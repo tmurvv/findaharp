@@ -12,7 +12,7 @@ const Index = (props) => {
     //console.log('here', props.products)
     const {products, setProducts, makesModels, setMakesModels} = useContext(ProductsContext);
     const [ loader, setLoader ] = useState(true);
-    const productsArray = Array.from(props.products);
+    
     console.log(props.products[0])
     useEffect(() => {
         //const unsubscribe = api.createSubscription()
@@ -37,7 +37,7 @@ const Index = (props) => {
                     <h1>Find A Harp <span style={{fontStyle: 'italic', fontSize: '80%'}}>.com</span></h1>
                     <p className='subTitle'>Save valuable time! Pre-owned harps from reputable harp stores and private sellers all in one place.</p>
                 </div>
-                <p>{props.products[0].title}</p>
+                <p>Here: {props.products[0].productTitle}</p>
                 {/* <HarpSearch 
                     // makesmodels={makesModels}
                     // usedharps={products}
@@ -49,10 +49,10 @@ const Index = (props) => {
 }
 Index.getInitialProps = async () => {
     // const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    const data = res.data;
+    const res = await axios.get('https://onestop-api-staging.herokuapp.com/');
+    const data = res.data.harpData;
     console.log("FETCHING IN GET INITIAL PROPS")
-    return { products: Array.from(data), mood: 'HAPPY' };
+    return { products: data, mood: 'HAPPY' };
 }
 
 export default Index;
