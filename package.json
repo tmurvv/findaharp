@@ -1,0 +1,21 @@
+{
+  "name": "findaharp-fe",
+  "version": "0.0.1",
+  "description": "Front End for findaharp.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "Tisha Murvihill",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "next": "^9.3.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "uuid": "^7.0.3"
+  }
+}
