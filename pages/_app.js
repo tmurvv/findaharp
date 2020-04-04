@@ -12,19 +12,17 @@ import NavBar from '../components/NavBar';
 import { ProductsProvider } from '../contexts/ProductsContext';
 import Footer from '../components/Footer';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, products }) {
     return(
         <>
             <NavBar />
-            <ProductsProvider>
+            <ProductsProvider products={products}>
                 <Component {...pageProps} />
             </ProductsProvider>          
             <Footer />
         </>
     )
 }
-
-export default MyApp
 
 // Only uncomment this method if you have blocking data requirements for
 // every single page in your application. This disables the ability to
@@ -37,3 +35,4 @@ export default MyApp
 //
 //   return { ...appProps }
 // }
+export default MyApp;
