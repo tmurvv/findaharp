@@ -7,13 +7,13 @@ const NavBar = () => {
             <Link href='/'>
                 <a>Home</a>
             </Link>
-            <Link href='/'>
+            <Link href='/PrivateAds'>
                 <a>Sell Your Harp</a>
             </Link>
-            <Link href='/about'>
+            <Link href='/About'>
                 <a>About</a>
             </Link>
-            <Link href='/contact'>
+            <Link href='/Contact'>
                 <a>Contact</a>
             </Link>
         </div>

@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 
 // internal
 import HarpsContainer from './HarpsContainer';

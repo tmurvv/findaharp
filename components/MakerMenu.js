@@ -1,17 +1,14 @@
 // Packages
-import React, { useContext } from 'react';
 // Material-ui
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // internal
-import { ProductsContext } from '../contexts/ProductsContext';
 
 const ITEM_HEIGHT = 48;
 
 export default function MakerMenu(props) {
-    // const { makesModels, products } = useContext(ProductsContext);
-
+    
     const [anchorEl_1, setAnchorEl_1] = React.useState(null);
     const [anchorEl_2, setAnchorEl_2] = React.useState(null);
     const open_2 = Boolean(anchorEl_2);

@@ -6,19 +6,17 @@ import "../css/App.css";
 import '../css/Loader.css';
 import "../css/Home.css";
 import "../css/Footer.css";
+import 'react-phone-input-2/lib/style.css'
 
 // internal
 import NavBar from '../components/NavBar';
-import { ProductsProvider } from '../contexts/ProductsContext';
 import Footer from '../components/Footer';
 
-function MyApp({ Component, pageProps, products }) {
+function MyApp({ Component, pageProps }) {
     return(
         <>
             <NavBar />
-            <ProductsProvider products={products}>
-                <Component {...pageProps} />
-            </ProductsProvider>          
+            <Component {...pageProps} />
             <Footer />
         </>
     )

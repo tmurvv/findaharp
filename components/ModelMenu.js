@@ -1,16 +1,14 @@
 // Package
-import React, { useContext } from 'react';
+import React from 'react';
 // Material-ui
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // Internal
 import { getModelList } from '../utils/helpers';
-import { ProductsContext } from '../contexts/ProductsContext';
 
 export default function ModelMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    // const { makesModels, products } = useContext(ProductsContext);
     const currentModels = props.products.map(product => product.productModel).sort();
     const models = Array.from(getModelList(props.makesmodels, props.productType))
         .sort()
