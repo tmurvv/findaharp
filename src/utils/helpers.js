@@ -28,15 +28,23 @@ export function findSizeWords(strings, type) {
     if (strings>29) return 'concert grand pedal';
     return 'size not found'
 }
-function findProductType(productMakesModels, maker, model) {
+export const findProductType= (productMakesModels, maker, model) => {
     if (!model||!maker) return 'no model found';
-   
-    const makerHarps = leafLocal(productMakesModels, maker);
-    if (leafLocal(makerHarps, model)&&leafLocal(makerHarps, model).harptype) {
-        return leafLocal(makerHarps, model).harptype;
-    } else {
-        return 'harp type not found';
-    }
+    
+    productMakesModels.map(makesModel => {
+        if (makesModel.sellerName === maker) {
+            makesModel.sellerProducts.map(product => {if (product.productName === model) return product.productType})
+        }        
+    })
+
+    return 'not found';
+
+    // const makerHarps = leafLocal(productMakesModels, maker);
+    // if (leafLocal(makerHarps, model)&&leafLocal(makerHarps, model).harptype) {
+    //     return leafLocal(makerHarps, model).harptype;
+    // } else {
+    //     return 'harp type not found';
+    // }
 }
 export function getModelList(productMakesModels, productType, productMaker) {
     let productKeys = [];

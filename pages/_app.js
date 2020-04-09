@@ -1,11 +1,11 @@
 // import App from 'next/app'
-
+import jest from 'jest';
 // css
-import "../css/projectStyles.css";
-import "../css/App.css";
-import '../css/Loader.css';
-import "../css/Home.css";
-import "../css/Footer.css";
+import "../src/css/projectStyles.css";
+import "../src/css/App.css";
+import '../src/css/Loader.css';
+import "../src/css/Home.css";
+import "../src/css/Footer.css";
 import 'react-phone-input-2/lib/style.css'
 
 // internal
