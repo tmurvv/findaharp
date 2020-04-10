@@ -1,21 +1,24 @@
 // Package
 import React from 'react';
+import uuid from 'react-uuid';
 // Material-ui
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // Internal
-import { getModelList } from '../utils/helpers';
+import { getModelList, itemsSortByDisabled } from '../utils/helpers';
+
 
 export default function ModelMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const currentModels = props.products.map(product => product.productModel).sort();
-    // console.log(props.makesmodels, props.producttype)
-    const models = Array.from(getModelList(props.makesmodels, props.producttype))
-        .sort()
-        .map(model => <option 
+    let models = Array.from(getModelList(props.makesmodels, props.producttype))
+    // console.log(models)
+    
+    models=itemsSortByDisabled(models, currentModels).map(model => <option 
             name={model}
         >{model.trim()}</option>);
+        
     const handleClick = (evt) => {
         setAnchorEl(evt.currentTarget);
     };
@@ -48,7 +51,7 @@ export default function ModelMenu(props) {
                     >All Models</Button>
                 </MenuItem>
                 {models.map(model =>
-                    <MenuItem onClick={handleClose}>        
+                    <MenuItem key={uuid()} onClick={handleClose}>        
                         <Button
                             aria-label="more"
                             aria-controls="long-menu"

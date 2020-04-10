@@ -21,8 +21,7 @@
     "next": "^9.3.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-phone-input-2": "^2.12.1",
-    "uuid": "^7.0.3"
+    "react-phone-input-2": "^2.12.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.4.0",
@@ -33,6 +32,7 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "jest": "^25.3.0"
+    "jest": "^25.3.0",
+    "react-uuid": "^1.0.2"
   }
 }

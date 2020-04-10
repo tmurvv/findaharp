@@ -62,7 +62,6 @@ export function getModelListForMaker(productMakesModels, productMaker) {
 export function getModelList(productMakesModels, productType, productMaker) {
     // short circuit
     if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelList: productMakesModels parameter empty");
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",productMakesModels.length, productType)
     let modelList = [];
     productMakesModels.map(maker => {
         //for type
@@ -80,6 +79,7 @@ export function getModelList(productMakesModels, productType, productMaker) {
             }
         }        
     });
+    
     modelList = new Set(modelList);
     return modelList; 
 }
@@ -90,4 +90,15 @@ export function getFilteredProducts(filteredProducts, allState) {
     if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
     
     return filteredProducts;
-}    
+} 
+
+export const itemsSortByDisabled = (items, currentItems) => {
+    let itemsWithDisabled = [];
+    const sortItems = [];
+    items.map(model => {
+        itemsWithDisabled.push({name:model,disabled:!currentItems.find(currentModel => currentModel === model)})  
+    });
+    itemsWithDisabled.sort((a, b) => a.disabled-b.disabled || a.name.localeCompare(b.name));  
+    itemsWithDisabled.map(modelboo => sortItems.push(modelboo.name))
+    return sortItems;
+}

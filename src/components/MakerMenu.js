@@ -1,15 +1,15 @@
 // Packages
+import uuid from 'react-uuid';
 // Material-ui
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // internal
-import { getModelListForMaker } from '../utils/helpers';
+import { getModelListForMaker, itemsSortByDisabled } from '../utils/helpers';
 
 const ITEM_HEIGHT = 48;
 
 export default function MakerMenu(props) {
-    
     const [anchorEl_1, setAnchorEl_1] = React.useState(null);
     const [anchorEl_2, setAnchorEl_2] = React.useState(null);
     const open_2 = Boolean(anchorEl_2);
@@ -18,13 +18,14 @@ export default function MakerMenu(props) {
     const [models, setModels] = React.useState([]);
     const currentMakers = props.products.map(product => product.productMaker);
     const currentModels = props.products.map(product => product.productModel).sort();
-    const makers = []
+    let makers = []
     props.makesmodels.map(maker => makers.push(maker.sellerName));
-    makers.sort();
+    makers = itemsSortByDisabled(makers, currentMakers);
     
     function createModelMenu(maker) {
         if (!maker||!props.makesmodels) throw 'from createModelMenu, no maker or props.makesmodels found';
-        const myArray = getModelListForMaker(props.makesmodels, maker);
+        let myArray = getModelListForMaker(props.makesmodels, maker);
+        myArray = itemsSortByDisabled(myArray, currentModels);
         return myArray
     }
     const handleClick_1 = (evt) => {
@@ -68,7 +69,7 @@ export default function MakerMenu(props) {
                     >All Makers</Button>
                 </MenuItem>
                 {makers.map(maker =>
-                    <MenuItem onClick={handleClose_1}>
+                    <MenuItem key={uuid()} onClick={handleClose_1}>
                         <Button
                             aria-label="more"
                             aria-controls="long-menu"

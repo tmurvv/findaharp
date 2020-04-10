@@ -28,7 +28,7 @@ Index.getInitialProps = async () => {
     //console.log(res.data.harpMakesModels)
     const products = res.data.harpData;
     const makesModels = await JSON.parse(res.data.harpMakesModels);
-    console.log("indexbleah", makesModels[0])
+    //console.log("indexbleah", makesModels[0])
     return { products, makesModels };
 }
 
