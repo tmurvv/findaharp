@@ -1,5 +1,5 @@
-- all makers menu selection busted
-- select by size lever and lever-free busted
+- select by size small lever and lever-free need to be tested, no harps currently matching (add some to harptisha site)
+- make it so when harp not found generic harp photo shows
 - finish writing tests for helper file
 - get list to show harps randomly
 - convert css files to jsx
@@ -7,4 +7,6 @@
 - CRUD operations on upload listings
 
 ### FUTURE IDEAS:
+
+- implement email text communication through website
 - New Listings Page

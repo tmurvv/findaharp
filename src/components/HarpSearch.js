@@ -48,6 +48,7 @@ function HarpSearch(props) {
         });
     }
     function handleSizeSelection(newProductSize) {
+        console.log('prodsize', newProductSize)
         resetDropDowns('size');
         setAllState({...allState, 
             size: newProductSize==='All Sizes'?'Select Harp Size':newProductSize,

@@ -1,25 +1,11 @@
 //leaf function helps find nested object keys,
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
 
-// const findMakerFromModel = (model, makesModels) => {
-//     if (!model) throw 'from findMakerFromModel: model parameter is empty';
-//     if (!makesModels || (Object.keys(makesModels).length === 0 && makesModels.constructor === Object)) throw 'from findMakerFromModel: makesModels parameter is empty';
-    
-//     let foundName;
-//     const makerList = Object.keys(makesModels);
-    
-//     makerList.map(maker => {      
-//         Object.keys(leaf(makesModels,maker)).map(makerModel => {
-//             if (makerModel.toUpperCase() === model.toUpperCase()) {               
-//                 foundName = maker;
-//             }
-//         });
-//     });
-//     return foundName;
-// }
+
 export function findSizeWords(strings, type) {
     strings = parseInt(strings);
-    if (strings<29) return 'small lever';
+    if (strings<29&&type==='lever-free') return 'lever-free';
+    if (strings<29&&type==='lever') return 'small lever';
     if (strings<35&&type==='lever') return 'medium lever';
     if (strings<44&&type==='lever' ) return 'large lever';  
     if (strings<46) return 'small pedal';

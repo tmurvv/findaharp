@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 //#region Material-ui imports
 import { TextField, Typography } from '@material-ui/core/';
@@ -82,6 +83,7 @@ const PrivateAds = (props) => {
             
         console.log(res);
     }
+    
     return (
         <Box border='1px #5acedc' mt='40px' mb='60px'>
             <Typography variant='h5' align='center'>About Listing a Harp on FindAHarp.com</Typography>
@@ -139,7 +141,7 @@ const PrivateAds = (props) => {
                         <StarBorder />
                     </ListItemIcon>
                     <ListItemText>
-                        Like with any online sales listing, please beware of scammers. <a href='https://twocents.lifehacker.com/how-to-not-get-scammed-when-selling-things-online-1825190225'>Click here</a> for guidance on avoiding scammers.
+                        As with any online sales listing, please beware of scammers. <a href='https://twocents.lifehacker.com/how-to-not-get-scammed-when-selling-things-online-1825190225'>Click here</a> for guidance on avoiding scammers.
                     </ListItemText>
                 </ListItem>
                 <Box display="flex" flexDirection='column' justifyContent="center">
@@ -153,7 +155,7 @@ const PrivateAds = (props) => {
                     </Box>              
                 </Box>
             </List>
-               
+            
             <Dialog open={open} autoComplete="off">
                 <DialogTitle>Add a Harp for Sale to FindAHarp.com</DialogTitle>
                 <DialogContent>
@@ -162,7 +164,7 @@ const PrivateAds = (props) => {
                     <DialogContentText>
                         <Typography variant='subtitle2'>Your contact information will not be shared. Communication with prospective buyers can take place through findaharp.com at no extra charge.<br></br></Typography>
                     </DialogContentText>
-                    <DialogContentText fontFamily='vivaldi' bgColor='#fafbfc'>
+                    <DialogContentText>
                         About the Seller (or contact person)
                     </DialogContentText>                                        
                     <Box display="flex">
@@ -298,7 +300,6 @@ const PrivateAds = (props) => {
                             onChange={handleChange}
                             helperText='80 characters'
                             multiline
-                            onInput
                         />
                     </Box>                      
                     <Box>
@@ -333,13 +334,20 @@ const PrivateAds = (props) => {
                         />
                     </Box>                                     
                 </Box>                          
-                <Box mb='40px' mt='40px'>
+                <Box mb='40px' mt='40px' display='flex' justifyContent='space-evenly'>
                     <Button
                         onClick={handleSubmit}
                         variant="contained"
-                        color="inherit"
+                        color="primary"
                     >
                         Add to Cart
+                    </Button> 
+                    <Button
+                        onClick={()=>setOpen(false)}
+                        variant="contained"
+                        color="default"
+                    >
+                        Cancel
                     </Button> 
                 </Box>
                 </DialogContent> 
