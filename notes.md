@@ -1,0 +1,1 @@
+- command to see test coverage: npm run test -- --coverage --watchAll=false

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // internal
+import { getModelListForMaker } from '../utils/helpers';
 
 const ITEM_HEIGHT = 48;
 
@@ -17,11 +18,13 @@ export default function MakerMenu(props) {
     const [models, setModels] = React.useState([]);
     const currentMakers = props.products.map(product => product.productMaker);
     const currentModels = props.products.map(product => product.productModel).sort();
-    const makers = Object.keys(props.makesmodels).sort();
+    const makers = []
+    props.makesmodels.map(maker => makers.push(maker.sellerName));
+    makers.sort();
     
     function createModelMenu(maker) {
         if (!maker||!props.makesmodels) throw 'from createModelMenu, no maker or props.makesmodels found';
-        const myArray = (Object.keys(props.makesmodels[maker]));
+        const myArray = getModelListForMaker(props.makesmodels, maker);
         return myArray
     }
     const handleClick_1 = (evt) => {
@@ -92,7 +95,7 @@ export default function MakerMenu(props) {
                                 name={`All ${makerSelected} Models:`} 
                                 onClick={handleClose_2}
                             >
-                                    All {makerSelected} Models
+                                All {makerSelected} Models
                             </MenuItem>
                             {models.map(model => (
                                 <MenuItem 

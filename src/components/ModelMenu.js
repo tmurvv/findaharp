@@ -10,12 +10,12 @@ import { getModelList } from '../utils/helpers';
 export default function ModelMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const currentModels = props.products.map(product => product.productModel).sort();
-    const models = Array.from(getModelList(props.makesmodels, props.productType))
+    // console.log(props.makesmodels, props.producttype)
+    const models = Array.from(getModelList(props.makesmodels, props.producttype))
         .sort()
         .map(model => <option 
             name={model}
         >{model.trim()}</option>);
-    
     const handleClick = (evt) => {
         setAnchorEl(evt.currentTarget);
     };

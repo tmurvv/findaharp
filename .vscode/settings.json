@@ -1,3 +1,6 @@
 {
-    "workbench.colorTheme": "Solarized Light"
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorCustomizations" : {
+        "terminal.ansiBrightWhite": "#aaa38d" 
+    }
 }

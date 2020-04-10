@@ -1,23 +1,22 @@
 //leaf function helps find nested object keys,
-const leafLocal = (obj, path) => (path.split('.').reduce((value,el) => value[el], obj)); //from StackOverflow
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
 
-const findMakerFromModel = (model, makesModels) => {
-    if (!model) throw 'from findMakerFromModel: model parameter is empty';
-    if (!makesModels || (Object.keys(makesModels).length === 0 && makesModels.constructor === Object)) throw 'from findMakerFromModel: makesModels parameter is empty';
+// const findMakerFromModel = (model, makesModels) => {
+//     if (!model) throw 'from findMakerFromModel: model parameter is empty';
+//     if (!makesModels || (Object.keys(makesModels).length === 0 && makesModels.constructor === Object)) throw 'from findMakerFromModel: makesModels parameter is empty';
     
-    let foundName;
-    const makerList = Object.keys(makesModels);
+//     let foundName;
+//     const makerList = Object.keys(makesModels);
     
-    makerList.map(maker => {      
-        Object.keys(leaf(makesModels,maker)).map(makerModel => {
-            if (makerModel.toUpperCase() === model.toUpperCase()) {               
-                foundName = maker;
-            }
-        });
-    });
-    return foundName;
-}
+//     makerList.map(maker => {      
+//         Object.keys(leaf(makesModels,maker)).map(makerModel => {
+//             if (makerModel.toUpperCase() === model.toUpperCase()) {               
+//                 foundName = maker;
+//             }
+//         });
+//     });
+//     return foundName;
+// }
 export function findSizeWords(strings, type) {
     strings = parseInt(strings);
     if (strings<29) return 'small lever';
@@ -29,42 +28,60 @@ export function findSizeWords(strings, type) {
     return 'size not found'
 }
 export const findProductType= (productMakesModels, maker, model) => {
-    if (!model||!maker) return 'no model found';
+    // short circuit
+    if (!productMakesModels || productMakesModels.length === 0) throw new Error("from findProductType: productMakesModels parameter empty");
+    if (!maker) throw new Error("from findProductType: maker parameter empty");
+    if (!model) throw new Error("from findProductType: model parameter empty");  
     
-    productMakesModels.map(makesModel => {
-        if (makesModel.sellerName === maker) {
-            makesModel.sellerProducts.map(product => {if (product.productName === model) return product.productType})
+    let foundName;
+    productMakesModels.map(makesModelsMaker => {
+        if (makesModelsMaker.sellerName === maker) {
+            makesModelsMaker.sellerProducts.map(product => {
+                if (product.productTitle === model) foundName = product.productType
+            });
         }        
     })
 
+    if (foundName) return foundName;
     return 'not found';
+}
+export function getModelListForMaker(productMakesModels, productMaker) {
+    if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelListForMaker: productMakesModels parameter empty");
+    if (!productMaker) throw new Error("from getModelListForMaker: maker parameter empty");
 
-    // const makerHarps = leafLocal(productMakesModels, maker);
-    // if (leafLocal(makerHarps, model)&&leafLocal(makerHarps, model).harptype) {
-    //     return leafLocal(makerHarps, model).harptype;
-    // } else {
-    //     return 'harp type not found';
-    // }
+    let modelList = [];
+    productMakesModels.map(maker => {   
+        if (productMaker === maker.sellerName) {
+            maker.sellerProducts.map(model => {
+                modelList.push(model.productTitle);
+            });
+        }    
+    });
+    return modelList;    
 }
 export function getModelList(productMakesModels, productType, productMaker) {
-    let productKeys = [];
-    const makers = Object.keys(productMakesModels)
-    makers.map(maker => {
-        const models = Object.keys(leafLocal(productMakesModels, maker));
-        if (productType !== 'model' && (productType === 'pedal' || productType === 'lever')) {
-            models.map(model => {
-                if (findProductType(productMakesModels, maker, model) === productType) productKeys.push(model);
-            });
-        } else if (productMaker) {
-            models.map(model => {
-                if (findMakerFromModel(model, productMakesModels) === productMaker) productKeys.push(model);
-            });
-        } else {
-            models.map(model => productKeys.push(model));
-        }     
+    // short circuit
+    if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelList: productMakesModels parameter empty");
+    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",productMakesModels.length, productType)
+    let modelList = [];
+    productMakesModels.map(maker => {
+        //for type
+        if (maker.sellerProducts) {
+            // select pedal, lever, or lever-free
+            if (productType === 'pedal' || productType==='lever-free' || productType === 'lever') { // lever-free come up in lever also which is intentional
+                maker.sellerProducts.map(model => {
+                    if (model.productType === productType) modelList.push(model.productTitle);
+                });
+            //all
+            } else if (productType === 'all') {
+                maker.sellerProducts.map(product => {                   
+                    modelList.push(product.productTitle);
+                });
+            }
+        }        
     });
-    productKeys = new Set(productKeys);
-    return productKeys;
+    modelList = new Set(modelList);
+    return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
     if (allState.productType !== 'all') filteredProducts = filteredProducts.filter(product => product.productType===allState.productType);    
@@ -73,13 +90,4 @@ export function getFilteredProducts(filteredProducts, allState) {
     if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
     
     return filteredProducts;
-}
-
-export function findModelHelper(products, model) {
-    products.find(product => {
-        if (product.productModel===model) {
-            return true;
-        }      
-    });
-    return false;
 }    

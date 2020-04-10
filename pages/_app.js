@@ -1,5 +1,4 @@
 // import App from 'next/app'
-import jest from 'jest';
 // css
 import "../src/css/projectStyles.css";
 import "../src/css/App.css";
@@ -9,8 +8,8 @@ import "../src/css/Footer.css";
 import 'react-phone-input-2/lib/style.css'
 
 // internal
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
+import NavBar from '../src/components/NavBar';
+import Footer from '../src/components/Footer';
 
 function MyApp({ Component, pageProps }) {
     return(

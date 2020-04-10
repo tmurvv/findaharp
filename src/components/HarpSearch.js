@@ -1,6 +1,7 @@
 // packages
 import React, { useState} from 'react';
 
+// design
 // internal
 import HarpsContainer from './HarpsContainer';
 import MakerMenu from './MakerMenu';
@@ -93,6 +94,7 @@ function HarpSearch(props) {
                     <ModelMenu 
                         handleModelChange = {handleModelSelection}
                         products={props.products}
+                        producttype={allState.productType}
                         makesmodels={props.makesmodels}
                         currentselected={allState.model?allState.model:'Select Harp Model'}/>
                     <SizeMenu 

@@ -25,10 +25,10 @@ Index.getInitialProps = async () => {
     // const res = await axios.get('https://findaharp-api.herokuapp.com/');
     const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     // const res = await axios.get('https://onestop-api-staging.herokuapp.com/');
-    console.log(res.data.harpMakesModels)
+    //console.log(res.data.harpMakesModels)
     const products = res.data.harpData;
-    const makesModels = res.data.harpMakesModels;
-    
+    const makesModels = await JSON.parse(res.data.harpMakesModels);
+    console.log("indexbleah", makesModels[0])
     return { products, makesModels };
 }
 
