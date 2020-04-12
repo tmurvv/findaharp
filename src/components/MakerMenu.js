@@ -52,12 +52,13 @@ export default function MakerMenu(props) {
                 {props.currentselected}
             </Button>                
             <Menu
-                id="simple-menu"
+                key={uuid()}
+                id='simple-menu'
                 anchorEl={anchorEl_1}
                 keepMounted
                 open={Boolean(anchorEl_1)}
-                onClose={handleClose_1}
                 name='Maker Menu'
+                onClose={handleClose_1}
             >
                 <MenuItem onClick={handleClose_1}>
                     <Button

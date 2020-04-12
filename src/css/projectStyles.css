@@ -1,10 +1,10 @@
+/* Reference file for default project styles */
 
 :root {
     --dark-text-color: #333333; /* dark text */
     --secondary-color:#faf8ed; /*secondary */
     --primary-color: #8c8a7d; /*primary */
 }
-
 
 .marginL {
     margin: 50px;

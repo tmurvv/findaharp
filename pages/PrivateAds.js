@@ -101,7 +101,7 @@ const PrivateAds = (props) => {
                         <StarBorder />
                     </ListItemIcon>
                     <ListItemText>
-                        You will be asked for your contact information. If you wish, all communication with prospective buyers can take place through FindAHarp.com at no extra charge.
+                        You will be asked for your contact information. If you wish, all email communication with prospective buyers can take place through FindAHarp.com at no extra charge.
                     </ListItemText>
                 </ListItem>
                 <ListItem>
@@ -109,7 +109,7 @@ const PrivateAds = (props) => {
                         <StarBorder />
                     </ListItemIcon>
                     <ListItemText>
-                        When a buyer expresses interest in a harp, you will be notified by FindAHarp.com by text and/or email. Findaharp.com will not share your contact information with anyone or any organization. 
+                        When a buyer expresses interest in a harp, you will be notified by FindAHarp.com by email. Findaharp.com will not share your contact information with anyone or any organization. 
                     </ListItemText>
                 </ListItem>
                 <ListItem>
@@ -160,11 +160,11 @@ const PrivateAds = (props) => {
                 <DialogTitle>Add a Harp for Sale to FindAHarp.com</DialogTitle>
                 <DialogContent>
                 {/* <Box > */}
-                <Box height='350px' display='flex' flexDirection='column' justifyContent='space-between'>
+                <Box height='250px' display='flex' flexDirection='column' justifyContent='space-between'>
                     <DialogContentText>
                         <Typography variant='subtitle2'>Your contact information will not be shared. Communication with prospective buyers can take place through findaharp.com at no extra charge.<br></br></Typography>
                     </DialogContentText>
-                    <DialogContentText>
+                    <DialogContentText mt='-100px'>
                         About the Seller (or contact person)
                     </DialogContentText>                                        
                     <Box display="flex">
@@ -187,42 +187,14 @@ const PrivateAds = (props) => {
                             />
                         </Box>
                     </Box>
-                    <Box>
-                        <FormControl>
-                            <FormLabel>Contact Preference</FormLabel>
-                            <RadioGroup 
-                                row
-                                name="contactPreference" 
-                                value={productListing.contactPreference} 
-                                onChange={handleChange}
-                                required
-                            >
-                                <FormControlLabel value="text" control={<Radio />} label="Text" />
-                                <FormControlLabel value="email" control={<Radio />} label="Email" />
-                                <FormControlLabel value="both" control={<Radio />} label="Both" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Box>
-                    <Box>
-                        {productListing.contactPreference==='text'||productListing.contactPreference==='both'?
-                            <PhoneInput
-                                country={'us'}label="Contact Text" 
-                                value={productListing.contactText}
-                                name='contactText'
-                                onBlur={handleChange}
-                            />:""
-                        }
-                    </Box>
-                    <Box>
-                        {productListing.contactPreference==='email'||productListing.contactPreference==='both'?
-                            <TextField
-                                id="outlined-helperText"
-                                label="Contact Email"
-                                name='contactEmail'
-                                value={productListing.contactEmail}
-                                onChange={handleChange}
-                            />:''
-                        } 
+                    <Box mt='-15px'>
+                        <TextField
+                            id="outlined-helperText"
+                            label="Contact Email"
+                            name='contactEmail'
+                            value={productListing.contactEmail}
+                            onChange={handleChange}
+                        />
                     </Box>         
                 </Box>
                 <Box mt='40px' Box height='1000px' display='flex' flexDirection='column' justifyContent='space-between'>
@@ -338,14 +310,13 @@ const PrivateAds = (props) => {
                     <Button
                         onClick={handleSubmit}
                         variant="contained"
-                        color="primary"
                     >
                         Add to Cart
                     </Button> 
                     <Button
                         onClick={()=>setOpen(false)}
                         variant="contained"
-                        color="default"
+                        className='button'
                     >
                         Cancel
                     </Button> 
@@ -359,8 +330,9 @@ const PrivateAds = (props) => {
         .marginBottomMedium {
             margin-bottom: 15px;
         }
-        
-
+        .button {
+            backgroundColor: var(--primary-color);
+        }
         ul {
           padding: 0;
         }
@@ -379,56 +351,6 @@ const PrivateAds = (props) => {
           opacity: 0.6;
         }
       `}</style>
-            {/* <style jsx>{`
-                .root: {
-                    border: 0;
-                    borderRadius: 3;
-                    color: '#333333';
-                    height: 48;
-                    padding: '0 30px';
-                    marginBottom: '25px';
-                    width: '100%';
-                },
-                button: {
-                    margin: '40px 45%';
-                },
-                h2: {
-                    marginBottom: 700px;
-                    textAlign: 'center';
-                    marginTop: '40px';
-                    background-color: cyan;
-                },
-                .info: {
-                    marginTop: '30px';
-                    marginBottom:'30px';
-                },
-                .flexContainer: {
-                    boxShadow: '5px 10px 18px #8c8a7d';
-                    width: '600px';
-                    margin: 'auto';
-                },
-                .flexItem: { 
-                    margin: auto;
-                    background-color;
-                    padding: '25px';
-                    width: '80%';
-                    // textAlign: 'left';
-                    // display: 'flex';
-                    // flexDirection: 'column'
-                },
-                .productTypeSpan: {
-                    fontSize: '80%';
-                    fontStyle: 'italic';
-                },
-                .marginTopMedium: {
-                    marginTop: '15px';
-                },
-                .marginTopLarge: {
-                    marginTop: '40px';
-                }
-            `}
-    </style> */}
-
         </Box>
     );
 }

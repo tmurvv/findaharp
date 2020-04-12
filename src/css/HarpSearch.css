@@ -1,16 +1,25 @@
-.harpSearchOuter h3 {
-    /* border: 14px double var(--color-primary);
-    margin: auto;
-    padding: 25px; */
-    margin-top: 15px;
+.searchTitle {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 40px;
 }
 .harpSearchInner {
-    /* text-align: left;
-    width: fit-content;
-    margin: auto; */
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 40px;
 }
-.harpSearchInner ul li {
-    /* text-align: left;
-    width: fit-content; */
+.flexSE {
+    display: flex;
+    justify-content: space-evenly;
+}
+input {
+    margin-bottom: 15px;
+}
 
+.makerModelMenu {
+    position: absolute;
+    top: 45%;
+    left: 33%;
 }

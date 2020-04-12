@@ -1,10 +1,8 @@
 // import App from 'next/app'
+
 // css
-import "../src/css/projectStyles.css";
-import "../src/css/App.css";
-import '../src/css/Loader.css';
-import "../src/css/Home.css";
-import "../src/css/Footer.css";
+// import '../src/css/Loader.css';
+import "../src/css/HarpSearch.css";
 import 'react-phone-input-2/lib/style.css'
 
 // internal
@@ -17,6 +15,50 @@ function MyApp({ Component, pageProps }) {
             <NavBar />
             <Component {...pageProps} />
             <Footer />
+            <style jsx="true">{`
+                :root {
+                    --dark-text-color: #333333; /* dark text */
+                    --secondary-color:#faf8ed; /*secondary */
+                    --primary-color: #8c8a7d; /*primary */
+                }
+                * {
+                    margin-block-start: 0;
+                    margin-block-end: 0;
+                    text-align: center; 
+                }         
+                .marginL {
+                    margin: 50px;
+                }
+                .marginM {
+                    margin: 20px;
+                }
+                .marginS {
+                    margin: 8px;
+                }
+                .flex {
+                    display: flex;
+                }
+                .flexSB {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                .flexSE {
+                    display: flex;
+                    justify-content: space-evenly;
+                }
+                .searchTitle {
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 25px;
+                    margin-top: 40px;
+                }
+                .harpSearchInner {
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 25px;
+                    margin-top: 40px;
+                }
+            `}</style>
         </>
     )
 }

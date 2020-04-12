@@ -33,6 +33,8 @@ function HarpsContainer(props) {
     } else {
         return(       
             <div data-test='component-harpscontainer' className='harpsContainer' style={{padding: '150px'}}>
+                <img src= 'https://findaharp-api.herokuapp.com/assets/img/genericHarp.png' alt='harp in silhouette'/>
+                
                 <h3>Make/Model/Size not found in our listings. Please try another search.</h3>
             </div>
         );

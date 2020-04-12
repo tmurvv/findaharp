@@ -21,7 +21,8 @@
     "next": "^9.3.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-phone-input-2": "^2.12.1"
+    "react-phone-input-2": "^2.12.1",
+    "styled-jsx": "^3.2.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.4.0",

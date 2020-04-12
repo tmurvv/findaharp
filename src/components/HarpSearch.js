@@ -53,14 +53,17 @@ function HarpSearch(props) {
         setAllState({...allState, 
             size: newProductSize==='All Sizes'?'Select Harp Size':newProductSize,
             selectionType: newProductSize==='All Sizes'?'':'size',
-            productType: 'all'
+            productType: 'all',
+            maker: 'Select Harp Maker',
+            model: 'Select Harp Model'
         });
     }
     const filteredProducts = getFilteredProducts(props.products, allState);
-    return (       
+    return (
+        <>       
         <div className='harpSearchOuter'>
             <hr></hr>
-            <h3>What harp will you discover? Search here...</h3>
+            <h3 className='searchTitle'>What harp will you discover? Search here...</h3>
             <div className='harpSearchInner'>
                 <div className = 'harpLeverRadio marginM'>
                     <input 
@@ -84,6 +87,7 @@ function HarpSearch(props) {
                         onChange={handlePedalLeverChange}
                         checked={allState.productType==='pedal'}
                     /> Pedal Harps
+                    
                 </div>
                 <div className='marginM flexSE'>
                     <MakerMenu 
@@ -104,8 +108,9 @@ function HarpSearch(props) {
                     />
                 </div>           
                 <HarpsContainer data-test="component-harpscontainer" filteredproducts={filteredProducts}/>               
-            </div>                   
+            </div>               
         </div>
+        </>
     );
 }
 

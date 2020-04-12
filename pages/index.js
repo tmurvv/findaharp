@@ -7,6 +7,7 @@ import HarpSearch from '../src/components/HarpSearch';
 
 const Index = (props) => {
     return (
+        <>
         <div className="App">  
             <div className='mainTitle'>
                 <h5>This website is under construction and none of the design is implemented.<br></br>
@@ -17,18 +18,38 @@ const Index = (props) => {
             <HarpSearch 
                 makesmodels={props.makesModels}
                 products={props.products}
-            />              
+            />
+                        
         </div>
+        <style jsx>{`
+        .mainTitle {
+            text-align: center;
+            margin: auto;
+            margin-bottom: 30px;
+            
+        }
+        .subTitle {
+            margin-top: 10px;
+            font-size: 16px;
+            font-style: italic;
+        }
+    `}
+    </style>
+        </>
     );
 }
 Index.getInitialProps = async () => {
-    // const res = await axios.get('https://findaharp-api.herokuapp.com/');
-    const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
-    // const res = await axios.get('https://onestop-api-staging.herokuapp.com/');
-    //console.log(res.data.harpMakesModels)
+    // Get product ads from api
+    // PRODUCTION API
+    const res = await axios.get('https://findaharp-api.herokuapp.com/');
+    // STAGING API
+    // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
+    // TESTING API
+    // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
+    
     const products = res.data.harpData;
-    const makesModels = await JSON.parse(res.data.harpMakesModels);
-    //console.log("indexbleah", makesModels[0])
+    const makesModels = res.data.harpMakesModels;
+    
     return { products, makesModels };
 }
 
