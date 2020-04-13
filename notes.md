@@ -2,3 +2,15 @@
 - PRODUCTION -- findaharp.com
 
 - command to see test coverage: npm run test -- --coverage --watchAll=false
+
+
+
+size lever/harp
+
+purdy's
+
+favorites -- cookies
+
+pale yellow fades to white gradient
+fonts logo Dido, price ("Dido",price) down the road
+fonts secondary Avenir, helvetica, sans-serif
