@@ -3,6 +3,7 @@ import React from "react";
 import axios from 'axios';
 
 // internal
+import IndexCss from '../src/styles/index.css.js'
 import HarpSearch from '../src/components/HarpSearch';
 
 const Index = (props) => {
@@ -17,28 +18,7 @@ const Index = (props) => {
                 products={props.products}
             />                 
         </div>
-        <style jsx>{`
-        .App {
-            background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
-            margin: 0;
-            padding-top: 20px;
-            
-        }
-        .App h2 {
-            margin-block-end:0;
-            margin-block-start:0;
-        }
-        .mainTitle {
-            text-align: center;
-            margin: auto;
-        }
-        .subTitle {
-            margin-top: 10px;
-            font-size: 16px;
-            font-style: italic;
-        }
-    `}
-    </style>
+        <IndexCss />
         </>
     );
 }

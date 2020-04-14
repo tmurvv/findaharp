@@ -3,6 +3,7 @@ import React, { useState} from 'react';
 
 // design
 // internal
+import HarpSearchCss from '../styles/harpSearch.css';
 import HarpsContainer from './HarpsContainer';
 import MakerMenu from './MakerMenu';
 import ModelMenu from './ModelMenu';
@@ -70,32 +71,71 @@ function HarpSearch(props) {
                         handleModelChange = {handleModelSelection} 
                         products={props.products}
                         makesmodels={props.makesmodels}
-                        currentselected={allState.maker?allState.maker:'Select Harp Maker'}
+                        currentselected={allState.maker?allState.maker:'Harp Maker'}
                     />
                     <ModelMenu 
                         handleModelChange = {handleModelSelection}
                         products={props.products}
                         producttype={allState.productType}
                         makesmodels={props.makesmodels}
-                        currentselected={allState.model?allState.model:'Select Harp Model'}/>
+                        currentselected={allState.model?allState.model:'Harp Model'}/>
                     <SizeMenu 
                         handleSizeChange = {handleSizeSelection}
-                        currentselected={allState.size?allState.size:'Select Harp Size'}
+                        currentselected={allState.size?allState.size:'Harp Size'}
                     />
+                </div>   
+            </div> 
+            <div className="searchLine1Sub">
+                <div className='arrow rightArrow'></div>
+                <div id="selectedMaker" value={allState.maker}>
+                    {allState.maker.startsWith("Harp")?"Not Selected":allState.maker}
                 </div>
-                <div className="searchLine1Sub">
-                    <box id="selectedMaker" value={allState.maker}>
-                        {allState.maker.startsWith("Select")?"Selected":allState.maker}
-                    </box>
-                    <box id="selectedModel" value={allState.model}>
-                        {allState.maker.startsWith("Select")?"Selected":allState.model}
-                    </box>
-                    <box id="selectedSize" value={allState.size}>
-                        {allState.maker.startsWith("Select")?"Selected":allState.size}
-                    </box>
-                </div>      
-                <HarpsContainer data-test="component-harpscontainer" filteredproducts={filteredProducts}/>               
-            </div>               
+                <div id="selectedModel" value={allState.model}>
+                    {allState.maker.startsWith("Harp")?"Not Selected":allState.model}
+                </div>
+                <div id="selectedSize" value={allState.size}>
+                    {allState.maker.startsWith("Harp")?"Not Selected":allState.size}
+                </div>
+                <div className='arrow leftArrow'></div>
+            </div>
+            <div className='searchLine2'>
+                <div className='flexSE'>
+                    <MakerMenu 
+                        handleModelChange = {handleModelSelection} 
+                        products={props.products}
+                        makesmodels={props.makesmodels}
+                        // currentselected={allState.maker?allState.maker:'Harp Finish'}
+                        currentselected='Harp Finish'
+                    />
+                    <ModelMenu 
+                        handleModelChange = {handleModelSelection}
+                        products={props.products}
+                        producttype={allState.productType}
+                        makesmodels={props.makesmodels}
+                        currentselected='Harp Price'/>
+                        {/* currentselected={allState.model?allState.model:'Harp Price'}/> */}
+                    <SizeMenu 
+                        handleSizeChange = {handleSizeSelection}
+                        currentselected='Harp Location'
+                        // currentselected={allState.size?allState.size:'Harp Location'}
+                    />
+                </div>   
+            </div> 
+            <div className="searchLine2Sub">
+                <div className='arrow rightArrow'></div>
+                <div id="selectedMaker" value={allState.maker}>
+                    {allState.maker.startsWith("Harp")?"Selected":allState.maker}
+                </div>
+                <div id="selectedModel" value={allState.model}>
+                    {allState.maker.startsWith("Harp")?"Selected":allState.model}
+                </div>
+                <div id="selectedSize" value={allState.size}>
+                    {allState.maker.startsWith("Harp")?"Selected":allState.size}
+                </div>
+                <div className='arrow leftArrow'></div>
+            </div>
+            <HarpSearchCss />    
+            <HarpsContainer data-test="component-harpscontainer" filteredproducts={filteredProducts}/>              
         </div>
         </>
     );
