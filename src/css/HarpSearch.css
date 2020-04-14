@@ -1,14 +1,31 @@
 .searchTitle {
     width: 100%;
     text-align: center;
-    margin-bottom: 25px;
+    font-size: 12px;
+    font-style: italic;
+    color: #868686
+}
+.searchLine1 {
+    width: 80%;
+    margin: auto;
+    height: 30px;
+    background-color: #000000;
+    text-align: center;
+    color: #fafbfc;
     margin-top: 40px;
 }
-.harpSearchInner {
-    width: 100%;
+.searchLine1 span {
+    color: #fafbfc;
+}
+.searchLine1Sub {
+    width: 85%;
+    margin: auto;
+    height: 30px;
     text-align: center;
-    margin-bottom: 25px;
-    margin-top: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #ffffff;
+    color: #868686;
 }
 .flexSE {
     display: flex;

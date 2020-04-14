@@ -61,35 +61,11 @@ function HarpSearch(props) {
     const filteredProducts = getFilteredProducts(props.products, allState);
     return (
         <>       
-        <div className='harpSearchOuter'>
-            <hr></hr>
-            <h3 className='searchTitle'>What harp will you discover? Search here...</h3>
-            <div className='harpSearchInner'>
-                <div className = 'harpLeverRadio marginM'>
-                    <input 
-                        type="radio" 
-                        name="harpLever"
-                        value="all"
-                        onChange= {handlePedalLeverChange}
-                        checked={allState.productType==='all'}
-                    /> All Harps
-                    <input 
-                        type="radio" 
-                        name="harpLever"
-                        value="lever"
-                        onChange={handlePedalLeverChange}
-                        checked={allState.productType==='lever'}
-                    /> Lever Harps
-                    <input 
-                        type="radio" 
-                        name="harpLever"
-                        value="pedal"
-                        onChange={handlePedalLeverChange}
-                        checked={allState.productType==='pedal'}
-                    /> Pedal Harps
-                    
-                </div>
-                <div className='marginM flexSE'>
+        
+        <h3 className='searchTitle'>Narrow your results with one, some, or all of these filters.</h3>
+        <div className='harpSearchOuter'>    
+            <div className='searchLine1'>
+                <div className='flexSE'>
                     <MakerMenu 
                         handleModelChange = {handleModelSelection} 
                         products={props.products}
@@ -106,7 +82,18 @@ function HarpSearch(props) {
                         handleSizeChange = {handleSizeSelection}
                         currentselected={allState.size?allState.size:'Select Harp Size'}
                     />
-                </div>           
+                </div>
+                <div className="searchLine1Sub">
+                    <box id="selectedMaker" value={allState.maker}>
+                        {allState.maker.startsWith("Select")?"Selected":allState.maker}
+                    </box>
+                    <box id="selectedModel" value={allState.model}>
+                        {allState.maker.startsWith("Select")?"Selected":allState.model}
+                    </box>
+                    <box id="selectedSize" value={allState.size}>
+                        {allState.maker.startsWith("Select")?"Selected":allState.size}
+                    </box>
+                </div>      
                 <HarpsContainer data-test="component-harpscontainer" filteredproducts={filteredProducts}/>               
             </div>               
         </div>

@@ -5,7 +5,7 @@ const NavBar = () => {
         <>
         <div className='navBarOuter'>
             <Link href='/'>
-                <a>Home</a>
+                <a>Find a Harp</a>
             </Link>
             <Link href='/PrivateAds'>
                 <a>Sell Your Harp</a>
@@ -23,10 +23,11 @@ const NavBar = () => {
         <style jsx>{`
             .navBarOuter {
                 background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
-                height: 40px;
+                height: 30px;
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
+                border-bottom: 1px solid grey;
             }
             a {
                 font-family: 'avenir';

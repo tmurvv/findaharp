@@ -10,11 +10,7 @@ const Index = (props) => {
         <>
         <div className="App">  
             <div className='mainTitle'>
-            
-                <h5>This website is under construction and none of the design is implemented.<br></br>
-                It will be beautiful! But right now, it is only functional.</h5>
-                <h1>Find A Harp <span style={{fontStyle: 'italic', fontSize: '80%'}}>.com</span></h1>
-                <p className='subTitle'>Save valuable time! Pre-owned harps from reputable harp stores and private sellers all in one place.</p>
+                <h2>Find a Harp</h2>
             </div>
             <HarpSearch 
                 makesmodels={props.makesModels}
@@ -22,11 +18,19 @@ const Index = (props) => {
             />                 
         </div>
         <style jsx>{`
+        .App {
+            background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
+            margin: 0;
+            padding-top: 20px;
+            
+        }
+        .App h2 {
+            margin-block-end:0;
+            margin-block-start:0;
+        }
         .mainTitle {
             text-align: center;
             margin: auto;
-            margin-bottom: 30px;
-            
         }
         .subTitle {
             margin-top: 10px;
