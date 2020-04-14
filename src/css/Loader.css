@@ -1,3 +1,11 @@
+@font-face {
+    font-family: avenir;
+    src: url('../../public/fonts/avenir_ff/AvenirLTStd-Black.otf');
+}
+
+html {
+    font-family: avenir, Helvetica, sans-serif;
+}
 .loader {
     height: 15vmin;   
     pointer-events: none;    

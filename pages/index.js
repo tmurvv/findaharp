@@ -10,6 +10,7 @@ const Index = (props) => {
         <>
         <div className="App">  
             <div className='mainTitle'>
+            
                 <h5>This website is under construction and none of the design is implemented.<br></br>
                 It will be beautiful! But right now, it is only functional.</h5>
                 <h1>Find A Harp <span style={{fontStyle: 'italic', fontSize: '80%'}}>.com</span></h1>
@@ -18,8 +19,7 @@ const Index = (props) => {
             <HarpSearch 
                 makesmodels={props.makesModels}
                 products={props.products}
-            />
-                        
+            />                 
         </div>
         <style jsx>{`
         .mainTitle {
@@ -43,9 +43,9 @@ Index.getInitialProps = async () => {
     // PRODUCTION API
     // const res = await axios.get('https://findaharp-api.herokuapp.com/');
     // STAGING API
-    const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
+    // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     // TESTING API
-    // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
+    const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
     
     const products = res.data.harpData;
     const makesModels = res.data.harpMakesModels;

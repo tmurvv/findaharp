@@ -10,8 +10,11 @@ const NavBar = () => {
             <Link href='/PrivateAds'>
                 <a>Sell Your Harp</a>
             </Link>
-            <Link href='/About'>
-                <a>About</a>
+            <Link href='/BuyersGuide'>
+                <a>Buyer's Guide</a>
+            </Link>
+            <Link href='/FAQ'>
+                <a>FAQ</a>
             </Link>
             <Link href='/Contact'>
                 <a>Contact</a>
@@ -19,16 +22,17 @@ const NavBar = () => {
         </div>
         <style jsx>{`
             .navBarOuter {
-                background-color: #333333;
+                background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
                 height: 40px;
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
             }
             a {
+                font-family: 'avenir';
+                font-size: 12px;
                 text-decoration: none;
-                color: #fafbfc;
-                opacity: .85
+                color: #000000;
             }
 
             a:hover {

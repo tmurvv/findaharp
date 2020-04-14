@@ -1,10 +1,10 @@
 import React from 'react';
 
-function About() {
+function FAQ() {
     return (
         <>
         <div>           
-            <h1>About</h1>
+            <h1>FAQ</h1>
         </div>
         <style jsx="true">{`
             background-color: #534873;
@@ -16,4 +16,4 @@ function About() {
     )
 }
 
-export default About;
+export default FAQ;

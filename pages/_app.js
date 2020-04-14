@@ -1,17 +1,19 @@
 // import App from 'next/app'
 
 // css
-// import '../src/css/Loader.css';
+import '../src/css/Loader.css';
 import "../src/css/HarpSearch.css";
 import 'react-phone-input-2/lib/style.css'
 
 // internal
+import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
 
 function MyApp({ Component, pageProps }) {
     return(
         <>
+            <Banner />
             <NavBar />
             <Component {...pageProps} />
             <Footer />

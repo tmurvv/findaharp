@@ -1,4 +1,5 @@
 import React from 'react';
+import FooterCss from './Footer.css.js';
 
 function Footer() {
     return (
@@ -6,18 +7,7 @@ function Footer() {
             <div className='footer'>
                 Footer Not Yet Implemented
             </div>
-            <style jsx>{`
-                .footer {
-                    background-color: #333333;
-                    color: #faf8ed;
-                    height: 75px;
-                    font-size: 20px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-            `}
-            </style>
+            <FooterCss />
         </>
     )
 }
