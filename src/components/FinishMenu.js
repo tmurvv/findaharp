@@ -7,19 +7,19 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export default function SizeMenu(props) {
+export default function FinishMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClick = (evt) => setAnchorEl(evt.currentTarget);
     const handleClose = (evt) => {
         setAnchorEl(null);
         if (evt.target.value === 'All Sizes') return;
-        props.handleSizeChange(evt.target.getAttribute('name')); 
+        props.handleFinishChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Harp Size
+                FINISH
             </Button>               
             <Menu
                 id="size-select"
@@ -27,58 +27,60 @@ export default function SizeMenu(props) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                name='Size Menu'
+                name='Finish Menu'
             >
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='All Sizes'
-                >All Sizes</MenuItem>
+                >All Finishes</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()}
-                    name='All Lever'
-                >All Lever</MenuItem>      
-                <MenuItem 
-                    onClick={handleClose} 
-                    // key={uuid()}
-                    name='All Pedal'
-                >All Pedal</MenuItem>      
-                <MenuItem 
-                    onClick={handleClose}
-                    // key={uuid()}
-                    name='Large Lever'
-                >Large Lever (35+ strings)</MenuItem>      
+                    name='Mahogany'
+                    selected={props.currentselected.startsWith('Large')}
+                >Mahogany</MenuItem>      
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Medium Lever'
-                >Medium Lever (29-34 strings)</MenuItem>
+                    name='Natural'
+                    selected={props.currentselected.startsWith('Medium')}
+                >Natural</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Small Lever'
-                >Small Lever (22-28 strings)</MenuItem>
+                    name='Ebony'
+                >Ebony</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Lever-Free/Lap'
-                >Lever-Free/Lap</MenuItem>
+                    name='Maple'
+                    selected={props.currentselected.startsWith('Lever')}
+                >Maple</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Concert Grand Pedal'
-                >Concert Grand Pedal</MenuItem>
+                    name='Walnut'
+                    selected={props.currentselected.startsWith('Concert')}
+                >Walnut</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Semi-Grand Pedal'
-                >Semi-Grand Pedal</MenuItem>
+                    name='Cherry'
+                    selected={props.currentselected.startsWith('Semi')}
+                >Cherry</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Small Pedal'
-                >Small Pedal</MenuItem>               
+                    name='Bubinga'
+                    selected={props.currentselected.startsWith('Small Pedal')}
+                >Bubinga</MenuItem>               
+                <MenuItem 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='Other'
+                    selected={props.currentselected.startsWith('Small Pedal')}
+                >Other</MenuItem>               
             </Menu>     
         </div>
     );

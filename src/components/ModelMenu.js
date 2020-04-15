@@ -31,7 +31,7 @@ export default function ModelMenu(props) {
     return (
         <div>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                {props.currentselected}
+                Harp Model
             </Button>               
             <Menu
                 id="simple-menu"

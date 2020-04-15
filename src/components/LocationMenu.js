@@ -7,19 +7,19 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export default function SizeMenu(props) {
+export default function LocationMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClick = (evt) => setAnchorEl(evt.currentTarget);
     const handleClose = (evt) => {
         setAnchorEl(null);
         if (evt.target.value === 'All Sizes') return;
-        props.handleSizeChange(evt.target.getAttribute('name')); 
+        props.handleLocationChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Harp Size
+                Location
             </Button>               
             <Menu
                 id="size-select"
@@ -27,58 +27,59 @@ export default function SizeMenu(props) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-                name='Size Menu'
+                name='Location Menu'
             >
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='All Sizes'
-                >All Sizes</MenuItem>
+                    name='All Locations'
+                >All Locations</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()}
-                    name='All Lever'
-                >All Lever</MenuItem>      
-                <MenuItem 
-                    onClick={handleClose} 
-                    // key={uuid()}
-                    name='All Pedal'
-                >All Pedal</MenuItem>      
-                <MenuItem 
-                    onClick={handleClose}
-                    // key={uuid()}
-                    name='Large Lever'
-                >Large Lever (35+ strings)</MenuItem>      
+                    name='US-NorthEastern'
+                >US-NorthEastern</MenuItem>      
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Medium Lever'
-                >Medium Lever (29-34 strings)</MenuItem>
+                    name='US-SouthEastern'
+                    selected={props.currentselected.startsWith('Medium')}
+                >US-SouthEastern</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Small Lever'
-                >Small Lever (22-28 strings)</MenuItem>
+                    name='US-South'
+                >US-South</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Lever-Free/Lap'
-                >Lever-Free/Lap</MenuItem>
+                    name='US-MidWest'
+                    selected={props.currentselected.startsWith('Lever')}
+                >US-MidWest</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Concert Grand Pedal'
-                >Concert Grand Pedal</MenuItem>
+                    name='US-West'
+                    selected={props.currentselected.startsWith('Concert')}
+                >US-West</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Semi-Grand Pedal'
-                >Semi-Grand Pedal</MenuItem>
+                    name='US-Pacific'
+                    selected={props.currentselected.startsWith('Semi')}
+                >US-Pacific</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Small Pedal'
-                >Small Pedal</MenuItem>               
+                    name='Canada'
+                    selected={props.currentselected.startsWith('Small Pedal')}
+                >Canada</MenuItem>               
+                <MenuItem 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='Mexico'
+                    selected={props.currentselected.startsWith('Small Pedal')}
+                >Mexico</MenuItem>               
             </Menu>     
         </div>
     );

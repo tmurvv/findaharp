@@ -18,9 +18,12 @@ function IndexCss() {
                 margin: auto;
             }
             .subTitle {
-                margin-top: 10px;
-                font-size: 16px;
+                width: 60%;
+                margin: auto;
+                text-align: center;
+                font-size: 12px;
                 font-style: italic;
+                color: #868686           
             }
         `}
     </style>

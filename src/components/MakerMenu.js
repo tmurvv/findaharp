@@ -49,7 +49,7 @@ export default function MakerMenu(props) {
     return (
         <div>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick_1}>
-                {props.currentselected}
+                Harp Maker
             </Button>                
             <Menu
                 key={uuid()}
