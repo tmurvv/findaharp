@@ -14,7 +14,7 @@ function ProductContainerCss() {
                 transform: rotate(25deg);
             }           
             .productContainer {
-                width: 60%;
+                width: 70%;
                 margin: 30px auto;
             }
             .grid-container {
@@ -46,10 +46,11 @@ function ProductContainerCss() {
                 height: 100%;
             }
             .productSmallDisplay-text {
-                flex: 3;
+                flex: 2;
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                align-items: top;
+                padding-top: 5px;
                 width: 100%;
             }
         `}

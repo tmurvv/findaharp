@@ -1,7 +1,6 @@
 //leaf function helps find nested object keys,
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
 
-
 export function findSizeWords(strings, type) {
     strings = parseInt(strings);
     if (strings<29&&type==='lever-free') return 'lever-free';
@@ -51,18 +50,9 @@ export function getModelList(productMakesModels, productType, productMaker) {
     let modelList = [];
     productMakesModels.map(maker => {
         //for type
-        if (maker.sellerProducts) {
-            // select pedal, lever, or lever-free
-            if (productType === 'pedal' || productType==='lever-free' || productType === 'lever') { // lever-free come up in lever also which is intentional
-                maker.sellerProducts.map(model => {
-                    if (model.productType === productType) modelList.push(model.productTitle);
-                });
-            //all
-            } else if (productType === 'all') {
-                maker.sellerProducts.map(product => {                   
-                    modelList.push(product.productTitle);
-                });
-            }
+        if (maker.sellerProducts) {maker.sellerProducts.map(product => {                   
+                modelList.push(product.productTitle);
+            });
         }        
     });
     
@@ -75,7 +65,7 @@ export function getFilteredProducts(filteredProducts, allState) {
     if (allState.model && allState.selectionType === 'model') return filteredProducts.filter(product => product.productModel === allState.model);
     if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
     
-    return filteredProducts;
+    return filteredProducts.sort();
 } 
 
 export const itemsSortByDisabled = (items, currentItems) => {

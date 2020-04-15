@@ -10,6 +10,7 @@ function BannerCss() {
             display: flex;
             justify-content: flex-start;
             align-items: center;
+            padding: 20px;
         }
         .textLogo {
             height: 70%;

@@ -32,13 +32,18 @@ function ProductSearch(props) {
         if (!exceptions.includes('location')) setAllState({...allState, size: 'Location'});
     }
     
-    function handleModelSelection(modelName, maker) {
+    function handleMakerSelection(maker) {
         //modelName.endsWith('Models:') catches when user selects all models from maker
         setAllState({...allState, 
-            maker: modelName&&modelName.endsWith('Models:')?modelName.substr(4,(modelName.length-12)):maker,
-            model: modelName&&modelName.endsWith('Models:')?'':modelName,
-            selectionType: modelName&&modelName.endsWith('Models:')?'maker':'model',
-            productType: 'all'
+            maker,
+            selectionType: 'maker'
+        });
+    }
+    function handleModelSelection(model) {
+        //modelName.endsWith('Models:') catches when user selects all models from maker
+        setAllState({...allState, 
+            model,
+            selectionType: 'maker'
         });
     }
     function handleSizeSelection(newProductSize) {
@@ -79,27 +84,24 @@ function ProductSearch(props) {
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
         <div className='ProductSearchOuter'>    
             <div className='searchLine1'>
-                {/* <div className='flexSB'> */}
-                    <div className={`arrow rightArrow line1RightArrow`}></div>
-                    <SizeMenu 
-                        handleSizeChange = {handleSizeSelection}
-                        currentselected={allState.size?allState.size:'Harp Size'}
-                    />
-                    <MakerMenu 
-                        handleModelChange = {handleModelSelection} 
-                        products={props.products}
-                        makesmodels={props.makesmodels}
-                        currentselected={allState.maker?allState.maker:'Harp Maker'}
-                    />
-                    <ModelMenu 
-                        handleModelChange = {handleModelSelection}
-                        products={props.products}
-                        producttype={allState.productType}
-                        makesmodels={props.makesmodels}
-                        currentselected={allState.model?allState.model:'Harp Model'}/>
-                    
-                    <div className='arrow leftArrow line1LeftArrow'></div>
-                {/* </div>    */}
+               
+                <div className={`arrow rightArrow line1RightArrow`}></div>
+                <SizeMenu 
+                    handleSizeChange = {handleSizeSelection}
+                />
+                <MakerMenu 
+                    handleMakerChange = {handleMakerSelection} 
+                    products={props.products}
+                    makesmodels={props.makesmodels}
+                />
+                <ModelMenu 
+                    handleModelChange = {handleModelSelection}
+                    products={props.products}
+                    producttype={allState.productType}
+                    makesmodels={props.makesmodels}
+                />
+                
+                <div className='arrow leftArrow line1LeftArrow'></div>
             </div>
              
             <div className="searchLine1Sub">

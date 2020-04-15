@@ -16,6 +16,7 @@ function IndexCss() {
             .mainTitle {
                 text-align: center;
                 margin: auto;
+                letter-spacing: 1.5px;
             }
             .subTitle {
                 width: 60%;
@@ -23,7 +24,8 @@ function IndexCss() {
                 text-align: center;
                 font-size: 12px;
                 font-style: italic;
-                color: #868686           
+                color: #868686;
+                letter-spacing: 1px;         
             }
         `}
     </style>
