@@ -70,7 +70,7 @@ export function getModelList(productMakesModels, productType, productMaker) {
     return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
-    if (allState.productType !== 'all') filteredProducts = filteredProducts.filter(product => product.productType===allState.productType);    
+    // if (allState.productType !== 'all') filteredProducts = filteredProducts.filter(product => product.productType===allState.productType);    
     if (allState.maker && allState.selectionType === 'maker') return filteredProducts.filter(product => product.productMaker === allState.maker);
     if (allState.model && allState.selectionType === 'model') return filteredProducts.filter(product => product.productModel === allState.model);
     if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));

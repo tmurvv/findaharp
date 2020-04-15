@@ -4,7 +4,7 @@ import React, { useState} from 'react';
 // design
 // internal
 import HarpSearchCss from '../styles/harpSearch.css';
-import HarpsContainer from './HarpsContainer';
+import ProductContainer from './ProductContainer';
 import MakerMenu from './MakerMenu';
 import ModelMenu from './ModelMenu';
 import SizeMenu from './SizeMenu';
@@ -72,6 +72,7 @@ function HarpSearch(props) {
             selectionType: newProductLocation==='All Locations'?'':'location'
         });
     }
+    console.log(allState)
     const filteredProducts = getFilteredProducts(props.products, allState);
     return (
         <>       
@@ -153,7 +154,7 @@ function HarpSearch(props) {
                 <div className={`arrow leftArrow line2SubLeftArrow`}></div>
             </div>
             <HarpSearchCss />    
-            <HarpsContainer data-test="component-harpscontainer" filteredproducts={filteredProducts}/>              
+            <ProductContainer data-test="component-ProductContainer" filteredproducts={filteredProducts}/>              
         </div>
         </>
     );

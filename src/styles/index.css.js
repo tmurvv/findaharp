@@ -7,7 +7,6 @@ function IndexCss() {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 margin: 0;
                 padding-top: 20px;
-                height: 100vh;
             }
             .App h2 {
                 margin-block-end:0;
