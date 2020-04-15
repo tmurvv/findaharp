@@ -4,7 +4,7 @@ function FooterCss() {
     return (
         <style jsx>{`
             .footer {
-                background-color: #333333;
+                background-color: #000000;
                 color: #faf8ed;
                 height: 75px;
                 font-size: 20px;

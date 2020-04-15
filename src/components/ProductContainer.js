@@ -4,16 +4,26 @@ import ProductContainerCss from '../styles/ProductContainer.css';
 
 function ProductContainer(props) {
     if (props.filteredproducts&&props.filteredproducts.length>0) {
-        console.log(props.filteredproducts)
+        const gridProducts = props.filteredproducts.map(product => (
+                <div key={product.id} className={`grid-item productSmallDisplay`}>
+                    <div className={`productSmallDisplay-img`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
+                    <div className={`grid-item evenRow productSmallDisplay-text`}>{product.productMaker} {product.productModel}<br></br>{product.productSize} Strings<br></br></div>
+                </div>                                     
+        ));
         return( 
             <>      
             <div data-test='component-ProductContainer' className='productContainer'>       
-                <div class="grid-container">
-                    <div class={`grid-item oddRow`}><img src= {props.filteredproducts[0].productImageUrl} alt={props.filteredproducts.productTitle}/></div>
-                    <div class={`grid-item oddRow`}>2</div>
+                <div className="grid-container">
+                    {gridProducts}
+                    {/* <div className={`grid-item oddRow productSmallDisplay`}>
+                        <div className={`productSmallDisplay-img`}><img src= {props.filteredproducts[0].productImageUrl} alt={props.filteredproducts.productTitle}/></div>
+                        <div className={`grid-item evenRow productSmallDisplay-text`}>{props.filteredproducts[0].productMaker} {props.filteredproducts[0].productModel}<br></br>{props.filteredproducts[0].productSize} Strings<br></br></div>
+                    </div> */}
+                    
+                    {/* <div class={`grid-item oddRow`}>2</div>
                     <div class={`grid-item oddRow`}>3</div>  
                     <div class={`grid-item oddRow`}>4</div>
-                    <div class={`grid-item evenRow`}>{props.filteredproducts[0].productMaker} {props.filteredproducts[0].productModel}<br></br>{props.filteredproducts[0].productSize} Strings<br></br></div>
+                    
                     <div class={`grid-item evenRow`}>6</div>  
                     <div class={`grid-item evenRow`}>7</div>
                     <div class={`grid-item evenRow`}>8</div>
@@ -24,7 +34,7 @@ function ProductContainer(props) {
                     <div class={`grid-item evenRow`}>13</div>  
                     <div class={`grid-item evenRow`}>14</div>  
                     <div class={`grid-item evenRow`}>15</div>  
-                    <div class={`grid-item evenRow`}>16</div>  
+                    <div class={`grid-item evenRow`}>16</div>   */}
                 </div>
 
             </div>
@@ -32,16 +42,30 @@ function ProductContainer(props) {
             </>
         );
     } else {
-        return(       
-            <div data-test='component-ProductContainer' className='ProductContainer' style={{padding: '150px'}}>
+        return(
+            <>     
+            <div data-test='component-ProductContainer' className='notFoundContainer'>
                 <img src= 'https://findaharp-api.herokuapp.com/assets/img/genericHarp.png' alt='harp in silhouette'/>
-                
-                <h3>Make/Model/Size not found in our listings. Please try another search.</h3>
             </div>
+            <h3 style={{textAlign: 'center'}}>Not found in our listings. Please try another search.</h3>
+            <ProductContainerCss />
+            </>
         );
     }    
 }
 export default ProductContainer;
+
+              
+                    // {props.filteredproducts.map(product => (
+                    //     <div className={`grid-item oddRow productSmallDisplay`}>
+                    //     <div className={`productSmallDisplay-img`}><img src= {props.filteredproducts[0].productImageUrl} alt={props.filteredproducts.productTitle}/></div>
+                    //     <div className={`grid-item evenRow productSmallDisplay-text`}>{props.filteredproducts[0].productMaker} {props.filteredproducts[0].productModel}<br></br>{props.filteredproducts[0].productSize} Strings<br></br></div>
+                    // </div>                                     
+                    // ))}
+//                 </ul>
+
+
+
 
 // <ul style={{listStyle: "none"}}>               
 //                     {props.filteredproducts.map(product => (

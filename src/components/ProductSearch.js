@@ -3,17 +3,17 @@ import React, { useState} from 'react';
 
 // design
 // internal
-import HarpSearchCss from '../styles/harpSearch.css';
+import ProductSearchCss from '../styles/ProductSearch.css';
 import ProductContainer from './ProductContainer';
-import MakerMenu from './MakerMenu';
-import ModelMenu from './ModelMenu';
-import SizeMenu from './SizeMenu';
-import FinishMenu from './FinishMenu';
-import PriceMenu from './PriceMenu';
-import LocationMenu from './LocationMenu';
+import MakerMenu from './searchMenus/MakerMenu';
+import ModelMenu from './searchMenus/ModelMenu';
+import SizeMenu from './searchMenus/SizeMenu';
+import FinishMenu from './searchMenus/FinishMenu';
+import PriceMenu from './searchMenus/PriceMenu';
+import LocationMenu from './searchMenus/LocationMenu';
 import { getFilteredProducts } from '../utils/helpers'
 
-function HarpSearch(props) {
+function ProductSearch(props) {
     const [allState, setAllState] = useState({
         selectionType: '',
         maker: 'Harp Maker',
@@ -77,7 +77,7 @@ function HarpSearch(props) {
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
-        <div className='harpSearchOuter'>    
+        <div className='ProductSearchOuter'>    
             <div className='searchLine1'>
                 {/* <div className='flexSB'> */}
                     <div className={`arrow rightArrow line1RightArrow`}></div>
@@ -104,13 +104,13 @@ function HarpSearch(props) {
              
             <div className="searchLine1Sub">
                 <div className='arrow rightArrow line1SubRightArrow'></div>
-                <div id="selectedSize" value={allState.size}>
+                <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
                     {allState.size==='Harp Size'?'':allState.size}
                 </div>
-                <div id="selectedMaker" value={allState.maker}>
+                <div id="selectedMaker" className={`search-grid-item`} value={allState.maker}>
                     {allState.maker==='Harp Maker'?'':allState.maker}
                 </div>
-                <div id="selectedModel" value={allState.model}>
+                <div id="selectedModel" className={`search-grid-item`} value={allState.model}>
                     {allState.model==='Harp Model'?'':allState.model}
                 </div>
                 
@@ -142,22 +142,22 @@ function HarpSearch(props) {
             </div> 
             <div className="searchLine2Sub">
                 <div className={`arrow rightArrow line2SubRightArrow`}></div>
-                <div id="selectedFinish" value={allState.finish}>
+                <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
                     {allState.finish==='Finish'?'':allState.finish}
                 </div>
-                <div id="selectedPrice" value={allState.price}>
+                <div id="selectedPrice" className={`search-grid-item`} value={allState.price}>
                     {allState.price==='Price Range'?'':allState.price}
                 </div>
-                <div id="selectedLocation" value={allState.location}>
+                <div id="selectedLocation" className={`search-grid-item`} value={allState.location}>
                 {allState.location==='Location'?'':allState.location}
                 </div>
                 <div className={`arrow leftArrow line2SubLeftArrow`}></div>
             </div>
-            <HarpSearchCss />    
+            <ProductSearchCss />    
             <ProductContainer data-test="component-ProductContainer" filteredproducts={filteredProducts}/>              
         </div>
         </>
     );
 }
 
-export default HarpSearch;
+export default ProductSearch;

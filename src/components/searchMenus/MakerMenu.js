@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // internal
-import { getModelListForMaker, itemsSortByDisabled } from '../utils/helpers';
+import { getModelListForMaker, itemsSortByDisabled } from '../../utils/helpers';
 
 const ITEM_HEIGHT = 48;
 

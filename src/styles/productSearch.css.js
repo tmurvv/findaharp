@@ -1,6 +1,6 @@
 import React from 'react';
 
-function HarpSearchCss() {
+function ProductSearchCss() {
     return (
         <style jsx>{`
             .searchTitle {
@@ -18,8 +18,8 @@ function HarpSearchCss() {
                 background-color: #000000;
                 text-align: center;
                 color: #fafbfc;
-                display: flex;
-                justify-content: space-between;
+                display: grid;
+                grid-template-columns: 9.5% 29% 29% 29% 9.5%;
             }
             .searchLine1 span {
                 color: #fafbfc;
@@ -28,15 +28,14 @@ function HarpSearchCss() {
                 width: 70%;
                 margin: auto;
                 height: 28.5px;
-                text-align: center;
-                display: flex;
-                justify-content: space-between;
                 background-color: #ffffff;
                 color: #868686;
                 font-style: italic;
                 border-top: 1px solid;
                 border-bottom: 1px solid;
                 text-align: center;
+                display: grid;
+                grid-template-columns: 9.5% 29% 29% 29% 9.5%;
             }
             .searchLine2 {
                 width: 60%;
@@ -44,11 +43,10 @@ function HarpSearchCss() {
                 height: 27px;
                 background-color: #f9bf1e;
                 color: #868686;
-                display: flex;
-                justify-content: space-between;
                 text-align: center;
                 border-top: 1px solid;
-                vertical-align: -50px;
+                display: grid;
+                grid-template-columns: 9.5% 29% 29% 29% 9.5%;
             }
             .searchLine2 span {
                 color: #fafbfc;
@@ -57,15 +55,13 @@ function HarpSearchCss() {
                 width: 60%;
                 margin: auto;
                 height: 26.5px;
-                display: flex;
-                justify-content: space-between;
                 background-color: #ffffff;
                 color: #868686;
                 font-style: italic;
                 border-top: 1px solid;
                 border-bottom: 1px solid;
-                align-items: center;
-                text-align: center;
+                display: grid;
+                grid-template-columns: 9.5% 29% 29% 29% 9.5%;
             }
             .arrow {
                 background-color: #fffff3;
@@ -120,6 +116,11 @@ function HarpSearchCss() {
                 display: flex;
                 justify-content: space-between;
             }
+            .search-grid-item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
             input {
                 margin-bottom: 15px;
             }
@@ -131,4 +132,4 @@ function HarpSearchCss() {
     )
 }
 
-export default HarpSearchCss;
+export default ProductSearchCss;

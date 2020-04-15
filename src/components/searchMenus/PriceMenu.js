@@ -42,23 +42,23 @@ export default function PriceMenu(props) {
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='$20,000-$29,999'
-                >$20,000-$29,999</MenuItem>
+                    name='$20,000-29,999'
+                >$20,000-29,999</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='$10,000-$19,999'
-                >$10,000-$19,999</MenuItem>
+                    name='$10,000-19,999'
+                >$10,000-19,999</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='$5,000-$9,999'
-                >$5,000-$9,999</MenuItem>
+                    name='$5,000-9,999'
+                >$5,000-9,999</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='$2,000-$4,999'
-                >$2,000-$4,999</MenuItem>
+                    name='$2,000-4,999'
+                >$2,000-4,999</MenuItem>
                 <MenuItem 
                     onClick={handleClose} 
                     // key={uuid()} 

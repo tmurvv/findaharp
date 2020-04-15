@@ -3,12 +3,13 @@ import React from 'react';
 function IndexCss() {
     return (
         <style jsx>{`
-            .App {
+            .index {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 margin: 0;
                 padding-top: 20px;
+                height: fit-content;
             }
-            .App h2 {
+            .index h2 {
                 margin-block-end:0;
                 margin-block-start:0;
             }
