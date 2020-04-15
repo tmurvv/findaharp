@@ -1,87 +1,140 @@
 //Packages
 import React from 'react';
-// import uuid from 'uuid';
-
-// Material-ui
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 export default function FinishMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClick = (evt) => setAnchorEl(evt.currentTarget);
     const handleClose = (evt) => {
         setAnchorEl(null);
-        if (evt.target.value === 'All Sizes') return;
+        if (evt.target.value === 'All Finishes') return;
         props.handleFinishChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                FINISH
-            </Button>               
-            <Menu
-                id="size-select"
+            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}
+            >FINISH</div>            
+            <ul
+                id="finish-select"
                 anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
                 onClose={handleClose}
+                hidden={!anchorEl}
                 name='Finish Menu'
+                className='plainTextSelectLine2'
             >
-                <MenuItem 
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='All Sizes'
-                >All Finishes</MenuItem>
-                <MenuItem 
+                    name='All Finishes'       
+                >All Finishes</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()}
                     name='Mahogany'
-                    selected={props.currentselected.startsWith('Large')}
-                >Mahogany</MenuItem>      
-                <MenuItem 
+                >Mahogany</li>      
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Natural'
-                    selected={props.currentselected.startsWith('Medium')}
-                >Natural</MenuItem>
-                <MenuItem 
+                >Natural</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Ebony'
-                >Ebony</MenuItem>
-                <MenuItem 
+                >Ebony</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Maple'
-                    selected={props.currentselected.startsWith('Lever')}
-                >Maple</MenuItem>
-                <MenuItem 
+                >Maple</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Walnut'
-                    selected={props.currentselected.startsWith('Concert')}
-                >Walnut</MenuItem>
-                <MenuItem 
+                >Walnut</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Cherry'
-                    selected={props.currentselected.startsWith('Semi')}
-                >Cherry</MenuItem>
-                <MenuItem 
+                >Cherry</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Bubinga'
-                    selected={props.currentselected.startsWith('Small Pedal')}
-                >Bubinga</MenuItem>               
-                <MenuItem 
+                >Bubinga</li>               
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Other'
-                    selected={props.currentselected.startsWith('Small Pedal')}
-                >Other</MenuItem>               
-            </Menu>     
+                >Other</li>               
+            </ul>
         </div>
     );
+
+
+
+    // return (
+    //     <div>             
+    //         <select
+    //             id="size-select"
+    //             anchorEl={anchorEl}
+    //             onClose={handleClose}
+    //             name='Finish Menu'
+    //             className='plainTextSelect'
+    //         >
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='All Finishes'       
+    //             >FINISH</option>
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()}
+    //                 name='Mahogany'
+    //                 selected={props.currentselected.startsWith('Large')}
+    //             >Mahogany</option>      
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Natural'
+    //                 selected={props.currentselected.startsWith('Medium')}
+    //             >Natural</option>
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Ebony'
+    //             >Ebony</option>
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Maple'
+    //                 selected={props.currentselected.startsWith('Lever')}
+    //             >Maple</option>
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Walnut'
+    //                 selected={props.currentselected.startsWith('Concert')}
+    //             >Walnut</option>
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Cherry'
+    //                 selected={props.currentselected.startsWith('Semi')}
+    //             >Cherry</option>
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Bubinga'
+    //                 selected={props.currentselected.startsWith('Small Pedal')}
+    //             >Bubinga</option>               
+    //             <option 
+    //                 onClick={handleClose} 
+    //                 // key={uuid()} 
+    //                 name='Other'
+    //                 selected={props.currentselected.startsWith('Small Pedal')}
+    //             >Other</option>               
+    //         </select>   
+    //     </div>
+    // );
 }

@@ -12,8 +12,7 @@ function ProductContainerCss() {
                 justify-content: center;
                 margin: 45px auto 25px;
                 transform: rotate(25deg);
-            }
-            
+            }           
             .productContainer {
                 width: 60%;
                 margin: 30px auto;

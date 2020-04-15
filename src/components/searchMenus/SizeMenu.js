@@ -1,11 +1,5 @@
 //Packages
 import React from 'react';
-// import uuid from 'uuid';
-
-// Material-ui
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 export default function SizeMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
@@ -18,68 +12,68 @@ export default function SizeMenu(props) {
 
     return (
         <div>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Harp Size
-            </Button>               
-            <Menu
+             <div className="plainTextSelectLine1" onClick={() => setAnchorEl(!anchorEl)}>
+                HARP SIZE
+            </div>              
+            <ul
                 id="size-select"
                 anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
                 onClose={handleClose}
+                hidden={!anchorEl}
                 name='Size Menu'
+                className='plainTextSelectLine1'
             >
-                <MenuItem 
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='All Sizes'
-                >All Sizes</MenuItem>
-                <MenuItem 
+                >All Sizes</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()}
                     name='All Lever'
-                >All Lever</MenuItem>      
-                <MenuItem 
+                >All Lever</li>      
+                <li 
                     onClick={handleClose} 
                     // key={uuid()}
                     name='All Pedal'
-                >All Pedal</MenuItem>      
-                <MenuItem 
+                >All Pedal</li>      
+                <li 
                     onClick={handleClose}
                     // key={uuid()}
                     name='Large Lever'
-                >Large Lever (35+ strings)</MenuItem>      
-                <MenuItem 
+                >Large Lever (35+ strings)</li>      
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Medium Lever'
-                >Medium Lever (29-34 strings)</MenuItem>
-                <MenuItem 
+                >Medium Lever (29-34 strings)</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Small Lever'
-                >Small Lever (22-28 strings)</MenuItem>
-                <MenuItem 
+                >Small Lever (22-28 strings)</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Lever-Free/Lap'
-                >Lever-Free/Lap</MenuItem>
-                <MenuItem 
+                >Lever-Free/Lap</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Concert Grand Pedal'
-                >Concert Grand Pedal</MenuItem>
-                <MenuItem 
+                >Concert Grand Pedal</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Semi-Grand Pedal'
-                >Semi-Grand Pedal</MenuItem>
-                <MenuItem 
+                >Semi-Grand Pedal</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Small Pedal'
-                >Small Pedal</MenuItem>               
-            </Menu>     
+                >Small Pedal</li>               
+            </ul>     
         </div>
     );
 }

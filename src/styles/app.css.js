@@ -12,10 +12,39 @@ function AppCss() {
                 margin: 0;
                 margin-block-end: 0;
                 margin-block-start: 0;
-           
                 font-family: avenir;
                 color: #5c5b5b;
-            }            
+            }
+            .menuButton {
+                background-color: transparent;
+                font-size: 14px;
+                padding: 6px 9px;
+                position: relative;
+                cursor: pointer;
+                color: #fafbfc;
+            }
+            .plainTextSelectLine1 {
+                margin-block-end: 0;
+                margin-block-start: 0;
+                color: #fafbfc;
+                background-color: #000000;
+                font-size: 14px;
+                padding: 6px 9px;
+                position: relative;
+                cursor: pointer;
+                z-index: 2000;
+                list-style: none;
+            }
+            .plainTextSelectLine2 {
+                margin-block-start: -.5em;
+                color: #fafbfc;
+                font-size: 14px;
+                padding: 6px 9px;
+                position: relative;
+                cursor: pointer;
+                background-color: #f9bf1e;
+                list-style: none;
+            }
         `}
         </style>
     )

@@ -101,10 +101,10 @@ function ProductSearchCss() {
                 transform: translate(8.5px, 4px) rotate(135deg);
             }
             .line2SubRightArrow {
-                transform: translate(-10px, 0) rotate(135deg);
+                transform: translate(-9px, 3px) rotate(135deg);
             }
             .line2SubLeftArrow {
-                transform: translate(10px, 0) rotate(135deg);
+                transform: translate(8.5px, 3px) rotate(135deg);
             }
             .flexSE {
                 width: 100%;
@@ -126,6 +126,15 @@ function ProductSearchCss() {
             }
             button {
                 transform: translateY(-3px);
+            }
+            
+            
+            
+            li {
+                
+                padding: 5px 7px;
+                border: 1 solid grey;
+                z-index: 1000;
             } 
         `}
     </style>
