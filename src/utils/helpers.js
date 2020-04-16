@@ -44,16 +44,14 @@ export function getModelListForMaker(productMakesModels, productMaker) {
                 modelList.push(model.productTitle);
             });
         }    
-    });
-    
-    
+    });  
     return modelList;    
 }
 export function getModelList(productMakesModels, productMaker) {
-    console.log('func', productMakesModels)
     // short circuit
     if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelList: productMakesModels parameter empty");
     let modelList = [];
+    console.log(productMakesModels)
     productMakesModels.map(maker => {
         if (maker.sellerProducts) {maker.sellerProducts.map(product => { 
                 // console.log(maker)                  
@@ -63,30 +61,64 @@ export function getModelList(productMakesModels, productMaker) {
     });
     
     modelList = new Set(modelList);
-    console.log(modelList)
+    
     return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
     
-    if (allState.model.toUpperCase() !== "HARP MODEL" && allState.maker.toUpperCase() !== "ALL MODELS") {
-        
+    if (allState.model && allState.model.toUpperCase() !== "HARP MODEL" && allState.model.toUpperCase() !== "ALL MODELS") {   
         return filteredProducts.filter(product => product.productModel === allState.model);
     }
-    if (allState.maker.toUpperCase() !== "HARP MAKER" && allState.maker.toUpperCase() !== "ALL MAKERS") filteredProducts = filteredProducts.filter(product => product.productMaker === allState.maker);
-    if (allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
+    if (allState.maker && allState.maker.toUpperCase() !== "HARP MAKER" && allState.maker.toUpperCase() !== "ALL MAKERS") filteredProducts = filteredProducts.filter(product => product.productMaker === allState.maker);
+    if (allState.size && allState.size.toUpperCase() === "ALL PEDAL") return filteredProducts.filter(product => product.productType === 'pedal');
+    if (allState.size && allState.size.toUpperCase() === "ALL LEVER") return filteredProducts.filter(product => product.productType === 'lever');
+    if (allState.size && allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
     return filteredProducts;
-    
-    
-    // // if (allState.productType !== 'all') 
-    // console.log('from get filtered', allState)
-    
-    // if (allState.maker && allState.selectionType === 'maker') return filteredProducts.filter(product => product.productMaker === allState.maker);
-    // if (allState.model && allState.selectionType === 'model') return filteredProducts.filter(product => product.productModel === allState.model);
-    // if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
-    
-    return filteredProducts.sort();
 } 
+/**
+ * Finds the maker of a certain Model from makers/models JSON-style object
+ * @function findMakerFromModel
+ * @param {String} model model name to search on
+ * @param {array} makesModels array product makers with models
+ * @returns {String} - Maker name
+ */
+export function getMakerFromModel(makesModels, model) {   
+    if (!model) throw new AppError('from findMakerFromModel: model parameter is empty');
+    if (!makesModels || makesModels.length === 0) throw new AppError('from findMakerFromModel: makesModels parameter is empty');
+    
+    let foundName;
+    makesModels.map((maker,idx) => {
+        maker.sellerProducts.map(sellerProduct => {
+            if (sellerProduct.productTitle.toUpperCase() === model.toUpperCase()) {               
+                foundName = maker.sellerName;
+            }
+        });
+    });
 
+    return foundName;
+}
+/**
+ * Finds the maker of a certain Model from makers/models JSON-style object
+ * @function findMakerFromModel
+ * @param {String} model model name to search on
+ * @param {array} makesModels array product makers with models
+ * @returns {String} - Maker name
+ */
+export function getSizeFromModel(makesModels, model) {   
+    if (!model) throw new AppError('from findMakerFromModel: model parameter is empty');
+    if (!makesModels || makesModels.length === 0) throw new AppError('from findMakerFromModel: makesModels parameter is empty');
+    console.log(makesModels)
+    let foundName;
+    makesModels.map((maker,idx) => {
+        maker.sellerProducts.map(sellerProduct => {
+            if (sellerProduct.productTitle.toUpperCase() === model.toUpperCase()) {               
+                foundName = sellerProduct.productSize;
+            }
+        });
+    });
+
+    return foundName;
+}
 export const itemsSortByDisabled = (items, currentItems) => {
     let itemsWithDisabled = [];
     const sortItems = [];

@@ -11,7 +11,13 @@ import SizeMenu from './searchMenus/SizeMenu';
 import FinishMenu from './searchMenus/FinishMenu';
 import PriceMenu from './searchMenus/PriceMenu';
 import LocationMenu from './searchMenus/LocationMenu';
-import { getFilteredProducts } from '../utils/helpers'
+import { 
+    getFilteredProducts, 
+    getMakerFromModel, 
+    getSizeFromModel,
+    findSizeWords,
+    findProductType 
+} from '../utils/helpers'
 
 function ProductSearch(props) {
     const [allState, setAllState] = useState({
@@ -41,22 +47,28 @@ function ProductSearch(props) {
         });
     }
     function handleModelSelection(model) {
-        //modelName.endsWith('Models:') catches when user selects all models from maker
+        //catches when user selects all models from maker
+        if (model.toUpperCase() === 'ALL MODELS') {
+            setAllState({...allState, 
+                model: "All Models"
+            });
+            return;
+        }
+
         setAllState({...allState, 
             model,
-            maker: "Harp Maker",
-            size: "Harp Size"
+            maker: getMakerFromModel(props.makesmodels, model),
+            size: findSizeWords(getSizeFromModel(props.makesmodels, model), findProductType(props.makesmodels, getMakerFromModel(props.makesmodels, model), model))
+            // size: `${getSizeFromModel(props.makesmodels, model)} Strings`
         });
     }
     function handleSizeSelection(newProductSize) {
-        console.log('prodsize', newProductSize)
         // resetDropDowns('size');
         setAllState({...allState, 
             size: newProductSize
         });
     }
     function handleFinishSelection(newProductFinish) {
-        console.log('prodfinish', newProductFinish);
         resetDropDowns('finish');
         setAllState({...allState, 
             finish: newProductFinish==='All Finish'?'Finish':newProductFinish,
@@ -65,14 +77,12 @@ function ProductSearch(props) {
         });
     }
     function handlePriceSelection(newProductPrice) {
-        console.log('prodprice', newProductPrice)
         setAllState({...allState, 
             price: newProductPrice,
             selectionType: newProductPrice==='All Prices'?'':'price'
         });
     }
     function handleLocationSelection(newProductLocation) {
-        console.log('prodlocation', newProductLocation)
         setAllState({...allState, 
             location: newProductLocation,
             selectionType: newProductLocation==='All Locations'?'':'location'

@@ -9,12 +9,19 @@ export default function ModelMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     
     let maker; 
-    if (props.productMaker !== "Harp Maker" && props.productMaker !== "All Makers") maker = [props.makesmodels.find(maker => maker.sellerName === props.productMaker)];
-    const currentModels = props.products.map(product => product.productModel).sort(); 
+    if (props.productMaker !== "Harp Maker" && props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
     
+    const currentModels = props.products.map(product => product.productModel).sort(); 
+    console.log('model props', props)
     let models;
-    if (maker) console.log('below', maker);
-    if (maker?.length > 0) {models = Array.from(getModelList(Array.from(maker)))} else {models = Array.from(getModelList(props.makesmodels));}
+    if (maker) maker = [maker];
+    if (maker && maker.length > 0) {
+        console.log('inif')
+        models = Array.from(getModelList(maker))
+    } else {
+        console.log('inelse')
+        models = Array.from(getModelList(props.makesmodels));
+    }
     models=itemsSortByDisabled(models, currentModels).map(model => <option 
             name={model}
         >{model.trim()}</option>);
@@ -45,8 +52,11 @@ export default function ModelMenu(props) {
                     All Models
                 </li>  
                 {models.map(model =>
-                    <li key={uuid()} onClick={handleClose}                                   
-                            disabled={!currentModels.find(currentModel => currentModel === model.props.name)}
+                    <li 
+                        key={uuid()} 
+                        onClick={handleClose}                                   
+                        disabled={!currentModels.find(currentModel => currentModel === model.props.name)}
+                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#d3d3d3"}:{color:"#fafbfc"}}
                         >{model}
                     </li>
                 )}
