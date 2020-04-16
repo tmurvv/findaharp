@@ -36,6 +36,7 @@ function ProductSearch(props) {
         //modelName.endsWith('Models:') catches when user selects all models from maker
         setAllState({...allState, 
             maker,
+            model: "Harp Model",
             selectionType: 'maker'
         });
     }
@@ -43,15 +44,15 @@ function ProductSearch(props) {
         //modelName.endsWith('Models:') catches when user selects all models from maker
         setAllState({...allState, 
             model,
-            selectionType: 'maker'
+            maker: "Harp Maker",
+            size: "Harp Size"
         });
     }
     function handleSizeSelection(newProductSize) {
         console.log('prodsize', newProductSize)
         // resetDropDowns('size');
         setAllState({...allState, 
-            size: newProductSize,
-            selectionType: 'size'
+            size: newProductSize
         });
     }
     function handleFinishSelection(newProductFinish) {
@@ -83,8 +84,7 @@ function ProductSearch(props) {
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
         <div className='ProductSearchOuter'>    
-            <div className='searchLine1'>
-               
+            <div className='searchLine1'>  
                 <div className={`arrow rightArrow line1RightArrow`}></div>
                 <SizeMenu 
                     handleSizeChange = {handleSizeSelection}
@@ -97,7 +97,7 @@ function ProductSearch(props) {
                 <ModelMenu 
                     handleModelChange = {handleModelSelection}
                     products={props.products}
-                    producttype={allState.productType}
+                    productMaker={allState.maker}
                     makesmodels={props.makesmodels}
                 />
                 

@@ -1,24 +1,23 @@
 // Package
 import React from 'react';
 import uuid from 'react-uuid';
-// Material-ui
-import Button from '@material-ui/core/Button';
+
 // Internal
 import { getModelList, itemsSortByDisabled } from '../../utils/helpers';
 
-
 export default function ModelMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const currentModels = props.products.map(product => product.productModel).sort();
-    let models = Array.from(getModelList(props.makesmodels))
     
+    let maker; 
+    if (props.productMaker !== "Harp Maker" && props.productMaker !== "All Makers") maker = [props.makesmodels.find(maker => maker.sellerName === props.productMaker)];
+    const currentModels = props.products.map(product => product.productModel).sort(); 
+    
+    let models;
+    if (maker) console.log('below', maker);
+    if (maker?.length > 0) {models = Array.from(getModelList(Array.from(maker)))} else {models = Array.from(getModelList(props.makesmodels));}
     models=itemsSortByDisabled(models, currentModels).map(model => <option 
             name={model}
         >{model.trim()}</option>);
-        
-    const handleClick = (evt) => {
-        setAnchorEl(evt.currentTarget);
-    };
 
     const handleClose = (evt) => {
         props.handleModelChange(evt.target.getAttribute('name'));
@@ -38,25 +37,17 @@ export default function ModelMenu(props) {
                 name='Model Menu'
                 className='plainTextSelectLine1'
             >
-                
                 <li 
                     onClick={handleClose} 
-                    // key={uuid()} 
+                    key={uuid()} 
                     name='All Models'
-                >All Models</li>
-                
+                >
+                    All Models
+                </li>  
                 {models.map(model =>
-                    <li key={uuid()} onClick={handleClose}        
-                            
+                    <li key={uuid()} onClick={handleClose}                                   
                             disabled={!currentModels.find(currentModel => currentModel === model.props.name)}
-                        >{model}         
-                        {/* <Button
-                            aria-label="more"
-                            aria-controls="long-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                            disabled={!currentModels.find(currentModel => currentModel === model.props.name)}
-                        >{model}</Button>          */}
+                        >{model}
                     </li>
                 )}
             </ul>     

@@ -35,6 +35,9 @@ export function getModelListForMaker(productMakesModels, productMaker) {
     if (!productMaker) throw new Error("from getModelListForMaker: maker parameter empty");
 
     let modelList = [];
+    if (productMaker.toUpperCase !== "HARP MAKER" && productMaker.toUpperCase() !== "ALL MAKERS"){
+        productMakesModels.filter(product => product.productMaker === productMaker);
+    } 
     productMakesModels.map(maker => {   
         if (productMaker === maker.sellerName) {
             maker.sellerProducts.map(model => {
@@ -42,28 +45,44 @@ export function getModelListForMaker(productMakesModels, productMaker) {
             });
         }    
     });
+    
+    
     return modelList;    
 }
-export function getModelList(productMakesModels, productType, productMaker) {
+export function getModelList(productMakesModels, productMaker) {
+    console.log('func', productMakesModels)
     // short circuit
     if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelList: productMakesModels parameter empty");
     let modelList = [];
     productMakesModels.map(maker => {
-        //for type
-        if (maker.sellerProducts) {maker.sellerProducts.map(product => {                   
+        if (maker.sellerProducts) {maker.sellerProducts.map(product => { 
+                // console.log(maker)                  
                 modelList.push(product.productTitle);
             });
         }        
     });
     
     modelList = new Set(modelList);
+    console.log(modelList)
     return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
-    // if (allState.productType !== 'all') filteredProducts = filteredProducts.filter(product => product.productType===allState.productType);    
-    if (allState.maker && allState.selectionType === 'maker') return filteredProducts.filter(product => product.productMaker === allState.maker);
-    if (allState.model && allState.selectionType === 'model') return filteredProducts.filter(product => product.productModel === allState.model);
-    if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
+    
+    if (allState.model.toUpperCase() !== "HARP MODEL" && allState.maker.toUpperCase() !== "ALL MODELS") {
+        
+        return filteredProducts.filter(product => product.productModel === allState.model);
+    }
+    if (allState.maker.toUpperCase() !== "HARP MAKER" && allState.maker.toUpperCase() !== "ALL MAKERS") filteredProducts = filteredProducts.filter(product => product.productMaker === allState.maker);
+    if (allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
+    return filteredProducts;
+    
+    
+    // // if (allState.productType !== 'all') 
+    // console.log('from get filtered', allState)
+    
+    // if (allState.maker && allState.selectionType === 'maker') return filteredProducts.filter(product => product.productMaker === allState.maker);
+    // if (allState.model && allState.selectionType === 'model') return filteredProducts.filter(product => product.productModel === allState.model);
+    // if (allState.size && allState.selectionType === 'size') return filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
     
     return filteredProducts.sort();
 } 

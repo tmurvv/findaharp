@@ -5,7 +5,7 @@ function AppCss() {
         <style jsx>{`
             @font-face {
                 font-family: avenir;
-                src: url('/fonts/avenir_ff/AvenirLTStd-Roman.otf');
+                src: url(/fonts/avenir_ff/AvenirLTStd-Roman.otf);
             }
             
             body {
