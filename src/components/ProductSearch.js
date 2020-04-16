@@ -1,7 +1,6 @@
 // packages
 import React, { useState} from 'react';
 
-// design
 // internal
 import ProductSearchCss from '../styles/ProductSearch.css';
 import ProductContainer from './ProductContainer';
@@ -77,9 +76,9 @@ function ProductSearch(props) {
         });
     }
     function handlePriceSelection(newProductPrice) {
+        console.log(newProductPrice)
         setAllState({...allState, 
-            price: newProductPrice,
-            selectionType: newProductPrice==='All Prices'?'':'price'
+            price: newProductPrice
         });
     }
     function handleLocationSelection(newProductLocation) {

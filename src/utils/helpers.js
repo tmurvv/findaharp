@@ -1,3 +1,5 @@
+import parseNum from 'parse-num';
+
 //leaf function helps find nested object keys,
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
 
@@ -11,6 +13,17 @@ export function findSizeWords(strings, type) {
     if (strings===46) return 'semi-grand pedal';
     if (strings>29) return 'concert grand pedal';
     return 'size not found'
+}
+export function findPriceRange(price) {
+    price = parseNum(price);
+    console.log(price)
+    if (price<2000) return 'Less than $2,000';
+    if (price>=2000&&price<5000) return '$2,000-4,999';
+    if (price>=5000&&price<9999) return '$5,000-9,999';
+    if (price>=10000&&price<19999) return '$10,000-19,999'; 
+    if (price>=20000&&price<29999) return '$20,000-29,999'; 
+    if (price>29999&&price<150000) return '$30,000 plus';
+    return 'price not found'
 }
 export const findProductType= (productMakesModels, maker, model) => {
     // short circuit
@@ -64,7 +77,9 @@ export function getModelList(productMakesModels) {
     return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
-    console.log(allState, filteredProducts[0]);
+    console.log("state", allState.price);
+    console.log('product', findPriceRange(filteredProducts[12].productPrice))
+    // console.log(filteredProducts.map(product => findPriceRange(product.productPrice)));
     if (allState.model && allState.model.toUpperCase() !== "HARP MODEL" && allState.model.toUpperCase() !== "ALL MODELS") {   
         return filteredProducts.filter(product => product.productModel === allState.model);
     }
@@ -74,6 +89,8 @@ export function getFilteredProducts(filteredProducts, allState) {
     if (allState.size && allState.size.toUpperCase() === "ALL PEDAL") return filteredProducts.filter(product => product.productType === 'pedal');
     if (allState.size && allState.size.toUpperCase() === "ALL LEVER") return filteredProducts.filter(product => product.productType === 'lever');
     if (allState.size && allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
+    if (allState.size && allState.price.toUpperCase() !== "PRICE RANGE" && allState.price.toUpperCase() !== "ALL PRICES") filteredProducts = filteredProducts.filter(product => allState.price===findPriceRange(product.productPrice));
+    // if (allState.price && allState.price.toUpperCase() !== "PRICE RANGE" && allState.price.toUpperCase() !== "ALL PRICES") filteredProducts = filteredProducts.filter(product => findPriceRange(product.productPrice)) == allState.price;
     return filteredProducts;
 } 
 /**

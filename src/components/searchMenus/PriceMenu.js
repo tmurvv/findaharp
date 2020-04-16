@@ -5,6 +5,7 @@ export default function PriceMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClose = (evt) => {
         setAnchorEl(null);
+        console.log('balh', evt.target.getAttribute('name'));
         if (evt.target.value === 'All Prices') return;
         props.handlePriceChange(evt.target.getAttribute('name')); 
     };

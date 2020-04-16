@@ -19,6 +19,7 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "next": "^9.3.4",
+    "parse-num": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-phone-input-2": "^2.12.1",
