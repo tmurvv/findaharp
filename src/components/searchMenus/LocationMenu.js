@@ -2,24 +2,22 @@
 import React from 'react';
 
 export default function LocationMenu(props) {
-    const [anchorElLocation, setAnchorElLocation] = React.useState(null);  
-    const handleClick = (evt) => setAnchorElLocation(evt.currentTarget);
+    const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClose = (evt) => {
-        setAnchorElLocation(null);
+        setAnchorEl(null);
         if (evt.target.value === 'All Locations') return;
         props.handleLocationChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
-            <div className="menuButton" onClick={() => setAnchorElLocation(!anchorElLocation)}>
+            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
                 LOCATION
             </div>                
             <ul
                 id="location-select"
-                anchorElLocation={anchorElLocation}
                 onClose={handleClose}
-                hidden={!anchorElLocation}
+                hidden={!anchorEl}
                 name='Location Menu'
                 className='plainTextSelectLine2'
             >
@@ -31,38 +29,38 @@ export default function LocationMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()}
-                    name='US-NorthEastern'
+                    name='North-East'
                 >US-NorthEastern</li>      
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='US-SouthEastern'
-                >US-SouthEastern</li>
+                    name='Eastern'
+                >Eastern</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='US-South'
+                    name='South'
                 >US-South</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='US-MidWest'
+                    name='Mid-West'
                 >US-MidWest</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='US-West'
+                    name='West'
                 >US-West</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='US-Pacific'
+                    name='Pacific'
                 >US-Pacific</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Canada'
-                >Canada</li>               
+                >West Canada</li>               
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 

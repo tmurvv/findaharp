@@ -12,14 +12,11 @@ export default function ModelMenu(props) {
     if (props.productMaker !== "Harp Maker" && props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
     
     const currentModels = props.products.map(product => product.productModel).sort(); 
-    console.log('model props', props)
     let models;
     if (maker) maker = [maker];
     if (maker && maker.length > 0) {
-        console.log('inif')
         models = Array.from(getModelList(maker))
     } else {
-        console.log('inelse')
         models = Array.from(getModelList(props.makesmodels));
     }
     models=itemsSortByDisabled(models, currentModels).map(model => <option 

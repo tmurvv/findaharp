@@ -12,6 +12,8 @@ function ProductContainerCss() {
                 justify-content: center;
                 margin: 45px auto 25px;
                 transform: rotate(25deg);
+                position: relative;
+                z-index: 0;
             }           
             .productContainer {
                 width: 70%;
@@ -37,8 +39,7 @@ function ProductContainerCss() {
             .productSmallDisplay-img {
                 flex:7; 
                 height: 70%;    
-                /*background-image: linear-gradient(to right, #ffffff, #fffee0 25%, #fffee0 75%, #ffffff 0%);*/
-                background-color: #fffee0;
+                background-color: #efefef;
                 overflow: hidden;
             }
             .productSmallDisplay-img img{

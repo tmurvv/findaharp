@@ -84,12 +84,11 @@ function ProductSearch(props) {
     }
     function handleLocationSelection(newProductLocation) {
         setAllState({...allState, 
-            location: newProductLocation,
-            selectionType: newProductLocation==='All Locations'?'':'location'
+            location: newProductLocation
         });
     }
-    console.log(allState)
     const filteredProducts = getFilteredProducts(props.products, allState);
+
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>

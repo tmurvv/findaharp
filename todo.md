@@ -1,4 +1,6 @@
-- convert css to sass
+- tests not passing
+- implement finish search
+- install get-image-colors and try borders
 - finish writing tests for helper file
 - make it so when on pedal radio, only pedal models show in model list
 

@@ -17,7 +17,6 @@ export default function SizeMenu(props) {
             </div>              
             <ul
                 id="size-select"
-                anchorEl={anchorEl}
                 onClose={handleClose}
                 hidden={!anchorEl}
                 name='Size Menu'

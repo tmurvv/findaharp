@@ -8,7 +8,7 @@ export default function MakerMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const currentMakers = props.products.map(product => product.productMaker);
-    console.log()
+
     let makers = []
     props.makesmodels.map(maker => {makers.push(maker.sellerName)});
     makers = itemsSortByDisabled(makers, currentMakers);
@@ -24,7 +24,6 @@ export default function MakerMenu(props) {
             </div>               
             <ul
                 id="maker-select"
-                anchorElPrice={anchorEl}
                 onClose={handleClose}
                 hidden={!anchorEl}
                 name='Maker Menu'

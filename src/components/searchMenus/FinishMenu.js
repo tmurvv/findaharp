@@ -3,7 +3,6 @@ import React from 'react';
 
 export default function FinishMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
-    const handleClick = (evt) => setAnchorEl(evt.currentTarget);
     const handleClose = (evt) => {
         setAnchorEl(null);
         if (evt.target.value === 'All Finishes') return;
@@ -16,7 +15,6 @@ export default function FinishMenu(props) {
             >FINISH</div>            
             <ul
                 id="finish-select"
-                anchorEl={anchorEl}
                 onClose={handleClose}
                 hidden={!anchorEl}
                 name='Finish Menu'
@@ -37,6 +35,11 @@ export default function FinishMenu(props) {
                     // key={uuid()} 
                     name='Natural'
                 >Natural</li>
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='Gold'
+                >Gold</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 

@@ -47,14 +47,13 @@ export function getModelListForMaker(productMakesModels, productMaker) {
     });  
     return modelList;    
 }
-export function getModelList(productMakesModels, productMaker) {
+export function getModelList(productMakesModels) {
     // short circuit
     if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelList: productMakesModels parameter empty");
     let modelList = [];
-    console.log(productMakesModels)
+    
     productMakesModels.map(maker => {
         if (maker.sellerProducts) {maker.sellerProducts.map(product => { 
-                // console.log(maker)                  
                 modelList.push(product.productTitle);
             });
         }        
@@ -65,11 +64,13 @@ export function getModelList(productMakesModels, productMaker) {
     return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
-    
+    console.log(allState, filteredProducts[0]);
     if (allState.model && allState.model.toUpperCase() !== "HARP MODEL" && allState.model.toUpperCase() !== "ALL MODELS") {   
         return filteredProducts.filter(product => product.productModel === allState.model);
     }
     if (allState.maker && allState.maker.toUpperCase() !== "HARP MAKER" && allState.maker.toUpperCase() !== "ALL MAKERS") filteredProducts = filteredProducts.filter(product => product.productMaker === allState.maker);
+    if (allState.location && allState.location.toUpperCase() !== "LOCATION" && allState.location.toUpperCase() !== "ALL LOCATIONS") filteredProducts = filteredProducts.filter(product => product.sellerRegion === allState.location);
+    if (allState.finish && allState.finish.toUpperCase() !== "FINISH" && allState.finish.toUpperCase() !== "ALL FINISHES") filteredProducts = filteredProducts.filter(product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase());
     if (allState.size && allState.size.toUpperCase() === "ALL PEDAL") return filteredProducts.filter(product => product.productType === 'pedal');
     if (allState.size && allState.size.toUpperCase() === "ALL LEVER") return filteredProducts.filter(product => product.productType === 'lever');
     if (allState.size && allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
@@ -107,7 +108,6 @@ export function getMakerFromModel(makesModels, model) {
 export function getSizeFromModel(makesModels, model) {   
     if (!model) throw new AppError('from findMakerFromModel: model parameter is empty');
     if (!makesModels || makesModels.length === 0) throw new AppError('from findMakerFromModel: makesModels parameter is empty');
-    console.log(makesModels)
     let foundName;
     makesModels.map((maker,idx) => {
         maker.sellerProducts.map(sellerProduct => {

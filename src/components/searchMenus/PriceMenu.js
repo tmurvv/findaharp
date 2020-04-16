@@ -2,24 +2,22 @@
 import React from 'react';
 
 export default function PriceMenu(props) {
-    const [anchorElPrice, setAnchorElPrice] = React.useState(null);  
-    const handleClick = (evt) => setAnchorElPrice(evt.currentTarget);
+    const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClose = (evt) => {
-        setAnchorElPrice(null);
+        setAnchorEl(null);
         if (evt.target.value === 'All Prices') return;
         props.handlePriceChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
-            <div className="menuButton" onClick={() => setAnchorElPrice(!anchorElPrice)}>
+            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
                 PRICE RANGE
             </div>               
             <ul
                 id="price-select"
-                anchorElPrice={anchorElPrice}
                 onClose={handleClose}
-                hidden={!anchorElPrice}
+                hidden={!anchorEl}
                 name='Price Menu'
                 className='plainTextSelectLine2'
             >
