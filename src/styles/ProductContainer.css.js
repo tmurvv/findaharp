@@ -18,6 +18,7 @@ function ProductContainerCss() {
             .productContainer {
                 width: 70%;
                 margin: 30px auto;
+                position: relative;
             }
             .grid-container {
                 display: grid;

@@ -1,11 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 
+// internal
+import ProductModal from './ProductModal';
 import ProductContainerCss from '../styles/ProductContainer.css';
 
 function ProductContainer(props) {
+    const [open, setOpen] = useState(false);
+    const [opacity, setOpacity] = useState(1);
+    const [detailItem, setDetailItem] = useState("");
+
+    function handleClick(evt) {
+        if (open) {
+            setOpacity(1);
+            setOpen(false);
+            return;
+        }
+        console.log(evt.screenY)
+        setDetailItem(props.filteredproducts.find(product => evt.target.closest('.productSmallDisplay').id === product.id));
+        setOpen(true);
+        setOpacity(.10);
+    }
+    function handleClose() {
+        console.log('imin')
+        setOpen(false);
+        setOpacity(1);
+    }
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
-            <div key={product.id} className={`grid-item productSmallDisplay`}>
+            <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={handleClick}>
                 <div className={`productSmallDisplay-img`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
                 <div className={`grid-item productSmallDisplay-text`}>
                     <p>{product.productMaker} {product.productModel}</p>
@@ -16,11 +38,17 @@ function ProductContainer(props) {
         return( 
             <>      
             <div data-test='component-ProductContainer' className='productContainer'>       
-                <div className="grid-container">
+                <div className="grid-container" style={{'opacity': `${opacity}`}}>
                     {gridProducts}
                 </div>
+                <div hidden={!open}>
+                    <ProductModal product={detailItem} handleClose={handleClose}/>
+                </div>
+                
             </div>
+            
             <ProductContainerCss />
+            
             </>
         );
     } else {
