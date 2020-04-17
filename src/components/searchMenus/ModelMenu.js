@@ -35,7 +35,6 @@ export default function ModelMenu(props) {
             </div>               
             <ul
                 id="model-select"
-                anchorElPrice={anchorEl}
                 onClose={handleClose}
                 hidden={!anchorEl}
                 name='Model Menu'

@@ -8,9 +8,8 @@ export default function MakerMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const currentMakers = props.products.map(product => product.productMaker);
-
     let makers = []
-    props.makesmodels.map(maker => {makers.push(maker.sellerName)});
+    props.makesmodels.map(maker => { if (maker.sellerName !== 'findaharpFinishes') makers.push(maker.sellerName)});
     makers = itemsSortByDisabled(makers, currentMakers);
     const handleClose = (evt) => {
         props.handleMakerChange(evt.target.getAttribute('name'));

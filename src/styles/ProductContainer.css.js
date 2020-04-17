@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProductContainerCss() {
     return (
-        <style jsx>{`
+        <style jsx="true">{`
             img {
                 height: 100%;
             }

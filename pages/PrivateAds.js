@@ -323,7 +323,7 @@ const PrivateAds = (props) => {
                 </Box>
                 </DialogContent> 
             </Dialog>
-            <style jsx>{`
+            <style jsx='true'>{`
         h2 {
             margin-top: 25px;
         },

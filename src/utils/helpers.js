@@ -16,7 +16,6 @@ export function findSizeWords(strings, type) {
 }
 export function findPriceRange(price) {
     price = parseNum(price);
-    console.log(price)
     if (price<2000) return 'Less than $2,000';
     if (price>=2000&&price<5000) return '$2,000-4,999';
     if (price>=5000&&price<9999) return '$5,000-9,999';
@@ -77,9 +76,6 @@ export function getModelList(productMakesModels) {
     return modelList; 
 }
 export function getFilteredProducts(filteredProducts, allState) {
-    console.log("state", allState.price);
-    console.log('product', findPriceRange(filteredProducts[12].productPrice))
-    // console.log(filteredProducts.map(product => findPriceRange(product.productPrice)));
     if (allState.model && allState.model.toUpperCase() !== "HARP MODEL" && allState.model.toUpperCase() !== "ALL MODELS") {   
         return filteredProducts.filter(product => product.productModel === allState.model);
     }
@@ -90,6 +86,7 @@ export function getFilteredProducts(filteredProducts, allState) {
     if (allState.size && allState.size.toUpperCase() === "ALL LEVER") return filteredProducts.filter(product => product.productType === 'lever');
     if (allState.size && allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
     if (allState.size && allState.price.toUpperCase() !== "PRICE RANGE" && allState.price.toUpperCase() !== "ALL PRICES") filteredProducts = filteredProducts.filter(product => allState.price===findPriceRange(product.productPrice));
+    filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
     // if (allState.price && allState.price.toUpperCase() !== "PRICE RANGE" && allState.price.toUpperCase() !== "ALL PRICES") filteredProducts = filteredProducts.filter(product => findPriceRange(product.productPrice)) == allState.price;
     return filteredProducts;
 } 

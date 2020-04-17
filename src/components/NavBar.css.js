@@ -2,7 +2,7 @@ import React from "react";
 
 function NavBarCss() {
     return (
-        <style jsx>{`
+        <style jsx="true">{`
         /*.outerContainer {
             background-image: linear-gradient(to left, #eee8aa, #ffffff 50%, #eee8aa 75%);
             height: 135px;

@@ -8,10 +8,12 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
+import Head from '../src/components/Head';
 
 function MyApp({ Component, pageProps }) {
     return(
-        <>
+        <>  
+            <Head/>
             <Banner />
             <NavBar />
             <Component {...pageProps} />

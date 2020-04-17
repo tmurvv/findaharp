@@ -1,8 +1,7 @@
-- tests not passing
-- implement finish search
-- install get-image-colors and try borders
+
+- do favicon
 - finish writing tests for helper file
-- make it so when on pedal radio, only pedal models show in model list
+- make it so when on all pedal, only pedal models show in model list
 
 ### FUTURE IDEAS:
 
