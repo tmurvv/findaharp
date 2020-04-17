@@ -1,5 +1,5 @@
 
-- do favicon
+- clear filters
 - finish writing tests for helper file
 - make it so when on all pedal, only pedal models show in model list
 

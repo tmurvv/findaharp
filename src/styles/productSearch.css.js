@@ -9,7 +9,9 @@ function ProductSearchCss() {
                 text-align: center;
                 font-size: 12px;
                 font-style: italic;
-                color: #868686
+                color: #868686;
+                font-weight: 500;
+                font-size:14px;
             }
             .searchLine1 {
                 width: 70%;

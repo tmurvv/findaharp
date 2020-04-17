@@ -7,7 +7,10 @@ function ProductContainer(props) {
         const gridProducts = props.filteredproducts.map(product => (
             <div key={product.id} className={`grid-item productSmallDisplay`}>
                 <div className={`productSmallDisplay-img`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
-                <div className={`grid-item evenRow productSmallDisplay-text`}>{product.productMaker} {product.productModel}<br></br>{product.productSize} Strings<br></br></div>
+                <div className={`grid-item productSmallDisplay-text`}>
+                    <p>{product.productMaker} {product.productModel}</p>
+                    <p>{product.productSize} Strings / {product.productType}</p>
+                </div>           
             </div>                                     
         ));
         return( 
@@ -16,18 +19,18 @@ function ProductContainer(props) {
                 <div className="grid-container">
                     {gridProducts}
                 </div>
-
             </div>
             <ProductContainerCss />
             </>
         );
     } else {
         return(
-            <>     
+            <>
+            <h3 style={{textAlign: 'center'}}>Not found in our listings</h3>
+            <h3 style={{textAlign: 'center'}}>Please try again using fewer filters.</h3>    
             <div data-test='component-ProductContainer' className='notFoundContainer'>
                 <img src= 'https://findaharp-api.herokuapp.com/assets/img/genericHarp.png' alt='harp in silhouette'/>
             </div>
-            <h3 style={{textAlign: 'center'}}>Not found in our listings. Please try another search.</h3>
             <ProductContainerCss />
             </>
         );

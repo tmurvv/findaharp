@@ -7,8 +7,8 @@ function AppCss() {
                 font-family: avenir;
                 src: url(/fonts/avenir_ff/AvenirLTStd-Roman.otf);
             }
-            
             body {
+                overflowX: hidden;
                 margin: 0;
                 margin-block-end: 0;
                 margin-block-start: 0;
@@ -37,7 +37,7 @@ function AppCss() {
             }
             .plainTextSelectLine2 {
                 margin-block-start: -.5em;
-                color: #fafbfc;
+                color: #333333;
                 font-size: 14px;
                 padding: 6px 9px;
                 position: relative;

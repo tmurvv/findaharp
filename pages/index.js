@@ -12,7 +12,7 @@ const Index = (props) => {
         <div className="index">  
             <div className='mainTitle'>
                 <h2>Find a Harp</h2>
-                <h3 className="subTitle">Harp listings gathered from North American harp stores and private sellers.</h3>
+                <h3 className="subTitle">pre-owned harp listings from around the US and Canada</h3>
             </div>
             <ProductSearch 
                 makesmodels={props.makesModels}

@@ -19,7 +19,7 @@ function BannerCss() {
         }
         .productGraphic {
             height: 100%;
-            margin-left: -55px;
+            margin-left: -25px;
         }
     `}
     </style>

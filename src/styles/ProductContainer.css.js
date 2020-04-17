@@ -11,7 +11,7 @@ function ProductContainerCss() {
                 display: flex;
                 justify-content: center;
                 margin: 45px auto 25px;
-                transform: rotate(25deg);
+                transform: rotate(15deg);
                 position: relative;
                 z-index: 0;
             }           
@@ -38,8 +38,8 @@ function ProductContainerCss() {
             }
             .productSmallDisplay-img {
                 flex:7; 
-                height: 70%;    
-                background-color: #efefef;
+                height: 70%;
+                background-color: transparent;
                 overflow: hidden;
             }
             .productSmallDisplay-img img{
@@ -49,10 +49,19 @@ function ProductContainerCss() {
             .productSmallDisplay-text {
                 flex: 2;
                 display: flex;
-                justify-content: center;
-                align-items: top;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
                 padding-top: 5px;
                 width: 100%;
+            }
+            .productSmallDisplay-text p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+            .priceText {
+                font-size: 12px;
+                font-style: italic;
             }
         `}
         </style>
