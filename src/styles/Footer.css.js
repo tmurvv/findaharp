@@ -2,7 +2,7 @@ import React from "react";
 
 function FooterCss() {
     return (
-        <style jsx='true'>{`
+        <style jsx>{`
             .footer {
                 background-color: #000000;
                 color: #faf8ed;
@@ -12,11 +12,13 @@ function FooterCss() {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                margin-top: 30px;
-                padding: 20px;
+                padding: 10px;
             }
             .logo {
-                height: 30px
+                height: 30px;
+            }
+            .logo>img {
+                height: 100%;
             }
             .flexSB {
                 display: flex;

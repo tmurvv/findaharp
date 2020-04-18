@@ -55,19 +55,36 @@ export function getModelListForMaker(productMakesModels, productMaker) {
             maker.sellerProducts.map(model => {
                 modelList.push(model.productTitle);
             });
-        }    
+        }
     });  
     return modelList;    
 }
-export function getModelList(productMakesModels) {
+export function getModelList(productMakesModels, size) {
     // short circuit
     if (!productMakesModels || productMakesModels.length === 0) throw new Error("from getModelList: productMakesModels parameter empty");
     let modelList = [];
     
     productMakesModels.map(maker => {
-        if (maker.sellerProducts) {maker.sellerProducts.map(product => { 
-                modelList.push(product.productTitle);
-            });
+        console.log('inabove', size, size !== 'Harp Size')
+        if (maker.sellerProducts) {
+            if (size && size.toUpperCase() !== "HARP SIZE" && size.toUpperCase() !== "ALL SIZES") {
+                if (size && (size.toUpperCase()==="ALL LEVER" || size.toUpperCase()=== "ALL PEDAL")) {
+                    maker.sellerProducts.map(product => { 
+                        if (size.toUpperCase().includes(product.productType.toUpperCase())) {
+                            modelList.push(product.productTitle);        
+                        }       
+                    });
+                    return;  
+                } else {
+                    maker.sellerProducts.map(product => { 
+                        if (size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase())) {
+                            modelList.push(product.productTitle);        
+                        }       
+                    });
+                    return;
+                }
+            }
+            maker.sellerProducts.map(product => modelList.push(product.productTitle));
         }        
     });
     
@@ -140,6 +157,12 @@ export const itemsSortByDisabled = (items, currentItems) => {
         itemsWithDisabled.push({name:model,disabled:!currentItems.find(currentModel => currentModel === model)})  
     });
     itemsWithDisabled.sort((a, b) => a.disabled-b.disabled || a.name.localeCompare(b.name));  
-    itemsWithDisabled.map(modelboo => sortItems.push(modelboo.name))
+    let lastValue=false; //to add 'no listings'
+    itemsWithDisabled.map(modelboo => {
+        console.log(modelboo.disabled, lastValue)
+        if (lastValue !== modelboo.disabled) sortItems.push('---no listings---');
+        sortItems.push(modelboo.name)
+        lastValue = modelboo.disabled;
+    });
     return sortItems;
 }

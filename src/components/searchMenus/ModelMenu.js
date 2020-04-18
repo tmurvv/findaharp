@@ -17,7 +17,7 @@ export default function ModelMenu(props) {
     if (maker && maker.length > 0) {
         models = Array.from(getModelList(maker))
     } else {
-        models = Array.from(getModelList(props.makesmodels));
+        models = Array.from(getModelList(props.makesmodels, props.productSize));
     }
     models=itemsSortByDisabled(models, currentModels).map(model => <option 
             name={model}
@@ -32,31 +32,33 @@ export default function ModelMenu(props) {
         <div>
             <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
                 HARP MODEL
-            </div>               
+            </div>
+            
             <ul
                 id="model-select"
                 onClose={handleClose}
                 hidden={!anchorEl}
                 name='Model Menu'
                 className='plainTextSelectLine1'
+                TransitionComponent='down'
             >
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='All Models'
                 >
-                    All Models
+                    {props&&props.productSize&&props.productSize.toUpperCase()!=='ALL SIZES'&&props.productSize.toUpperCase!=='HARP SIZE'?props.productSize:"All Models"}
                 </li>  
                 {models.map(model =>
                     <li 
                         key={uuid()} 
                         onClick={handleClose}                                   
                         disabled={!currentModels.find(currentModel => currentModel === model.props.name)}
-                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#d3d3d3"}:{color:"#fafbfc"}}
+                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#c3c3c3"}:{color:"#fafbfc"}}
                         >{model}
                     </li>
                 )}
-            </ul>     
+            </ul>  
         </div>
     );
 }

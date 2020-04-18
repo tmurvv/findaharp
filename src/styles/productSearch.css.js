@@ -128,16 +128,23 @@ function ProductSearchCss() {
             }
             button {
                 transform: translateY(-3px);
-            }
-            
-            
-            
+            }   
             li {
-                
                 padding: 5px 7px;
                 border: 1 solid grey;
                 z-index: 1000;
-            } 
+            }
+            .clearSearch {
+                position: absolute; 
+                right: 13%;
+                height: 40px;
+                top: 405px;
+                cursor: pointer;
+                transition: all .7s;
+            }
+            .clearSearch:hover {
+                transform: scale(1.2);
+            }
         `}
     </style>
     )

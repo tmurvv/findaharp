@@ -86,6 +86,18 @@ function ProductSearch(props) {
             location: newProductLocation
         });
     }
+
+    function handleClear(evt) {
+        setAllState({
+            ...allState,
+            finish: 'Finish',
+            price: 'Price Range',
+            location: 'Location',
+            size: "Harp Size",
+            maker: "Harp Maker",
+            model: "Harp Model"
+        });
+    }
     const filteredProducts = getFilteredProducts(props.products, allState);
 
     return (
@@ -106,6 +118,7 @@ function ProductSearch(props) {
                     handleModelChange = {handleModelSelection}
                     products={props.products}
                     productMaker={allState.maker}
+                    productSize={allState.size}
                     makesmodels={props.makesmodels}
                 />
                 
@@ -148,8 +161,11 @@ function ProductSearch(props) {
                         currentselected={allState.location?allState.location:'Harp Location'}
                     /> 
                     <div className='arrow leftArrow line2LeftArrow'></div>
-                {/* </div>    */}
-            </div> 
+                {/* </div>    */}       
+            </div>
+            <div onClick={handleClear} className='clearSearch'>
+                <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+            </div>
             <div className="searchLine2Sub">
                 <div className={`arrow rightArrow line2SubRightArrow`}></div>
                 <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>

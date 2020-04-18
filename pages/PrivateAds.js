@@ -149,9 +149,9 @@ const PrivateAds = (props) => {
                         <Typography>Sounds good, I am ready to list my harp on findaharp.com!</Typography>
                     </Box>
                     <Box m='auto' mt='15px'>
-                    <Button variant='contained' onClick={() => setOpen(true)} color="primary">
+                    <button onClick={() => setOpen(true)} color="primary">
                         I'm ready
-                    </Button>
+                    </button>
                     </Box>              
                 </Box>
             </List>
@@ -307,19 +307,17 @@ const PrivateAds = (props) => {
                     </Box>                                     
                 </Box>                          
                 <Box mb='40px' mt='40px' display='flex' justifyContent='space-evenly'>
-                    <Button
+                    <button
                         onClick={handleSubmit}
-                        variant="contained"
                     >
                         Add to Cart
-                    </Button> 
-                    <Button
+                    </button> 
+                    <button
                         onClick={()=>setOpen(false)}
-                        variant="contained"
-                        className='button'
+                        style={{backgroundColor: '#cccccc'}}
                     >
                         Cancel
-                    </Button> 
+                    </button> 
                 </Box>
                 </DialogContent> 
             </Dialog>
@@ -330,8 +328,13 @@ const PrivateAds = (props) => {
         .marginBottomMedium {
             margin-bottom: 15px;
         }
-        .button {
-            backgroundColor: var(--primary-color);
+        button {
+            margin: 15px auto;
+            background-color: #f9bf1e;
+            padding: 5px 10px;
+            font-size: 20px;
+            border-radius: 3px;
+            outline: none;  
         }
         ul {
           padding: 0;
