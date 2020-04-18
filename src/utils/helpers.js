@@ -65,7 +65,6 @@ export function getModelList(productMakesModels, size) {
     let modelList = [];
     
     productMakesModels.map(maker => {
-        console.log('inabove', size, size !== 'Harp Size')
         if (maker.sellerProducts) {
             if (size && size.toUpperCase() !== "HARP SIZE" && size.toUpperCase() !== "ALL SIZES") {
                 if (size && (size.toUpperCase()==="ALL LEVER" || size.toUpperCase()=== "ALL PEDAL")) {
@@ -159,7 +158,6 @@ export const itemsSortByDisabled = (items, currentItems) => {
     itemsWithDisabled.sort((a, b) => a.disabled-b.disabled || a.name.localeCompare(b.name));  
     let lastValue=false; //to add 'no listings'
     itemsWithDisabled.map(modelboo => {
-        console.log(modelboo.disabled, lastValue)
         if (lastValue !== modelboo.disabled) sortItems.push('---no listings---');
         sortItems.push(modelboo.name)
         lastValue = modelboo.disabled;

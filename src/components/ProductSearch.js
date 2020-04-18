@@ -76,7 +76,6 @@ function ProductSearch(props) {
         });
     }
     function handlePriceSelection(newProductPrice) {
-        console.log(newProductPrice)
         setAllState({...allState, 
             price: newProductPrice
         });

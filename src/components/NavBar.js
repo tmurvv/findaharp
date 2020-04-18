@@ -7,8 +7,8 @@ const NavBar = () => {
             <Link href='/'>
                 <a>Find a Harp</a>
             </Link>
-            <Link href='/PrivateAds'>
-                <a>Sell Your Harp</a>
+            <Link href='/StorePartners'>
+                <a>Our Store Partners</a>
             </Link>
             <Link href='/BuyersGuide'>
                 <a>Buyer's Guide</a>

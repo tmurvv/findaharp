@@ -15,13 +15,11 @@ function ProductContainer(props) {
             setOpen(false);
             return;
         }
-        console.log(evt.screenY)
         setDetailItem(props.filteredproducts.find(product => evt.target.closest('.productSmallDisplay').id === product.id));
         setOpen(true);
         setOpacity(.10);
     }
     function handleClose() {
-        console.log('imin')
         setOpen(false);
         setOpacity(1);
     }
