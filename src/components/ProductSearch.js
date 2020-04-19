@@ -102,7 +102,8 @@ function ProductSearch(props) {
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
-        <div className='ProductSearchOuter'>    
+        <div className='ProductSearchOuter'>
+            <div className='mobileSearchLine1'> 
             <div className='searchLine1'>  
                 <div className={`arrow rightArrow line1RightArrow`}></div>
                 <SizeMenu 
@@ -123,7 +124,7 @@ function ProductSearch(props) {
                 
                 <div className='arrow leftArrow line1LeftArrow'></div>
             </div>
-             
+            
             <div className="searchLine1Sub">
                 <div className='arrow rightArrow line1SubRightArrow'></div>
                 <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
@@ -138,7 +139,9 @@ function ProductSearch(props) {
                 
                 <div className='arrow leftArrow line1SubLeftArrow'></div>
             </div>
+            </div>
             <h3 className='searchTitle'>Further refine your search.</h3>
+            <div className='mobileSearchLine2'>
             <div className='searchLine2'>
                 <div className='arrow rightArrow line2RightArrow'></div>
                 {/* <div className='flexSB'> */}
@@ -162,9 +165,6 @@ function ProductSearch(props) {
                     <div className='arrow leftArrow line2LeftArrow'></div>
                 {/* </div>    */}       
             </div>
-            <div onClick={handleClear} className='clearSearch'>
-                <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-            </div>
             <div className="searchLine2Sub">
                 <div className={`arrow rightArrow line2SubRightArrow`}></div>
                 <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
@@ -177,6 +177,11 @@ function ProductSearch(props) {
                 {allState.location==='Location'?'':allState.location}
                 </div>
                 <div className={`arrow leftArrow line2SubLeftArrow`}></div>
+                <div onClick={handleClear} className='clearSearch'>
+                    <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+                    <p>Clear All</p>
+                </div>
+            </div>
             </div>
             <ProductSearchCss />    
             <ProductContainer data-test="component-ProductContainer" filteredproducts={filteredProducts}/>              

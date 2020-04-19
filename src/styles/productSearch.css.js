@@ -14,6 +14,7 @@ function ProductSearchCss() {
                 font-size:14px;
             }
             .searchLine1 {
+                position: relative;
                 width: 70%;
                 margin: auto;
                 height: 30px;
@@ -27,6 +28,7 @@ function ProductSearchCss() {
                 color: #fafbfc;
             }
             .searchLine1Sub {
+                position: relative;
                 width: 70%;
                 margin: auto;
                 height: 28.5px;
@@ -39,7 +41,25 @@ function ProductSearchCss() {
                 display: grid;
                 grid-template-columns: 9.5% 29% 29% 29% 9.5%;
             }
+            @media only screen and (max-width: 650px) {
+                .mobileSearchLine1 {
+                    display: flex;
+                    margin: 5%;
+                }
+                .searchLine1 {
+                    grid-template-columns: 100%;
+                    grid-template-rows: 9.5% 29% 29% 29% 9.5%;
+                    height: 120px;
+                }
+                .searchLine1Sub {
+                    grid-template-columns: 100%;
+                    grid-template-rows: 9.5% 29% 29% 29% 9.5%;
+                    height: 120px;
+                    border-right: 1px solid;
+                } 
+            }
             .searchLine2 {
+                position: relative;
                 width: 60%;
                 margin: auto;
                 height: 27px;
@@ -54,6 +74,7 @@ function ProductSearchCss() {
                 color: #fafbfc;
             }
             .searchLine2Sub {
+                position: relative;
                 width: 60%;
                 margin: auto;
                 height: 26.5px;
@@ -65,6 +86,25 @@ function ProductSearchCss() {
                 display: grid;
                 grid-template-columns: 9.5% 29% 29% 29% 9.5%;
             }
+            @media only screen and (max-width: 650px) {
+                .mobileSearchLine2 {
+                    display: flex;
+                    margin: 5%;
+                    margin-bottom: 40px;
+                }
+                .searchLine2 {
+                    grid-template-columns: 100%;
+                    grid-template-rows: 9.5% 29% 29% 29% 9.5%;
+                    height: 120px;
+                    border: 1px solid;
+                }
+                .searchLine2Sub {
+                    grid-template-columns: 100%;
+                    grid-template-rows: 9.5% 29% 29% 29% 9.5%;
+                    height: 120px;
+                    border: 1px solid;
+                }
+            }
             .arrow {
                 background-color: #fffff3;
                 height: 20px;
@@ -73,40 +113,20 @@ function ProductSearchCss() {
             .rightArrow {
                 border-left: 1px solid;
                 border-top: 1px solid;
+                transform: translate(-10.5px, 4px) rotate(135deg);
             }
             .leftArrow {
                 border-right: 1px solid;
                 border-bottom: 1px solid;
+                position: absolute;
+                top: 4px;
+                right: -10px;
+                transform: rotate(135deg);
             }
-            .line1RightArrow {
-                transform: translate(-10px, -50px) rotate(135deg);
-            }
-            .line1LeftArrow {
-                transform: translate(10px, 4px) rotate(135deg);
-            }
-            .line1SubRightArrow {
-                transform: translate(-10px, 4px) rotate(135deg);
-            }
-            .line1SubLeftArrow {
-                transform: translate(10px, 4px) rotate(135deg);
-            }
-            .line1RightArrow {
-                transform: translate(-10px, 4px) rotate(135deg);
-            }
-            .line1LeftArrow {
-                transform: translate(10px, 4px) rotate(135deg);
-            }
-            .line2RightArrow {
-                transform: translate(-10px, 4px) rotate(135deg);
-            }
-            .line2LeftArrow {
-                transform: translate(8.5px, 4px) rotate(135deg);
-            }
-            .line2SubRightArrow {
-                transform: translate(-9px, 3px) rotate(135deg);
-            }
-            .line2SubLeftArrow {
-                transform: translate(8.5px, 3px) rotate(135deg);
+            @media only screen and (max-width: 650px) {
+                .arrow {
+                    opacity: 0;
+                }
             }
             .flexSE {
                 width: 100%;
@@ -136,11 +156,24 @@ function ProductSearchCss() {
             }
             .clearSearch {
                 position: absolute; 
-                right: 13%;
+                right: -120px;
                 height: 40px;
-                top: 405px;
+                top: -8px;
                 cursor: pointer;
                 transition: all .7s;
+                display: flex;
+            }
+            @media only screen and (max-width: 650px) {
+                .clearSearch {
+                    Top: 120px;
+                    right: 0;
+                }
+                
+            }
+            @media only screen and (max-width: 500px) {
+                .clearSearch {
+                    height: 30px;
+                }
             }
             .clearSearch:hover {
                 transform: scale(1.2);

@@ -16,20 +16,49 @@ function ProductContainerCss() {
                 z-index: 0;
             }           
             .productContainer {
-                width: 70%;
-                margin: 30px auto;
+                margin: auto;
                 position: relative;
             }
             .grid-container {
+                margin: auto;
+                margin-top: 45px;
                 display: grid;
-                grid-template-columns: 25% 25% 25% 25%;
-                grid-column-gap: 10px
+                grid-template-columns: 20% 20% 20% 20% 20%;
+                grid-column-gap: 10px;
+                width: 90%;
+            }
+            @media only screen and (max-width: 1000px) {
+                .productContainer {
+                    width: unset;
+                }
+                .grid-container {
+                    grid-template-columns: 25% 25% 25% 25%;
+                        grid-column-gap: 5px;
+                        margin: 5%;
+                        width: unset;    
+                }
+            }
+            @media only screen and (max-width: 750px) {
+                .grid-container {
+                    grid-template-columns: 33.3% 33.3% 33.3%;
+                    width: unset;
+                }
+            }
+            @media only screen and (max-width: 600px) {
+                .grid-container {
+                    grid-template-columns: 50% 50%;
+                }
             }
             .grid-item {
                 font-size: 30px;
                 text-align: center;
                 width: 180px;
                 font-size: 14px;
+            }
+            @media only screen and (max-width: 600px) {
+                .grid-item {
+                    width: 150px;
+                }
             }
             .productSmallDisplay {
                 display: flex;

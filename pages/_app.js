@@ -12,7 +12,7 @@ import Head from '../src/components/Head';
 
 function MyApp({ Component, pageProps }) {
     const [windowWidth, setWindowWidth] = useState(0);
-    const [navOpen, setNavOpen] = useState(true);
+    const [navOpen, setNavOpen] = useState(false);
     useEffect(() => {
         setWindowWidth.innerWidth;
         const handleResize = () => {

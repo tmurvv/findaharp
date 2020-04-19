@@ -8,7 +8,7 @@ function AppCss() {
                 src: url(/fonts/avenir_ff/AvenirLTStd-Roman.otf);
             }
             body {
-                overflowX: hidden;
+                overflow-x: hidden;
                 margin: 0;
                 margin-block-end: 0;
                 margin-block-start: 0;
