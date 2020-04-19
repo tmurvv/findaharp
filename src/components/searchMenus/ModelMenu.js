@@ -40,7 +40,6 @@ export default function ModelMenu(props) {
                 hidden={!anchorEl}
                 name='Model Menu'
                 className='plainTextSelectLine1'
-                TransitionComponent='down'
             >
                 <li 
                     onClick={handleClose} 

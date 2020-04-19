@@ -67,7 +67,6 @@ function AboutPartnerStore(props) {
                 cursor: pointer;
                 transition: all .3s;
                 outline: none;
-                font-size: 18px;
                 width: fit-content;
                 margin: auto;
                 margin-bottom: 15px
