@@ -13,11 +13,13 @@ function ProductContainer(props) {
         if (open) {
             setOpacity(1);
             setOpen(false);
+            document.body.overflow='auto';
             return;
         }
         setDetailItem(props.filteredproducts.find(product => evt.target.closest('.productSmallDisplay').id === product.id));
         setOpen(true);
         setOpacity(.10);
+        document.body.overflow='hidden';
     }
     function handleClose() {
         setOpen(false);

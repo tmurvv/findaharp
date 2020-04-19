@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Link from 'next/link';
 
 export default function NavBar(props) {
-    
-    console.log('NavBar', props.mobile, props.open);
-    
     return(
         <>
         <div className='navBarOuter'>

@@ -20,32 +20,39 @@ function ProductModal(props) {
                 <p>Price: {product.productPrice}</p>
                 <p>Finish: {product.productFinish}</p>
                 <p>------</p>
-                <p>Description: {longDesc?product.productLongDesc.substr(0,100):product.productLongDesc} </p> 
-                <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<99}>{longDesc?' more...':' less...'}</div>
+                <p>Description: {longDesc?product.productLongDesc.substr(0,200):product.productLongDesc} </p> 
+                <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<199}>{longDesc?' more...':' less...'}</div>
                 <p>------</p>
                 <p>Location: {product.sellerRegion}</p>
                 <p>contact info (will link to a contact form): {product.sellerName}</p>     
+                
             </div>
-            <button className='detailButton' onClick={handleClick}>Close</button>
+            <div onClick={handleClick} className='clearModal'>
+                <img onClick={handleClick} src='/img/clear_search.png' alt='clear filters'/>
+            </div>  
         </div>
         <style jsx>{`
             .detailContainer {
-                overflow-y: scroll;
-                min-height: 75vh;
-                max-height: 90vh;
-                width: 50vw;
+                width: 80vw;
                 background-color: #ffffff;
                 position: fixed;
-                border: 12px double #f9bf1e;
+                border: 4px solid #f9bf1e;
+                box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
                 top: 50vh;
                 left: 50vw;
                 transform: translate(-50%, -50%);
                 display: flex;
-                flex-direction: column;
                 align-items: center;
                 padding: 20px;
                 z-index: 3000;
+                max-height: calc(100vh - 210px);
+                overflow-y: auto;
+            }
+            @media only screen and (max-width: 500px) {
+                .detailContainer {
+                    flex-direction: column;
+                }
             }
             .detailButton {
                 margin: 15px auto;
@@ -55,8 +62,7 @@ function ProductModal(props) {
                 border-radius: 3px;
             }
             .detailImg {
-                height: 50%;
-                margin: 0 auto;
+                height: 100%;
             }
             .detailImg img {
                 height: 100%;
@@ -64,7 +70,7 @@ function ProductModal(props) {
                 margin: 0 auto;
             }
             .detailText {
-                padding: 20px 0;
+                padding: 20px;
             }
             .detailText p {
                 text-align: center;
@@ -75,6 +81,13 @@ function ProductModal(props) {
             }
             .marginTop {
                 margin-top: 10px;
+            }
+            .clearModal {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: black;
+                height: 35px;
             }
             .moreButton {
                 color: purple;
