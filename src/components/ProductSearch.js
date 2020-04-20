@@ -21,27 +21,27 @@ import {
 function ProductSearch(props) {
     const [allState, setAllState] = useState({
         selectionType: '',
-        maker: 'Harp Maker',
-        model: 'Harp Model',
-        size: 'Harp Size',
-        finish: 'Finish',
-        price: 'Price Range',
-        location: 'Location'
+        maker: 'All Makers',
+        model: 'All Models',
+        size: 'All Sizes',
+        finish: 'All Finishes',
+        price: 'All Prices',
+        location: 'All Locations'
     });
     function resetDropDowns(exceptions) {
-        if (!exceptions.includes('maker')) setAllState({...allState, maker: 'Harp Maker'});     
-        if (!exceptions.includes('model')) setAllState({...allState, model: 'Harp Model'});
-        if (!exceptions.includes('size')) setAllState({...allState, size: 'Harp Size'});
-        if (!exceptions.includes('finish')) setAllState({...allState, size: 'Finish'});
-        if (!exceptions.includes('price')) setAllState({...allState, size: 'Price Range'});
-        if (!exceptions.includes('location')) setAllState({...allState, size: 'Location'});
+        if (!exceptions.includes('maker')) setAllState({...allState, maker: 'All Makers'});     
+        if (!exceptions.includes('model')) setAllState({...allState, model: 'All Models'});
+        if (!exceptions.includes('size')) setAllState({...allState, size: 'All Sizes'});
+        if (!exceptions.includes('finish')) setAllState({...allState, size: 'All Finishes'});
+        if (!exceptions.includes('price')) setAllState({...allState, size: 'All Prices'});
+        if (!exceptions.includes('location')) setAllState({...allState, size: 'All Locations'});
     }
     
     function handleMakerSelection(maker) {
         //modelName.endsWith('Models:') catches when user selects all models from maker
         setAllState({...allState, 
             maker,
-            model: "Harp Model",
+            model: "All Models",
             selectionType: 'maker'
         });
     }
@@ -70,7 +70,7 @@ function ProductSearch(props) {
     function handleFinishSelection(newProductFinish) {
         resetDropDowns('finish');
         setAllState({...allState, 
-            finish: newProductFinish==='All Finish'?'Finish':newProductFinish,
+            finish: newProductFinish==='All Finish'?'All Finishes':newProductFinish,
             selectionType: newProductFinish==='All Finish'?'':'finish',
             productType: 'all',
         });
@@ -80,21 +80,21 @@ function ProductSearch(props) {
             price: newProductPrice
         });
     }
-    function handleLocationSelection(newProductLocation) {
+    function handleLocationSelection(newProductLocations) {
         setAllState({...allState, 
-            location: newProductLocation
+            location: newProductLocations
         });
     }
 
     function handleClear(evt) {
         setAllState({
             ...allState,
-            finish: 'Finish',
-            price: 'Price Range',
-            location: 'Location',
-            size: "Harp Size",
-            maker: "Harp Maker",
-            model: "Harp Model"
+            finish: 'All Finishes',
+            price: 'All Prices',
+            location: 'All Locations',
+            size: "All Sizes",
+            maker: "All Makers",
+            model: "All Models"
         });
     }
     const filteredProducts = getFilteredProducts(props.products, allState);
@@ -128,13 +128,16 @@ function ProductSearch(props) {
             <div className="searchLine1Sub">
                 <div className='arrow rightArrow line1SubRightArrow'></div>
                 <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
-                    {allState.size==='Harp Size'?'':allState.size}
+                    {allState.size}
+                    {/* {allState.size==='All Sizes'?'':allState.size} */}
                 </div>
                 <div id="selectedMaker" className={`search-grid-item`} value={allState.maker}>
-                    {allState.maker==='Harp Maker'?'':allState.maker}
+                    {allState.maker}
+                    {/* {allState.maker==='All Makers'?'':allState.maker} */}
                 </div>
                 <div id="selectedModel" className={`search-grid-item`} value={allState.model}>
-                    {allState.model==='Harp Model'?'':allState.model}
+                    {allState.model}
+                    {/* {allState.model==='All Models'?'':allState.model} */}
                 </div>
                 
                 <div className='arrow leftArrow line1SubLeftArrow'></div>
@@ -160,7 +163,7 @@ function ProductSearch(props) {
                     />
                     <LocationMenu 
                         handleLocationChange = {handleLocationSelection}
-                        currentselected={allState.location?allState.location:'Harp Location'}
+                        currentselected={allState.location?allState.location:'Harp All Locations'}
                     /> 
                     <div className='arrow leftArrow line2LeftArrow'></div>
                 {/* </div>    */}       
@@ -168,13 +171,16 @@ function ProductSearch(props) {
             <div className="searchLine2Sub">
                 <div className={`arrow rightArrow line2SubRightArrow`}></div>
                 <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
-                    {allState.finish==='Finish'?'':allState.finish}
+                    {allState.finish}
+                    {/* {allState.finish==='All Finishes'?'':allState.finish} */}
                 </div>
                 <div id="selectedPrice" className={`search-grid-item`} value={allState.price}>
-                    {allState.price==='Price Range'?'':allState.price}
+                    {allState.price}
+                    {/* {allState.price==='All Prices'?'':allState.price} */}
                 </div>
-                <div id="selectedLocation" className={`search-grid-item`} value={allState.location}>
-                {allState.location==='Location'?'':allState.location}
+                <div id="selectedAll Locations" className={`search-grid-item`} value={allState.location}>
+                    {allState.location}
+                    {/* {allState.location==='All Locations'?'':allState.location} */}
                 </div>
                 <div className={`arrow leftArrow line2SubLeftArrow`}></div>
                 <div onClick={handleClear} className='clearSearch'>

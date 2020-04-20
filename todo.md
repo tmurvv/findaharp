@@ -1,5 +1,4 @@
 - responsive
-- move clear all button to after 'further refine'
 
 - finish writing tests for helper file
 

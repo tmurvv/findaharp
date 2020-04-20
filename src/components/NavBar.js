@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 export default function NavBar(props) {
@@ -79,10 +79,10 @@ export default function NavBar(props) {
             a:hover {
                 opacity: 1;
             }
-            .hamburgerMenu {
+            .hamburgerMenu img {
                 height: 35px;
             }
-            .closeIcon {
+            .closeIcon img {
                 height: 25px;
                 position: absolute;
                 top: 0;

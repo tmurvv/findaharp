@@ -160,23 +160,22 @@ function ProductSearchCss() {
                 height: 40px;
                 top: -8px;
                 cursor: pointer;
-                transition: all .7s;
                 display: flex;
+                align-items: center;
             }
             @media only screen and (max-width: 650px) {
                 .clearSearch {
-                    Top: 120px;
+                    top: 120px;
                     right: 0;
-                }
-                
+                    font-size: 16px;
+                }   
             }
             @media only screen and (max-width: 500px) {
                 .clearSearch {
-                    height: 30px;
+                    top: 130px;
+                    height: 25px;
+                    font-size: 14px;
                 }
-            }
-            .clearSearch:hover {
-                transform: scale(1.2);
             }
         `}
     </style>

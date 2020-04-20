@@ -1,4 +1,4 @@
-import react from 'React';
+import React from 'react';
 import AboutPartnerStore from '../src/components/AboutPartnerStore';
 
 export default function StorePartners() {

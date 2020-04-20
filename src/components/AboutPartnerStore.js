@@ -10,32 +10,47 @@ function AboutPartnerStore(props) {
         <div className='detailContainer'>
             <div className={`detailImg`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
             <div className={`detailText`}>
-                <h4>{product.productMaker}</h4>
+                <h2>{product.productMaker}</h2>
                 
-                <p>{longDesc?product.productLongDesc.substr(0,120):product.productLongDesc} </p> 
-                <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<120}>{longDesc?' more...':' less...'}</div>
+                <p>{longDesc?product.productLongDesc.substr(0,240):product.productLongDesc} </p> 
+                <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<240}>{longDesc?' more...':' less...'}</div>
                 <p>{product.sellerRegion}</p>
                 <p>{product.sellerWebsite} {product.sellerEmail}</p>     
             </div>
         </div>
         <style jsx='true'>{`
-            h4 {
+            h2 {
                 text-align: center;
                 margin-top: -20px;
             }
             .detailContainer {
                 overflow-y: scroll;
                 min-height: 25vh;
-                max-height: 10vh;
                 width: 80vw;
                 background-color: #ffffff;
-                border: 12px double #f9bf1e;
                 border-radius: 3px;
                 display: flex;
                 align-items: center;
                 padding: 20px;
                 margin: auto;
-                margin-bottom: 30px;
+                margin-bottom: 50px;
+                border: 4px solid #f9bf1e;
+                box-shadow: 0 1rem 1rem rgba(249,191,30, .05);
+                border-radius: 3px;
+                max-height: calc(100vh - 210px);
+                overflow-y: auto;
+            }
+            @media only screen and (max-width: 750px) {
+                .detailContainer: {
+                    height: 250px;
+                    max-height: calc(100vh - 150px);
+                }
+            }
+            @media only screen and (max-width: 650px) {
+                .detailContainer {
+                    flex-direction: column;
+                    height: unset;
+                }
             }
             .detailButton {
                 margin: 15px auto;
@@ -44,13 +59,24 @@ function AboutPartnerStore(props) {
                 font-size: 20px;
                 border-radius: 3px;
             }
+            .detailImg {}
             .detailImg img {
                 height: 100%;
                 max-height: 170px;
                 margin: 0 auto;
             }
+            @media only screen and (max-width: 750px) {
+                .detailImg img {
+                    max-height: 120px;
+                }
+            }
             .detailText {
-                padding: 20px 0;
+                padding: 20px;
+            }
+            @media only screen and (max-width: 750px) {
+                .detailText {
+                    padding: 20px 0;
+                }
             }
             .detailText p {
                 text-align: center;

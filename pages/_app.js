@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
     useEffect(() => {
         setWindowWidth.innerWidth;
         const handleResize = () => {
-          setWindowWidth(window.innerWidth)
+            setWindowWidth(window.innerWidth);
         }
         window.addEventListener('resize', handleResize);
         return () => { window.removeEventListener('resize', handleResize) }
@@ -27,12 +27,12 @@ function MyApp({ Component, pageProps }) {
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
-    
+    console.log('App', navOpen, windowWidth);
     return(
         <>  
             <Head/>
             <Banner />
-            <NavBar mobile={windowWidth<500} open={navOpen} handleNavOpen={handleNavOpen}/>
+            <NavBar mobile={windowWidth<=500} open={navOpen} handleNavOpen={handleNavOpen}/>
             <Component {...pageProps} />
             <Footer />
             <AppCss />
