@@ -26,15 +26,15 @@ const Index = (props) => {
 Index.getInitialProps = async () => {
     // Get product ads from api
     // PRODUCTION API
-    // const res = await axios.get('https://findaharp-api.herokuapp.com/');
+    const res = await axios.get('https://findaharp-api.herokuapp.com/');
     // STAGING API
     // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
     // TESTING API
-    const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
+    // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     
     const products = res.data.harpData;
     const makesModels = res.data.harpMakesModels;
-    
+    products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0)); 
     return { products, makesModels };
 }
 

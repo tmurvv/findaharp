@@ -71,7 +71,6 @@ function ProductSearch(props) {
         resetDropDowns('finish');
         setAllState({...allState, 
             finish: newProductFinish==='All Finish'?'All Finishes':newProductFinish,
-            selectionType: newProductFinish==='All Finish'?'':'finish',
             productType: 'all',
         });
     }

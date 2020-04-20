@@ -3,15 +3,28 @@ import React from 'react';
 function FAQ() {
     return (
         <>
-        <div>           
-            <h1>FAQ</h1>
+        <div className='FAQ'>           
+            <h2>FAQ Page Under Construction</h2>
         </div>
         <style jsx="true">{`
-            background-color: #534873;
-            color: white;
-            padding: 15px;
-        `}
-        </style>
+                .FAQ {
+                    background-image: url('/img/factoryFloor.jpg');
+                    background-position: cover;
+                    text-align:center;
+                    padding: 15px;
+                    min-height: 75vh;
+                }
+                h2 {
+                    background-color: #bbbbbb;
+                    color: white;
+                    width: fit-content;
+                    padding: 20px;
+                    margin:auto;
+                    margin-top: 30px;
+                    border-raduis: 7px;
+                }
+            `}
+            </style>
         </>
     )
 }

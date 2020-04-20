@@ -46,6 +46,14 @@ function AppCss() {
                 list-style: none;
                 z-index: 2000;
             }
+            @media only screen and (max-width: 500px) {
+                .plainTextSelectLine1 {
+                    margin-block-start: -.5em;
+                }
+                .plainTextSelectLine2 {
+                    margin-block-start: -.5em;
+                }
+            }
         `}
         </style>
     )

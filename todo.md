@@ -1,4 +1,4 @@
-- responsive
+- on menu selection check screen size
 
 - finish writing tests for helper file
 

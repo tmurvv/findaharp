@@ -1,3 +1,6 @@
+- check for console.logs
+- check for BREAKINk
+- check which API is connecting
 - good idea to commit and push
 - run tests
 - do build npm run build

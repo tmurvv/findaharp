@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     useEffect(() => {
-        setWindowWidth.innerWidth;
+        setWindowWidth(window.innerWidth);
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         }
@@ -23,11 +23,9 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     function handleNavOpen() {
-        console.log('imin')
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
-    console.log('App', navOpen, windowWidth);
     return(
         <>  
             <Head/>

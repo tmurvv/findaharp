@@ -35,6 +35,7 @@ function ProductSearchCss() {
                 background-color: #ffffff;
                 color: #868686;
                 font-style: italic;
+                font-size: 14px;
                 border-top: 1px solid;
                 border-bottom: 1px solid;
                 text-align: center;
@@ -81,6 +82,7 @@ function ProductSearchCss() {
                 background-color: #ffffff;
                 color: #868686;
                 font-style: italic;
+                font-size: 14px;
                 border-top: 1px solid;
                 border-bottom: 1px solid;
                 display: grid;

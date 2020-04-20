@@ -10,28 +10,31 @@ function ProductContainer(props) {
     const [detailItem, setDetailItem] = useState("");
 
     function handleClick(evt) {
+        console.log('imin')
         if (open) {
             setOpacity(1);
             setOpen(false);
-            document.body.overflow='auto';
+            document.querySelector('body').style.overflowY='auto';
+            
             return;
         }
         setDetailItem(props.filteredproducts.find(product => evt.target.closest('.productSmallDisplay').id === product.id));
         setOpen(true);
         setOpacity(.10);
-        document.body.overflow='hidden';
+        document.querySelector('body').style.overflowY='hidden';
     }
     function handleClose() {
         setOpen(false);
         setOpacity(1);
+        document.body.style.overflowY='auto';
     }
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
             <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={handleClick}>
                 <div className={`productSmallDisplay-img`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
                 <div className={`grid-item productSmallDisplay-text`}>
-                    <p>{product.productMaker} {product.productModel}</p>
-                    <p>{product.productSize} Strings / {product.productType}</p>
+                    <p>{product.productMaker} {product.productModel}<br></br>
+                    {product.productSize} Strings / {product.productType}</p>
                 </div>           
             </div>                                     
         ));

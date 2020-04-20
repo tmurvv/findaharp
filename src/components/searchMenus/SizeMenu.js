@@ -3,7 +3,6 @@ import React from 'react';
 
 export default function SizeMenu(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);  
-    const handleClick = (evt) => setAnchorEl(evt.currentTarget);
     const handleClose = (evt) => {
         setAnchorEl(null);
         if (evt.target.value === 'All Sizes') return;

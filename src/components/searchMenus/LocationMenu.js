@@ -60,12 +60,7 @@ export default function LocationMenu(props) {
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Canada'
-                >West Canada</li>               
-                <li 
-                    onClick={handleClose} 
-                    // key={uuid()} 
-                    name='Mexico'
-                >Mexico</li>               
+                >Canada</li>              
             </ul>     
         </div>
     );

@@ -5,8 +5,8 @@ function Banner() {
     return (
         <>
         <div className="mainContainer">
-            <img className="textLogo" src="./img/logo_findaharp.png" alt="textPlaceholder"/>
-            <img className="productGraphic" src="./img/golden_harp_cropped.png" alt="cool loopy logo"/>
+            <img className="textLogo" src="./img/logo_findaharp.png" alt="Find a Harp text logo"/>
+            <img className="productGraphic" src="./img/golden_harp_cropped.png" alt="Find a Harp graphic logo"/>
         </div>
         <BannerCss />
         </>

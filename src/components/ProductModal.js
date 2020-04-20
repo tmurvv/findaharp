@@ -15,16 +15,16 @@ function ProductModal(props) {
         <div className='detailContainer'>
             <div className={`detailImg`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
             <div className={`detailText`}>
-                <p>Maker: {product.productMaker} {product.productModel}</p>
-                <p>Model: {product.productSize} Strings / {product.productType}</p>
-                <p>Price: {product.productPrice}</p>
-                <p>Finish: {product.productFinish}</p>
+                <p>Maker: {product.productMaker} {product.productModel}<br></br>
+                Model: {product.productSize} Strings / {product.productType}<br></br>
+                Price: {product.productPrice}<br></br>
+                Finish: {product.productFinish}</p>
                 <p>------</p>
                 <p>Description: {longDesc?product.productLongDesc.substr(0,200):product.productLongDesc} </p> 
                 <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<199}>{longDesc?' more...':' less...'}</div>
                 <p>------</p>
-                <p>Location: {product.sellerRegion}</p>
-                <p>contact info (will link to a contact form): {product.sellerName}</p>     
+                <p>Location: {product.sellerRegion}<br></br>
+                contact info (will link to a contact form): {product.sellerName}</p>     
                 
             </div>
             <div onClick={handleClick} className='clearModal'>
@@ -47,6 +47,7 @@ function ProductModal(props) {
                 padding: 20px;
                 z-index: 3000;
                 max-height: calc(100vh - 210px);
+                max-width: 600px;
                 overflow-y: auto;
             }
             @media only screen and (max-width: 500px) {
