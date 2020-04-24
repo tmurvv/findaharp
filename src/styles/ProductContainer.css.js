@@ -68,13 +68,17 @@ function ProductContainerCss() {
             }
             .productSmallDisplay-img {
                 flex:7; 
-                height: 70%;
-                background-color: transparent;
+                height: 60%;
                 overflow: hidden;
+                background-color: #333333;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
             .productSmallDisplay-img img{
                 width: auto;
-                height: 100%;
+                height: 70%;
+
             }
             .productSmallDisplay-text {
                 flex: 2;
@@ -85,9 +89,15 @@ function ProductContainerCss() {
                 padding-top: 5px;
                 width: 100%;
             }
+            
             .productSmallDisplay-text p {
                 margin-block-start: 0;
                 margin-block-end: 0;
+            }
+            .productSmallDisplay-text p a {
+                text-decoration: none;
+                cursor: pointer;
+                color: #333333;
             }
             .priceText {
                 font-size: 12px;

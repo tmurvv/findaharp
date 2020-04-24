@@ -3,6 +3,7 @@ import React from "react";
 import axios from 'axios';
 
 // internal
+import testData from '../src/utils/testData';
 import IndexCss from '../src/styles/index.css.js'
 import ProductSearch from '../src/components/ProductSearch';
 
@@ -32,7 +33,9 @@ Index.getInitialProps = async () => {
     // TESTING API
     // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     
-    const products = res.data.harpData;
+    const products = testData;
+    console.log(products);
+    // const products = res.data.harpData;
     const makesModels = res.data.harpMakesModels;
     products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0)); 
     return { products, makesModels };
