@@ -1,5 +1,11 @@
 - on menu selection check screen size
 
+- contact form on modal
+
+- cache images
+
+- make two stages loading and not found for images
+
 - finish writing tests for helper file
 
 ### FUTURE IDEAS:

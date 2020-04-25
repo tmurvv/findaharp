@@ -10,7 +10,6 @@ function ProductContainer(props) {
     const [detailItem, setDetailItem] = useState("");
 
     function handleClick(evt) {
-        console.log('imin')
         if (open) {
             setOpacity(1);
             setOpen(false);

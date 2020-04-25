@@ -1,5 +1,5 @@
 // import App from 'next/app'
-import react, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 // css
 import 'react-phone-input-2/lib/style.css'
 

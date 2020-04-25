@@ -1,3 +1,4 @@
+// packages
 import React, { useState } from 'react';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
@@ -22,7 +23,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import StarBorder from '@material-ui/icons/StarBorder';
 import { typography } from '@material-ui/system';
+import PrivateAdsCSS from '../src/styles/PrivateAds.css';
 //#endregion
+
+// internal
+import PrivateAdsCSS from '../src/styles/PrivateAds.css';
 
 const PrivateAds = (props) => {
     const [productListing, setProductListing] = useState({ contactPreference: 'both', productType: '' });
@@ -321,39 +326,7 @@ const PrivateAds = (props) => {
                 </Box>
                 </DialogContent> 
             </Dialog>
-            <style jsx='true'>{`
-        h2 {
-            margin-top: 25px;
-        },
-        .marginBottomMedium {
-            margin-bottom: 15px;
-        }
-        button {
-            margin: 15px auto;
-            background-color: #f9bf1e;
-            padding: 5px 10px;
-            font-size: 20px;
-            border-radius: 3px;
-            outline: none;  
-        }
-        ul {
-          padding: 0;
-        }
-
-        li {
-          list-style: none;
-          margin: 5px 0;
-        }
-
-        a {
-          text-decoration: none;
-          color: blue;
-        }
-
-        a:hover {
-          opacity: 0.6;
-        }
-      `}</style>
+            <PrivateAdsCSS />
         </Box>
     );
 }

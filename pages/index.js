@@ -34,7 +34,6 @@ Index.getInitialProps = async () => {
     // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     
     const products = testData;
-    console.log(products);
     // const products = res.data.harpData;
     const makesModels = res.data.harpMakesModels;
     products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0)); 

@@ -1,30 +1,13 @@
 import React from 'react';
+import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
 
 function FAQ() {
     return (
         <>
-        <div className='FAQ'>           
+        <div className='underConstruction'>           
             <h2>FAQ Page Under Construction</h2>
         </div>
-        <style jsx="true">{`
-                .FAQ {
-                    background-image: url('/img/factoryFloor.jpg');
-                    background-position: cover;
-                    text-align:center;
-                    padding: 15px;
-                    min-height: 75vh;
-                }
-                h2 {
-                    background-color: #bbbbbb;
-                    color: white;
-                    width: fit-content;
-                    padding: 20px;
-                    margin:auto;
-                    margin-top: 30px;
-                    border-raduis: 7px;
-                }
-            `}
-            </style>
+        <PageUnderConstructionCSS />
         </>
     )
 }

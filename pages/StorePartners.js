@@ -1,5 +1,6 @@
 import React from 'react';
 import AboutPartnerStore from '../src/components/AboutPartnerStore';
+import StorePartnersCSS from '../src/styles/StorePartners.css';
 
 export default function StorePartners() {
     const product = {
@@ -24,14 +25,7 @@ export default function StorePartners() {
             <AboutPartnerStore product={product}/>
             <AboutPartnerStore product={product}/>
             <AboutPartnerStore product={product}/>
-            <style jsx='true'>{`
-                h2 {
-                    text-align: center;
-                    margin: 50px auto;
-                    width: 60%;
-                }
-
-            `}</style>
+            <StorePartnersCSS />
         </>
     )
 }

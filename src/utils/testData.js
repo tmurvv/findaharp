@@ -152,7 +152,7 @@ const testData = [
         "productType": "pedal",
         "productSize": 47,
         "productFinish": "mahogany",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30-2.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30-3.jpg",
         "productImageBestColor": "#d2d1d6",
         "divider": "00000000000000000000000"
     },
@@ -169,7 +169,7 @@ const testData = [
         "productModel": "85CG",
         "productType": "pedal",
         "productSize": 47,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30-3.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30.jpg",
         "productImageBestColor": "#dfdfde",
         "divider": "00000000000000000000000"
     },
@@ -277,7 +277,7 @@ const testData = [
         "productType": "pedal",
         "productSize": 47,
         "productFinish": "ebony",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30-3.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30.jpg",
         "productImageBestColor": "#f1e1c6",
         "divider": "00000000000000000000000"
     },
@@ -313,7 +313,7 @@ const testData = [
         "productType": "pedal",
         "productSize": 47,
         "productFinish": "ebony",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30-3.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH30-2.jpg",
         "productImageBestColor": "#f1e1c5",
         "divider": "00000000000000000000000"
     },
