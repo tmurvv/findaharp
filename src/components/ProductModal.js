@@ -28,10 +28,10 @@ function ProductModal(props) {
                 <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<199}>{longDesc?' more...':' less...'}</div>
                 <p>------</p>
                 <p>Location: {product.sellerRegion}<br></br>
-                <button onClick={() => document.querySelector('ContactForm').hidden='false'}>Contact {product.sellerName}</button> </p>     
+                <button onClick={() => props.handleOpenContact(product)}>Contact {product.sellerName}</button> </p>     
                 
             </div>
-            <ContactForm contacthidden={true} product={product}/>
+            
             <div onClick={handleClick} className='clearModal'>
                 <img onClick={handleClick} src='/img/clear_search.png' alt='clear filters'/>
             </div>  

@@ -1,12 +1,11 @@
 import React from 'react';
 
-import ProductModalCSS from '../styles/ProductModal.css';
-
 function ContactForm(props) {
     const {product} = props;
+    console.log('contact', product)
     return (
         <>
-        <div hidden={true} className='detailContainer'>
+        <div className='detailContainer'>
             <div className={`detailImg`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
             <div className={`detailText`}>
                 <p>Contact {product.sellerName} about {product.productMaker} {product.productModel}<br></br>
@@ -14,11 +13,84 @@ function ContactForm(props) {
                 contact info (will link to a contact form): {product.sellerName}</p>     
                 
             </div>
-            {/* <div onClick={handleClick} className='clearModal'>
-                <img onClick={handleClick} src='/img/clear_search.png' alt='clear filters'/>
-            </div>   */}
+            <div onClick={() => props.handleClose()} className='clearModal'>
+                <img onClick={() => props.handleClose()} src='/img/clear_search.png' alt='clear filters'/>
+            </div>  
         </div>
-        <ProductModalCSS />
+        <style jsx={true}>{`
+            .detailContainer {
+                width: 100%;
+                height: 100%;
+                background-color: #ffffff;
+                border: 4px solid #f9bf1e;
+                box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
+                border-radius: 3px;
+                display: flex;
+                align-items: center;
+                padding: 20px;
+                z-index: 3000;
+                max-height: calc(100vh - 210px);
+                max-width: 600px;
+                overflow-y: auto;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+            @media only screen and (max-width: 500px) {
+                .detailContainer {
+                    flex-direction: column;
+                }
+            }
+            .detailButton {
+                margin: 15px auto;
+                background-color: #f9bf1e;
+                padding: 5px 10px;
+                font-size: 20px;
+                border-radius: 3px;
+            }
+            .detailImg {
+                height: 100%;
+            }
+            .detailImg img {
+                height: 100%;
+                max-height: 300px;
+                margin: 0 auto;
+            }
+            .detailText {
+                padding: 20px;
+            }
+            .detailText p {
+                text-align: center;
+                margin-block-start: 0;
+                margin-block-end: 0;
+                height: auto;
+                transition: all .7s;
+            }
+            .marginTop {
+                margin-top: 10px;
+            }
+            .clearModal {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: black;
+                height: 35px;
+            }
+            .moreButton {
+                color: purple;
+                cursor: pointer;
+                transition: all .3s;
+                outline: none;
+                font-size: 18px;
+                width: fit-content;
+                margin: auto;
+            }
+            .moreButton:hover {
+                transform: scale(1.1);
+            }
+        `}
+        </style>
         </>
     )
 }
