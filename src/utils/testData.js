@@ -283,7 +283,7 @@ const testData = [
     },
     {
         "id": "76bdff77-26e1-4acd-b4b2-51c28d1bb27d",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Pratt Chamber Harp Cherry #29688",
@@ -319,7 +319,7 @@ const testData = [
     },
     {
         "id": "c1b26d53-c1c1-4bd9-8082-c65194c37ef5",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Lyon & Healy Ogden Ebony #207",
@@ -337,7 +337,7 @@ const testData = [
     },
     {
         "id": "808709b0-5aa5-4a74-81dd-e173942ab0c9",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Mike Lewis Arie 22 String",
@@ -354,7 +354,7 @@ const testData = [
     },
     {
         "id": "ba90fa7c-b12f-42ea-a5d6-588aa413c7a4",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Camac DHC 32 True Fire Blue #K2181",
@@ -388,7 +388,7 @@ const testData = [
     },
     {
         "id": "9621123b-55c7-4c7f-b461-dcbadbc83932",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Dusty Strings Allegro 26 Sapele",
@@ -405,7 +405,7 @@ const testData = [
     },
     {
         "id": "0ea21c33-f1f7-4473-b11b-b0d3d67bb73b",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Triplett Nino Cherry #88804",
@@ -423,7 +423,7 @@ const testData = [
     },
     {
         "id": "5e48f6e6-bb0c-4d76-a2c6-ff7df474349b",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Dusty Strings FH26 Walnut #17201",
@@ -441,7 +441,7 @@ const testData = [
     },
     {
         "id": "d9c79a4a-f038-4264-a358-c7faeb965a0b",
-        "sellerName": "HarpsGalore",
+        "sellerName": "Harps Galore",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Rees Mariposa Maple",

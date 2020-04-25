@@ -98,7 +98,7 @@ function ProductContainer(props) {
                         hidden={true}
                         src= {product.productImageUrl} 
                         onLoad={(evt) => handleImageLoad(evt)} 
-                        onError={(evt) => evt.target.src='https://findaharp-api.herokuapp.com/assets/img/golden_harp_full.png'} 
+                        onError={(evt) => {evt.target.src='./img/golden_harp_full_not_found.png';evt.target.style.backgroundColor='#000000'}} 
                         alt={product.productTitle}
                     />
                     <img 

@@ -1,6 +1,7 @@
 - check for console.logs
 - check for BREAKINk
 - check which API is connecting
+- check that makesModels not local
 - good idea to commit and push
 - run tests
 - do build npm run build

@@ -28,7 +28,7 @@ function ProductModal(props) {
                 <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<199}>{longDesc?' more...':' less...'}</div>
                 <p>------</p>
                 <p>Location: {product.sellerRegion}<br></br>
-                <button onClick={() => props.handleOpenContact(product)}>Contact {product.sellerName}</button> </p>     
+                <button className='detailButton' onClick={() => props.handleOpenContact(product)}>Contact Seller</button> </p>     
                 
             </div>
             

@@ -1,5 +1,3 @@
-import ProductContainerCss from "./ProductContainer.css"
-
 function ProductModalCSS() {
     return (
         <style jsx={true}>{`
@@ -27,11 +25,14 @@ function ProductModalCSS() {
                 }
             }
             .detailButton {
-                margin: 15px auto;
-                background-color: #f9bf1e;
+                margin: 25px auto;
+                background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
                 padding: 5px 10px;
-                font-size: 20px;
+                font-size: 16px;
                 border-radius: 3px;
+                outline: none;
+                border-style: none;
+                border-color: none;
             }
             .detailImg {
                 height: 100%;

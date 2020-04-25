@@ -4,6 +4,7 @@ import axios from 'axios';
 
 // internal
 import testData from '../src/utils/testData';
+import testMakesModels from '../src/utils/testMakesModels';
 import IndexCss from '../src/styles/index.css.js'
 import ProductSearch from '../src/components/ProductSearch';
 
@@ -25,17 +26,21 @@ const Index = (props) => {
     );
 }
 Index.getInitialProps = async () => {
-    // Get product ads from api
     // PRODUCTION API
-    const res = await axios.get('https://findaharp-api.herokuapp.com/');
+    // const res = await axios.get('https://findaharp-api.herokuapp.com/');
     // STAGING API
     // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
     // TESTING API
     // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     
-    const products = testData;
+    // API DATA Populate variables
     // const products = res.data.harpData;
-    const makesModels = res.data.harpMakesModels;
+    // const makesModels = res.data.harpMakesModels;
+
+    //LOCAL DATA Populate variables
+    const products = testData;
+    const makesModels = testMakesModels;
+    
     products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0)); 
     return { products, makesModels };
 }

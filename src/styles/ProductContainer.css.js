@@ -54,6 +54,7 @@ function ProductContainerCss() {
                 text-align: center;
                 width: 180px;
                 font-size: 14px;
+                max-width: 200px;
             }
             @media only screen and (max-width: 600px) {
                 .grid-item {
