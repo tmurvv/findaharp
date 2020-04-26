@@ -2,7 +2,7 @@ import React from "react";
 
 function BannerCss() {
     return (
-        <style jsx="true">{`
+        <style jsx={true}>{`
             .mainContainer {
                 background-color: #000000;
                 height: 120px;

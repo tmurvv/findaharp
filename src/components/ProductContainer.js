@@ -13,15 +13,13 @@ const initialState = {
     overflowY: 'auto'
 }
 function reducer(state, action) {
-    console.log('reducer', action.product)
     switch (action.type) {
         case 'detail':
             return {
                 openDetail: true,
                 openContact: false,
                 productSelect: action.product,
-                opacity: .1,
-                overflowY: 'hidden'
+                opacity: .1
             }
         case 'contact':
             return {
@@ -29,61 +27,36 @@ function reducer(state, action) {
                 openContact: true,
                 productSelect: action.product,
                 opacity: .1,
-                overflowY: 'hidden'
             }
         case 'initial':
             return {
                 openDetail: false,
                 openContact: false,
                 productSelect: null,
-                opacity: 1,
-                overflowY: 'auto'
+                opacity: 1
             }
     }
 }
 function ProductContainer(props) {
     const [state, dispatch] = useReducer(reducer, initialState);
-    // const [open, setOpen] = useState(false);
-    // const [openContact, setOpenContact] = useState(false);
-    // const [contactProduct, setContactProduct] = useState();
-    // const [opacity, setOpacity] = useState(1);
-    // const [detailItem, setDetailItem] = useState("");
 
-    function handleClick(product) {
+    function handleOpenDetail(product) {
         dispatch({type:'detail', product})
         document.body.style.overflowY='hidden';
-        // if (open) {
-        //     setOpacity(1);
-        //     setOpen(false);
-        //     document.querySelector('body').style.overflowY='auto';
-            
-        //     return;
-        // }
-        // setDetailItem(props.filteredproducts.find(product => evt.target.closest('.productSmallDisplay').id === product.id));
-        // setOpen(true);
-        // setOpacity(.10);
-        // document.querySelector('body').style.overflowY='hidden';
     }
-    function handleClose() {
+    function handleCloseDetail(product, openContact) {
         dispatch({type: 'initial'})
         document.body.style.overflowY='auto';
+        if (openContact) handleOpenContact(product);
     }
-    function handleOpenContact(product) {
+    function handleOpenContact(evt, product) {
+        evt.stopPropagation();
         dispatch({type:'contact', product})
-        document.body.style.overflowY='hidden';
-        // setOpen(false);
-        // setContactProduct(product);
-        // setOpenContact(true);
-        
-        // setOpacity(0.1);
-        // document.querySelector('body').style.overflowY='hidden';
+        document.body.style.overflowY='hidden'; 
     }
-    function handleCloseContact(product) {
+    function handleCloseContact() {
         dispatch({type:'initial'})
         document.body.style.overflowY='auto';
-        // setOpacity(1);
-        // setOpenContact(false);
-        // document.body.style.overflowY='auto';
     }
     function handleImageLoad(evt) {
         evt.target.hidden=false; evt.target.nextElementSibling.hidden=true;
@@ -92,7 +65,7 @@ function ProductContainer(props) {
     }
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
-            <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={() => handleClick(product)}>
+            <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={() => handleOpenDetail(product)}>
                 <div className={`productSmallDisplay-img image`}>
                     <img 
                         hidden={true}
@@ -109,17 +82,15 @@ function ProductContainer(props) {
                     />
                 </div>
                 <div className={`grid-item productSmallDisplay-text`}>
-                    <p>{product.productMaker} {product.productModel}<br></br>
-                    {product.productSize} Strings / {product.productType}<br></br>
-                    <span><a href='mailto: tmurv@shaw.ca'>{product.sellerName.includes("-o")||product.sellerName.includes("-e")?
+                    <p>{product.productMaker} {product.productModel}/{product.productSize}<br></br>
+                    {product.sellerName.includes("-o")||product.sellerName.includes("-e")?
                         product.sellerName.substr(0,product.sellerName.length-2)
-                        :product.sellerName}
-                    </a></span>
+                        :product.sellerName}<br></br>
+                    <span onClick={(e)=>handleOpenContact(e, product)}>Contact Seller</span>
                     </p>
                 </div>           
             </div>
         ));
-        // console.log(open, openContact)
         return( 
             <>      
             <div data-test='component-ProductContainer' className='productContainer'>       
@@ -127,9 +98,8 @@ function ProductContainer(props) {
                     {gridProducts}
                 </div>
                 
-                {state.openDetail&&<ProductModal product={state.productSelect} handleOpenContact={handleOpenContact} handleClose={handleClose}/>}
-                {state.openContact&&<ContactForm handleClose={handleCloseContact} product={state.productSelect}/>}
-                
+                {state.openDetail&&<ProductModal product={state.productSelect} handleCloseDetail={handleCloseDetail} handleOpenContact={handleOpenContact} handleCloseContact={handleCloseContact}/>}
+                {state.openContact&&<ContactForm handleCloseContact={handleCloseContact} product={state.productSelect}/>}  
             </div>       
             <ProductContainerCss />           
             </>
@@ -140,7 +110,7 @@ function ProductContainer(props) {
             <h3 style={{textAlign: 'center'}}>Not found in our listings</h3>
             <h3 style={{textAlign: 'center'}}>Please try again using fewer filters.</h3>    
             <div data-test='component-ProductContainer' className='notFoundContainer'>
-                <img src= 'https://findaharp-api.herokuapp.com/assets/img/genericHarp.png' alt='harp in silhouette'/>
+                <img src= './img/golden_harp_full_not_found.png' alt='harp in silhouette'/>
             </div>
             <ProductContainerCss />
             </>

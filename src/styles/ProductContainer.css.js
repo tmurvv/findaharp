@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProductContainerCss() {
     return (
-        <style jsx="true">{`
+        <style jsx={true}>{`
             img {
                 height: 100%;
             }
@@ -66,6 +66,9 @@ function ProductContainerCss() {
                 flex-direction: column;
                 height: 350px;
                 width: 100%;
+            }
+            .productSmallDisplay span {
+                cursor: pointer;
             }
             .productSmallDisplay-img {
                 flex:7; 

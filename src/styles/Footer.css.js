@@ -2,7 +2,7 @@ import React from "react";
 
 function FooterCss() {
     return (
-        <style jsx='true'>{`
+        <style jsx={true}>{`
             .footer {
                 background-color: #000000;
                 color: #faf8ed;

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
-    "startdev": "next",
+    "startdev": "next -p 3006",
     "build": "next build && next export",
     "start": "next start"
   },

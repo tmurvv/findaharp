@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProductSearchCss() {
     return (
-        <style jsx="true">{`
+        <style jsx={true}>{`
             .searchTitle {
                 width: 60%;
                 margin: 25px auto 5px;
