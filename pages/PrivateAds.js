@@ -27,7 +27,7 @@ import PrivateAdsCSS from '../src/styles/PrivateAds.css';
 //#endregion
 
 // internal
-import PrivateAdsCSS from '../src/styles/PrivateAds.css';
+// import PrivateAdsCSS from '../src/styles/PrivateAds.css';
 
 const PrivateAds = (props) => {
     const [productListing, setProductListing] = useState({ contactPreference: 'both', productType: '' });
@@ -326,7 +326,7 @@ const PrivateAds = (props) => {
                 </Box>
                 </DialogContent> 
             </Dialog>
-            <PrivateAdsCSS />
+            {/* <PrivateAdsCSS /> */}
         </Box>
     );
 }

@@ -1,4 +1,3 @@
-//Packages
 import React from 'react';
 
 export default function FinishMenu(props) {
@@ -73,71 +72,4 @@ export default function FinishMenu(props) {
             </ul>
         </div>
     );
-
-
-
-    // return (
-    //     <div>             
-    //         <select
-    //             id="size-select"
-    //             anchorEl={anchorEl}
-    //             onClose={handleClose}
-    //             name='Finish Menu'
-    //             className='plainTextSelect'
-    //         >
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='All Finishes'       
-    //             >FINISH</option>
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()}
-    //                 name='Mahogany'
-    //                 selected={props.currentselected.startsWith('Large')}
-    //             >Mahogany</option>      
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Natural'
-    //                 selected={props.currentselected.startsWith('Medium')}
-    //             >Natural</option>
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Ebony'
-    //             >Ebony</option>
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Maple'
-    //                 selected={props.currentselected.startsWith('Lever')}
-    //             >Maple</option>
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Walnut'
-    //                 selected={props.currentselected.startsWith('Concert')}
-    //             >Walnut</option>
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Cherry'
-    //                 selected={props.currentselected.startsWith('Semi')}
-    //             >Cherry</option>
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Bubinga'
-    //                 selected={props.currentselected.startsWith('Small Pedal')}
-    //             >Bubinga</option>               
-    //             <option 
-    //                 onClick={handleClose} 
-    //                 // key={uuid()} 
-    //                 name='Other'
-    //                 selected={props.currentselected.startsWith('Small Pedal')}
-    //             >Other</option>               
-    //         </select>   
-    //     </div>
-    // );
 }

@@ -6,12 +6,12 @@ import ProductModalCSS from '../styles/ProductModal.css';
 function ProductModal(props) {
     const [longDesc, setLongDesc] = useState(true);
     let product = props.product;
-    if (product===undefined||!product) return props.handleClose();
-    if (product!==undefined && !product.productLongDesc) product={...product, productLongDesc: "description not found"};
+    if (product===undefined||!product) return props.handleCloseDetail();
+    if (!product.productLongDesc) product={...product, productLongDesc: "Description not available."};
 
-    function handleClick(product, openContact) {
+    function handleClick(evt, product, openContact) {
         setLongDesc(true);
-        props.handleCloseDetail(product, openContact);
+        props.handleCloseDetail(evt, product, openContact);
     }
     return (
         <>
@@ -27,12 +27,12 @@ function ProductModal(props) {
                 <div className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<199}>{longDesc?' more...':' less...'}</div>
                 <p>------</p>
                 <p>Location: {product.sellerRegion}<br></br>
-                <button className='detailButton' onClick={() => handleClick(product, true)}>Contact Seller</button> </p>     
+                <button className='detailButton' onClick={(evt) => handleClick(evt, product, true)}>Contact Seller</button> </p>     
                 
             </div>
             
-            <div onClick={() => handleClick(product, false)} className='clearModal'>
-                <img onClick={() => handleClick(product, false)} src='/img/clear_search.png' alt='clear filters'/>
+            <div onClick={(evt) => handleClick(evt, product, false)} className='clearModal'>
+                <img src='/img/clear_search.png' alt='clear filters'/>
             </div>  
         </div>
         <ProductModalCSS />

@@ -10,8 +10,8 @@ function AppCss() {
             body {
                 overflow-x: hidden;
                 margin: 0;
-                margin-block-end: 0;
-                margin-block-start: 0;
+                margin-block-end: 0 !important;
+                margin-block-start: 0 !important;
                 font-family: avenir;
                 color: #5c5b5b;
             }

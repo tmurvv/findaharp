@@ -3,6 +3,11 @@ import parseNum from 'parse-num';
 //leaf function helps find nested object keys,
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
 
+export function removeDashOE(sellerName) {
+    return sellerName.includes("-o")||sellerName.includes("-e")
+        ?sellerName.substr(0,sellerName.length-2)
+        :sellerName;
+}
 export function findSizeWords(strings, type) {
     strings = parseInt(strings);
     if (strings<29&&type==='lever-free') return 'lever-free';

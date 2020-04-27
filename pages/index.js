@@ -32,8 +32,8 @@ Index.getInitialProps = async () => {
      * LOCAL DATA
      ******************/
     //LOCAL DATA Populate variables
-    // const products = testData;
-    // const makesModels = testMakesModels;
+    const products = testData;
+    const makesModels = testMakesModels;
 
     /*******************
      * API DATA
@@ -43,11 +43,11 @@ Index.getInitialProps = async () => {
     // STAGING API
     // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
     // TESTING API
-    const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
+    // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     
     // API DATA Populate variables
-    const products = res.data.harpData;
-    const makesModels = res.data.harpMakesModels;
+    // const products = res.data.harpData;
+    // const makesModels = res.data.harpMakesModels;
     
     products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0)); 
     return { products, makesModels };

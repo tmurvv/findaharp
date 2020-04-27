@@ -1,17 +1,21 @@
+// packages
 import React, {useState} from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
+// internal
 import ContactFormCSS from '../styles/ContactForm.css';
+import {removeDashOE} from '../utils/helpers';
 
 function ContactForm(props) {
+    if (!props.product || props.product===undefined) {console.log('product not found'); props.handleCloseContact(); return null; }
     const {product} = props;
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
         contactemail: '',
-        contactmaker: product.productMaker,
-        contactmodel: product.productModel,
+        contactmaker: product.productMaker||'',
+        contactmodel: product.productModel||'',
         contactcomments: ''
     });
     const handleChange = (evt) => {
@@ -67,7 +71,7 @@ function ContactForm(props) {
                 <img src= {product.productImageUrl} alt={product.productTitle}/>
                 <p><span style={{fontWeight: 600}}>
                     {product.productTitle}
-                </span><br></br><span>{product.sellerName}</span></p>
+                </span></p><p>{removeDashOE(product.sellerName)}</p>
             </div>
             <div 
                 className='clearModal' 

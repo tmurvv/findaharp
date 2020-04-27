@@ -1,4 +1,4 @@
-function PrivateAdsCSS {
+function PrivateAdsCSS() {
     return (
         <style jsx={true}>{`
         h2 {

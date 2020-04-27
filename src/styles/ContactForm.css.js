@@ -37,6 +37,11 @@ function ContactFormCSS() {
                 max-height: 300px;
                 margin: 0 auto;
             }
+            .detailImg p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+                text-align: center;
+            }
             span {
                 text-align:center;
             }
@@ -65,11 +70,10 @@ function ContactFormCSS() {
             }
             .inputGroup {
                 margin-top: 15px;
-                width: 80%;
                 display: flex;
             }
             .inputGroup label {
-                flex:2;
+                flex:3;
                 text-align: right;
                 margin-right: 7px;
             }
@@ -93,7 +97,7 @@ function ContactFormCSS() {
                 background-image: none;
             }
             textarea {
-                flex: 8
+                flex: 7;
             }
         `}
         </style>

@@ -4,6 +4,7 @@ import React, {useReducer} from 'react';
 import ProductModal from './ProductModal';
 import ContactForm from './ContactForm';
 import ProductContainerCss from '../styles/ProductContainer.css';
+import {removeDashOE} from '../utils/helpers';
 
 const initialState = {
     openDetail: false,
@@ -44,10 +45,10 @@ function ProductContainer(props) {
         dispatch({type:'detail', product})
         document.body.style.overflowY='hidden';
     }
-    function handleCloseDetail(product, openContact) {
+    function handleCloseDetail(evt, product, openContact) {
         dispatch({type: 'initial'})
         document.body.style.overflowY='auto';
-        if (openContact) handleOpenContact(product);
+        if (openContact) handleOpenContact(evt, product);
     }
     function handleOpenContact(evt, product) {
         evt.stopPropagation();
@@ -83,9 +84,7 @@ function ProductContainer(props) {
                 </div>
                 <div className={`grid-item productSmallDisplay-text`}>
                     <p>{product.productMaker} {product.productModel}/{product.productSize}<br></br>
-                    {product.sellerName.includes("-o")||product.sellerName.includes("-e")?
-                        product.sellerName.substr(0,product.sellerName.length-2)
-                        :product.sellerName}<br></br>
+                    {removeDashOE(product.sellerName)}<br></br>
                     <span onClick={(e)=>handleOpenContact(e, product)}>Contact Seller</span>
                     </p>
                 </div>           
