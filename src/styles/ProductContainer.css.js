@@ -2,10 +2,7 @@ import React from 'react';
 
 function ProductContainerCss() {
     return (
-        <style jsx={true}>{`
-            img {
-                height: 100%;
-            }
+        <style jsx="true">{`
             .notFoundContainer {
                 width: 60%;
                 display: flex;
@@ -71,8 +68,7 @@ function ProductContainerCss() {
                 cursor: pointer;
             }
             .productSmallDisplay-img {
-                flex:7; 
-                height: 60%;
+                flex:7;
                 overflow: hidden;
                 background-color: #333333;
                 display: flex;
@@ -80,9 +76,8 @@ function ProductContainerCss() {
                 align-items: center;
             }
             .productSmallDisplay-img img{
+                height: 100%;
                 width: auto;
-                height: 70%;
-
             }
             .productSmallDisplay-text {
                 flex: 2;

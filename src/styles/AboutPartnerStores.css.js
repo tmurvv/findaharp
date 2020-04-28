@@ -1,7 +1,7 @@
 function AboutPartnerStoresCSS() {
     return (
         
-        <style jsx={true}>{`
+        <style jsx="true">{`
             h2 {
                 text-align: center;
                 margin-top: -20px;

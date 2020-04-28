@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProductSearchCss() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
             .searchTitle {
                 width: 60%;
                 margin: 25px auto 5px;
@@ -159,11 +159,14 @@ function ProductSearchCss() {
             .clearSearch {
                 position: absolute; 
                 right: -120px;
-                height: 40px;
+                height: 60%;
                 top: -8px;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
+            }
+            .clearSearch img {
+                width: 40px;
             }
             @media only screen and (max-width: 650px) {
                 .clearSearch {
@@ -177,6 +180,9 @@ function ProductSearchCss() {
                     top: 130px;
                     height: 25px;
                     font-size: 14px;
+                }
+                .clearSearch img{
+                    width: 25px;
                 }
             }
         `}

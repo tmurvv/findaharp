@@ -1,6 +1,12 @@
-- on menu selection check screen size
+- react lazyload
+    <LazyLoad
+        once={true}
+        placeholder={<img src={`https://mysource.png`} alt="..." />}
+    >
+        <img src={`mysource/dfs.jpg`} alt="..." />
+    </LazyLoad>
 
-- contact form on modal
+- on menu selection check screen size
 
 - cache images
 

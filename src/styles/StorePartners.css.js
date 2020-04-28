@@ -1,6 +1,6 @@
 function StorePartnersCSS() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
                 h2 {
                     text-align: center;
                     margin: 50px auto;

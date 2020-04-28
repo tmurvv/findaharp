@@ -2,7 +2,7 @@ import React from 'react';
 
 function AppCss() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
             @font-face {
                 font-family: avenir;
                 src: url(/fonts/avenir_ff/AvenirLTStd-Roman.otf);

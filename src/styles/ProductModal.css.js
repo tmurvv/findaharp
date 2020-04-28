@@ -1,6 +1,6 @@
 function ProductModalCSS() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
             .detailContainer {
                 width: 80vw;
                 background-color: #ffffff;
@@ -61,6 +61,9 @@ function ProductModalCSS() {
                 right: 0;
                 color: black;
                 height: 35px;
+            }
+            .clearModal img {
+                width: 35px;
             }
             .moreButton {
                 color: purple;

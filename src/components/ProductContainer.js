@@ -1,4 +1,5 @@
 import React, {useReducer} from 'react';
+import LazyLoad from 'react-lazyload';
 
 // internal
 import ProductModal from './ProductModal';
@@ -60,7 +61,6 @@ function ProductContainer(props) {
         document.body.style.overflowY='auto';
     }
     function handleImageLoad(evt) {
-        evt.target.hidden=false; evt.target.nextElementSibling.hidden=true;
         evt.target.parentElement.style.backgroundColor="#FFFFFF";
         evt.target.style.height="100%";
     }
@@ -68,9 +68,25 @@ function ProductContainer(props) {
         const gridProducts = props.filteredproducts.map(product => (
             <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={() => handleOpenDetail(product)}>
                 <div className={`productSmallDisplay-img image`}>
-                    <img 
+                    <LazyLoad
+                        once={true}
+                        offset={300}
+                        placeholder={<img src={`/img/golden_harp_full_loading.png`} alt="Image Not Found with store logo" />}
+                    >
+                        <img 
+                            id={product.id} 
+                            src={product.productImageUrl} 
+                            onError={(evt) => {evt.target.src='./img/golden_harp_full_not_found.png';evt.target.style.backgroundColor='#000000'}} 
+                            onLoad={(evt) => handleImageLoad(evt)} 
+                            alt={product.productTitle}
+                        />
+                    </LazyLoad>
+
+
+
+                    {/* <img 
                         hidden={true}
-                        src= {product.productImageUrl} 
+                        src= {product.productImageUrl}
                         onLoad={(evt) => handleImageLoad(evt)} 
                         onError={(evt) => {evt.target.src='./img/golden_harp_full_not_found.png';evt.target.style.backgroundColor='#000000'}} 
                         alt={product.productTitle}
@@ -80,7 +96,7 @@ function ProductContainer(props) {
                         src= 'https://findaharp-api.herokuapp.com/assets/img/golden_harp_full.png' 
                         height='60%' 
                         alt={product.productTitle}
-                    />
+                    /> */}
                 </div>
                 <div className={`grid-item productSmallDisplay-text`}>
                     <p>{product.productMaker} {product.productModel}/{product.productSize}<br></br>
@@ -99,7 +115,8 @@ function ProductContainer(props) {
                 
                 {state.openDetail&&<ProductModal product={state.productSelect} handleCloseDetail={handleCloseDetail} handleOpenContact={handleOpenContact} handleCloseContact={handleCloseContact}/>}
                 {state.openContact&&<ContactForm handleCloseContact={handleCloseContact} product={state.productSelect}/>}  
-            </div>       
+            </div>
+            
             <ProductContainerCss />           
             </>
         );

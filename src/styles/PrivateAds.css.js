@@ -1,6 +1,6 @@
 function PrivateAdsCSS() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
         h2 {
             margin-top: 25px;
         },

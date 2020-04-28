@@ -1,6 +1,6 @@
 function ContactFormCSS() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
             .detailContainer {
                 width: 100%;
                 height: fit-content;
@@ -67,6 +67,9 @@ function ContactFormCSS() {
                 right: 0;
                 color: black;
                 height: 35px;
+            }
+            .clearModal img{
+                width: 35px;
             }
             .inputGroup {
                 margin-top: 15px;

@@ -1,6 +1,6 @@
 function PageUnderConstructionCSS() {
     return (
-        <style jsx={true}>{`
+        <style jsx="true">{`
             .underConstruction {
                 background-image: url('/img/factoryFloor.jpg');
                 background-position: cover;
