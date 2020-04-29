@@ -85,8 +85,7 @@ const PrivateAds = (props) => {
         setOpen(false);
         const res = await axios.post(`https://findaharp-api-development.herokuapp.com/api/v1/privateads`, { productListing });
         if (res) alert('Payment not yet implemented, but harp submitted.');
-            
-        console.log(res);
+        
     }
     
     return (

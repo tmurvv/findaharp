@@ -28,12 +28,12 @@ export default function NavBar(props) {
                     </Link>
                     <Link href='/BuyersGuide'>
                         <a>Buyer's Guide</a>
-                    </Link>
-                    <Link href='/FAQ'>
-                        <a>FAQ</a>
-                    </Link>
+                    </Link>        
                     <Link href='/Contact'>
                         <a>Contact</a>
+                    </Link>
+                    <Link href='/LoginSignup'>
+                        <a>Login/Signup</a>
                     </Link>
                 </div>:''
             }

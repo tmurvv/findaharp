@@ -1,16 +1,16 @@
-- react lazyload
-    <LazyLoad
-        once={true}
-        placeholder={<img src={`https://mysource.png`} alt="..." />}
-    >
-        <img src={`mysource/dfs.jpg`} alt="..." />
-    </LazyLoad>
+- more functionality in modal not right
+
+- contact page needs spinner for when email sent
+
+- harp photos relative not right
 
 - on menu selection check screen size
 
 - cache images
 
-- make two stages loading and not found for images
+<div>Font made from <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>is licensed by CC BY 3.0</div>
+
+- responsive on forms and modals
 
 - finish writing tests for helper file
 

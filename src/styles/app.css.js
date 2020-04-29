@@ -7,6 +7,20 @@ function AppCss() {
                 font-family: avenir;
                 src: url(/fonts/avenir_ff/AvenirLTStd-Roman.otf);
             }
+            @font-face {
+                font-family: 'Avenir Next Bold';
+                font-weight: bold;
+                font-style: normal;
+                font-variant:normal;
+                src: url('./fonts/Avenir_ff/Avenir_Next_Condensed_Bold.otf') format('opentype');
+            }
+            @font-face {
+                font-family: 'Metropolis Extra Bold';
+                font-weight: bold;
+                font-style: normal;
+                font-variant:normal;
+                src: url('./fonts/Avenir_ff/Metropolis-ExtraBold.otf') format('opentype');
+            }
             body {
                 overflow-x: hidden;
                 margin: 0;

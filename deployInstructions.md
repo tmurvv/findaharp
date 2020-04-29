@@ -5,4 +5,4 @@
 - good idea to commit and push
 - run tests
 - do build npm run build
-- ftp files in "out" folder to findaharp.com and frecencylist.comq
+- ftp files in "out" folder to findaharp.com and frecencylist.com

@@ -1,4 +1,4 @@
-function ContactFormCSS() {
+function LoginSignupCSS() {
     return (
         <style jsx="true">{`
             .detailContainer {
@@ -13,7 +13,7 @@ function ContactFormCSS() {
                 padding: 20px;
                 z-index: 3000;
                 max-height: calc(100vh - 50px);
-                max-width: 85vw;
+                max-width: 600px;
                 overflow-y: auto;
                 position: fixed;
                 top: 50%;
@@ -112,4 +112,4 @@ function ContactFormCSS() {
     )
 }
 
-export default ContactFormCSS;
+export default LoginSignupCSS;

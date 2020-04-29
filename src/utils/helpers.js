@@ -8,6 +8,21 @@ export function removeDashOE(sellerName) {
         ?sellerName.substr(0,sellerName.length-2)
         :sellerName;
 }
+export function setOpacity(yesNo) {
+    if (yesNo) {
+        document.body.style.overflowY='hidden';
+        document.querySelector('.searchLine1').style.opacity='.1';
+        document.querySelector('.searchLine2').style.opacity='.1';
+        document.querySelector('.searchLine1Sub').style.opacity='.1';
+        document.querySelector('.searchLine2Sub').style.opacity='.1';
+        return
+    }
+    document.body.style.overflowY='auto';
+    document.querySelector('.searchLine1').style.opacity='1';
+    document.querySelector('.searchLine2').style.opacity='1';
+    document.querySelector('.searchLine1Sub').style.opacity='1';
+    document.querySelector('.searchLine2Sub').style.opacity='1';
+}
 export function findSizeWords(strings, type) {
     strings = parseInt(strings);
     if (strings<29&&type==='lever-free') return 'lever-free';

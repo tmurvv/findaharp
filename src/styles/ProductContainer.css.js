@@ -23,6 +23,7 @@ function ProductContainerCss() {
                 grid-template-columns: 20% 20% 20% 20% 20%;
                 grid-column-gap: 10px;
                 width: 90%;
+                max-width: 1010px;
             }
             @media only screen and (max-width: 1000px) {
                 .productContainer {
@@ -32,18 +33,23 @@ function ProductContainerCss() {
                     grid-template-columns: 25% 25% 25% 25%;
                         grid-column-gap: 5px;
                         margin: 5%;
-                        width: unset;    
+                        width: unset;
+                        max-width: 800px;    
                 }
             }
             @media only screen and (max-width: 750px) {
                 .grid-container {
                     grid-template-columns: 33.3% 33.3% 33.3%;
                     width: unset;
+                    max-width: 600px;
+                    margin: auto;
                 }
             }
             @media only screen and (max-width: 600px) {
                 .grid-container {
                     grid-template-columns: 50% 50%;
+                    max-width: 350px;
+                    margin: auto;
                 }
             }
             .grid-item {
@@ -63,6 +69,7 @@ function ProductContainerCss() {
                 flex-direction: column;
                 height: 350px;
                 width: 100%;
+                margin-bottom: 50px;
             }
             .productSmallDisplay span {
                 cursor: pointer;
@@ -76,8 +83,12 @@ function ProductContainerCss() {
                 align-items: center;
             }
             .productSmallDisplay-img img{
-                height: 100%;
+                height: 95%;
                 width: auto;
+                max-width:100%;
+                max-height:100%;
+                object-fit: cover;
+                overflow: hidden;
             }
             .productSmallDisplay-text {
                 flex: 2;

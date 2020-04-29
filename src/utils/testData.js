@@ -63,7 +63,7 @@ const testData = [
         "productModel": "Prelude 40",
         "productType": "lever",
         "productSize": 40,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Prelude_62477.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LHPrelude.jpg",
         "productImageBestColor": "#eeeeee",
         "divider": "00000000000000000000000"
     },

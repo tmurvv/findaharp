@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 import ProductModal from './ProductModal';
 import ContactForm from './ContactForm';
 import ProductContainerCss from '../styles/ProductContainer.css';
-import {removeDashOE} from '../utils/helpers';
+import {removeDashOE,setOpacity} from '../utils/helpers';
 
 const initialState = {
     openDetail: false,
@@ -43,26 +43,26 @@ function ProductContainer(props) {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     function handleOpenDetail(product) {
-        dispatch({type:'detail', product})
-        document.body.style.overflowY='hidden';
+        dispatch({type:'detail', product});
+        setOpacity(true); 
     }
     function handleCloseDetail(evt, product, openContact) {
         dispatch({type: 'initial'})
-        document.body.style.overflowY='auto';
+        setOpacity(false);
         if (openContact) handleOpenContact(evt, product);
     }
     function handleOpenContact(evt, product) {
         evt.stopPropagation();
         dispatch({type:'contact', product})
-        document.body.style.overflowY='hidden'; 
+        setOpacity(true);
     }
     function handleCloseContact() {
         dispatch({type:'initial'})
-        document.body.style.overflowY='auto';
+        setOpacity(false);
     }
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#FFFFFF";
-        evt.target.style.height="100%";
+        if (evt.target.style.height !== '85%') evt.target.style.height="100%";
     }
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
@@ -76,27 +76,11 @@ function ProductContainer(props) {
                         <img 
                             id={product.id} 
                             src={product.productImageUrl} 
-                            onError={(evt) => {evt.target.src='./img/golden_harp_full_not_found.png';evt.target.style.backgroundColor='#000000'}} 
+                            onError={(evt) => {evt.target.src='./img/not_found.png';console.dir(evt.target);evt.target.style.height='85%';}} 
                             onLoad={(evt) => handleImageLoad(evt)} 
                             alt={product.productTitle}
                         />
                     </LazyLoad>
-
-
-
-                    {/* <img 
-                        hidden={true}
-                        src= {product.productImageUrl}
-                        onLoad={(evt) => handleImageLoad(evt)} 
-                        onError={(evt) => {evt.target.src='./img/golden_harp_full_not_found.png';evt.target.style.backgroundColor='#000000'}} 
-                        alt={product.productTitle}
-                    />
-                    <img 
-                        id={product.id} 
-                        src= 'https://findaharp-api.herokuapp.com/assets/img/golden_harp_full.png' 
-                        height='60%' 
-                        alt={product.productTitle}
-                    /> */}
                 </div>
                 <div className={`grid-item productSmallDisplay-text`}>
                     <p>{product.productMaker} {product.productModel}/{product.productSize}<br></br>

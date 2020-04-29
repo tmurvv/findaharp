@@ -2,22 +2,28 @@ function ProductModalCSS() {
     return (
         <style jsx="true">{`
             .detailContainer {
+                opacity: 1;
                 width: 80vw;
                 background-color: #ffffff;
-                position: fixed;
                 border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
+                position: fixed;
                 top: 50vh;
                 left: 50vw;
                 transform: translate(-50%, -50%);
-                display: flex;
-                align-items: center;
-                padding: 20px;
                 z-index: 3000;
-                max-height: calc(100vh - 210px);
-                max-width: 600px;
+                max-height: calc(100vh - 50px);
+                max-width: 800px;
                 overflow-y: auto;
+                text-align: center;
+                padding: 30px;
+                color: #000000
+            }
+            .detailInfo {
+                display: flex;
+                align-items: flex-start;
+                padding: 30px 20px 20px;
             }
             @media only screen and (max-width: 500px) {
                 .detailContainer {
@@ -25,7 +31,7 @@ function ProductModalCSS() {
                 }
             }
             .detailButton {
-                margin: 25px auto;
+                margin: 40px 0;
                 background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
                 padding: 5px 10px;
                 font-size: 16px;
@@ -33,20 +39,34 @@ function ProductModalCSS() {
                 outline: none;
                 border-style: none;
                 border-color: none;
+                -webkit-box-shadow: 2px 2px 2px 0px #555555;
+                box-shadow: 2px 2px 2px 0px #555555;
+            }
+            .detailButton:active {
+                box-shadow: none;
             }
             .detailImg {
+                flex: 4;
                 height: 100%;
             }
             .detailImg img {
-                height: 100%;
-                max-height: 300px;
-                margin: 0 auto;
+                height: 95%;
+                width: 95%;
+                max-width:100%;
+                max-height:100%;
+                object-fit: cover;
+                overflow: hidden;
             }
             .detailText {
-                padding: 20px;
+                flex: 6;
+                padding: 0 0 0 60px;
+                text-align: left;
+            }
+            .detailText span {
+                font-family: 'Metropolis Extra Bold';
+                font-weight: 800;
             }
             .detailText p {
-                text-align: center;
                 margin-block-start: 0;
                 margin-block-end: 0;
                 height: auto;
@@ -57,25 +77,28 @@ function ProductModalCSS() {
             }
             .clearModal {
                 position: absolute;
-                top: 0;
-                right: 0;
+                bottom: 0;
+                right: 20px;
                 color: black;
-                height: 35px;
+                height: 50px;
             }
             .clearModal img {
                 width: 35px;
             }
             .moreButton {
-                color: purple;
+                color: #f9bf1e;
                 cursor: pointer;
-                transition: all .3s;
                 outline: none;
-                font-size: 18px;
-                width: fit-content;
-                margin: auto;
+                font-size: 14px;
             }
-            .moreButton:hover {
-                transform: scale(1.1);
+            .longDesc {
+                max-height: 300px;
+                text-align: left;
+            }
+            .divider {
+                width: 90%;
+                height: 7px;
+                margin: auto;
             }
         `}
         </style>

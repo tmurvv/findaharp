@@ -4,19 +4,16 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import ContactFormCSS from '../styles/ContactForm.css';
-import {removeDashOE} from '../utils/helpers';
+import LoginSignupCSS from '../src/styles/LoginSignup.css';
+import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
 
-function ContactForm(props) {
-    if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
-    const {product} = props;
+function LoginSignup(props) {
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
         contactemail: '',
-        contactmaker: product.productMaker||'',
-        contactmodel: product.productModel||'',
-        contactcomments: '',
+        password: '',
+        confirmpassword: '',
         change: false
     });
     const handleChange = (evt) => {
@@ -30,62 +27,65 @@ function ContactForm(props) {
             case 'contactemail': 
                 setUser({...user, contactemail: evt.target.value, change: true});
                 break
-            case 'contactmaker': 
-                setUser({...user, contactmaker: evt.target.value, change: true});
+            case 'password': 
+                setUser({...user, password: evt.target.value, change: true});
                 break
-            case 'contactmodel': 
-                setUser({...user, contactmodel: evt.target.value, change: true});
-                break     
-            case 'contactcomments': 
-                setUser({...user, contactcomments: evt.target.value, change: true});
-                break     
+            case 'confirmpassword': 
+                setUser({...user, confirmpassword: evt.target.value, change: true});
+                break
+               
             default :
         }
     }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        if (!user.contactemail) return alert('Email is required');
-        const contact = {
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.contactemail,
-            sellername: product.sellerName,
-            productmaker: user.contactmaker,
-            productmodel: user.contactmodel,
-            comments: user.contactcomments
-        }
-        try {
-            const res = await axios.post(
-                `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
-                contact
-            );
-            alert("Email sent.")
-        } catch(e) {
-            alert("Something went wrong. Please try again or contact the webmaster.", e.message)
-        }
+        alert('Signup new user under construction.');
+        // if (!user.contactemail) return alert('Email is required');
+        // const contact = {
+        //     firstname: user.firstname,
+        //     lastname: user.lastname,
+        //     email: user.contactemail,
+        //     sellername: product.sellerName,
+        //     productmaker: user.contactmaker,
+        //     productmodel: user.contactmodel,
+        //     comments: user.contactcomments
+        // }
+        // try {
+        //     const res = await axios.post(
+        //         `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
+        //         contact
+        //     );
+        //     alert("Email sent.")
+        // } catch(e) {
+        //     alert("Something went wrong. Please try again or contact the webmaster.", e.message)
+        // }
         
-        props.handleCloseContact();
+        // props.handleCloseContact();
+    }
+    function handleClose() {
+        document.querySelector('.detailContainer').style.display="none";
     }
    return (
         <>
+        <div className='underConstruction'>           
+            <h2>Login/Signup Page Under Construction</h2>
+        </div>
+        <PageUnderConstructionCSS />
         <div className='detailContainer'>
             <div className={`detailImg`}>
-                <img src= {product.productImageUrl} alt={product.productTitle}/>
-                <p><span style={{fontWeight: 600}}>
-                    {product.productTitle}
-                </span></p><p>{removeDashOE(product.sellerName)}</p>
+                <img src= {`./img/golden_harp_full.png`} alt={"logo"}/>
             </div>
             <div 
                 className='clearModal' 
                 onClick={() => 
-                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                    {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
                 }} 
             >
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
             <form className='detailText'>             
                 <div className='heading'>
-                    <p>Your contact information will not be shared. Communication with sellers can take place through findaharp.com at no charge.<br></br></p>
+                    <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
                 </div>              
                 <div className={`flex marginTopLarge`}>
                     <div className='inputGroup'>
@@ -95,6 +95,7 @@ function ContactForm(props) {
                             value={user.firstname}
                             onChange={handleChange}
                             name='firstname'
+                            placeholder="optional"
                         />
                     </div>
                     <div className='inputGroup'>
@@ -105,6 +106,7 @@ function ContactForm(props) {
                             value={user.lastname}
                             onChange={handleChange}
                             name ='lastname'
+                            placeholder="optional"
                         />
                     </div>
                 </div>
@@ -113,39 +115,34 @@ function ContactForm(props) {
                     <input
                         id={uuid()}
                         name='contactemail'
+                        type='email'
                         value={user.contactemail}
                         onChange={handleChange}
                         required
                     />
                 </div>         
                 <div className='inputGroup'>
-                    <label name='contactmaker'>Maker: </label>
+                    <label name='password'>password: </label>
                     <input
                         id={uuid()}
-                        name='contactmaker'
-                        value={user.contactmaker}
+                        type='password'
+                        name='password'
+                        value={user.password}
                         onChange={handleChange}
+                        required
                     />
                 </div>         
                 <div className='inputGroup'>
-                    <label name='contactmodel'>Model: </label>
+                    <label name='confirmpassword'>confirm password: </label>
                     <input
                         id={uuid()}
-                        name='contactmodel'
-                        value={user.contactmodel}
+                        name='confirmpassword'
+                        type='password'
+                        value={user.confirmpassword}
                         onChange={handleChange}
+                        required
                     />
-                </div>         
-                <div className='inputGroup'>
-                    <label name='contactcomments'>Comments: </label>
-                    <textarea
-                        id={uuid()}
-                        name='contactcomments'
-                        value={user.contactcomments}
-                        onChange={handleChange}
-                        rows='6'
-                    />
-                </div>         
+                </div>                  
                 <div>
                     <button
                         className='detailButton'
@@ -157,16 +154,16 @@ function ContactForm(props) {
                         className={`detailButton detailButton-cancel`}
                         type='button'
                         onClick={() => 
-                            {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                            {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
                         }}
                     >Cancel
                     </button>
                 </div>         
             </form>
         </div>
-        <ContactFormCSS />
+        <LoginSignupCSS />
         </>
     )
 }
 
-export default ContactForm;
+export default LoginSignup;

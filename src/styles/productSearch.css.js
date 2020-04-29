@@ -170,20 +170,13 @@ function ProductSearchCss() {
             }
             @media only screen and (max-width: 650px) {
                 .clearSearch {
-                    top: 120px;
-                    right: 0;
-                    font-size: 16px;
-                }   
-            }
-            @media only screen and (max-width: 500px) {
-                .clearSearch {
                     top: 130px;
                     height: 25px;
                     font-size: 14px;
                 }
                 .clearSearch img{
                     width: 25px;
-                }
+                }  
             }
         `}
     </style>
