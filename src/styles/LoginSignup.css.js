@@ -27,7 +27,7 @@ function LoginSignupCSS() {
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
-                padding: 40px;
+                padding: 0 40px 20px;
             }
             heading {
                 width: 80%;
@@ -51,7 +51,7 @@ function LoginSignupCSS() {
                 text-align:center;
             }
             .detailText {
-                padding: 20px;
+                padding: 0 20px;
                 flex: 6;
             }
             .detailText p {
@@ -69,8 +69,8 @@ function LoginSignupCSS() {
             }
             .clearModal {
                 position: absolute;
-                top: 0;
-                right: 0;
+                bottom: 10px;
+                right: 10px;
                 color: black;
                 height: 35px;
             }

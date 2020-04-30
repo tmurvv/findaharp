@@ -1,6 +1,5 @@
 function AboutPartnerStoresCSS() {
-    return (
-        
+    return ( 
         <style jsx="true">{`
             h2 {
                 text-align: center;
@@ -8,12 +7,13 @@ function AboutPartnerStoresCSS() {
             }
             .detailContainer {
                 overflow-y: scroll;
-                min-height: 25vh;
+                height: 20vh;
                 width: 80vw;
+                max-width: 800px;
                 background-color: #ffffff;
                 border-radius: 3px;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 padding: 20px;
                 margin: auto;
                 margin-bottom: 50px;
@@ -23,7 +23,7 @@ function AboutPartnerStoresCSS() {
                 max-height: calc(100vh - 210px);
                 overflow-y: auto;
             }
-            @media only screen and (max-width: 750px) {
+            /*@media only screen and (max-width: 750px) {
                 .detailContainer: {
                     height: 250px;
                     max-height: calc(100vh - 150px);
@@ -34,6 +34,11 @@ function AboutPartnerStoresCSS() {
                     flex-direction: column;
                     height: unset;
                 }
+            } */
+            .storeName {
+                padding-bottom: 10px;
+                font-size: 20px;
+                font-weight: 600;
             }
             .detailButton {
                 margin: 15px auto;
@@ -45,8 +50,9 @@ function AboutPartnerStoresCSS() {
             .detailImg {}
             .detailImg img {
                 height: 100%;
-                max-height: 170px;
+                max-height: 130px;
                 margin: 0 auto;
+                padding-top: 10px;
             }
             @media only screen and (max-width: 750px) {
                 .detailImg img {
@@ -54,7 +60,8 @@ function AboutPartnerStoresCSS() {
                 }
             }
             .detailText {
-                padding: 20px;
+                padding: 5px 20px 20px;
+                text-align: left;
             }
             @media only screen and (max-width: 750px) {
                 .detailText {

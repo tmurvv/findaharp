@@ -1,6 +1,6 @@
 // packages
-import React, {useReducer} from 'react';
-import LazyLoad from 'react-lazyload';
+import React, {useReducer, useEffect} from 'react';
+import LazyLoad, {forceCheck} from 'react-lazyload';
 
 // styles
 import ProductContainerCss from '../styles/ProductContainer.css';
@@ -44,7 +44,7 @@ function reducer(state, action) {
 }
 function ProductContainer(props) {
     const [state, dispatch] = useReducer(reducer, initialState);
-
+    
     function handleOpenDetail(product) {
         dispatch({type:'detail', product});
         setOpacity(true); 
@@ -66,6 +66,8 @@ function ProductContainer(props) {
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
+        window.scrollBy(0,1); //hack to trigger lazyload after search
+        window.scrollBy(0,-1); //hack to trigger lazyload after search
     }
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
@@ -80,7 +82,7 @@ function ProductContainer(props) {
                             id={product.id} 
                             src={product.productImageUrl} 
                             onError={(evt) => {evt.target.src='./img/not_found.png';console.dir(evt.target);evt.target.style.height='85%';}} 
-                            onLoad={(evt) => handleImageLoad(evt)} 
+                            onLoad={(evt) => handleImageLoad(evt)}
                             alt={product.productTitle}
                         />
                     </LazyLoad>
@@ -121,7 +123,7 @@ function ProductContainer(props) {
             <h3 style={{textAlign: 'center'}}>Not found in our listings</h3>
             <h3 style={{textAlign: 'center'}}>Please try again using fewer filters.</h3>    
             <div data-test='component-ProductContainer' className='notFoundContainer'>
-                <img src= 'not_found.png' alt='not found, humourous harp with broken strings'/>
+                <img src= './img/not_found.png' alt='not found, humourous harp with broken strings'/>
             </div>
             <ProductContainerCss />
             </>

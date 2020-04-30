@@ -4,14 +4,15 @@ function ProductContainerCss() {
     return (
         <style jsx="true">{`
             .notFoundContainer {
-                width: 60%;
                 display: flex;
                 justify-content: center;
                 margin: 45px auto 25px;
-                transform: rotate(15deg);
                 position: relative;
                 z-index: 0;
-            }           
+            } 
+            .notFoundContainer img {
+                height: 225px;
+            }          
             .productContainer {
                 margin: auto;
                 position: relative;

@@ -72,7 +72,7 @@ function LoginSignup(props) {
         </div>
         <PageUnderConstructionCSS />
         <div className='detailContainer'>
-            <img style={{backgroundColor: 'black', height: '80px', padding: '15px', marginLeft: '28%'}} src=".\img\logo_findaharp.png" alt="Find a Harp text logo" />
+            <img style={{backgroundColor: 'black', height: '60px', padding: '15px', marginTop: '25px', marginLeft: '33.3%', borderRadius: '3px'}} src=".\img\logo_findaharp.png" alt="Find a Harp text logo" />
             <h2 style={{backgroundColor: 'white', color: 'black'}}>Login/Signup Under Construction</h2>
             <div className='loginContainer'>
                 
@@ -88,9 +88,9 @@ function LoginSignup(props) {
                     <img src='/img/clear_search.png' alt='clear filters'/>
                 </div>
                 <form className='detailText'>             
-                    <div className='heading'>
+                    {/* <div className='heading'>
                         <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
-                    </div>              
+                    </div>               */}
                     <div className={`flex marginTopLarge`}>
                         <div className='inputGroup'>
                             <label name='firstname'>First Name: </label>

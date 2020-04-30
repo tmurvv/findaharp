@@ -1,5 +1,5 @@
 // packages
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
 // internal
 import ProductSearchCss from '../styles/ProductSearch.css';
@@ -42,7 +42,7 @@ function ProductSearch(props) {
         setAllState({...allState, 
             maker,
             model: "All Models",
-            selectionType: 'maker'
+            // selectionType: 'maker'
         });
     }
     function handleModelSelection(model) {
@@ -56,8 +56,8 @@ function ProductSearch(props) {
 
         setAllState({...allState, 
             model,
-            maker: getMakerFromModel(props.makesmodels, model),
-            size: findSizeWords(getSizeFromModel(props.makesmodels, model), findProductType(props.makesmodels, getMakerFromModel(props.makesmodels, model), model))
+            // maker: getMakerFromModel(props.makesmodels, model),
+            // size: findSizeWords(getSizeFromModel(props.makesmodels, model), findProductType(props.makesmodels, getMakerFromModel(props.makesmodels, model), model))
             // size: `${getSizeFromModel(props.makesmodels, model)} Strings`
         });
     }
@@ -70,7 +70,7 @@ function ProductSearch(props) {
     function handleFinishSelection(newProductFinish) {
         resetDropDowns('finish');
         setAllState({...allState, 
-            finish: newProductFinish==='All Finish'?'All Finishes':newProductFinish,
+            finish: newProductFinish==='All Finishes'?'All Finishes':newProductFinish,
             productType: 'all',
         });
     }
@@ -97,7 +97,7 @@ function ProductSearch(props) {
         });
     }
     const filteredProducts = getFilteredProducts(props.products, allState);
-
+    
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
