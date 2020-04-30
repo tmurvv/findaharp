@@ -69,27 +69,31 @@ function ContactForm(props) {
    return (
         <>
         <div className='detailContainer'>
-            <div className={`detailImg`}>
-                <img src= {product.productImageUrl} alt={product.productTitle}/>
-                <p><span style={{fontWeight: 600}}>
-                    {product.productTitle}
-                </span></p><p>{removeDashOE(product.sellerName)}</p>
+            <h1>Contact {removeDashOE(product.sellerName)}</h1>           
+            <div className='heading'>
+                <p>Communication with sellers can take place through findaharp.com at no charge.<br></br></p>
             </div>
             <div 
-                className='clearModal' 
-                onClick={() => 
-                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                }} 
-            >
-                <img src='/img/clear_search.png' alt='clear filters'/>
+                    className='clearModal' 
+                    onClick={() => 
+                        {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                    }} 
+                >
+                    <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
-            <form className='detailText'>             
-                <div className='heading'>
-                    <p>Your contact information will not be shared. Communication with sellers can take place through findaharp.com at no charge.<br></br></p>
-                </div>              
-                <div className={`flex marginTopLarge`}>
+            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
+            <div className='contactContainer'>
+                <div className={`detailImg`}>
+                    <img src= {product.productImageUrl} alt={product.productTitle}/>
+                    <p><span style={{fontWeight: 600}}>
+                        {product.productMaker} {product.productModel}
+                    </span></p><p>{removeDashOE(product.sellerName)}</p>
+                </div>
+                
+                <form className='detailText'>            
+                    
                     <div className='inputGroup'>
-                        <label name='firstname'>First Name: </label>
+                        <label name='firstname'>First Name </label>
                         <input
                             id={uuid()}
                             value={user.firstname}
@@ -98,7 +102,7 @@ function ContactForm(props) {
                         />
                     </div>
                     <div className='inputGroup'>
-                        <label name='lastname'>Last Name: </label>
+                        <label name='lastname'>Last Name </label>
                         <input
                             id={uuid()}id="outlined-helperText"
                             label="Last Name"
@@ -107,62 +111,62 @@ function ContactForm(props) {
                             name ='lastname'
                         />
                     </div>
-                </div>
-                <div className='inputGroup'>
-                    <label name='email'>Email: </label>
-                    <input
-                        id={uuid()}
-                        name='contactemail'
-                        value={user.contactemail}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>         
-                <div className='inputGroup'>
-                    <label name='contactmaker'>Maker: </label>
-                    <input
-                        id={uuid()}
-                        name='contactmaker'
-                        value={user.contactmaker}
-                        onChange={handleChange}
-                    />
-                </div>         
-                <div className='inputGroup'>
-                    <label name='contactmodel'>Model: </label>
-                    <input
-                        id={uuid()}
-                        name='contactmodel'
-                        value={user.contactmodel}
-                        onChange={handleChange}
-                    />
-                </div>         
-                <div className='inputGroup'>
-                    <label name='contactcomments'>Comments: </label>
-                    <textarea
-                        id={uuid()}
-                        name='contactcomments'
-                        value={user.contactcomments}
-                        onChange={handleChange}
-                        rows='6'
-                    />
-                </div>         
-                <div>
-                    <button
-                        className='detailButton'
-                        type='submit'
-                        onClick={handleSubmit} 
-                    >Submit
-                    </button>
-                    <button
-                        className={`detailButton detailButton-cancel`}
-                        type='button'
-                        onClick={() => 
-                            {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                        }}
-                    >Cancel
-                    </button>
-                </div>         
-            </form>
+                    <div className='inputGroup'>
+                        <label name='email'>Email </label>
+                        <input
+                            id={uuid()}
+                            name='contactemail'
+                            value={user.contactemail}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>         
+                    <div className='inputGroup'>
+                        <label name='contactmaker'>Maker </label>
+                        <input
+                            id={uuid()}
+                            name='contactmaker'
+                            value={user.contactmaker}
+                            onChange={handleChange}
+                        />
+                    </div>         
+                    <div className='inputGroup'>
+                        <label name='contactmodel'>Model </label>
+                        <input
+                            id={uuid()}
+                            name='contactmodel'
+                            value={user.contactmodel}
+                            onChange={handleChange}
+                        />
+                    </div>         
+                    <div className='inputGroup'>
+                        <label name='contactcomments'>Comments </label>
+                        <textarea
+                            id={uuid()}
+                            name='contactcomments'
+                            value={user.contactcomments}
+                            onChange={handleChange}
+                            rows='6'
+                        />
+                    </div>         
+                    <div>
+                        <button
+                            className='detailButton'
+                            type='submit'
+                            onClick={handleSubmit} 
+                        >Submit
+                        </button>
+                        <button
+                            className={`detailButton detailButton-cancel`}
+                            type='button'
+                            onClick={() => 
+                                {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                            }}
+                        >Cancel
+                        </button>
+                    </div>         
+                </form>
+            </div>
         </div>
         <ContactFormCSS />
         </>

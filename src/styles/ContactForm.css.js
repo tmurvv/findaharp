@@ -2,40 +2,57 @@ function ContactFormCSS() {
     return (
         <style jsx="true">{`
             .detailContainer {
-                width: 100%;
+                width: 85vw;
                 height: fit-content;
                 background-color: #ffffff;
                 border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
-                display: flex;
-                align-items: center;
                 padding: 20px;
                 z-index: 3000;
                 max-height: calc(100vh - 50px);
-                max-width: 85vw;
+                max-width: 800px;
                 overflow-y: auto;
                 position: fixed;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%,-50%);
+                text-align: center;
             }
             @media only screen and (max-width: 500px) {
                 .detailContainer {
                     flex-direction: column;
                 }
             }
-            heading {
+            .contactContainer {
+                display: flex;
+                align-items: center;
+                margin-top: 20px;
+            }
+            
+            @media only screen and (max-width: 750px) {
+                .contactContainer {
+                    flex-direction: column-reverse;
+                    align-items: unset;
+                }
+            }
+            .heading, h1 {
                 width: 80%;
-                margin-top: 30px;
+                margin: 30px auto;
+                
             }
             .detailImg {
-                padding-right: 20px;
+                flex: 4;
+                height: 100%;
+                padding: 20px;
             }
             .detailImg img {
-                height: 100%;
-                max-height: 300px;
-                margin: 0 auto;
+                height: 95%;
+                width: 95%;
+                max-width:100%;
+                max-height:100%;
+                object-fit: cover;
+                overflow: hidden;
             }
             .detailImg p {
                 margin-block-start: 0;
@@ -45,8 +62,13 @@ function ContactFormCSS() {
             span {
                 text-align:center;
             }
+            label {
+                font-family: 'Metropolis Extra Bold';
+                transform: translateY(3.5px);
+            }
             .detailText {
-                padding: 20px;
+                padding: 20px 30px 20px 0;
+                flex: 6;
             }
             .detailText p {
                 text-align: center;
@@ -62,11 +84,10 @@ function ContactFormCSS() {
                 margin-top: 40px;
             }
             .clearModal {
-                position: absolute;
-                top: 0;
-                right: 0;
+                position: fixed;
+                bottom: 15px;
+                right: 15px;
                 color: black;
-                height: 35px;
             }
             .clearModal img{
                 width: 35px;
@@ -76,12 +97,19 @@ function ContactFormCSS() {
                 display: flex;
             }
             .inputGroup label {
-                flex:3;
+                flex:2;
                 text-align: right;
-                margin-right: 7px;
+                margin-right: 20px;
+                vertical-align: -7px;
+                font-size: 14px;
             }
             .inputGroup input {
-                flex:8;
+                flex: 7.5;
+                height: 20px;
+                border-top: none;
+                border-left: none;
+                border-bottom: 1px solid #bbbbbb;
+                border-right: 1px solid #bbbbbb;
             }
             .detailButton {
                 margin: 25px auto;
@@ -106,6 +134,10 @@ function ContactFormCSS() {
             }
             textarea {
                 flex: 7;
+                border-top: none;
+                border-left: none;
+                border-bottom: 1px solid #bbbbbb;
+                border-right: 1px solid #bbbbbb;
             }
         `}
         </style>

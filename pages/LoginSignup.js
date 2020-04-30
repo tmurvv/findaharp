@@ -72,94 +72,99 @@ function LoginSignup(props) {
         </div>
         <PageUnderConstructionCSS />
         <div className='detailContainer'>
-            <div className={`detailImg`}>
-                <img src= {`./img/golden_harp_full.png`} alt={"logo"}/>
-            </div>
-            <div 
-                className='clearModal' 
-                onClick={() => 
-                    {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
-                }} 
-            >
-                <img src='/img/clear_search.png' alt='clear filters'/>
-            </div>
-            <form className='detailText'>             
-                <div className='heading'>
-                    <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
-                </div>              
-                <div className={`flex marginTopLarge`}>
+            <img style={{backgroundColor: 'black', height: '80px', padding: '15px', marginLeft: '28%'}} src=".\img\logo_findaharp.png" alt="Find a Harp text logo" />
+            <h2 style={{backgroundColor: 'white', color: 'black'}}>Login/Signup Under Construction</h2>
+            <div className='loginContainer'>
+                
+                <div className={`detailImg`}>
+                    <img src= {`./img/golden_harp_full.png`} alt={"logo"}/>
+                </div>
+                <div 
+                    className='clearModal' 
+                    onClick={() => 
+                        {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
+                    }} 
+                >
+                    <img src='/img/clear_search.png' alt='clear filters'/>
+                </div>
+                <form className='detailText'>             
+                    <div className='heading'>
+                        <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
+                    </div>              
+                    <div className={`flex marginTopLarge`}>
+                        <div className='inputGroup'>
+                            <label name='firstname'>First Name: </label>
+                            <input
+                                id={uuid()}
+                                value={user.firstname}
+                                onChange={handleChange}
+                                name='firstname'
+                                placeholder="optional"
+                            />
+                        </div>
+                        <div className='inputGroup'>
+                            <label name='lastname'>Last Name: </label>
+                            <input
+                                id={uuid()}id="outlined-helperText"
+                                label="Last Name"
+                                value={user.lastname}
+                                onChange={handleChange}
+                                name ='lastname'
+                                placeholder="optional"
+                            />
+                        </div>
+                    </div>
                     <div className='inputGroup'>
-                        <label name='firstname'>First Name: </label>
+                        <label name='email'>Email: </label>
                         <input
                             id={uuid()}
-                            value={user.firstname}
+                            name='contactemail'
+                            type='email'
+                            value={user.contactemail}
                             onChange={handleChange}
-                            name='firstname'
-                            placeholder="optional"
+                            required
                         />
-                    </div>
+                    </div>         
                     <div className='inputGroup'>
-                        <label name='lastname'>Last Name: </label>
+                        <label name='password'>password: </label>
                         <input
-                            id={uuid()}id="outlined-helperText"
-                            label="Last Name"
-                            value={user.lastname}
+                            id={uuid()}
+                            type='password'
+                            name='password'
+                            value={user.password}
                             onChange={handleChange}
-                            name ='lastname'
-                            placeholder="optional"
+                            required
                         />
-                    </div>
-                </div>
-                <div className='inputGroup'>
-                    <label name='email'>Email: </label>
-                    <input
-                        id={uuid()}
-                        name='contactemail'
-                        type='email'
-                        value={user.contactemail}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>         
-                <div className='inputGroup'>
-                    <label name='password'>password: </label>
-                    <input
-                        id={uuid()}
-                        type='password'
-                        name='password'
-                        value={user.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>         
-                <div className='inputGroup'>
-                    <label name='confirmpassword'>confirm password: </label>
-                    <input
-                        id={uuid()}
-                        name='confirmpassword'
-                        type='password'
-                        value={user.confirmpassword}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>                  
-                <div>
-                    <button
-                        className='detailButton'
-                        type='submit'
-                        onClick={handleSubmit} 
-                    >Submit
-                    </button>
-                    <button
-                        className={`detailButton detailButton-cancel`}
-                        type='button'
-                        onClick={() => 
-                            {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
-                        }}
-                    >Cancel
-                    </button>
-                </div>         
-            </form>
+                    </div>         
+                    <div className='inputGroup'>
+                        <label name='confirmpassword'>confirm password: </label>
+                        <input
+                            id={uuid()}
+                            name='confirmpassword'
+                            type='password'
+                            value={user.confirmpassword}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>                  
+                    <div>
+                        <button
+                            className='detailButton'
+                            type='submit'
+                            onClick={handleSubmit} 
+                        >Submit
+                        </button>
+                        <button
+                            className={`detailButton detailButton-cancel`}
+                            type='button'
+                            onClick={() => 
+                                {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
+                            }}
+                        >Cancel
+                        </button>
+                    </div>         
+                </form>
+            </div>
         </div>
         <LoginSignupCSS />
         </>

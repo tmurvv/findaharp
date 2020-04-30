@@ -8,12 +8,10 @@ function LoginSignupCSS() {
                 border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
-                display: flex;
-                align-items: center;
                 padding: 20px;
                 z-index: 3000;
                 max-height: calc(100vh - 50px);
-                max-width: 600px;
+                max-width: 1000px;
                 overflow-y: auto;
                 position: fixed;
                 top: 50%;
@@ -21,9 +19,15 @@ function LoginSignupCSS() {
                 transform: translate(-50%,-50%);
             }
             @media only screen and (max-width: 500px) {
-                .detailContainer {
+                .loginContainer {
                     flex-direction: column;
                 }
+            }
+            .loginContainer {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                padding: 40px;
             }
             heading {
                 width: 80%;
@@ -36,6 +40,7 @@ function LoginSignupCSS() {
                 height: 100%;
                 max-height: 300px;
                 margin: 0 auto;
+                flex: 4;
             }
             .detailImg p {
                 margin-block-start: 0;
@@ -47,6 +52,7 @@ function LoginSignupCSS() {
             }
             .detailText {
                 padding: 20px;
+                flex: 6;
             }
             .detailText p {
                 text-align: center;

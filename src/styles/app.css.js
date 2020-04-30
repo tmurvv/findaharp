@@ -67,6 +67,11 @@ function AppCss() {
                 .plainTextSelectLine2 {
                     margin-block-start: -.5em;
                 }
+            }  
+            .divider {
+                width: 90%;
+                height: 7px;
+                margin: auto;
             }
         `}
         </style>

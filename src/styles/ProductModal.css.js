@@ -13,7 +13,7 @@ function ProductModalCSS() {
                 left: 50vw;
                 transform: translate(-50%, -50%);
                 z-index: 3000;
-                max-height: calc(100vh - 50px);
+                max-height: calc(100vh - 100px);
                 max-width: 800px;
                 overflow-y: auto;
                 text-align: center;
@@ -94,11 +94,6 @@ function ProductModalCSS() {
             .longDesc {
                 max-height: 300px;
                 text-align: left;
-            }
-            .divider {
-                width: 90%;
-                height: 7px;
-                margin: auto;
             }
         `}
         </style>

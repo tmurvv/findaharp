@@ -1,6 +1,9 @@
 - check for console.loks
 - check for BREAKINk
 - check which API is connecting
+- for testing, make sure test data has correct data set for images...
+    - findaharp-api only for findaharp.com
+    - findaharp-api-testing for others
 - check that makesModels not local
 - good idea to commit and push
 - run tests

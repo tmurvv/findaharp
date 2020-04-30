@@ -1,10 +1,13 @@
+// packages
 import React, {useReducer} from 'react';
 import LazyLoad from 'react-lazyload';
+
+// styles
+import ProductContainerCss from '../styles/ProductContainer.css';
 
 // internal
 import ProductModal from './ProductModal';
 import ContactForm from './ContactForm';
-import ProductContainerCss from '../styles/ProductContainer.css';
 import {removeDashOE,setOpacity} from '../utils/helpers';
 
 const initialState = {
@@ -61,13 +64,13 @@ function ProductContainer(props) {
         setOpacity(false);
     }
     function handleImageLoad(evt) {
-        evt.target.parentElement.style.backgroundColor="#FFFFFF";
+        evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
     }
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
             <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={() => handleOpenDetail(product)}>
-                <div className={`productSmallDisplay-img image`}>
+                <div className={`productSmallDisplay-img`}>
                     <LazyLoad
                         once={true}
                         offset={300}
@@ -96,11 +99,19 @@ function ProductContainer(props) {
                 <div className="grid-container" style={{'opacity': `${state.opacity}`}}>
                     {gridProducts}
                 </div>
-                
-                {state.openDetail&&<ProductModal product={state.productSelect} handleCloseDetail={handleCloseDetail} handleOpenContact={handleOpenContact} handleCloseContact={handleCloseContact}/>}
-                {state.openContact&&<ContactForm handleCloseContact={handleCloseContact} product={state.productSelect}/>}  
+                {state.openDetail
+                    &&<ProductModal 
+                        product={state.productSelect} 
+                        handleCloseDetail={handleCloseDetail} 
+                        handleOpenContact={handleOpenContact} 
+                        handleCloseContact={handleCloseContact}
+                />}
+                {state.openContact
+                    &&<ContactForm 
+                        product={state.productSelect}
+                        handleCloseContact={handleCloseContact}     
+                />}  
             </div>
-            
             <ProductContainerCss />           
             </>
         );
@@ -110,7 +121,7 @@ function ProductContainer(props) {
             <h3 style={{textAlign: 'center'}}>Not found in our listings</h3>
             <h3 style={{textAlign: 'center'}}>Please try again using fewer filters.</h3>    
             <div data-test='component-ProductContainer' className='notFoundContainer'>
-                <img src= './img/golden_harp_full_not_found.png' alt='harp in silhouette'/>
+                <img src= 'not_found.png' alt='not found, humourous harp with broken strings'/>
             </div>
             <ProductContainerCss />
             </>
