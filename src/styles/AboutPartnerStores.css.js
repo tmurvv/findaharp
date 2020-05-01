@@ -7,34 +7,26 @@ function AboutPartnerStoresCSS() {
             }
             .detailContainer {
                 overflow-y: scroll;
-                height: 20vh;
+                height: fit-content;
                 width: 80vw;
                 max-width: 800px;
                 background-color: #ffffff;
                 border-radius: 3px;
                 display: flex;
-                align-items: flex-start;
+                align-items: center;
                 padding: 20px;
                 margin: auto;
                 margin-bottom: 50px;
                 border: 4px solid #f9bf1e;
                 box-shadow: 0 1rem 1rem rgba(249,191,30, .05);
                 border-radius: 3px;
-                max-height: calc(100vh - 210px);
                 overflow-y: auto;
             }
-            /*@media only screen and (max-width: 750px) {
-                .detailContainer: {
-                    height: 250px;
-                    max-height: calc(100vh - 150px);
-                }
-            }
-            @media only screen and (max-width: 650px) {
+            @media only screen and (max-width: 550px) {
                 .detailContainer {
                     flex-direction: column;
-                    height: unset;
                 }
-            } */
+            }
             .storeName {
                 padding-bottom: 10px;
                 font-size: 20px;
@@ -68,12 +60,25 @@ function AboutPartnerStoresCSS() {
                     padding: 20px 0;
                 }
             }
-            .detailText p {
+            @media only screen and (max-width: 550px) {
+                .detailText {
+                    text-align: center;
+                }
+            }
+            .detailText {
                 text-align: center;
                 margin-block-start: 0;
                 margin-block-end: 0;
                 height: auto;
                 transition: all .7s;
+            }
+            .longDesc {
+                text-align: left;
+            }
+            @media only screen and (max-width: 550px) {
+                .longDesc {
+                    text-align: center;
+                }         
             }
             .marginTop {
                 margin-top: 10px;

@@ -6,13 +6,13 @@ function FooterCss() {
             .footer {
                 background-color: #000000;
                 color: #faf8ed;
-                height: 75px;
+                height: 85px;
                 font-size: 20px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                padding: 10px;
+                padding: 20px 20px 10px;
             }
             .logo {
                 height: 30px;

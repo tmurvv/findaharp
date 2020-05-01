@@ -13,20 +13,14 @@ function BannerCss() {
             }
             @media only screen and (max-width: 950px) {
                 .mainContainer {
-                  height: 90px;
+                  height: 120px;
                   padding: 0 75px;
                 }
             }
             @media only screen and (max-width: 750px) {
                 .mainContainer {
-                  height: 60px;
+                  height: 78px;
                   padding: 0 150px 0 100px;
-                }
-            }
-            @media only screen and (max-width: 750px) {
-                .mainContainer {
-                    height: 60px;
-                    padding: 0 150px 0 100px;
                 }
             }
             @media only screen and (max-width:550px) {

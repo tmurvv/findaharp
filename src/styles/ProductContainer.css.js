@@ -28,23 +28,31 @@ function ProductContainerCss() {
                 margin: auto;
                 margin-top: 45px;
                 display: grid;
-                grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
-                grid-column-gap: 1%;
+                grid-template-columns: 13.2vw 13.2vw 13.2vw 13.2vw 13.2vw;
+                grid-column-gap: 1vw;
                 width: 100%;
             }
+
             @media only screen and (max-width: 1200px) {
                 .grid-container {
-                    grid-template-columns: 24.25% 24.25% 24.25% 24.25%;
+                    grid-template-columns: 16.75vw 16.75vw 16.75vw 16.75vw;
                 }
             }
             @media only screen and (max-width: 950px) {
                 .grid-container {
-                    grid-template-columns: 32.66% 32.66% 32.66%;
+                    grid-template-columns: 22.66vw 22.66vw 22.66vw;
                 }
             }
             @media only screen and (max-width: 700px) {
                 .grid-container {
-                    grid-template-columns: 48.5% 48.5%;
+                    width: 60vw;
+                    grid-template-columns: 29.5vw 29.5vw;   
+                }
+            }
+            @media only screen and (max-width: 550px) {
+                .grid-container {
+                    width: 80vw;
+                    grid-template-columns: 39.5vw 39.5vw;   
                 }
             }
             .grid-item {
@@ -52,13 +60,7 @@ function ProductContainerCss() {
                 text-align: center;
                 width: 180px;
                 font-size: 14px;
-                max-width: 200px;
             }
-            // @media only screen and (max-width: 600px) {
-            //     .grid-item {
-            //         width: 150px;
-            //     }
-            // }
             .productSmallDisplay {
                 display: flex;
                 flex-direction: column;

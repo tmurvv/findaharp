@@ -31,8 +31,6 @@ function ProductModal(props) {
                 <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc.substr(0,240):productLongDesc}
                 
                 <span className='moreButton' onClick={()=>{
-                    console.log('imin')
-                    console.log(document.querySelector('.longDesc').style.overflowY)
                     if (!longDesc) document.querySelector('.longDesc').style.overflowY='none';
                     if (longDesc) document.querySelector('.longDesc').style.overflowY='auto';
                     setLongDesc(!longDesc);

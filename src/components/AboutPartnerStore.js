@@ -12,7 +12,7 @@ function AboutPartnerStore(props) {
             <div className={`detailImg`}><img src= {product.productImageUrl} alt={product.productTitle}/></div>
             <div className={`detailText`}>
                 <p className='storeName'>{product.productMaker}</p>
-                <p style={{textAlign: 'left'}}>{longDesc?product.productLongDesc.substr(0,200):product.productLongDesc} <span style={{fontSize: '18px'}} className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<200}>{longDesc?' more...':' less...'}</span></p> 
+                <p className='longDesc'>{longDesc?product.productLongDesc.substr(0,200):product.productLongDesc} <span style={{fontSize: '18px'}} className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={product.productLongDesc.length<200}>{longDesc?' more...':' less...'}</span></p> 
                 <p style={{marginTop: '10px'}}>{product.sellerRegion}</p>
                 <p>{product.sellerWebsite} {product.sellerEmail}</p>     
             </div>
