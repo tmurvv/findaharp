@@ -5,10 +5,10 @@ function NavBarCss() {
         <style jsx="true">{`
             .navBarOuter {
                 background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
-                height: 30px;
+                height: 40px;
                 border-bottom: 1px solid grey;
             }
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 550px) {
                 .navBarOuter {
                     padding-right: 10px;
                     height: 40px;
@@ -23,7 +23,7 @@ function NavBarCss() {
                 align-items: center;
                 position: relative;
             }
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 550px) {
                 .navLinks {
                     flex-direction: column;
                     height: 140px;
@@ -38,13 +38,25 @@ function NavBarCss() {
             }
             a {
                 font-family: 'avenir';
-                font-size: 12px;
+                font-size: 16px;
                 text-decoration: none;
                 color: #000000;
                 opacity: .8;
+                flex: 2;
+                text-align: center;
             }
             a:hover {
                 opacity: 1;
+            }
+            @media only screen and (max-width: 950px) {
+                a {
+                    font-size: 14px;
+                }
+            }
+            @media only screen and (max-width: 700px) {
+                a {
+                    font-size: 12px;
+                }
             }
             .hamburgerMenu img {
                 height: 35px;
@@ -56,7 +68,6 @@ function NavBarCss() {
                 left: 0;
             }
       `}</style>
-
     )
 }
 

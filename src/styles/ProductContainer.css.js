@@ -16,41 +16,35 @@ function ProductContainerCss() {
             .productContainer {
                 margin: auto;
                 position: relative;
+                width: 70%;
+                max-width: 1010px;
+            }
+            @media only screen and (max-width: 550px) {
+                .productContainer {
+                    width: 80%;
+                }
             }
             .grid-container {
                 margin: auto;
                 margin-top: 45px;
                 display: grid;
-                grid-template-columns: 20% 20% 20% 20% 20%;
-                grid-column-gap: 10px;
-                width: 90%;
-                max-width: 1010px;
+                grid-template-columns: 19.2% 19.2% 19.2% 19.2% 19.2%;
+                grid-column-gap: 1%;
+                width: 100%;
             }
-            @media only screen and (max-width: 1000px) {
-                .productContainer {
-                    width: unset;
-                }
+            @media only screen and (max-width: 1200px) {
                 .grid-container {
-                    grid-template-columns: 25% 25% 25% 25%;
-                        grid-column-gap: 5px;
-                        margin: 5%;
-                        width: unset;
-                        max-width: 800px;    
+                    grid-template-columns: 24.25% 24.25% 24.25% 24.25%;
                 }
             }
-            @media only screen and (max-width: 750px) {
+            @media only screen and (max-width: 950px) {
                 .grid-container {
-                    grid-template-columns: 33.3% 33.3% 33.3%;
-                    width: unset;
-                    max-width: 600px;
-                    margin: auto;
+                    grid-template-columns: 32.66% 32.66% 32.66%;
                 }
             }
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 700px) {
                 .grid-container {
-                    grid-template-columns: 50% 50%;
-                    max-width: 350px;
-                    margin: auto;
+                    grid-template-columns: 48.5% 48.5%;
                 }
             }
             .grid-item {
@@ -60,11 +54,11 @@ function ProductContainerCss() {
                 font-size: 14px;
                 max-width: 200px;
             }
-            @media only screen and (max-width: 600px) {
-                .grid-item {
-                    width: 150px;
-                }
-            }
+            // @media only screen and (max-width: 600px) {
+            //     .grid-item {
+            //         width: 150px;
+            //     }
+            // }
             .productSmallDisplay {
                 display: flex;
                 flex-direction: column;

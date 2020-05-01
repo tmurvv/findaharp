@@ -165,7 +165,7 @@ function ProductSearch(props) {
                         currentselected={allState.location?allState.location:'Harp All Locations'}
                     /> 
                     <div className='arrow leftArrow line2LeftArrow'></div>
-                {/* </div>    */}       
+                {/* </div>           */}
             </div>
             <div className="searchLine2Sub">
                 <div className={`arrow rightArrow line2SubRightArrow`}></div>

@@ -11,7 +11,7 @@ export default function SizeMenu(props) {
 
     return (
         <div>
-             <div className="plainTextSelectLine1" onClick={() => setAnchorEl(!anchorEl)}>
+             <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
                 HARP SIZE
             </div>              
             <ul
