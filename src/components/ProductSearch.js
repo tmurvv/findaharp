@@ -12,6 +12,7 @@ import PriceMenu from './searchMenus/PriceMenu';
 import LocationMenu from './searchMenus/LocationMenu';
 import { 
     getFilteredProducts, 
+    triggerLazy,
     getMakerFromModel, 
     getSizeFromModel,
     findSizeWords,
@@ -68,7 +69,6 @@ function ProductSearch(props) {
         });
     }
     function handleFinishSelection(newProductFinish) {
-        resetDropDowns('finish');
         setAllState({...allState, 
             finish: newProductFinish==='All Finishes'?'All Finishes':newProductFinish,
             productType: 'all',
@@ -96,6 +96,10 @@ function ProductSearch(props) {
             model: "All Models"
         });
     }
+    useEffect(() => {
+        triggerLazy();
+    });
+
     const filteredProducts = getFilteredProducts(props.products, allState);
     
     return (

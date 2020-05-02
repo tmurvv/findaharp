@@ -27,7 +27,7 @@ export default function ModelMenu(props) {
         props.handleModelChange(evt.target.getAttribute('name'));
         setAnchorEl(null);
     };
-
+    console.log(models);
     return (
         <div>
             <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>

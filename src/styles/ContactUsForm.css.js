@@ -1,62 +1,35 @@
-function ContactFormCSS() {
+function ContactUsFormCSS() {
     return (
         <style jsx="true">{`
-            .detailContainer {
-                width: 85vw;
-                height: fit-content;
+            h2 {
+                font-size: 36px;
+                margin-bottom: 5px;
+            }
+            .subTitle {
+                font-style: italic;
+            }
+            .contactFormContainer {
                 background-color: #ffffff;
                 border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
                 padding: 20px;
-                z-index: 3000;
-                max-height: calc(100vh - 50px);
-                max-width: 800px;
-                overflow-y: auto;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%,-50%);
                 text-align: center;
             }
-            @media only screen and (max-width: 500px) {
-                .detailContainer {
-                    flex-direction: column;
-                }
+            .contactFormContainer p {
+                width: 100%;
+                text-align: center;
             }
-            .contactContainer {
-                display: flex;
-                align-items: center;
-                margin-top: 20px;
-            }
-            
-            @media only screen and (max-width: 750px) {
-                .contactContainer {
-                    flex-direction: column-reverse;
-                    align-items: unset;
-                }
-            }
-            .heading, h1 {
-                width: 80%;
-                margin: 30px auto;
-            }
-            .detailImg {
+            .contactText {
                 flex: 4;
                 height: 100%;
                 padding: 20px;
+                text-align: left;
             }
-            .detailImg img {
-                height: 95%;
-                width: 95%;
-                max-width:100%;
-                max-height:100%;
-                object-fit: cover;
-                overflow: hidden;
-            }
-            .detailImg p {
+            .contactText p {
                 margin-block-start: 0;
                 margin-block-end: 0;
-                text-align: center;
+                text-align: justify;
             }
             span {
                 text-align:center;
@@ -65,11 +38,11 @@ function ContactFormCSS() {
                 font-family: 'Metropolis Extra Bold';
                 transform: translateY(3.5px);
             }
-            .detailText {
+            .contactForm {
                 padding: 20px 30px 20px 0;
                 flex: 6;
             }
-            .detailText p {
+            .contactForm p {
                 text-align: center;
                 margin-block-start: 0;
                 margin-block-end: 0;
@@ -143,4 +116,4 @@ function ContactFormCSS() {
     )
 }
 
-export default ContactFormCSS;
+export default ContactUsFormCSS;

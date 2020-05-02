@@ -66,9 +66,10 @@ function ProductContainer(props) {
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
-        window.scrollBy(0,1); //hack to trigger lazyload after search
-        window.scrollBy(0,-1); //hack to trigger lazyload after search
     }
+    useEffect(() => {
+        
+    }, []);
     if (props.filteredproducts&&props.filteredproducts.length>0) {
         const gridProducts = props.filteredproducts.map(product => (
             <div key={product.id} id={product.id} className={`grid-item productSmallDisplay`} onClick={() => handleOpenDetail(product)}>

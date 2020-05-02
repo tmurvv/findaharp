@@ -4,18 +4,13 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import ContactFormCSS from '../styles/ContactForm.css';
-import {removeDashOE} from '../utils/helpers';
+import ContactUsFormCSS from '../styles/ContactUsForm.css';
 
-function ContactForm(props) {
-    if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
-    const {product} = props;
+function ContactUsForm(props) {
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
         contactemail: '',
-        contactmaker: product.productMaker||'',
-        contactmodel: product.productModel||'',
         contactcomments: '',
         change: false
     });
@@ -30,12 +25,6 @@ function ContactForm(props) {
             case 'contactemail': 
                 setUser({...user, contactemail: evt.target.value, change: true});
                 break
-            case 'contactmaker': 
-                setUser({...user, contactmaker: evt.target.value, change: true});
-                break
-            case 'contactmodel': 
-                setUser({...user, contactmodel: evt.target.value, change: true});
-                break     
             case 'contactcomments': 
                 setUser({...user, contactcomments: evt.target.value, change: true});
                 break     
@@ -49,17 +38,15 @@ function ContactForm(props) {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.contactemail,
-            sellername: product.sellerName,
-            productmaker: user.contactmaker,
-            productmodel: user.contactmodel,
             comments: user.contactcomments
         }
         try {
-            const res = await axios.post(
-                `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
-                contact
-            );
-            alert("Email sent.")
+            // const res = await axios.post(
+            //     `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
+            //     contact
+            // );
+            // alert("Email sent.")
+            alert('under construction, contact form not sent')
         } catch(e) {
             alert("Something went wrong. Please try again or contact the webmaster.", e.message)
         }
@@ -67,30 +54,28 @@ function ContactForm(props) {
         props.handleCloseContact();
     }
    return (
-        <>
-        <div className='detailContainer'>
-            <h1>Contact {removeDashOE(product.sellerName)}</h1>           
-            <div className='heading'>
-                <p>Communication with sellers can take place through findaharp.com at no charge.<br></br></p>
-            </div>
+        <>    
             <div 
-                    className='clearModal' 
-                    onClick={() => 
-                        {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                    }} 
-                >
-                    <img src='/img/clear_search.png' alt='clear filters'/>
+                className='clearModal' 
+                onClick={() => 
+                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                }} 
+            >
+                <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
-            <div className='contactContainer'>
-                <div className={`detailImg`}>
-                    <img src= {product.productImageUrl} alt={product.productTitle}/>
-                    <p><span style={{fontWeight: 600}}>
-                        {product.productMaker} {product.productModel}
-                    </span></p><p>{removeDashOE(product.sellerName)}</p>
-                </div>
+            <div className='contactFormContainer'> 
+                <h2>Contact Find a Harp</h2> 
+                <p className='subTitle' style={{textAlign: 'center'}}>We want to hear from you!<br></br></p>
                 
-                <form className='detailText'>     
+                <div className='flexSB'>
+                <div className={`contactText`}>    
+                    <h3>Problems with Harp Advertisements</h3>
+                    <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
+                    <h3>Suggestions</h3>
+                    <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p> 
+                </div>
+            
+                <form className='contactForm'>     
                     <div className='inputGroup'>
                         <label name='firstname'>First Name </label>
                         <input
@@ -119,25 +104,7 @@ function ContactForm(props) {
                             onChange={handleChange}
                             required
                         />
-                    </div>         
-                    <div className='inputGroup'>
-                        <label name='contactmaker'>Maker </label>
-                        <input
-                            id={uuid()}
-                            name='contactmaker'
-                            value={user.contactmaker}
-                            onChange={handleChange}
-                        />
-                    </div>         
-                    <div className='inputGroup'>
-                        <label name='contactmodel'>Model </label>
-                        <input
-                            id={uuid()}
-                            name='contactmodel'
-                            value={user.contactmodel}
-                            onChange={handleChange}
-                        />
-                    </div>         
+                    </div>                 
                     <div className='inputGroup'>
                         <label name='contactcomments'>Comments </label>
                         <textarea
@@ -157,19 +124,26 @@ function ContactForm(props) {
                         </button>
                         <button
                             className={`detailButton detailButton-cancel`}
-                            type='button'
-                            onClick={() => 
-                                {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                            }}
-                        >Cancel
+                            type='reset'
+                            onClick={() => setUser({
+                                firstname: '',
+                                lastname: '',
+                                email: '',
+                                comments: '',
+                                change: false})
+                            }
+                        >Clear
                         </button>
                     </div>         
                 </form>
-            </div>
+                </div>
+                
+            
         </div>
-        <ContactFormCSS />
+            
+        <ContactUsFormCSS />
         </>
     )
 }
 
-export default ContactForm;
+export default ContactUsForm;

@@ -48,6 +48,7 @@ function AppCss() {
                 cursor: pointer;
                 z-index: 2000;
                 list-style: none;
+                margin-top: -2px;
             }
             .plainTextSelectLine2 {
                 margin-block-start: -.5em;
