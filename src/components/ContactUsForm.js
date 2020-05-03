@@ -69,10 +69,13 @@ function ContactUsForm(props) {
                 
                 <div className='flexSB'>
                 <div className={`contactText`}>    
-                    <h3>Problems with Harp Advertisements</h3>
-                    <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
                     <h3>Suggestions</h3>
                     <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p> 
+                    <h3>Submissions to our Buyer's Guide</h3>
+                    <p>We would love for our Buyer's Guide to be a collaborative undertaking by the harp community. Please submit anything you feel we have left out.</p> 
+                    <h3>Problems with Harp Advertisements</h3>
+                    <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
+                    
                 </div>
             
                 <form className='contactForm'>     
@@ -120,11 +123,13 @@ function ContactUsForm(props) {
                             className='detailButton'
                             type='submit'
                             onClick={handleSubmit} 
+                            style={{marginBottom: '0'}}
                         >Submit
                         </button>
                         <button
                             className={`detailButton detailButton-cancel`}
                             type='reset'
+                            style={{marginBottom: '0'}}
                             onClick={() => setUser({
                                 firstname: '',
                                 lastname: '',

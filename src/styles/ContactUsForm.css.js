@@ -41,6 +41,9 @@ function ContactUsFormCSS() {
             .contactForm {
                 padding: 20px 30px 20px 0;
                 flex: 6;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between; 
             }
             .contactForm p {
                 text-align: center;
