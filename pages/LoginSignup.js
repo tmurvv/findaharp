@@ -8,47 +8,109 @@ import LoginSignupCSS from '../src/styles/LoginSignup.css';
 import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
 
 function LoginSignup(props) {
-    const [user, setUser] = useState({
+    const [active, setActive] = useState('login');
+    const [userSignup, setUserSignup] = useState({
         firstname: '',
         lastname: '',
-        contactemail: '',
-        password: '',
+        signupemail: '',
+        signuppassword: '',
         confirmpassword: '',
-        change: false
+        signupchange: false
+    });
+    const [userLogin, setUserLogin] = useState({
+        loginemail: '',
+        loginpassword: '',
+        loginchange: false
     });
     const handleChange = (evt) => {
+
         switch (evt.target.name) {
             case 'firstname': 
-                setUser({...user, firstname: evt.target.value, change: true});
+                setUserSignup({...userSignup, firstname: evt.target.value, signupchange: true});
                 break
             case 'lastname': 
-                setUser({...user, lastname: evt.target.value, change: true});
+                setUserSignup({...userSignup, lastname: evt.target.value, signupchange: true});
                 break
-            case 'contactemail': 
-                setUser({...user, contactemail: evt.target.value, change: true});
+            case 'signupemail': 
+                setUserSignup({...userSignup, signupemail: evt.target.value, signupchange: true});
                 break
-            case 'password': 
-                setUser({...user, password: evt.target.value, change: true});
+            case 'loginemail': 
+                setUserLogin({...userLogin, loginemail: evt.target.value, loginchange: true});
+                break
+            case 'signuppassword': 
+                setUserSignup({...userSignup, signuppassword: evt.target.value, signupchange: true});
+                break
+            case 'loginpassword': 
+                setUserLogin({...userLogin, loginpassword: evt.target.value, loginchange: true});
                 break
             case 'confirmpassword': 
-                setUser({...user, confirmpassword: evt.target.value, change: true});
+                setUserSignup({...userSignup, confirmpassword: evt.target.value, signupchange: true});
                 break
-               
             default :
         }
     }
+    function resetSignupForm() {
+        setUserSignup({
+            firstname: '',
+            lastname: '',
+            signupemail: '',
+            signuppassword: '',
+            confirmpassword: '',
+            signupchange: false
+        });
+    }
+    function resetLoginForm() { 
+        setUserLogin({
+            loginemail: '',
+            loginpassword: '',
+            loginchange: false
+        });
+    }
+    function handleSignupClick(evt) {
+        if (userLogin.loginchange===true) {if (!confirm('changes will be lost')) return};
+        resetLoginForm();
+        setActive('signup');
+        const signup = document.querySelector('#signup');
+        const login = document.querySelector('#login');
+        signup.classList.remove("s-atbottom");
+        signup.classList.add("s-attop");
+        login.classList.remove("l-attop");
+        login.classList.add("l-atbottom");
+    }
+    function handleLoginClick(evt) {
+        if (userSignup.signupchange===true) {if (!confirm('changes will be lost')) return};
+        resetSignupForm();
+        setActive('login');
+        const signup = document.querySelector('#signup');
+        const login = document.querySelector('#login');
+        signup.classList.add("s-atbottom");
+        signup.classList.remove("s-attop");
+        login.classList.add("l-attop");
+        login.classList.remove("l-atbottom");
+    }
+    
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        alert('Signup new user under construction.');
-        // if (!user.contactemail) return alert('Email is required');
+        if (active='signup') {
+            if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
+            if (userSignup.signuppassword !== userSignup.confirmpassword) return alert('Passwords must match.');
+            alert('Signup under construction.');
+        }
+        if (active==='login') {
+            if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
+            alert('Login under construction.');
+        }
+        
+        resetSignupForm();
+        resetLoginForm();
         // const contact = {
-        //     firstname: user.firstname,
-        //     lastname: user.lastname,
-        //     email: user.contactemail,
+        //     firstname: userSignup.firstname,
+        //     lastname: userSignup.lastname,
+        //     email: userSignup.contactemail,
         //     sellername: product.sellerName,
-        //     productmaker: user.contactmaker,
-        //     productmodel: user.contactmodel,
-        //     comments: user.contactcomments
+        //     productmaker: userSignup.contactmaker,
+        //     productmodel: userSignup.contactmodel,
+        //     comments: userSignup.contactcomments
         // }
         // try {
         //     const res = await axios.post(
@@ -62,113 +124,310 @@ function LoginSignup(props) {
         
         // props.handleCloseContact();
     }
-    function handleClose() {
-        document.querySelector('.detailContainer').style.display="none";
-    }
+    
    return (
-        <>
-        <div className='underConstruction'>           
-            <h2>Login/Signup Page Under Construction</h2>
-        </div>
-        <PageUnderConstructionCSS />
-        <div className='detailContainer'>
-            <img style={{backgroundColor: 'black', height: '60px', padding: '15px', marginTop: '25px', marginLeft: '33.3%', borderRadius: '3px'}} src=".\img\logo_findaharp.png" alt="Find a Harp text logo" />
-            <h2 style={{backgroundColor: 'white', color: 'black'}}>Login/Signup Under Construction</h2>
-            <div className='loginContainer'>
-                
-                <div className={`detailImg`}>
-                    <img src= {`./img/golden_harp_full.png`} alt={"logo"}/>
+       <>
+        <div className='login-signup-container'>
+            <div className="login-signup l-attop" id="login" onClick={()=>handleLoginClick()}>
+                <div className="login-signup-title">
+                    LOG IN
                 </div>
-                <div 
-                    className='clearModal' 
-                    onClick={() => 
-                        {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
-                    }} 
-                >
-                    <img src='/img/clear_search.png' alt='clear filters'/>
-                </div>
-                <form className='detailText'>             
-                    {/* <div className='heading'>
-                        <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
-                    </div>               */}
-                    <div className={`flex marginTopLarge`}>
-                        <div className='inputGroup'>
-                            <label name='firstname'>First Name: </label>
-                            <input
-                                id={uuid()}
-                                value={user.firstname}
-                                onChange={handleChange}
-                                name='firstname'
-                                placeholder="optional"
-                            />
+                <form className="login-signup-content"  onSubmit={()=>handleSubmit()}>
+                    <div className="input-name">
+                        <h2>Email</h2>
+                    </div>
+                    <input
+                        className="field-input"
+                        type='email'
+                        id={uuid()}
+                        value={userLogin.loginemail}
+                        onChange={handleChange}
+                        name='loginemail'
+                        required = {active==='login'}
+                        disabled={active==='signup'}
+                    />
+                    <div className="input-name input-margin">
+                        <h2>Password</h2>
+                    </div>
+                    <input 
+                        className="field-input"
+                        type='password'
+                        id={uuid()}
+                        value={userLogin.loginpassword}
+                        onChange={handleChange}
+                        name='loginpassword'
+                        required = {active==='login'}
+                        disabled={active==='signup'}
+                    />
+                    <div className="input-r">
+                        <div className="check-input">
+                            <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
+                            <label className="rememberme-blue" htmlFor="remember-me-2"></label>
                         </div>
-                        <div className='inputGroup'>
-                            <label name='lastname'>Last Name: </label>
-                            <input
-                                id={uuid()}id="outlined-helperText"
-                                label="Last Name"
-                                value={user.lastname}
-                                onChange={handleChange}
-                                name ='lastname'
-                                placeholder="optional"
-                            />
+                        <div className="rememberme">
+                            <label htmlFor="remember-me-2">Remember Me</label>
                         </div>
                     </div>
-                    <div className='inputGroup'>
-                        <label name='email'>Email: </label>
-                        <input
-                            id={uuid()}
-                            name='contactemail'
-                            type='email'
-                            value={user.contactemail}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>         
-                    <div className='inputGroup'>
-                        <label name='password'>password: </label>
-                        <input
-                            id={uuid()}
-                            type='password'
-                            name='password'
-                            value={user.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>         
-                    <div className='inputGroup'>
-                        <label name='confirmpassword'>confirm password: </label>
-                        <input
-                            id={uuid()}
-                            name='confirmpassword'
-                            type='password'
-                            value={user.confirmpassword}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>                  
-                    <div>
-                        <button
-                            className='detailButton'
-                            type='submit'
-                            onClick={handleSubmit} 
-                        >Submit
-                        </button>
-                        <button
-                            className={`detailButton detailButton-cancel`}
-                            type='button'
-                            onClick={() => 
-                                {if (!user.change || user.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
-                            }}
-                        >Cancel
-                        </button>
-                    </div>         
+        
+                    <button className="submit-btn">
+                        Submit
+                    </button>
+                    <div className="forgot-pass">
+                        <a href="#">Forgot Password?</a>
+                    </div>
                 </form>
             </div>
+            <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
+                <form className="login-signup-title" onSubmit={()=>handleSubmit()}>
+                    SIGN UP
+                    <div className="login-signup-content">
+                        <div className="input-name">
+                            <h3>First Name</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            id={uuid()}
+                            value={userSignup.firstname}
+                            onChange={handleChange}
+                            name='firstname'
+                            placeholder="optional"
+                            disabled={active==='login'}
+                        />
+                        <div className="input-name">
+                            <h3>Last Name</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            id={uuid()}
+                            value={userSignup.lastname}
+                            onChange={handleChange}
+                            name='lastname'
+                            placeholder="optional"
+                            disabled={active==='login'}
+                        />
+                        <div className="input-name input-margin">
+                            <h3>E-Mail</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            type='email'
+                            id={uuid()}
+                            value={userSignup.signupemail}
+                            onChange={handleChange}
+                            name='signupemail'
+                            required={active==='signup'}
+                            disabled={active==='login'}
+                        />
+                        <div className="input-name input-margin">
+                            <h3>Password</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            type='password'
+                            id={uuid()}
+                            value={userSignup.signuppassword}
+                            onChange={handleChange}
+                            name='signuppassword'
+                            required={active==='signup'}
+                            disabled={active==='login'}
+                        />
+                        <div className="input-name input-margin">
+                            <h3>Confirm Password</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            type='password'
+                            id={uuid()}
+                            value={userSignup.confirmpassword}
+                            onChange={handleChange}
+                            name='confirmpassword'
+                            required={active==='signup'}
+                            disabled={active==='login'}
+                        />
+                        <button className="submit-btn">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <LoginSignupCSS />
         </div>
-        <LoginSignupCSS />
         </>
     )
 }
 
 export default LoginSignup;
+// // packages
+// import React, {useState} from 'react';
+// import axios from 'axios';
+// import uuid from 'react-uuid';
+
+// // internal
+// import LoginSignupCSS from '../src/styles/LoginSignup.css';
+// import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
+
+// function LoginSignup(props) {
+//     const [userSignup, setUserSignup] = useState({
+//         firstname: '',
+//         lastname: '',
+//         contactemail: '',
+//         password: '',
+//         confirmpassword: '',
+//         change: false
+//     });
+//     const handleChange = (evt) => {
+//         switch (evt.target.name) {
+//             case 'firstname': 
+//                 setUserSignup({...userSignup, firstname: evt.target.value, change: true});
+//                 break
+//             case 'lastname': 
+//                 setUserSignup({...userSignup, lastname: evt.target.value, change: true});
+//                 break
+//             case 'contactemail': 
+//                 setUserSignup({...userSignup, contactemail: evt.target.value, change: true});
+//                 break
+//             case 'password': 
+//                 setUserSignup({...userSignup, password: evt.target.value, change: true});
+//                 break
+//             case 'confirmpassword': 
+//                 setUserSignup({...userSignup, confirmpassword: evt.target.value, change: true});
+//                 break
+               
+//             default :
+//         }
+//     }
+    // const handleSubmit = async (evt) => {
+    //     evt.preventDefault();
+    //     alert('Signup new userSignup under construction.');
+    //     // if (!userSignup.contactemail) return alert('Email is required');
+    //     // const contact = {
+    //     //     firstname: userSignup.firstname,
+    //     //     lastname: userSignup.lastname,
+    //     //     email: userSignup.contactemail,
+    //     //     sellername: product.sellerName,
+    //     //     productmaker: userSignup.contactmaker,
+    //     //     productmodel: userSignup.contactmodel,
+    //     //     comments: userSignup.contactcomments
+    //     // }
+    //     // try {
+    //     //     const res = await axios.post(
+    //     //         `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
+    //     //         contact
+    //     //     );
+    //     //     alert("Email sent.")
+    //     // } catch(e) {
+    //     //     alert("Something went wrong. Please try again or contact the webmaster.", e.message)
+    //     // }
+        
+    //     // props.handleCloseContact();
+    // }
+    // function handleClose() {
+    //     document.querySelector('.detailContainer').style.display="none";
+    // }
+//    return (
+//         <>
+//         <div className='underConstruction'>           
+//             <h2>Login/Signup Page Under Construction</h2>
+//         </div>
+//         <PageUnderConstructionCSS />
+//         <div className='detailContainer'>
+//             <img style={{backgroundColor: 'black', height: '60px', padding: '15px', marginTop: '25px', marginLeft: '33.3%', borderRadius: '3px'}} src=".\img\logo_findaharp.png" alt="Find a Harp text logo" />
+//             <h2 style={{backgroundColor: 'white', color: 'black'}}>Login/Signup Under Construction</h2>
+//             <div className='loginContainer'>
+                
+//                 <div className={`detailImg`}>
+//                     <img src= {`./img/golden_harp_full.png`} alt={"logo"}/>
+//                 </div>
+//                 <div 
+//                     className='clearModal' 
+//                     onClick={() => 
+//                         {if (!userSignup.change || userSignup.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
+//                     }} 
+//                 >
+//                     <img src='/img/clear_search.png' alt='clear filters'/>
+//                 </div>
+//                 <form className='detailText'>             
+//                     {/* <div className='heading'>
+//                         <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
+//                     </div>               */}
+//                     <div className={`flex marginTopLarge`}>
+//                         <div className='inputGroup'>
+//                             <label name='firstname'>First Name: </label>
+//                             <input
+//                                 id={uuid()}
+//                                 value={userSignup.firstname}
+//                                 onChange={handleChange}
+//                                 name='firstname'
+//                                 placeholder="optional"
+//                             />
+//                         </div>
+//                         <div className='inputGroup'>
+//                             <label name='lastname'>Last Name: </label>
+//                             <input
+//                                 id={uuid()}id="outlined-helperText"
+//                                 label="Last Name"
+//                                 value={userSignup.lastname}
+//                                 onChange={handleChange}
+//                                 name ='lastname'
+//                                 placeholder="optional"
+//                             />
+//                         </div>
+//                     </div>
+//                     <div className='inputGroup'>
+//                         <label name='email'>Email: </label>
+//                         <input
+//                             id={uuid()}
+//                             name='contactemail'
+//                             type='email'
+//                             value={userSignup.contactemail}
+//                             onChange={handleChange}
+//                             required
+//                         />
+//                     </div>         
+//                     <div className='inputGroup'>
+//                         <label name='password'>password: </label>
+//                         <input
+//                             id={uuid()}
+//                             type='password'
+//                             name='password'
+//                             value={userSignup.password}
+//                             onChange={handleChange}
+//                             required
+//                         />
+//                     </div>         
+//                     <div className='inputGroup'>
+//                         <label name='confirmpassword'>confirm password: </label>
+//                         <input
+//                             id={uuid()}
+//                             name='confirmpassword'
+//                             type='password'
+//                             value={userSignup.confirmpassword}
+//                             onChange={handleChange}
+//                             required
+//                         />
+//                     </div>                  
+//                     <div>
+//                         <button
+//                             className='detailButton'
+//                             type='submit'
+//                             onClick={handleSubmit} 
+//                         >Submit
+//                         </button>
+//                         <button
+//                             className={`detailButton detailButton-cancel`}
+//                             type='button'
+//                             onClick={() => 
+//                                 {if (!userSignup.change || userSignup.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
+//                             }}
+//                         >Cancel
+//                         </button>
+//                     </div>         
+//                 </form>
+//             </div>
+//         </div>
+//         <LoginSignupCSS />
+//         </>
+//     )
+// }
+
+// export default LoginSignup;

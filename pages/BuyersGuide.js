@@ -7,7 +7,7 @@ function BuyersGuide() {
         <div className='buyersContainer'>
             <div className='buyersGuide'>       
                 <h1>Buyer's Guide</h1>
-                <p>Your best resource for choosing a harp is your teacher. If you do not have a teacher or you are looking to supplement your knowledge, read on!!</p>
+                <p>At Findaharp, we believe the best resource for choosing a harp is your teacher. If you do not have a teacher or you are looking to supplement your knowledge, read on!!</p>
                 <p>We would love to make this a collaborative guide from the harp community. If you have a different opinion or supplemental information, please write it up and submit it on the contact page.</p>
                 <p>Findaharp.com uses two main categories of harp: LEVER and PEDAL. We include partially levered, lever-free, and lap harps in our LEVER category.</p>
                 <div className='pedalLeverTut' hidden>
@@ -66,11 +66,15 @@ function BuyersGuide() {
                     </div>
                     <div className='block'>
                         <input type='radio' id='irish' name='musictype' value='irish'/>
-                        <label htmlFor='irish'>I am mostly interested in Irish/Celtic/Folk type music</label>
+                        <label htmlFor='irish'>I am mostly interested in the Irish/Celtic/Folk style of music</label>
                     </div>
                     <div className='block'>
                         <input type='radio' id='all' name='musictype' value='all'/>
-                        <label htmlFor='all'>I want the option to play all types: classical, pop, jazz, world, etc.</label>
+                        <label htmlFor='all'>I am mostly interested in classical</label>
+                    </div>
+                    <div className='block'>
+                        <input type='radio' id='all' name='musictype' value='all'/>
+                        <label htmlFor='all'>I am interested in a wide variety of musical styles: classical, pop, jazz, inspirational, world, etc.</label>
                     </div>
                     <button className='shortcutButton' onClick={() => alert('shortcut paths not yet implemented')}>Take the shortcut</button>
                 </div>
@@ -82,7 +86,7 @@ function BuyersGuide() {
                 <h3>Lever Harp Path-beginner</h3>
                 <p>This path is for buyers interested in the 'Irish/Celtic/Folk' style of playing.</p>
                 <p>As a beginner, you want to be sure to start with a harp that will rest on the floor rather than held up by your legs or in your lap. With everything else that you are learning, you don’t want to worry about balancing the instrument. Even if you are hoping to eventually play a smaller lap harp, it is good to learn first on a larger floor harp.</p> 
-                <p>For this type of harp, the number of strings becomes quite important. Usually, beginners start with 28-36 strings. What is the difference? Ironically, the larger the instrument in this category, the easier it is to play. A larger lever harp generally has a larger sound. Obviously there are fewer strings on a smaller harp and harpists sometimes have to rearrange the music to make it work on the instrument.</p>
+                <p>For this type of harp, the number of strings becomes quite important. Usually, beginners start with 28-36 strings. What is the difference? Ironically, the larger the instrument in this category, the easier it is to play. A larger lever harp generally has a larger sound. A harp with fewer strings sometimes sometimes requires rearranging the music to make it work on the instrument.</p>
                 <p>It is also a good idea to inquire when the harp was last maintained. In the harp world we call it 'regulation'. Since harps are made of wood and glue, things can shift around a bit because of the weather and because of the tension of the strings. These shifts will cause the lever or pedal change to go 'off key' or 'out of tune'. Regulation corrects for this and should be done every 1-3 years depending on your situation.</p>
                 <p>Here are some things lever harp students or purchasers can find frustrating if they are not included with the instrument:</p>    
                     <ol>
@@ -97,8 +101,8 @@ function BuyersGuide() {
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
                 <h3>Pedal Harp Path-beginner</h3>
-                <p>This path is for students or purchasers interested in a wide variety of music such as classical, pop, jazz, world.</p>
-                <p>Students on the pedal harp path will generally start with a lever harp to be sure that they really take to the instrument before making the investment a pedal harp requires. If the expense is not prohibitive and the student is at least 4’10”, then it can be a good choice to start right away with a pedal harp. Here we will assume the student is starting with a lever harp before progressing to a pedal harp.</p>
+                <p>This path is for students or purchasers interested in classical music or in a wide variety of music such as classical, pop, jazz, inspirational, world, etc.</p>
+                <p>Students on the pedal harp path will generally start with a lever harp to be sure that they really take to the instrument before making the investment a pedal harp requires. If the expense is not prohibitive and the student is at least 4’10”, then it can be a good choice to start right away with a pedal harp (<a href="#" style={{color: '#fe9e1a'}}>click here</a> to skip to pedal harp section). Here we will assume the student is starting with a lever harp before progressing to a pedal harp.</p>
                 <p>Here are three suggestions for finding a lever harp that will set you up to transition into a pedal harp:</p>
                 <ol>
                     <li>Find a harp that has a similar tension as the strings as a pedal harp. In other words, the strings are not more loose or wobbly than pedal harp strings. </li>
@@ -118,11 +122,10 @@ function BuyersGuide() {
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
-                <h3>"Not sure yet" path</h3>
-                <p>Not sure whether you want to end up in a pedal harp or lever harp?</p>
-                <p>Typically this student or purchaser would begin with a lever harp and then discover what type of music is most enjoyed before choosing a long-term harp. Whichever harp you choose to begin on, it is still possible to transition to a pedal harp. </p>
+                <h3>"Not sure yet" path-beginner</h3>
+                <p>Not sure whether you want to end up in a pedal harp or lever harp? No problem at all.</p>
+                <p>Typically this student or purchaser would begin with a lever harp and then discover what type of music is most enjoyed before choosing a long-term harp. Whichever lever harp you choose to begin on, it is still possible to transition to a pedal harp. </p>
                 <p>You will still want to look a lever harp that stands on the floor and can be tipped back on your shoulder rather than one you have to hold up with your legs or hold in your lap. The ideal size harp I recommend for a beginner is 34-36 strings.</p>
-                <p>It is also a good idea to inquire when the harp was last maintained. In the harp world we call it 'regulation.' Since harps are made of wood and glue, things can shift around a bit because of the weather and because of the tension of the strings. These shifts will cause the lever or pedal change to go 'off key' or 'out of tune.' Regulation corrects for this and should be done every 1-3 years depending on your individual situation.</p>
                 <p>Here are some things lever harp students or purchasers can find frustrating if they are not included with the instrument:</p>    
                 <ol>
                     <li>A tuning key that fits the tuning pegs.</li>
@@ -130,7 +133,9 @@ function BuyersGuide() {
                     <li>For a smaller lever harp, legs for the instrument to make it high enough to lean back on your shoulder.</li>
                     <li>Full levers. Some harps will come ‘partially levered’.</li>
                 </ol>
-                <p>Bottom line, we recommend starting with a medium-large lever harp (30-36 strings).</p>
+                <p>It is also a good idea to inquire when the harp was last maintained. In the harp world we call it 'regulation.' Since harps are made of wood and glue, things can shift around a bit because of the weather and because of the tension of the strings. These shifts will cause the lever or pedal change to go 'off key' or 'out of tune.' Regulation corrects for this and should be done every 1-3 years depending on your individual situation.</p>
+                
+                <p>Bottom line, we recommend starting with a medium-large lever harp, 30-36 strings (ideally 34 or 36 strings).</p>
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
@@ -147,7 +152,7 @@ function BuyersGuide() {
                         <li>For a smaller lever harp, legs for the instrument to make it high enough to lean back on your shoulder.</li>
                         {/* <li>Full levers. Some harps will come ‘partially levered’.</li> */}
                     </ol>
-                <p>Bottom line: we recommend a 34 or 36 string lever harp.</p>
+                <p>Bottom line: </p>
 
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>

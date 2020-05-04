@@ -22,18 +22,15 @@ export default function ModelMenu(props) {
     models=itemsSortByDisabled(models, currentModels).map(model => <option 
             name={model}
         >{model.trim()}</option>);
-
     const handleClose = (evt) => {
         props.handleModelChange(evt.target.getAttribute('name'));
         setAnchorEl(null);
     };
-    console.log(models);
     return (
         <div>
             <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
                 HARP MODEL
             </div>
-            
             <ul
                 id="model-select"
                 onClose={handleClose}

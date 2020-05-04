@@ -30,7 +30,7 @@ export default function NavBar(props) {
                         <a>Buyer's Guide</a>
                     </Link>        
                     <Link href='/Contact'>
-                        <a>Contact</a>
+                        <a>Contact/About</a>
                     </Link>
                     <Link href='/LoginSignup'>
                         <a>Login/Signup</a>

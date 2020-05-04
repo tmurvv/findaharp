@@ -32,7 +32,8 @@ function ContactCSS() {
                 width: 100%;
                 text-align: center;
             }
-            .contactContainer p {
+            .contactContainer p,
+            .contactContainer blockquote {
                 text-align: justify;
             }
             .contactContainer blockquote {
