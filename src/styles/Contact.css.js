@@ -8,18 +8,17 @@ function ContactCSS() {
                 padding: 30px;
                 height: fit-content;
                 margin-top: 0;
-
             }
             .contact {
                 width: 100%;
                 
             }
             .contactItem {
-                margin: 50px;
-                background-color: #ffffff;
+                background-color: transparent;
+                /*background-color: #ffffff;
                 border: 2px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
-                border-radius: 3px;
+                border-radius: 3px;*/
                 padding: 20px;
                 text-align: center;
                 margin: auto;
@@ -61,7 +60,7 @@ function ContactCSS() {
                 font-size:14px       
             }
             .contactDivider {
-                margin: 100px auto;
+                margin: 50px auto;
                 height: 2px;
                 width: 80%;
             }
@@ -74,6 +73,9 @@ function ContactCSS() {
             }
             .about {
                 padding: 10px 50px 30px ;
+            }
+            .about h2 {
+                margin-bottom: 40px;
             }
         `}
     </style>

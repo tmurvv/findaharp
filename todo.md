@@ -1,4 +1,4 @@
-- contact page needs spinner for when email sent
+- contact & verify pages need spinner
 
 - cache images
 

@@ -5,14 +5,18 @@ function ContactUsFormCSS() {
                 font-size: 36px;
                 margin-bottom: 5px;
             }
+            .findaharpLogo img {
+                height: 36px;
+            }
             .subTitle {
                 font-style: italic;
+                margin-bottom: 15px;
             }
             .contactFormContainer {
-                background-color: #ffffff;
-                border: 4px solid #f9bf1e;
+                background-color: tranparent;
+                /*border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
-                border-radius: 3px;
+                border-radius: 3px;*/
                 padding: 20px;
                 text-align: center;
             }
@@ -53,7 +57,7 @@ function ContactUsFormCSS() {
                 transition: all .7s;
             }
             .marginTop {
-                margin-top: 10px;
+                margin-top: 15px;
             }
             .marginTopLarge {
                 margin-top: 40px;
@@ -79,6 +83,7 @@ function ContactUsFormCSS() {
                 font-size: 14px;
             }
             .inputGroup input {
+                background-color: transparent;
                 flex: 7.5;
                 height: 20px;
                 border-top: none;
@@ -108,6 +113,7 @@ function ContactUsFormCSS() {
                 background-image: none;
             }
             textarea {
+                background-color: transparent;
                 flex: 7;
                 border-top: none;
                 border-left: none;

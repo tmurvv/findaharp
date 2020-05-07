@@ -31,6 +31,15 @@ function ContactUsForm(props) {
             default :
         }
     }
+    function clearForm() {
+        setUser({
+            firstname: '',
+            lastname: '',
+            contactemail: '',
+            contactcomments: '',
+            change: false
+        });
+    }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         if (!user.contactemail) return alert('Email is required');
@@ -51,7 +60,7 @@ function ContactUsForm(props) {
             alert("Something went wrong. Please try again or contact the webmaster.", e.message)
         }
         
-        props.handleCloseContact();
+        clearForm();
     }
    return (
         <>    
@@ -64,10 +73,10 @@ function ContactUsForm(props) {
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
             <div className='contactFormContainer'> 
-                <h2>Contact Find a Harp</h2> 
+                <h2 className='findaharpLogo'>Contact Us</h2> 
                 <p className='subTitle' style={{textAlign: 'center'}}>We want to hear from you!<br></br></p>
                 
-                <div className='flexSB'>
+                <div className={`marginTop flexSB`}>
                 <div className={`contactText`}>    
                     <h3>Suggestions</h3>
                     <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p> 
@@ -128,16 +137,11 @@ function ContactUsForm(props) {
                         </button>
                         <button
                             className={`detailButton detailButton-cancel`}
-                            type='reset'
-                            style={{marginBottom: '0'}}
-                            onClick={() => setUser({
-                                firstname: '',
-                                lastname: '',
-                                email: '',
-                                comments: '',
-                                change: false})
-                            }
-                        >Clear
+                            type='button'
+                            onClick={() => 
+                                {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Clear contact form?')) clearForm();
+                            }}
+                        >Cancel
                         </button>
                     </div>         
                 </form>

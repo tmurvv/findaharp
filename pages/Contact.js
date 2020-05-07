@@ -5,18 +5,16 @@ import ContactUsForm from '../src/components/ContactUsForm';
 function Contact() {
     return (
         <div className='contactContainer'>
-            <h1>Contact Us / About Us</h1>
             <div>
                 <ContactUsForm handleCloseContact={() => console.log('imin')} />
             </div>
             <div className='contactDivider'>
-                <img src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
+                <img src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             </div>
             
             <div className={`contactItem about`}>
                 <h2>About us</h2>
-                <p>Findaharp.com was designed and developed by harpists Rachael Cooper and Tisha Murvihill.</p>
-                <p>Tisha Murvihill is the principal harpist of the Calgary Philharmonic in Alberta, Canada.</p>
+                <p>Findaharp.com was designed and developed by harpists Rachael Cooper and Tisha Murvihill. Tisha Murvihill is the principal harpist of the Calgary Philharmonic in Alberta, Canada.</p>
                 <blockquote>"Whenever I am trying to help a student find the first or next perfect harp to bring into their lives, I find it difficult to see what is available, especially if the student needs a pre-owned instrument. Since I have a strong interest in web development as well as the harp, I decided to combine my interests and create a website for the harp community where they can easily find available pre-owned harps."</blockquote>
                 <p>Designer Rachael Cooper is the owner/operator of Diomed Design. She is also the owner of a brand new stunning Salvi Apollo pedal harp as well as a an outstanding "Emilie" lever harp from Newsom Harps in Bragg Creek, Alberta. You can contact Rachael at <a href='www.diomed.ca'>diomed.ca</a>.</p>
                 <p>Tisha's main instrument is a robust sounding Lyon & Healy 85CG pedal harp. She also has a rare gold Charles Lindemann pedal harp built in the 1930's that was rescued from a dumpster! Her Lever harps include a Pilgrim Ashdown c.1993 made in Wales, and a Craig Pierpont, 'Irish Style' out of Kentucky. harp website: <a href='https://www.harptisha.com'>harptisha.com</a> / tech website: <a href='https://www.take2tech.ca'>take2tech.ca</a></p>

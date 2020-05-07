@@ -67,7 +67,6 @@ function LoginSignup(props) {
         });
     }
     function handleSignupClick(evt) {
-        if (userLogin.loginchange===true) {if (!confirm('changes will be lost')) return};
         resetLoginForm();
         setActive('signup');
         const signup = document.querySelector('#signup');

@@ -9,10 +9,14 @@ import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
 import Head from '../src/components/Head';
+import ActivateEmail from './ActivateEmail.js';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
+    // const [router, useRouter] = useState(useRouter());
+    const router = useRouter();
     useEffect(() => {
         setWindowWidth(window.innerWidth);
         const handleResize = () => {
@@ -33,6 +37,7 @@ function MyApp({ Component, pageProps }) {
             <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
             <Component {...pageProps} />
             <Footer />
+            <ActivateEmail router={router} thing="thign" />
             <AppCss />
         </>
     )

@@ -24,7 +24,8 @@
     "react-dom": "^16.13.1",
     "react-lazyload": "^2.6.7",
     "react-phone-input-2": "^2.13.3",
-    "styled-jsx": "^3.2.5"
+    "styled-jsx": "^3.2.5",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.5.0",

@@ -19,6 +19,23 @@ function BuyersGuideCSS() {
                 width: 70%;
                 margin: auto;
             }
+            @media only screen and (max-width: 1200px) {
+                .buyersGuide {
+                    width: 80%;
+                }
+            }
+            @media only screen and (max-width: 1050px) {
+                .buyersGuide {
+                    width: 90%;
+                }
+            }
+            @media only screen and (max-width: 900px) {
+                .buyersGuide {
+                    width: 100%;
+                    padding: inherit 15px;
+                }
+            }
+
             .buyersGuide p,
             .shortcut p, 
             .buyersGuide li,
@@ -42,6 +59,14 @@ function BuyersGuideCSS() {
                 position: relative;
                 display: flex;
                 justify-content: space-between;
+            .pedalLeverTutMobile {
+                margin: 50px auto 70px;
+                background-color: #ffffff;
+                border: 2px solid #f9bf1e;
+                box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
+                border-radius: 3px;
+                padding: 30px 0;
+                
             }
             .pedalLeverTutText {
                 flex: 5;
@@ -149,6 +174,9 @@ function BuyersGuideCSS() {
             }
             .buyerClearModal img{
                 width: 35px;
+            }
+            .underConstructionImage img{
+                height: 100px;
             }
         `}
     </style>
