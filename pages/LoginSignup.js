@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
+import btoa from 'btoa';
 
 // internal
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
@@ -9,6 +10,7 @@ import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
 
 function LoginSignup(props) {
     const [active, setActive] = useState('login');
+    const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
         firstname: '',
         lastname: '',
@@ -89,15 +91,33 @@ function LoginSignup(props) {
     }
     
     const handleSubmit = async (evt) => {
-        evt.preventDefault();
-        if (active='signup') {
+        
+        //evt.preventDefault();
+        if (active==='signup') {
+            
             if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
             if (userSignup.signuppassword !== userSignup.confirmpassword) return alert('Passwords must match.');
-            alert('Signup under construction.');
+            
+            const newUser = {
+                firstname: userSignup.firstname,
+                lastname: userSignup.lastname,
+                email: userSignup.signupemail,
+                password: userSignup.signuppassword
+            };
+
+            try {
+                const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
+                console.log('hereres', res);
+                if (res.status===200) {alert('Signup Successful. Please check your inbox to verify your email.'); setNeedVerify(true)}
+            } catch (e) {
+                alert(`Something went wrong on signup: ${e.message}`)
+            }
+            
+            
         }
         if (active==='login') {
             if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
-            alert('Login under construction.');
+            const res = await axios.post('http://localhost:3000/api/v1/users/login', {});
         }
         
         resetSignupForm();
@@ -129,51 +149,61 @@ function LoginSignup(props) {
         <div className='login-signup-container'>
             <div className="login-signup l-attop" id="login" onClick={()=>handleLoginClick()}>
                 <div className="login-signup-title">
-                    LOG IN
+                    {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>
-                <form className="login-signup-content"  onSubmit={()=>handleSubmit()}>
-                    <div className="input-name">
-                        <h2>Email</h2>
-                    </div>
-                    <input
-                        className="field-input"
-                        type='email'
-                        id={uuid()}
-                        value={userLogin.loginemail}
-                        onChange={handleChange}
-                        name='loginemail'
-                        required = {active==='login'}
-                        disabled={active==='signup'}
-                    />
-                    <div className="input-name input-margin">
-                        <h2>Password</h2>
-                    </div>
-                    <input 
-                        className="field-input"
-                        type='password'
-                        id={uuid()}
-                        value={userLogin.loginpassword}
-                        onChange={handleChange}
-                        name='loginpassword'
-                        required = {active==='login'}
-                        disabled={active==='signup'}
-                    />
-                    <div className="input-r">
-                        <div className="check-input">
-                            <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
-                            <label className="rememberme-blue" htmlFor="remember-me-2"></label>
+                <form className="login-signup-content">
+                    {needVerify
+                    ?
+                        <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
+                            <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
+                            <img height='100%' src='./img/not_found.png' alt='golden harp' />}
                         </div>
-                        <div className="rememberme">
-                            <label htmlFor="remember-me-2">Remember Me</label>
+                    :
+                        <>
+                        <div className="input-name">
+                            <h2>Email</h2>
                         </div>
-                    </div>
-        
-                    <button className="submit-btn">
-                        Submit
-                    </button>
-                    <div className="forgot-pass">
-                        <a href="#">Forgot Password?</a>
-                    </div>
+                        <input
+                            className="field-input"
+                            type='email'
+                            id={uuid()}
+                            value={userLogin.loginemail}
+                            onChange={handleChange}
+                            name='loginemail'
+                            required = {active==='login'}
+                            disabled={active==='signup'}
+                        />
+                        <div className="input-name input-margin">
+                            <h2>Password</h2>
+                        </div>
+                        <input 
+                            className="field-input"
+                            type='password'
+                            id={uuid()}
+                            value={userLogin.loginpassword}
+                            onChange={handleChange}
+                            name='loginpassword'
+                            required = {active==='login'}
+                            disabled={active==='signup'}
+                        />
+                        <div className="input-r">
+                            <div className="check-input">
+                                <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
+                                <label className="rememberme-blue" htmlFor="remember-me-2"></label>
+                            </div>
+                            <div className="rememberme">
+                                <label htmlFor="remember-me-2">Remember Me</label>
+                            </div>
+                        </div>
+            
+                        <button className="submit-btn">
+                            Submit
+                        </button>
+                        <div className="forgot-pass">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                        </>
+                    }
                 </form>
             </div>
             <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
@@ -243,7 +273,7 @@ function LoginSignup(props) {
                             required={active==='signup'}
                             disabled={active==='login'}
                         />
-                        <button className="submit-btn">
+                        <button className="submit-btn" onClick={handleSubmit}>
                             Submit
                         </button>
                     </div>

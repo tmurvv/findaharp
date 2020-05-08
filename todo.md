@@ -1,5 +1,7 @@
 - contact & verify pages need spinner
 
+- check on encryption for signup password (does it show up in devtools console upon submit when no localhost used)
+
 - cache images
 
 <div>Font made from <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>is licensed by CC BY 3.0</div>

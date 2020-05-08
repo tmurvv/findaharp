@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }) {
         <>  
             <Head/>
             <Banner />
+            
             <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
             <Component {...pageProps} />
             <Footer />

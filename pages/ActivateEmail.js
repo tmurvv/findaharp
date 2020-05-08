@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import parse from 'url-parse';
 import axios from 'axios';
+import btoa from 'btoa';
 
 // internal
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
@@ -76,7 +77,7 @@ function ActivateEmail(props) {
 ActivateEmail.getInitialProps = async (props) => {
     const activateEmail = props.query.email;    
     try {
-        const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/emailverify', { email: activateEmail});
+        const res = await axios.post('http://localhost:3000/api/v1/emailverify', { email: activateEmail});
         if (res) return {emailFound: true};
     } catch (error) {
         console.log('error', error);
