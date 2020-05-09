@@ -1,16 +1,20 @@
 // packages
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
+import { useRouter } from 'next/router';
 import parse from 'url-parse';
 import axios from 'axios';
 import btoa from 'btoa';
 
 // internal
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
+import {UserContext} from '../src/contexts/UserContext';
 
 function ActivateEmail(props) {
+    const user = useContext(UserContext);
     const [verifying, setVerifying] = useState(false);
     const [found, setFound] = useState(props.emailFound);
-    
+    const router = useRouter();
+    console.log(router.route)
     // useEffect(() => {
     //     async function verifyEmail() {
     //         const emailRoute = props.router;
@@ -37,7 +41,7 @@ function ActivateEmail(props) {
     
    return (
        <>
-         <div className='login-signup-container' style={{padding: '40px'}}>
+         <div className='login-signup-container' style={{padding: '40px'}} hidden={router.route!=='/ActivateEmail'}>
             
              {verifying ? 
                     <div className="login-signup l-attop" style={{ transform: 'translate(0,0)'}} id="login" onClick={()=>handleLoginClick()}>

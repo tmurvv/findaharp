@@ -134,7 +134,7 @@ const testData = [
         "productType": "lever-free",
         "productSize": 26,
         "productFinish": "natural",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Harpsicle-Maple.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/harpsicle.jpg",
         "productImageBestColor": "#d1ae96",
         "divider": "00000000000000000000000"
     },
@@ -348,7 +348,7 @@ const testData = [
         "productModel": "Arie",
         "productType": "lever",
         "productSize": 22,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Heather28.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/aries.jpg",
         "productImageBestColor": "#d0dcde",
         "divider": "00000000000000000000000"
     },
@@ -435,7 +435,7 @@ const testData = [
         "productType": "lever",
         "productSize": 26,
         "productFinish": "walnut",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Cheyenne26.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/ceili.jpg",
         "productImageBestColor": "#dac6ad",
         "divider": "00000000000000000000000"
     },
@@ -556,7 +556,7 @@ const testData = [
         "productModel": "Ceili",
         "productType": "lever",
         "productSize": 34,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Cheyenne26.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/ceili.jpg",
         "productImageBestColor": "#f3dcd1",
         "divider": "00000000000000000000000"
     },
@@ -608,7 +608,7 @@ const testData = [
         "productModel": "Aberdeen Meadows",
         "productType": "lever",
         "productSize": 36,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Cheyenne26.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/mariposa.jpg",
         "productImageBestColor": "#f0d6a6",
         "divider": "00000000000000000000000"
     },
@@ -781,7 +781,7 @@ const testData = [
         "productModel": "Style 23",
         "productType": "pedal",
         "productSize": 47,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH23.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/23.jpg",
         "productImageBestColor": "#dacca8",
         "divider": "00000000000000000000000"
     },
@@ -964,7 +964,7 @@ const testData = [
         "productModel": "Cunningham 35",
         "productType": "lever",
         "productSize": 35,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Cheyenne26.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/cunningham.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -980,7 +980,7 @@ const testData = [
         "productModel": "Boulevard Classic 34",
         "productType": "lever",
         "productSize": 34,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/DustyBoulevard34.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/boulevard.jpg",
         "divider": "00000000000000000000000"
     },
     {

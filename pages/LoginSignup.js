@@ -1,14 +1,14 @@
 // packages
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
-import btoa from 'btoa';
 
 // internal
+import {UserContext} from '../src/contexts/UserContext';
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
-import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
 
 function LoginSignup(props) {
+    const user = useContext(UserContext);
     const [active, setActive] = useState('login');
     const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
@@ -92,7 +92,7 @@ function LoginSignup(props) {
     
     const handleSubmit = async (evt) => {
         
-        //evt.preventDefault();
+        evt.preventDefault();
         if (active==='signup') {
             
             if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
@@ -112,12 +112,15 @@ function LoginSignup(props) {
             } catch (e) {
                 alert(`Something went wrong on signup: ${e.message}`)
             }
-            
-            
         }
         if (active==='login') {
-            if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
-            const res = await axios.post('http://localhost:3000/api/v1/users/login', {});
+            console.log('imin login')
+            if (userLogin.loginpassword.length<8) return alert('Passwords must be at least 8 characters long.');
+            const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+            console.log(res);
+            user.changeUser({name: res.data.user.firstname, email: 'Changed'});
+            
+            document.querySelector('#userName').innerText='Welcome ' + user.name;
         }
         
         resetSignupForm();
@@ -147,7 +150,7 @@ function LoginSignup(props) {
    return (
        <>
         <div className='login-signup-container'>
-            <div className="login-signup l-attop" id="login" onClick={()=>handleLoginClick()}>
+            <div className="login-signup l-attop" id="login">
                 <div className="login-signup-title">
                     {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>
@@ -196,7 +199,7 @@ function LoginSignup(props) {
                             </div>
                         </div>
             
-                        <button className="submit-btn">
+                        <button className="submit-btn" onClick={handleSubmit}>
                             Submit
                         </button>
                         <div className="forgot-pass">
