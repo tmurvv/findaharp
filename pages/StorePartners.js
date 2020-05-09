@@ -10,7 +10,7 @@ export default function StorePartners() {
         productTitle: "Your Store Name",
         productPrice: "$2,900",
         
-        productLongDesc: "Harpist Eugenia Miller started Harps Central in 2003 after feeling her community of harpists was under-served in her region. She dreamt of creating a convenient central location where harpists from around the region could come to view harps, select music, and just have a little bit of harp-chat time with other passionate players. Currently Harps Galore features a wide selection of pre-owned lever and pedal harps, as well as harp music, harp strings and all of those fun harp trinkets that we love to display around our homes.",
+        productLongDesc: "Harps Central was started in 2003 after a local harpist felt the community of harpists was under-served in the region. The store creates a convenient central location where harpists can come to view harps, select music, and have a little bit of harp-chat time with other passionate players. Currently Harps Central features a wide selection of pre-owned lever and pedal harps, as well as harp music, harp strings and all of those fun harp trinkets that we love to display around our homes.",
         productMaker: "YOUR STORE NAME",
         productImageUrl: "/img/genericLogo.png",
         productImageBestColor: "#d6c3ab",

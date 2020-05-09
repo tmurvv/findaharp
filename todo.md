@@ -1,5 +1,7 @@
 - contact & verify pages need spinner
 
+- Remember me, forgot password on login
+
 - check on encryption for signup password (does it show up in devtools console upon submit when no localhost used)
 
 - cache images

@@ -7,7 +7,6 @@ import {UserContext} from '../contexts/UserContext';
 
 export default function NavBar(props) {
     const user = useContext(UserContext);
-    console.log('usercontexzt', user)
     return(
         <>
         <div className='navBarOuter'>

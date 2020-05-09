@@ -1,44 +1,18 @@
 // packages
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { useRouter } from 'next/router';
-import parse from 'url-parse';
 import axios from 'axios';
-import btoa from 'btoa';
 
 // internal
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
-import {UserContext} from '../src/contexts/UserContext';
+import { UserContext } from '../src/contexts/UserContext';
 
 function ActivateEmail(props) {
     const user = useContext(UserContext);
     const [verifying, setVerifying] = useState(false);
     const [found, setFound] = useState(props.emailFound);
     const router = useRouter();
-    console.log(router.route)
-    // useEffect(() => {
-    //     async function verifyEmail() {
-    //         const emailRoute = props.router;
-    //         if (emailRoute) {
-    //             const idx = (emailRoute.asPath).indexOf('?');
-    //             const myEmail = JSON.parse(JSON.stringify(emailRoute.asPath.substr(idx+7)));
-    //             console.log(myEmail);
-    //             // const myEmail = "tmurvv@gmail.com";
-    //             const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/emailverify', {"email": myEmail});
-    //             if(res.status===200) return true
-    //             return false;
-    //         }
-    //         if (verifyEmail()) {
-    //             setVerifying(false);
-    //             setFound(true);
-    //         } else {
-    //             setVerifying(false);
-    //             setFound(false);
-    //         }
-    //     };
-        
 
-    // }, []);
-    
    return (
        <>
          <div className='login-signup-container' style={{padding: '40px'}} hidden={router.route!=='/ActivateEmail'}>

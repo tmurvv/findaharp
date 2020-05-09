@@ -4,7 +4,7 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import {UserContext} from '../src/contexts/UserContext';
+import { UserContext } from '../src/contexts/UserContext';
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
 
 function LoginSignup(props) {
@@ -107,17 +107,14 @@ function LoginSignup(props) {
 
             try {
                 const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
-                console.log('hereres', res);
                 if (res.status===200) {alert('Signup Successful. Please check your inbox to verify your email.'); setNeedVerify(true)}
             } catch (e) {
                 alert(`Something went wrong on signup: ${e.message}`)
             }
         }
         if (active==='login') {
-            console.log('imin login')
             if (userLogin.loginpassword.length<8) return alert('Passwords must be at least 8 characters long.');
             const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-            console.log(res);
             user.changeUser({name: res.data.user.firstname, email: 'Changed'});
             
             document.querySelector('#userName').innerText='Welcome ' + user.name;
@@ -150,7 +147,7 @@ function LoginSignup(props) {
    return (
        <>
         <div className='login-signup-container'>
-            <div className="login-signup l-attop" id="login">
+            <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
                     {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>

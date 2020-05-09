@@ -45,8 +45,8 @@ function MyApp({ Component, pageProps }) {
             <UserContext.Provider value={user}>
                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
                 {/* <ActivateEmail router={router} /> */}
+                <Component {...pageProps} />
             </UserContext.Provider>
-            <Component {...pageProps} />
             <Footer />
             <AppCss />
         </>

@@ -3,6 +3,15 @@
 
 - command to see test coverage: npm run test -- --coverage --watchAll=false
 
+buyers guide logic:
+    i want pedal -> pedal
+    i want lever or not sure
+        beginner 
+            classical, variety -> pedal path
+            irish -> lever path
+            not sure, other -> not sure path
+        have played some
+            under construction
 
 
 size lever/harp

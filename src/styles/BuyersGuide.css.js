@@ -59,14 +59,25 @@ function BuyersGuideCSS() {
                 position: relative;
                 display: flex;
                 justify-content: space-between;
+            }
+            @media only screen and (max-width: 800px) {
+                .pedalLeverTut {
+                    display: none;
+                }
+            }
             .pedalLeverTutMobile {
+                display: none;
                 margin: 50px auto 70px;
                 background-color: #ffffff;
                 border: 2px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
-                padding: 30px 0;
-                
+                padding: 30px;
+            }
+            @media only screen and (max-width: 800px) {
+                .pedalLeverTutMobile {
+                    display: block;
+                }
             }
             .pedalLeverTutText {
                 flex: 5;
