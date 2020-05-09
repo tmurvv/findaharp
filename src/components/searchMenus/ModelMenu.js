@@ -13,15 +13,20 @@ export default function ModelMenu(props) {
     
     const currentModels = props.products.map(product => product.productModel).sort(); 
     let models;
+    
+    
     if (maker) maker = [maker];
     if (maker && maker.length > 0) {
         models = Array.from(getModelList(maker))
     } else {
         models = Array.from(getModelList(props.makesmodels, props.productSize));
     }
-    models=itemsSortByDisabled(models, currentModels).map(model => <option 
+    // BREAKING
+    // models = itemsSortByDisabled(models, currentModels);
+    models=itemsSortByDisabled(models, currentModels).map(model => <p 
             name={model}
-        >{model.trim()}</option>);
+        >{model.trim()}</p>);
+
     const handleClose = (evt) => {
         props.handleModelChange(evt.target.getAttribute('name'));
         setAnchorEl(null);
@@ -48,13 +53,18 @@ export default function ModelMenu(props) {
                 {models.map(model =>
                     <li 
                         key={uuid()} 
-                        onClick={handleClose}                                   
-                        disabled={!currentModels.find(currentModel => currentModel === model.props.name)}
-                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#c3c3c3"}:{color:"#fafbfc"}}
+                        name={model}
+                        onClick={currentModels.find(currentModel => currentModel === model.props.name)?handleClose:()=>alert(`No listings for ${model.props.name}.`)}                                   
+                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#c3c3c3"}:{color:"#fafbfc"}} // BREAKING
                         >{model}
                     </li>
                 )}
             </ul>  
         </div>
     );
+}
+
+ModelMenu.getInitialProps = (props) => {
+    console.log('inminin', props);
+    return props;
 }

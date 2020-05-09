@@ -106,7 +106,7 @@ function LoginSignup(props) {
             };
 
             try {
-                const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
+                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
                 if (res.status===200) {alert('Signup Successful. Please check your inbox to verify your email.'); setNeedVerify(true)}
             } catch (e) {
                 alert(`Something went wrong on signup: ${e.message}`)
@@ -114,7 +114,7 @@ function LoginSignup(props) {
         }
         if (active==='login') {
             if (userLogin.loginpassword.length<8) return alert('Passwords must be at least 8 characters long.');
-            const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+            const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
             user.changeUser({name: res.data.user.firstname, email: 'Changed'});
             
             document.querySelector('#userName').innerText='Welcome ' + user.name;

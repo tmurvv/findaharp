@@ -29,6 +29,10 @@ function AppCss() {
                 font-family: avenir;
                 color: #5c5b5b;
             }
+            p {
+                margin-block-end: 0 !important;
+                margin-block-start: 0 !important;
+            }
             .menuButton {
                 background-color: transparent;
                 font-size: 14px;

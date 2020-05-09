@@ -89,9 +89,9 @@ function ProductContainer(props) {
                     </LazyLoad>
                 </div>
                 <div className={`grid-item productSmallDisplay-text`}>
-                    <p>{product.productMaker} {product.productModel}/{product.productSize}<br></br>
-                    {removeDashOE(product.sellerName)}<br></br>
-                    <span onClick={(e)=>handleOpenContact(e, product)}>Contact Seller</span>
+                    <p>{product.productMaker} {product.productModel}<br></br>
+                    {product.productSize} Strings<br></br>
+                    <span onClick={(e)=>handleOpenContact(e, product)} style={{textDecoration: 'underline'}}>{removeDashOE(product.sellerName)}</span>
                     </p>
                 </div>           
             </div>

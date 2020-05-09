@@ -417,7 +417,7 @@ const testData = [
         "productType": "lever",
         "productSize": 30,
         "productFinish": "cherry",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/DustyRavenna34.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/nino.jpg",
         "productImageBestColor": "#cfb9a0",
         "divider": "00000000000000000000000"
     },
@@ -522,7 +522,7 @@ const testData = [
         "productModel": "Livia",
         "productType": "lever",
         "productSize": 36,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Heather28.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/ceili.jpg",
         "productImageBestColor": "#ddc3ba",
         "divider": "00000000000000000000000"
     },
@@ -591,7 +591,7 @@ const testData = [
         "productModel": "Ulysses",
         "productType": "lever",
         "productSize": 34,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/Cheyenne26.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/aries.jpg",
         "productImageBestColor": "#e6d4ce",
         "divider": "00000000000000000000000"
     },

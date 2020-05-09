@@ -40,8 +40,8 @@ function ActivateEmail(props) {
                             </div>
                             <div>
                                 {found?
-                                    <a href='http://localhost:3006'><button className='submit-btn'>Go to Harp Listings</button></a>
-                                    :<a href='http://localhost:3006/LoginSignup'><button className='submit-btn'>Go to Login/Signup</button></a>
+                                    <a href='https://findaharp.com'><button className='submit-btn'>Go to Harp Listings</button></a>
+                                    :<a href='https://findaharp.com/LoginSignup'><button className='submit-btn'>Go to Login/Signup</button></a>
                                 }
                             </div>
                         </div>
@@ -55,7 +55,7 @@ function ActivateEmail(props) {
 ActivateEmail.getInitialProps = async (props) => {
     const activateEmail = props.query.email;    
     try {
-        const res = await axios.post('http://localhost:3000/api/v1/emailverify', { email: activateEmail});
+        const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/emailverify', { email: activateEmail});
         if (res) return {emailFound: true};
     } catch (error) {
         console.log('error', error);
