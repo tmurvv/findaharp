@@ -174,6 +174,13 @@ export function getSizeFromModel(makesModels, model) {
 
     return foundName;
 }
+export const getSearchInfo = (stateItem, update) => {
+    let newSearchPartial = allState.searchInfo;
+    if (allState.searchInfo.indexOf("All Harps")>-1) newSearchPartial = '';
+    let idx = allState.searchInfo.indexOf(allState[stateItem]);
+    if (idx>-1) newSearchPartial = newSearchPartial.slice(0,idx) + newSearchPartial.slice(idx+allState[stateItem].length+2);
+    return `${update}, ${newSearchPartial}`;
+}
 export const itemsSortByDisabled = (items, currentItems) => {
     let itemsWithDisabled = [];
     const sortItems = [];

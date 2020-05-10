@@ -2,12 +2,11 @@
 - make it easier to change api on deployment
 
 ### UI/UX
-- Only one menu open at a time
-- Add search parameters above harp listings
-- Open close all menus, only one menu open at a time?
+- cherry nino not showing when under $2000 selected
 - Responsive for login page
 - contact & verify pages need spinner
 - broken harp image needs image not found
+- Open only one menu at a time
 
 ### AUTHENTICATION
 - Remember me, 
@@ -31,4 +30,3 @@
 - CRUD operations on upload listings
 - add close form to private listings
 - New Listings Page
-

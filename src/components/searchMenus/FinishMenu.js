@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function FinishMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);  
+    const [anchorEl, setAnchorEl] = React.useState(props.open);  
     const handleClose = (evt) => {
         setAnchorEl(null);
         if (evt.target.value === 'All Finishes') return;

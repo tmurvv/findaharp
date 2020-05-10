@@ -42,6 +42,7 @@ export default function ModelMenu(props) {
                 hidden={!anchorEl}
                 name='Model Menu'
                 className='plainTextSelectLine1'
+                style={{zIndex: 6000}}
             >
                 <li 
                     onClick={handleClose} 

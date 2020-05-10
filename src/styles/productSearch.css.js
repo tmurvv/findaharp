@@ -13,6 +13,13 @@ function ProductSearchCss() {
                 font-weight: 500;
                 font-size:14px;
             }
+            
+            h3 {
+                width: 100%;
+                text-align: center;
+                margin-block-end: 1.66em;
+                margin-block-start: 1.66em;
+            }
             .productSearchOuter {
                 max-width: 1010px;
             }

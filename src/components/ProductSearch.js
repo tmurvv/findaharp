@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useRef } from 'react';
 
 // internal
 import ProductSearchCss from '../styles/ProductSearch.css';
@@ -12,14 +12,17 @@ import PriceMenu from './searchMenus/PriceMenu';
 import LocationMenu from './searchMenus/LocationMenu';
 import { 
     getFilteredProducts, 
-    triggerLazy,
-    getMakerFromModel, 
-    getSizeFromModel,
-    findSizeWords,
-    findProductType 
-} from '../utils/helpers'
+    getSearchInfo,
+    triggerLazy
+} from '../utils/helpers';
+import { searchReducer } from '../utils/reducers'
 
+const initialState = {
+    sizeOpen: false,
+    finishOpen: false
+}
 function ProductSearch(props) {
+    const [openMenu, setOpenMenu] = useReducer(searchReducer, initialState);
     const [allState, setAllState] = useState({
         selectionType: '',
         maker: 'All Makers',
@@ -27,61 +30,53 @@ function ProductSearch(props) {
         size: 'All Sizes',
         finish: 'All Finishes',
         price: 'All Prices',
-        location: 'All Locations'
-    });
-    function resetDropDowns(exceptions) {
-        if (!exceptions.includes('maker')) setAllState({...allState, maker: 'All Makers'});     
-        if (!exceptions.includes('model')) setAllState({...allState, model: 'All Models'});
-        if (!exceptions.includes('size')) setAllState({...allState, size: 'All Sizes'});
-        if (!exceptions.includes('finish')) setAllState({...allState, size: 'All Finishes'});
-        if (!exceptions.includes('price')) setAllState({...allState, size: 'All Prices'});
-        if (!exceptions.includes('location')) setAllState({...allState, size: 'All Locations'});
-    }
-    
+        location: 'All Locations',
+        searchInfo: 'All Harps'
+    });   
     function handleMakerSelection(maker) {
-        //modelName.endsWith('Models:') catches when user selects all models from maker
         setAllState({...allState, 
             maker,
             model: "All Models",
-            // selectionType: 'maker'
+            searchInfo: getSearchInfo('maker', maker)
         });
     }
     function handleModelSelection(model) {
         //catches when user selects all models from maker
         if (model.toUpperCase() === 'ALL MODELS') {
             setAllState({...allState, 
-                model: "All Models"
+                model: "All Models",
+                searchInfo: getSearchInfo('model', model)
             });
             return;
         }
-
         setAllState({...allState, 
             model,
-            // maker: getMakerFromModel(props.makesmodels, model),
-            // size: findSizeWords(getSizeFromModel(props.makesmodels, model), findProductType(props.makesmodels, getMakerFromModel(props.makesmodels, model), model))
-            // size: `${getSizeFromModel(props.makesmodels, model)} Strings`
+            searchInfo: getSearchInfo('model', model)
         });
     }
-    function handleSizeSelection(newProductSize) {
-        // resetDropDowns('size');
+    function handleSizeSelection(size) {
         setAllState({...allState, 
-            size: newProductSize
+            size,
+            searchInfo: getSearchInfo('size', size)
         });
     }
-    function handleFinishSelection(newProductFinish) {
+    function handleFinishSelection(finish) {
         setAllState({...allState, 
-            finish: newProductFinish==='All Finishes'?'All Finishes':newProductFinish,
+            finish: finish==='All Finishes'?'All Finishes':finish,
             productType: 'all',
+            searchInfo: getSearchInfo('finish', finish)
         });
     }
-    function handlePriceSelection(newProductPrice) {
+    function handlePriceSelection(price) {
         setAllState({...allState, 
-            price: newProductPrice
+            price,
+            searchInfo: getSearchInfo('price', price)
         });
     }
-    function handleLocationSelection(newProductLocations) {
+    function handleLocationSelection(location) {
         setAllState({...allState, 
-            location: newProductLocations
+            location,
+            searchInfo: getSearchInfo('location', location)
         });
     }
 
@@ -93,7 +88,8 @@ function ProductSearch(props) {
             location: 'All Locations',
             size: "All Sizes",
             maker: "All Makers",
-            model: "All Models"
+            model: "All Models",
+            searchInfo: 'All Harps'
         });
     }
     useEffect(() => {
@@ -111,6 +107,8 @@ function ProductSearch(props) {
                 <div className={`arrow rightArrow line1RightArrow`}></div>
                 <SizeMenu 
                     handleSizeChange = {handleSizeSelection}
+                    onClick={() => dispatch({type: 'size'})}
+                    open={openMenu.sizeOpen}
                 />
                 <MakerMenu 
                     handleMakerChange = {handleMakerSelection} 
@@ -127,7 +125,6 @@ function ProductSearch(props) {
                 
                 <div className='arrow leftArrow line1LeftArrow'></div>
             </div>
-            
             <div className="searchLine1Sub">
                 <div className='arrow rightArrow line1SubRightArrow'></div>
                 <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
@@ -142,7 +139,6 @@ function ProductSearch(props) {
                     {allState.model}
                     {/* {allState.model==='All Models'?'':allState.model} */}
                 </div>
-                
                 <div className='arrow leftArrow line1SubLeftArrow'></div>
             </div>
             </div>
@@ -156,6 +152,8 @@ function ProductSearch(props) {
                         products={props.products}
                         makesmodels={props.makesmodels}
                         currentselected={allState.finish?allState.finish:'Harp Finish'}
+                        onClick={() => dispatch({type: 'finish'})}
+                        open={openMenu.finishOpen}
                     />
                     <PriceMenu 
                         handlePriceChange = {handlePriceSelection}
@@ -188,12 +186,18 @@ function ProductSearch(props) {
                 <div className={`arrow leftArrow line2SubLeftArrow`}></div>
                 <div onClick={handleClear} className='clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                    <p>Clear All</p>
+                    <p>Clear All</p> 
                 </div>
             </div>
+            <h3>Searching {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)===','?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}</h3>
             </div>
             <ProductSearchCss />    
-            <ProductContainer data-test="component-ProductContainer" filteredproducts={filteredProducts}/>              
+            <ProductContainer 
+                data-test="component-ProductContainer" 
+                filteredproducts={filteredProducts} 
+                searchInfo={allState.searchInfo}
+                // searchInfo={allState.searchInfo}
+            />              
         </div>
         </>
     );

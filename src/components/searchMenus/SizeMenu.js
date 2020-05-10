@@ -2,7 +2,7 @@
 import React from 'react';
 
 export default function SizeMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);  
+    const [anchorEl, setAnchorEl] = React.useState(props.open);  
     const handleClose = (evt) => {
         setAnchorEl(null);
         if (evt.target.value === 'All Sizes') return;
@@ -11,7 +11,10 @@ export default function SizeMenu(props) {
 
     return (
         <div>
-             <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
+            <div 
+                className="menuButton"
+                onClick={() => setAnchorEl(!anchorEl)}
+            >
                 HARP SIZE
             </div>              
             <ul
@@ -20,6 +23,7 @@ export default function SizeMenu(props) {
                 hidden={!anchorEl}
                 name='Size Menu'
                 className='plainTextSelectLine1'
+                style={{zIndex: 6000}}
             >
                 <li 
                     onClick={handleClose} 

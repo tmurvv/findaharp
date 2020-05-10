@@ -26,7 +26,6 @@ function ProductContainerCss() {
             }
             .grid-container {
                 margin: auto;
-                margin-top: 45px;
                 display: grid;
                 grid-template-columns: 13.2vw 13.2vw 13.2vw 13.2vw 13.2vw;
                 grid-column-gap: 1vw;

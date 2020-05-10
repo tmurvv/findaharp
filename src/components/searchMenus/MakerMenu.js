@@ -27,6 +27,7 @@ export default function MakerMenu(props) {
                 hidden={!anchorEl}
                 name='Maker Menu'
                 className='plainTextSelectLine1'
+                style={{zIndex: 6000}}
             >
                 <li onClick={handleClose}                   
                         onClick={handleClose}

@@ -29,10 +29,6 @@ function AppCss() {
                 font-family: avenir;
                 color: #5c5b5b;
             }
-            p {
-                margin-block-end: 0 !important;
-                margin-block-start: 0 !important;
-            }
             .menuButton {
                 background-color: transparent;
                 font-size: 14px;
@@ -54,6 +50,10 @@ function AppCss() {
                 list-style: none;
                 margin-top: -2px;
             }
+            .plainTextSelectLine1 p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
             .plainTextSelectLine2 {
                 margin-block-start: -.5em;
                 color: #333333;
@@ -64,6 +64,10 @@ function AppCss() {
                 background-color: #f9bf1e;
                 list-style: none;
                 z-index: 2000;
+            }
+            .plainTextSelectLine2 p {
+                margin-block-start: 0;
+                margin-block-end: 0;
             }
             @media only screen and (max-width: 550px) {
                 .plainTextSelectLine1 {
