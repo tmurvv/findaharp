@@ -7,7 +7,6 @@ export function triggerLazy() {
     window.scrollBy(0,1); //hack to trigger lazyload after search
     window.scrollBy(0,-1); //hack to trigger lazyload after search
 }
-
 export function removeDashOE(sellerName) {
     return sellerName.includes("-o")||sellerName.includes("-e")
         ?sellerName.substr(0,sellerName.length-2)
@@ -40,7 +39,9 @@ export function findSizeWords(strings, type) {
     return 'size not found'
 }
 export function findPriceRange(price) {
+    console.log(price)
     price = parseNum(price);
+    console.log(price)
     if (price<2000) return 'Less than $2,000';
     if (price>=2000&&price<5000) return '$2,000-4,999';
     if (price>=5000&&price<9999) return '$5,000-9,999';
@@ -174,12 +175,11 @@ export function getSizeFromModel(makesModels, model) {
 
     return foundName;
 }
-export const getSearchInfo = (stateItem, update) => {
-    let newSearchPartial = allState.searchInfo;
-    if (allState.searchInfo.indexOf("All Harps")>-1) newSearchPartial = '';
-    let idx = allState.searchInfo.indexOf(allState[stateItem]);
-    if (idx>-1) newSearchPartial = newSearchPartial.slice(0,idx) + newSearchPartial.slice(idx+allState[stateItem].length+2);
-    return `${update}, ${newSearchPartial}`;
+export const getSearchInfo = (searchInfo, oldValue, update) => {
+    if (searchInfo.indexOf("All Harps")>-1) searchInfo = '';
+    let idx = searchInfo.indexOf(oldValue);
+    if (idx>-1) searchInfo = searchInfo.slice(0,idx) + searchInfo.slice(idx+oldValue.length+2);
+    return `${update}, ${searchInfo}`;
 }
 export const itemsSortByDisabled = (items, currentItems) => {
     let itemsWithDisabled = [];

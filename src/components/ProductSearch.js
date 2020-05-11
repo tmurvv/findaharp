@@ -22,7 +22,7 @@ const initialState = {
     finishOpen: false
 }
 function ProductSearch(props) {
-    const [openMenu, setOpenMenu] = useReducer(searchReducer, initialState);
+    const [openMenu] = useReducer(searchReducer, initialState);
     const [allState, setAllState] = useState({
         selectionType: '',
         maker: 'All Makers',
@@ -37,7 +37,7 @@ function ProductSearch(props) {
         setAllState({...allState, 
             maker,
             model: "All Models",
-            searchInfo: getSearchInfo('maker', maker)
+            searchInfo: getSearchInfo(allState.searchInfo, allState.maker, maker)
         });
     }
     function handleModelSelection(model) {
@@ -45,41 +45,40 @@ function ProductSearch(props) {
         if (model.toUpperCase() === 'ALL MODELS') {
             setAllState({...allState, 
                 model: "All Models",
-                searchInfo: getSearchInfo('model', model)
+                searchInfo: getSearchInfo(allState.searchInfo, allState.model, model)
             });
             return;
         }
         setAllState({...allState, 
             model,
-            searchInfo: getSearchInfo('model', model)
+            searchInfo: getSearchInfo(allState.searchInfo, allState.model, model)
         });
     }
     function handleSizeSelection(size) {
         setAllState({...allState, 
             size,
-            searchInfo: getSearchInfo('size', size)
+            searchInfo: getSearchInfo(allState.searchInfo, allState.size, size)
         });
     }
     function handleFinishSelection(finish) {
         setAllState({...allState, 
             finish: finish==='All Finishes'?'All Finishes':finish,
             productType: 'all',
-            searchInfo: getSearchInfo('finish', finish)
+            searchInfo: getSearchInfo(allState.searchInfo, allState.finish, finish)
         });
     }
     function handlePriceSelection(price) {
         setAllState({...allState, 
             price,
-            searchInfo: getSearchInfo('price', price)
+            searchInfo: getSearchInfo(allState.searchInfo, allState.price, price)
         });
     }
     function handleLocationSelection(location) {
         setAllState({...allState, 
             location,
-            searchInfo: getSearchInfo('location', location)
+            searchInfo: getSearchInfo(allState.searchInfo, allState.location, location)
         });
     }
-
     function handleClear(evt) {
         setAllState({
             ...allState,

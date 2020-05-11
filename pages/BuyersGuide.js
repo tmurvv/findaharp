@@ -1,25 +1,62 @@
 import React from 'react';
-import { useRouter } from 'next/router'
 import BuyersGuideCSS from '../src/styles/BuyersGuide.css';
 import PedalLeverTut from '../src/components/PedalLeverTut';
 
 function BuyersGuide(props) {
-    const router = useRouter();
     function handleSurveySubmit() {
-        alert('Shortcut not yet implemented');
-        // i want pedal -> pedal
-        // if (document.querySelector('#pedal').checked) {
-        //     console.log('imin')
-        //     props.buyerWindow.location.href('#buyerspedalharp');
-        // }
-    
-        // i want lever or not sure
-        //     beginner 
-        //         classical, variety -> pedal path
-        //         irish -> lever path
-        //         not sure, other -> not sure path
-        //     have played some
-        //         under construction
+        // pedal harp shortcut
+        if (document.querySelector('#pedalharp').checked) {
+            document.querySelector('#guidePedalGeneral').scrollIntoView();
+            return window.scrollBy(0, -100);
+        }
+        
+        // get survey results
+        const beginner = () => document.querySelector('#beginner').checked;
+        const harptype = () => {
+            if (document.querySelector('#leverharp').checked) return 'leverharp';
+            if (document.querySelector('#notsureharp').checked) return 'notsureharp';
+        }
+        const musictype = () => {
+            if (document.querySelector('#notsuremusic').checked) return 'notsuremusic';
+            if (document.querySelector('#irishmusic').checked) return 'irishmusic';
+            if (document.querySelector('#classicalmusic').checked) return 'classicalmusic';
+            if (document.querySelector('#varietymusic').checked) return 'varietymusic';
+            if (document.querySelector('#othermusic').checked) return 'othermusic';
+        }
+        console.log('res', beginner(), harptype(), musictype());
+        
+        // beginner 
+        if (beginner()) {
+            console.log('imbeg')
+            if (musictype()==='classicalmusic' || musictype()==='varietymusic') {
+                document.querySelector('#guidePedalPath').scrollIntoView();
+                return window.scrollBy(0, -100);
+            }
+            if (musictype()==='irishmusic') {
+                document.querySelector('#guideLeverPath').scrollIntoView();
+                return window.scrollBy(0, -100);
+            }
+            if (musictype()==='notsuremusic'||musictype()==='othermusic') {
+                document.querySelector('#guideNotSurePath').scrollIntoView();
+                return window.scrollBy(0, -100);
+            }
+        }
+        // experienced
+        if (harptype()==='leverharp') {
+            document.querySelector('#guideLeverGeneral').scrollIntoView();
+            return window.scrollBy(0, -100);
+        }
+        if (harptype()==='notsureharp') {
+            if (musictype()==='classicalmusic' || musictype()==='variety') {
+                document.querySelector('#guidePedalGeneral').scrollIntoView();
+                return window.scrollBy(0, -100);
+            }
+            if (musictype()==='irishmusic'||musictype()==='notsuremusic'||musictype()==='othermusic') {
+                if (musictype()==='othermusic') alert('Findaharp can not be sure whether you need a pedal or lever harp when option "Other Music" is selected. For now, we will direct you to our lever harp section.');
+                document.querySelector('#guideLeverGeneral').scrollIntoView();
+                return window.scrollBy(0, -100);
+            }
+        }   
     }
     return (
         <>
@@ -31,12 +68,12 @@ function BuyersGuide(props) {
                 <p>Findaharp.com uses two main categories of harp: LEVER and PEDAL. We include partially levered, lever-free, and lap harps in our LEVER category.</p>
                 <PedalLeverTut />
                 <h1>Shortcut Section</h1>
-                <h4 style={{textAlign: "center"}}>Answer these questions and we will take you the section of the guide that is most relevant to you.</h4>
+                <h4 style={{textAlign: "center"}}>Answer these questions and we will take you the section of the guide that is most relevant to you. Scroll down to skip.</h4>
                 {/* <button className='shortcutButton' onClick={() => {document.querySelector('.shortcut').hidden=false;document.querySelector('.shortcutButton').hidden=true;}}>Answer Shortcut Questions</button> */}
                 <div className='shortcut'>
                     <p>Are you a brand new harpist or have you been playing for at least a few months?</p>
                     <div className='block'>
-                        <input type='radio' id='new' name='newplayer' value='Brand New'/>
+                        <input type='radio' id='beginner' name='newplayer' value='Brand New'/>
                         <label htmlFor='newPlayer'>Brand new</label>
                     </div>
                     <div className='block'>
@@ -46,15 +83,15 @@ function BuyersGuide(props) {
                     <p>Do you know if you are looking for a pedal harp or a lever harp?</p>
                     <div className='radioGroup'>
                         <div className='block'>
-                            <input type='radio' id='not sure' name='pedallever' value='Not sure'/>
+                            <input type='radio' id='notsureharp' name='pedallever' value='Not sure'/>
                             <label htmlFor='not sure'>Not sure</label> 
                         </div>
                         <div className='block'>
-                            <input type='radio' id='lever' name='pedallever' value='lever'/>
+                            <input type='radio' id='leverharp' name='pedallever' value='lever'/>
                             <label htmlFor='lever'>I want a lever harp</label>
                         </div>
                         <div className='block'>
-                            <input type='radio' id='pedal' name='pedallever' value='pedal'/>
+                            <input type='radio' id='pedalharp' name='pedallever' value='pedal'/>
                             <label htmlFor='pedal'>I want a pedal harp</label>
                         </div>
                     </div>  
@@ -64,19 +101,19 @@ function BuyersGuide(props) {
                         <label htmlFor='not sure music'>Not sure</label>
                     </div>
                     <div className='block'>
-                        <input type='radio' id='irish' name='musictype' value='irish'/>
+                        <input type='radio' id='irishmusic' name='musictype' value='irish'/>
                         <label htmlFor='irish'>I am mostly interested in the Irish/Celtic/Folk style of music</label>
                     </div>
                     <div className='block'>
-                        <input type='radio' id='classical' name='musictype' value='classical'/>
+                        <input type='radio' id='classicalmusic' name='musictype' value='classical'/>
                         <label htmlFor='all'>I am mostly interested in classical</label>
                     </div>
                     <div className='block'>
-                        <input type='radio' id='all' name='musictype' value='all'/>
+                        <input type='radio' id='varietymusic' name='musictype' value='all'/>
                         <label htmlFor='all'>I am interested in a wide variety of musical styles: classical, pop, jazz, inspirational, world, etc.</label>
                     </div>
                     <div className='block'>
-                        <input type='radio' id='other' name='musictype' value='other'/>
+                        <input type='radio' id='othermusic' name='musictype' value='other'/>
                         <label htmlFor='all'>Other</label>
                     </div>
                     <button className='shortcutButton' onClick={handleSurveySubmit}>Take the shortcut</button>
@@ -86,10 +123,10 @@ function BuyersGuide(props) {
                 </div>
                 <h1>Buyer's Guide</h1>
                 <p>Findaharp.com uses these two main categories of harp: LEVER and PEDAL. We include partially levered, lever-free, and lap harps in our LEVER category.</p>
-                <h3>Lever Harp Path-beginner</h3>
+                <h3 id='guideLeverPath'>Lever Harp Path-beginner</h3>
                 <p>This path is for buyers interested in the 'Irish/Celtic/Folk' style of playing.</p>
                 <p>As a beginner, you want to be sure to start with a harp that will rest on the floor rather than held up by your legs or in your lap. With everything else that you are learning, you don’t want to worry about balancing the instrument. Even if you are hoping to eventually play a smaller lap harp, it is good to learn first on a larger floor harp.</p> 
-                <p>Usually, beginners start with 28-36 strings. What is the difference? Most find that the larger the instrument in this category, the easier it is to play. A larger lever harp generally has a larger sound. A harp with fewer strings sometimes sometimes requires rearranging the music to make it work on the instrument.</p>
+                <p>Usually, beginners start with 28-36 strings. In this size range, a larger instrument is a bit easier to keep tipped back on the shoulder. Also, a harp with fewer strings sometimes sometimes requires rearranging the music to make it work on the instrument.</p>
                 <p>It is also a good idea to inquire when the harp was last maintained. In the harp world we call it 'regulation'. Since harps are made of wood and glue, things can shift around a bit because of the weather and because of the tension of the strings. These shifts will cause the lever or pedal change to go 'off key' or 'out of tune'. Regulation corrects for this and should be done every 1-3 years depending on your situation.</p>
                 <p>Some other things to ask about:</p>    
                     <ol>
@@ -103,9 +140,9 @@ function BuyersGuide(props) {
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
-                <h3>Pedal Harp Path-beginner</h3>
+                <h3 id='guidePedalPath'>Pedal Harp Path-beginner</h3>
                 <p>This path is for students or purchasers interested in classical music or in a wide variety of music such as classical, pop, jazz, inspirational, world, etc.</p>
-                <p>Students on the pedal harp path will generally start with a lever harp to be sure that they really take to the instrument before making the investment a pedal harp requires. If the expense is not prohibitive and the student is at least 4’10”, then starting on a pedal harp would be an option. (<a href="#buyerspedalharp" style={{color: '#fe9e1a'}}>click here</a> to skip to pedal harp section). Here we will assume the student is starting with a lever harp before progressing to a pedal harp.</p>
+                <p>Students on the pedal harp path will generally start with a lever harp to be sure that they really take to the instrument before making the investment a pedal harp requires. If the expense is not prohibitive and the student is at least 4’10”, then starting on a pedal harp would be an option. (<a href="#guidePedalGeneral" style={{color: '#fe9e1a'}}>click here</a> to skip to pedal harp section). Here we will assume the student is starting with a lever harp before progressing to a pedal harp.</p>
                 <p>Here are three suggestions for finding a lever harp that will set you up to transition into a pedal harp:</p>
                 <ol>
                     <li>Find a harp that has a similar tension as the strings as a pedal harp. In other words, the strings are not more loose or wobbly than pedal harp strings. </li>
@@ -125,7 +162,7 @@ function BuyersGuide(props) {
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
-                <h3>"Not sure yet" path-beginner</h3>
+                <h3 id='guideNotSurePath'>"Not sure yet" path-beginner</h3>
                 <p>Not sure whether you want to end up in a pedal harp or lever harp? No problem at all.</p>
                 <p>Typically this student or purchaser would begin with a lever harp, as the student progresses they will discover what style of music speaks to them and they are usually drawn to a certain type of harp.</p>
                 <p>You will want to look for a lever harp that stands on the floor and can be tipped back on your shoulder rather than one you have to hold up with your legs or hold in your lap. The ideal size harp for a beginner is usually 34-36 strings.</p>
@@ -142,7 +179,7 @@ function BuyersGuide(props) {
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
-                <h3 id="buyerspedalharp">Purchasing a Pedal Harp</h3>
+                <h3 id="guidePedalGeneral">Purchasing a Pedal Harp</h3>
                 <div className='underConstructionImage'>
                     <img src='./img/not_found.png' alt='humorous harp with broken strings'/>
                     <h4>Under Construction</h4>
@@ -170,7 +207,7 @@ function BuyersGuide(props) {
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
-                <h3>Lever Harp Path-already playing</h3>
+                <h3 id='guideLeverGeneral'>Purchasing a Lever Harp</h3>
                 <div className='underConstructionImage'>
                     <img src='./img/not_found.png' alt='humorous harp with broken strings'/>
                     <h4>Under Construction</h4>

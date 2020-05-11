@@ -18,7 +18,7 @@ const initialState = {
 }
 function ProductContainer(props) {
     const [state, dispatch] = useReducer(productsReducer, initialState);
-    const [filteredproducts] = props;
+    const { filteredproducts } = props;
     
     function handleOpenDetail(product) {
         dispatch({type:'detail', product});
