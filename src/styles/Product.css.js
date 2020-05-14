@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProductContainerCss() {
+function ProductCss() {
     return (
         <style jsx="true">{`
             .notFoundContainer {
@@ -120,4 +120,4 @@ function ProductContainerCss() {
     )
 } 
 
-export default ProductContainerCss;
+export default ProductCss;

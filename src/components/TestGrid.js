@@ -2,7 +2,7 @@
 import React, {useReducer, useEffect, useState } from 'react';
 import LazyLoad from 'react-lazyload';
 // styles
-import ProductContainerCss from '../styles/ProductContainer.css';
+import TestGridCss from '../styles/TestGrid.css';
 // internal
 import ProductModal from './ProductModal';
 import ContactForm from './ContactForm';
@@ -18,7 +18,7 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductContainer = ({ filteredproducts }) => {
+const TestGrid = ({ filteredproducts }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [adjProducts, setAdjProducts] = useState(filteredproducts);
     const size = useWindowSize();
@@ -109,7 +109,7 @@ const ProductContainer = ({ filteredproducts }) => {
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     
                 />}
-                <ProductContainerCss />           
+                <TestGridCss />           
             </div>
         );
     } else {
@@ -120,13 +120,13 @@ const ProductContainer = ({ filteredproducts }) => {
                 <div data-test='component-ProductContainer' className='notFoundContainer'>
                     <img src= './img/not_found.png' alt='not found, humourous harp with broken strings'/>
                 </div>
-                <ProductContainerCss />
+                <TestGridCss />
             </>
         );
     }    
 }
 
-export default ProductContainer;
+export default TestGrid;
 
 
 // let newDiv = props => React.createElement('div', { className: 'productSmallDisplay', onClick: props.onClick })

@@ -22,11 +22,12 @@ function ProductSearchCss() {
             }
             .productSearchOuter {
                 max-width: 1010px;
+                width: 70%;
+                margin: auto;
             }
             .searchLine1 {
                 position: relative;
-                width: 70%;
-                margin: auto;
+                width: 100%;
                 height: 27px;
                 background-color: #000000;
                 color: #fafbfc;
@@ -41,7 +42,7 @@ function ProductSearchCss() {
             }
             .searchLine1Sub {
                 position: relative;
-                width: 70%;
+                width: 100%;
                 margin: auto;
                 margin-top: -2px;
                 height: 27px;
@@ -82,7 +83,7 @@ function ProductSearchCss() {
             }
             .searchLine2 {
                 position: relative;
-                width: 60%;
+                width: 90%;
                 margin: auto;
                 height: 27px;
                 background-color: #f9bf1e;
@@ -97,7 +98,7 @@ function ProductSearchCss() {
             }
             .searchLine2Sub {
                 position: relative;
-                width: 60%;
+                width: 90%;
                 margin: auto;
                 height: 26.5px;
                 background-color: #ffffff;

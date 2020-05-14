@@ -4,6 +4,7 @@ import React, { useState, useReducer, useEffect, useRef } from 'react';
 // internal
 import ProductSearchCss from '../styles/ProductSearch.css';
 import ProductContainer from './ProductContainer';
+import TestGrid from './TestGrid';
 import MakerMenu from './searchMenus/MakerMenu';
 import ModelMenu from './searchMenus/ModelMenu';
 import SizeMenu from './searchMenus/SizeMenu';
@@ -100,7 +101,7 @@ function ProductSearch(props) {
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
-        <div className='ProductSearchOuter'>
+        <div className='productSearchOuter'>
             <div className='mobileSearchLine1'> 
             <div className='searchLine1'>  
                 <div className={`arrow rightArrow line1RightArrow`}></div>
@@ -121,22 +122,18 @@ function ProductSearch(props) {
                     productSize={allState.size}
                     makesmodels={props.makesmodels}
                 />
-                
                 <div className='arrow leftArrow line1LeftArrow'></div>
             </div>
             <div className="searchLine1Sub">
                 <div className='arrow rightArrow line1SubRightArrow'></div>
                 <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
                     {allState.size}
-                    {/* {allState.size==='All Sizes'?'':allState.size} */}
                 </div>
                 <div id="selectedMaker" className={`search-grid-item`} value={allState.maker}>
                     {allState.maker}
-                    {/* {allState.maker==='All Makers'?'':allState.maker} */}
                 </div>
                 <div id="selectedModel" className={`search-grid-item`} value={allState.model}>
                     {allState.model}
-                    {/* {allState.model==='All Models'?'':allState.model} */}
                 </div>
                 <div className='arrow leftArrow line1SubLeftArrow'></div>
             </div>
@@ -145,7 +142,6 @@ function ProductSearch(props) {
             <div className='mobileSearchLine2'>
             <div className='searchLine2'>
                 <div className='arrow rightArrow line2RightArrow'></div>
-                {/* <div className='flexSB'> */}
                     <FinishMenu 
                         handleFinishChange = {handleFinishSelection} 
                         products={props.products}
@@ -166,31 +162,36 @@ function ProductSearch(props) {
                         currentselected={allState.location?allState.location:'Harp All Locations'}
                     /> 
                     <div className='arrow leftArrow line2LeftArrow'></div>
-                {/* </div>           */}
-            </div>
-            <div className="searchLine2Sub">
-                <div className={`arrow rightArrow line2SubRightArrow`}></div>
-                <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
-                    {allState.finish}
-                    {/* {allState.finish==='All Finishes'?'':allState.finish} */}
                 </div>
-                <div id="selectedPrice" className={`search-grid-item`} value={allState.price}>
-                    {allState.price}
-                    {/* {allState.price==='All Prices'?'':allState.price} */}
-                </div>
-                <div id="selectedAll Locations" className={`search-grid-item`} value={allState.location}>
-                    {allState.location}
-                    {/* {allState.location==='All Locations'?'':allState.location} */}
-                </div>
-                <div className={`arrow leftArrow line2SubLeftArrow`}></div>
-                <div onClick={handleClear} className='clearSearch'>
-                    <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                    <p>Clear All</p> 
+                <div className="searchLine2Sub">
+                    <div className={`arrow rightArrow line2SubRightArrow`}></div>
+                    <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
+                        {allState.finish}
+                        {/* {allState.finish==='All Finishes'?'':allState.finish} */}
+                    </div>
+                    <div id="selectedPrice" className={`search-grid-item`} value={allState.price}>
+                        {allState.price}
+                        {/* {allState.price==='All Prices'?'':allState.price} */}
+                    </div>
+                    <div id="selectedAll Locations" className={`search-grid-item`} value={allState.location}>
+                        {allState.location}
+                        {/* {allState.location==='All Locations'?'':allState.location} */}
+                    </div>
+                    <div className={`arrow leftArrow line2SubLeftArrow`}></div>
+                    <div onClick={handleClear} className='clearSearch'>
+                        <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+                        <p>Clear All</p> 
+                    </div>
                 </div>
             </div>
             <h3>Searching {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)===','?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}</h3>
-            </div>
-            <ProductSearchCss />    
+            <ProductSearchCss />
+            {/* <TestGrid 
+                data-test="component-ProductContainer" 
+                filteredproducts={filteredProducts} 
+                searchInfo={allState.searchInfo}
+                // searchInfo={allState.searchInfo}
+            />               */}
             <ProductContainer 
                 data-test="component-ProductContainer" 
                 filteredproducts={filteredProducts} 

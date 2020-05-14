@@ -1,3 +1,4 @@
+import {useState, useEffect} from 'react';
 import parseNum from 'parse-num';
 
 //leaf function helps find nested object keys,
@@ -11,6 +12,34 @@ export function removeDashOE(sellerName) {
     return sellerName.includes("-o")||sellerName.includes("-e")
         ?sellerName.substr(0,sellerName.length-2)
         :sellerName;
+}
+//courtesy of Gabe Ragland useHooks.com
+export function useWindowSize() { 
+    const isClient = typeof window === 'object';
+  
+    function getSize() {
+      return {
+        width: isClient ? window.innerWidth : undefined,
+        height: isClient ? window.innerHeight : undefined
+      };
+    }
+  
+    const [windowSize, setWindowSize] = useState(getSize);
+  
+    useEffect(() => {
+      if (!isClient) {
+        return false;
+      }
+      
+      function handleResize() {
+        setWindowSize(getSize());
+      }
+  
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+  
+    return windowSize;
 }
 export function setOpacity(yesNo) {
     if (yesNo) {

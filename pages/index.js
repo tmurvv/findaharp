@@ -49,7 +49,7 @@ Index.getInitialProps = async () => {
     // const products = res.data.harpData;
     // const makesModels = res.data.harpMakesModels;
     
-    products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0)); 
+    products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
     return { products, makesModels };
 }
 

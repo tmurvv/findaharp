@@ -1,7 +1,9 @@
 ### internal
 - make it easier to change api on deployment
+- check do we need to pass all open/close functions to Product
 
 ### UI/UX
+- model menu click on line, comes up [object, Object]
 - cherry nino not showing when under $2000 selected
 - Responsive for login page
 - contact & verify pages need spinner
