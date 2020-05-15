@@ -91,7 +91,6 @@ function ProductSearch(props) {
         setMenus(initialState);
     }
     function handleClick(e) {
-        console.log(e.target.name);
         switch(e.target.name) {
             case 'size':
                 setMenus({
@@ -282,7 +281,9 @@ function ProductSearch(props) {
                     </div>
                 </div>
             </div>
-            <h3>Searching {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)===','?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}</h3>
+            <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginBottom:'-20px'}}>Website Under Construction</h5>
+            <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginBottom:'-20px'}}>Sample Listings</h5>
+            <h3>Selected {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)===','?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}</h3>
             <ProductSearchCss />
             <ProductContainer 
                 data-test="component-ProductContainer" 

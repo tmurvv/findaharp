@@ -18,7 +18,7 @@ export default function MakerMenu(props) {
             <button 
                 className="menuButton" 
                 name='maker' 
-                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+                onClick={(e)=>{props.handleclick(e);}}
             >
                 HARP MAKER
             </button>               

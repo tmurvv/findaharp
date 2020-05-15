@@ -45,24 +45,27 @@ function ContactForm(props) {
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         if (!user.contactemail) return alert('Email is required');
-        const contact = {
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.contactemail,
-            sellername: product.sellerName,
-            productmaker: user.contactmaker,
-            productmodel: user.contactmodel,
-            comments: user.contactcomments
-        }
-        try {
-            const res = await axios.post(
-                `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
-                contact
-            );
-            alert("Email sent.")
-        } catch(e) {
-            alert("Something went wrong. Please try again or contact the webmaster.", e.message)
-        }
+
+        // BREAKING
+        alert('Under Construction. Email not sent'); 
+        // const contact = {
+        //     firstname: user.firstname,
+        //     lastname: user.lastname,
+        //     email: user.contactemail,
+        //     sellername: product.sellerName,
+        //     productmaker: user.contactmaker,
+        //     productmodel: user.contactmodel,
+        //     comments: user.contactcomments
+        // }
+        // try {
+        //     const res = await axios.post(
+        //         `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
+        //         contact
+        //     );
+        //     alert("Email sent.")
+        // } catch(e) {
+        //     alert("Something went wrong. Please try again or contact the webmaster.", e.message)
+        // }
         
         props.handleCloseContact();
     }

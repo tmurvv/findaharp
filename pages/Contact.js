@@ -6,7 +6,7 @@ function Contact() {
     return (
         <div className='contactContainer'>
             <div>
-                <ContactUsForm handleCloseContact={() => console.log('imin')} />
+                <ContactUsForm handleCloseContact={() => console.log('')} />
             </div>
             <div className='contactDivider'>
                 <img src="./img/golden_tapered_line.png" alt="fancy golden divider line" />

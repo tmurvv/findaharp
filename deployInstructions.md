@@ -1,11 +1,12 @@
 - check for console.loks
 - check for BREAKINk
 - check which API is connecting
+- is contact form submitting or not submitting as you want
 - for testing, make sure test data has correct data set for images...
     - findaharp-api only for findaharp.com
     - findaharp-api-testing for others
 - check that makesModels not local
-- good idea to commit and push
 - run tests
+- good idea to commit and push
 - do build npm run build
-- ftp files in "out" folder to findaharp.com and frecencylist.com
+- ftp files in "out" folder to findaharp.com

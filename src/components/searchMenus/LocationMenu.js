@@ -12,7 +12,7 @@ export default function LocationMenu(props) {
             <button 
                 className="menuButton" 
                 name='location' 
-                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+                onClick={(e)=>{props.handleclick(e);}}
             >
                 LOCATION
             </button>                

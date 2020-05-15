@@ -15,7 +15,6 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     const [openProductModal, setOpenProductModal] = useState(false);
     const [openContactModal, setOpenContactModal] = useState(false);
     function handleOpenProductModal() {
-        console.log('imin')
         setOpenProductModal(true);
         handleopendetail(productdetail); 
     }

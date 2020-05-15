@@ -13,7 +13,7 @@ export default function SizeMenu(props) {
             <button 
                 className="menuButton" 
                 name='size' 
-                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+                onClick={(e)=>{props.handleclick(e);}}
             >
                 HARP SIZE
             </button>              

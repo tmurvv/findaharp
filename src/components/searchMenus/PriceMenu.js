@@ -12,7 +12,7 @@ export default function PriceMenu(props) {
             <button 
                 className="menuButton" 
                 name='price' 
-                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+                onClick={(e)=>{props.handleclick(e);}}
             >
                 PRICE RANGE
             </button>               

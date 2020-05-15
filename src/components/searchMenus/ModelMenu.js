@@ -32,7 +32,7 @@ export default function ModelMenu(props) {
             <button 
                 className="menuButton" 
                 name='model' 
-                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+                onClick={(e)=>{props.handleclick(e);}}
             >
                 HARP MODEL
             </button>
@@ -66,6 +66,5 @@ export default function ModelMenu(props) {
 }
 
 ModelMenu.getInitialProps = (props) => {
-    console.log('inminin', props);
     return props;
 }

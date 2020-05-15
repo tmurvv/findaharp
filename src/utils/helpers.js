@@ -169,7 +169,6 @@ export function addPlaceholderProducts(filteredproductscontainer, width) {
     }
     if (width <= 950 && width > 700) {
         numNeeded = 3-(filteredproductscontainer.length%3);
-        console.log(numNeeded);
     }
     let newAd = {
         divider: "00000000000000000000000",

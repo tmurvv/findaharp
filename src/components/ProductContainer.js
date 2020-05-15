@@ -1,5 +1,6 @@
 // packages
 import React, {useReducer, useEffect, useState } from 'react';
+import uuid from 'react-uuid';
 import LazyLoad from 'react-lazyload';
 // styles
 import ProductContainerCss from '../styles/ProductContainer.css';
@@ -50,7 +51,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate }) => {
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container" style={{'opacity': `${state.opacity}`}}>
                     {addPlaces.map(product => <Product 
-                        key={product.id}
+                        key={uuid()}
                         productdetail={product}
                         handleopendetail={handleOpenDetail} 
                         handleclosedetail={handleCloseDetail} 

@@ -23,11 +23,10 @@ function BuyersGuide(props) {
             if (document.querySelector('#varietymusic').checked) return 'varietymusic';
             if (document.querySelector('#othermusic').checked) return 'othermusic';
         }
-        console.log('res', beginner(), harptype(), musictype());
+        //console.log('res', beginner(), harptype(), musictype());
         
         // beginner 
         if (beginner()) {
-            console.log('imbeg')
             if (musictype()==='classicalmusic' || musictype()==='varietymusic') {
                 document.querySelector('#guidePedalPath').scrollIntoView();
                 return window.scrollBy(0, -100);
