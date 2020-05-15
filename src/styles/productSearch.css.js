@@ -175,10 +175,7 @@ function ProductSearchCss() {
             }
             input {
                 margin-bottom: 15px;
-            }
-            button {
-                transform: translateY(-3px);
-            }   
+            }  
             li {
                 padding: 5px 7px;
                 border: 1 solid grey;

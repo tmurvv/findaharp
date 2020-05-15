@@ -1,21 +1,22 @@
 import React from 'react';
 
 export default function FinishMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(props.open);  
     const handleClose = (evt) => {
-        setAnchorEl(null);
         if (evt.target.value === 'All Finishes') return;
         props.handleFinishChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
-            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}
-            >FINISH</div>            
+            <button 
+                className="menuButton" 
+                name='finish' 
+                onClick={(e)=>{props.handleclick(e);}}
+            >FINISH</button>
             <ul
                 id="finish-select"
                 onClose={handleClose}
-                hidden={!anchorEl}
+                hidden={!props.open}
                 name='Finish Menu'
                 className='plainTextSelectLine2'
             >

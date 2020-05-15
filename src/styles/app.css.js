@@ -36,6 +36,8 @@ function AppCss() {
                 position: relative;
                 cursor: pointer;
                 color: #fafbfc;
+                border: none;
+                outline: none;
             }
             .plainTextSelectLine1 {
                 margin-block-end: 0;

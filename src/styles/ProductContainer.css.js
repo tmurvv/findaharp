@@ -67,7 +67,6 @@ function ProductContainerCss() {
             @media only screen and (max-width: 700px) {
                 .productSmallDisplay {
                   width: 30vw;
-                    
                 }
             }
             @media only screen and (max-width: 550px) {

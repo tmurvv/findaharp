@@ -1,6 +1,7 @@
 ### internal
 - make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
+- make addPlaceholders remove any placeholders that may be there already
 
 ### UI/UX
 - model menu click on line, comes up [object, Object]
@@ -9,6 +10,8 @@
 - contact & verify pages need spinner
 - broken harp image needs image not found
 - Open only one menu at a time
+- Run add filler program on window resize
+- get last line of product container to not justify. See old code (search on useEffect)
 
 ### AUTHENTICATION
 - Remember me, 

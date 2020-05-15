@@ -7,9 +7,8 @@ import ProductContainerCss from '../styles/ProductContainer.css';
 import ProductModal from './ProductModal';
 import ContactForm from './ContactForm';
 import Product from './Product';
-import { removeDashOE, setOpacity, useWindowSize } from '../utils/helpers';
+import { addPlaceholderProducts, setOpacity, useWindowSize } from '../utils/helpers';
 import { productsReducer } from '../utils/reducers';
-// Hook
 
 const initialState = {
     openDetail: false,
@@ -18,11 +17,10 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductContainer = ({ filteredproducts }) => {
+const ProductContainer = ({ filteredproductscontainer, allstate }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
-    const [adjProducts, setAdjProducts] = useState(filteredproducts);
+    const [adjProducts, setAdjProducts] = useState(filteredproductscontainer);
     const size = useWindowSize();
-
     function handleOpenDetail(product) {
         dispatch({type:'detail', product});
         setOpacity(true); 
@@ -45,49 +43,13 @@ const ProductContainer = ({ filteredproducts }) => {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
     }
-    useEffect(() => {
-        console.log('here', size.width);
-        const copyProds = [...filteredproducts]
-        // console.log(filteredProductsCopy[15])
-        let numNeeded;
-        if (size.width > 1200) {
-            numNeeded = 5-(copyProds.length%5);
-            console.log(numNeeded);
-        }
-        const newAd = {
-            divider: "00000000000000000000000",
-            id: "d101837f-27dc-48ff-952f-175c5dc47d2d",
-            productFinish: "walnut",
-            productImageBestColor: "#eeeeee",
-            productImageUrl: "./img/logo_findaharp.png",
-            productLongDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis elit in ipsum commodo ornare. Vivamus luctus enim eget tortor sollicitudin laoreet. Curabitur ex tellus, fermentum interdum massa in, ullamcorper sollicitudin ex. Sed eu accumsan turpis. Suspendisse molestie velit eu rhoncus pharetra. Sed vel elementum metus. Pellentesque cursus eros sit amet erat suscipit dictum. Phasellus egestas leo risus, eget molestie tortor interdum ut. Proin non tempus massa. Ut viverra mi ac consectetur tristique. Pellentesque blandit ut felis fringilla blandit. Vivamus imperdiet quam vitae lectus pellentesque, laoreet malesuada elit dapibus. Suspendisse tristique interdum pellentesque. Ut nisl mi, eleifend sed nisl vel, convallis euismod dui. Mauris vitae dignissim enim. Ut imperdiet diam nunc, sed rutrum purus accumsan eu. Sed tempus lectus erat. Integer condimentum laoreet tempor. Nam ullamcorper odio eu mattis mollis. In vel ante tellus. Ut efficitur eros et faucibus egestas. Ut et turpis vitae quam auctor egestas. Sed tristique nunc sit amet est volutpat, sit amet ultricies diam consectetur. Donec arcu turpis, ornare volutpat felis placerat, sollicitudin pretium dui. Duis congue risus purus, sed hendrerit odio imperdiet sit amet. Cras id faucibus nunc. Vivamus sed metus sit amet lorem rhoncus pulvinar eu id sem.",
-            productMaker: "",
-            productModel: "",
-            productPrice: "$17,500.00",
-            productShortDesc: "Short description not available",
-            productSize: 0,
-            productTitle: "Filler Product",
-            productType: "pedal",
-            sellerCountry: "USA",
-            sellerName: "",
-            sellerRegion: "Mid-West"
-        }
-        // // console.log(iterProds.length)
-        for (var x = 0; x<numNeeded; x++) {
-            copyProds.push(newAd);
-        }
-        
-        
-        setAdjProducts(copyProds);
-        // console.log(filteredProductsCopy[58])
-
-    }, []);
-    if (filteredproducts&&filteredproducts.length>0) {
+    
+    if (filteredproductscontainer&&filteredproductscontainer.length>0) {
+        const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
         return(  
             <div data-test='component-ProductContainer' className='productContainer'>    
-                {size.width}
                 <div className="grid-container" style={{'opacity': `${state.opacity}`}}>
-                    {adjProducts.map(product => <Product 
+                    {addPlaces.map(product => <Product 
                         key={product.id}
                         productdetail={product}
                         handleopendetail={handleOpenDetail} 

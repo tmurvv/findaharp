@@ -5,29 +5,30 @@ import uuid from 'react-uuid';
 import { itemsSortByDisabled } from '../../utils/helpers';
 
 export default function MakerMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
     const currentMakers = props.products.map(product => product.productMaker);
     let makers = []
     props.makesmodels.map(maker => { if (maker.sellerName !== 'findaharpFinishes') makers.push(maker.sellerName)});
     makers = itemsSortByDisabled(makers, currentMakers);
     const handleClose = (evt) => {
         props.handleMakerChange(evt.target.getAttribute('name'));
-        setAnchorEl(null);
     };
     
     return (
         <div>
-            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
+            <button 
+                className="menuButton" 
+                name='maker' 
+                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+            >
                 HARP MAKER
-            </div>               
+            </button>               
             <ul
                 id="maker-select"
                 onClose={handleClose}
-                hidden={!anchorEl}
                 name='Maker Menu'
                 className='plainTextSelectLine1'
                 style={{zIndex: 6000}}
+                hidden={props.open}
             >
                 <li onClick={handleClose}                   
                         onClick={handleClose}

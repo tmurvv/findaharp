@@ -2,22 +2,24 @@
 import React from 'react';
 
 export default function LocationMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);  
     const handleClose = (evt) => {
-        setAnchorEl(null);
         if (evt.target.value === 'All Locations') return;
         props.handleLocationChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
-            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
+            <button 
+                className="menuButton" 
+                name='location' 
+                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+            >
                 LOCATION
-            </div>                
+            </button>                
             <ul
                 id="location-select"
                 onClose={handleClose}
-                hidden={!anchorEl}
+                hidden={!props.open}
                 name='Location Menu'
                 className='plainTextSelectLine2'
             >

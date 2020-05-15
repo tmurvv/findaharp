@@ -1,29 +1,29 @@
 //Packages
 import React from 'react';
+import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
 
 export default function SizeMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(props.open);  
     const handleClose = (evt) => {
-        setAnchorEl(null);
         if (evt.target.value === 'All Sizes') return;
         props.handleSizeChange(evt.target.getAttribute('name')); 
     };
 
     return (
         <div>
-            <div 
-                className="menuButton"
-                onClick={() => setAnchorEl(!anchorEl)}
+            <button 
+                className="menuButton" 
+                name='size' 
+                onClick={(e)=>{console.log('click');props.handleclick(e);}}
             >
                 HARP SIZE
-            </div>              
+            </button>              
             <ul
                 id="size-select"
                 onClose={handleClose}
-                hidden={!anchorEl}
                 name='Size Menu'
                 className='plainTextSelectLine1'
                 style={{zIndex: 6000}}
+                hidden={!props.open}
             >
                 <li 
                     onClick={handleClose} 

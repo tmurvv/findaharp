@@ -1,29 +1,32 @@
 // packages
-import React, { useState, useReducer, useEffect, useRef } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 
 // internal
 import ProductSearchCss from '../styles/ProductSearch.css';
 import ProductContainer from './ProductContainer';
-import TestGrid from './TestGrid';
 import MakerMenu from './searchMenus/MakerMenu';
 import ModelMenu from './searchMenus/ModelMenu';
 import SizeMenu from './searchMenus/SizeMenu';
 import FinishMenu from './searchMenus/FinishMenu';
 import PriceMenu from './searchMenus/PriceMenu';
 import LocationMenu from './searchMenus/LocationMenu';
-import { 
-    getFilteredProducts, 
+import {
+    getFilteredProducts,
     getSearchInfo,
     triggerLazy
 } from '../utils/helpers';
 import { searchReducer } from '../utils/reducers'
 
 const initialState = {
-    sizeOpen: false,
-    finishOpen: false
+    size: false,
+    model: false,
+    maker: false,
+    finish: false, 
+    price: false, 
+    location: false
 }
 function ProductSearch(props) {
-    const [openMenu] = useReducer(searchReducer, initialState);
+    const [menus, setMenus] = useState(initialState);
     const [allState, setAllState] = useState({
         selectionType: '',
         maker: 'All Makers',
@@ -33,13 +36,14 @@ function ProductSearch(props) {
         price: 'All Prices',
         location: 'All Locations',
         searchInfo: 'All Harps'
-    });   
+    }); 
     function handleMakerSelection(maker) {
         setAllState({...allState, 
             maker,
             model: "All Models",
             searchInfo: getSearchInfo(allState.searchInfo, allState.maker, maker)
         });
+        setMenus(initialState);
     }
     function handleModelSelection(model) {
         //catches when user selects all models from maker
@@ -48,18 +52,21 @@ function ProductSearch(props) {
                 model: "All Models",
                 searchInfo: getSearchInfo(allState.searchInfo, allState.model, model)
             });
+            setMenus(initialState);
             return;
         }
         setAllState({...allState, 
             model,
             searchInfo: getSearchInfo(allState.searchInfo, allState.model, model)
         });
+        setMenus(initialState);
     }
     function handleSizeSelection(size) {
         setAllState({...allState, 
             size,
             searchInfo: getSearchInfo(allState.searchInfo, allState.size, size)
         });
+        setMenus(initialState);
     }
     function handleFinishSelection(finish) {
         setAllState({...allState, 
@@ -67,18 +74,95 @@ function ProductSearch(props) {
             productType: 'all',
             searchInfo: getSearchInfo(allState.searchInfo, allState.finish, finish)
         });
+        setMenus(initialState);
     }
     function handlePriceSelection(price) {
         setAllState({...allState, 
             price,
             searchInfo: getSearchInfo(allState.searchInfo, allState.price, price)
         });
+        setMenus(initialState);
     }
     function handleLocationSelection(location) {
         setAllState({...allState, 
             location,
             searchInfo: getSearchInfo(allState.searchInfo, allState.location, location)
         });
+        setMenus(initialState);
+    }
+    function handleClick(e) {
+        console.log(e.target.name);
+        switch(e.target.name) {
+            case 'size':
+                setMenus({
+                    size: !menus.size,
+                    maker: false,
+                    model: false,
+                    finish: false,
+                    price: false,
+                    location: false
+                });
+                break;
+            case 'maker':
+                setMenus({
+                    size: false,
+                    maker: !menus.maker,
+                    model: false,
+                    finish: false,
+                    price: false,
+                    location: false
+                });
+                break;
+            case 'model':
+                setMenus({
+                    size: false,
+                    maker: false,
+                    model: !menus.model,
+                    finish: false,
+                    price: false,
+                    location: false
+                });
+                break;
+            case 'finish':
+                setMenus({
+                    size: false,
+                    maker: false,
+                    model: false,
+                    finish: !menus.finish,
+                    price: false,
+                    location: false
+                });
+                break;
+            case 'price':
+                setMenus({
+                    size: false,
+                    maker: false,
+                    model: false,
+                    finish: false,
+                    price: !menus.price,
+                    location: false
+                });
+                break;
+            case 'location':
+                setMenus({
+                    size: false,
+                    maker: false,
+                    model: false,
+                    finish: false,
+                    price: false,
+                    location: !menus.location
+                });
+                break;
+            default:
+                setMenus({
+                    size: false,
+                    maker: false,
+                    model: false,
+                    finish: false,
+                    price: false,
+                    location: false
+                });
+          }
     }
     function handleClear(evt) {
         setAllState({
@@ -92,12 +176,15 @@ function ProductSearch(props) {
             searchInfo: 'All Harps'
         });
     }
+    function handleMenuClick(evt) {
+        document.querySelector('#finish-select').style.transform="scale"
+    }
     useEffect(() => {
         triggerLazy();
     });
 
     const filteredProducts = getFilteredProducts(props.products, allState);
-    
+    // console.log('filtered', filteredProducts)
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -106,14 +193,19 @@ function ProductSearch(props) {
             <div className='searchLine1'>  
                 <div className={`arrow rightArrow line1RightArrow`}></div>
                 <SizeMenu 
-                    handleSizeChange = {handleSizeSelection}
-                    onClick={() => dispatch({type: 'size'})}
-                    open={openMenu.sizeOpen}
-                />
-                <MakerMenu 
-                    handleMakerChange = {handleMakerSelection} 
+                    handleSizeChange = {handleSizeSelection} 
                     products={props.products}
                     makesmodels={props.makesmodels}
+                    currentselected={allState.size?allState.size:'Harp Size'}
+                    handleclick={handleClick}
+                    open={menus.size}
+                />
+                <MakerMenu 
+                    handleMakerChange = {handleMakerSelection}
+                    open={!menus.maker} 
+                    products={props.products}
+                    makesmodels={props.makesmodels}
+                    handleclick={handleClick}
                 />
                 <ModelMenu 
                     handleModelChange = {handleModelSelection}
@@ -121,6 +213,8 @@ function ProductSearch(props) {
                     productMaker={allState.maker}
                     productSize={allState.size}
                     makesmodels={props.makesmodels}
+                    open={menus.model}
+                    handleclick={handleClick}
                 />
                 <div className='arrow leftArrow line1LeftArrow'></div>
             </div>
@@ -147,8 +241,8 @@ function ProductSearch(props) {
                         products={props.products}
                         makesmodels={props.makesmodels}
                         currentselected={allState.finish?allState.finish:'Harp Finish'}
-                        onClick={() => dispatch({type: 'finish'})}
-                        open={openMenu.finishOpen}
+                        handleclick={handleClick}
+                        open={menus.finish}
                     />
                     <PriceMenu 
                         handlePriceChange = {handlePriceSelection}
@@ -156,10 +250,14 @@ function ProductSearch(props) {
                         producttype={allState.productType}
                         makesmodels={props.makesmodels}
                         currentselected={allState.price?allState.price:'Harp Price'}
+                        open={menus.price}
+                        handleclick={handleClick}
                     />
                     <LocationMenu 
                         handleLocationChange = {handleLocationSelection}
                         currentselected={allState.location?allState.location:'Harp All Locations'}
+                        open={menus.location}
+                        handleclick={handleClick}
                     /> 
                     <div className='arrow leftArrow line2LeftArrow'></div>
                 </div>
@@ -186,17 +284,11 @@ function ProductSearch(props) {
             </div>
             <h3>Searching {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)===','?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}</h3>
             <ProductSearchCss />
-            {/* <TestGrid 
-                data-test="component-ProductContainer" 
-                filteredproducts={filteredProducts} 
-                searchInfo={allState.searchInfo}
-                // searchInfo={allState.searchInfo}
-            />               */}
             <ProductContainer 
                 data-test="component-ProductContainer" 
-                filteredproducts={filteredProducts} 
+                filteredproductscontainer={filteredProducts} 
                 searchInfo={allState.searchInfo}
-                // searchInfo={allState.searchInfo}
+                allstate={allState}
             />              
         </div>
         </>

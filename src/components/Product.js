@@ -61,7 +61,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
             </div>
             <div className={`grid-item productSmallDisplay-text`}>
                 <p>{productdetail.productMaker} {productdetail.productModel}<br></br>
-                {productdetail.productSize} Strings<br></br>
+                {productdetail.productSize!==0?`${productdetail.productSize} Strings`:''}<br></br>
                 <span 
                     onClick={(e)=>handleOpenContactModal(e, productdetail)} 
                     style={{textDecoration: 'underline'}}

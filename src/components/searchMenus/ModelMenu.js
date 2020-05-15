@@ -6,14 +6,11 @@ import uuid from 'react-uuid';
 import { getModelList, itemsSortByDisabled } from '../../utils/helpers';
 
 export default function ModelMenu(props) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    
     let maker; 
     if (props.productMaker !== "Harp Maker" && props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
     
     const currentModels = props.products.map(product => product.productModel).sort(); 
     let models;
-    
     
     if (maker) maker = [maker];
     if (maker && maker.length > 0) {
@@ -29,17 +26,20 @@ export default function ModelMenu(props) {
 
     const handleClose = (evt) => {
         props.handleModelChange(evt.target.getAttribute('name'));
-        setAnchorEl(null);
     };
     return (
         <div>
-            <div className="menuButton" onClick={() => setAnchorEl(!anchorEl)}>
+            <button 
+                className="menuButton" 
+                name='model' 
+                onClick={(e)=>{console.log('click');props.handleclick(e);}}
+            >
                 HARP MODEL
-            </div>
+            </button>
             <ul
                 id="model-select"
                 onClose={handleClose}
-                hidden={!anchorEl}
+                hidden={!props.open}
                 name='Model Menu'
                 className='plainTextSelectLine1'
                 style={{zIndex: 6000}}
