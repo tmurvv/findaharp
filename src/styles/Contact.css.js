@@ -68,7 +68,7 @@ function ContactCSS() {
                 width: 100%;
             }
             .contactContainer a {
-                color: #f9bf1e;
+                color: #6A75AA;
                 text-decoration: underline;
             }
             .about {

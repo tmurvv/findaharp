@@ -18,14 +18,15 @@ export default function StorePartners() {
         sellerEmail: 'yourstore@email.com'
     }
     return (
-        <>
-        <h2>Find a Harp is proud to partner with the following harp sellers</h2>
+        <div className='storePartnersContainer'>
+        
+            <h2>Find a Harp is proud to partner with the following harp sellers</h2>
             <AboutPartnerStore product={product}/>
             <AboutPartnerStore product={product}/>
             <AboutPartnerStore product={product}/>
             <AboutPartnerStore product={product}/>
             <AboutPartnerStore product={product}/>
             <StorePartnersCSS />
-        </>
+        </div>
     )
 }

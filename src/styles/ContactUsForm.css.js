@@ -14,9 +14,8 @@ function ContactUsFormCSS() {
             }
             .contactFormContainer {
                 background-color: tranparent;
-                /*border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
-                border-radius: 3px;*/
+                border-radius: 3px;
                 padding: 20px;
                 text-align: center;
             }
@@ -43,11 +42,13 @@ function ContactUsFormCSS() {
                 transform: translateY(3.5px);
             }
             .contactForm {
-                padding: 20px 30px 20px 0;
+                padding: 20px 30px 0px 0px;
                 flex: 6;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between; 
+                justify-content: space-between;
+                border: 1px solid #f9bf1e;
+                margin-left: 10px;
             }
             .contactForm p {
                 text-align: center;
@@ -81,6 +82,9 @@ function ContactUsFormCSS() {
                 margin-right: 20px;
                 vertical-align: -7px;
                 font-size: 14px;
+                font-family: 'Metropolis Extra Bold';
+                font-weight: 800;
+                color: #000000;
             }
             .inputGroup input {
                 background-color: transparent;
@@ -93,15 +97,15 @@ function ContactUsFormCSS() {
             }
             .detailButton {
                 margin: 25px auto;
-                background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
+                background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
                 padding: 5px 10px;
                 font-size: 16px;
                 border-radius: 3px;
                 outline: none;
                 border-style: none;
                 border-color: none;
-                -webkit-box-shadow: 2px 2px 2px 0px #555555;
-                box-shadow: 2px 2px 2px 0px #555555;
+                -webkit-box-shadow: 1.5px 1.5px 1.5px 0px #929191;
+                box-shadow: 1.5px 1.5px 1.5px 0px #929191;
             }
             .detailButton:active {
                 box-shadow: none;
@@ -114,11 +118,14 @@ function ContactUsFormCSS() {
             }
             textarea {
                 background-color: transparent;
-                flex: 7;
+                flex: 7.5;
                 border-top: none;
                 border-left: none;
                 border-bottom: 1px solid #bbbbbb;
                 border-right: 1px solid #bbbbbb;
+            }
+            .buttons {
+                margin: auto;
             }
         `}
         </style>

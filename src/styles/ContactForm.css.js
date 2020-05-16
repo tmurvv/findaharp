@@ -9,7 +9,6 @@ function ContactFormCSS() {
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
                 padding: 20px;
-                z-index: 3000;
                 max-height: calc(100vh - 50px);
                 max-width: 800px;
                 overflow-y: auto;
@@ -116,15 +115,15 @@ function ContactFormCSS() {
             }
             .detailButton {
                 margin: 25px auto;
-                background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
+                /*background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);*/
+                background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
                 padding: 5px 10px;
                 font-size: 16px;
                 border-radius: 3px;
                 outline: none;
                 border-style: none;
                 border-color: none;
-                -webkit-box-shadow: 2px 2px 2px 0px #555555;
-                box-shadow: 2px 2px 2px 0px #555555;
+                box-shadow: 1.5px 1.5px 1.5px 0px #555555;
             }
             .detailButton:active {
                 box-shadow: none;
@@ -136,7 +135,7 @@ function ContactFormCSS() {
                 background-image: none;
             }
             textarea {
-                flex: 7;
+                flex: 7.5;
                 border-top: none;
                 border-left: none;
                 border-bottom: 1px solid #bbbbbb;

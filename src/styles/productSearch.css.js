@@ -25,6 +25,12 @@ function ProductSearchCss() {
                 width: 70%;
                 margin: auto;
             }
+            @media only screen and (max-width: 550px) {
+                .productSearchOuter {
+                    width: 90%;
+                }
+            }
+            
             .searchLine1 {
                 position: relative;
                 width: 100%;
@@ -177,11 +183,13 @@ function ProductSearchCss() {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                z-index: 5;
             }
             .search-grid-item img {
                 height: 20px;
                 margin-left: 10px;
                 color: #333333
+                z-index: 1000;
             }
             input {
                 margin-bottom: 15px;
@@ -215,6 +223,7 @@ function ProductSearchCss() {
                 margin-bottom: -10px;
             }
             .clearSearch img {
+                z-index: 1000;
                 width: 30px;
                 margin-left: -6px;
             }

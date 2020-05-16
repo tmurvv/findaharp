@@ -4,12 +4,14 @@
 - make addPlaceholders remove any placeholders that may be there already
 
 ### UI/UX
-- search on Allegro 26 gold shows allegro 26
-- model menu click on line, comes up [object, Object]
+- search on Allegro 26 gold shows allegro 26, which is not gold
+- if on the model menu, you accidentally click on the line between the listings, it comes up [object, Object]
 - cherry nino not showing when under $2000 selected
-- Responsive for login page
-- contact & verify pages need spinner
+- on mobile, open menu pushes down other buttons
+- Responsive for login page, detail, contact, not yet implemented 
+- contact & verify pages need spinner when submit button pressed
 - broken harp image needs image not found
+- make button gradient consistent once we hear back from Rachael
 - From Rachael, I feel that there should be a way for the user to flick back and forth between the form and the harp information, and without losing anything that they've already typed in if possible. Right now if one clicks on "Contact Seller" the only way to look at the full harp information again is to close the form and click on the harp again. 
 
 ### AUTHENTICATION

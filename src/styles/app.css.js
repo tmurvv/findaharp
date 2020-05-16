@@ -32,7 +32,7 @@ function AppCss() {
             .menuButton {
                 background-color: transparent;
                 font-size: 14px;
-                padding: 6px 9px;
+                padding: 6px 4px;
                 position: relative;
                 cursor: pointer;
                 color: #fafbfc;
@@ -50,7 +50,12 @@ function AppCss() {
                 cursor: pointer;
                 z-index: 2000;
                 list-style: none;
-                margin-top: -2px;
+                margin-top: -2px;   
+            }
+            @media only screen and (max-width: 550px) {
+                .plainTextSelectLine1 {
+                    width: 190%;
+                }
             }
             .plainTextSelectLine1 p {
                 margin-block-start: 0;
@@ -73,10 +78,12 @@ function AppCss() {
             }
             @media only screen and (max-width: 550px) {
                 .plainTextSelectLine1 {
-                    margin-block-start: -.5em;
+                    /*margin-block-start: -.5em;*/
+                    width: 190%;
                 }
                 .plainTextSelectLine2 {
-                    margin-block-start: -.5em;
+                    /*margin-block-start: -.5em;*/
+                    width: 190%;
                 }
             }  
             .divider {

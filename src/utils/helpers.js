@@ -243,9 +243,9 @@ export const getSearchInfo = (searchInfo, oldValue, update) => {
     if (searchInfo.indexOf("All Harps")>-1) searchInfo = '';
     let idx = searchInfo.indexOf(oldValue);
     if (idx>-1) searchInfo = searchInfo.slice(0,idx) + searchInfo.slice(idx+oldValue.length+2);
-    console.log('ingetsearch', searchInfo, oldValue, update)
+    console.log('ingetsearchbeloe', searchInfo, oldValue, update)
     if (update) return `${update} | ${searchInfo}`;
-
+    if (searchInfo.indexOf('|')===-1) return 'All Harps';
     return searchInfo;
 }
 export const itemsSortByDisabled = (items, currentItems) => {

@@ -179,9 +179,10 @@ function ProductSearch(props) {
         document.querySelector('#finish-select').style.transform="scale"
     }
     function clearOneFilter(e) {
-        console.log(e.target.name)
-        const newSearchInfo = getSearchInfo(allState.searchInfo, "Camac");
-        setAllState({...allState, [e.target.name]: `All ${e.target.name}s`, searchInfo: newSearchInfo});
+        let menuClick = e.target.name;
+        const newSearchInfo = getSearchInfo(allState.searchInfo, allState[menuClick]);
+        if (menuClick==='finish') menuClick = 'finishe';
+        setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
     }
     useEffect(() => {
         triggerLazy();
@@ -212,7 +213,7 @@ function ProductSearch(props) {
                     handleclick={handleClick}
                 />
                 <ModelMenu 
-                    handleModelChange = {handleModelSelection}
+                    handleModelChange={handleModelSelection}
                     products={props.products}
                     productMaker={allState.maker}
                     productSize={allState.size}
@@ -224,29 +225,65 @@ function ProductSearch(props) {
             </div>
             <div className="searchLine1Sub">
                 <div className='arrow rightArrow line1SubRightArrow'></div>
-                <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
+                <div 
+                    id="selectedSize" 
+                    className={`search-grid-item`} 
+                    value={allState.size}
+                    onClick={()=>handleClick({target: {name: 'size'}})}
+                >
                     {allState.size}
                     {allState.size!=="All Sizes"
-                        ?<img onClick={()=>setAllState({...allState, size: 'All Sizes'})} src='/img/clear_search.png' alt='clear filters'/>
-                        :''
-                    }
-                </div>
-                <div id="selectedMaker" className={`search-grid-item`} value={allState.maker}>
-                    {allState.maker}
-                    {allState.maker!=="All Makers"
                         ?<img 
-                            onClick={(e)=>clearOneFilter(e)} 
+                            name='size'
+                            onClick={
+                                (e)=>{
+                                    e.stopPropagation(); 
+                                    clearOneFilter({target:{name:'size'}});
+                                }
+                            } 
                             src='/img/clear_search.png' 
                             alt='clear filters'
                         />
                         :''
                     }
                 </div>
-                <div id="selectedModel" className={`search-grid-item`} value={allState.model}>
+                <div 
+                    id="selectedMaker" 
+                    className={`search-grid-item`} 
+                    value={allState.maker}
+                    onClick={()=>handleClick({target: {name: 'maker'}})}
+                >
+                    {allState.maker}
+                    {allState.maker!=="All Makers"
+                        ?<img 
+                            name='maker'
+                            onClick={
+                                (e)=>{
+                                    e.stopPropagation(); 
+                                    clearOneFilter({target:{name:'maker'}});
+                                }
+                            }
+                            src='/img/clear_search.png' 
+                            alt='clear filters'
+                        />
+                        :''
+                    }
+                </div>
+                <div 
+                    id="selectedModel" 
+                    className={`search-grid-item`} 
+                    value={allState.model}
+                    onClick={()=>handleClick({target: {name: 'model'}})}
+                >
                     {allState.model}
                     {allState.model!=="All Models"
                         ?<img 
-                            onClick={(e)=>clearOneFilter(e)} 
+                        onClick={
+                            (e)=>{
+                                e.stopPropagation(); 
+                                clearOneFilter({target:{name:'model'}});
+                            }
+                        }
                             src='/img/clear_search.png'
                             name='model' 
                             alt='clear model filters'
@@ -288,25 +325,70 @@ function ProductSearch(props) {
                 </div>
                 <div className="searchLine2Sub">
                     <div className={`arrow rightArrow line2SubRightArrow`}></div>
-                    <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
+                    <div 
+                        id="selectedFinish" 
+                        className={`search-grid-item`} 
+                        value={allState.finish}
+                        onClick={()=>handleClick({target: {name: 'finish'}})}
+                    >
                         {allState.finish}
                         {allState.finish!=="All Finishes"
-                            ?<img onClick={()=>setAllState({...allState, finish: 'All Finishes'})} src='/img/clear_search.png' alt='clear filters'/>
+                            ?<img 
+                                name='finish'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'finish'}});
+                                    }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
                             :''
                         }
                     </div>
-                    <div id="selectedPrice" className={`search-grid-item`} value={allState.price}>
+                    <div 
+                        id="selectedPrice" 
+                        className={`search-grid-item`} 
+                        value={allState.price}
+                        onClick={()=>handleClick({target: {name: 'price'}})}
+                    >
                         {allState.price}
                         {allState.price!=="All Prices"
-                            ?<img onClick={()=>setAllState({...allState, price: 'All Prices'})} src='/img/clear_search.png' alt='clear filters'/>
+                            ?<img 
+                                name='price'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'price'}});
+                                    }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
                             :''
                         }
                         
                     </div>
-                    <div id="selectedAll Locations" className={`search-grid-item`} value={allState.location}>
+                    <div 
+                        id="selectedAll Locations" 
+                        className={`search-grid-item`} 
+                        value={allState.location}
+                        onClick={()=>handleClick({target: {name: 'location'}})}
+                    >
                         {allState.location}
                         {allState.location!=="All Locations"
-                            ?<img onClick={()=>setAllState({...allState, location: 'All Locations'})} src='/img/clear_search.png' alt='clear filters'/>
+                            ?<img 
+                                name='locations'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'location'}});
+                                    }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
                             :''
                         }
                     </div>

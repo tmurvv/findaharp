@@ -127,7 +127,7 @@ function ContactUsForm(props) {
                             rows='6'
                         />
                     </div>         
-                    <div>
+                    <div className='buttons'>
                         <button
                             className='detailButton'
                             type='submit'

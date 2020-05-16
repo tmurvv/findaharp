@@ -32,15 +32,17 @@ function ProductModalCSS() {
             }
             .detailButton {
                 margin: 40px 0;
-                background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
+                /*background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);*/
+                background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
                 padding: 5px 10px;
                 font-size: 16px;
                 border-radius: 3px;
                 outline: none;
                 border-style: none;
                 border-color: none;
-                -webkit-box-shadow: 2px 2px 2px 0px #555555;
-                box-shadow: 2px 2px 2px 0px #555555;
+                box-shadow: 1.5px 1.5px 1.5px 0px #555555;
+                /*-webkit-box-shadow: 2px 2px 2px 0px #555555;
+                box-shadow: 2px 2px 2px 0px #555555;*/
             }
             .detailButton:active {
                 box-shadow: none;
