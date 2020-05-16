@@ -13,6 +13,7 @@ export default function LocationMenu(props) {
                 className="menuButton" 
                 name='location' 
                 onClick={(e)=>{props.handleclick(e);}}
+                style={{color: '#000000'}}
             >
                 LOCATION
             </button>                

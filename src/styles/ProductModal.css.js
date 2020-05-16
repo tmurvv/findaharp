@@ -92,8 +92,9 @@ function ProductModalCSS() {
                 font-size: 14px;
             }
             .longDesc {
-                max-height: 300px;
+                max-height: 212px;
                 text-align: left;
+                overflow-y: auto;
             }
         `}
         </style>

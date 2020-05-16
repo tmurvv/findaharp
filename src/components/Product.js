@@ -26,7 +26,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     function handleOpenContactModal(evt, product) {
         evt.stopPropagation();
         setOpenContactModal(true);
-        handleOpenContact(evt, product)
+        handleopencontact(evt, product);
     }
     function handleCloseContactModal() {
         evt.stopPropagation();

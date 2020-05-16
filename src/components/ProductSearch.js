@@ -178,12 +178,17 @@ function ProductSearch(props) {
     function handleMenuClick(evt) {
         document.querySelector('#finish-select').style.transform="scale"
     }
+    function clearOneFilter(e) {
+        console.log(e.target.name)
+        const newSearchInfo = getSearchInfo(allState.searchInfo, "Camac");
+        setAllState({...allState, [e.target.name]: `All ${e.target.name}s`, searchInfo: newSearchInfo});
+    }
     useEffect(() => {
         triggerLazy();
     });
 
+
     const filteredProducts = getFilteredProducts(props.products, allState);
-    // console.log('filtered', filteredProducts)
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -221,12 +226,33 @@ function ProductSearch(props) {
                 <div className='arrow rightArrow line1SubRightArrow'></div>
                 <div id="selectedSize" className={`search-grid-item`} value={allState.size}>
                     {allState.size}
+                    {allState.size!=="All Sizes"
+                        ?<img onClick={()=>setAllState({...allState, size: 'All Sizes'})} src='/img/clear_search.png' alt='clear filters'/>
+                        :''
+                    }
                 </div>
                 <div id="selectedMaker" className={`search-grid-item`} value={allState.maker}>
                     {allState.maker}
+                    {allState.maker!=="All Makers"
+                        ?<img 
+                            onClick={(e)=>clearOneFilter(e)} 
+                            src='/img/clear_search.png' 
+                            alt='clear filters'
+                        />
+                        :''
+                    }
                 </div>
                 <div id="selectedModel" className={`search-grid-item`} value={allState.model}>
                     {allState.model}
+                    {allState.model!=="All Models"
+                        ?<img 
+                            onClick={(e)=>clearOneFilter(e)} 
+                            src='/img/clear_search.png'
+                            name='model' 
+                            alt='clear model filters'
+                        />
+                        :''
+                    }
                 </div>
                 <div className='arrow leftArrow line1SubLeftArrow'></div>
             </div>
@@ -264,26 +290,41 @@ function ProductSearch(props) {
                     <div className={`arrow rightArrow line2SubRightArrow`}></div>
                     <div id="selectedFinish" className={`search-grid-item`} value={allState.finish}>
                         {allState.finish}
-                        {/* {allState.finish==='All Finishes'?'':allState.finish} */}
+                        {allState.finish!=="All Finishes"
+                            ?<img onClick={()=>setAllState({...allState, finish: 'All Finishes'})} src='/img/clear_search.png' alt='clear filters'/>
+                            :''
+                        }
                     </div>
                     <div id="selectedPrice" className={`search-grid-item`} value={allState.price}>
                         {allState.price}
-                        {/* {allState.price==='All Prices'?'':allState.price} */}
+                        {allState.price!=="All Prices"
+                            ?<img onClick={()=>setAllState({...allState, price: 'All Prices'})} src='/img/clear_search.png' alt='clear filters'/>
+                            :''
+                        }
+                        
                     </div>
                     <div id="selectedAll Locations" className={`search-grid-item`} value={allState.location}>
                         {allState.location}
-                        {/* {allState.location==='All Locations'?'':allState.location} */}
+                        {allState.location!=="All Locations"
+                            ?<img onClick={()=>setAllState({...allState, location: 'All Locations'})} src='/img/clear_search.png' alt='clear filters'/>
+                            :''
+                        }
                     </div>
                     <div className={`arrow leftArrow line2SubLeftArrow`}></div>
-                    <div onClick={handleClear} className='clearSearch'>
-                        <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                        <p>Clear All</p> 
-                    </div>
                 </div>
             </div>
-            <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginBottom:'-20px'}}>Website Under Construction</h5>
-            <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginBottom:'-20px'}}>Sample Listings</h5>
-            <h3>Selected {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)===','?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}</h3>
+            {/* <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginTop: '5px', marginBottom:'-10px'}}>Website Under Construction-Sample Listings</h5> */}
+            <div className='selected'>
+                <p>
+                    <span>SHOWING </span>
+                    {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}
+                </p>
+                <div onClick={handleClear} className='clearSearch'>
+                    <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+                    <p>Clear All Filters</p> 
+                </div>
+            </div>
+            <h3 className='searchTitle'>Website Under Construction-Sample Listings</h3>
             <ProductSearchCss />
             <ProductContainer 
                 data-test="component-ProductContainer" 

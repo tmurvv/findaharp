@@ -12,6 +12,7 @@ export default function FinishMenu(props) {
                 className="menuButton" 
                 name='finish' 
                 onClick={(e)=>{props.handleclick(e);}}
+                style={{color: '#000000'}}
             >FINISH</button>
             <ul
                 id="finish-select"

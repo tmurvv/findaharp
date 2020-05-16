@@ -239,10 +239,14 @@ export function getSizeFromModel(makesModels, model) {
     return foundName;
 }
 export const getSearchInfo = (searchInfo, oldValue, update) => {
+    console.log('ingetsearch', searchInfo, oldValue, update)
     if (searchInfo.indexOf("All Harps")>-1) searchInfo = '';
     let idx = searchInfo.indexOf(oldValue);
     if (idx>-1) searchInfo = searchInfo.slice(0,idx) + searchInfo.slice(idx+oldValue.length+2);
-    return `${update}, ${searchInfo}`;
+    console.log('ingetsearch', searchInfo, oldValue, update)
+    if (update) return `${update} | ${searchInfo}`;
+
+    return searchInfo;
 }
 export const itemsSortByDisabled = (items, currentItems) => {
     let itemsWithDisabled = [];

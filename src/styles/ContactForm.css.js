@@ -62,8 +62,13 @@ function ContactFormCSS() {
                 text-align:center;
             }
             label {
-                font-family: 'Metropolis Extra Bold';
+                
                 transform: translateY(3.5px);
+            }
+            .label {
+                font-family: 'Metropolis Extra Bold';
+                font-weight: 800;
+                color: #000000;
             }
             .detailText {
                 padding: 20px 30px 20px 0;
@@ -98,9 +103,8 @@ function ContactFormCSS() {
             .inputGroup label {
                 flex:2;
                 text-align: right;
-                margin-right: 20px;
+                margin-right: 10px;
                 vertical-align: -7px;
-                font-size: 14px;
             }
             .inputGroup input {
                 flex: 7.5;

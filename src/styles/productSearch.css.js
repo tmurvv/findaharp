@@ -50,6 +50,8 @@ function ProductSearchCss() {
                 color: #868686;
                 border-top: 1px solid;
                 border-bottom: 1px solid;
+                font-style: italic;
+                font-size: 14px;
                 text-align: center;
                 display: grid;
                 grid-template-columns: 5.5% 29% 29% 29% 9.5%;
@@ -125,6 +127,9 @@ function ProductSearchCss() {
                     border: 1px solid;
                     border-right: none;
                 }
+                .searchLine2.div.button {
+                    color: #000000;
+                }
                 .searchLine2Sub {
                     grid-template-columns: 100%;
                     height: 120px;
@@ -173,6 +178,11 @@ function ProductSearchCss() {
                 align-items: center;
                 justify-content: center;
             }
+            .search-grid-item img {
+                height: 20px;
+                margin-left: 10px;
+                color: #333333
+            }
             input {
                 margin-bottom: 15px;
             }  
@@ -181,19 +191,37 @@ function ProductSearchCss() {
                 border: 1 solid grey;
                 z-index: 1000;
             }
+            .selected {
+                width: fit-content;
+                height: fit-content;
+                margin: auto;
+                flex-direction: column;
+                margin-block-start: 1.66em;
+                margin-block-end: 0;
+            }
+            .selected span{
+                font-size: 14px;
+                margin-right: 5px;
+            }
+            .selected p {
+                font-size: 20px;
+            }
             .clearSearch {
-                position: absolute; 
-                right: -120px;
-                height: 60%;
-                top: -8px;
                 cursor: pointer;
                 display: flex;
+                justify-content: center;
                 align-items: center;
+                margin-top: -25px;
+                margin-bottom: -10px;
             }
             .clearSearch img {
-                width: 40px;
+                width: 30px;
+                margin-left: -6px;
             }
-            @media only screen and (max-width: 750px) {
+            .clearSearch p {
+                font-size: 14px;
+            }
+            /*@media only screen and (max-width: 750px) {
                 .clearSearch {
                     top: 35px;
                     right: -35px;
@@ -209,7 +237,7 @@ function ProductSearchCss() {
                     top: 125px;
                     right: 0;
                 } 
-            }
+            }*/
         `}
     </style>
     )

@@ -4,14 +4,13 @@
 - make addPlaceholders remove any placeholders that may be there already
 
 ### UI/UX
+- search on Allegro 26 gold shows allegro 26
 - model menu click on line, comes up [object, Object]
 - cherry nino not showing when under $2000 selected
 - Responsive for login page
 - contact & verify pages need spinner
 - broken harp image needs image not found
-- Open only one menu at a time
-- Run add filler program on window resize
-- get last line of product container to not justify. See old code (search on useEffect)
+- From Rachael, I feel that there should be a way for the user to flick back and forth between the form and the harp information, and without losing anything that they've already typed in if possible. Right now if one clicks on "Contact Seller" the only way to look at the full harp information again is to close the form and click on the harp again. 
 
 ### AUTHENTICATION
 - Remember me, 

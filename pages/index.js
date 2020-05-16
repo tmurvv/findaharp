@@ -16,7 +16,7 @@ const Index = (props) => {
         <div className="index">  
             <div className='mainTitle'>
                 <h2>Find a Harp</h2>
-                <h3 className="subTitle">pre-owned harp listings from around the US and Canada</h3>
+                <h3 className="subTitle">Pre-owned harp listings from around the US and Canada</h3>
             </div>
             <ProductSearch 
                 makesmodels={props.makesModels}

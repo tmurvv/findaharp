@@ -84,6 +84,10 @@ function AppCss() {
                 height: 7px;
                 margin: auto;
             }
+            .flex-sa {
+                display: flex;
+                justify-content: space-around;
+            }
         `}
         </style>
     )

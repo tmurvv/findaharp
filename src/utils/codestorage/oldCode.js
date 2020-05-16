@@ -1,3 +1,12 @@
+// <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc.substr(0,240):productLongDesc}              
+// <span className='moreButton' onClick={()=>{
+//    if (!longDesc) document.querySelector('.longDesc').style.overflowY='none';
+//    if (longDesc) document.querySelector('.longDesc').style.overflowY='auto';
+//    setLongDesc(!longDesc);
+//  }} hidden={productLongDesc.length<240}>{longDesc?' more...':' less...'}</span></div>  */}
+//<span className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={productLongDesc.length<199}>{longDesc?' more...':' less...'}</span></p
+
+
 // useEffect(() => {
         
 //     const copyProds = [filteredproductscontainer];

@@ -77,25 +77,25 @@ function ContactForm(props) {
                 <p>Communication with sellers can take place through findaharp.com at no charge.<br></br></p>
             </div>
             <div 
-                    className='clearModal' 
-                    onClick={() => 
-                        {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                    }} 
-                >
-                    <img src='/img/clear_search.png' alt='clear filters'/>
+                className='clearModal' 
+                onClick={() => 
+                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                }} 
+            >
+                <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
             <div className='contactContainer'>
                 <div className={`detailImg`}>
                     <img src= {product.productImageUrl} alt={product.productTitle}/>
-                    <p><span style={{fontWeight: 600}}>
+                    <p><span className='label'>
                         {product.productMaker} {product.productModel}
                     </span></p><p>{removeDashOE(product.sellerName)}</p>
                 </div>
                 
                 <form className='detailText'>     
                     <div className='inputGroup'>
-                        <label name='firstname'>First Name </label>
+                        <label className="label" className="label" name='firstname'>First Name </label>
                         <input
                             id={uuid()}
                             value={user.firstname}
@@ -104,7 +104,7 @@ function ContactForm(props) {
                         />
                     </div>
                     <div className='inputGroup'>
-                        <label name='lastname'>Last Name </label>
+                        <label className="label" name='lastname'>Last Name </label>
                         <input
                             id={uuid()}id="outlined-helperText"
                             label="Last Name"
@@ -114,7 +114,7 @@ function ContactForm(props) {
                         />
                     </div>
                     <div className='inputGroup'>
-                        <label name='email'>Email </label>
+                        <label className="label" name='email'>Email </label>
                         <input
                             id={uuid()}
                             name='contactemail'
@@ -124,7 +124,7 @@ function ContactForm(props) {
                         />
                     </div>         
                     <div className='inputGroup'>
-                        <label name='contactmaker'>Maker </label>
+                        <label className="label" name='contactmaker'>Maker </label>
                         <input
                             id={uuid()}
                             name='contactmaker'
@@ -133,7 +133,7 @@ function ContactForm(props) {
                         />
                     </div>         
                     <div className='inputGroup'>
-                        <label name='contactmodel'>Model </label>
+                        <label className="label" name='contactmodel'>Model </label>
                         <input
                             id={uuid()}
                             name='contactmodel'
@@ -142,7 +142,7 @@ function ContactForm(props) {
                         />
                     </div>         
                     <div className='inputGroup'>
-                        <label name='contactcomments'>Comments </label>
+                        <label className="label" name='contactcomments'>Comments </label>
                         <textarea
                             id={uuid()}
                             name='contactcomments'

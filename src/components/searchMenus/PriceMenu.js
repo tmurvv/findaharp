@@ -13,6 +13,7 @@ export default function PriceMenu(props) {
                 className="menuButton" 
                 name='price' 
                 onClick={(e)=>{props.handleclick(e);}}
+                style={{color: '#000000'}}
             >
                 PRICE RANGE
             </button>               

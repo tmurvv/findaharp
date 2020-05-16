@@ -45,7 +45,7 @@ function ProductContainerCss() {
             .productSmallDisplay {
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 50px;
+                margin-bottom: 35px;
                 text-align: center;
                 font-size: 14px;
                 height: 350px;

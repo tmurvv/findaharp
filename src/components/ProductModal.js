@@ -28,14 +28,7 @@ function ProductModal(props) {
                 <span>Price</span> {productPrice?productPrice:'unavailable'}<br></br>
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
                 <br></br>
-                <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc.substr(0,240):productLongDesc}
-                
-                <span className='moreButton' onClick={()=>{
-                    if (!longDesc) document.querySelector('.longDesc').style.overflowY='none';
-                    if (longDesc) document.querySelector('.longDesc').style.overflowY='auto';
-                    setLongDesc(!longDesc);
-                }} hidden={productLongDesc.length<240}>{longDesc?' more...':' less...'}</span></div> 
-                {/* <span className='moreButton' onClick={()=>setLongDesc(!longDesc)} hidden={productLongDesc.length<199}>{longDesc?' more...':' less...'}</span></p>  */}
+                <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div>
                 <br></br>
                 <p><span>Location</span> {sellerRegion?sellerRegion:'unavailable'}<br></br>
                 <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
