@@ -99,10 +99,36 @@ function LoginSignup(props) {
     
     const handleSubmit = async (evt) => {
         evt.preventDefault();
+        const resultContainer = document.querySelector('#loadingLogin');
+        const resultText = document.querySelector('#loadingLoginText');
+        const resultButton = document.querySelector('#loadingLoginOk');
+        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
+        const resultImg = document.querySelector('#loadingLoginImg');
         if (active==='signup') {
-            if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
-            if (userSignup.signuppassword !== userSignup.confirmpassword) return alert('Passwords must match.');
+            console.log('signup', userSignup)
+            console.log('login', userLogin)
+            // shortcut
+            if ((!userSignup.signuppassword)||userSignup.signuppassword.length<8) {
+                console.log('insignupshortpass')
+                resultContainer.style.display='block';
+                resultImg.style.display='none';
+                resultButtonTryAgain.style.display='block';
+                resultButtonTryAgain.style.marginLeft=0;
+                resultText.innerText=`Passwords must be at least 8 characters long.`;
+                return
+            }
             
+            // shortcut two
+            if (userSignup.signuppassword !== userSignup.confirmpassword) {
+                resultContainer.style.display='block';
+                resultImg.style.display='none';
+                resultButtonTryAgain.style.display='block';
+                resultButtonTryAgain.style.marginLeft=0;
+                resultText.innerText=`Passwords do not match.`;
+                return
+            }
+            resultContainer.style.display='block';
+            resultImg.style.display='block';
             const newUser = {
                 firstname: userSignup.firstname,
                 lastname: userSignup.lastname,
@@ -111,19 +137,23 @@ function LoginSignup(props) {
             };
 
             try {
-                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
-                if (res.status===200) {alert('Signup Successful. Please check your inbox to verify your email.'); setNeedVerify(true)}
+                const res = await axios.post('https://finddaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+                if (res.status===200) {
+                    resultImg.style.display='none';
+                    resultButton.style.display='block';
+                    resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
+                    setNeedVerify(true);
+                }
+                
             } catch (e) {
-                alert(`Something went wrong on signup: ${e.message}`)
+                resultImg.style.display='none';
+                resultButton.style.display='block';
+                resultButtonTryAgain.style.display='block';
+                resultButtonTryAgain.style.marginLeft='30px';
+                resultText.innerText=`Something went wrong on signup. Logging in as guest user. ${e.message}`
             }
         }
-        if (active==='login') {
-            const resultContainer = document.querySelector('#loadingLogin');
-            const resultText = document.querySelector('#loadingLoginText');
-            const resultButton = document.querySelector('#loadingLoginOk');
-            const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-            const resultImg = document.querySelector('#loadingLoginImg');
-            
+        if (active==='login') {   
             resultContainer.style.display='block';
             if (userLogin.loginpassword.length<8) {
                 resultImg.style.display='none';
@@ -136,7 +166,7 @@ function LoginSignup(props) {
             resultImg.style.display='block';
             try {
                 const res = await axios.post('https://fikndaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-                user.changeUser({name: res.data.user.firstname, email: 'Changed'});
+                user.changeUser({name: res.data.user.firstname, email: res.data.user.email});
                 document.querySelector('#userName').innerText=user.name;
                 resultText.innerText=`Login Successful: Welcome ${user.name}`;
                 resultImg.style.display='none';
@@ -145,35 +175,21 @@ function LoginSignup(props) {
                 resultImg.style.display='none';
                 resultText.innerText=`Unable to login ${userLogin.loginemail}. Logging in as guest.`;
                 resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block'
+                resultButtonTryAgain.style.display='block';
+                resultButtonTryAgain.style.marginLeft='30px';
             }
         }
         
         console.log('user', user)
         resetSignupForm();
         resetLoginForm();
-        // const contact = {
-        //     firstname: userSignup.firstname,
-        //     lastname: userSignup.lastname,
-        //     email: userSignup.contactemail,
-        //     sellername: product.sellerName,
-        //     productmaker: userSignup.contactmaker,
-        //     productmodel: userSignup.contactmodel,
-        //     comments: userSignup.contactcomments
-        // }
-        // try {
-        //     const res = await axios.post(
-        //         `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
-        //         contact
-        //     );
-        //     alert("Email sent.")
-        // } catch(e) {
-        //     alert("Something went wrong. Please try again or contact the webmaster.", e.message)
-        // }
-        
-        // props.handleCloseContact();
     }
-    
+    function loginGuest() {
+        user.changeUser({name: 'Guest', email: 'guestemail@findaharp.com'});
+        document.querySelector('#userName').innerText=user.name;
+        resetResults();
+        Router.push('/');
+    }
    return (
        <>
         <div className='login-signup-container'>
@@ -181,15 +197,15 @@ function LoginSignup(props) {
                 <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
                 <div className='flex-sb'>
-                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={()=>user!=='guest user'?Router.push('/'):resetResults()}>OK</button>
-                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={()=>resetResults()}>Try Again</button>
+                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
+                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                 </div>
             </div>
             <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
                     {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     {needVerify
                     ?
                         <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
@@ -224,7 +240,7 @@ function LoginSignup(props) {
                             required = {active==='login'}
                             disabled={active==='signup'}
                         />
-                        <div className="input-r">
+                        <div className="input-r" onClick={()=>alert('remember me under construction')}>
                             <div className="check-input">
                                 <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
                                 <label className="rememberme-blue" htmlFor="remember-me-2"></label>
@@ -234,10 +250,10 @@ function LoginSignup(props) {
                             </div>
                         </div>
             
-                        <button className="submit-btn" onClick={handleSubmit}>
+                        <button type='submit' className="submit-btn">
                             Submit
                         </button>
-                        <div className="forgot-pass">
+                        <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
                             <a href="#">Forgot Password?</a>
                         </div>
                         </>
@@ -245,8 +261,10 @@ function LoginSignup(props) {
                 </form>
             </div>
             <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
-                <form className="login-signup-title" onSubmit={()=>handleSubmit()}>
-                    SIGN UP
+                <form onSubmit={()=>handleSubmit()}>
+                    <div className="login-signup-title">
+                        SIGN UP
+                    </div>
                     <div >
                         <div className="input-name">
                             <h3>First Name</h3>
@@ -311,7 +329,7 @@ function LoginSignup(props) {
                             required={active==='signup'}
                             disabled={active==='login'}
                         />
-                        <button className="submit-btn" onClick={handleSubmit}>
+                        <button type='submit' className="submit-btn" onClick={handleSubmit}>
                             Submit
                         </button>
                     </div>

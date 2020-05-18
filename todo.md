@@ -1,15 +1,19 @@
+## check sign up functionality on the backend
+
 ### internal
 - make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
 - make addPlaceholders remove any placeholders that may be there already
 - add findaharp known finish listing to Mongo
 - refactor getFilteredProducts
+- in login/signup, install reducer for result states
 
 ### UI/UX
 - Contact Seller button moved to top and centered
 - Responsive for contact not yet implemented 
 - contact & verify pages need spinner when submit button pressed
 - if user login fails offer option to proceed as guest
+- Price range wrapping around 650px
 
 ### functionality
 - CRUD operations on upload listings

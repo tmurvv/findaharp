@@ -2,7 +2,6 @@ function LoginSignupCSS() {
     return (
         <style jsx="true">{`
             a {
-                text-decoration: none;
                 cursor: pointer;
             }        
             input,
@@ -12,6 +11,8 @@ function LoginSignupCSS() {
             .login-signup-container {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 overflow: hidden;
+                position: relative;
+                padding: 50px;
             }
             .login-signup {
                 width: 300px;
@@ -75,27 +76,28 @@ function LoginSignupCSS() {
                 left: 3px;
             }
             .input-r {
-                margin-top: 15px;
+                margin-top: 30px;
+                margin-bottom: 30px;
                 position: relative;
             }
-            /*.check-input label:after {
-                opacity: 0;
-                content: "";
-                position: absolute;
-                width: 7px;
-                height: 4px;
-                background: transparent;
-                top: 3px;
-                left: 3px;
-                border: 2px solid #FFF;
-                border-top: none;
-                border-right: none;
-                -webkit-transform: rotate(-45deg);
-                -moz-transform: rotate(-45deg);
-                -o-transform: rotate(-45deg);
-                -ms-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-            } */
+            // .check-input label:after {
+            //     opacity: 0;
+            //     content: "";
+            //     position: absolute;
+            //     width: 7px;
+            //     height: 4px;
+            //     background: transparent;
+            //     top: 3px;
+            //     left: 3px;
+            //     border: 2px solid #FFF;
+            //     border-top: none;
+            //     border-right: none;
+            //     -webkit-transform: rotate(-45deg);
+            //     -moz-transform: rotate(-45deg);
+            //     -o-transform: rotate(-45deg);
+            //     -ms-transform: rotate(-45deg);
+            //     transform: rotate(-45deg);
+            // }
             
             // .check-input label:hover:after {
             //     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
@@ -124,62 +126,64 @@ function LoginSignupCSS() {
                 background-color: #333333;
                 margin-left: 30px;
                 color: white;
-            }
-            
+            }          
             .forgot-pass {
                 width: 100%;
-                margin-top: 50px;
+                margin-top: 30px;
                 border-top: 1px solid #E0E0E0;
                 padding: 5px 0;
                 text-align: center;
             }
             .forgot-pass a {
                 text-align: center;
-                font-size: 10px;
+                font-size: 12px;
                 color: #757575;
+                text-decoration: underline;
             }
             #signup .login-signup-content {
                 padding-bottom: 46px;
             }
-            // .s-atbottom {
-            //     transform: translate3d(100px, -506.5px, 0);
-            //     z-index: 0;
-            //     -webkit-filter: blur(1px);
-            //     filter: blur(1px);
-            //     opacity: 0.6;
-            // }
-            // .s-attop {
-            //     transform: translate3d(100px, -506.5px, 0);
-            //     z-index: 1;
-            //     -webkit-filter: blur(0);
-            //     filter: blur(0);
-            //     box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.75);
-            //     opacity: 1;
-            // }
-            // .l-attop {
-            //     transform: translate3d(100px, -506.5px, 0);
-            //     z-index: 1;
-            //     -webkit-filter: blur(0);
-            //     filter: blur(0);
-            //     box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.75);
-            //     opacity: 1;
-            // }
-            // .l-atbottom {
-            //     z-index: 0;
-            //     -webkit-filter: blur(1px);
-            //     filter: blur(1px);
-            //     opacity: 0.6;
-            // }
+            .s-atbottom {
+                // transform: translate3d(100px, -506.5px, 0);
+                z-index: 0;
+                -webkit-filter: blur(1px);
+                filter: blur(1px);
+                opacity: 0.6;
+            }
+            .s-attop {
+                // transform: translate3d(100px, -506.5px, 0);
+                z-index: 1;
+                -webkit-filter: blur(0);
+                filter: blur(0);
+                box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.75);
+                opacity: 1;
+            }
+            .l-attop {
+                // transform: translate3d(100px, -506.5px, 0);
+                z-index: 1;
+                -webkit-filter: blur(0);
+                filter: blur(0);
+                box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.75);
+                opacity: 1;
+            }
+            .l-atbottom {
+                z-index: 0;
+                -webkit-filter: blur(1px);
+                filter: blur(1px);
+                opacity: 0.6;
+            }
             // #signup,
             // #login {
             //     transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             // }
-            // #login {
-            //     transform: translate(15px, 125px);;
-            // }
-            // #signup {
-            //     transform: translate(-20px, -390px);
-            // }
+            #login {
+                position: absolute;
+                top: 150px;
+                left: 15%;
+            }
+            #signup {
+                transform: translate(50px, 20px);
+            }
             #loadingLogin {
                 display: none;
                 color: #6A75AA;
