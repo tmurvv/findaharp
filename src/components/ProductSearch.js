@@ -38,55 +38,80 @@ function ProductSearch(props) {
         searchInfo: 'All Harps'
     }); 
     function handleMakerSelection(maker) {
+        const newState = {...allState, 
+            maker,
+            model: "All Models"
+        }       
         setAllState({...allState, 
             maker,
             model: "All Models",
-            searchInfo: getSearchInfo(allState.searchInfo, allState.maker, maker)
+            searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
     }
     function handleModelSelection(model) {
+        // shortcut when user clicks on line between model listings
+        if (model==='[object Object]') return;
         //catches when user selects all models from maker
+        const newStateAllModels = {...allState, 
+            model: "All Models"
+        } 
         if (model.toUpperCase() === 'ALL MODELS') {
             setAllState({...allState, 
                 model: "All Models",
-                searchInfo: getSearchInfo(allState.searchInfo, allState.model, model)
+                searchInfo: getSearchInfo(newStateAllModels)
             });
             setMenus(initialState);
             return;
         }
+        const newState = {...allState, 
+            model
+        }
         setAllState({...allState, 
             model,
-            searchInfo: getSearchInfo(allState.searchInfo, allState.model, model)
+            searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
     }
     function handleSizeSelection(size) {
+        const newState = {...allState, 
+            size
+        }
         setAllState({...allState, 
             size,
-            searchInfo: getSearchInfo(allState.searchInfo, allState.size, size)
+            searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
     }
     function handleFinishSelection(finish) {
+        const newState = {...allState, 
+            finish: finish==='All Finishes'?'All Finishes':finish,
+            productType: 'all',
+        }
         setAllState({...allState, 
             finish: finish==='All Finishes'?'All Finishes':finish,
             productType: 'all',
-            searchInfo: getSearchInfo(allState.searchInfo, allState.finish, finish)
+            searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
     }
     function handlePriceSelection(price) {
+        const newState = {...allState, 
+            price
+        }
         setAllState({...allState, 
             price,
-            searchInfo: getSearchInfo(allState.searchInfo, allState.price, price)
+            searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
     }
     function handleLocationSelection(location) {
+        const newState = {...allState, 
+            location
+        }
         setAllState({...allState, 
             location,
-            searchInfo: getSearchInfo(allState.searchInfo, allState.location, location)
+            searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
     }
@@ -180,15 +205,14 @@ function ProductSearch(props) {
     }
     function clearOneFilter(e) {
         let menuClick = e.target.name;
-        const newSearchInfo = getSearchInfo(allState.searchInfo, allState[menuClick]);
+        const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
+        const newSearchInfo = getSearchInfo(newState);
         if (menuClick==='finish') menuClick = 'finishe';
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
     }
     useEffect(() => {
         triggerLazy();
     });
-
-
     const filteredProducts = getFilteredProducts(props.products, allState);
     return (
         <>       
@@ -198,7 +222,7 @@ function ProductSearch(props) {
             <div className='searchLine1'>  
                 <div className={`arrow rightArrow line1RightArrow`}></div>
                 <SizeMenu 
-                    handleSizeChange = {handleSizeSelection} 
+                    handleSizeChange={handleSizeSelection} 
                     products={props.products}
                     makesmodels={props.makesmodels}
                     currentselected={allState.size?allState.size:'Harp Size'}

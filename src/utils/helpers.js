@@ -13,8 +13,13 @@ export function removeDashOE(sellerName) {
         ?sellerName.substr(0,sellerName.length-2)
         :sellerName;
 }
-//courtesy of Gabe Ragland useHooks.com
-export function useWindowSize() { 
+/**
+ * Gets window size (innerWidth) only if on client side
+ * courtesy of Gabe Ragland useHooks.com
+ * @function getWindowSize
+ * @returns {Number} - innerWidth from window
+ */
+export function getWindowSize() { 
     const isClient = typeof window === 'object';
   
     function getSize() {
@@ -67,6 +72,13 @@ export function findSizeWords(strings, type) {
     if (strings>29) return 'concert grand pedal';
     return 'size not found'
 }
+/**
+ * Finds the maker of a certain Model from makers/models JSON-style object
+ * @function findPriceRange
+ * @param {string} price price from seller website listing
+ * @requires parseNum turns price string into number with typeof number
+ * @returns {String} - Price Range from Price Menu
+ */
 export function findPriceRange(price) {
     price = parseNum(price);
     if (price<2000) return 'Less than $2,000';
@@ -100,7 +112,7 @@ export function getModelListForMaker(productMakesModels, productMaker) {
     if (!productMaker) throw new Error("from getModelListForMaker: maker parameter empty");
 
     let modelList = [];
-    if (productMaker.toUpperCase !== "HARP MAKER" && productMaker.toUpperCase() !== "ALL MAKERS"){
+    if (productMaker.toUpperCase() !== "ALL MAKERS"){
         productMakesModels.filter(product => product.productMaker === productMaker);
     } 
     productMakesModels.map(maker => {   
@@ -144,19 +156,54 @@ export function getModelList(productMakesModels, size) {
     
     return modelList; 
 }
-export function getFilteredProducts(filteredProducts, allState) {
-    if (allState.model && allState.model.toUpperCase() !== "HARP MODEL" && allState.model.toUpperCase() !== "ALL MODELS") {   
-        return filteredProducts.filter(product => product.productModel === allState.model);
-    }
-    if (allState.maker && allState.maker.toUpperCase() !== "HARP MAKER" && allState.maker.toUpperCase() !== "ALL MAKERS") filteredProducts = filteredProducts.filter(product => product.productMaker === allState.maker);
-    if (allState.location && allState.location.toUpperCase() !== "LOCATION" && allState.location.toUpperCase() !== "ALL LOCATIONS") filteredProducts = filteredProducts.filter(product => product.sellerRegion === allState.location);
-    if (allState.finish && allState.finish.toUpperCase() !== "FINISH" && allState.finish.toUpperCase() !== "ALL FINISHES") filteredProducts = filteredProducts.filter(product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase());
-    if (allState.size && allState.size.toUpperCase() === "ALL PEDAL") return filteredProducts.filter(product => product.productType === 'pedal');
-    if (allState.size && allState.size.toUpperCase() === "ALL LEVER") return filteredProducts.filter(product => product.productType === 'lever');
-    if (allState.size && allState.size.toUpperCase() !== "HARP SIZE" && allState.size.toUpperCase() !== "ALL SIZES") filteredProducts = filteredProducts.filter(product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase()));
-    if (allState.size && allState.price.toUpperCase() !== "PRICE RANGE" && allState.price.toUpperCase() !== "ALL PRICES") filteredProducts = filteredProducts.filter(product => allState.price===findPriceRange(product.productPrice));
+/**
+ * Finds the maker of a certain Model from makers/models JSON-style object
+ * @function getFilteredProducts
+ * @param {array} allProducts Product list
+ * @param {array} allState list of filters selected by user
+ * @returns {String} - Product List with filetersApplied
+ */
+export function getFilteredProducts(allProducts, allState) {
+    let filteredProducts = [...allProducts];
+    // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
-    // if (allState.price && allState.price.toUpperCase() !== "PRICE RANGE" && allState.price.toUpperCase() !== "ALL PRICES") filteredProducts = filteredProducts.filter(product => findPriceRange(product.productPrice)) == allState.price;
+    // apply filters // not yet implemented map from array or refactor to function
+    if (allState.size&&allState.size.toUpperCase() === "ALL PEDAL") 
+        filteredProducts = filteredProducts.filter(
+            product => product.productType&&product.productType === 'pedal'
+        );    
+    if (allState.size&&allState.size.toUpperCase() === "ALL LEVER") 
+        filteredProducts = filteredProducts.filter(
+            product => product.productType&&product.productType === 'lever'
+        );
+    if (allState.model&&allState.model.toUpperCase() !== "ALL MODELS") 
+        filteredProducts = filteredProducts.filter(
+            product => product.productModel&&product.productModel === allState.model
+        );
+    if (allState.maker && allState.maker.toUpperCase() !== "ALL MAKERS") 
+        filteredProducts = filteredProducts.filter(
+            product => product.productMaker&&product.productMaker === allState.maker
+        );
+    if (allState.location&&allState.location.toUpperCase() !== "ALL LOCATIONS") 
+        filteredProducts = filteredProducts.filter(
+            product => product.sellerRegion&&product.sellerRegion === allState.location
+        );
+    if (allState.finish&&allState.finish.toUpperCase() !== "ALL FINISHES") 
+        filteredProducts = filteredProducts.filter(
+            product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()
+        );
+    if (allState.size&&allState.price.toUpperCase() !== "ALL PRICES") 
+        filteredProducts = filteredProducts.filter(
+            product => product.productPrice&&findPriceRange(product.productPrice)===allState.price
+    );
+    // if size all pedal or all lever ready for return
+    if (allState.size&&(allState.size.toUpperCase() === "ALL PEDAL"||allState.size.toUpperCase() === "ALL LEVER")) 
+        return filteredProducts;
+    // size filter
+    if (allState.size&&allState.size.toUpperCase() !== "ALL SIZES") 
+        filteredProducts = filteredProducts.filter(
+            product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase())
+        );
     return filteredProducts;
 }
 export function addPlaceholderProducts(filteredproductscontainer, width) {
@@ -197,7 +244,7 @@ export function addPlaceholderProducts(filteredproductscontainer, width) {
 } 
 /**
  * Finds the maker of a certain Model from makers/models JSON-style object
- * @function findMakerFromModel
+ * @function getMakerFromModel
  * @param {String} model model name to search on
  * @param {array} makesModels array product makers with models
  * @returns {String} - Maker name
@@ -219,10 +266,10 @@ export function getMakerFromModel(makesModels, model) {
 }
 /**
  * Finds the maker of a certain Model from makers/models JSON-style object
- * @function findMakerFromModel
- * @param {String} model model name to search on
+ * @function getSizeFromModel
  * @param {array} makesModels array product makers with models
- * @returns {String} - Maker name
+ * @param {String} model model name to search on
+ * @returns {String} - Model size
  */
 export function getSizeFromModel(makesModels, model) {   
     if (!model) throw new AppError('from findMakerFromModel: model parameter is empty');
@@ -238,14 +285,25 @@ export function getSizeFromModel(makesModels, model) {
 
     return foundName;
 }
-export const getSearchInfo = (searchInfo, oldValue, update) => {
-    console.log('ingetsearch', searchInfo, oldValue, update)
-    if (searchInfo.indexOf("All Harps")>-1) searchInfo = '';
-    let idx = searchInfo.indexOf(oldValue);
-    if (idx>-1) searchInfo = searchInfo.slice(0,idx) + searchInfo.slice(idx+oldValue.length+2);
-    console.log('ingetsearchbeloe', searchInfo, oldValue, update)
-    if (update) return `${update} | ${searchInfo}`;
-    if (searchInfo.indexOf('|')===-1) return 'All Harps';
+/**
+ * Returns string of all currently selected filters
+ * @function getSearchInfo
+ * @param {object} current state including filter selections
+ * @returns {String} - search info string
+ */
+export const getSearchInfo = (allState) => {
+    // shortcut if no filters selected
+    if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
+    // prepare comparison array to eliminate not-selected filters
+    const initArr = ['All Sizes', 'All Makers', 'All Models', 'All Finishes', 'All Prices', 'All Locations']
+    // prepare array of only filter selections from state
+    const menuArr = [allState.size, allState.maker, allState.model, allState.finish, allState.price, allState.location];
+    // append searchInfo string with only selected filter information
+    let searchInfo='';
+    menuArr.map(menuItem => {
+        if(!initArr.includes(menuItem)) searchInfo += `${menuItem} | `
+    });
+    
     return searchInfo;
 }
 export const itemsSortByDisabled = (items, currentItems) => {

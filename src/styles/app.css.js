@@ -80,10 +80,12 @@ function AppCss() {
                 .plainTextSelectLine1 {
                     /*margin-block-start: -.5em;*/
                     width: 190%;
+                    position: absolute;
                 }
                 .plainTextSelectLine2 {
                     /*margin-block-start: -.5em;*/
                     width: 190%;
+                    position: absolute;
                 }
             }  
             .divider {
@@ -92,6 +94,10 @@ function AppCss() {
                 margin: auto;
             }
             .flex-sa {
+                display: flex;
+                justify-content: space-around;
+            }
+            .flex-sb {
                 display: flex;
                 justify-content: space-around;
             }

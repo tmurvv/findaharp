@@ -57,8 +57,8 @@ export default function PriceMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Less than $2000'
-                >Less than $2000</li>          
+                    name='Less than $2,000'
+                >Less than $2,000</li>          
             </ul>     
         </div>
     );

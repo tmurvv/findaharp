@@ -2,7 +2,6 @@ function ProductModalCSS() {
     return (
         <style jsx="true">{`
             .detailContainer {
-                opacity: 1;
                 width: 80vw;
                 background-color: #ffffff;
                 border: 4px solid #f9bf1e;
@@ -19,15 +18,19 @@ function ProductModalCSS() {
                 text-align: center;
                 padding: 30px;
                 color: #000000
+                opacity: 1;
             }
             .detailInfo {
                 display: flex;
                 align-items: flex-start;
                 padding: 30px 20px 20px;
             }
-            @media only screen and (max-width: 500px) {
+            @media only screen and (max-width: 550px) {
                 .detailContainer {
                     flex-direction: column;
+                }
+                .detailInfo {
+                    flex-direction: column
                 }
             }
             .detailButton {
@@ -64,6 +67,11 @@ function ProductModalCSS() {
                 padding: 0 0 0 60px;
                 text-align: left;
             }
+            @media only screen and (max-width: 550px) {
+                .detailText {
+                    padding: 25px 0;
+                }
+            }         
             .detailText span {
                 font-family: 'Metropolis Extra Bold';
                 font-weight: 800;

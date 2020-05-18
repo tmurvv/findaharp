@@ -7,7 +7,7 @@ import { getModelList, itemsSortByDisabled } from '../../utils/helpers';
 
 export default function ModelMenu(props) {
     let maker; 
-    if (props.productMaker !== "Harp Maker" && props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
+    if (props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
     
     const currentModels = props.products.map(product => product.productModel).sort(); 
     let models;

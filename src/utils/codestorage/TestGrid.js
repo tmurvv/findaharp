@@ -7,7 +7,7 @@ import TestGridCss from '../styles/TestGrid.css';
 import ProductModal from './ProductModal';
 import ContactForm from './ContactForm';
 import Product from './Product';
-import { removeDashOE, setOpacity, useWindowSize } from '../utils/helpers';
+import { removeDashOE, setOpacity, getWindowSize } from '../utils/helpers';
 import { productsReducer } from '../utils/reducers';
 // Hook
 
@@ -21,7 +21,7 @@ const initialState = {
 const TestGrid = ({ filteredproducts }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [adjProducts, setAdjProducts] = useState(filteredproducts);
-    const size = useWindowSize();
+    const size = getWindowSize();
 
     function handleOpenDetail(product) {
         dispatch({type:'detail', product});

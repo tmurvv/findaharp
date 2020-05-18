@@ -1,5 +1,6 @@
 // packages
 import React, {useState, useContext} from 'react';
+import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
@@ -25,7 +26,6 @@ function LoginSignup(props) {
         loginchange: false
     });
     const handleChange = (evt) => {
-
         switch (evt.target.name) {
             case 'firstname': 
                 setUserSignup({...userSignup, firstname: evt.target.value, signupchange: true});
@@ -61,6 +61,13 @@ function LoginSignup(props) {
             signupchange: false
         });
     }
+    function resetResults() {
+        document.querySelector('#loadingLogin').style.display='none';
+        document.querySelector('#loadingLoginText').innerText='';
+        document.querySelector('#loadingLoginOk').style.display='none';
+        document.querySelector('#loadingLoginTryAgain').style.display='none';
+        document.querySelector('#loadingLoginImg').style.display='none';
+    }
     function resetLoginForm() { 
         setUserLogin({
             loginemail: '',
@@ -91,10 +98,8 @@ function LoginSignup(props) {
     }
     
     const handleSubmit = async (evt) => {
-        
         evt.preventDefault();
         if (active==='signup') {
-            
             if (userSignup.signuppassword.length<8) return alert('Passwords must be at least 8 characters long.');
             if (userSignup.signuppassword !== userSignup.confirmpassword) return alert('Passwords must match.');
             
@@ -113,13 +118,38 @@ function LoginSignup(props) {
             }
         }
         if (active==='login') {
-            if (userLogin.loginpassword.length<8) return alert('Passwords must be at least 8 characters long.');
-            const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-            user.changeUser({name: res.data.user.firstname, email: 'Changed'});
+            const resultContainer = document.querySelector('#loadingLogin');
+            const resultText = document.querySelector('#loadingLoginText');
+            const resultButton = document.querySelector('#loadingLoginOk');
+            const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
+            const resultImg = document.querySelector('#loadingLoginImg');
             
-            document.querySelector('#userName').innerText='Welcome ' + user.name;
+            resultContainer.style.display='block';
+            if (userLogin.loginpassword.length<8) {
+                resultImg.style.display='none';
+                resultButtonTryAgain.style.display='block';
+                resultButtonTryAgain.style.marginLeft=0;
+                resultText.innerText=`Passwords must be at least 8 characters long.`;
+                return
+            }
+            resultText.innerText='Loading...';
+            resultImg.style.display='block';
+            try {
+                const res = await axios.post('https://fikndaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                user.changeUser({name: res.data.user.firstname, email: 'Changed'});
+                document.querySelector('#userName').innerText=user.name;
+                resultText.innerText=`Login Successful: Welcome ${user.name}`;
+                resultImg.style.display='none';
+                resultButton.style.display= 'block';
+            } catch(e) {
+                resultImg.style.display='none';
+                resultText.innerText=`Unable to login ${userLogin.loginemail}. Logging in as guest.`;
+                resultButton.style.display='block';
+                resultButtonTryAgain.style.display='block'
+            }
         }
         
+        console.log('user', user)
         resetSignupForm();
         resetLoginForm();
         // const contact = {
@@ -147,11 +177,19 @@ function LoginSignup(props) {
    return (
        <>
         <div className='login-signup-container'>
+            <div id="loadingLogin">
+                <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingLoginText"></p>
+                <div className='flex-sb'>
+                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={()=>user!=='guest user'?Router.push('/'):resetResults()}>OK</button>
+                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={()=>resetResults()}>Try Again</button>
+                </div>
+            </div>
             <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
                     {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>
-                <form className="login-signup-content">
+                <form>
                     {needVerify
                     ?
                         <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
@@ -209,7 +247,7 @@ function LoginSignup(props) {
             <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
                 <form className="login-signup-title" onSubmit={()=>handleSubmit()}>
                     SIGN UP
-                    <div className="login-signup-content">
+                    <div >
                         <div className="input-name">
                             <h3>First Name</h3>
                         </div>
@@ -286,177 +324,3 @@ function LoginSignup(props) {
 }
 
 export default LoginSignup;
-// // packages
-// import React, {useState} from 'react';
-// import axios from 'axios';
-// import uuid from 'react-uuid';
-
-// // internal
-// import LoginSignupCSS from '../src/styles/LoginSignup.css';
-// import PageUnderConstructionCSS from '../src/styles/PageUnderConstuction.css';
-
-// function LoginSignup(props) {
-//     const [userSignup, setUserSignup] = useState({
-//         firstname: '',
-//         lastname: '',
-//         contactemail: '',
-//         password: '',
-//         confirmpassword: '',
-//         change: false
-//     });
-//     const handleChange = (evt) => {
-//         switch (evt.target.name) {
-//             case 'firstname': 
-//                 setUserSignup({...userSignup, firstname: evt.target.value, change: true});
-//                 break
-//             case 'lastname': 
-//                 setUserSignup({...userSignup, lastname: evt.target.value, change: true});
-//                 break
-//             case 'contactemail': 
-//                 setUserSignup({...userSignup, contactemail: evt.target.value, change: true});
-//                 break
-//             case 'password': 
-//                 setUserSignup({...userSignup, password: evt.target.value, change: true});
-//                 break
-//             case 'confirmpassword': 
-//                 setUserSignup({...userSignup, confirmpassword: evt.target.value, change: true});
-//                 break
-               
-//             default :
-//         }
-//     }
-    // const handleSubmit = async (evt) => {
-    //     evt.preventDefault();
-    //     alert('Signup new userSignup under construction.');
-    //     // if (!userSignup.contactemail) return alert('Email is required');
-    //     // const contact = {
-    //     //     firstname: userSignup.firstname,
-    //     //     lastname: userSignup.lastname,
-    //     //     email: userSignup.contactemail,
-    //     //     sellername: product.sellerName,
-    //     //     productmaker: userSignup.contactmaker,
-    //     //     productmodel: userSignup.contactmodel,
-    //     //     comments: userSignup.contactcomments
-    //     // }
-    //     // try {
-    //     //     const res = await axios.post(
-    //     //         `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
-    //     //         contact
-    //     //     );
-    //     //     alert("Email sent.")
-    //     // } catch(e) {
-    //     //     alert("Something went wrong. Please try again or contact the webmaster.", e.message)
-    //     // }
-        
-    //     // props.handleCloseContact();
-    // }
-    // function handleClose() {
-    //     document.querySelector('.detailContainer').style.display="none";
-    // }
-//    return (
-//         <>
-//         <div className='underConstruction'>           
-//             <h2>Login/Signup Page Under Construction</h2>
-//         </div>
-//         <PageUnderConstructionCSS />
-//         <div className='detailContainer'>
-//             <img style={{backgroundColor: 'black', height: '60px', padding: '15px', marginTop: '25px', marginLeft: '33.3%', borderRadius: '3px'}} src=".\img\logo_findaharp.png" alt="Find a Harp text logo" />
-//             <h2 style={{backgroundColor: 'white', color: 'black'}}>Login/Signup Under Construction</h2>
-//             <div className='loginContainer'>
-                
-//                 <div className={`detailImg`}>
-//                     <img src= {`./img/golden_harp_full.png`} alt={"logo"}/>
-//                 </div>
-//                 <div 
-//                     className='clearModal' 
-//                     onClick={() => 
-//                         {if (!userSignup.change || userSignup.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
-//                     }} 
-//                 >
-//                     <img src='/img/clear_search.png' alt='clear filters'/>
-//                 </div>
-//                 <form className='detailText'>             
-//                     {/* <div className='heading'>
-//                         <p>Easy Sign-up <button className={`detailButton`}>Login</button><br></br></p>
-//                     </div>               */}
-//                     <div className={`flex marginTopLarge`}>
-//                         <div className='inputGroup'>
-//                             <label name='firstname'>First Name: </label>
-//                             <input
-//                                 id={uuid()}
-//                                 value={userSignup.firstname}
-//                                 onChange={handleChange}
-//                                 name='firstname'
-//                                 placeholder="optional"
-//                             />
-//                         </div>
-//                         <div className='inputGroup'>
-//                             <label name='lastname'>Last Name: </label>
-//                             <input
-//                                 id={uuid()}id="outlined-helperText"
-//                                 label="Last Name"
-//                                 value={userSignup.lastname}
-//                                 onChange={handleChange}
-//                                 name ='lastname'
-//                                 placeholder="optional"
-//                             />
-//                         </div>
-//                     </div>
-//                     <div className='inputGroup'>
-//                         <label name='email'>Email: </label>
-//                         <input
-//                             id={uuid()}
-//                             name='contactemail'
-//                             type='email'
-//                             value={userSignup.contactemail}
-//                             onChange={handleChange}
-//                             required
-//                         />
-//                     </div>         
-//                     <div className='inputGroup'>
-//                         <label name='password'>password: </label>
-//                         <input
-//                             id={uuid()}
-//                             type='password'
-//                             name='password'
-//                             value={userSignup.password}
-//                             onChange={handleChange}
-//                             required
-//                         />
-//                     </div>         
-//                     <div className='inputGroup'>
-//                         <label name='confirmpassword'>confirm password: </label>
-//                         <input
-//                             id={uuid()}
-//                             name='confirmpassword'
-//                             type='password'
-//                             value={userSignup.confirmpassword}
-//                             onChange={handleChange}
-//                             required
-//                         />
-//                     </div>                  
-//                     <div>
-//                         <button
-//                             className='detailButton'
-//                             type='submit'
-//                             onClick={handleSubmit} 
-//                         >Submit
-//                         </button>
-//                         <button
-//                             className={`detailButton detailButton-cancel`}
-//                             type='button'
-//                             onClick={() => 
-//                                 {if (!userSignup.change || userSignup.change && confirm('Signup not completed. Changes will be lost. Exit signup?')) handleClose();
-//                             }}
-//                         >Cancel
-//                         </button>
-//                     </div>         
-//                 </form>
-//             </div>
-//         </div>
-//         <LoginSignupCSS />
-//         </>
-//     )
-// }
-
-// export default LoginSignup;
