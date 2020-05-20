@@ -63,7 +63,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                 {productdetail.productSize!==0?`${productdetail.productSize} Strings`:''}<br></br>
                 <span 
                     onClick={(e)=>handleOpenContactModal(e, productdetail)} 
-                    style={{textDecoration: 'underline'}}
+                    style={{color: '#6A75AA'}}
                 >
                     {removeDashOE(productdetail.sellerName)}
                 </span>

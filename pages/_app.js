@@ -1,5 +1,5 @@
 // import App from 'next/app'
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useRouter } from 'next/router';
 // css
 import 'react-phone-input-2/lib/style.css'
@@ -13,15 +13,18 @@ import Footer from '../src/components/Footer';
 import Head from '../src/components/Head';
 import ActivateEmail from './ActivateEmail.js';
 
-let user = {
-    name: 'guest user',
-    email: '',
-    changeUser: (newUser) => {
-        user.name = newUser.name;
-    }
-};
+// let user = {
+//     name: 'guest user',
+//     email: '',
+//     changeUser: (newUser) => {
+//         console.log('imin', newUser)
+//         console.log('userabove', user)
+//         console.log('below', user)
+//         return user = {name: newUser.name, email: newUser.email};
+//     }
+// };
 function MyApp({ Component, pageProps }) {
-    //const [user, setUser] = useState(user);
+    const [user, setUser] = useState('Login');
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     const router = useRouter();
@@ -42,7 +45,7 @@ function MyApp({ Component, pageProps }) {
         <>  
             <Head/>
             <Banner />
-            <UserContext.Provider value={user}>
+            <UserContext.Provider value={{user, setUser}}>
                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
                 {/* <ActivateEmail router={router} /> */}
                 <Component {...pageProps} />

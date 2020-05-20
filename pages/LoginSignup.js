@@ -9,7 +9,9 @@ import { UserContext } from '../src/contexts/UserContext';
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
 
 function LoginSignup(props) {
-    const user = useContext(UserContext);
+    // const userContext = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
+    
     const [active, setActive] = useState('login');
     const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
@@ -105,11 +107,8 @@ function LoginSignup(props) {
         const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
         const resultImg = document.querySelector('#loadingLoginImg');
         if (active==='signup') {
-            console.log('signup', userSignup)
-            console.log('login', userLogin)
             // shortcut
             if ((!userSignup.signuppassword)||userSignup.signuppassword.length<8) {
-                console.log('insignupshortpass')
                 resultContainer.style.display='block';
                 resultImg.style.display='none';
                 resultButtonTryAgain.style.display='block';
@@ -137,20 +136,27 @@ function LoginSignup(props) {
             };
 
             try {
-                const res = await axios.post('https://finddaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+                /* LOCAL */
+                // const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
+                /* TESTING */
+                const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
+                /* PRODUCTION */
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+                
                 if (res.status===200) {
                     resultImg.style.display='none';
                     resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     setNeedVerify(true);
+                    console.log(res);
+                    setUser(res.data.data.added.firstname)
                 }
-                
             } catch (e) {
                 resultImg.style.display='none';
                 resultButton.style.display='block';
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft='30px';
-                resultText.innerText=`Something went wrong on signup. Logging in as guest user. ${e.message}`
+                resultText.innerText=`Something went wrong on signup. Logging in as guest user? ${e.message}`
             }
         }
         if (active==='login') {   
@@ -165,28 +171,43 @@ function LoginSignup(props) {
             resultText.innerText='Loading...';
             resultImg.style.display='block';
             try {
-                const res = await axios.post('https://fikndaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-                user.changeUser({name: res.data.user.firstname, email: res.data.user.email});
-                document.querySelector('#userName').innerText=user.name;
-                resultText.innerText=`Login Successful: Welcome ${user.name}`;
+                /* LOCAL */
+                // const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                /* TESTING */
+                const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                /* PRODUCTION */
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                const returnedUser = res.data.user;
+                console.log(returnedUser.emailverified)
+                if (returnedUser.emailverified === false) console.log('not verified')
+                await setUser(returnedUser.firstname);
+                resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
             } catch(e) {
-                resultImg.style.display='none';
-                resultText.innerText=`Unable to login ${userLogin.loginemail}. Logging in as guest.`;
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
+                console.log(e.response.data.message)
+                console.log(e.response.data.message.includes('verified'))
+                if (e.response.data.message.includes('verified')) {
+                    resultImg.style.display='none';
+                    resultText.innerText=`${e.response.data.message} Login as guest?`;
+                    resultButton.style.display='block';
+                    resultButtonTryAgain.style.display='block';
+                    resultButtonTryAgain.style.marginLeft='30px';
+                } else {
+                    resultImg.style.display='none';
+                    resultText.innerText=`${e.response.data.message} Login as guest?`;
+                    resultButton.style.display='block';
+                    resultButtonTryAgain.style.display='block';
+                    resultButtonTryAgain.style.marginLeft='30px';
+                }
             }
         }
-        
-        console.log('user', user)
+
         resetSignupForm();
         resetLoginForm();
     }
     function loginGuest() {
-        user.changeUser({name: 'Guest', email: 'guestemail@findaharp.com'});
-        document.querySelector('#userName').innerText=user.name;
+        //setUser('Guest');
         resetResults();
         Router.push('/');
     }

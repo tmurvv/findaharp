@@ -1,3 +1,8 @@
+## MAY 18, 2020
+### DATA IS LOCAL AND FAKE, 
+### LOGIN/SIGNUP GOES TO TESTING API, BUT LIVE DB
+
+
 - check for console.loks
 - check for BREAKINk
 - check which API is connecting

@@ -1,4 +1,5 @@
-## check sign up functionality on the backend
+### high priority
+- why is name not showing up in navBar changeUser function not working in login success?
 
 ### internal
 - make it easier to change api on deployment
@@ -12,7 +13,6 @@
 - Contact Seller button moved to top and centered
 - Responsive for contact not yet implemented 
 - contact & verify pages need spinner when submit button pressed
-- if user login fails offer option to proceed as guest
 - Price range wrapping around 650px
 
 ### functionality

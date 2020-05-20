@@ -6,7 +6,8 @@ import NavBarCss from '../styles/NavBar.css';
 import {UserContext} from '../contexts/UserContext';
 
 export default function NavBar(props) {
-    const user = useContext(UserContext);
+    // const  {value, setValue}= useContext(UserContext);
+    const { user } = useContext(UserContext);
     return(
         <>
         <div className='navBarOuter'>
@@ -35,7 +36,8 @@ export default function NavBar(props) {
                         <a>Contact/About</a>
                     </Link>
                     <Link href='/LoginSignup'>
-                        <a id='userName'>{user.name==='guest user'?'Login':user.name}</a>
+                        {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
+                        <a id='userName'>{user}</a>
                     </Link>
                 </div>:''
             }
