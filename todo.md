@@ -12,6 +12,7 @@
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
 - Responsive for contact form not yet implemented
 - Price range wrapping around 650px
+- add placeholders to store images
 
 ### functionality
 - CRUD operations on upload listings
@@ -27,7 +28,7 @@
 ### SEO
 
 - All SEO checks in Google Guide
-- Lighthourse
+- Lighthouse
 
 ### PERFORMANCE
 - cache images

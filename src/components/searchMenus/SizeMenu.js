@@ -9,7 +9,7 @@ export default function SizeMenu(props) {
     };
 
     return (
-        <div>
+        <div className='relative'>
             <button 
                 className="menuButton" 
                 name='size' 

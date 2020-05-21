@@ -13,7 +13,12 @@ function ProductSearchCss() {
                 font-weight: 500;
                 font-size:14px;
             }
-            
+            .testRibbon {
+                height: 50px;
+                width: 80%;
+                /*background-image: url("./img/ribbon_black_full.png");
+                background-size: cover;*/
+            }
             h3 {
                 width: 100%;
                 text-align: center;
@@ -29,25 +34,35 @@ function ProductSearchCss() {
                 .productSearchOuter {
                     width: 90%;
                 }
-            }
-            
+            } 
             .searchLine1 {
-                position: relative;
+                display: flex;
+                justify-content: space-evenly;
+                /*position: relative;
                 width: 100%;
                 height: 27px;
                 background-color: #000000;
-                color: #fafbfc;
                 text-align: center;
                 border-top: 1px solid;
-                border-bottom: 1px solid;
+                border-bottom: 1px solid;*/
+                text-align: center;
                 display: grid;
-                grid-template-columns: 5.5% 29% 29% 29% 9.5%;
+                grid-template-columns: 33.3% 33.3% 33.3%;               
+            }
+            .searchLine1 img {
+                width: 70%;
+                position: absolute;
+                height: 50px;
             }
             .searchLine1 span {
                 color: #fafbfc;
             }
             .searchLine1Sub {
-                position: relative;
+                display: flex;
+                justify-content: space-evenly;
+                font-size: 10px;
+                padding-top: 7px;
+                /*position: relative;
                 width: 100%;
                 margin: auto;
                 margin-top: -2px;
@@ -57,10 +72,10 @@ function ProductSearchCss() {
                 border-top: 1px solid;
                 border-bottom: 1px solid;
                 font-style: italic;
-                font-size: 14px;
+                font-size: 14px;*/
                 text-align: center;
                 display: grid;
-                grid-template-columns: 5.5% 29% 29% 29% 9.5%;
+                grid-template-columns: 33.3% 33.3% 33.3%;
             }
             @media only screen and (max-width: 550px) {
                 .mobileSearchLine1 {
@@ -77,6 +92,7 @@ function ProductSearchCss() {
                     height: 120px;
                     grid-template-columns: unset;
                     align-items: center;
+                    
                 }
                 .searchLine1>.grid-item {
                     padding-top: 5px;
@@ -146,22 +162,22 @@ function ProductSearchCss() {
                 }
             }
             .arrow {
-                background-color: #fffff3;
-                height: 20px;
-                width: 20px;  
+                // background-color: #fffff3;
+                // height: 20px;
+                // width: 20px;  
             }  
             .rightArrow {
-                border-left: 1px solid;
-                border-top: 1px solid;
-                transform: translate(-10.5px, 4px) rotate(135deg);
+                // border-left: 1px solid;
+                // border-top: 1px solid;
+                // transform: translate(-10.5px, 4px) rotate(135deg);
             }
             .leftArrow {
-                border-right: 1px solid;
-                border-bottom: 1px solid;
-                position: absolute;
-                top: 4px;
-                right: -10px;
-                transform: rotate(135deg);
+                // border-right: 1px solid;
+                // border-bottom: 1px solid;
+                // position: absolute;
+                // top: 4px;
+                // right: -10px;
+                // transform: rotate(135deg);
             }
             .line1RightArrow {
                 transform: translate(-13.5px, 4px) rotate(135deg);
@@ -186,7 +202,7 @@ function ProductSearchCss() {
                 z-index: 5;
             }
             .search-grid-item img {
-                height: 20px;
+                height: 12px;
                 margin-left: 10px;
                 color: #333333
                 z-index: 1000;

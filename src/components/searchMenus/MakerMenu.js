@@ -14,7 +14,7 @@ export default function MakerMenu(props) {
     };
     
     return (
-        <div>
+        <div className='relative'>
             <button 
                 className="menuButton" 
                 name='maker' 

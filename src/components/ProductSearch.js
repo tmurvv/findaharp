@@ -213,12 +213,15 @@ function ProductSearch(props) {
     });
     const filteredProducts = getFilteredProducts(props.products, allState);
     return (
+
+
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
         <div className='productSearchOuter'>
-            <div className='mobileSearchLine1'> 
+            <div className='mobileSearchLine1'>
             <div className='searchLine1'>  
-                <div className={`arrow rightArrow line1RightArrow`}></div>
+                {/* <div className={`arrow rightArrow line1RightArrow`}></div> */}
+                <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
                 <SizeMenu 
                     handleSizeChange={handleSizeSelection} 
                     products={props.products}
@@ -243,10 +246,10 @@ function ProductSearch(props) {
                     open={menus.model}
                     handleclick={handleClick}
                 />
-                <div className='arrow leftArrow line1LeftArrow'></div>
+                {/* <div className='arrow leftArrow line1LeftArrow'></div> */}
             </div>
             <div className="searchLine1Sub">
-                <div className='arrow rightArrow line1SubRightArrow'></div>
+                {/* <div className='arrow rightArrow line1SubRightArrow'></div> */}
                 <div 
                     id="selectedSize" 
                     className={`search-grid-item`} 
@@ -313,7 +316,7 @@ function ProductSearch(props) {
                         :''
                     }
                 </div>
-                <div className='arrow leftArrow line1SubLeftArrow'></div>
+                {/* <div className='arrow leftArrow line1SubLeftArrow'></div> */}
             </div>
             </div>
             <h3 className='searchTitle'>Further refine your search.</h3>

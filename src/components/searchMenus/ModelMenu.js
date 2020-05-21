@@ -27,7 +27,7 @@ export default function ModelMenu(props) {
         props.handleModelChange(evt.target.getAttribute('name'));
     };
     return (
-        <div>
+        <div className='relative'>
             <button 
                 className="menuButton" 
                 name='model' 
