@@ -8,7 +8,7 @@ export default function PriceMenu(props) {
     };
 
     return (
-        <div>
+        <div className='relative'>
             <button 
                 className="menuButton" 
                 name='price' 

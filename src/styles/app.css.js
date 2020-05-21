@@ -32,7 +32,7 @@ function AppCss() {
             .menuButton {
                 background-color: transparent;
                 font-size: 14px;
-                padding-top: 9px;
+                padding-top: 11px;
                 position: relative;
                 cursor: pointer;
                 color: #fafbfc;
@@ -65,15 +65,19 @@ function AppCss() {
                 margin-block-end: 0;
             }
             .plainTextSelectLine2 {
-                margin-block-start: -.5em;
+                margin-block-start: -.2em;
                 color: #333333;
                 font-size: 14px;
-                padding: 6px 9px;
-                position: relative;
+                padding: 6px 0;
+                position: absolute;
                 cursor: pointer;
                 background-color: #f9bf1e;
                 list-style: none;
                 z-index: 2000;
+                padding-inline-start: 0;
+                width: 75%;
+                transform: translateX(16.5%);
+                text-align: center;
             }
             .plainTextSelectLine2 p {
                 margin-block-start: 0;

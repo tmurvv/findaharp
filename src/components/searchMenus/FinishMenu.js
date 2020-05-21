@@ -7,7 +7,7 @@ export default function FinishMenu(props) {
     };
 
     return (
-        <div>
+        <div className='relative'>
             <button 
                 className="menuButton" 
                 name='finish' 

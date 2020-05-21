@@ -220,7 +220,6 @@ function ProductSearch(props) {
         <div className='productSearchOuter'>
             <div className='mobileSearchLine1'>
             <div className='searchLine1'>  
-                {/* <div className={`arrow rightArrow line1RightArrow`}></div> */}
                 <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
                 <SizeMenu 
                     handleSizeChange={handleSizeSelection} 
@@ -246,10 +245,8 @@ function ProductSearch(props) {
                     open={menus.model}
                     handleclick={handleClick}
                 />
-                {/* <div className='arrow leftArrow line1LeftArrow'></div> */}
             </div>
             <div className="searchLine1Sub">
-                {/* <div className='arrow rightArrow line1SubRightArrow'></div> */}
                 <div 
                     id="selectedSize" 
                     className={`search-grid-item`} 
@@ -316,13 +313,12 @@ function ProductSearch(props) {
                         :''
                     }
                 </div>
-                {/* <div className='arrow leftArrow line1SubLeftArrow'></div> */}
             </div>
             </div>
             <h3 className='searchTitle'>Further refine your search.</h3>
             <div className='mobileSearchLine2'>
-            <div className='searchLine2'>
-                <div className='arrow rightArrow line2RightArrow'></div>
+                <div className='searchLine2'>
+                    <img src='./img/ribbon_golden_full.png' alt="golden background ribbon"/> 
                     <FinishMenu 
                         handleFinishChange = {handleFinishSelection} 
                         products={props.products}
@@ -346,81 +342,78 @@ function ProductSearch(props) {
                         open={menus.location}
                         handleclick={handleClick}
                     /> 
-                    <div className='arrow leftArrow line2LeftArrow'></div>
                 </div>
                 <div className="searchLine2Sub">
-                    <div className={`arrow rightArrow line2SubRightArrow`}></div>
-                    <div 
-                        id="selectedFinish" 
-                        className={`search-grid-item`} 
-                        value={allState.finish}
-                        onClick={()=>handleClick({target: {name: 'finish'}})}
-                    >
-                        {allState.finish}
-                        {allState.finish!=="All Finishes"
-                            ?<img 
-                                name='finish'
-                                onClick={
-                                    (e)=>{
-                                        e.stopPropagation(); 
-                                        clearOneFilter({target:{name:'finish'}});
-                                    }
-                                }
-                                src='/img/clear_search.png' 
-                                alt='clear filters'
-                            />
-                            :''
-                        }
-                    </div>
-                    <div 
-                        id="selectedPrice" 
-                        className={`search-grid-item`} 
-                        value={allState.price}
-                        onClick={()=>handleClick({target: {name: 'price'}})}
-                    >
-                        {allState.price}
-                        {allState.price!=="All Prices"
-                            ?<img 
-                                name='price'
-                                onClick={
-                                    (e)=>{
-                                        e.stopPropagation(); 
-                                        clearOneFilter({target:{name:'price'}});
-                                    }
-                                }
-                                src='/img/clear_search.png' 
-                                alt='clear filters'
-                            />
-                            :''
-                        }
                         
-                    </div>
-                    <div 
-                        id="selectedAll Locations" 
-                        className={`search-grid-item`} 
-                        value={allState.location}
-                        onClick={()=>handleClick({target: {name: 'location'}})}
-                    >
-                        {allState.location}
-                        {allState.location!=="All Locations"
-                            ?<img 
-                                name='locations'
-                                onClick={
-                                    (e)=>{
-                                        e.stopPropagation(); 
-                                        clearOneFilter({target:{name:'location'}});
+                        <div 
+                            id="selectedFinish" 
+                            className={`search-grid-item`} 
+                            value={allState.finish}
+                            onClick={()=>handleClick({target: {name: 'finish'}})}
+                        >
+                            {allState.finish}
+                            {allState.finish!=="All Finishes"
+                                ?<img 
+                                    name='finish'
+                                    onClick={
+                                        (e)=>{
+                                            e.stopPropagation(); 
+                                            clearOneFilter({target:{name:'finish'}});
+                                        }
                                     }
-                                }
-                                src='/img/clear_search.png' 
-                                alt='clear filters'
-                            />
-                            :''
-                        }
-                    </div>
-                    <div className={`arrow leftArrow line2SubLeftArrow`}></div>
+                                    src='/img/clear_search.png' 
+                                    alt='clear filters'
+                                />
+                                :''
+                            }
+                        </div>
+                        <div 
+                            id="selectedPrice" 
+                            className={`search-grid-item`} 
+                            value={allState.price}
+                            onClick={()=>handleClick({target: {name: 'price'}})}
+                        >
+                            {allState.price}
+                            {allState.price!=="All Prices"
+                                ?<img 
+                                    name='price'
+                                    onClick={
+                                        (e)=>{
+                                            e.stopPropagation(); 
+                                            clearOneFilter({target:{name:'price'}});
+                                        }
+                                    }
+                                    src='/img/clear_search.png' 
+                                    alt='clear filters'
+                                />
+                                :''
+                            }
+                            
+                        </div>
+                        <div 
+                            id="selectedAll Locations" 
+                            className={`search-grid-item`} 
+                            value={allState.location}
+                            onClick={()=>handleClick({target: {name: 'location'}})}
+                        >
+                            {allState.location}
+                            {allState.location!=="All Locations"
+                                ?<img 
+                                    name='locations'
+                                    onClick={
+                                        (e)=>{
+                                            e.stopPropagation(); 
+                                            clearOneFilter({target:{name:'location'}});
+                                        }
+                                    }
+                                    src='/img/clear_search.png' 
+                                    alt='clear filters'
+                                />
+                                :''
+                            }
+                        </div>
                 </div>
             </div>
-            {/* <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginTop: '5px', marginBottom:'-10px'}}>Website Under Construction-Sample Listings</h5> */}
             <div className='selected'>
                 <p>
                     SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}

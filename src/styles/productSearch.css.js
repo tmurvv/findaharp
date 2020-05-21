@@ -38,13 +38,6 @@ function ProductSearchCss() {
             .searchLine1 {
                 display: flex;
                 justify-content: space-evenly;
-                /*position: relative;
-                width: 100%;
-                height: 27px;
-                background-color: #000000;
-                text-align: center;
-                border-top: 1px solid;
-                border-bottom: 1px solid;*/
                 text-align: center;
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;               
@@ -52,7 +45,7 @@ function ProductSearchCss() {
             .searchLine1 img {
                 width: 70%;
                 position: absolute;
-                height: 50px;
+                height: 55px;
             }
             .searchLine1 span {
                 color: #fafbfc;
@@ -60,19 +53,8 @@ function ProductSearchCss() {
             .searchLine1Sub {
                 display: flex;
                 justify-content: space-evenly;
-                font-size: 10px;
-                padding-top: 7px;
-                /*position: relative;
-                width: 100%;
-                margin: auto;
-                margin-top: -2px;
-                height: 27px;
-                background-color: #ffffff;
-                color: #868686;
-                border-top: 1px solid;
-                border-bottom: 1px solid;
-                font-style: italic;
-                font-size: 14px;*/
+                font-size: 12px;
+                padding-top: 9.5px;
                 text-align: center;
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;
@@ -92,7 +74,6 @@ function ProductSearchCss() {
                     height: 120px;
                     grid-template-columns: unset;
                     align-items: center;
-                    
                 }
                 .searchLine1>.grid-item {
                     padding-top: 5px;
@@ -106,33 +87,32 @@ function ProductSearchCss() {
                 } 
             }
             .searchLine2 {
-                position: relative;
                 width: 90%;
                 margin: auto;
-                height: 27px;
-                background-color: #f9bf1e;
-                color: #868686;
+                display: flex;
+                justify-content: space-evenly;
                 text-align: center;
-                border-top: 1px solid;
                 display: grid;
-                grid-template-columns: 5.5% 29% 29% 29% 9.5%;
+                grid-template-columns: 33.3% 33.3% 33.3%;
+            }
+            .searchLine2 img {
+                width: 63.3%;
+                position: absolute;
+                height: 55px;
             }
             .searchLine2 span {
                 color: #fafbfc;
             }
             .searchLine2Sub {
-                position: relative;
-                width: 90%;
                 margin: auto;
-                height: 26.5px;
-                background-color: #ffffff;
-                color: #868686;
-                font-style: italic;
-                font-size: 14px;
-                border-top: 1px solid;
-                border-bottom: 1px solid;
+                width: 90%;
+                display: flex;
+                justify-content: space-evenly;
+                font-size: 12px;
+                padding-top: 9.5px;
+                text-align: center;
                 display: grid;
-                grid-template-columns: 5.5% 29% 29% 29% 9.5%;
+                grid-template-columns: 33.3% 33.3% 33.3%;
             }
             @media only screen and (max-width: 550px) {
                 .mobileSearchLine2 {
@@ -149,6 +129,11 @@ function ProductSearchCss() {
                     border: 1px solid;
                     border-right: none;
                 }
+                .searchLine2 img {
+                    width: 70%;
+                    position: absolute;
+                    height: 50px;
+                }
                 .searchLine2.div.button {
                     color: #000000;
                 }
@@ -156,35 +141,8 @@ function ProductSearchCss() {
                     grid-template-columns: 100%;
                     height: 120px;
                     border: 1px solid;
-                }
-                .arrow {
-                    display: none;
-                }
-            }
-            .arrow {
-                // background-color: #fffff3;
-                // height: 20px;
-                // width: 20px;  
-            }  
-            .rightArrow {
-                // border-left: 1px solid;
-                // border-top: 1px solid;
-                // transform: translate(-10.5px, 4px) rotate(135deg);
-            }
-            .leftArrow {
-                // border-right: 1px solid;
-                // border-bottom: 1px solid;
-                // position: absolute;
-                // top: 4px;
-                // right: -10px;
-                // transform: rotate(135deg);
-            }
-            .line1RightArrow {
-                transform: translate(-13.5px, 4px) rotate(135deg);
-            }
-            .line1LeftArrow {
-                transform: translate(2.5px, -1px) rotate(135deg);
-            }
+                }     
+            } 
             .flexSE {
                 width: 100%;
                 display: flex;
@@ -218,8 +176,7 @@ function ProductSearchCss() {
             .selected {
                 width: fit-content;
                 height: fit-content;
-                margin: auto;
-                margin-bottom: -15px;
+                margin: 20px auto -15px;
                 display: flex;
                 justify-content: center;
             }
@@ -235,10 +192,11 @@ function ProductSearchCss() {
             }
             .clearSearch img {
                 z-index: 1000;
-                width: 20px;
+                width: 15px;
             }
             .clearSearch p {
                 font-size: 14px;
+                margin-left: 3px;
             }
             /*@media only screen and (max-width: 750px) {
                 .clearSearch {

@@ -8,7 +8,7 @@ export default function LocationMenu(props) {
     };
 
     return (
-        <div>
+        <div className='relative'>
             <button 
                 className="menuButton" 
                 name='location' 
