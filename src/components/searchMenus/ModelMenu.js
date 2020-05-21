@@ -18,8 +18,7 @@ export default function ModelMenu(props) {
     } else {
         models = Array.from(getModelList(props.makesmodels, props.productSize));
     }
-    // BREAKING
-    // models = itemsSortByDisabled(models, currentModels);
+     // models = itemsSortByDisabled(models, currentModels);
     models=itemsSortByDisabled(models, currentModels).map(model => <p 
             name={model}
         >{model.trim()}</p>);
@@ -56,7 +55,7 @@ export default function ModelMenu(props) {
                         key={uuid()} 
                         name={model}
                         onClick={currentModels.find(currentModel => currentModel === model.props.name)?handleClose:()=>alert(`No listings for ${model.props.name}.`)}                                   
-                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#c3c3c3"}:{color:"#fafbfc"}} // BREAKING
+                        style={!currentModels.find(currentModel => currentModel === model.props.name)?{color: "#c3c3c3"}:{color:"#fafbfc"}}
                         >{model}
                     </li>
                 )}

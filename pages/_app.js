@@ -11,23 +11,12 @@ import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
 import Head from '../src/components/Head';
-import ActivateEmail from './ActivateEmail.js';
 
-// let user = {
-//     name: 'guest user',
-//     email: '',
-//     changeUser: (newUser) => {
-//         console.log('imin', newUser)
-//         console.log('userabove', user)
-//         console.log('below', user)
-//         return user = {name: newUser.name, email: newUser.email};
-//     }
-// };
 function MyApp({ Component, pageProps }) {
     const [user, setUser] = useState('Login');
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
-    const router = useRouter();
+    
     useEffect(() => {
         setWindowWidth(window.innerWidth);
         const handleResize = () => {
@@ -47,7 +36,6 @@ function MyApp({ Component, pageProps }) {
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                {/* <ActivateEmail router={router} /> */}
                 <Component {...pageProps} />
             </UserContext.Provider>
             <Footer />

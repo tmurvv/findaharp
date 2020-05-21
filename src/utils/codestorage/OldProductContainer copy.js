@@ -42,7 +42,6 @@ function ProductContainer(props) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
     }
-    console.log('outside')
     if (filteredproducts&&filteredproducts.length>0) {
         const gridProducts = filteredproducts.map(product => (
             <div 

@@ -235,7 +235,6 @@ export function addPlaceholderProducts(filteredproductscontainer, width) {
         sellerName: "",
         sellerRegion: "Mid-West"
     }
-    // // console.log(iterProds.length)
     for (var x = 0; x<numNeeded; x++) {
         const adId = {...newAd, id:x}
         filteredproductscontainer.push(adId);

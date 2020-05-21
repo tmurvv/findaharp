@@ -23,7 +23,6 @@ function BuyersGuide(props) {
             if (document.querySelector('#varietymusic').checked) return 'varietymusic';
             if (document.querySelector('#othermusic').checked) return 'othermusic';
         }
-        //console.log('res', beginner(), harptype(), musictype());
         
         // beginner 
         if (beginner()) {

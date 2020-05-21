@@ -46,13 +46,10 @@ const TestGrid = ({ filteredproducts }) => {
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
     }
     useEffect(() => {
-        console.log('here', size.width);
         const copyProds = [...filteredproducts]
-        // console.log(filteredProductsCopy[15])
         let numNeeded;
         if (size.width > 1200) {
             numNeeded = 5-(copyProds.length%5);
-            console.log(numNeeded);
         }
         const newAd = {
             divider: "00000000000000000000000",
@@ -72,15 +69,10 @@ const TestGrid = ({ filteredproducts }) => {
             sellerName: "",
             sellerRegion: "Mid-West"
         }
-        // // console.log(iterProds.length)
         for (var x = 0; x<numNeeded; x++) {
             copyProds.push(newAd);
-        }
-        
-        
+        }    
         setAdjProducts(copyProds);
-        // console.log(filteredProductsCopy[58])
-
     }, []);
     if (filteredproducts&&filteredproducts.length>0) {
         return(  

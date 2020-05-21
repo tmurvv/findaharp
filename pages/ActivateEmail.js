@@ -12,12 +12,12 @@ function ActivateEmail(props) {
     const [verifying] = useState(false);
     const [found] = useState(props.emailFound);
     const Router = useRouter();
-    console.log(props)
-   return (
+    
+    return (
        <>
-         <div className='login-signup-container' style={{padding: '40px'}} hidden={Router.route!=='/ActivateEmail'}>
+            <div className='login-signup-container' style={{padding: '40px'}} hidden={Router.route!=='/ActivateEmail'}>
             
-             {verifying ? 
+                {verifying ? 
                 <div id="loadingLogin" style={{display: 'block', top: '25%'}}>
                     <img id='loadingLoginImg' src='/img/spinner.gif' style={{display: 'block'}} alt='loading spinner' />
                     <p id="loadingLoginText">VERIFYING EMAIL and Logging In</p>
@@ -65,9 +65,7 @@ function ActivateEmail(props) {
                     //             }
                     //         </div>
                     //     </div>
-                    // </div>
-                    
-                
+                    // </div>              
                 }
             <LoginSignupCSS />
         </div>

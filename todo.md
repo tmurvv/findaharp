@@ -1,4 +1,5 @@
 ### internal
+- cleanup activate email
 - make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
 - make addPlaceholders remove any placeholders that may be there already
@@ -9,8 +10,7 @@
 ### UI/UX
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
-- Responsive for contact not yet implemented 
-- contact & verify pages need spinner when submit button pressed
+- Responsive for contact form not yet implemented
 - Price range wrapping around 650px
 
 ### functionality

@@ -8,6 +8,7 @@ import {UserContext} from '../contexts/UserContext';
 export default function NavBar(props) {
     // const  {value, setValue}= useContext(UserContext);
     const { user } = useContext(UserContext);
+    
     return(
         <>
         <div className='navBarOuter'>
@@ -24,20 +25,20 @@ export default function NavBar(props) {
                         </div>:''
                     }
                     <Link href='/'>
-                        <a>Find a Harp</a>
+                        <a onClick={props.handleNavOpen}>Find a Harp</a>
                     </Link>
                     <Link href='/StorePartners'>
-                        <a>Our Store Partners</a>
+                        <a onClick={props.handleNavOpen}>Our Store Partners</a>
                     </Link>
                     <Link href='/BuyersGuide'>
-                        <a>Buyer's Guide</a>
+                        <a onClick={props.handleNavOpen}>Buyer's Guide</a>
                     </Link>        
                     <Link href='/Contact'>
-                        <a>Contact/About</a>
+                        <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
                     <Link href='/LoginSignup'>
                         {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
-                        <a id='userName'>{user}</a>
+                        <a id='userName' onClick={props.handleNavOpen}>{user}</a>
                     </Link>
                 </div>:''
             }

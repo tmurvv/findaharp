@@ -134,7 +134,6 @@ function LoginSignup(props) {
                 email: userSignup.signupemail,
                 password: userSignup.signuppassword
             };
-
             try {
                 /* LOCAL */
                 // const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
@@ -148,7 +147,6 @@ function LoginSignup(props) {
                     resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     setNeedVerify(true);
-                    console.log(res);
                     setUser(res.data.data.added.firstname)
                 }
             } catch (e) {
@@ -174,40 +172,34 @@ function LoginSignup(props) {
                 /* LOCAL */
                 // const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* TESTING */
-                const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* PRODUCTION */
-                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
-                console.log(returnedUser.emailverified)
-                if (returnedUser.emailverified === false) console.log('not verified')
                 await setUser(returnedUser.firstname);
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
             } catch(e) {
-                console.log(e.response.data.message)
-                console.log(e.response.data.message.includes('verified'))
-                if (e.response.data.message.includes('verified')) {
+                if (e.response&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                     resultImg.style.display='none';
-                    resultText.innerText=`${e.response.data.message} Login as guest?`;
+                    resultText.innerText=`${e.response.data.data.message} Login as guest?`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
                 } else {
                     resultImg.style.display='none';
-                    resultText.innerText=`${e.response.data.message} Login as guest?`;
+                    resultText.innerText=`${e.response.data.data.message} Login as guest?`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
                 }
             }
         }
-
         resetSignupForm();
         resetLoginForm();
     }
     function loginGuest() {
-        //setUser('Guest');
         resetResults();
         Router.push('/');
     }
