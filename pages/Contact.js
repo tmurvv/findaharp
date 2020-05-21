@@ -50,11 +50,11 @@ export default Contact;
 //                     <img src='./img/golden_tapered_line.png' />
 //                 </div>
                 
-//                 {/* <ContactForm /> */}
+//                 {/* <ContactSellerForm /> */}
 
 //             </div>
 //             <ContactCSS />
-//         </ContactForm>
+//         </ContactSellerForm>
 //     )
 // }
 

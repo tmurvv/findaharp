@@ -1,4 +1,4 @@
-function ContactFormCSS() {
+function ContactSellerFormCSS() {
     return (
         <style jsx="true">{`
             .detailContainer {
@@ -17,6 +17,7 @@ function ContactFormCSS() {
                 left: 50%;
                 transform: translate(-50%,-50%);
                 text-align: center;
+                z-index: 2000;
             }
             @media only screen and (max-width: 500px) {
                 .detailContainer {
@@ -87,7 +88,7 @@ function ContactFormCSS() {
                 margin-top: 40px;
             }
             .clearModal {
-                position: fixed;
+                position: absolute;
                 bottom: 15px;
                 right: 15px;
                 color: black;
@@ -110,8 +111,8 @@ function ContactFormCSS() {
                 height: 20px;
                 border-top: none;
                 border-left: none;
+                border-right: none;
                 border-bottom: 1px solid #bbbbbb;
-                border-right: 1px solid #bbbbbb;
             }
             .detailButton {
                 margin: 25px auto;
@@ -138,12 +139,12 @@ function ContactFormCSS() {
                 flex: 7.5;
                 border-top: none;
                 border-left: none;
-                border-bottom: 1px solid #bbbbbb;
-                border-right: 1px solid #bbbbbb;
+                border-right: none;
+                border-bottom: none none 1px solid #bbbbbb;
             }
         `}
         </style>
     )
 }
 
-export default ContactFormCSS;
+export default ContactSellerFormCSS;

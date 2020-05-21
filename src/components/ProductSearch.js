@@ -189,6 +189,7 @@ function ProductSearch(props) {
           }
     }
     function handleClear(evt) {
+        document.querySelector('.clearAll').style.display='none';
         setAllState({
             ...allState,
             finish: 'All Finishes',
@@ -199,9 +200,6 @@ function ProductSearch(props) {
             model: "All Models",
             searchInfo: 'All Harps'
         });
-    }
-    function handleMenuClick(evt) {
-        document.querySelector('#finish-select').style.transform="scale"
     }
     function clearOneFilter(e) {
         let menuClick = e.target.name;
@@ -422,12 +420,11 @@ function ProductSearch(props) {
             {/* <h5 style={{textAlign: 'center', marginBlockEnd:'0', marginTop: '5px', marginBottom:'-10px'}}>Website Under Construction-Sample Listings</h5> */}
             <div className='selected'>
                 <p>
-                    <span>SHOWING </span>
-                    {allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}
+                    SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}
                 </p>
-                <div onClick={handleClear} className='clearSearch'>
+                <div onClick={handleClear} style={{display: 'none'}} className='clearAll clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                    <p>Clear All Filters</p> 
+                    <p>Clear</p> 
                 </div>
             </div>
             <h3 className='searchTitle'>Website Under Construction-Sample Listings</h3>

@@ -4,10 +4,10 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import ContactFormCSS from '../styles/ContactForm.css';
+import ContactSellerFormCSS from '../styles/ContactSellerForm.css';
 import {removeDashOE} from '../utils/helpers';
 
-function ContactForm(props) {
+function ContactSellerForm(props) {
     if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
     const {product} = props;
     const [user, setUser] = useState({
@@ -59,7 +59,7 @@ function ContactForm(props) {
         // }
         // try {
         //     const res = await axios.post(
-        //         `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
+        //         `https://findaharp-api-testing.herokuapp.com/api/v1/ContactSellerForm`, 
         //         contact
         //     );
         //     alert("Email sent.")
@@ -170,9 +170,9 @@ function ContactForm(props) {
                 </form>
             </div>
         </div>
-        <ContactFormCSS />
+        <ContactSellerFormCSS />
         </>
     )
 }
 
-export default ContactForm;
+export default ContactSellerForm;

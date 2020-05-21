@@ -5,6 +5,158 @@ function AboutPartnerStoresCSS() {
                 text-align: center;
                 margin-top: -20px;
             }
+            .productContainer {
+                margin: auto;
+                position: relative;
+                width: 80%;
+                /*max-width: 1010px;*/
+            }
+            @media only screen and (max-width: 1475px) {
+                .productContainer {
+                    max-width: unset;
+                }
+            }
+            @media only screen and (max-width: 550px) {
+                .productContainer {
+                    width: 80%;
+                }
+            }
+            .grid-container {
+                margin: auto;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            @media only screen and (max-width: 550px) {
+                .grid-container {
+                    width: 60vw;
+                }
+            }         
+            .productContainer {
+                margin: auto;
+                position: relative;
+                width: 80%;
+                /*max-width: 1010px;*/
+            }
+            @media only screen and (max-width: 1475px) {
+                .productContainer {
+                    max-width: unset;
+                }
+            }
+            @media only screen and (max-width: 550px) {
+                .productContainer {
+                    width: 80%;
+                }
+            }
+            .grid-container {
+                margin: auto;
+                width: 100%;
+                /*max-width: 1010px;*/
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            @media only screen and (max-width: 550px) {
+                .grid-container {
+                    width: 60vw;
+                }
+            }
+            .productSmallDisplay {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 50px;
+                text-align: center;
+                font-size: 12px;
+                height: 200px;
+                width: 19%;
+                border: 1px solid #f9bf1e;
+                padding: 20px 20px 3px;
+                background-color: #ffffff
+            }
+            .productSmallDisplay:nth-child(5n) {
+                margin-right: 0;
+            }
+            @media only screen and (max-width: 1500px) {
+                .productSmallDisplay {
+                    width: 24%;
+                }
+            }
+            @media only screen and (max-width: 1000px) {
+                .productSmallDisplay {
+                    width: 26%;
+                }
+            }
+            @media only screen and (max-width: 950px) {
+                .productSmallDisplay {
+                  width: 42%;
+                  margin: 10px auto;
+                }
+            }
+            @media only screen and (max-width: 700px) {
+                .productSmallDisplay {
+                    width: 80vw;  
+                }
+            }
+            .productSmallDisplay span {
+                cursor: pointer;
+            }
+            .productSmallDisplay-img {
+                flex:4;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .productSmallDisplay-img img{
+                height: 267px;
+                width: auto;
+                max-width:100%;
+                max-height:100%;
+                object-fit: cover;
+                overflow: hidden;
+            }
+            .productSmallDisplay-LongDesc {
+                flex: 3;
+                text-align: left;
+                height: 73px;
+                overflow-y: scroll;
+            }
+            .productSmallDisplay-LongDesc span {
+                font-weight: 600;
+            }
+            .productSmallDisplay-text {
+                flex: 3;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 5px;
+            }
+            .productSmallDisplay-text p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+            .productSmallDisplay-text p a {
+                text-decoration: none;
+                cursor: pointer;
+                color: #333333;
+            }
+            .priceText {
+                font-size: 12px;
+                font-style: italic;
+            }
+            
+            .buyerDivider {
+                height: 9px;
+            }
+            .buyerDivider img {
+                width: 100%;
+            }
+
+
+
+
             .detailContainer {
                 overflow-y: scroll;
                 height: fit-content;
@@ -51,29 +203,8 @@ function AboutPartnerStoresCSS() {
                     max-height: 120px;
                 }
             }
-            .detailText {
-                padding: 5px 20px 20px;
-                text-align: left;
-            }
-            @media only screen and (max-width: 750px) {
-                .detailText {
-                    padding: 20px 0;
-                }
-            }
-            @media only screen and (max-width: 550px) {
-                .detailText {
-                    text-align: center;
-                }
-            }
-            .detailText {
-                text-align: center;
-                margin-block-start: 0;
-                margin-block-end: 0;
-                height: auto;
-                transition: all .7s;
-            }
             .longDesc {
-                text-align: left;
+                
             }
             @media only screen and (max-width: 550px) {
                 .longDesc {

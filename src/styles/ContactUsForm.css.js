@@ -92,8 +92,8 @@ function ContactUsFormCSS() {
                 height: 20px;
                 border-top: none;
                 border-left: none;
+                border-right: none;
                 border-bottom: 1px solid #bbbbbb;
-                border-right: 1px solid #bbbbbb;
             }
             .detailButton {
                 margin: 25px auto;
@@ -121,8 +121,8 @@ function ContactUsFormCSS() {
                 flex: 7.5;
                 border-top: none;
                 border-left: none;
+                border-right: none;
                 border-bottom: 1px solid #bbbbbb;
-                border-right: 1px solid #bbbbbb;
             }
             .buttons {
                 margin: auto;

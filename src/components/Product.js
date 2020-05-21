@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 import ProductCss from '../styles/Product.css';
 // internal
 import ProductModal from './ProductModal';
-import ContactForm from './ContactForm';
+import ContactSellerForm from './ContactSellerForm';
 import { removeDashOE,setOpacity } from '../utils/helpers';
 import { productsReducer } from '../utils/reducers';
 import ProductContainer from './ProductContainer';
@@ -68,8 +68,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                     {removeDashOE(productdetail.sellerName)}
                 </span>
                 </p>
-            </div> 
-            
+            </div>           
             <ProductCss />          
         </div>
     );

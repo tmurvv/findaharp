@@ -1,6 +1,3 @@
-### high priority
-- why is name not showing up in navBar changeUser function not working in login success?
-
 ### internal
 - make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
@@ -10,7 +7,8 @@
 - in login/signup, install reducer for result states
 
 ### UI/UX
-- Contact Seller button moved to top and centered
+- Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
+- Contact Seller button moved to top and centered (use a scroll down for more type thing)
 - Responsive for contact not yet implemented 
 - contact & verify pages need spinner when submit button pressed
 - Price range wrapping around 650px

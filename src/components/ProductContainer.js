@@ -6,7 +6,7 @@ import LazyLoad from 'react-lazyload';
 import ProductContainerCss from '../styles/ProductContainer.css';
 // internal
 import ProductModal from './ProductModal';
-import ContactForm from './ContactForm';
+import ContactSellerForm from './ContactSellerForm';
 import Product from './Product';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../utils/helpers';
 import { productsReducer } from '../utils/reducers';
@@ -68,7 +68,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate }) => {
                         handleCloseContact={handleCloseContact}
                 />}
                 {state.openContact
-                    &&<ContactForm 
+                    &&<ContactSellerForm 
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     
                 />}
