@@ -13,6 +13,7 @@ function LoginSignupCSS() {
                 overflow: hidden;
                 position: relative;
                 padding: 50px;
+                padding-top: 70px;
                 min-height: 400px;
             }
             .login-signup {

@@ -318,7 +318,7 @@ function ProductSearch(props) {
             <h3 className='searchTitle'>Further refine your search.</h3>
             <div className='mobileSearchLine2'>
                 <div className='searchLine2'>
-                    <img src='./img/ribbon_golden_full.png' alt="golden background ribbon"/> 
+                    <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
                     <FinishMenu 
                         handleFinishChange = {handleFinishSelection} 
                         products={props.products}

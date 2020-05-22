@@ -6,7 +6,7 @@ function IndexCss() {
             .index {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 margin: 0;
-                padding-top: 20px;
+                padding-top: 70px;
                 height: fit-content;
             }
             .index h2 {

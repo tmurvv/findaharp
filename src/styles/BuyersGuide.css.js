@@ -6,10 +6,14 @@ function BuyersGuideCSS() {
             .buyersContainer {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 padding: 30px;
+                padding-top: 70px;
                 height: fit-content;
                 margin-top: 0;
                 text-align: center;
                 margin: auto;
+            }
+            h1 {
+                margin-block-start: 0;
             }
             .block {
                 display: block;

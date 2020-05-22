@@ -6,12 +6,12 @@ function ContactCSS() {
             .contactContainer {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 padding: 30px;
+                padding-top: 70px;
                 height: fit-content;
                 margin-top: 0;
             }
             .contact {
                 width: 100%;
-                
             }
             .contactItem {
                 background-color: transparent;

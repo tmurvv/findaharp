@@ -39,6 +39,11 @@ function AppCss() {
                 border: none;
                 outline: none;
             }
+            @media only screen and (max-width: 550px) {
+                .menuButton {
+                    padding: 0
+                }
+            }
             .plainTextSelectLine1 {
                 margin-block-end: 0;
                 margin-block-start: 0;

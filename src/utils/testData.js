@@ -729,7 +729,7 @@ const testData = [
         "productType": "pedal",
         "productSize": 47,
         "productFinish": "gold",
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH17-3.jpg",
+        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LH17-4.jpg",
         "productImageBestColor": "#bfb48f",
         "divider": "00000000000000000000000"
     },

@@ -74,17 +74,16 @@ function ContactUsForm(props) {
             </div>
             <div className='contactFormContainer'> 
                 <h2 className='findaharpLogo'>Contact Us</h2> 
-                <p className='subTitle' style={{textAlign: 'center'}}>We want to hear from you!<br></br></p>
+                <p className='subTitle'>We want to hear from you!<br></br></p>
                 
-                <div className={`marginTop flexSB`}>
+                <div className={`marginTopLarge flexSB`}>
                 <div className={`contactText`}>    
                     <h3>Suggestions</h3>
-                    <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p> 
+                    <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p><br></br><br></br>
                     <h3>Submissions to our Buyer's Guide</h3>
-                    <p>We would love for our Buyer's Guide to be a collaborative undertaking by the harp community. Please submit anything you feel we have left out.</p> 
+                    <p>We would love for our Buyer's Guide to be a collaborative undertaking by the harp community. Please submit anything you feel we have left out.</p><br></br><br></br>
                     <h3>Problems with Harp Advertisements</h3>
                     <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
-                    
                 </div>
             
                 <form className='contactForm'>     

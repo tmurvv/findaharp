@@ -3,25 +3,30 @@ function ContactUsFormCSS() {
         <style jsx="true">{`
             h2 {
                 font-size: 36px;
-                margin-bottom: 5px;
+                margin-bottom: 50px;
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+            h3 {
+                margin-block-end: 0;
+                margin-block-start: 0;
+                font-family: 'Metropolis Extra Bold';
             }
             .findaharpLogo img {
                 height: 36px;
             }
             .subTitle {
                 font-style: italic;
-                margin-bottom: 15px;
+                margin-bottom: 45px;
             }
             .contactFormContainer {
-                background-color: tranparent;
-                box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
                 padding: 20px;
+                padding-top: 0;
                 text-align: center;
             }
             .contactFormContainer p {
-                width: 100%;
-                text-align: center;
+                width: fit-content;
             }
             .contactText {
                 flex: 4;
@@ -42,13 +47,14 @@ function ContactUsFormCSS() {
                 transform: translateY(3.5px);
             }
             .contactForm {
-                padding: 20px 30px 0px 0px;
+                padding: 40px 20px 25px 10px;
                 flex: 6;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                border: 1px solid #f9bf1e;
+                border: 2px solid #f9bf1e;
                 margin-left: 10px;
+                background-color: #ffffff;
             }
             .contactForm p {
                 text-align: center;
@@ -125,7 +131,7 @@ function ContactUsFormCSS() {
                 border-bottom: 1px solid #bbbbbb;
             }
             .buttons {
-                margin: auto;
+                margin-top: 20px;
             }
         `}
         </style>

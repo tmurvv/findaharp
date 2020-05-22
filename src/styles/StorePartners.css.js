@@ -3,7 +3,7 @@ function StorePartnersCSS() {
         <style jsx="true">{`
             .storePartnersContainer {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
-                padding-top: 50px;
+                padding-top: 70px;
             }
             h2 {
                 text-align: center;
