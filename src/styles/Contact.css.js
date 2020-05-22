@@ -69,7 +69,26 @@ function ContactCSS() {
             }
             .contactContainer a {
                 color: #6A75AA;
-                text-decoration: underline;
+                font-size: 16px;
+                font-weight: 400;
+            }
+            .personContainer {
+               flex: 5;
+            }
+            .personContainer h3 {
+                font-family: 'Metropolis Extra Bold';
+            }
+            .imgContainer {
+                height: 130px;
+                width: 130px;
+                border: 3px solid #f9bf1e;
+                border-radius: 50%;
+                overflow: hidden;
+                margin: 20px auto;
+                position: relative;
+            }
+            .imgContainer img {
+                width: 130px;
             }
             .about {
                 padding: 10px 50px 30px ;

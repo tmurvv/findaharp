@@ -144,9 +144,7 @@ function ContactUsForm(props) {
                         </button>
                     </div>         
                 </form>
-                </div>
-                
-            
+                </div>   
         </div>
             
         <ContactUsFormCSS />

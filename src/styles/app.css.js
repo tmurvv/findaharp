@@ -116,6 +116,12 @@ function AppCss() {
             .relative {
                 position: relative;
             }
+            .marginLeft {
+                margin-left: 15px;
+            }
+            .marginRight {
+                margin-right: 15px;
+            }
         `}
         </style>
     )
