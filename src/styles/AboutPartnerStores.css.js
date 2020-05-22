@@ -9,7 +9,6 @@ function AboutPartnerStoresCSS() {
                 margin: auto;
                 position: relative;
                 width: 80%;
-                /*max-width: 1010px;*/
             }
             @media only screen and (max-width: 1475px) {
                 .productContainer {
@@ -37,7 +36,6 @@ function AboutPartnerStoresCSS() {
                 margin: auto;
                 position: relative;
                 width: 80%;
-                /*max-width: 1010px;*/
             }
             @media only screen and (max-width: 1475px) {
                 .productContainer {
@@ -52,7 +50,6 @@ function AboutPartnerStoresCSS() {
             .grid-container {
                 margin: auto;
                 width: 100%;
-                /*max-width: 1010px;*/
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
@@ -70,9 +67,9 @@ function AboutPartnerStoresCSS() {
                 font-size: 12px;
                 height: 200px;
                 width: 19%;
-                border: 1px solid #f9bf1e;
+                border: 2px solid #f9bf1e;
                 padding: 20px 20px 3px;
-                background-color: #ffffff
+                background-color: #ffffff;
             }
             .productSmallDisplay:nth-child(5n) {
                 margin-right: 0;
@@ -153,10 +150,6 @@ function AboutPartnerStoresCSS() {
             .buyerDivider img {
                 width: 100%;
             }
-
-
-
-
             .detailContainer {
                 overflow-y: scroll;
                 height: fit-content;

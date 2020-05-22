@@ -72,6 +72,15 @@ function ContactCSS() {
                 font-size: 16px;
                 font-weight: 400;
             }
+            .peopleContainer {
+                display: flex;
+                justify-content: space-between;
+            }
+            @media only screen and (max-width: 550px) {
+                .peopleContainer {
+                    flex-direction: column;
+                }
+            }
             .personContainer {
                flex: 5;
             }
@@ -91,7 +100,14 @@ function ContactCSS() {
                 width: 130px;
             }
             .about {
-                padding: 10px 50px 30px ;
+                padding: 10px 20px 30px ;
+                max-width: 1300px;
+                margin: auto;
+            }
+            @media only screen and (max-width: 700px) {
+                .about {
+                    padding: 20px;
+                }
             }
             .about h2 {
                 margin-bottom: 40px;

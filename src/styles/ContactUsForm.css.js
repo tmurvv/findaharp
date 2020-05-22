@@ -24,15 +24,34 @@ function ContactUsFormCSS() {
                 padding: 20px;
                 padding-top: 0;
                 text-align: center;
+                max-width: 1300px;
+                margin: auto;
             }
             .contactFormContainer p {
                 width: fit-content;
             }
+            .contactArea {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 45px; 
+            }
+            @media only screen and (max-width: 950px) {
+                .contactArea {
+                    flex-direction: column;
+                }
+            }
             .contactText {
                 flex: 4;
                 height: 100%;
-                padding: 20px;
+                padding: 20px 20px 20px 0;
                 text-align: left;
+            }
+            @media only screen and (max-width: 700px) {
+                .contactText {
+                    padding-left: 0;
+                    padding-right: 0;
+                    margin-bottom: 30px;
+                }
             }
             .contactText p {
                 margin-block-start: 0;
@@ -56,6 +75,13 @@ function ContactUsFormCSS() {
                 margin-left: 10px;
                 background-color: #ffffff;
             }
+            @media only screen and (max-width: 700px) {
+                .contactForm {
+                    padding-left: 20px;
+                    margin-left: 0;
+                }
+            }
+            
             .contactForm p {
                 text-align: center;
                 margin-block-start: 0;

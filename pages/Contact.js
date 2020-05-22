@@ -16,7 +16,7 @@ function Contact() {
                 <h2>About us</h2>
                 <p>Findaharp.com was designed and developed by harpists Rachael Cooper and Tisha Murvihill. Tisha Murvihill is the principal harpist of the Calgary Philharmonic in Alberta, Canada.</p>
                 <p style={{fontWeight: '600'}}><span>"</span>Whenever I am trying to help a student find the first or next perfect harp to bring into their lives, I find it difficult to see what is available, especially if the student needs a pre-owned instrument. Since I have a strong interest in web development as well as the harp, I decided to combine my interests and create a website for the harp community where they easily can find available pre-owned harps.<span>"</span></p>
-                <div className="flexSB">
+                <div className="peopleContainer">
                     <div className='personContainer marginRight'>
                         <div className='imgContainer'>
                             <img src='./img/ITHeadShotMoney.jpg' width='100px' alt='Tisha Murvihill head shot' />

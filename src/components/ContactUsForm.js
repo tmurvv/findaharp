@@ -76,7 +76,7 @@ function ContactUsForm(props) {
                 <h2 className='findaharpLogo'>Contact Us</h2> 
                 <p className='subTitle'>We want to hear from you!<br></br></p>
                 
-                <div className={`marginTopLarge flexSB`}>
+                <div className={`contactArea`}>
                 <div className={`contactText`}>    
                     <h3>Suggestions</h3>
                     <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p><br></br><br></br>
