@@ -19,7 +19,7 @@ function AppCss() {
                 font-weight: bold;
                 font-style: normal;
                 font-variant:normal;
-                src: url('./fonts/Avenir_ff/Metropolis-ExtraBold.otf') format('opentype');
+                src: url('./fonts/metropolis_ff/Metropolis-ExtraBold.otf') format('opentype');
             }
             body {
                 overflow-x: hidden;
@@ -29,10 +29,32 @@ function AppCss() {
                 font-family: avenir;
                 color: #5c5b5b;
             }
+            h2 {
+                margin-block-end:0;
+                margin-block-start:0;
+            }
+            .mainTitle {
+                text-align: center;
+                margin: auto;
+                letter-spacing: 1.5px;
+                font-size: 24px
+            }
+            .subTitle {
+                width: 60%;
+                margin: auto;
+                text-align: center;
+                font-size: 16px;
+                font-style: italic;
+                font-weight: 500;
+                color: #868686;
+                letter-spacing: 1px;
+                margin-bottom: 45px;
+                font-family: avenir;    
+            }
             .menuButton {
                 background-color: transparent;
                 font-size: 14px;
-                padding-top: 11px;
+                padding-top: 12px;
                 position: relative;
                 cursor: pointer;
                 color: #fafbfc;
@@ -76,7 +98,7 @@ function AppCss() {
                 padding: 6px 0;
                 position: absolute;
                 cursor: pointer;
-                background-color: #f9bf1e;
+                background-color: #fcd961;
                 list-style: none;
                 z-index: 2000;
                 padding-inline-start: 0;

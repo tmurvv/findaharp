@@ -139,8 +139,7 @@ function BuyersGuideCSS() {
                 margin-bottom: 50px;
                 width: 100%;
                 text-align: center;
-            }
-            
+            }    
             .contactContainer input {
                 font-size: 14px;
                 margin-right: 15px;
@@ -148,23 +147,6 @@ function BuyersGuideCSS() {
             .contact h2 {
                 margin-block-end:0;
                 margin-block-start:0;
-            }
-            .mainTitle {
-                text-align: center;
-                margin: auto;
-                letter-spacing: 1.5px;
-                font-size: 24px
-            }
-            .subTitle {
-                width: 60%;
-                margin: auto;
-                text-align: center;
-                font-size: 12px;
-                font-style: italic;
-                color: #868686;
-                letter-spacing: 1px;
-                font-weight: 500;
-                font-size:14px       
             }
             .buyerDivider {
                 margin: 50px auto 80px;

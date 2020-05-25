@@ -206,6 +206,10 @@ function LoginSignup(props) {
    return (
        <>
         <div className='login-signup-container'>
+            <div className='mainTitle'>
+                <h2>Login/Signup</h2>
+                <h3 className="subTitle">Welcome to our community!</h3>
+            </div>
             <div id="loadingLogin">
                 <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
@@ -213,65 +217,6 @@ function LoginSignup(props) {
                     <button id='loadingLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
                     <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                 </div>
-            </div>
-            <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
-                <div className="login-signup-title">
-                    {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
-                </div>
-                <form onSubmit={handleSubmit}>
-                    {needVerify
-                    ?
-                        <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
-                            <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
-                            <img height='100%' src='./img/not_found.png' alt='golden harp' />}
-                        </div>
-                    :
-                        <>
-                        <div className="input-name">
-                            <h2>Email</h2>
-                        </div>
-                        <input
-                            className="field-input"
-                            type='email'
-                            id={uuid()}
-                            value={userLogin.loginemail}
-                            onChange={handleChange}
-                            name='loginemail'
-                            required = {active==='login'}
-                            disabled={active==='signup'}
-                        />
-                        <div className="input-name input-margin">
-                            <h2>Password</h2>
-                        </div>
-                        <input 
-                            className="field-input"
-                            type='password'
-                            id={uuid()}
-                            value={userLogin.loginpassword}
-                            onChange={handleChange}
-                            name='loginpassword'
-                            required = {active==='login'}
-                            disabled={active==='signup'}
-                        />
-                        <div className="input-r" onClick={()=>alert('remember me under construction')}>
-                            <div className="check-input">
-                                <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
-                                <label className="rememberme-blue" htmlFor="remember-me-2"></label>
-                            </div>
-                            <div className="rememberme">
-                                <label htmlFor="remember-me-2">Remember Me</label>
-                            </div>
-                        </div>
-            
-                        <button type='submit' className="submit-btn">
-                            Submit
-                        </button>
-                        <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
-                            <a href="#">Forgot Password?</a>
-                        </div>
-                        </>
-                    }
-                </form>
             </div>
             <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
                 <form onSubmit={()=>handleSubmit()}>
@@ -346,6 +291,65 @@ function LoginSignup(props) {
                             Submit
                         </button>
                     </div>
+                </form>
+            </div>
+            <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
+                <div className="login-signup-title">
+                    {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
+                </div>
+                <form onSubmit={handleSubmit}>
+                    {needVerify
+                    ?
+                        <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
+                            <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
+                            <img height='100%' src='./img/not_found.png' alt='golden harp' />}
+                        </div>
+                    :
+                        <>
+                        <div className="input-name">
+                            <h3>Email</h3>
+                        </div>
+                        <input
+                            className="field-input"
+                            type='email'
+                            id={uuid()}
+                            value={userLogin.loginemail}
+                            onChange={handleChange}
+                            name='loginemail'
+                            required = {active==='login'}
+                            disabled={active==='signup'}
+                        />
+                        <div className="input-name input-margin">
+                            <h3>Password</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            type='password'
+                            id={uuid()}
+                            value={userLogin.loginpassword}
+                            onChange={handleChange}
+                            name='loginpassword'
+                            required = {active==='login'}
+                            disabled={active==='signup'}
+                        />
+                        <div className="input-r" onClick={()=>alert('remember me under construction')}>
+                            <div className="check-input">
+                                <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
+                                <label className="rememberme-blue" htmlFor="remember-me-2"></label>
+                            </div>
+                            <div className="rememberme">
+                                <label htmlFor="remember-me-2">Remember Me</label>
+                            </div>
+                        </div>
+            
+                        <button type='submit' className="submit-btn">
+                            Submit
+                        </button>
+                        <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                        </>
+                    }
                 </form>
             </div>
             <LoginSignupCSS />

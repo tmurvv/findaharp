@@ -59,9 +59,12 @@ function BuyersGuide(props) {
     return (
         <>
         <div className='buyersContainer'>
-            <div className='buyersGuide'>       
-                <h1>Buyer's Guide</h1>
-                <p>At Findaharp, we believe the best resource for choosing a harp is your teacher. If you do not have a teacher or you are looking to supplement your knowledge, read on!!</p>
+            <div className='buyersGuide'>
+                <div className='mainTitle'>
+                    <h2>Buyer's Guide</h2>
+                    <h3 className="subTitle">A collaborative guide from your harp community</h3>
+                </div>    
+                <p>At FindaHarp, we believe the best resource for choosing a harp is your teacher. If you do not have a teacher or you are looking to supplement your knowledge, read on!!</p>
                 <p>We would love to make this a collaborative guide from the harp community. If you have a different opinion or supplemental information, please write it up and submit it on the contact page.</p>
                 <p>Findaharp.com uses two main categories of harp: LEVER and PEDAL. We include partially levered, lever-free, and lap harps in our LEVER category.</p>
                 <PedalLeverTut />

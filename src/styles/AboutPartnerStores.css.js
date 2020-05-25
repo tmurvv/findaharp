@@ -5,6 +5,17 @@ function AboutPartnerStoresCSS() {
                 text-align: center;
                 margin-top: -20px;
             }
+            .subTitle {
+                width: 60%;
+                margin: auto;
+                text-align: center;
+                font-size: 12px;
+                font-style: italic;
+                color: #868686;
+                letter-spacing: 1px;
+                font-weight: 500;
+                font-size:14px       
+            }
             .productContainer {
                 margin: auto;
                 position: relative;
@@ -66,6 +77,7 @@ function AboutPartnerStoresCSS() {
                 text-align: center;
                 font-size: 12px;
                 height: 200px;
+                min-width: 280px;
                 width: 19%;
                 border: 2px solid #f9bf1e;
                 padding: 20px 20px 3px;
@@ -74,23 +86,24 @@ function AboutPartnerStoresCSS() {
             .productSmallDisplay:nth-child(5n) {
                 margin-right: 0;
             }
+            @media only screen and (max-width: 1800px) {
+                .productSmallDisplay {
+                    width: 19%;
+                }
+            }
             @media only screen and (max-width: 1500px) {
                 .productSmallDisplay {
                     width: 24%;
                 }
             }
-            @media only screen and (max-width: 1000px) {
-                .productSmallDisplay {
-                    width: 26%;
-                }
-            }
-            @media only screen and (max-width: 950px) {
+        
+            @media only screen and (max-width: 1250px) {
                 .productSmallDisplay {
                   width: 42%;
                   margin: 10px auto;
                 }
             }
-            @media only screen and (max-width: 700px) {
+            @media only screen and (max-width: 850px) {
                 .productSmallDisplay {
                     width: 80vw;  
                 }
@@ -109,7 +122,7 @@ function AboutPartnerStoresCSS() {
                 height: 267px;
                 width: auto;
                 max-width:100%;
-                max-height:100%;
+                max-height:90%;
                 object-fit: cover;
                 overflow: hidden;
             }

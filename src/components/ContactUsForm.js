@@ -73,9 +73,10 @@ function ContactUsForm(props) {
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
             <div className='contactFormContainer'> 
-                <h2 className='findaharpLogo'>Contact Us</h2> 
-                <p className='subTitle'>We want to hear from you!<br></br></p>
-                
+                <div className='mainTitle'>
+                    <h2>Contact Us</h2>
+                    <h3 className="subTitle">We want to hear from you!</h3>
+                </div>
                 <div className={`contactArea`}>
                 <div className={`contactText`}>    
                     <h3>Suggestions</h3>

@@ -24,6 +24,7 @@ function LoginSignupCSS() {
                 padding: 25px;
                 background-color: #FFF;
                 border: 1px solid #E2E2E2;
+                position: relative;
             }
             .login-signup-title {
                 padding: 15px;
@@ -172,19 +173,17 @@ function LoginSignupCSS() {
                 z-index: 0;
                 -webkit-filter: blur(1px);
                 filter: blur(1px);
-                opacity: 0.6;
+                opacity: 0.4;
             }
-            // #signup,
-            // #login {
-            //     transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
-            // }
+            #signup,
             #login {
-                position: absolute;
-                top: 150px;
-                left: 15%;
+                transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
+            }
+            #login {
+                transform: translate(28%, -120%);
             }
             #signup {
-                transform: translate(50px, 20px);
+                transform: translateX(-28%);
             }
             #loadingLogin {
                 display: none;

@@ -13,12 +13,6 @@ function ProductSearchCss() {
                 font-weight: 500;
                 font-size:14px;
             }
-            .testRibbon {
-                height: 50px;
-                width: 80%;
-                /*background-image: url("./img/ribbon_black_full.png");
-                background-size: cover;*/
-            }
             h3 {
                 width: 100%;
                 text-align: center;
@@ -50,7 +44,7 @@ function ProductSearchCss() {
             .searchLine1 img {
                 width: 70%;
                 position: absolute;
-                height: 55px;
+                height: 60px;
                 max-width: 1010px;
             }
             @media only screen and (max-width: 550px) {
@@ -64,8 +58,8 @@ function ProductSearchCss() {
             .searchLine1Sub {
                 display: flex;
                 justify-content: space-evenly;
-                font-size: 12px;
-                padding-top: 9.5px;
+                font-size: 11px;
+                padding-top: 11px;
                 text-align: center;
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;
@@ -119,7 +113,7 @@ function ProductSearchCss() {
             .searchLine2 img {
                 width: 63.3%;
                 position: absolute;
-                height: 55px;
+                height: 60px;
                 max-width: 909px;
             }
             @media only screen and (max-width: 550px) {
@@ -135,8 +129,8 @@ function ProductSearchCss() {
                 width: 90%;
                 display: flex;
                 justify-content: space-evenly;
-                font-size: 12px;
-                padding-top: 9.0px;
+                font-size: 11px;
+                padding-top: 11px;
                 text-align: center;
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;

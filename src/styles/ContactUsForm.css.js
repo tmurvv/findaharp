@@ -15,10 +15,6 @@ function ContactUsFormCSS() {
             .findaharpLogo img {
                 height: 36px;
             }
-            .subTitle {
-                font-style: italic;
-                margin-bottom: 45px;
-            }
             .contactFormContainer {
                 border-radius: 3px;
                 padding: 20px;
@@ -33,7 +29,6 @@ function ContactUsFormCSS() {
             .contactArea {
                 display: flex;
                 justify-content: space-between;
-                margin-top: 45px; 
             }
             @media only screen and (max-width: 950px) {
                 .contactArea {
@@ -117,6 +112,7 @@ function ContactUsFormCSS() {
                 font-family: 'Metropolis Extra Bold';
                 font-weight: 800;
                 color: #000000;
+                max-width: 85px;
             }
             .inputGroup input {
                 background-color: transparent;

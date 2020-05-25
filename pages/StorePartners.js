@@ -18,7 +18,10 @@ export default function StorePartners() {
     }
     return (
         <div className='storePartnersContainer'>
-            <h2>Find a Harp is proud to partner with the following harp sellers</h2>
+            <div className='mainTitle'>
+                <h2>Store Partners</h2>
+                <h3 className="subTitle">Find a Harp is proud to partner with the following harp sellers</h3>
+            </div>
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container">
                     <AboutPartnerStore product={product}/>
