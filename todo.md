@@ -8,10 +8,9 @@
 - in login/signup, install reducer for result states
 
 ### UI/UX
-- fix Safari issue 'iOS = /^(iPhone|iPad|iPod)/.test(navigator.platform);'
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
-- add placeholders to store images
+- return close window button to bottom right on harp detail modal
 
 ### functionality
 - remember me and forgot password on login

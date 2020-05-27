@@ -3,8 +3,9 @@ import React from "react";
 import axios from 'axios';
 
 // internal
-import IndexCss from '../src/styles/index.css.js'
+import IndexCss from '../src/styles/index.css.js';
 import ProductSearch from '../src/components/ProductSearch';
+import PageTitle from '../src/components/PageTitle';
 
 // local test data
 import testData from '../src/utils/testData';
@@ -14,10 +15,7 @@ const Index = (props) => {
     return (
         <>
         <div className="index">  
-            <div className='mainTitle'>
-                <h2>Find a Harp</h2>
-                <h3 className="subTitle">Pre-owned harp listings from around the US and Canada</h3>
-            </div>
+           <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 
                 makesmodels={props.makesModels}
                 products={props.products}

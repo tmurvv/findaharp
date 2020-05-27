@@ -21,10 +21,12 @@ function LoginSignupCSS() {
                 margin: 0 auto;
                 background: #e2e2e2;
                 border-radius: 3px;
-                padding: 25px;
                 background-color: #FFF;
                 border: 1px solid #E2E2E2;
                 position: relative;
+            }
+            .login-form {
+                padding: 25px;
             }
             .login-signup-title {
                 padding: 15px;
@@ -32,8 +34,11 @@ function LoginSignupCSS() {
                 text-align: center;
                 font-size: 16px;
                 color: #000;
-                background-color: #f9bf1e;
-                border: 1px solid #f9b919;
+                background-color: #ffe58a;
+                border: 1px solid #ffe58a;
+                border-top-right-radius: 3px;
+                border-top-left-radius: 3px;
+                transform: translate(-1px, -1px);
             }
             
             .input-name {
@@ -67,6 +72,7 @@ function LoginSignupCSS() {
                 top: 6px;
                 position: relative;
                 margin-left: 8px;
+                margin-bottom: 30px;
                 float: left;
             }
             .check-input label {
@@ -116,11 +122,11 @@ function LoginSignupCSS() {
             
             .submit-btn {
                 width: 100%;
-                margin-top: 28px;
-                text-align: center;
-                padding: 5px 0;
+                // margin-top: 28px;
+                // text-align: center;
+                // padding: 5px 0;
                 border-radius: 3px;
-                background-color: #f9bf1e;
+                background-color: #ffe58a;
                 color: #000;
                 border: none;
                 // transition: 0.5s cubic-bezier(0.72, 0.15, 0.53, 0.84);
@@ -132,7 +138,6 @@ function LoginSignupCSS() {
             }          
             .forgot-pass {
                 width: 100%;
-                margin-top: 30px;
                 border-top: 1px solid #E0E0E0;
                 padding: 5px 0;
                 text-align: center;
@@ -188,7 +193,7 @@ function LoginSignupCSS() {
             #loadingLogin {
                 display: none;
                 color: #6A75AA;
-                border: 5px double #6A75AA;
+                border: 2px solid #6A75AA;
                 background-color: #fff;
                 padding: 30px;
                 border-radius: 3px;
@@ -208,6 +213,7 @@ function LoginSignupCSS() {
             #loadingLoginOk,
             #loadingLoginTryAgain {
                 display: none;
+                padding: 7px;
             }
             #loadingLoginText {
                 text-align: center;

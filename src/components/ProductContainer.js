@@ -11,6 +11,7 @@ import Product from './Product';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../utils/helpers';
 import { productsReducer } from '../utils/reducers';
 
+
 const initialState = {
     openDetail: false,
     openContact: false,

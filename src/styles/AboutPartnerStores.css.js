@@ -19,7 +19,7 @@ function AboutPartnerStoresCSS() {
             .productContainer {
                 margin: auto;
                 position: relative;
-                width: 80%;
+                width: 90%;
             }
             @media only screen and (max-width: 1475px) {
                 .productContainer {
@@ -36,7 +36,7 @@ function AboutPartnerStoresCSS() {
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                justify-content: space-evenly;
             }
             @media only screen and (max-width: 550px) {
                 .grid-container {
@@ -63,7 +63,7 @@ function AboutPartnerStoresCSS() {
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                justify-content: space-evenly;
             }
             @media only screen and (max-width: 550px) {
                 .grid-container {
@@ -75,16 +75,14 @@ function AboutPartnerStoresCSS() {
                 flex-direction: column;
                 margin-bottom: 50px;
                 text-align: center;
-                font-size: 12px;
-                height: 200px;
-                min-width: 280px;
-                width: 19%;
+                font-size: 16px;
+                height: 250px;
+                min-width: 360px;
+                max-width: 100%:
+                // width: 19%;
                 border: 2px solid #f9bf1e;
                 padding: 20px 20px 3px;
                 background-color: #ffffff;
-            }
-            .productSmallDisplay:nth-child(5n) {
-                margin-right: 0;
             }
             @media only screen and (max-width: 1800px) {
                 .productSmallDisplay {
@@ -95,17 +93,21 @@ function AboutPartnerStoresCSS() {
                 .productSmallDisplay {
                     width: 24%;
                 }
-            }
-        
+            }      
             @media only screen and (max-width: 1250px) {
                 .productSmallDisplay {
                   width: 42%;
                   margin: 10px auto;
                 }
             }
-            @media only screen and (max-width: 850px) {
+            @media only screen and (max-width: 1010px) {
                 .productSmallDisplay {
                     width: 80vw;  
+                }
+            }
+            @media only screen and (max-width: 850px) {
+                .productSmallDisplay {
+                    min-width: 300px;  
                 }
             }
             .productSmallDisplay span {
@@ -129,8 +131,9 @@ function AboutPartnerStoresCSS() {
             .productSmallDisplay-LongDesc {
                 flex: 3;
                 text-align: left;
-                height: 73px;
+                height: 60px;
                 overflow-y: scroll;
+                margin-top: 18px;
             }
             .productSmallDisplay-LongDesc span {
                 font-weight: 600;
@@ -152,11 +155,6 @@ function AboutPartnerStoresCSS() {
                 cursor: pointer;
                 color: #333333;
             }
-            .priceText {
-                font-size: 12px;
-                font-style: italic;
-            }
-            
             .buyerDivider {
                 height: 9px;
             }

@@ -39,7 +39,6 @@ function BuyersGuideCSS() {
                     padding: inherit 15px;
                 }
             }
-
             .buyersGuide p,
             .shortcut p, 
             .buyersGuide li,

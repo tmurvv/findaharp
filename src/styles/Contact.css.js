@@ -48,7 +48,6 @@ function ContactCSS() {
             .contactContainer a {
                 color: #6A75AA;
                 font-size: 16px;
-                font-weight: 400;
             }
             .peopleContainer {
                 display: flex;
@@ -62,20 +61,16 @@ function ContactCSS() {
             .personContainer {
                flex: 5;
             }
-            .personContainer h3 {
-                font-family: 'Metropolis Extra Bold';
+            .personContainer>p>span {
+                font-style: italic;
             }
             .imgContainer {
-                height: 130px;
-                width: 130px;
-                border: 3px solid #f9bf1e;
-                border-radius: 50%;
-                overflow: hidden;
-                margin: 20px auto;
-                position: relative;
+                height: 180px;
+                width: 180px;
+                margin: 10px auto 45px;
             }
             .imgContainer img {
-                width: 130px;
+                width: 180px;
             }
             .about {
                 padding: 10px 20px 30px ;

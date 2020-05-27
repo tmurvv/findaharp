@@ -1,9 +1,12 @@
 import React from 'react';
 import AboutPartnerStore from '../src/components/AboutPartnerStore';
+import PageTitle from '../src/components/PageTitle';
 import StorePartnersCSS from '../src/styles/StorePartners.css';
+import { addPlaceholderStorePartners, getWindowSize } from '../src/utils/helpers';
 
 export default function StorePartners() {
-    const product = {
+    const size = getWindowSize();
+    const storePartner = {
         id: "aa6503a9-a295-45fd-aa1c-4f6f4918c88f",
         sellerCountry: "USA",
         sellerRegion: "Topeka, Kansas",
@@ -16,19 +19,14 @@ export default function StorePartners() {
         sellerWebsite: 'www.yourstoresite.com',
         sellerEmail: 'yourstore@email.com'
     }
+    const storePartners = [ storePartner, storePartner, storePartner, storePartner, storePartner ];
+    const addPlaceHolders=addPlaceholderStorePartners(storePartners, size.width);
     return (
         <div className='storePartnersContainer'>
-            <div className='mainTitle'>
-                <h2>Store Partners</h2>
-                <h3 className="subTitle">Find a Harp is proud to partner with the following harp sellers</h3>
-            </div>
+            <PageTitle maintitle='Our Store Partners' subtitle='Find a Harp is proud to partner with the following harp sellers' />
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container">
-                    <AboutPartnerStore product={product}/>
-                    <AboutPartnerStore product={product}/>
-                    <AboutPartnerStore product={product}/>
-                    <AboutPartnerStore product={product}/>
-                    <AboutPartnerStore product={product}/>
+                    {addPlaceHolders.map(partner=> <AboutPartnerStore product={partner} placeholder={!partner.productTitle}/>)}
                 </div>
             </div>
             <StorePartnersCSS />

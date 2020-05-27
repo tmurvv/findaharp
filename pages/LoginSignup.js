@@ -5,6 +5,7 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
+import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
 
@@ -138,9 +139,9 @@ function LoginSignup(props) {
                 /* LOCAL */
                 // const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
                 /* TESTING */
-                const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
+                // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
                 /* PRODUCTION */
-                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
                 
                 if (res.status===200) {
                     resultImg.style.display='none';
@@ -150,11 +151,13 @@ function LoginSignup(props) {
                     setUser(res.data.data.added.firstname)
                 }
             } catch (e) {
+                console.log(e);
                 resultImg.style.display='none';
                 resultButton.style.display='block';
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft='30px';
-                resultText.innerText=`Something went wrong on signup. Logging in as guest user? ${e.message}`
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`
+                // resultText.innerText=`Something went wrong on signup. Log in as guest user?`
             }
         }
         if (active==='login') {   
@@ -170,26 +173,28 @@ function LoginSignup(props) {
             resultImg.style.display='block';
             try {
                 /* LOCAL */
-                // const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* TESTING */
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* PRODUCTION */
-                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
+                console.log(res.data);
                 await setUser(returnedUser.firstname);
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
             } catch(e) {
-                if (e.response&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
+                console.log(e.response.data.message)
+                if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                     resultImg.style.display='none';
-                    resultText.innerText=`${e.response.data.data.message} Login as guest?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong on login.'} Login as guest?`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
                 } else {
                     resultImg.style.display='none';
-                    resultText.innerText=`${e.response.data.data.message} Login as guest?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:'Something went wrong on login.'} Login as guest?`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
@@ -203,13 +208,10 @@ function LoginSignup(props) {
         resetResults();
         Router.push('/');
     }
-   return (
+    return (
        <>
         <div className='login-signup-container'>
-            <div className='mainTitle'>
-                <h2>Login/Signup</h2>
-                <h3 className="subTitle">Welcome to our community!</h3>
-            </div>
+            <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />
             <div id="loadingLogin">
                 <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
@@ -223,7 +225,7 @@ function LoginSignup(props) {
                     <div className="login-signup-title">
                         SIGN UP
                     </div>
-                    <div >
+                    <div className='login-form'>
                         <div className="input-name">
                             <h3>First Name</h3>
                         </div>
@@ -287,67 +289,69 @@ function LoginSignup(props) {
                             required={active==='signup'}
                             disabled={active==='login'}
                         />
-                        <button type='submit' className="submit-btn" onClick={handleSubmit}>
-                            Submit
-                        </button>
                     </div>
+                    <button type='submit' className="submit-btn login-signup-title" onClick={handleSubmit}>
+                        Submit
+                    </button>
                 </form>
             </div>
             <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
                     {needVerify?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>
+                
                 <form onSubmit={handleSubmit}>
-                    {needVerify
-                    ?
-                        <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
-                            <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
-                            <img height='100%' src='./img/not_found.png' alt='golden harp' />}
-                        </div>
-                    :
+                        {needVerify
+                        ?
+                            <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
+                                <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
+                                <img height='100%' src='./img/not_found.png' alt='golden harp' />}
+                            </div>
+                        :
                         <>
-                        <div className="input-name">
-                            <h3>Email</h3>
-                        </div>
-                        <input
-                            className="field-input"
-                            type='email'
-                            id={uuid()}
-                            value={userLogin.loginemail}
-                            onChange={handleChange}
-                            name='loginemail'
-                            required = {active==='login'}
-                            disabled={active==='signup'}
-                        />
-                        <div className="input-name input-margin">
-                            <h3>Password</h3>
-                        </div>
-                        <input 
-                            className="field-input"
-                            type='password'
-                            id={uuid()}
-                            value={userLogin.loginpassword}
-                            onChange={handleChange}
-                            name='loginpassword'
-                            required = {active==='login'}
-                            disabled={active==='signup'}
-                        />
-                        <div className="input-r" onClick={()=>alert('remember me under construction')}>
-                            <div className="check-input">
-                                <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
-                                <label className="rememberme-blue" htmlFor="remember-me-2"></label>
+                            <div style={{padding: '25px'}}>   
+                                <div className="input-name">
+                                    <h3>Email</h3>
+                                </div>
+                                <input
+                                    className="field-input"
+                                    type='email'
+                                    id={uuid()}
+                                    value={userLogin.loginemail}
+                                    onChange={handleChange}
+                                    name='loginemail'
+                                    required = {active==='login'}
+                                    disabled={active==='signup'}
+                                />
+                                <div className="input-name input-margin">
+                                    <h3>Password</h3>
+                                </div>
+                                <input 
+                                    className="field-input"
+                                    type='password'
+                                    id={uuid()}
+                                    value={userLogin.loginpassword}
+                                    onChange={handleChange}
+                                    name='loginpassword'
+                                    required = {active==='login'}
+                                    disabled={active==='signup'}
+                                />
+                                <div className="input-r" onClick={()=>alert('remember me under construction')}>
+                                    <div className="check-input">
+                                        <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
+                                        <label className="rememberme-blue" htmlFor="remember-me-2"></label>
+                                    </div>
+                                    <div className="rememberme">
+                                        <label htmlFor="remember-me-2">Remember Me</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="rememberme">
-                                <label htmlFor="remember-me-2">Remember Me</label>
+                            <button type='submit' className="submit-btn login-signup-title">
+                                Submit
+                            </button>
+                            <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
+                                <a href="#">Forgot Password?</a>
                             </div>
-                        </div>
-            
-                        <button type='submit' className="submit-btn">
-                            Submit
-                        </button>
-                        <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
-                            <a href="#">Forgot Password?</a>
-                        </div>
                         </>
                     }
                 </form>

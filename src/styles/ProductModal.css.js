@@ -87,13 +87,14 @@ function ProductModalCSS() {
             }
             .clearModal {
                 position: absolute;
-                bottom: 0;
+                top: 20px;
                 right: 20px;
                 color: black;
                 height: 50px;
             }
             .clearModal img {
                 width: 35px;
+                opacity: .4;
             }
             .moreButton {
                 color: #f9bf1e;

@@ -47,7 +47,7 @@ function ProductContainerCss() {
                 flex-direction: column;
                 margin-bottom: 35px;
                 text-align: center;
-                font-size: 14px;
+                font-size: 16px;
                 height: 350px;
                 width: 19%;
             }

@@ -73,10 +73,6 @@ function ContactUsForm(props) {
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
             <div className='contactFormContainer'> 
-                <div className='mainTitle'>
-                    <h2>Contact Us</h2>
-                    <h3 className="subTitle">We want to hear from you!</h3>
-                </div>
                 <div className={`contactArea`}>
                 <div className={`contactText`}>    
                     <h3>Suggestions</h3>
@@ -86,7 +82,6 @@ function ContactUsForm(props) {
                     <h3>Problems with Harp Advertisements</h3>
                     <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
                 </div>
-            
                 <form className='contactForm'>     
                     <div className='inputGroup'>
                         <label name='firstname'>First Name </label>

@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import parseNum from 'parse-num';
+import { STOREPARTNER_PLACEHOLDER, PRODUCTAD_PLACEHOLDER } from '../constants/constants';
 
 //leaf function helps find nested object keys,
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
@@ -20,17 +21,17 @@ export function removeDashOE(sellerName) {
  * @returns {Number} - innerWidth from window
  */
 export function getWindowSize() { 
-    const isClient = typeof window === 'object';
-  
+    const isClient = typeof window === 'object'; 
+
     function getSize() {
       return {
         width: isClient ? window.innerWidth : undefined,
         height: isClient ? window.innerHeight : undefined
       };
-    }
-  
-    const [windowSize, setWindowSize] = useState(getSize);
-  
+    }  
+
+    const [windowSize, setWindowSize] = useState(getSize); 
+
     useEffect(() => {
       if (!isClient) {
         return false;
@@ -206,7 +207,17 @@ export function getFilteredProducts(allProducts, allState) {
         );
     return filteredProducts;
 }
+/**
+ * Finds the maker of a certain Model from makers/models JSON-style object
+ * @function addPlaceholderProducts
+ * @param {array} filteredproductscontainer Product Array
+ * @param {number} width inner window width
+ * @returns {array} - Product array with placeholders
+ */
 export function addPlaceholderProducts(filteredproductscontainer, width) {
+    //shortcut
+    if (width<=850) return filteredproductscontainer;
+    //determine number of placeholders needed
     let numNeeded;
     if (width > 1200) {
         numNeeded = 5-(filteredproductscontainer.length%5);
@@ -217,29 +228,47 @@ export function addPlaceholderProducts(filteredproductscontainer, width) {
     if (width <= 950 && width > 700) {
         numNeeded = 3-(filteredproductscontainer.length%3);
     }
-    let newAd = {
-        divider: "00000000000000000000000",
-        id: "d101837f-27dc-48ff-952f-175c5dc47d2d",
-        productFinish: "walnut",
-        productImageBestColor: "#eeeeee",
-        productImageUrl: "./img/logo_findaharp.png",
-        productLongDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis elit in ipsum commodo ornare. Vivamus luctus enim eget tortor sollicitudin laoreet. Curabitur ex tellus, fermentum interdum massa in, ullamcorper sollicitudin ex. Sed eu accumsan turpis. Suspendisse molestie velit eu rhoncus pharetra. Sed vel elementum metus. Pellentesque cursus eros sit amet erat suscipit dictum. Phasellus egestas leo risus, eget molestie tortor interdum ut. Proin non tempus massa. Ut viverra mi ac consectetur tristique. Pellentesque blandit ut felis fringilla blandit. Vivamus imperdiet quam vitae lectus pellentesque, laoreet malesuada elit dapibus. Suspendisse tristique interdum pellentesque. Ut nisl mi, eleifend sed nisl vel, convallis euismod dui. Mauris vitae dignissim enim. Ut imperdiet diam nunc, sed rutrum purus accumsan eu. Sed tempus lectus erat. Integer condimentum laoreet tempor. Nam ullamcorper odio eu mattis mollis. In vel ante tellus. Ut efficitur eros et faucibus egestas. Ut et turpis vitae quam auctor egestas. Sed tristique nunc sit amet est volutpat, sit amet ultricies diam consectetur. Donec arcu turpis, ornare volutpat felis placerat, sollicitudin pretium dui. Duis congue risus purus, sed hendrerit odio imperdiet sit amet. Cras id faucibus nunc. Vivamus sed metus sit amet lorem rhoncus pulvinar eu id sem.",
-        productMaker: "",
-        productModel: "",
-        productPrice: "$17,500.00",
-        productShortDesc: "Short description not available",
-        productSize: 0,
-        productTitle: "Filler Product",
-        productType: "pedal",
-        sellerCountry: "USA",
-        sellerName: "",
-        sellerRegion: "Mid-West"
-    }
+    //add placeholders
+    let newAd = {...PRODUCTAD_PLACEHOLDER}
     for (var x = 0; x<numNeeded; x++) {
         const adId = {...newAd, id:x}
         filteredproductscontainer.push(adId);
     }
+    //return array
     return filteredproductscontainer;
+}
+/**
+ * Finds the maker of a certain Model from makers/models JSON-style object
+ * @function addPlaceholderStorePartners
+ * @param {array} storePartnersContainer Store Partner Array
+ * @param {number} width inner window width
+ * @returns {array} - Store Partner array with placeholders
+ */
+export function addPlaceholderStorePartners(storePartnersContainer, width) {
+    //shortcut
+    if (width<=850) return storePartnersContainer;
+    // determine number of placeholders needed
+    let numNeeded = 0;
+    if (width > 1800) {
+        numNeeded = 5-(storePartnersContainer.length%5);
+    }
+    if (width <= 1800 && width >1500) {
+        numNeeded = 4-(storePartnersContainer.length%4);
+    }
+    if (width <= 1500 && width >1250) {
+        numNeeded = 3-(storePartnersContainer.length%3);
+    }
+    if (width <= 1250 && width > 850) {
+        numNeeded = 2-(storePartnersContainer.length%2);
+    }
+    //add placeholders
+    let storePartner = {...STOREPARTNER_PLACEHOLDER}; 
+    for (var x = 0; x < numNeeded; x++) {
+        const adId = {...storePartner, id:x}
+        storePartnersContainer.push(adId);
+    }
+    //return array
+    return storePartnersContainer;
 } 
 /**
  * Finds the maker of a certain Model from makers/models JSON-style object

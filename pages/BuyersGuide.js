@@ -1,4 +1,6 @@
 import React from 'react';
+import PageTitle from '../src/components/PageTitle';
+
 import BuyersGuideCSS from '../src/styles/BuyersGuide.css';
 import PedalLeverTut from '../src/components/PedalLeverTut';
 
@@ -60,10 +62,7 @@ function BuyersGuide(props) {
         <>
         <div className='buyersContainer'>
             <div className='buyersGuide'>
-                <div className='mainTitle'>
-                    <h2>Buyer's Guide</h2>
-                    <h3 className="subTitle">A collaborative guide from your harp community</h3>
-                </div>    
+                <PageTitle maintitle="Buyer's Guide" subtitle='A collaborative guide from your harp community' />    
                 <p>At FindaHarp, we believe the best resource for choosing a harp is your teacher. If you do not have a teacher or you are looking to supplement your knowledge, read on!!</p>
                 <p>We would love to make this a collaborative guide from the harp community. If you have a different opinion or supplemental information, please write it up and submit it on the contact page.</p>
                 <p>Findaharp.com uses two main categories of harp: LEVER and PEDAL. We include partially levered, lever-free, and lap harps in our LEVER category.</p>
