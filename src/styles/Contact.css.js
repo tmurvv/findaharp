@@ -47,7 +47,7 @@ function ContactCSS() {
             }
             .contactContainer a {
                 color: #6A75AA;
-                font-size: 16px;
+                font-size: 18px;
             }
             .peopleContainer {
                 display: flex;

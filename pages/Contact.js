@@ -23,7 +23,7 @@ function Contact() {
                         <div className='imgContainer'>
                             <img src='./img/photo_tisha.png' width='100px' alt='Tisha Murvihill head shot' />
                         </div>
-                        <p>Tisha's main instrument is a robust sounding <span>Lyon & Healy 85CG</span> pedal harp. She also has a rare gold <span>Charles Lindemann</span> pedal harp built in the 1930's that was rescued from a dumpster! Her Lever harps include a <span>Pilgrim Ashdown</span> c.1993 made in Wales, and a <span>Craig Pierpont, Irish Style</span> out of Kentucky. Harp website: <a href='https://www.harptisha.com'>harptisha.com</a> / tech website: <a href='https://www.take2tech.ca'>take2tech.ca</a>.</p>
+                        <p>Tisha's main instrument is a robust sounding <span>Lyon & Healy 85CG</span> pedal harp. She also has a rare gold <span>Charles Lindemann</span> pedal harp built in the 1930's. Her Lever harps include a <span>Pilgrim Ashdown</span> c.1993 made in Wales, and a <span>Craig Pierpont, Irish Style</span> out of Kentucky. Harp website: <a href='https://www.harptisha.com'>harptisha.com</a> / tech website: <a href='https://www.take2tech.ca'>take2tech.ca</a>.</p>
                     </div>
                     <div className='personContainer marginLeft'>
                         <div className='imgContainer'>

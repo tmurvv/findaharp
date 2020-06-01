@@ -58,8 +58,8 @@ function ProductSearchCss() {
             .searchLine1Sub {
                 display: flex;
                 justify-content: space-evenly;
-                font-size: 11px;
-                padding-top: 11px;
+                font-size: 13px;
+                padding-top: 9px;
                 text-align: center;
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;
@@ -129,8 +129,8 @@ function ProductSearchCss() {
                 width: 90%;
                 display: flex;
                 justify-content: space-evenly;
-                font-size: 11px;
-                padding-top: 11px;
+                font-size: 13px;
+                padding-top: 9px;
                 text-align: center;
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;

@@ -89,12 +89,13 @@ function ContactSellerFormCSS() {
             }
             .clearModal {
                 position: absolute;
-                bottom: 15px;
+                top: 15px;
                 right: 15px;
                 color: black;
+                opacity: .4;
             }
             .clearModal img{
-                width: 35px;
+                width: 28px;
             }
             .inputGroup {
                 margin-top: 15px;

@@ -42,16 +42,6 @@ function AboutPartnerStoresCSS() {
                 .grid-container {
                     width: 60vw;
                 }
-            }         
-            .productContainer {
-                margin: auto;
-                position: relative;
-                width: 80%;
-            }
-            @media only screen and (max-width: 1475px) {
-                .productContainer {
-                    max-width: unset;
-                }
             }
             @media only screen and (max-width: 550px) {
                 .productContainer {
@@ -78,17 +68,13 @@ function AboutPartnerStoresCSS() {
                 font-size: 16px;
                 height: 250px;
                 min-width: 360px;
-                max-width: 100%:
-                // width: 19%;
+                max-width: 100%;
+                width: 19%;
                 border: 2px solid #f9bf1e;
                 padding: 20px 20px 3px;
                 background-color: #ffffff;
             }
-            @media only screen and (max-width: 1800px) {
-                .productSmallDisplay {
-                    width: 19%;
-                }
-            }
+            
             @media only screen and (max-width: 1500px) {
                 .productSmallDisplay {
                     width: 24%;
@@ -131,24 +117,25 @@ function AboutPartnerStoresCSS() {
             .productSmallDisplay-LongDesc {
                 flex: 3;
                 text-align: left;
-                height: 60px;
+                height: 75px;
                 overflow-y: scroll;
-                margin-top: 18px;
+                margin-top: 29px;
             }
             .productSmallDisplay-LongDesc span {
                 font-weight: 600;
             }
             .productSmallDisplay-text {
-                flex: 3;
+                flex: 2;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                padding-top: 5px;
+                padding-bottom: 10px;
             }
             .productSmallDisplay-text p {
                 margin-block-start: 0;
                 margin-block-end: 0;
+                text-align: left;
             }
             .productSmallDisplay-text p a {
                 text-decoration: none;
@@ -229,6 +216,19 @@ function AboutPartnerStoresCSS() {
             }
             .moreButton:hover {
                 transform: scale(1.1);
+            }
+            ::-webkit-scrollbar {
+                width: 6px;
+            } 
+            ::-webkit-scrollbar {
+                    width: 6px;
+            } 
+            ::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            } 
+            ::-webkit-scrollbar-thumb {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                    background-color: #ffe58a; 
             }
         `}
         </style>

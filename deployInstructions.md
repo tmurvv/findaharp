@@ -7,7 +7,6 @@
 - check which API is connecting
 - is contact form submitting or not submitting as you want
 - check next.config.js for deployment environment
-- is error message under login production or development?
 - for testing, make sure test data has correct data set for images...
     - findaharp-api only for findaharp.com
     - findaharp-api-testing for others

@@ -8,11 +8,12 @@
 - in login/signup, install reducer for result states
 
 ### UI/UX
+- email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
-- return close window button to bottom right on harp detail modal
 
 ### functionality
+- location specifics
 - remember me and forgot password on login
 - CRUD operations on upload listings
 - add close form to private listings
@@ -25,7 +26,6 @@
 - check on encryption for signup password (does it show up in devtools console upon submit when no localhost used)
 
 ### SEO
-
 - All SEO checks in Google Guide
 - Lighthouse
 

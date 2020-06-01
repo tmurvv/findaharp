@@ -90,10 +90,10 @@ function ProductModalCSS() {
                 top: 20px;
                 right: 20px;
                 color: black;
-                height: 50px;
+                height: 28px;
             }
             .clearModal img {
-                width: 35px;
+                width: 28px;
                 opacity: .4;
             }
             .moreButton {

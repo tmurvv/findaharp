@@ -889,7 +889,7 @@ const testData = [
     },
     {
         "id": "5ffc7137-3b1f-4af2-9773-0b70a15d3aa3",
-        "sellerName": "Pacific Harp Center-e",
+        "sellerName": "Dream Harp Center",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Camac Hermine (Consignment #K1600)",
@@ -905,7 +905,7 @@ const testData = [
     },
     {
         "id": "5ffb251e-cab8-4029-987a-19d88ef00c0f",
-        "sellerName": "Pacific Harp Center-e",
+        "sellerName": "Dream Harp Center",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Dusty Strings Boulevard (Consignment #18299)",
@@ -921,7 +921,7 @@ const testData = [
     },
     {
         "id": "2b7aaf4d-c08a-4090-a0e9-60044d0793d5",
-        "sellerName": "Pacific Harp Center-e",
+        "sellerName": "Dream Harp Center",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Dusty Strings Boulevard (Preowned #19264) SOLD",
@@ -937,7 +937,7 @@ const testData = [
     },
     {
         "id": "9ab1f735-bdfa-4fa1-94db-0cf425ec384d",
-        "sellerName": "Pacific Harp Center-o",
+        "sellerName": "Dream Harp Center",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Blevins Encore 34 (Consignment)",
@@ -969,7 +969,7 @@ const testData = [
     },
     {
         "id": "dd0c3c89-4549-4c99-9a79-5052ed827b06",
-        "sellerName": "Pacific Harp Center-o",
+        "sellerName": "Dream Harp Center",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Dusty Strings Boulevard (Consignment #19330)",
@@ -985,7 +985,7 @@ const testData = [
     },
     {
         "id": "adffe9fb-d970-4415-a270-9618a1cdd4e0",
-        "sellerName": "Pacific Harp Center-o",
+        "sellerName": "Dream Harp Center",
         "sellerCountry": "USA",
         "sellerRegion": "Pacific",
         "productTitle": "Dusty Strings FH36S - Cherry (Consignment #16012)",

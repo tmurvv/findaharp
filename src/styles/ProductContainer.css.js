@@ -47,7 +47,7 @@ function ProductContainerCss() {
                 flex-direction: column;
                 margin-bottom: 35px;
                 text-align: center;
-                font-size: 16px;
+                font-size: 14px;
                 height: 350px;
                 width: 19%;
             }
@@ -84,6 +84,7 @@ function ProductContainerCss() {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                min-height: 269px;
             }
             .productSmallDisplay-img img{
                 height: 267px;

@@ -4,6 +4,7 @@ function StorePartnersCSS() {
             .storePartnersContainer {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 padding-top: 70px;
+                padding-bottom: 70px;
             }
         `}</style>
     )
