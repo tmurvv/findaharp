@@ -15,7 +15,6 @@ import {
     getSearchInfo,
     triggerLazy
 } from '../utils/helpers';
-import { searchReducer } from '../utils/reducers'
 
 const initialState = {
     size: false,
@@ -213,8 +212,6 @@ function ProductSearch(props) {
     });
     const filteredProducts = getFilteredProducts(props.products, allState);
     return (
-
-
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
         <div className='productSearchOuter'>
@@ -430,6 +427,8 @@ function ProductSearch(props) {
                 filteredproductscontainer={filteredProducts} 
                 searchInfo={allState.searchInfo}
                 allstate={allState}
+                clientlat={props.clientlat}
+                clientlong={props.clientlong}
             />              
         </div>
         </>

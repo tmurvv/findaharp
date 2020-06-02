@@ -50,6 +50,12 @@ function ProductModalCSS() {
             .detailButton:active {
                 box-shadow: none;
             }
+            .detailButton-cancel {
+                background-color: #333333;
+                margin-left: 30px;
+                color: white;
+                background-image: none;
+            }
             .detailImg {
                 flex: 4;
                 height: 100%;
@@ -106,6 +112,14 @@ function ProductModalCSS() {
                 max-height: 212px;
                 text-align: left;
                 overflow-y: auto;
+            }
+            .blueFontButton {
+                background-color: 'white';
+                outline: 'none';
+                color:'#6A75AA';
+                text-decoration: 'none'; 
+                border: 'none'; 
+                font-size: '14px';
             }
         `}
         </style>

@@ -66,7 +66,7 @@ function AboutPartnerStoresCSS() {
                 margin-bottom: 50px;
                 text-align: center;
                 font-size: 16px;
-                height: 250px;
+                height: 335px;
                 min-width: 360px;
                 max-width: 100%;
                 width: 19%;
@@ -111,18 +111,18 @@ function AboutPartnerStoresCSS() {
                 width: auto;
                 max-width:100%;
                 max-height:90%;
-                object-fit: cover;
+                object-fit: contain;
                 overflow: hidden;
             }
             .productSmallDisplay-LongDesc {
                 flex: 3;
                 text-align: left;
-                height: 75px;
+                height: 98px;
                 overflow-y: scroll;
                 margin-top: 29px;
             }
             .productSmallDisplay-LongDesc span {
-                font-weight: 600;
+                font-family: 'Metropolis Extra Bold';
             }
             .productSmallDisplay-text {
                 flex: 2;
@@ -204,18 +204,6 @@ function AboutPartnerStoresCSS() {
             }
             .marginTop {
                 margin-top: 10px;
-            }
-            .moreButton {
-                color: purple;
-                cursor: pointer;
-                transition: all .3s;
-                outline: none;
-                width: fit-content;
-                margin: auto;
-                margin-bottom: 15px
-            }
-            .moreButton:hover {
-                transform: scale(1.1);
             }
             ::-webkit-scrollbar {
                 width: 6px;

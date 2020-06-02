@@ -1,12 +1,15 @@
 //Packages
-import React from 'react';
+import React, {useState} from 'react';
 
 export default function LocationMenu(props) {
+    const [miles, setMiles] = useState(true)
     const handleClose = (evt) => {
+        console.log(evt.target.innerText)
         if (evt.target.value === 'All Locations') return;
+        if (evt.target.innerText === 'Change to kms') return alert('Coming soon... change to kms.');
+        if (evt.target.innerText.startsWith('Less than')) return alert('Coming soon... select harp by how far away it is. For now, please select by region.');
         props.handleLocationChange(evt.target.getAttribute('name')); 
     };
-
     return (
         <div className='relative'>
             <button 
@@ -30,15 +33,35 @@ export default function LocationMenu(props) {
                     name='All Locations'
                 >All Locations</li>
                 <li 
+                    onClick={()=>setMiles(!miles)} 
+                    // key={uuid()}
+                    name='changeUnit'
+                >{miles?'Change to kms':'Change to miles'}</li>      
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()}
+                    name='lt500'
+                >{miles?'Less than 500 miles':'Less than 700kms'}</li>      
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()}
+                    name='lt300'
+                >{miles?'Less than 300 miles':'Less than 400kms'}</li>      
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()}
+                    name='lt100'
+                >{miles?'Less than 100 miles':'Less than 150kms'}</li>
+                <li 
                     onClick={handleClose} 
                     // key={uuid()}
                     name='North-East'
-                >US-NorthEastern</li>      
+                >US-NorthEastern</li>    
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Eastern'
-                >Eastern</li>
+                >US-Eastern</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
@@ -63,7 +86,12 @@ export default function LocationMenu(props) {
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Canada'
-                >Canada</li>              
+                >Canada-East</li>              
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='Canada'
+                >Canada-West</li>              
             </ul>     
         </div>
     );

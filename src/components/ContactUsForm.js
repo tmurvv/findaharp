@@ -63,15 +63,7 @@ function ContactUsForm(props) {
         clearForm();
     }
    return (
-        <>    
-            <div 
-                className='clearModal' 
-                onClick={() => 
-                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                }} 
-            >
-                <img src='/img/clear_search.png' alt='clear filters'/>
-            </div>
+        <>  
             <div className='contactFormContainer'> 
                 <div className={`contactArea`}>
                 <div className={`contactText`}>    

@@ -47,7 +47,7 @@ export default function StorePartners() {
         We are located within a few kilometres of two major ferries to the British Columbia mainland and close to the TransCanada highway. You can visit from Vancouver and return the same day.  View our street map. BC Ferries will deliver you as a car or foot passenger from West Vancouver or Tsawwassen to Nanaimo or Duke Point and then it's a short drive to the rural community of Cedar where our Studio is located.
         
         Subscribe to our free Harp Notes Newsletter - emailed to you 2 - 4 X per year`,
-        productMaker: "Harps Central",
+        productMaker: "West Coast Harps",
         productImageUrl: "/img/StorePartners/westCoastHarps.jpg",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'www.westcoastharps.com',

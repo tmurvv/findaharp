@@ -4,38 +4,36 @@ import LazyLoad from 'react-lazyload';
 // styles
 import ProductCss from '../styles/Product.css';
 // internal
-import ProductModal from './ProductModal';
-import ContactSellerForm from './ContactSellerForm';
-import { removeDashOE,setOpacity } from '../utils/helpers';
-import { productsReducer } from '../utils/reducers';
-import ProductContainer from './ProductContainer';
-import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
+import { removeDashOE, geoDistance } from '../utils/helpers';
 
-function Product({productdetail, handleopendetail, handleclosedetail, handleopencontact, handleclosecontact}) {
+
+function Product({productdetail, handleopendetail, handleclosedetail, handleopencontact, handleclosecontact, clientlat, clientlong}) {
     const [openProductModal, setOpenProductModal] = useState(false);
     const [openContactModal, setOpenContactModal] = useState(false);
+    
     function handleOpenProductModal() {
         setOpenProductModal(true);
         handleopendetail(productdetail); 
     }
-    function handleCloseProductModal(evt, product, openContact) {
-        setOpenProductModal(false);
-        handleclosedetail(productdetail); 
-        if (openContactModal) handleopencontact(evt, product);
-    }
+    // function handleCloseProductModal(evt, product, openContact) {
+    //     setOpenProductModal(false);
+    //     handleclosedetail(productdetail); 
+    //     if (openContactModal) handleopencontact(evt, product);
+    // }
     function handleOpenContactModal(evt, product) {
         evt.stopPropagation();
         setOpenContactModal(true);
         handleopencontact(evt, product);
     }
-    function handleCloseContactModal() {
-        evt.stopPropagation();
-        setOpenContactModal(false);
-    }
+    // function handleCloseContactModal() {
+    //     evt.stopPropagation();
+    //     setOpenContactModal(false);
+    // }
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
     }
+    
     return (
         <div 
             key={productdetail.id} 

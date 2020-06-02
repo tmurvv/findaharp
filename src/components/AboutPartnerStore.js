@@ -42,7 +42,7 @@ function AboutPartnerStore(props) {
                 </p>
             </div>
             <div className={`grid-item productSmallDisplay-text`}>
-                <p>{partnerStore.sellerWebsite}</p>
+                <p><a href={`https://${partnerStore.sellerWebsite}`} style={{color: '#6A75AA', fontSize: '18px'}} target="_blank">{partnerStore.sellerWebsite}</a></p>
                 <p>{partnerStore.sellerRegion}</p>     
             </div>           
             <AboutPartnerStoresCSS />          

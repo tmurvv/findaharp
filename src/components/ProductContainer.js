@@ -10,6 +10,7 @@ import ContactSellerForm from './ContactSellerForm';
 import Product from './Product';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../utils/helpers';
 import { productsReducer } from '../utils/reducers';
+import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
 
 
 const initialState = {
@@ -19,7 +20,7 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductContainer = ({ filteredproductscontainer, allstate }) => {
+const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clientlong }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [adjProducts, setAdjProducts] = useState(filteredproductscontainer);
     const size = getWindowSize();
@@ -49,7 +50,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate }) => {
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
         return(  
-            <div data-test='component-ProductContainer' className='productContainer'>    
+            <div data-test='component-ProductContainer' className='productContainer'>
                 <div className="grid-container" style={{'opacity': `${state.opacity}`}}>
                     {addPlaces.map(product => <Product 
                         key={uuid()}
@@ -57,7 +58,9 @@ const ProductContainer = ({ filteredproductscontainer, allstate }) => {
                         handleopendetail={handleOpenDetail} 
                         handleclosedetail={handleCloseDetail} 
                         handleopencontact={handleOpenContact} 
-                        handleclosecontact={handleCloseContact} 
+                        handleclosecontact={handleCloseContact}
+                        clientlat={clientlat} 
+                        clientlong={clientlong}
                         />
                     )}
                 </div>
@@ -67,6 +70,8 @@ const ProductContainer = ({ filteredproductscontainer, allstate }) => {
                         handleCloseDetail={handleCloseDetail} 
                         handleOpenContact={handleOpenContact} 
                         handleCloseContact={handleCloseContact}
+                        clientlat={clientlat}
+                        clientlong={clientlong}
                 />}
                 {state.openContact
                     &&<ContactSellerForm 

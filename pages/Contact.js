@@ -12,8 +12,7 @@ function Contact() {
             </div>
             <div className='contactDivider'>
                 <img src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
-            </div>
-            
+            </div>           
             <div className={`contactItem about`}>
                 <h2>About us</h2>
                 <p>Findaharp.com was designed and developed by harpists Rachael Cooper and Tisha Murvihill. Tisha Murvihill has been the principal harpist of the Calgary Philharmonic in Alberta, Canada since 1995.</p>
@@ -30,11 +29,8 @@ function Contact() {
                             <img src='./img/photo_rachael.png' alt='Rachael Cooper head shot' />
                         </div>
                         <p>Rachael is a Graphic Designer, cat lover, and aspiring harpist. She began playing the harp in 2015, with Tisha as her teacher, and has shown what wonderful results can come from starting an instrument as an adult. Rachael is the proud owner of a stunning <span>Salvi Apollo</span> pedal harp as of 2020, as well as a particularly superb <span>Emilie</span> lever harp crafted by Newsom Harps in Bragg Creek, AB in 2015. Rachael is a freelance graphic designer and can be reached at <a href='https://www.diomed.ca'>diomed.ca</a>.</p>
-                        {/* <p>Designer Rachael Cooper began playing the harp in 2015 and has shown what wonderful results can come from starting an instrument as an adult. She is the owner of a stunning <span>Salvi Apollo</span> pedal harp as well as a an outstanding <span>Emilie</span> lever harp from Newsom Harps in Bragg Creek, Alberta. Rachael is the owner/operator of Diomed Design and can be reached at <a href='https://www.diomed.ca'>diomed.ca</a>.</p> */}
                     </div>
-                    
-                </div>
-                       
+                </div>         
             </div>
             <ContactCSS />
         </div>
