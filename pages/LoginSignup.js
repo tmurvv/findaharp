@@ -11,7 +11,7 @@ import LoginSignupCSS from '../src/styles/LoginSignup.css';
 
 function LoginSignup(props) {
     // const userContext = useContext(UserContext);
-    const {setUser} = useContext(UserContext);
+    const { user, setUser} = useContext(UserContext);
     const [active, setActive] = useState('login');
     const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
@@ -147,7 +147,7 @@ function LoginSignup(props) {
                     resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     setNeedVerify(true);
-                    setUser(res.data.data.added.firstname)
+                    setUser([res.data.data.added.firstname]);
                 }
             } catch (e) {
                 console.log(e);
@@ -177,14 +177,16 @@ function LoginSignup(props) {
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* PRODUCTION */
                 const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                console.log(res.data.user);
                 const returnedUser = res.data.user;
-                console.log(res.data);
-                await setUser(returnedUser.firstname);
+               
+                await setUser([returnedUser.firstname]);
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
             } catch(e) {
-                console.log(e.response.data.message)
+
+                console.log(e.message)
                 if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                     resultImg.style.display='none';
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong on login.'} Login as guest?`;

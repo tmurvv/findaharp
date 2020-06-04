@@ -2,13 +2,12 @@
 import React, {useState} from 'react';
 
 export default function LocationMenu(props) {
-    const [miles, setMiles] = useState(true)
-    const handleClose = (evt) => {
-        console.log(evt.target.innerText)
+    const [activateDriving, setActivateDriving] = useState(false)
+    const handleClose = async (evt) => {
         if (evt.target.value === 'All Locations') return;
-        if (evt.target.innerText === 'Change to kms') return alert('Coming soon... change to kms.');
-        if (evt.target.innerText.startsWith('Less than')) return alert('Coming soon... select harp by how far away it is. For now, please select by region.');
-        props.handleLocationChange(evt.target.getAttribute('name')); 
+        if (evt.target.getAttribute('name')==='ltActivate') evt.target.setAttribute('name', 'All Locations');
+        console.log(evt.target.getAttribute('name'))
+        props.handleLocationChange(evt.target.getAttribute('name'));
     };
     return (
         <div className='relative'>
@@ -33,65 +32,79 @@ export default function LocationMenu(props) {
                     name='All Locations'
                 >All Locations</li>
                 <li 
-                    onClick={()=>setMiles(!miles)} 
+                    onClick={(e) => {setActivateDriving(!activateDriving); handleClose(e);}}
                     // key={uuid()}
-                    name='changeUnit'
-                >{miles?'Change to kms':'Change to miles'}</li>      
+                    name='ltActivate'
+                    style={{color: '#6A75AA', textDecoration: 'underline'}}
+                >{activateDriving?'by Region':'by Driving Distance'}</li>      
+                <li 
+                    onClick={handleClose}
+                    hidden={!activateDriving} 
+                    // key={uuid()}
+                    name='Less than 500'
+                >Less than 500</li>      
                 <li 
                     onClick={handleClose} 
+                    
+                    hidden={!activateDriving} 
                     // key={uuid()}
-                    name='lt500'
-                >{miles?'Less than 500 miles':'Less than 700kms'}</li>      
+                    name='Less than 300'
+                >Less than 300</li>      
                 <li 
                     onClick={handleClose} 
+                    
+                    hidden={!activateDriving} 
                     // key={uuid()}
-                    name='lt300'
-                >{miles?'Less than 300 miles':'Less than 400kms'}</li>      
+                    name='Less than 100'
+                >Less than 100</li>
                 <li 
-                    onClick={handleClose} 
-                    // key={uuid()}
-                    name='lt100'
-                >{miles?'Less than 100 miles':'Less than 150kms'}</li>
-                <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()}
                     name='North-East'
                 >US-NorthEastern</li>    
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving} 
                     // key={uuid()} 
                     name='Eastern'
                 >US-Eastern</li>
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()} 
                     name='South'
                 >US-South</li>
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()} 
                     name='Mid-West'
                 >US-MidWest</li>
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()} 
                     name='West'
                 >US-West</li>
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()} 
                     name='Pacific'
-                >US-Pacific</li>
+                >Pacific</li>
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()} 
-                    name='Canada'
+                    name='Canada-East'
                 >Canada-East</li>              
                 <li 
-                    onClick={handleClose} 
+                    onClick={handleClose}
+                    hidden={activateDriving}
                     // key={uuid()} 
                     name='Canada'
-                >Canada-West</li>              
+                >Canada</li>              
             </ul>     
         </div>
     );

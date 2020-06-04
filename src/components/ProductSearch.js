@@ -1,5 +1,6 @@
 // packages
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 // internal
 import ProductSearchCss from '../styles/ProductSearch.css';
@@ -10,11 +11,21 @@ import SizeMenu from './searchMenus/SizeMenu';
 import FinishMenu from './searchMenus/FinishMenu';
 import PriceMenu from './searchMenus/PriceMenu';
 import LocationMenu from './searchMenus/LocationMenu';
+import { UserContext } from '../contexts/UserContext';
 import {
     getFilteredProducts,
     getSearchInfo,
     triggerLazy
 } from '../utils/helpers';
+async function getDrivingDistance(lat1, long1, lat2, long2) {
+    try {
+        const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
+        // console.log(response.data.routes[0].distance)
+        return response.data.routes[0].distance;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 const initialState = {
     size: false,
@@ -25,7 +36,9 @@ const initialState = {
     location: false
 }
 function ProductSearch(props) {
+    const { user } = useContext(UserContext);
     const [menus, setMenus] = useState(initialState);
+    const [trigger, setTrigger] = useState(false);
     const [allState, setAllState] = useState({
         selectionType: '',
         maker: 'All Makers',
@@ -104,7 +117,18 @@ function ProductSearch(props) {
         });
         setMenus(initialState);
     }
-    function handleLocationSelection(location) {
+    async function handleLocationSelection(location) {
+        const addDistances = () => {
+            props.products.map(async product => {
+                let distance = await getDrivingDistance(props.clientlat, props.clientlong, product.sellerLat, product.sellerLong);
+                distance = (distance*0.000621).toFixed(0);
+            });
+        }
+        if (location.startsWith('Less than')) {
+            await addDistances();
+            setTrigger(!trigger);
+        };
+
         const newState = {...allState, 
             location
         }
@@ -112,7 +136,7 @@ function ProductSearch(props) {
             location,
             searchInfo: getSearchInfo(newState)
         });
-        setMenus(initialState);
+        if (location!=='All Locations') setMenus(initialState);
     }
     function handleClick(e) {
         switch(e.target.name) {
@@ -208,9 +232,18 @@ function ProductSearch(props) {
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
     }
     useEffect(() => {
+        
         triggerLazy();
-    });
-    const filteredProducts = getFilteredProducts(props.products, allState);
+        
+    },[]);
+    //implement distance filter here or in getInitial or useEffect?
+    // let filteredProducts;
+    // if (allState.location && allState.location.startsWith('lt')) {
+    //     filteredProducts = getFilteredProductsAsync();
+    // } else {
+    //     // filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[1]);
+    // }
+    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[1]);
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>

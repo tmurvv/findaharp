@@ -13,7 +13,7 @@ import Footer from '../src/components/Footer';
 import Head from '../src/components/Head';
 
 function MyApp({ Component, pageProps }) {
-    const [user, setUser] = useState('Login');
+    const [user, setUser] = useState(['Login', 'miles']);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -25,7 +25,6 @@ function MyApp({ Component, pageProps }) {
         window.addEventListener('resize', handleResize);
         return () => { window.removeEventListener('resize', handleResize) }
     }, []);
-
     function handleNavOpen() {
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);

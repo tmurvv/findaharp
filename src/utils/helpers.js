@@ -1,9 +1,20 @@
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 import parseNum from 'parse-num';
 import { STOREPARTNER_PLACEHOLDER, PRODUCTAD_PLACEHOLDER } from '../constants/constants';
 
 //leaf function helps find nested object keys,
 export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el], obj))} //from StackOverflow
+
+async function getDrivingDistance(lat1, long1, lat2, long2) {
+    try {
+        const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
+        console.log(response.data.routes[0].distance)
+        return response.data.routes[0].distance;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 export function triggerLazy() {
     window.scrollBy(0,1); //hack to trigger lazyload after search
@@ -164,8 +175,10 @@ export function getModelList(productMakesModels, size) {
  * @param {array} allState list of filters selected by user
  * @returns {String} - Product List with filetersApplied
  */
-export function getFilteredProducts(allProducts, allState) {
+export function getFilteredProducts(allProducts, allState, clientLat, clientLong, distanceUnit) {
     let filteredProducts = [...allProducts];
+   
+    
     // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
     // apply filters // not yet implemented map from array or refactor to function
@@ -186,9 +199,34 @@ export function getFilteredProducts(allProducts, allState) {
             product => product.productMaker&&product.productMaker === allState.maker
         );
     if (allState.location&&allState.location.toUpperCase() !== "ALL LOCATIONS") 
-        filteredProducts = filteredProducts.filter(
-            product => product.sellerRegion&&product.sellerRegion === allState.location
-        );
+        if (allState.location.startsWith('Less than')) {
+            // filteredProducts = filteredProducts.map(
+            //     product => {console.log(product.distance, allState.location);
+            //     return product;}
+            // );
+            if(allState.location==='Less than 100') {
+                filteredProducts = filteredProducts.filter(
+                    product => (product.distance&&product.distance<100)||product.distance===0
+                );
+            }
+            if(allState.location==='Less than 300') {
+                filteredProducts = filteredProducts.filter(
+                    product => (product.distance&&product.distance<300)||product.distance===0
+                );
+            }
+            if(allState.location==='Less than 500') {
+                filteredProducts = filteredProducts.filter(
+                    product => (product.distance&&product.distance<500)||product.distance===0
+                );
+            }
+        } else {
+            filteredProducts = filteredProducts.filter(
+                product => product.sellerRegion&&product.sellerRegion === allState.location
+            );
+        } 
+        // filteredProducts = filteredProducts.filter(
+        //     product => product.sellerRegion&&product.sellerRegion === allState.location
+        // );
     if (allState.finish&&allState.finish.toUpperCase() !== "ALL FINISHES") 
         filteredProducts = filteredProducts.filter(
             product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()
@@ -351,10 +389,28 @@ export const itemsSortByDisabled = (items, currentItems) => {
     });
     return sortItems;
 }
+/**
+ * Returns distance, unit
+ * @function getDrivingDistance - based on function from GeoDataSource
+ * @param {number} lat1
+ * @param {number} long1
+ * @param {number} lat2
+ * @param {number} long2
+ * @returns {number} - driving distance in meters
+ */
+// export const getDrivingDistance = async (lat1, long1, lat2, long2) => {
+//     try {
+//         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
+//         console.log(response.data.routes[0].distance)
+//         return response.data.routes[0].distance;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
 /**
  * Returns distance, unit
- * @function geoDistance - based on function from GeoDataSource
+ * @function getGeoDistance - based on function from GeoDataSource
  * @param {number} lat1
  * @param {number} long1
  * @param {number} lat2
@@ -362,7 +418,7 @@ export const itemsSortByDisabled = (items, currentItems) => {
  * @param {string} unit 'm','k','n' miles, kms, nautical miles respectively
  * @returns {number} - distance
  */
-export const geoDistance = (lat1, lon1, lat2, lon2, unit) => {
+export const getGeoDistance = (lat1, lon1, lat2, lon2, unit) => {
 	if ((lat1 == lat2) && (lon1 == lon2)) {
 		return 0;
 	}

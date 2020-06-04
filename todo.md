@@ -6,14 +6,17 @@
 - add findaharp known finish listing to Mongo
 - refactor getFilteredProducts
 - in login/signup, install reducer for result states
+- getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+- trouble-shoot harp icon
 - randomize order
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
 
 ### functionality
+- make raw data locations match menu choices
 - location specifics
 - remember me and forgot password on login
 - CRUD operations on upload listings
@@ -42,7 +45,6 @@
 
 ### FUTURE IDEAS:
 
-- driving distance
 - on mobile menu highlight, put in fancy corners
 - New Listings Page
 - From Rachael, I feel that there should be a way for the user to flick back and forth between the form and the harp information, and without losing anything that they've already typed in if possible. Right now if one clicks on "Contact Seller" the only way to look at the full harp information again is to close the form and click on the harp again. 

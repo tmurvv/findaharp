@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 // internal
 import ProductModalCSS from '../styles/ProductModal.css';
-import { removeDashOE, geoDistance } from '../utils/helpers';
+import { removeDashOE, getGeoDistance } from '../utils/helpers';
+import { UserContext } from '../contexts/UserContext';
 
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
@@ -15,12 +16,11 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
 }
 
 function ProductModal(props) {
+    const { user } = useContext(UserContext);
     const [longDesc, setLongDesc] = useState(true);
-    const [miles, setMiles] = useState(true);
-    const [distanceM, setDistanceM] = useState(0); //miles
-    const [distanceK, setDistanceK] = useState(0); //km
-    const [drivingDistanceM, setDrivingDistanceM] = useState(0); //miles
-    const [drivingDistanceK, setDrivingDistanceK] = useState(0); //miles
+    const [miles, setMiles] = useState(user[1]==='miles');
+    const [geoDistance, setGeoDistance] = useState(0); //miles
+    const [drivingDistance, setDrivingDistance] = useState(0); //miles
     const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerRegion, sellerName, sellerLat, sellerLong} = props.product;
     if (props.product===undefined||!props.product) return props.handleCloseDetail();
     
@@ -29,12 +29,12 @@ function ProductModal(props) {
         props.handleCloseDetail(evt, product, openContact);
     }
     async function getDistances(lat1, long1, lat2, long2) {
+        // Driving Distance
         const resultDist = await getDrivingDistance(lat1, long1, lat2, long2);
-        setDrivingDistanceM((resultDist*0.000621).toFixed(0));
-        setDrivingDistanceK((resultDist/1000).toFixed(0));
-        const geoDist = geoDistance(lat1, long1, lat2, long2).toFixed(0);
-        setDistanceM(geoDist);
-        setDistanceK((geoDist*1.609).toFixed(0));
+        miles?setDrivingDistance((resultDist*0.000621).toFixed(0)):setDrivingDistance((resultDist/1000).toFixed(0));
+        // Geographical Distance
+        const geoDist = getGeoDistance(lat1, long1, lat2, long2).toFixed(0);
+        miles?setGeoDistance(geoDist):setGeoDistance((geoDist*1.609).toFixed(0));
     }
 
     return (
@@ -50,7 +50,7 @@ function ProductModal(props) {
                 <span>Size</span> {productSize?productSize:'unavailable'} Strings / {productType}<br></br>
                 <span>Price</span> {productPrice?productPrice:'unavailable'}<br></br>
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
-                <span>Distance</span> {drivingDistanceM===0
+                <span>Distance</span> {drivingDistance===0
                     ?<button 
                         type='button'
                         className='blueFontButton'
@@ -59,15 +59,9 @@ function ProductModal(props) {
                     >
                     Click here
                     </button>
-                    :miles?`Driving: ${drivingDistanceM}Mi / Straight Line: ${distanceM}Mi`:`Driving: ${drivingDistanceK}Km / Straight Line: ${distanceK}Km`}
-                    {distanceM===0?'':<button 
-                        type='button'
-                        onClick={()=>{setMiles(!miles);}}
-                        style={{float: 'right', backgroundColor: 'white', outline: 'none', color:'#6A75AA', textDecoration:'none', border: 'none', fontSize: '12px'}}
-                    >
-                    {miles?'to Kms':'to Miles'}
-                    </button>
+                    :`Driving: ${drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance}${miles?'Mi':'Kms'}`
                     }
+                <br></br>
                 <br></br>
                 <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div>
                 <br></br>

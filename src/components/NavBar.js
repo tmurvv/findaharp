@@ -8,6 +8,7 @@ import {UserContext} from '../contexts/UserContext';
 export default function NavBar(props) {
     // const  {value, setValue}= useContext(UserContext);
     const { user } = useContext(UserContext);
+    const login = user[0];
     
     return(
         <>
