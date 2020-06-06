@@ -118,25 +118,29 @@ function ProductSearch(props) {
         setMenus(initialState);
     }
     async function handleLocationSelection(location) {
+        function updateState() {
+            const newState = {...allState, 
+                location
+            }
+            setAllState({...allState, 
+                location,
+                searchInfo: getSearchInfo(newState)
+            });
+            if (location!=='All Locations') setMenus(initialState);
+        }
         const addDistances = () => {
             props.products.map(async product => {
                 let distance = await getDrivingDistance(props.clientlat, props.clientlong, product.sellerLat, product.sellerLong);
-                distance = (distance*0.000621).toFixed(0);
+                product.distance = user[3]==='miles'?(distance*0.000621).toFixed(0):(distance/1000).toFixed(0);
             });
         }
-        if (location.startsWith('Less than')) {
+        if (location==='ltActivate') {
             await addDistances();
-            setTrigger(!trigger);
-        };
-
-        const newState = {...allState, 
-            location
-        }
-        setAllState({...allState, 
-            location,
-            searchInfo: getSearchInfo(newState)
-        });
-        if (location!=='All Locations') setMenus(initialState);
+            location='All Locations';
+            updateState();
+        } else {
+            updateState();
+        }  
     }
     function handleClick(e) {
         switch(e.target.name) {
@@ -241,9 +245,11 @@ function ProductSearch(props) {
     // if (allState.location && allState.location.startsWith('lt')) {
     //     filteredProducts = getFilteredProductsAsync();
     // } else {
-    //     // filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[1]);
+    //     // filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
     // }
-    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[1]);
+    
+    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
+
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -258,6 +264,7 @@ function ProductSearch(props) {
                     currentselected={allState.size?allState.size:'Harp Size'}
                     handleclick={handleClick}
                     open={menus.size}
+                    trigger={trigger}
                 />
                 <MakerMenu 
                     handleMakerChange = {handleMakerSelection}

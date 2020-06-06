@@ -127,6 +127,10 @@ function AppCss() {
                 height: 7px;
                 margin: auto;
             }
+            .flex {
+                display: flex;
+                justify-content: flex-start;
+            }
             .flex-sa {
                 display: flex;
                 justify-content: space-around;

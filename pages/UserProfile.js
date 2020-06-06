@@ -9,10 +9,11 @@ import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
 
-function LoginSignup(props) {
+function UserProfile(props) {
     // const userContext = useContext(UserContext);
     const { user, setUser} = useContext(UserContext);
-    const [active, setActive] = useState('login');
+    console.log(user)
+    const [active, setActive] = useState('changePassword');
     const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
         firstname: '',
@@ -84,7 +85,7 @@ function LoginSignup(props) {
     }
     function handleSignupClick(evt) {
         resetLoginForm();
-        setActive('signup');
+        setActive('editProfile');
         const signup = document.querySelector('#signup');
         const login = document.querySelector('#login');
         signup.classList.remove("s-atbottom");
@@ -95,7 +96,7 @@ function LoginSignup(props) {
     function handleLoginClick(evt) {
         if (userSignup.signupchange===true) {if (!confirm('changes will be lost')) return};
         resetSignupForm();
-        setActive('login');
+        setActive('changePassword');
         const signup = document.querySelector('#signup');
         const login = document.querySelector('#login');
         signup.classList.add("s-atbottom");
@@ -112,7 +113,7 @@ function LoginSignup(props) {
         const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
         const resultImg = document.querySelector('#loadingLoginImg');
         
-        if (active==='signup') {
+        if (active==='editProfile') {
             // shortcut
             if ((!userSignup.signuppassword)||userSignup.signuppassword.length<8) {
                 resultContainer.style.display='block';
@@ -153,9 +154,8 @@ function LoginSignup(props) {
                     resultImg.style.display='none';
                     resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
-                    const {newUser} = res.data.data.added;
                     setNeedVerify(true);
-                    setUser([newUser.firstname='', newUser.lastname='', newUser.email='', newUser.distanceunit='miles']);
+                    setUser([res.data.data.added.firstname, res.data.data.added.distanceunit]);
                 }
             } catch (e) {
                 console.log(e);
@@ -168,7 +168,7 @@ function LoginSignup(props) {
             }
         }
         
-        if (active==='login') {   
+        if (active==='changePassword') {   
             resultContainer.style.display='block';
             if (userLogin.loginpassword.length<8) {
                 resultImg.style.display='none';
@@ -189,7 +189,7 @@ function LoginSignup(props) {
                 console.log(res.data.user);
                 const returnedUser = res.data.user;
                
-                await setUser([returnedUser.firstname, returnedUser.lastname, returnedUser.email, returnedUser.distanceunit]);
+                await setUser([returnedUser.firstname, returnedUser.distanceunit]);
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
@@ -221,7 +221,7 @@ function LoginSignup(props) {
     return (
        <>
         <div className='login-signup-container'>
-            <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />
+            <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
             <div id="loadingLogin">
                 <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
@@ -233,9 +233,22 @@ function LoginSignup(props) {
             <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="login-signup-title">
-                        SIGN UP
+                        Edit User Profile
                     </div>
                     <div className='login-form'>
+                        <div className="input-name input-margin">
+                            <h3>Please re-enter Password</h3>
+                        </div>
+                        <input 
+                            className="field-input"
+                            type='password'
+                            id={uuid()}
+                            value={userSignup.editpassword}
+                            onChange={handleChange}
+                            name='editpassword'
+                            required={active==='changePassword'}
+                            disabled={active==='editProfile'}
+                        />
                         <div className="input-name">
                             <h3>First Name</h3>
                         </div>
@@ -245,8 +258,8 @@ function LoginSignup(props) {
                             value={userSignup.firstname}
                             onChange={handleChange}
                             name='firstname'
-                            placeholder="optional"
-                            disabled={active==='login'}
+                            placeholder={user[0]}
+                            disabled={active==='changePassword'}
                         />
                         <div className="input-name">
                             <h3>Last Name</h3>
@@ -257,8 +270,8 @@ function LoginSignup(props) {
                             value={userSignup.lastname}
                             onChange={handleChange}
                             name='lastname'
-                            placeholder="optional"
-                            disabled={active==='login'}
+                            placeholder={user[1]}
+                            disabled={active==='passwordChange'}
                         />
                         <div className="input-name input-margin">
                             <h3>E-Mail</h3>
@@ -270,34 +283,9 @@ function LoginSignup(props) {
                             value={userSignup.signupemail}
                             onChange={handleChange}
                             name='signupemail'
-                            required={active==='signup'}
-                            disabled={active==='login'}
-                        />
-                        <div className="input-name input-margin">
-                            <h3>Password</h3>
-                        </div>
-                        <input 
-                            className="field-input"
-                            type='password'
-                            id={uuid()}
-                            value={userSignup.signuppassword}
-                            onChange={handleChange}
-                            name='signuppassword'
-                            required={active==='signup'}
-                            disabled={active==='login'}
-                        />
-                        <div className="input-name input-margin">
-                            <h3>Confirm Password</h3>
-                        </div>
-                        <input 
-                            className="field-input"
-                            type='password'
-                            id={uuid()}
-                            value={userSignup.confirmpassword}
-                            onChange={handleChange}
-                            name='confirmpassword'
-                            required={active==='signup'}
-                            disabled={active==='login'}
+                            placeholder={user[2]}
+                            required={active==='editProfile'}
+                            disabled={active==='changePassword'}
                         />
                         <div className="input-name input-margin">
                             <h3>I prefer distances in</h3>
@@ -310,9 +298,9 @@ function LoginSignup(props) {
                                 value='miles'
                                 onChange={handleChange}
                                 name='distanceunit'
-                                disabled={active==='login'}
+                                disabled={active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked
+                                defaultChecked = {user[3]==='miles'}
                             />
                             <label style={{marginRight: '30px'}} htmlFor="miles">Miles</label>
                             <input 
@@ -322,8 +310,9 @@ function LoginSignup(props) {
                                 value='kms'
                                 onChange={handleChange}
                                 name='distanceunit'
-                                disabled={active==='login'}
+                                disabled={active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
+                                defaultChecked = {user[3]!=='miles'}
                             />
                             <label htmlFor="Kms">Kms</label>
                         </div>   
@@ -335,11 +324,11 @@ function LoginSignup(props) {
             </div>
             <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
-                    {needVerify&&active==='login'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
+                    {needVerify&&active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
                 </div>
                 
                 <form onSubmit={handleSubmit}>
-                        {needVerify&&active==='login'
+                        {needVerify&&active==='changePassword'
                         ?
                             <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
                                 <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
@@ -348,47 +337,51 @@ function LoginSignup(props) {
                         :
                         <>
                             <div style={{padding: '25px'}}>   
-                                <div className="input-name">
-                                    <h3>Email</h3>
-                                </div>
-                                <input
-                                    className="field-input"
-                                    type='email'
-                                    id={uuid()}
-                                    value={userLogin.loginemail}
-                                    onChange={handleChange}
-                                    name='loginemail'
-                                    required = {active==='login'}
-                                    disabled={active==='signup'}
-                                />
-                                <div className="input-name input-margin">
-                                    <h3>Password</h3>
+                            <div className="input-name input-margin">
+                                    <h3>Old Password</h3>
                                 </div>
                                 <input 
                                     className="field-input"
                                     type='password'
                                     id={uuid()}
-                                    value={userLogin.loginpassword}
+                                    value={userLogin.oldpassword}
                                     onChange={handleChange}
-                                    name='loginpassword'
-                                    required = {active==='login'}
-                                    disabled={active==='signup'}
+                                    name='oldpassword'
+                                    required = {active==='editProfile'}
+                                    disabled={active==='changePassword'}
                                 />
-                                <div className="input-r" onClick={()=>alert('remember me under construction')}>
-                                    <div className="check-input">
-                                        <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
-                                        <label className="rememberme-blue" htmlFor="remember-me-2"></label>
-                                    </div>
-                                    <div className="rememberme">
-                                        <label htmlFor="remember-me-2">Remember Me</label>
-                                    </div>
+                                <div className="input-name input-margin">
+                                    <h3>New Password</h3>
                                 </div>
+                                <input 
+                                    className="field-input"
+                                    type='password'
+                                    id={uuid()}
+                                    value={userLogin.newpassword}
+                                    onChange={handleChange}
+                                    name='newpassword'
+                                    required = {active==='editProfile'}
+                                    disabled={active==='changePassword'}
+                                />
+                                <div className="input-name input-margin">
+                                    <h3>Confirm New Password</h3>
+                                </div>
+                                <input 
+                                    className="field-input"
+                                    type='password'
+                                    id={uuid()}
+                                    value={userLogin.confirmnewpassword}
+                                    onChange={handleChange}
+                                    name='confirmnewpassword'
+                                    required = {active==='editProfile'}
+                                    disabled={active==='changePassword'}
+                                />
                             </div>
                             <button type='submit' className="submit-btn login-signup-title">
                                 Submit
                             </button>
                             <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
-                                <a href="#">Forgot Password?</a>
+                                <a href="#">Forgot Old Password?</a>
                             </div>
                         </>
                     }
@@ -400,4 +393,4 @@ function LoginSignup(props) {
     )
 }
 
-export default LoginSignup;
+export default UserProfile;

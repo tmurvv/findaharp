@@ -13,7 +13,7 @@ import Footer from '../src/components/Footer';
 import Head from '../src/components/Head';
 
 function MyApp({ Component, pageProps }) {
-    const [user, setUser] = useState(['Login', 'miles']);
+    const [user, setUser] = useState(['Login', '', '', 'miles']); // firstname, lastname, email, distanceunit
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     

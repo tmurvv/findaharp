@@ -1,12 +1,14 @@
 //Packages
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
+//internal
+import { UserContext } from '../../contexts/UserContext';
 
 export default function LocationMenu(props) {
-    const [activateDriving, setActivateDriving] = useState(false)
+    const [activateDriving, setActivateDriving] = useState(false);
+    const { user } = useContext(UserContext);
+    const distanceUnit = user[3];
     const handleClose = async (evt) => {
         if (evt.target.value === 'All Locations') return;
-        if (evt.target.getAttribute('name')==='ltActivate') evt.target.setAttribute('name', 'All Locations');
-        console.log(evt.target.getAttribute('name'))
         props.handleLocationChange(evt.target.getAttribute('name'));
     };
     return (
@@ -42,21 +44,21 @@ export default function LocationMenu(props) {
                     hidden={!activateDriving} 
                     // key={uuid()}
                     name='Less than 500'
-                >Less than 500</li>      
+                >Less than 500 {distanceUnit}</li>      
                 <li 
                     onClick={handleClose} 
                     
                     hidden={!activateDriving} 
                     // key={uuid()}
                     name='Less than 300'
-                >Less than 300</li>      
+                >Less than 300 {distanceUnit}</li>      
                 <li 
                     onClick={handleClose} 
                     
                     hidden={!activateDriving} 
                     // key={uuid()}
                     name='Less than 100'
-                >Less than 100</li>
+                >Less than 100 {distanceUnit}</li>
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
@@ -103,8 +105,8 @@ export default function LocationMenu(props) {
                     onClick={handleClose}
                     hidden={activateDriving}
                     // key={uuid()} 
-                    name='Canada'
-                >Canada</li>              
+                    name='Canada-West'
+                >Canada-West</li>              
             </ul>     
         </div>
     );

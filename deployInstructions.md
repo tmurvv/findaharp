@@ -4,6 +4,7 @@
 
 - check for console.loks
 - check for BREAKINk
+- check for debuggek
 - check which API is connecting
 - is contact form submitting or not submitting as you want
 - check next.config.js for deployment environment

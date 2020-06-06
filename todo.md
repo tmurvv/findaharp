@@ -9,16 +9,16 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+- click outside search menus closes them
 - trouble-shoot harp icon
-- randomize order
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
 
 ### functionality
-- make raw data locations match menu choices
-- location specifics
+- trouble shoot distance needing two clicks
 - remember me and forgot password on login
+- CRUD operations on user
 - CRUD operations on upload listings
 - add close form to private listings
 - implement email text communication through website
@@ -45,6 +45,7 @@
 
 ### FUTURE IDEAS:
 
+- add edit pencils to user profile and disable fields
 - on mobile menu highlight, put in fancy corners
 - New Listings Page
 - From Rachael, I feel that there should be a way for the user to flick back and forth between the form and the harp information, and without losing anything that they've already typed in if possible. Right now if one clicks on "Contact Seller" the only way to look at the full harp information again is to close the form and click on the harp again. 

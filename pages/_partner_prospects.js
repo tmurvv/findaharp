@@ -114,7 +114,7 @@ function PartnerProspects() {
 									<td>Christina Tourin</td>
 									<td>only contact form</td>
 									<td>619-885-0313</td>
-									<td></td>
+									<td>June 5, 2020</td>
 									<td><textarea /></td>
 								</tr>
 								<tr>
@@ -122,15 +122,15 @@ function PartnerProspects() {
 								<td>Laura and Rob Goodwin</td>
 								<td>Contact form only</td>
 								<td>253-770-0550</td>
-								<td></td>
+								<td>June 5, 2020</td>
 								<td><textarea value='Puyallup WA'/></td>
 								</tr>
 								<tr>
 								<td>Harp in LA</td>
-								<td>Heidi</td>
+								<td></td>
 								<td>infoharpinla@yahoo.com</td>
 								<td>818-495-4652</td>
-								<td></td>
+								<td>June 4, 2020</td>
 								<td><textarea /></td>
 								</tr>
 								<tr>
@@ -138,7 +138,7 @@ function PartnerProspects() {
 								<td>Meredith Kohn Bocek</td>
 								<td>607-658-6589</td>
 								<td>mbocek@stny.rr.com</td>
-								<td></td>
+								<td>June 4th, 2020</td>
 								<td><textarea value='Apalachin NY, only 3 harps'/></td>
 								</tr>
 								<tr>

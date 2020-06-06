@@ -18,7 +18,7 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
 function ProductModal(props) {
     const { user } = useContext(UserContext);
     const [longDesc, setLongDesc] = useState(true);
-    const [miles, setMiles] = useState(user[1]==='miles');
+    const [miles, setMiles] = useState(user[3]==='miles');
     const [geoDistance, setGeoDistance] = useState(0); //miles
     const [drivingDistance, setDrivingDistance] = useState(0); //miles
     const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerRegion, sellerName, sellerLat, sellerLong} = props.product;

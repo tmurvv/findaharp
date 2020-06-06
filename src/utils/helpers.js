@@ -177,7 +177,6 @@ export function getModelList(productMakesModels, size) {
  */
 export function getFilteredProducts(allProducts, allState, clientLat, clientLong, distanceUnit) {
     let filteredProducts = [...allProducts];
-   
     
     // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
@@ -200,21 +199,17 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
         );
     if (allState.location&&allState.location.toUpperCase() !== "ALL LOCATIONS") 
         if (allState.location.startsWith('Less than')) {
-            // filteredProducts = filteredProducts.map(
-            //     product => {console.log(product.distance, allState.location);
-            //     return product;}
-            // );
-            if(allState.location==='Less than 100') {
+            if(allState.location.startsWith('Less than 100')) {
                 filteredProducts = filteredProducts.filter(
                     product => (product.distance&&product.distance<100)||product.distance===0
                 );
             }
-            if(allState.location==='Less than 300') {
+            if(allState.location.startsWith('Less than 300')) {
                 filteredProducts = filteredProducts.filter(
                     product => (product.distance&&product.distance<300)||product.distance===0
                 );
             }
-            if(allState.location==='Less than 500') {
+            if(allState.location.startsWith('Less than 500')) {
                 filteredProducts = filteredProducts.filter(
                     product => (product.distance&&product.distance<500)||product.distance===0
                 );
@@ -223,10 +218,7 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
             filteredProducts = filteredProducts.filter(
                 product => product.sellerRegion&&product.sellerRegion === allState.location
             );
-        } 
-        // filteredProducts = filteredProducts.filter(
-        //     product => product.sellerRegion&&product.sellerRegion === allState.location
-        // );
+        }
     if (allState.finish&&allState.finish.toUpperCase() !== "ALL FINISHES") 
         filteredProducts = filteredProducts.filter(
             product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()
@@ -439,3 +431,33 @@ export const getGeoDistance = (lat1, lon1, lat2, lon2, unit) => {
 		return dist;
 	}
 }
+
+function shuffle(array) { // based on Fisher-Yates
+    // initialize variables
+    let currentIndex = array.length;
+    let temporaryValue;
+    let randomIndex;
+    // While there remain elements to shuffle
+    while (0 !== currentIndex) {
+      // Pick a remaining element
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
+
+export function shuffleStorePartners(partnerArray) {
+    const storePartners = [];
+    // create array of indexes for shuffling
+    let indexArray = [...Array(partnerArray.length).keys()];
+    // shuffle indexes
+    shuffle(indexArray);
+    // push stores objects to array in randomized order
+    indexArray.map(idx => storePartners.push(partnerArray[idx]));
+    return storePartners
+}
+

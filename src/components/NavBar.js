@@ -37,9 +37,9 @@ export default function NavBar(props) {
                     <Link href='/Contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href='/LoginSignup'>
+                    <Link href={user[0]==='Login'?'/LoginSignup':'/UserProfile'}>
                         {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
-                        <a id='userName' onClick={props.handleNavOpen}>{user}</a>
+                        <a id='userName' onClick={props.handleNavOpen}>{user[0]}</a>
                     </Link>
                 </div>:''
             }
