@@ -1,5 +1,6 @@
 // packages
 import React, { useEffect, useState } from "react";
+import Head from 'next/head';
 import axios from 'axios';
 
 // internal
@@ -25,6 +26,10 @@ const Index = (props) => {
        }, []);
     return (
         <>
+        <Head>
+            <title>Find a Harp Pre-owned, Used</title>
+            <meta name="description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+        </Head>
         <div className="index">  
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 

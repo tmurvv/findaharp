@@ -223,6 +223,13 @@ function UserProfile(props) {
         resetResults();
         Router.push('/');
     }
+    async function handleDelete(e) {
+        console.log('imin')
+        e.preventDefault();
+        const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
+        console.log(res)
+        resetResults();
+    }
     return (
        <>
         <div className='login-signup-container'>
@@ -325,9 +332,15 @@ function UserProfile(props) {
                     <button type='submit' className="submit-btn login-signup-title" onClick={handleSubmit}>
                         Submit
                     </button>
+                    <div className='profileDivider'>
+                        <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
+                    </div>
+                    <button type='submit' style={{backgroundColor: 'tomato', color: 'white', marginBottom: '30px'}} className="submit-btn login-signup-title" onClick={handleDelete}>
+                        Delete Account
+                    </button>
                 </form>
             </div>
-            <div style={{transform: 'translate(28%, -120%)'}} className="login-signup l-attop" id="login" onClick={handleLoginClick}>
+            <div style={{transform: 'translate(28%, -145%)'}} className="login-signup l-attop" id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
                     {needVerify&&active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
                 </div>

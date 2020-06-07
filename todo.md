@@ -9,6 +9,7 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+
 - click outside search menus closes them
 - trouble-shoot harp icon
 - email verification can be prettier
@@ -19,7 +20,7 @@
 ### functionality
 - trouble shoot distance needing two clicks
 - remember me and forgot password on login
-- delete user
+- finish delete user
 - update password
 - CRUD operations on upload listings
 - add close form to private listings

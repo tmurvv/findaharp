@@ -1,5 +1,6 @@
 // import App from 'next/app'
 import React, {useState, useEffect, useContext} from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 // css
 import 'react-phone-input-2/lib/style.css'
@@ -10,7 +11,6 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
-import Head from '../src/components/Head';
 
 function MyApp({ Component, pageProps }) {
     const [user, setUser] = useState(['Login', '', '', 'miles']); // firstname, lastname, email, distanceunit
@@ -31,7 +31,11 @@ function MyApp({ Component, pageProps }) {
     }
     return(
         <>  
-            <Head/>
+            <Head>
+                <title>Find a Harp Pre-owned, Used</title>
+                <meta name="description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
+            </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>

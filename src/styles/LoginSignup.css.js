@@ -185,7 +185,7 @@ function LoginSignupCSS() {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
             #login {
-                transform: translate(28%, -143%);
+                transform: translate(28%, -165%);
             }
             #signup {
                 transform: translateX(-28%);
@@ -228,6 +228,14 @@ function LoginSignupCSS() {
             //     border-color: none;
             //     box-shadow: 1.5px 1.5px 1.5px 0px #555555;
             // }
+            .profileDivider {
+                margin: 20px auto 50px;
+                height: 2px;
+                width: 80%;
+            }
+            .profileDivider img {
+                width: 100%;
+            }
         `}
         </style>
     )

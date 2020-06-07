@@ -1,5 +1,6 @@
 // packages
 import React from 'react';
+import Head from 'next/head';
 
 //internal
 import { STORE_PARTNERS } from '../src/constants/constants';
@@ -19,6 +20,11 @@ export default function StorePartners() {
     // add blank placeholders for grid
     const addPlaceHolders=addPlaceholderStorePartners(storePartnersShuffled, size.width);
     return (
+        <>
+        <Head>
+            <title>findaharp.com -- Store Partners</title>
+            <meta name="description" content="Pre-owned or used Harps of all types -- Stores partnering with findaharp.com, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities" key="title" />
+        </Head>
         <div className='storePartnersContainer'>
             <PageTitle 
                 maintitle='Our Store Partners' 
@@ -37,5 +43,6 @@ export default function StorePartners() {
             </div>
             <StorePartnersCSS />
         </div>
+        </>
     )
 }

@@ -1,6 +1,9 @@
+// packages
 import React from 'react';
-import PageTitle from '../src/components/PageTitle';
+import Head from 'next/head';
 
+// internal
+import PageTitle from '../src/components/PageTitle';
 import BuyersGuideCSS from '../src/styles/BuyersGuide.css';
 import PedalLeverTut from '../src/components/PedalLeverTut';
 
@@ -60,6 +63,10 @@ function BuyersGuide(props) {
     }
     return (
         <>
+        <Head>
+            <title>findaharp.com -- Harp Buyer's Guide</title>
+            <meta name="description" content="Harp Buyer's Guide, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
+        </Head>
         <div className='buyersContainer'>
             <div className='buyersGuide'>
                 <PageTitle maintitle="Buyer's Guide" subtitle='A collaborative guide from your harp community' />    

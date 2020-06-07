@@ -1,10 +1,19 @@
+// packages
 import React from 'react';
+import Head from 'next/head';
+
+// internal
 import PageTitle from '../src/components/PageTitle';
 import ContactUsForm from '../src/components/ContactUsForm';
 import ContactCSS from '../src/styles/Contact.css';
 
 function Contact() {
     return (
+        <>
+        <Head>
+            <title>findaharp.com -- Contact Us</title>
+            <meta name="description" content="Contact Us -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
+        </Head>
         <div className='contactContainer'>
             <PageTitle maintitle='Contact Us' subtitle='We want to hear from you!' />
             <div>
@@ -34,6 +43,7 @@ function Contact() {
             </div>
             <ContactCSS />
         </div>
+        </>
     )
 }
 
