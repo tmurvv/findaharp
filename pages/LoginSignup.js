@@ -148,17 +148,23 @@ function LoginSignup(props) {
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
                 /* PRODUCTION */
                 // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
-                
+                console.log(res)
                 if (res.status===200) {
                     resultImg.style.display='none';
                     resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
-                    const {newUser} = res.data.data.added;
+                    const {addeduser} = res.data;
                     setNeedVerify(true);
-                    setUser([newUser.firstname='', newUser.lastname='', newUser.email='', newUser.distanceunit='miles']);
+                    setUser([
+                        addeduser.firstname='', 
+                        addeduser.lastname='', 
+                        addeduser.email='', 
+                        addeduser.distanceunit='miles',
+                        addeduser._id=''
+                    ]);
                 }
             } catch (e) {
-                console.log(e);
+                console.dir(e);
                 resultImg.style.display='none';
                 resultButton.style.display='block';
                 resultButtonTryAgain.style.display='block';
@@ -189,7 +195,13 @@ function LoginSignup(props) {
                 console.log(res.data.user);
                 const returnedUser = res.data.user;
                
-                await setUser([returnedUser.firstname, returnedUser.lastname, returnedUser.email, returnedUser.distanceunit]);
+                await setUser([
+                    returnedUser.firstname, 
+                    returnedUser.lastname, 
+                    returnedUser.email, 
+                    returnedUser.distanceunit, 
+                    returnedUser._id
+                ]);
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';

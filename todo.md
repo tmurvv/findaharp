@@ -11,6 +11,7 @@
 ### UI/UX
 - click outside search menus closes them
 - trouble-shoot harp icon
+- email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
@@ -18,16 +19,19 @@
 ### functionality
 - trouble shoot distance needing two clicks
 - remember me and forgot password on login
-- CRUD operations on user
+- delete user
+- update password
 - CRUD operations on upload listings
 - add close form to private listings
 - implement email text communication through website
 
 ### AUTHENTICATION
-- Remember me, 
+- add validate email on edit profile
+- Remember me
 - forgot password on login
 - signout
 - check on encryption for signup password (does it show up in devtools console upon submit when no localhost used)
+- add default name if no name found on login
 
 ### SEO
 - All SEO checks in Google Guide

@@ -59,7 +59,6 @@ Index.getInitialProps = async () => {
     
     // API DATA Populate variables
     const products = res.data.harpData;
-    console.log(products)
     const makesModels = res.data.harpMakesModels;
     products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
     return { products, makesModels };
