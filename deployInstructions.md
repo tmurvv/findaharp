@@ -1,11 +1,11 @@
-## MAY 21, 2020
-### DATA IS LOCAL AND FAKE, 
-### LOGIN/SIGNUP GOES TO PRODUCTION API, LIVE DB
+## June 7, 2020
+### DEPLOY TO TESTING, 
+### LOGIN/SIGNUP GOES TO TESTING API, LIVE DB
 
 - check for console.loks
 - check for BREAKINk
 - check for debuggek
-- check which API is connecting
+- check which API is connecting index, login, profile, reset password, images
 - is contact form submitting or not submitting as you want
 - check next.config.js for deployment environment
 - for testing, make sure test data has correct data set for images...

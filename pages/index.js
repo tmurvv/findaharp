@@ -28,7 +28,7 @@ const Index = (props) => {
         <>
         <Head>
             <title>Find a Harp Pre-owned, Used</title>
-            <meta name="description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+            <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
         </Head>
         <div className="index">  
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
@@ -57,10 +57,9 @@ Index.getInitialProps = async () => {
     // PRODUCTION API
     // const res = await axios.get('https://findaharp-api.herokuapp.com/');
     // STAGING API
-    const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
+    // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
     // TESTING API
-    // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
-    
+    const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     
     // API DATA Populate variables
     const products = res.data.harpData;

@@ -28,18 +28,24 @@ export default function NavBar(props) {
                     <Link href='/'>
                         <a onClick={props.handleNavOpen}>Find a Harp</a>
                     </Link>
-                    <Link href='/StorePartners'>
+                    <Link href='/StorePartners' as='/StorePartners'>
                         <a onClick={props.handleNavOpen}>Our Store Partners</a>
                     </Link>
-                    <Link href='/BuyersGuide'>
+                    <Link href='/BuyersGuide' as='/BuyersGuide'>
                         <a onClick={props.handleNavOpen}>Buyer's Guide</a>
                     </Link>        
-                    <Link href='/Contact'>
+                    <Link href='/Contact' as='Contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user[0]==='Login'?'/LoginSignup':'/UserProfile'}>
+                    <Link href={user[0]==='Login'?'/LoginSignup':'/UserProfile'} as={user[0]==='Login'?'/LoginSignup':'/UserProfile'}>
                         {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
                         <a id='userName' onClick={props.handleNavOpen}>{user[0]}</a>
+                    </Link>
+                    <Link href='/ActivateEmail' as='/ActivateEmail'>
+                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Contact/About</a>
+                    </Link>
+                    <Link href='/ResetPassword' as='/ResetPassword'>
+                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
                 </div>:''
             }

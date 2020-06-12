@@ -12,7 +12,7 @@ function Contact() {
         <>
         <Head>
             <title>findaharp.com -- Contact Us</title>
-            <meta name="description" content="Contact Us -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
+            <meta name="Description" content="Contact Us -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
         </Head>
         <div className='contactContainer'>
             <PageTitle maintitle='Contact Us' subtitle='We want to hear from you!' />

@@ -18,11 +18,29 @@ function SiteQuality() {
 				</div>
 				<div class="tbl-content">
 						<table cellpadding="0" cellspacing="0" border="0">
-						<tbody>
+							<tbody>
 								<tr>
-                                    <td>SEO</td>
+                                    <td colspan='4'>SEO-desktop</td>
+								</tr>
+								<tr>
+                                    <td></td>
                                     <td>June 7, 2020</td>
                                     <td>89</td>
+                                    <td><textarea value=""/></td>
+								</tr>
+								<tr>
+                                    <td></td>
+                                    <td>June 7, 2020</td>
+                                    <td>100</td>
+                                    <td><textarea value="added meta tags"/></td>
+								</tr>
+								<tr>
+                                    <td colspan='4'>SEO-mobile</td>
+								</tr>
+								<tr>
+                                    <td></td>
+                                    <td>June 7, 2020</td>
+                                    <td>100</td>
                                     <td><textarea value=""/></td>
 								</tr>
 								<tr>

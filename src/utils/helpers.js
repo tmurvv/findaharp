@@ -9,7 +9,6 @@ export function leaf(obj, path) {(path.split('.').reduce((value,el) => value[el]
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
-        console.log(response.data.routes[0].distance)
         return response.data.routes[0].distance;
     } catch (error) {
         console.error(error);
@@ -393,7 +392,6 @@ export const itemsSortByDisabled = (items, currentItems) => {
 // export const getDrivingDistance = async (lat1, long1, lat2, long2) => {
 //     try {
 //         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
-//         console.log(response.data.routes[0].distance)
 //         return response.data.routes[0].distance;
 //     } catch (error) {
 //         console.error(error);

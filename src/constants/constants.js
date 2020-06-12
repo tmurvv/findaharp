@@ -107,7 +107,7 @@ export const STORE_PARTNERS = [
         productMaker: "Harp Angel",
         productImageUrl: "/img/StorePartners/harpangel_logo.png",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'www.harptisha.com',
-        sellerEmail: 'harp@harptisha.com'
+        sellerWebsite: 'www.harpangel.com',
+        sellerEmail: 'info@harpangel.com'
     }
 ];

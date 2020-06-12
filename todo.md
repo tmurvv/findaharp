@@ -10,18 +10,19 @@
 
 ### UI/UX
 
-- click outside search menus closes them
-- trouble-shoot harp icon
+- get lin try "as" in Link components as="/products/something"
+
+- make it so navbar never has blank in position 5
 - email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - Contact Seller button moved to top and centered (use a scroll down for more type thing)
+- When update user encounters problem on backend, spinner persists, needs to show error message
 
 ### functionality
 - trouble shoot distance needing two clicks
-- remember me and forgot password on login
-- finish delete user
-- update password
+- forgot password on login
+- delete user not functional
 - CRUD operations on upload listings
 - add close form to private listings
 - implement email text communication through website
@@ -36,7 +37,6 @@
 
 ### SEO
 - All SEO checks in Google Guide
-- Lighthouse
 
 ### PERFORMANCE
 - cache images

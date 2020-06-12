@@ -17,7 +17,7 @@ function UserProfile(props) {
         firstname: '',
         lastname: '',
         signupemail: '',
-        signuppassword: '',
+        editpassword: '',
         confirmpassword: '',
         distanceunit: '',
         signupchange: false
@@ -39,6 +39,9 @@ function UserProfile(props) {
             case 'signupemail': 
                 setUserSignup({...userSignup, signupemail: evt.target.value, signupchange: true});
                 break
+            case 'editpassword':
+                setUserSignup({...userSignup, editpassword: evt.target.value, signupchange: true});
+                break
             case 'distanceunit': 
                 setUserSignup({...userSignup, distanceunit: evt.target.value, signupchange: true});
                 break
@@ -59,7 +62,7 @@ function UserProfile(props) {
             firstname: '',
             lastname: '',
             signupemail: '',
-            signuppassword: '',
+            editpassword: '',
             confirmpassword: '',
             distanceUnit: 'miles',
             signupchange: false
@@ -109,10 +112,9 @@ function UserProfile(props) {
         const resultButton = document.querySelector('#loadingLoginOk');
         const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
         const resultImg = document.querySelector('#loadingLoginImg');
-        console.log('active', active);
         if (active==='editProfile') {
             // shortcut
-            if ((!userSignup.signuppassword)||userSignup.signuppassword.length<8) {
+            if ((!userSignup.editpassword)||userSignup.editpassword.length<8) {
                 resultContainer.style.display='block';
                 resultImg.style.display='none';
                 resultButtonTryAgain.style.display='block';
@@ -122,16 +124,15 @@ function UserProfile(props) {
             }
             resultContainer.style.display='block';
             resultImg.style.display='block';
-            console.log('control', userSignup)
             const updatedUser = {
                 firstname: userSignup.firstname?userSignup.firstname:user[0],
                 lastname: userSignup.lastname?userSignup.lastname:user[1],
                 email: userSignup.signupemail?userSignup.signupemail:user[2],
                 distanceunit: userSignup.distanceunit?userSignup.distanceunit:user[3],
-                password: userSignup.signuppassword,
+                password: userSignup.editpassword,
                 userid: user[4]
             };
-            console.log('update', updatedUser);
+            
             try {
                 /* LOCAL */
                 const res = await axios.patch(`http://localhost:3000/api/v1/users/updateuser/${user[4]}`, updatedUser);
@@ -139,14 +140,13 @@ function UserProfile(props) {
                 // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
                 /* PRODUCTION */
                 // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
-                console.log(res)
                 if (res.status===200) {
+                    console.log('result', res.data)
                     resultImg.style.display='none';
                     resultButton.style.display='block';
                     resultText.innerText=`Update Successful.`;
                     setNeedVerify(true);
-                    console.log(res.data);
-                    const { userCopy } = res.data.data;
+                    const { userCopy } = res.data;
                     setUser([
                         userCopy.firstname, 
                         userCopy.lastname, 
@@ -156,12 +156,11 @@ function UserProfile(props) {
                     ]);
                 }
             } catch (e) {
-                console.dir(e);
                 resultImg.style.display='none';
                 resultButton.style.display='block';
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft='30px';
-                resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:e.response.data.message}`
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update.'}`
                 // resultText.innerText=`Something went wrong on signup. Log in as guest user?`
             }
         }       
@@ -174,7 +173,6 @@ function UserProfile(props) {
                 resultText.innerText=`Passwords must be at least 8 characters long.`;
                 return
             }
-            console.log('inchangepas',userLogin)
             // passwords match 
             if (userLogin.newpassword !== userLogin.confirmpassword) {
                 resultContainer.style.display='block';
@@ -194,8 +192,8 @@ function UserProfile(props) {
                 /* PRODUCTION */
                 // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}`, {userid: user[4], password: userLogin.newpassword, oldpassword: userLogin.oldpassword});
                 
-                const returnedUser = res.data.userCopy;
-                await setUser([returnedUser.firstname, returnedUser.distanceunit]);
+                // const returnedUser = res.data.userCopy;
+                // await setUser([returnedUser.firstname, returnedUser.distanceunit]);
                 resultText.innerText=`Password change successful.`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
@@ -224,11 +222,41 @@ function UserProfile(props) {
         Router.push('/');
     }
     async function handleDelete(e) {
-        console.log('imin')
+        const resultContainer = document.querySelector('#loadingLogin');
+        const resultText = document.querySelector('#loadingLoginText');
+        const resultButton = document.querySelector('#loadingLoginOk');
+        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
+        const resultImg = document.querySelector('#loadingLoginImg');
         e.preventDefault();
-        const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
-        console.log(res)
-        resetResults();
+        if ((!userSignup.editpassword)||userSignup.editpassword.length<8) {
+            resultContainer.style.display='block';
+            resultImg.style.display='none';
+            resultButtonTryAgain.style.display='block';
+            resultButtonTryAgain.style.marginLeft=0;
+            resultText.innerText=`Passwords must be at least 8 characters long.`;
+            return
+        }
+        if (prompt('Are you sure you want to delete your account? Please type in your account email to confirm.')!==user[2]) return alert('Email does not match.');
+        
+        try {
+            const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user[4]}`)
+            // const res=await axios.delete(`https://findaharp-api-staging.herokuapp.com/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
+            // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
+            // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
+            // const returnedUser = res.user;
+            resultText.innerText=`Account ${user[2]} has been deleted`;
+            resultContainer.style.display='block';
+            resultImg.style.display='none';
+            resultButton.style.display= 'block';
+            await setUser(['','','','miles','']);
+        } catch(e) {
+            console.dir(e)
+            resultContainer.style.display='block';
+            resultImg.style.display='none';
+            resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
+            resultButton.style.display='block';
+        }
+        
     }
     return (
        <>

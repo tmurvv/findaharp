@@ -65,7 +65,7 @@ function BuyersGuide(props) {
         <>
         <Head>
             <title>findaharp.com -- Harp Buyer's Guide</title>
-            <meta name="description" content="Harp Buyer's Guide, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
+            <meta name="Description" content="Harp Buyer's Guide, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
         </Head>
         <div className='buyersContainer'>
             <div className='buyersGuide'>
@@ -147,10 +147,10 @@ function BuyersGuide(props) {
                 <div className='buyerDivider'>
                     <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                 </div>
-                <h3 id='guidePedalPath'>Pedal Harp Path-beginner</h3>
-                <p>This path is for students or purchasers interested in classical music or in a wide variety of music such as classical, pop, jazz, inspirational, world, etc.</p>
-                <p>Students on the pedal harp path will generally start with a lever harp to be sure that they really take to the instrument before making the investment a pedal harp requires. If the expense is not prohibitive and the student is at least 4’10”, then starting on a pedal harp would be an option. (<a href="#guidePedalGeneral" style={{color: '#fe9e1a'}}>click here</a> to skip to pedal harp section). Here we will assume the student is starting with a lever harp before progressing to a pedal harp.</p>
-                <p>Here are three suggestions for finding a lever harp that will set you up to transition into a pedal harp:</p>
+                <h3 id='guidePedalPath'>Wide Variety of Music Path-beginner</h3>
+                <p>This path is for students or purchasers interested in classical music or in a wide variety of music such as classical, pop, jazz, inspirational, world, etc. Any type of music can be beautifully played on either a lever or pedal harp, but a lever harp has a smaller range of both pitches and harmonies.</p>
+                <p>Students on the this path will generally start with a lever harp to be sure that they really take to the instrument before deciding between a lever and a pedal harp. If the expense is not prohibitive and the student is at least 4’10”, then starting on a pedal harp would be an option. (<a href="#guidePedalGeneral" style={{color: '#fe9e1a'}}>click here</a> to skip to pedal harp section). Here we will assume the student is starting with a lever harp.</p>
+                <p>Here are three suggestions for finding a lever harp that will set you up to transition into a pedal harp should you eventually decide to do so:</p>
                 <ol>
                     <li>Find a harp that has a similar tension as the strings as a pedal harp. In other words, the strings are not more loose or wobbly than pedal harp strings. </li>
                     <li>Find a harp where the strings are the same distance apart as a pedal harp.</li>
@@ -172,7 +172,7 @@ function BuyersGuide(props) {
                 <h3 id='guideNotSurePath'>"Not sure yet" path-beginner</h3>
                 <p>Not sure whether you want to end up in a pedal harp or lever harp? No problem at all.</p>
                 <p>Typically this student or purchaser would begin with a lever harp, as the student progresses they will discover what style of music speaks to them and they are usually drawn to a certain type of harp.</p>
-                <p>You will want to look for a lever harp that stands on the floor and can be tipped back on your shoulder rather than one you have to hold up with your legs or hold in your lap. The ideal size harp for a beginner is usually 34-36 strings.</p>
+                <p>To get started, you will want to look for a lever harp that stands on the floor and can be tipped back on your shoulder rather than one you have to hold up with your legs or hold in your lap. The ideal size harp for a beginner is usually 34-36 strings.</p>
                 <p>Some other things to ask about:</p>
                 <ol>
                     <li>A tuning key that fits the tuning pegs.</li>

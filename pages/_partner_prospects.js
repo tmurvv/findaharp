@@ -96,7 +96,7 @@ function PartnerProspects() {
 								<tr>
 									<td>Virginia Harp Center<br></br>Atlanta Harp Center</td>
 									<td>David d'Arville</td>
-									<td>daviddarville@hotmail.com</td>
+									<td>david@vaharpcenter.com</td>
 									<td>804-378-3761</td>
 									<td>May 28, 2020</td>
 									<td><textarea /></td>
@@ -182,7 +182,7 @@ function PartnerProspects() {
 									<td><textarea value='Only 1 harp'/></td>
 								</tr>
 								<tr>
-									<td></td>
+									<td>Melody's Traditional Music and Harp Shoppe</td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -190,12 +190,12 @@ function PartnerProspects() {
 									<td><textarea value=''/></td>
 								</tr>
 								<tr>
+									<td>Harps By the Sea</td>
+									<td>Laurie Rasmussen</td>
+									<td>contact form only</td>
 									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><textarea value=''/></td>
+									<td>June 11, 2020</td>
+									<td><textarea value='Santa Barbara'/></td>
 								</tr>
 								<tr>
 									<td></td>

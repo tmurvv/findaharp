@@ -148,19 +148,19 @@ function LoginSignup(props) {
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
                 /* PRODUCTION */
                 // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
-                console.log(res)
                 if (res.status===200) {
                     resultImg.style.display='none';
                     resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
+                    console.log(res)
                     const {addeduser} = res.data;
                     setNeedVerify(true);
                     setUser([
-                        addeduser.firstname='', 
-                        addeduser.lastname='', 
-                        addeduser.email='', 
-                        addeduser.distanceunit='miles',
-                        addeduser._id=''
+                        addeduser.firstname, 
+                        addeduser.lastname, 
+                        addeduser.email, 
+                        addeduser.distanceunit,
+                        addeduser._id
                     ]);
                 }
             } catch (e) {
@@ -192,7 +192,6 @@ function LoginSignup(props) {
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* PRODUCTION */
                 const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-                console.log(res.data.user);
                 const returnedUser = res.data.user;
                
                 await setUser([
@@ -206,8 +205,6 @@ function LoginSignup(props) {
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
             } catch(e) {
-
-                console.log(e.message)
                 if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                     resultImg.style.display='none';
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong on login.'} Login as guest?`;
@@ -216,7 +213,7 @@ function LoginSignup(props) {
                     resultButtonTryAgain.style.marginLeft='30px';
                 } else {
                     resultImg.style.display='none';
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:'Something went wrong on login.'} Login as guest?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login.'} Login as guest?`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
@@ -225,6 +222,40 @@ function LoginSignup(props) {
         }
         resetSignupForm();
         resetLoginForm();
+    }
+    async function handleForgot() {
+        const resultContainer = document.querySelector('#loadingLogin');
+        const resultText = document.querySelector('#loadingLoginText');
+        const resultButton = document.querySelector('#loadingLoginOk');
+        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
+        const resultImg = document.querySelector('#loadingLoginImg');
+        
+        console.log(userLogin)
+        try {
+            /* LOCAL */
+            const res = await axios.get(`http://localhost:3000/api/v1/users/resetpassword/${userLogin.loginemail}`);
+            /* TESTING */
+            // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/users/resetpassword/${userLogin.loginemail}`);
+            /* PRODUCTION */
+            // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/users/resetpassword/${userLogin.loginemail}`);
+            if (res.status===200) {
+                resultContainer.style.display='block';
+                resultImg.style.display='none';
+                resultButton.style.display='block';
+                resultText.innerText=`Please check your inbox for an email with instuctions to reset your password.`;
+            }
+        } catch (e) {
+            console.dir(e);
+            resultContainer.style.display='block';
+            resultImg.style.display='none';
+            resultButton.style.display='block';
+            resultButtonTryAgain.style.display='block';
+            resultButtonTryAgain.style.marginLeft='30px';
+            resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset.'} Log in as guest user?`
+            // resultText.innerText=`Something went wrong on signup. Log in as guest user?`
+        }
+        // resetResults();
+        // Router.push('/');
     }
     function loginGuest() {
         resetResults();
@@ -349,7 +380,6 @@ function LoginSignup(props) {
                 <div className="login-signup-title">
                     {needVerify&&active==='login'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
                 </div>
-                
                 <form onSubmit={handleSubmit}>
                         {needVerify&&active==='login'
                         ?
@@ -399,7 +429,7 @@ function LoginSignup(props) {
                             <button type='submit' className="submit-btn login-signup-title">
                                 Submit
                             </button>
-                            <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
+                            <div className="forgot-pass" onClick={handleForgot}>
                                 <a href="#">Forgot Password?</a>
                             </div>
                         </>

@@ -23,7 +23,7 @@ export default function StorePartners() {
         <>
         <Head>
             <title>findaharp.com -- Store Partners</title>
-            <meta name="description" content="Pre-owned or used Harps of all types -- Stores partnering with findaharp.com, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities" key="title" />
+            <meta name="Description" content="Pre-owned or used Harps of all types -- Stores partnering with findaharp.com, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities" key="title" />
         </Head>
         <div className='storePartnersContainer'>
             <PageTitle 

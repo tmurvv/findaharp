@@ -1,5 +1,10 @@
 // packages
-import React, { useState, useContext, useEffect } from 'react';
+import React, { 
+    useState, 
+    useContext, 
+    useEffect, 
+    useRef } from 'react';
+import useOutsideClick from "../hooks/hooks";
 import axios from 'axios';
 
 // internal
@@ -20,7 +25,6 @@ import {
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
-        // console.log(response.data.routes[0].distance)
         return response.data.routes[0].distance;
     } catch (error) {
         console.error(error);
@@ -37,6 +41,8 @@ const initialState = {
 }
 function ProductSearch(props) {
     const { user } = useContext(UserContext);
+    const ref = useRef();
+
     const [menus, setMenus] = useState(initialState);
     const [trigger, setTrigger] = useState(false);
     const [allState, setAllState] = useState({
@@ -49,6 +55,16 @@ function ProductSearch(props) {
         location: 'All Locations',
         searchInfo: 'All Harps'
     }); 
+    useOutsideClick(ref, () => {
+        setMenus({
+            size: false,
+            maker: false,
+            model: false,
+            finish: false,
+            price: false,
+            location: false
+        });
+    });
     function handleMakerSelection(maker) {
         const newState = {...allState, 
             maker,
@@ -216,6 +232,7 @@ function ProductSearch(props) {
           }
     }
     function handleClear(evt) {
+        console.log('imin')
         document.querySelector('.clearAll').style.display='none';
         setAllState({
             ...allState,
@@ -255,7 +272,7 @@ function ProductSearch(props) {
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
         <div className='productSearchOuter'>
             <div className='mobileSearchLine1'>
-            <div className='searchLine1'>  
+            <div  ref={ref} className='searchLine1'>  
                 <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
                 <SizeMenu 
                     handleSizeChange={handleSizeSelection} 
@@ -265,6 +282,7 @@ function ProductSearch(props) {
                     handleclick={handleClick}
                     open={menus.size}
                     trigger={trigger}
+                    
                 />
                 <MakerMenu 
                     handleMakerChange = {handleMakerSelection}
