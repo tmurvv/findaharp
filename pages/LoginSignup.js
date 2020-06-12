@@ -187,11 +187,11 @@ function LoginSignup(props) {
             resultImg.style.display='block';
             try {
                 /* LOCAL */
-                // const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* TESTING */
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* PRODUCTION */
-                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
                
                 await setUser([
@@ -233,7 +233,7 @@ function LoginSignup(props) {
         console.log(userLogin)
         try {
             /* LOCAL */
-            const res = await axios.get(`http://localhost:3000/api/v1/users/resetpassword/${userLogin.loginemail}`);
+            const res = await axios.get(`http://localhost:3000/api/v1/users/sendresetemail/${userLogin.loginemail}`);
             /* TESTING */
             // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/users/resetpassword/${userLogin.loginemail}`);
             /* PRODUCTION */

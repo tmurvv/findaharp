@@ -7,114 +7,114 @@ import uuid from 'react-uuid';
 // internal
 import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
-import LoginSignupCSS from '../src/styles/LoginSignup.css';
+import UserProfileCSS from '../src/styles/UserProfile.css';
 
 function UserProfile(props) {
     const { user, setUser} = useContext(UserContext);
     const [active, setActive] = useState('changePassword');
     const [needVerify, setNeedVerify] = useState(false);
-    const [userSignup, setUserSignup] = useState({
+    const [userEdit, setUserEdit] = useState({
         firstname: '',
         lastname: '',
-        signupemail: '',
+        editemail: '',
         editpassword: '',
         confirmpassword: '',
         distanceunit: '',
-        signupchange: false
+        editchange: false
     });
-    const [userLogin, setUserLogin] = useState({
+    const [userUpdatePassword, setUserUpdatePassword] = useState({
         oldpassword: '',
         newpassword: '',
         confirmpassword: '',
-        loginchange: false
+        updatePasswordchange: false
     });
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'firstname': 
-                setUserSignup({...userSignup, firstname: evt.target.value, signupchange: true});
+                setUserEdit({...userEdit, firstname: evt.target.value, editchange: true});
                 break
             case 'lastname': 
-                setUserSignup({...userSignup, lastname: evt.target.value, signupchange: true});
+                setUserEdit({...userEdit, lastname: evt.target.value, editchange: true});
                 break
-            case 'signupemail': 
-                setUserSignup({...userSignup, signupemail: evt.target.value, signupchange: true});
+            case 'editemail': 
+                setUserEdit({...userEdit, editemail: evt.target.value, editchange: true});
                 break
             case 'editpassword':
-                setUserSignup({...userSignup, editpassword: evt.target.value, signupchange: true});
+                setUserEdit({...userEdit, editpassword: evt.target.value, editchange: true});
                 break
             case 'distanceunit': 
-                setUserSignup({...userSignup, distanceunit: evt.target.value, signupchange: true});
+                setUserEdit({...userEdit, distanceunit: evt.target.value, editchange: true});
                 break
             case 'oldpassword': 
-                setUserLogin({...userLogin, oldpassword: evt.target.value, loginchange: true});
+                setUserUpdatePassword({...userUpdatePassword, oldpassword: evt.target.value, updatePasswordchange: true});
                 break
             case 'newpassword': 
-                setUserLogin({...userLogin, newpassword: evt.target.value, loginchange: true});
+                setUserUpdatePassword({...userUpdatePassword, newpassword: evt.target.value, updatePasswordchange: true});
                 break
             case 'confirmpassword': 
-                setUserLogin({...userLogin, confirmpassword: evt.target.value, loginchange: true});
+                setUserUpdatePassword({...userUpdatePassword, confirmpassword: evt.target.value, updatePasswordchange: true});
                 break
             default :
         }
     }
-    function resetSignupForm() {
-        setUserSignup({
+    function resetEditForm() {
+        setUserEdit({
             firstname: '',
             lastname: '',
-            signupemail: '',
+            editemail: '',
             editpassword: '',
             confirmpassword: '',
             distanceUnit: 'miles',
-            signupchange: false
+            editchange: false
         });
     }
-    function resetLoginForm() { 
-        setUserLogin({
+    function resetUpdatePasswordForm() { 
+        setUserUpdatePassword({
             oldpassword: '',
             newpassword: '',
             confirmpassword: '',
-            loginchange: false
+            updatePasswordchange: false
         });
     }
     function resetResults() {
-        document.querySelector('#loadingLogin').style.display='none';
-        document.querySelector('#loadingLoginText').innerText='';
-        document.querySelector('#loadingLoginOk').style.display='none';
-        document.querySelector('#loadingLoginTryAgain').style.display='none';
-        document.querySelector('#loadingLoginImg').style.display='none';
+        document.querySelector('#loadingUpdatePassword').style.display='none';
+        document.querySelector('#loadingUpdatePasswordText').innerText='';
+        document.querySelector('#loadingUpdatePasswordOk').style.display='none';
+        document.querySelector('#loadingUpdatePasswordTryAgain').style.display='none';
+        document.querySelector('#loadingUpdatePasswordImg').style.display='none';
     }
-    function handleSignupClick(evt) {
-        resetLoginForm();
+    function handleEditClick(evt) {
+        resetUpdatePasswordForm();
         setActive('editProfile');
-        const signup = document.querySelector('#signup');
-        const login = document.querySelector('#login');
-        signup.classList.remove("s-atbottom");
-        signup.classList.add("s-attop");
-        login.classList.remove("l-attop");
-        login.classList.add("l-atbottom");
+        const edit = document.querySelector('#edit');
+        const updatePassword = document.querySelector('#updatePassword');
+        edit.classList.remove("s-atbottom");
+        edit.classList.add("s-attop");
+        updatePassword.classList.remove("l-attop");
+        updatePassword.classList.add("l-atbottom");
     }
-    function handleLoginClick(evt) {
-        if (userSignup.signupchange===true) {if (!confirm('changes will be lost')) return};
-        resetSignupForm();
+    function handleUpdatePasswordClick(evt) {
+        if (userEdit.editchange===true) {if (!confirm('changes will be lost')) return};
+        resetEditForm();
         setActive('changePassword');
-        const signup = document.querySelector('#signup');
-        const login = document.querySelector('#login');
-        signup.classList.add("s-atbottom");
-        signup.classList.remove("s-attop");
-        login.classList.add("l-attop");
-        login.classList.remove("l-atbottom");
+        const edit = document.querySelector('#edit');
+        const updatePassword = document.querySelector('#updatePassword');
+        edit.classList.add("s-atbottom");
+        edit.classList.remove("s-attop");
+        updatePassword.classList.add("l-attop");
+        updatePassword.classList.remove("l-atbottom");
     }
     
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLogin');
-        const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
+        const resultContainer = document.querySelector('#loadingUpdatePassword');
+        const resultText = document.querySelector('#loadingUpdatePasswordText');
+        const resultButton = document.querySelector('#loadingUpdatePasswordOk');
+        const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
+        const resultImg = document.querySelector('#loadingUpdatePasswordImg');
         if (active==='editProfile') {
             // shortcut
-            if ((!userSignup.editpassword)||userSignup.editpassword.length<8) {
+            if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
                 resultContainer.style.display='block';
                 resultImg.style.display='none';
                 resultButtonTryAgain.style.display='block';
@@ -125,11 +125,11 @@ function UserProfile(props) {
             resultContainer.style.display='block';
             resultImg.style.display='block';
             const updatedUser = {
-                firstname: userSignup.firstname?userSignup.firstname:user[0],
-                lastname: userSignup.lastname?userSignup.lastname:user[1],
-                email: userSignup.signupemail?userSignup.signupemail:user[2],
-                distanceunit: userSignup.distanceunit?userSignup.distanceunit:user[3],
-                password: userSignup.editpassword,
+                firstname: userEdit.firstname?userEdit.firstname:user[0],
+                lastname: userEdit.lastname?userEdit.lastname:user[1],
+                email: userEdit.editemail?userEdit.editemail:user[2],
+                distanceunit: userEdit.distanceunit?userEdit.distanceunit:user[3],
+                password: userEdit.editpassword,
                 userid: user[4]
             };
             
@@ -146,6 +146,7 @@ function UserProfile(props) {
                     resultButton.style.display='block';
                     resultText.innerText=`Update Successful.`;
                     setNeedVerify(true);
+                    
                     const { userCopy } = res.data;
                     setUser([
                         userCopy.firstname, 
@@ -161,12 +162,12 @@ function UserProfile(props) {
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft='30px';
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update.'}`
-                // resultText.innerText=`Something went wrong on signup. Log in as guest user?`
+                // resultText.innerText=`Something went wrong on edit. Log in as guest user?`
             }
         }       
         if (active==='changePassword') {   
             resultContainer.style.display='block';
-            if (userLogin.oldpassword.length<8 || userLogin.newpassword.length<8) {
+            if (userUpdatePassword.oldpassword.length<8 || userUpdatePassword.newpassword.length<8) {
                 resultImg.style.display='none';
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft=0;
@@ -174,7 +175,7 @@ function UserProfile(props) {
                 return
             }
             // passwords match 
-            if (userLogin.newpassword !== userLogin.confirmpassword) {
+            if (userUpdatePassword.newpassword !== userUpdatePassword.confirmpassword) {
                 resultContainer.style.display='block';
                 resultImg.style.display='none';
                 resultButtonTryAgain.style.display='block';
@@ -186,49 +187,47 @@ function UserProfile(props) {
             resultImg.style.display='block';
             try {
                 /* LOCAL */
-                const res = await axios.patch(`http://localhost:3000/api/v1/users/updateuser/${user[4]}`, {userid: user[4], password: userLogin.newpassword, oldpassword: userLogin.oldpassword});
+                await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* TESTING */
-                // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}`, {userid: user[4], password: userLogin.newpassword, oldpassword: userLogin.oldpassword});
+                // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* PRODUCTION */
-                // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}`, {userid: user[4], password: userLogin.newpassword, oldpassword: userLogin.oldpassword});
-                
-                // const returnedUser = res.data.userCopy;
-                // await setUser([returnedUser.firstname, returnedUser.distanceunit]);
+                // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                console.log('gothere')
                 resultText.innerText=`Password change successful.`;
                 resultImg.style.display='none';
                 resultButton.style.display= 'block';
             } catch(e) {
                 console.dir(e)
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
+                if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                     resultImg.style.display='none';
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:'Something went wrong on login.'} Login as guest?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'A.Something went wrong on updatePassword.'}`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
                 } else {
                     resultImg.style.display='none';
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:'Something went wrong on login.'} Login as guest?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'B.Something went wrong on updatePassword.'}`;
                     resultButton.style.display='block';
                     resultButtonTryAgain.style.display='block';
                     resultButtonTryAgain.style.marginLeft='30px';
                 }
             }
         }
-        resetSignupForm();
-        resetLoginForm();
+        resetEditForm();
+        resetUpdatePasswordForm();
     }
-    function loginGuest() {
+    function updatePasswordGuest() {
         resetResults();
         Router.push('/');
     }
     async function handleDelete(e) {
-        const resultContainer = document.querySelector('#loadingLogin');
-        const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
+        const resultContainer = document.querySelector('#loadingUpdatePassword');
+        const resultText = document.querySelector('#loadingUpdatePasswordText');
+        const resultButton = document.querySelector('#loadingUpdatePasswordOk');
+        const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
+        const resultImg = document.querySelector('#loadingUpdatePasswordImg');
         e.preventDefault();
-        if ((!userSignup.editpassword)||userSignup.editpassword.length<8) {
+        if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
             resultContainer.style.display='block';
             resultImg.style.display='none';
             resultButtonTryAgain.style.display='block';
@@ -248,7 +247,7 @@ function UserProfile(props) {
             resultContainer.style.display='block';
             resultImg.style.display='none';
             resultButton.style.display= 'block';
-            await setUser(['','','','miles','']);
+            await setUser(['Login','','','miles','']);
         } catch(e) {
             console.dir(e)
             resultContainer.style.display='block';
@@ -260,22 +259,22 @@ function UserProfile(props) {
     }
     return (
        <>
-        <div className='login-signup-container'>
+        <div className='updatePassword-edit-container'>
             <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
-            <div id="loadingLogin">
-                <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingLoginText"></p>
+            <div id="loadingUpdatePassword">
+                <img id='loadingUpdatePasswordImg' src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingUpdatePasswordText"></p>
                 <div className='flex-sb'>
-                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
-                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                    <button id='loadingUpdatePasswordOk' type='button' className='submit-btn' onClick={updatePasswordGuest}>OK</button>
+                    <button id='loadingUpdatePasswordTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                 </div>
             </div>
-            <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
+            <div className="updatePassword-edit s-atbottom" id="edit" onClick={()=>handleEditClick()}>
                 <form onSubmit={()=>handleSubmit()}>
-                    <div className="login-signup-title">
+                    <div className="updatePassword-edit-title">
                         Edit User Profile
                     </div>
-                    <div className='login-form'>
+                    <div className='updatePassword-form'>
                         <div className="input-name input-margin">
                             <h3>Please re-enter Password</h3>
                         </div>
@@ -283,7 +282,7 @@ function UserProfile(props) {
                             className="field-input"
                             type='password'
                             id={uuid()}
-                            value={userSignup.editpassword}
+                            value={userEdit.editpassword}
                             onChange={handleChange}
                             name='editpassword'
                             required={active==='editProfile'}
@@ -295,7 +294,7 @@ function UserProfile(props) {
                         <input 
                             className="field-input"
                             id={uuid()}
-                            value={userSignup.firstname}
+                            value={userEdit.firstname}
                             onChange={handleChange}
                             name='firstname'
                             placeholder={user[0]}
@@ -307,7 +306,7 @@ function UserProfile(props) {
                         <input 
                             className="field-input"
                             id={uuid()}
-                            value={userSignup.lastname}
+                            value={userEdit.lastname}
                             onChange={handleChange}
                             name='lastname'
                             placeholder={user[1]}
@@ -320,9 +319,9 @@ function UserProfile(props) {
                             className="field-input"
                             type='email'
                             id={uuid()}
-                            value={userSignup.signupemail}
+                            value={userEdit.editemail}
                             onChange={handleChange}
-                            name='signupemail'
+                            name='editemail'
                             placeholder={user[2]}
                             required={active==='editProfile'}
                             disabled={active==='changePassword'}
@@ -357,19 +356,19 @@ function UserProfile(props) {
                             <label htmlFor="Kms">Kms</label>
                         </div>   
                     </div>
-                    <button type='submit' className="submit-btn login-signup-title" onClick={handleSubmit}>
+                    <button type='submit' className="submit-btn updatePassword-edit-title" onClick={handleSubmit}>
                         Submit
                     </button>
                     <div className='profileDivider'>
                         <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
                     </div>
-                    <button type='submit' style={{backgroundColor: 'tomato', color: 'white', marginBottom: '30px'}} className="submit-btn login-signup-title" onClick={handleDelete}>
+                    <button type='submit' style={{backgroundColor: 'tomato', color: 'white', marginBottom: '30px'}} className="submit-btn updatePassword-edit-title" onClick={handleDelete}>
                         Delete Account
                     </button>
                 </form>
             </div>
-            <div style={{transform: 'translate(28%, -145%)'}} className="login-signup l-attop" id="login" onClick={handleLoginClick}>
-                <div className="login-signup-title">
+            <div style={{transform: 'translate(28%, -145%)'}} className="updatePassword-edit l-attop" id="updatePassword" onClick={handleUpdatePasswordClick}>
+                <div className="updatePassword-edit-title">
                     {needVerify&&active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
                 </div>
                 <form onSubmit={handleSubmit}>
@@ -389,7 +388,7 @@ function UserProfile(props) {
                                     className="field-input"
                                     type='password'
                                     id={uuid()}
-                                    value={userLogin.oldpassword}
+                                    value={userUpdatePassword.oldpassword}
                                     onChange={handleChange}
                                     name='oldpassword'
                                     required={active==='changePassword'}
@@ -402,7 +401,7 @@ function UserProfile(props) {
                                     className="field-input"
                                     type='password'
                                     id={uuid()}
-                                    value={userLogin.newpassword}
+                                    value={userUpdatePassword.newpassword}
                                     onChange={handleChange}
                                     name='newpassword'
                                     required={active==='changePassword'}
@@ -415,14 +414,14 @@ function UserProfile(props) {
                                     className="field-input"
                                     type='password'
                                     id={uuid()}
-                                    value={userLogin.confirmnewpassword}
+                                    value={userUpdatePassword.confirmpassword}
                                     onChange={handleChange}
                                     name='confirmpassword'
                                     required={active==='changePassword'}
                                     disabled={active==='editProfile'}
                                 />
                             </div>
-                            <button type='submit' className="submit-btn login-signup-title">
+                            <button type='submit' className="submit-btn updatePassword-edit-title">
                                 Submit
                             </button>
                             <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
@@ -432,7 +431,7 @@ function UserProfile(props) {
                     }
                 </form>
             </div>
-            <LoginSignupCSS />
+            <UserProfileCSS />
         </div>
         </>
     )

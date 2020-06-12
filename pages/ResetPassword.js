@@ -15,7 +15,7 @@ function ResetPassword(props) {
     const { user, setUser} = useContext(UserContext);
     const Router = useRouter();
         let email; 
-        if (Router.query.useremail) email = Router.query.useremail.substr(0,Router.query.useremail.length-2);
+        if (Router.query.useremail) email = Router.query.useremail.substr(0,Router.query.useremail.length-1);
         console.log('router', Router.query)
         if (email) console.log('email', email)
 
@@ -116,28 +116,27 @@ function ResetPassword(props) {
         resultImg.style.display='block';
         try {
             /* LOCAL */
-            const res = await axios.patch(`http://localhost:3000/api/v1/users/updateuser/${email}`, {resetpassword: userLogin.newpassword});
+            const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
-            // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${Router.query}`, {resetpassword: userLogin.newpassword});
+            // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* PRODUCTION */
-            // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${Router.query}`, {resetpassword: userLogin.newpassword});
+            // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             
-            const returnedUser = res.data.userCopy;
-            await setUser([returnedUser.firstname, returnedUser.distanceunit]);
             resultText.innerText=`Password change successful.`;
             resultImg.style.display='none';
             resultButton.style.display= 'block';
+            Router.push('/LoginSignup');
         } catch(e) {
             console.dir(e)
-            if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
+            if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                 resultImg.style.display='none';
-                resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:'Something went wrong resetting password.'} Login as guest?`;
+                resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
                 resultButton.style.display='block';
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft='30px';
             } else {
                 resultImg.style.display='none';
-                resultText.innerText=`${process.env.next_env==='development'?e.response.data.message:'Something went wrong resetting password.'} Login as guest?`;
+                resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
                 resultButton.style.display='block';
                 resultButtonTryAgain.style.display='block';
                 resultButtonTryAgain.style.marginLeft='30px';
@@ -199,7 +198,7 @@ function ResetPassword(props) {
                             className="field-input"
                             type='password'
                             id={uuid()}
-                            value={userLogin.confirmnewpassword}
+                            value={userLogin.confirmpassword}
                             onChange={handleChange}
                             name='confirmpassword'
                             required={true}
