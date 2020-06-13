@@ -41,6 +41,7 @@ function ContactUsForm(props) {
         });
     }
     const handleSubmit = async (evt) => {
+        // {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Clear contact form?')) clearForm();}
         evt.preventDefault();
         if (!user.contactemail) return alert('Email is required');
         const contact = {
@@ -50,11 +51,15 @@ function ContactUsForm(props) {
             comments: user.contactcomments
         }
         try {
-            // const res = await axios.post(
-            //     `https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, 
-            //     contact
-            // );
-            // alert("Email sent.")
+            // local
+            // const res = await axios.post(`http://localhost:3000/api/v1/contactform`, contact);
+            // testing
+            // const res = await axios.post(`https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, contact);
+            // staging
+            // const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/contactform`, contact);
+            // production
+            // const res = await axios.post(`https://findaharp-api.herokuapp.com/api/v1/contactform`, contact);
+            // alert("Email sent.");
             alert('under construction, contact form not sent')
         } catch(e) {
             alert("Something went wrong. Please try again or contact the webmaster.", e.message)
@@ -125,9 +130,7 @@ function ContactUsForm(props) {
                         <button
                             className={`detailButton detailButton-cancel`}
                             type='button'
-                            onClick={() => 
-                                {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Clear contact form?')) clearForm();
-                            }}
+                            onClick={handleSubmit}
                         >Cancel
                         </button>
                     </div>         

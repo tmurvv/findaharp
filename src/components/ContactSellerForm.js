@@ -42,36 +42,67 @@ function ContactSellerForm(props) {
             default :
         }
     }
+    function resetResults() {
+        document.querySelector('#loadingLogin').style.display='none';
+        document.querySelector('#loadingLoginText').innerText='';
+        document.querySelector('#loadingLoginOk').style.display='none';
+        document.querySelector('#loadingLoginTryAgain').style.display='none';
+        document.querySelector('#loadingLoginImg').style.display='none';
+    }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         if (!user.contactemail) return alert('Email is required');
-
+        const resultContainer = document.querySelector('#loadingLogin');
+        const resultText = document.querySelector('#loadingLoginText');
+        const resultButton = document.querySelector('#loadingLoginOk');
+        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
+        const resultImg = document.querySelector('#loadingLoginImg');
+        resultContainer.style.display='block';
+        resultImg.style.display='block';
         // BREAKING
-        alert('Under Construction. Email not sent'); 
-        // const contact = {
-        //     firstname: user.firstname,
-        //     lastname: user.lastname,
-        //     email: user.contactemail,
-        //     sellername: product.sellerName,
-        //     productmaker: user.contactmaker,
-        //     productmodel: user.contactmodel,
-        //     comments: user.contactcomments
-        // }
-        // try {
-        //     const res = await axios.post(
-        //         `https://findaharp-api-testing.herokuapp.com/api/v1/ContactSellerForm`, 
-        //         contact
-        //     );
-        //     alert("Email sent.")
-        // } catch(e) {
-        //     alert("Something went wrong. Please try again or contact the webmaster.", e.message)
-        // }
+        // alert('Under Construction. Email not sent'); 
+        const contact = {
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.contactemail,
+            sellername: product.sellerName,
+            selleremail: product.sellerEmail,
+            productmaker: user.contactmaker,
+            productmodel: user.contactmodel,
+            comments: user.contactcomments
+        }
+        try {
+            // local
+            const res = await axios.post(`http://localhost:3000/api/v1/contactsellerform`, contact);
+            // testing
+            // const res = await axios.post(`https://findaharp-api-testing.herokuapp.com/api/v1/contactsellerform`, contact);
+            // staging
+            // const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/contactsellerform`, contact);
+            // production
+            // const res = await axios.post(`https://findaharp-api.herokuapp.com/api/v1/contactsellerform`, contact);
+            resultText.innerText=`Email has been sent to seller.`;
+            // resultText.innerText=`Email regarding ${product.productMaker} ${product.productModel} has been sent to seller.`;
+            resultImg.style.display='none';
+            resultButton.style.display= 'block';
+        } catch(e) {
+            resultText.innerText=`Something went wrong. Please try again or contact the webmaster. ${e.message}`;
+            resultImg.style.display='none';
+            resultButtonTryAgain.style.display= 'block';
+        }
         
-        props.handleCloseContact();
+        // props.handleCloseContact();
     }
    return (
         <>
         <div className='detailContainer'>
+            <div id="loadingLogin">
+                <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingLoginText"></p>
+                <div className='flex-sb'>
+                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={props.handleCloseContact}>OK</button>
+                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                </div>
+            </div>
             <h1>Contact {removeDashOE(product.sellerName)}</h1>           
             <div className='heading'>
                 <p>Communication with sellers can take place through findaharp.com at no charge.<br></br></p>

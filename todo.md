@@ -1,6 +1,8 @@
 ### prelaunch
 
 - contact functionality
+- checkbox for newsletter
+- resend verify email for user who misplaces it
 - extensive testing
 
 ### internal

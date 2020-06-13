@@ -17,7 +17,6 @@ function MyApp(props) {
     const [user, setUser] = useState(['Login', '', '', 'miles']); // firstname, lastname, email, distanceunit
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
-    console.log(props.router.query)
     try {
         if (props.router && props.router.query && props.router.query.findpath === 'resetpassword') props.router.push('/ResetPassword');
     } catch (e) {
