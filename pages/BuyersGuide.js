@@ -156,7 +156,7 @@ function BuyersGuide(props) {
                     <li>Find a harp where the strings are the same distance apart as a pedal harp.</li>
                     <li>Find a lever harp that is on the larger side of lever harp choices, at least 36 strings.</li>
                 </ol>
-                <p>A lever harps made by a pedal harp maker will usually have the same string tension and distance between the strings as the maker's pedal harps. Having said that, many lever only harp makers will also use similar tensions and distance between strings and some of our most beautiful lever harps are from makers who do not make pedal harps.</p>
+                <p>A lever harp made by a pedal harp maker will usually have the same string tension and distance between the strings as the maker's pedal harps. Having said that, many lever only harp makers will also use similar tensions and distance between strings and some of our most beautiful lever harps are from makers who do not make pedal harps.</p>
                 <p>It is also a good idea to inquire when the harp was last maintained. In the harp world we call it 'regulation.' Since harps are made of wood and glue, things can shift around a bit because of the weather and because of the tension of the strings. These shifts will cause the lever or pedal change to go 'off key' or 'out of tune.' Regulation corrects for this and should be done every 1-3 years depending on your individual situation.</p>
                 <p>Some other things to ask about:</p>
                 <ol>

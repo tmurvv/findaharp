@@ -1,3 +1,8 @@
+### prelaunch
+
+- contact functionality
+- extensive testing
+
 ### internal
 - cleanup activate email
 - make it easier to change api on deployment
@@ -10,9 +15,6 @@
 
 ### UI/UX
 
-- get lin try "as" in Link components as="/products/something"
-
-- make it so navbar never has blank in position 5
 - email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
@@ -20,9 +22,8 @@
 - When update user encounters problem on backend, spinner persists, needs to show error message
 
 ### functionality
+- contact emails
 - trouble shoot distance needing two clicks
-- forgot password on login
-- delete user not functional
 - CRUD operations on upload listings
 - add close form to private listings
 - implement email text communication through website
@@ -30,10 +31,11 @@
 ### AUTHENTICATION
 - add validate email on edit profile
 - Remember me
-- forgot password on login
+- readd email encryption on reset email and activate email (is encrypted in send email and decrypted in post verify email, both in backend)
 - signout
 - check on encryption for signup password (does it show up in devtools console upon submit when no localhost used)
 - add default name if no name found on login
+- when Activate Email and reset email come back via params, make sure index page is frozen, maybe a spinner?
 
 ### SEO
 - All SEO checks in Google Guide

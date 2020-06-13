@@ -1,5 +1,6 @@
 // packages
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -15,9 +16,12 @@ import testMakesModels from '../src/utils/testMakesModels';
 const Index = (props) => {
     const [clientLat, setClientLat] = useState();
     const [clientLong, setClientLong] = useState();
+    const [router, setRouter] = useState();
     
-     useEffect(() => {
-         if (navigator&&navigator.geolocation) {
+    const Router = useRouter();
+    // console.log('Index', Router.query);
+    useEffect(() => {
+        if (navigator&&navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
                 setClientLat(position.coords.latitude.toFixed(4));
                 setClientLong(position.coords.longitude.toFixed(4));
@@ -43,6 +47,7 @@ const Index = (props) => {
         </>
     );
 }
+
 Index.getInitialProps = async () => {
     /******************
      * LOCAL DATA
@@ -65,6 +70,7 @@ Index.getInitialProps = async () => {
     const products = res.data.harpData;
     const makesModels = res.data.harpMakesModels;
     products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
+     
     return { products, makesModels };
 }
 

@@ -51,7 +51,7 @@ function PartnerProspects() {
 									<td>no email, only contact forms</td>
 									<td>626.791.6262</td>
 									<td>May 29th, 2020</td>
-									<td><textarea rows='5' value='sent contact on pacificharps.com. not sure if it went through. no confirmation modal'/></td>
+									<td><textarea rows='5' value='June 12 Left message /// sent contact on pacificharps.com. not sure if it went through. no confirmation modal'/></td>
 								</tr>
 								<tr>
 									<td>West Coast Harps</td>
@@ -67,7 +67,7 @@ function PartnerProspects() {
 									<td>stephen@phoenixharpcenter.com</td>
 									<td>602-341-4277</td>
 									<td>May 28th, 2020</td>
-									<td><textarea /></td>
+									<td><textarea value='June 12th, left Follow-up message'/></td>
 								</tr>
 								<tr>
 									<td>Summerhays Music</td>
@@ -83,7 +83,7 @@ function PartnerProspects() {
 									<td>marni@classicharpsnw.com</td>
 									<td>503-251-6920<br/>360-798-2188c</td>
 									<td>May 28, 2020</td>
-									<td><textarea /></td>
+									<td><textarea value='Tried to phone on June 12, not there'/></td>
 								</tr>
 								<tr>
 									<td>Kolacny Music</td>
@@ -91,15 +91,15 @@ function PartnerProspects() {
 									<td>harpdavidk@kolacnymusic.com</td>
 									<td>303-722-6081</td>
 									<td>May 29th, 2020</td>
-									<td><textarea /></td>
+									<td><textarea value='Tried to phone back on June 12, not there'/></td>
 								</tr>
 								<tr>
 									<td>Virginia Harp Center<br></br>Atlanta Harp Center</td>
 									<td>David d'Arville</td>
 									<td>david@vaharpcenter.com</td>
 									<td>804-378-3761</td>
-									<td>May 28, 2020</td>
-									<td><textarea /></td>
+									<td>May 28th, 2020</td>
+									<td><textarea value='June 9th, Talked about program. He will think and get back.'/></td>
 								</tr>
 								<tr>
 									<td>Michigan Harp Center</td>

@@ -135,11 +135,13 @@ function UserProfile(props) {
             
             try {
                 /* LOCAL */
-                const res = await axios.patch(`http://localhost:3000/api/v1/users/updateuser/${user[4]}`, updatedUser);
+                // const res = await axios.patch(`http://localhost:3000/api/v1/users/updateuser/${user[4]}`, updatedUser);
                 /* TESTING */
-                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
+                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}', newUser);
+                /* STAGING */
+                const res = await axios.patch('https://findaharp-api-staging.herokuapp.com/api/v1/users/updateuser/${user[4]}', newUser);
                 /* PRODUCTION */
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', newUser);
                 if (res.status===200) {
                     console.log('result', res.data)
                     resultImg.style.display='none';
@@ -187,9 +189,11 @@ function UserProfile(props) {
             resultImg.style.display='block';
             try {
                 /* LOCAL */
-                await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                // await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* TESTING */
                 // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                /* STAGING */
+                const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* PRODUCTION */
                 // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 console.log('gothere')
@@ -238,10 +242,14 @@ function UserProfile(props) {
         if (prompt('Are you sure you want to delete your account? Please type in your account email to confirm.')!==user[2]) return alert('Email does not match.');
         
         try {
-            const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user[4]}`)
-            // const res=await axios.delete(`https://findaharp-api-staging.herokuapp.com/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
-            // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
-            // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/5eda65d3d4e6a325386e0c37`)
+            // LOCAL
+            // const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user[4]}`);
+            // TESTING
+            // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
+            // STAGING
+            const res=await axios.delete(`https://findaharp-api-staging.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
+            // PRODUCTION
+            // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // const returnedUser = res.user;
             resultText.innerText=`Account ${user[2]} has been deleted`;
             resultContainer.style.display='block';

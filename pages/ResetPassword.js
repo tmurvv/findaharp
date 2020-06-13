@@ -1,10 +1,8 @@
 // packages
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import { useRouter } from 'next/router';
-import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
-import atob from 'atob';
 
 // internal
 import PageTitle from '../src/components/PageTitle';
@@ -116,9 +114,11 @@ function ResetPassword(props) {
         resultImg.style.display='block';
         try {
             /* LOCAL */
-            const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
+            // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
             // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
+            /* STAGING */
+            const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* PRODUCTION */
             // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             

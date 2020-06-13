@@ -12,10 +12,22 @@ import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
 
-function MyApp({ Component, pageProps }) {
+function MyApp(props) {
+    const { Component, pageProps } = props;
     const [user, setUser] = useState(['Login', '', '', 'miles']); // firstname, lastname, email, distanceunit
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
+    console.log(props.router.query)
+    try {
+        if (props.router && props.router.query && props.router.query.findpath === 'resetpassword') props.router.push('/ResetPassword');
+    } catch (e) {
+        console.error('from props.router', e)
+    }
+    try {
+        if (props.router && props.router.query && props.router.query.findpath === 'activateemail') props.router.push('/ActivateEmail?email=tmurv@shaw.ca');
+    } catch (e) {
+        console.error('from props.router', e)
+    }
     
     useEffect(() => {
         setWindowWidth(window.innerWidth);
@@ -45,6 +57,12 @@ function MyApp({ Component, pageProps }) {
             <AppCss />
         </>
     )
+}
+export async function getServerSideProps(context) {
+    console.log('context', context)
+    return {
+      props: {query: context.query}, // will be passed to the page component as props
+    }
 }
 
 // Only uncomment this method if you have blocking data requirements for

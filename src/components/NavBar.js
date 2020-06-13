@@ -41,10 +41,10 @@ export default function NavBar(props) {
                         {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
                         <a id='userName' onClick={props.handleNavOpen}>{user[0]}</a>
                     </Link>
-                    <Link href='/ActivateEmail' as='/ActivateEmail'>
+                    <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href='/ResetPassword' as='/ResetPassword'>
+                    <Link href='/ResetPassword' as='/resetpassword'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
                 </div>:''
