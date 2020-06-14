@@ -69,6 +69,7 @@ function ContactUsFormCSS() {
                 border: 2px solid #f9bf1e;
                 margin-left: 10px;
                 background-color: #ffffff;
+                postion: relative;
             }
             @media only screen and (max-width: 700px) {
                 .contactForm {
@@ -154,6 +155,50 @@ function ContactUsFormCSS() {
             }
             .buttons {
                 margin-top: 20px;
+            }
+            #loadingLogin {
+                display: none;
+                color: #6A75AA;
+                border: 2px solid #6A75AA;
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 3px;
+                width: 294px;
+                margin:auto;
+                position: absolute;
+                top: 25%;
+                right: 50%;
+                transform: translate(50%, 75%);
+                z-index: 5000;
+            }
+            #loadingLoginImg {
+                display: block;
+                height: 50px;
+                margin: auto;
+            }
+            #loadingLoginOk,
+            #loadingLoginTryAgain {
+                display: none;
+                padding: 7px;
+            }
+            #loadingLoginText {
+                text-align: center;
+            }
+            .submit-btn {
+                width: 100%;
+                // margin-top: 28px;
+                // text-align: center;
+                // padding: 5px 0;
+                border-radius: 3px;
+                background-color: #ffe58a;
+                color: #000;
+                border: none;
+                // transition: 0.5s cubic-bezier(0.72, 0.15, 0.53, 0.84);
+            }
+            .submit-btn-tryAgain {
+                background-color: #333333;
+                margin-left: 30px;
+                color: white;
             }
         `}
         </style>

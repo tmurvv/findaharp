@@ -10,6 +10,7 @@ import {removeDashOE} from '../utils/helpers';
 function ContactSellerForm(props) {
     if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
     const {product} = props;
+    console.log(product)
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
@@ -51,17 +52,19 @@ function ContactSellerForm(props) {
     }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        if (!user.contactemail) return alert('Email is required');
         const resultContainer = document.querySelector('#loadingLogin');
         const resultText = document.querySelector('#loadingLoginText');
         const resultButton = document.querySelector('#loadingLoginOk');
         const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
         const resultImg = document.querySelector('#loadingLoginImg');
+        if (!user.contactemail) return alert('Email is required');
         resultContainer.style.display='block';
         resultImg.style.display='block';
         // BREAKING
         // alert('Under Construction. Email not sent'); 
         const contact = {
+            contactid: uuid(),
+            date: new Date(Date.now()),
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.contactemail,
@@ -69,6 +72,7 @@ function ContactSellerForm(props) {
             selleremail: product.sellerEmail,
             productmaker: user.contactmaker,
             productmodel: user.contactmodel,
+            productprice: product.productPrice,
             comments: user.contactcomments
         }
         try {
@@ -89,8 +93,6 @@ function ContactSellerForm(props) {
             resultImg.style.display='none';
             resultButtonTryAgain.style.display= 'block';
         }
-        
-        // props.handleCloseContact();
     }
    return (
         <>
@@ -105,7 +107,7 @@ function ContactSellerForm(props) {
             </div>
             <h1>Contact {removeDashOE(product.sellerName)}</h1>           
             <div className='heading'>
-                <p>Communication with sellers can take place through findaharp.com at no charge.<br></br></p>
+                <p>Your name, email, and inquiry will be forwarded to {product.sellerName}.<br></br></p>
             </div>
             <div 
                 className='clearModal' 

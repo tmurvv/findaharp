@@ -1,11 +1,13 @@
 ### prelaunch
 
-- contact functionality
 - checkbox for newsletter
 - resend verify email for user who misplaces it
 - extensive testing
+- change store email on contact seller forms to store emails
+- also have a copy of email go to findaharp.com
 
 ### internal
+- separate store partner program info into a component
 - cleanup activate email
 - make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
@@ -20,15 +22,13 @@
 - email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
-- Contact Seller button moved to top and centered (use a scroll down for more type thing)
 - When update user encounters problem on backend, spinner persists, needs to show error message
 
 ### functionality
-- contact emails
+- add way to ask about becoming a store partner to store partner page
 - trouble shoot distance needing two clicks
 - CRUD operations on upload listings
 - add close form to private listings
-- implement email text communication through website
 
 ### AUTHENTICATION
 - add validate email on edit profile

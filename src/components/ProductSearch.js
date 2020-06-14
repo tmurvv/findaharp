@@ -478,7 +478,7 @@ function ProductSearch(props) {
                     <p>Clear</p> 
                 </div>
             </div>
-            <h3 className='searchTitle'>Website Under Construction-Sample Listings</h3>
+            <h3 className='searchTitle'>Findaharp.com is brand new and in the process of adding harps.<br/>Check back soon if you don't see the harp of your dreams!!</h3>
             <ProductSearchCss />
             <ProductContainer 
                 data-test="component-ProductContainer" 

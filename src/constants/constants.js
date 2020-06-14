@@ -83,12 +83,12 @@ export const STORE_PARTNERS = [
         id: uuid(),
         sellerCountry: "Canada",
         sellerRegion: "Calgary, AB, Canada",
-        productTitle: "Tisha Murvihill, harp services",
-        productLongDesc: " offers lessons, Skype lessons, rentals, and used harps. Located near Calgary, Alberta at the foot of the Canadian Rockies.",
-        productMaker: "Tisha Murvihill, harp services",
-        productImageUrl: "/img/StorePartners/murvihillHarpServices.jpg",
-        sellerWebsite: 'www.harptisha.com',
-        sellerEmail: 'harp@harptisha.com'
+        productTitle: "Find a Harp",
+        productLongDesc: " is mainly interested in connecting buyers with sellers, but also has a few harps of it's own for sale and rent. Located at the foot of the Rocky Mountains, Find a Harp is always searching for a wide variety of pre-owned instruments for harp lovers and aspiring students alike.",
+        productMaker: "Find a Harp",
+        productImageUrl: "/img/StorePartners/findaharp_store_logo.png",
+        sellerWebsite: 'www.findaharp.com',
+        sellerEmail: 'tisha@findaharp.com'
     },
     {
         id: uuid(),

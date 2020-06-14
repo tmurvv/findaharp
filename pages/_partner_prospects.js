@@ -67,7 +67,7 @@ function PartnerProspects() {
 									<td>stephen@phoenixharpcenter.com</td>
 									<td>602-341-4277</td>
 									<td>May 28th, 2020</td>
-									<td><textarea value='June 12th, left Follow-up message'/></td>
+									<td><textarea value='June 13th, Stephen emailed and said he did not received my email. I resent.June 12th, left Follow-up message'/></td>
 								</tr>
 								<tr>
 									<td>Summerhays Music</td>
