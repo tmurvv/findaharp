@@ -1,18 +1,32 @@
 // packages
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext, useReducer } from 'react';
 import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
+import LoginSignupCSS from '../src/styles/LoginSignup.css';
 import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
-import LoginSignupCSS from '../src/styles/LoginSignup.css';
+import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 
+const resultInfoInitialState = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
+const activeWindowInitialState = {
+    activeWindow: 'login',
+    loginClasses: 'login-signup l-attop',
+    signupClasses: 'login-signup s-atbottom'
+}
 function LoginSignup(props) {
-    // const userContext = useContext(UserContext);
-    const { user, setUser} = useContext(UserContext);
-    const [active, setActive] = useState('login');
+    const { setUser } = useContext(UserContext);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
+    const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
         firstname: '',
@@ -20,6 +34,7 @@ function LoginSignup(props) {
         signupemail: '',
         signuppassword: '',
         confirmpassword: '',
+        newsletter: false,
         distanceunit: 'miles',
         signupchange: false
     });
@@ -51,6 +66,9 @@ function LoginSignup(props) {
             case 'confirmpassword': 
                 setUserSignup({...userSignup, confirmpassword: evt.target.value, signupchange: true});
                 break
+            case 'newsletter': 
+                setUserSignup({...userSignup, newsletter: !userSignup.newsletter, signupchange: true});
+                break
             case 'distanceunit': 
                 setUserSignup({...userSignup, distanceunit: evt.target.value, signupchange: true});
                 break
@@ -64,16 +82,13 @@ function LoginSignup(props) {
             signupemail: '',
             signuppassword: '',
             confirmpassword: '',
-            distanceUnit: 'miles',
+            newsletter: '',
+            distanceunit: 'miles',
             signupchange: false
         });
     }
     function resetResults() {
-        document.querySelector('#loadingLogin').style.display='none';
-        document.querySelector('#loadingLoginText').innerText='';
-        document.querySelector('#loadingLoginOk').style.display='none';
-        document.querySelector('#loadingLoginTryAgain').style.display='none';
-        document.querySelector('#loadingLoginImg').style.display='none';
+        dispatchResultInfo({type: 'initial'});
     }
     function resetLoginForm() { 
         setUserLogin({
@@ -84,118 +99,89 @@ function LoginSignup(props) {
     }
     function handleSignupClick(evt) {
         resetLoginForm();
-        setActive('signup');
-        const signup = document.querySelector('#signup');
-        const login = document.querySelector('#login');
-        signup.classList.remove("s-atbottom");
-        signup.classList.add("s-attop");
-        login.classList.remove("l-attop");
-        login.classList.add("l-atbottom");
+        dispatchActiveWindow({type: 'signup'});
     }
     function handleLoginClick(evt) {
         if (userSignup.signupchange===true) {if (!confirm('changes will be lost')) return};
         resetSignupForm();
-        setActive('login');
-        const signup = document.querySelector('#signup');
-        const login = document.querySelector('#login');
-        signup.classList.add("s-atbottom");
-        signup.classList.remove("s-attop");
-        login.classList.add("l-attop");
-        login.classList.remove("l-atbottom");
+        dispatchActiveWindow({type: 'login'});
     }
-    
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLogin');
         const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
         
-        if (active==='signup') {
-            // shortcut
+        if (activeWindow.active==='signup') {
+            // shortcut - password not long enough
             if ((!userSignup.signuppassword)||userSignup.signuppassword.length<8) {
-                resultContainer.style.display='block';
-                resultImg.style.display='none';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft=0;
                 resultText.innerText=`Passwords must be at least 8 characters long.`;
+                dispatchResultInfo({type: 'tryAgain'});
                 return
             }
-            // shortcut two
+            // shortcut - passwords not matching
             if (userSignup.signuppassword !== userSignup.confirmpassword) {
-                resultContainer.style.display='block';
-                resultImg.style.display='none';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft=0;
                 resultText.innerText=`Passwords do not match.`;
+                dispatchResultInfo({type: 'tryAgain'});
                 return
             }
-            resultContainer.style.display='block';
-            resultImg.style.display='block';
+            // create signup user object
             const newUser = {
                 firstname: userSignup.firstname,
                 lastname: userSignup.lastname,
                 email: userSignup.signupemail,
                 password: userSignup.signuppassword,
+                newsletter: userSignup.newsletter,
                 distanceunit: userSignup.distanceunit
             };
+            // signup user
             try {
                 /* LOCAL */
-                // const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
+                const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
                 /* TESTING */
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
                 /* STAGING */
-                const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser', newUser);
+                // const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser', newUser);
                 /* PRODUCTION */
                 // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
                 if (res.status===200) {
-                    resultImg.style.display='none';
-                    resultButton.style.display='block';
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
-                    console.log(res)
+                    dispatchResultInfo({type: 'OK'});
                     const {addeduser} = res.data;
-                    setNeedVerify(true);
+                    // setNeedVerify(true);
                     setUser([
                         addeduser.firstname, 
                         addeduser.lastname, 
-                        addeduser.email, 
+                        addeduser.email,
                         addeduser.distanceunit,
                         addeduser._id
                     ]);
                 }
+            // Error on signup
             } catch (e) {
-                console.dir(e);
-                resultImg.style.display='none';
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`;
+                dispatchResultInfo({type: 'okTryAgain'});
             }
-        }
-        
-        if (active==='login') {   
-            resultContainer.style.display='block';
+        }       
+        if (activeWindow.active==='login') {   
+            // shortcut - password not long enough
             if (userLogin.loginpassword.length<8) {
-                resultImg.style.display='none';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft=0;
                 resultText.innerText=`Passwords must be at least 8 characters long.`;
+                dispatchResultInfo({type: 'tryAgain'});
                 return
             }
-            resultText.innerText='Loading...';
-            resultImg.style.display='block';
+            // set loading image
+            dispatchResultInfo({type:'loadingImage'});        
+            // login user
             try {
                 /* LOCAL */
-                // const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* TESTING */
                 // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* STAGING */
-                const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                // const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 /* PRODUCTION */
                 // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
-               
+                // set user context to added user
                 await setUser([
                     returnedUser.firstname, 
                     returnedUser.lastname, 
@@ -203,65 +189,86 @@ function LoginSignup(props) {
                     returnedUser.distanceunit, 
                     returnedUser._id
                 ]);
+                // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
-                resultImg.style.display='none';
-                resultButton.style.display= 'block';
+                dispatchResultInfo({type: 'OK'});
+            // error on login
             } catch(e) {
-                if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
-                    resultImg.style.display='none';
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong on login.'} Login as guest?`;
-                    resultButton.style.display='block';
-                    resultButtonTryAgain.style.display='block';
-                    resultButtonTryAgain.style.marginLeft='30px';
+                // user email not verified
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
+                    setNeedVerify(true);                
+                    await setUserLogin({...userLogin, loginemail: e.response.data.useremail})
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
+                    dispatchResultInfo({type: 'okTryAgain'});
+                // other error
                 } else {
-                    resultImg.style.display='none';
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login.'} Login as guest?`;
-                    resultButton.style.display='block';
-                    resultButtonTryAgain.style.display='block';
-                    resultButtonTryAgain.style.marginLeft='30px';
+                    dispatchResultInfo({type: 'okTryAgain'});
                 }
             }
         }
         resetSignupForm();
-        resetLoginForm();
+        // if (!needVerify) resetLoginForm();
     }
     async function handleForgot() {
-        if (!userLogin.loginemail) return alert('Please enter your email.');
-        const resultContainer = document.querySelector('#loadingLogin');
         const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
-        
+        if (!userLogin.loginemail) {
+            resultText.innerText='Please enter your account email.';
+            dispatchResultInfo({type: 'tryAgain'});
+            return;
+        }
         try {
             /* LOCAL */
-            // const res = await axios.get(`http://localhost:3000/api/v1/users/sendresetemail/${userLogin.loginemail}`);
+            const res = await axios.get(`http://localhost:3000/api/v1/users/sendresetemail/${userLogin.loginemail}`);
             /* TESTING */
             // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
             /* STAGING */
-            const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
+            // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
             /* PRODUCTION */
             // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
             if (res.status===200) {
-                resultContainer.style.display='block';
-                resultImg.style.display='none';
-                resultButton.style.display='block';
-                resultText.innerText=`Please check your inbox for an email with instuctions to reset your password.`;
+                resultText.innerText=`Please check your inbox for an email with instructions to reset your password.`;
+                dispatchResultInfo({type: 'OK'});
             }
         } catch (e) {
-            console.dir(e);
-            resultContainer.style.display='block';
-            resultImg.style.display='none';
-            resultButton.style.display='block';
-            resultButtonTryAgain.style.display='block';
-            resultButtonTryAgain.style.marginLeft='30px';
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset.'} Log in as guest user?`
-            // resultText.innerText=`Something went wrong on signup. Log in as guest user?`
+            dispatchResultInfo({type: 'okTryAgain'});
         }
         // resetResults();
         // Router.push('/');
     }
-    function loginGuest() {
+    async function loginGuest(evt) {
+        evt.preventDefault();
+        if (needVerify) {
+            const resultText = document.querySelector('#loadingLoginText');
+            dispatchResultInfo({ type: 'loadingImage' });  
+            const newUser = {
+                firstname: 'findaharp.com',
+                lastname: 'user',
+                email: userLogin.loginemail
+            }
+            try {
+                // this is a hack because program not returning for axios post, needs to be debugged and next three lines put below axios call
+                resultText.innerText=`Verify email sent.`;
+                dispatchResultInfo({type: 'OK'});
+                setNeedVerify(false);
+                /* LOCAL */
+                const res = await axios.post('http://localhost:3000/api/v1/resendverify', newUser);
+                /* TESTING */
+                // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
+                /* STAGING */
+                // const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser', newUser);
+                /* PRODUCTION */
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+             
+                // if (res.status===200) {
+                    
+                // }
+            } catch (e) {
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong sending verification email.'} Log in as guest user?`;
+                dispatchResultInfo({type: 'okTryAgain'});
+            }
+        }
         resetResults();
         Router.push('/');
     }
@@ -269,15 +276,31 @@ function LoginSignup(props) {
        <>
         <div className='login-signup-container'>
             <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />
-            <div id="loadingLogin">
-                <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
+            <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+                <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
                 <div className='flex-sb'>
-                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
-                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                    <button 
+                        id='loadingLoginOk'
+                        type='button' 
+                        className='submit-btn' 
+                        onClick={loginGuest}
+                        style={{display: resultInfo.resultOkButton}} 
+                    >
+                        OK
+                    </button>
+                    <button 
+                        id='loadingLoginTryAgain' 
+                        type='button' 
+                        className='submit-btn submit-btn-tryAgain' 
+                        onClick={resetResults}
+                        style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}} 
+                    >
+                        Try Again
+                    </button>
                 </div>
             </div>
-            <div className="login-signup s-atbottom" id="signup" onClick={()=>handleSignupClick()}>
+            <div className={activeWindow.signupClasses} id="signup" onClick={()=>handleSignupClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="login-signup-title">
                         SIGN UP
@@ -293,7 +316,7 @@ function LoginSignup(props) {
                             onChange={handleChange}
                             name='firstname'
                             placeholder="optional"
-                            disabled={active==='login'}
+                            disabled={activeWindow.active==='login'}
                         />
                         <div className="input-name">
                             <h3>Last Name</h3>
@@ -305,7 +328,7 @@ function LoginSignup(props) {
                             onChange={handleChange}
                             name='lastname'
                             placeholder="optional"
-                            disabled={active==='login'}
+                            disabled={activeWindow.active==='login'}
                         />
                         <div className="input-name input-margin">
                             <h3>E-Mail</h3>
@@ -317,8 +340,8 @@ function LoginSignup(props) {
                             value={userSignup.signupemail}
                             onChange={handleChange}
                             name='signupemail'
-                            required={active==='signup'}
-                            disabled={active==='login'}
+                            required={activeWindow.active==='signup'}
+                            disabled={activeWindow.active==='login'}
                         />
                         <div className="input-name input-margin">
                             <h3>Password</h3>
@@ -330,8 +353,8 @@ function LoginSignup(props) {
                             value={userSignup.signuppassword}
                             onChange={handleChange}
                             name='signuppassword'
-                            required={active==='signup'}
-                            disabled={active==='login'}
+                            required={activeWindow.active==='signup'}
+                            disabled={activeWindow.active==='login'}
                         />
                         <div className="input-name input-margin">
                             <h3>Confirm Password</h3>
@@ -343,9 +366,31 @@ function LoginSignup(props) {
                             value={userSignup.confirmpassword}
                             onChange={handleChange}
                             name='confirmpassword'
-                            required={active==='signup'}
-                            disabled={active==='login'}
+                            required={activeWindow.active==='signup'}
+                            disabled={activeWindow.active==='login'}
                         />
+                        <div className="input-r">
+                            <input 
+                                type='checkbox'
+                                name='newsletter'
+                                onChange={handleChange}
+                                style={{marginLeft: '0'}}
+                            />
+                            {/* <div className="check-input">
+                                <input 
+                                    type="checkbox" 
+                                    id="newsletter" 
+                                    name="newsletter" 
+                                    // checked={userSignup.newsletter} 
+                                    // onChange={handleChange} 
+                                    className="checkme"
+                                />
+                                {/* <label className="rememberme-blue" htmlFor="newsletter"></label> */}
+                            {/* </div> */}
+                            <div className="rememberme">
+                                <label htmlFor="remember-me-2" style={{marginLeft: '7px'}}>Signup for newsletter?</label>
+                            </div>
+                        </div>
                         <div className="input-name input-margin">
                             <h3>I prefer distances in</h3>
                         </div>
@@ -357,7 +402,7 @@ function LoginSignup(props) {
                                 value='miles'
                                 onChange={handleChange}
                                 name='distanceunit'
-                                disabled={active==='login'}
+                                disabled={activeWindow.active==='login'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
                                 defaultChecked
                             />
@@ -369,7 +414,7 @@ function LoginSignup(props) {
                                 value='kms'
                                 onChange={handleChange}
                                 name='distanceunit'
-                                disabled={active==='login'}
+                                disabled={activeWindow.active==='login'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
                             />
                             <label htmlFor="Kms">Kms</label>
@@ -380,64 +425,57 @@ function LoginSignup(props) {
                     </button>
                 </form>
             </div>
-            <div className="login-signup l-attop" id="login" onClick={handleLoginClick}>
+            <div className={activeWindow.loginClasses} id="login" onClick={handleLoginClick}>
                 <div className="login-signup-title">
-                    {needVerify&&active==='login'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "LOG IN"}
+                    LOG IN
                 </div>
                 <form onSubmit={handleSubmit}>
-                        {needVerify&&active==='login'
-                        ?
-                            <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
-                                <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
-                                <img height='100%' src='./img/not_found.png' alt='golden harp' />}
+                    <>
+                        <div style={{padding: '25px'}}>   
+                            <div className="input-name" id='loginEmail'>
+                                <h3>Email</h3>
                             </div>
-                        :
-                        <>
-                            <div style={{padding: '25px'}}>   
-                                <div className="input-name">
-                                    <h3>Email</h3>
+                            <input
+                                className="field-input"
+                                type='email'
+                                id={uuid()}
+                                value={userLogin.loginemail}
+                                onChange={handleChange}
+                                name='loginemail'
+                                required={activeWindow.active==='login'}
+                                disabled={activeWindow.active==='signup'}
+                            />
+                            <div className="input-name input-margin">
+                                <h3>Password</h3>
+                            </div>
+                            <input 
+                                className="field-input"
+                                type='password'
+                                id={uuid()}
+                                value={userLogin.loginpassword}
+                                onChange={handleChange}
+                                name='loginpassword'
+                                required={activeWindow.active==='login'}
+                                disabled={activeWindow.active==='signup'}
+                            />
+                            {/* <div className="input-r" onClick={()=>alert('remember me under construction')}>
+                                <div className="check-input">
+                                    <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
+                                    <label className="rememberme-blue" htmlFor="remember-me-2"></label>
                                 </div>
-                                <input
-                                    className="field-input"
-                                    type='email'
-                                    id={uuid()}
-                                    value={userLogin.loginemail}
-                                    onChange={handleChange}
-                                    name='loginemail'
-                                    required = {active==='login'}
-                                    disabled={active==='signup'}
-                                />
-                                <div className="input-name input-margin">
-                                    <h3>Password</h3>
+                                <div className="rememberme">
+                                    <label htmlFor="remember-me-2">Remember Me</label>
                                 </div>
-                                <input 
-                                    className="field-input"
-                                    type='password'
-                                    id={uuid()}
-                                    value={userLogin.loginpassword}
-                                    onChange={handleChange}
-                                    name='loginpassword'
-                                    required = {active==='login'}
-                                    disabled={active==='signup'}
-                                />
-                                {/* <div className="input-r" onClick={()=>alert('remember me under construction')}>
-                                    <div className="check-input">
-                                        <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
-                                        <label className="rememberme-blue" htmlFor="remember-me-2"></label>
-                                    </div>
-                                    <div className="rememberme">
-                                        <label htmlFor="remember-me-2">Remember Me</label>
-                                    </div>
-                                </div> */}
-                            </div>
-                            <button type='submit' className="submit-btn login-signup-title">
-                                Submit
-                            </button>
-                            <div className="forgot-pass" onClick={handleForgot}>
-                                <a href="#">Forgot Password?</a>
-                            </div>
-                        </>
-                    }
+                            </div> */}
+                        </div>
+                        <button type='submit' className="submit-btn login-signup-title">
+                            Submit
+                        </button>
+                        <div className="forgot-pass" onClick={handleForgot}>
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                    </>
+                    
                 </form>
             </div>
             <LoginSignupCSS />

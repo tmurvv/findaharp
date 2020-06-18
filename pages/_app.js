@@ -18,7 +18,7 @@ function MyApp(props) {
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     try {
-        if (props.router && props.router.query && props.router.query.findpath === 'resetpassword') props.router.push('/ResetPassword');
+        if (props.router && props.router.query && props.router.query.findpath === 'resetpassword') props.router.push(`/ResetPassword?useremail=${props.router.query.useremail}`);
     } catch (e) {
         console.error('from props.router', e)
     }
@@ -58,7 +58,6 @@ function MyApp(props) {
     )
 }
 export async function getServerSideProps(context) {
-    console.log('context', context)
     return {
       props: {query: context.query}, // will be passed to the page component as props
     }

@@ -1,10 +1,9 @@
 ### prelaunch
 
-- checkbox for newsletter
+- password incorrect message not returning, just says something went wrong
 - resend verify email for user who misplaces it
 - extensive testing
 - change store email on contact seller forms to store emails
-- also have a copy of email go to findaharp.com
 
 ### internal
 - separate store partner program info into a component
@@ -25,6 +24,7 @@
 - When update user encounters problem on backend, spinner persists, needs to show error message
 
 ### functionality
+- resend verification email is hacked
 - add way to ask about becoming a store partner to store partner page
 - trouble shoot distance needing two clicks
 - CRUD operations on upload listings

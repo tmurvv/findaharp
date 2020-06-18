@@ -16,6 +16,7 @@ function ResetPassword(props) {
         if (Router.query.useremail) email = Router.query.useremail.substr(0,Router.query.useremail.length-1);
         console.log('router', Router.query)
         if (email) console.log('email', email)
+        console.log(props);
 
     const [userSignup, setUserSignup] = useState({
         firstname: '',
@@ -112,13 +113,14 @@ function ResetPassword(props) {
         }
         resultText.innerText='Loading...';
         resultImg.style.display='block';
+        console.log(userLogin, 'resetpass')
         try {
             /* LOCAL */
-            // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
+            const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
             // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* STAGING */
-            const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
+            // const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* PRODUCTION */
             // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             

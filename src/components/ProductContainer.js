@@ -9,9 +9,7 @@ import ProductModal from './ProductModal';
 import ContactSellerForm from './ContactSellerForm';
 import Product from './Product';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../utils/helpers';
-import { productsReducer } from '../utils/reducers';
-import { loadGetInitialProps } from 'next/dist/next-server/lib/utils';
-
+import { productsReducer } from '../reducers/reducers';
 
 const initialState = {
     openDetail: false,

@@ -68,12 +68,9 @@ function LoginSignupCSS() {
                 top: 2px;
             }
             div.rememberme {
-                font-size: 12px;
-                top: 6px;
+                font-size: 14px;
+                top: 3px;
                 position: relative;
-                margin-left: 8px;
-                margin-bottom: 30px;
-                float: left;
             }
             .check-input label {
                 cursor: pointer;
@@ -87,7 +84,7 @@ function LoginSignupCSS() {
             .input-r {
                 margin-top: 30px;
                 margin-bottom: 30px;
-                position: relative;
+                display: flex;
             }
             // .check-input label:after {
             //     opacity: 0;
@@ -185,7 +182,7 @@ function LoginSignupCSS() {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
             #login {
-                transform: translate(28%, -165%);
+                transform: translate(28%, -184%);
             }
             #signup {
                 transform: translateX(-28%);

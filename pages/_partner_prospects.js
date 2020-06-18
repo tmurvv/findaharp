@@ -22,12 +22,12 @@ function PartnerProspects() {
 						<table cellpadding="0" cellspacing="0" border="0">
 						<tbody>
 								<tr>
-								<td>Harp Connection</td>
-								<td>Cameron & Karen</td>
-								<td>cameron.warner.jones@<br></br>gmail.com</td>
-								<td>888-287-4277</td>
-								<td>May 20, 2020</td>
-								<td><textarea value="awaiting response"/></td>
+									<td>Harp Connection</td>
+									<td>Cameron & Karen</td>
+									<td>cameron.warner.jones@<br></br>gmail.com</td>
+									<td>888-287-4277</td>
+									<td>May 20, 2020</td>
+									<td><textarea value="awaiting response"/></td>
 								</tr>
 								<tr>
 									<td>Harps Etc</td> 
@@ -67,7 +67,7 @@ function PartnerProspects() {
 									<td>stephen@phoenixharpcenter.com</td>
 									<td>602-341-4277</td>
 									<td>May 28th, 2020</td>
-									<td><textarea value='June 13th, Stephen emailed and said he did not received my email. I resent.June 12th, left Follow-up message'/></td>
+									<td><textarea value='June 15th, emailed and says he has a good amount of exposure and is not interested. June 13th, Stephen emailed and said he did not received my email. I resent.June 12th, left Follow-up message'/></td>
 								</tr>
 								<tr>
 									<td>Summerhays Music</td>
@@ -139,7 +139,7 @@ function PartnerProspects() {
 								<td>607-658-6589</td>
 								<td>mbocek@stny.rr.com</td>
 								<td>June 4th, 2020</td>
-								<td><textarea value='Apalachin NY, only 3 harps'/></td>
+								<td><textarea value='June 8th 2020 said she was retiring so not the right time,Apalachin NY, only 3 harps'/></td>
 								</tr>
 								<tr>
 								<td>Lyon & Healy</td>
@@ -198,28 +198,28 @@ function PartnerProspects() {
 									<td><textarea value='Santa Barbara'/></td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><textarea value=''/></td>
+									<td>Harp Place, The</td>
+									<td>Kathie</td>
+									<td>harpgal1@gmail.com</td>
+									<td>(518) 466-4084</td>
+									<td>June 15th, 2020</td>
+									<td><textarea value='Harps not on website'/></td>
 								</tr>
 								<tr>
+									<td>Budget Harp Rentals</td>
 									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
-									<td></td>
-									<td><textarea value=''/></td>
+									<td><textarea value='no mention of selling, but lots of harps'/></td>
 								</tr>
 								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><textarea value=''/></td>
+									<td>4harpmusic.com</td>
+									<td>Margaret Atkinson</td>
+									<td>contact form only</td>
+									<td>(214) 282-5354</td>
+									<td>June 15, 2020</td>
+									<td><textarea value='via contact form, Dallas area'/></td>
 								</tr>
 								<tr>
 									<td></td>
