@@ -66,7 +66,7 @@ function ContactUsForm(props) {
         }
         try {
             // local
-            const res = await axios.post(`http://localhost:3000/api/v1/contactform`, contact);
+            const res = await axios.post(`${process.env.backend}/api/v1/contactform`, contact);
             // testing
             // const res = await axios.post(`https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, contact);
             // staging

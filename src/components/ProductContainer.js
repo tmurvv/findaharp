@@ -40,10 +40,10 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
         dispatch({type:'initial'})
         setOpacity(false);
     }
-    function handleImageLoad(evt) {
-        evt.target.parentElement.style.backgroundColor="#ffffff";
-        if (evt.target.style.height !== '85%') evt.target.style.height="100%";
-    }
+    // function handleImageLoad(evt) {
+    //     evt.target.parentElement.style.backgroundColor="#ffffff";
+    //     if (evt.target.style.height !== '85%') evt.target.style.height="100%";
+    // }
     
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);

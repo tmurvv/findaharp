@@ -10,6 +10,7 @@ import { removeDashOE, geoDistance } from '../utils/helpers';
 function Product({productdetail, handleopendetail, handleclosedetail, handleopencontact, handleclosecontact, clientlat, clientlong}) {
     const [openProductModal, setOpenProductModal] = useState(false);
     const [openContactModal, setOpenContactModal] = useState(false);
+    const [useNaturalHeight, setUseNaturalHeight] = useState(0);
     
     function handleOpenProductModal() {
         setOpenProductModal(true);
@@ -32,8 +33,27 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="100%";
+        if (useNaturalHeight > 0) evt.target.style.height=`auto`;
     }
     
+    useEffect(() => {
+        var img = document.createElement('img');
+        console.dir('imin')
+        // img.src = evt.target.getAttribute('src');
+        img.src = productdetail.productImageUrl;
+
+        var poll = setInterval(function () {
+            if (img.naturalWidth) {
+                clearInterval(poll);
+                console.log(img.naturalWidth, img.naturalHeight);
+                console.log(img.naturalWidth/img.naturalHeight);
+                if (img.naturalWidth/img.naturalHeight > .85) setUseNaturalHeight(img.naturalHeight);
+                if (img.naturalWidth/img.naturalHeight > .85) console.log(productdetail.productTitle);
+            }
+        }, 10);
+
+        // img.onload = function () { console.log('Fully loaded'); }
+    })
     return (
         <div 
             key={productdetail.id} 
@@ -53,6 +73,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                         onError={(evt) => {evt.target.src='./img/not_found.png'; evt.target.style.height='85%';}} 
                         onLoad={(evt) => handleImageLoad(evt)}
                         alt={productdetail.productTitle}
+
                     />
                 </LazyLoad>
             </div>

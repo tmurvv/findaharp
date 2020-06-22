@@ -134,14 +134,7 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                /* LOCAL */
-                const res = await axios.post('http://localhost:3000/api/v1/users/createuser', newUser);
-                /* TESTING */
-                // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
-                /* STAGING */
-                // const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser', newUser);
-                /* PRODUCTION */
-                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
+                const res = await axios.post(`{process.env.backend}/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
@@ -170,16 +163,9 @@ function LoginSignup(props) {
             }
             // set loading image
             dispatchResultInfo({type:'loadingImage'});        
-            // login user
             try {
-                /* LOCAL */
-                const res = await axios.post('http://localhost:3000/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-                /* TESTING */
-                // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-                /* STAGING */
-                // const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
-                /* PRODUCTION */
-                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/loginuser', {email: userLogin.loginemail, password: userLogin.loginpassword});
+                // login user
+                const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
                 // set user context to added user
                 await setUser([
@@ -192,9 +178,8 @@ function LoginSignup(props) {
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
-            // error on login
             } catch(e) {
-                // user email not verified
+                // display error-user email not verified
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                
                     await setUserLogin({...userLogin, loginemail: e.response.data.useremail})
@@ -210,27 +195,25 @@ function LoginSignup(props) {
         resetSignupForm();
         // if (!needVerify) resetLoginForm();
     }
+    // handle forgotPassword click
     async function handleForgot() {
         const resultText = document.querySelector('#loadingLoginText');
+        // shortcut no email entered
         if (!userLogin.loginemail) {
             resultText.innerText='Please enter your account email.';
             dispatchResultInfo({type: 'tryAgain'});
             return;
         }
         try {
-            /* LOCAL */
-            const res = await axios.get(`http://localhost:3000/api/v1/users/sendresetemail/${userLogin.loginemail}`);
-            /* TESTING */
-            // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
-            /* STAGING */
-            // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
-            /* PRODUCTION */
-            // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/users/sendresetemail/${userLogin.loginemail}`);
+            // send forgot password email
+            const res = await axios.get(`${process.env.backend}/api/v1/users/sendresetemail/${userLogin.loginemail}`);
+            // display results
             if (res.status===200) {
                 resultText.innerText=`Please check your inbox for an email with instructions to reset your password.`;
                 dispatchResultInfo({type: 'OK'});
             }
         } catch (e) {
+            // display error
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset.'} Log in as guest user?`
             dispatchResultInfo({type: 'okTryAgain'});
         }
@@ -238,38 +221,32 @@ function LoginSignup(props) {
         // Router.push('/');
     }
     async function loginGuest(evt) {
-        evt.preventDefault();
+        evt.preventDefault();       
         if (needVerify) {
+            // display loader
             const resultText = document.querySelector('#loadingLoginText');
             dispatchResultInfo({ type: 'loadingImage' });  
-            const newUser = {
+            //create user object
+            const forgotPasswordUser = {
                 firstname: 'findaharp.com',
                 lastname: 'user',
                 email: userLogin.loginemail
             }
             try {
                 // this is a hack because program not returning for axios post, needs to be debugged and next three lines put below axios call
+                // display result
                 resultText.innerText=`Verify email sent.`;
                 dispatchResultInfo({type: 'OK'});
                 setNeedVerify(false);
-                /* LOCAL */
-                const res = await axios.post('http://localhost:3000/api/v1/resendverify', newUser);
-                /* TESTING */
-                // const res = await axios.post('https://findaharp-api-testing.herokuapp.com/api/v1/users/createuser', newUser);
-                /* STAGING */
-                // const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser', newUser);
-                /* PRODUCTION */
-                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/users/createuser', newUser);
-             
-                // if (res.status===200) {
-                    
-                // }
+                // send forgot password email
+                const res = await axios.post(`${process.env.backend}/api/v1/resendverify`, forgotPasswordUser);
             } catch (e) {
+                // display error
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong sending verification email.'} Log in as guest user?`;
                 dispatchResultInfo({type: 'okTryAgain'});
             }
         }
-        resetResults();
+        // go to main window
         Router.push('/');
     }
     return (

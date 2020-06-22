@@ -16,7 +16,7 @@ function UserProfileCSS() {
                 padding-top: 70px;
                 min-height: 400px;
             }
-            .updatePassword-edit {
+            .login-signup {
                 width: 300px;
                 margin: 0 auto;
                 background: #e2e2e2;
@@ -148,7 +148,7 @@ function UserProfileCSS() {
                 color: #757575;
                 text-decoration: underline;
             }
-            #edit .updatePassword-edit-content {
+            #signup .updatePassword-edit-content {
                 padding-bottom: 46px;
             }
             .s-atbottom {
@@ -180,17 +180,17 @@ function UserProfileCSS() {
                 filter: blur(1px);
                 opacity: 0.4;
             }
-            #edit,
-            #updatePassword {
+            #signup,
+            #login {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
-            #updatePassword {
+            #login {
                 transform: translate(28%, -165%);
             }
-            #edit {
+            #signup {
                 transform: translateX(-28%);
             }
-            #loadingUpdatePassword {
+            #loadingLogin {
                 display: none;
                 color: #6A75AA;
                 border: 2px solid #6A75AA;
@@ -205,17 +205,17 @@ function UserProfileCSS() {
                 transform: translate(50%, 50%);
                 z-index: 5000;
             }
-            #loadingUpdatePasswordImg {
+            #loadingLoginImg {
                 display: block;
                 height: 50px;
                 margin: auto;
             }
-            #loadingUpdatePasswordOk,
-            #loadingUpdatePasswordTryAgain {
+            #loadingLoginOk,
+            #loadingLoginTryAgain {
                 display: none;
                 padding: 7px;
             }
-            #loadingUpdatePasswordText {
+            #loadingLoginText {
                 text-align: center;
             }
             // .detailButton {

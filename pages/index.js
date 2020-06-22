@@ -66,7 +66,7 @@ Index.getInitialProps = async () => {
     // TESTING API
     // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     // LOCAL API
-    const res = await axios.get('http://localhost:3000');
+    const res = await axios.get(`${process.env.backend}`);
     
     // API DATA Populate variables
     const products = res.data.harpData;

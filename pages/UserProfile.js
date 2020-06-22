@@ -1,17 +1,33 @@
 // packages
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext, useReducer } from 'react';
 import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
 import PageTitle from '../src/components/PageTitle';
-import { UserContext } from '../src/contexts/UserContext';
 import UserProfileCSS from '../src/styles/UserProfile.css';
+import { UserContext } from '../src/contexts/UserContext';
+import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 
+const resultInfoInitialState = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
+const activeWindowInitialState = {
+    activeWindow: 'changePassword',
+    loginClasses: 'login-signup l-attop',
+    signupClasses: 'login-signup s-atbottom'
+}
 function UserProfile(props) {
     const { user, setUser} = useContext(UserContext);
-    const [active, setActive] = useState('changePassword');
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
+    const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
+    // const [active, setActive] = useState('changePassword');
     const [needVerify, setNeedVerify] = useState(false);
     const [userEdit, setUserEdit] = useState({
         firstname: '',
@@ -77,53 +93,54 @@ function UserProfile(props) {
         });
     }
     function resetResults() {
-        document.querySelector('#loadingUpdatePassword').style.display='none';
-        document.querySelector('#loadingUpdatePasswordText').innerText='';
-        document.querySelector('#loadingUpdatePasswordOk').style.display='none';
-        document.querySelector('#loadingUpdatePasswordTryAgain').style.display='none';
-        document.querySelector('#loadingUpdatePasswordImg').style.display='none';
+        dispatchResultInfo({type: 'initial'});
+        // document.querySelector('#loadingUpdatePassword').style.display='none';
+        // document.querySelector('#loadingUpdatePasswordText').innerText='';
+        // document.querySelector('#loadingUpdatePasswordOk').style.display='none';
+        // document.querySelector('#loadingUpdatePasswordTryAgain').style.display='none';
+        // document.querySelector('#loadingUpdatePasswordImg').style.display='none';
     }
     function handleEditClick(evt) {
+        // resetLoginForm();
+        dispatchActiveWindow({type: 'signup'});
         resetUpdatePasswordForm();
-        setActive('editProfile');
-        const edit = document.querySelector('#edit');
-        const updatePassword = document.querySelector('#updatePassword');
-        edit.classList.remove("s-atbottom");
-        edit.classList.add("s-attop");
-        updatePassword.classList.remove("l-attop");
-        updatePassword.classList.add("l-atbottom");
+        // setActive('editProfile');
+        // const edit = document.querySelector('#edit');
+        // const updatePassword = document.querySelector('#updatePassword');
+        // edit.classList.remove("s-atbottom");
+        // edit.classList.add("s-attop");
+        // updatePassword.classList.remove("l-attop");
+        // updatePassword.classList.add("l-atbottom");
     }
     function handleUpdatePasswordClick(evt) {
-        if (userEdit.editchange===true) {if (!confirm('changes will be lost')) return};
+        // if (userSignup.signupchange===true) {if (!confirm('changes will be lost')) return};
+        // resetSignupForm();
+        // if (userEdit.editchange===true) {if (!confirm('changes will be lost')) return};
+        dispatchActiveWindow({type: 'login'});
         resetEditForm();
-        setActive('changePassword');
-        const edit = document.querySelector('#edit');
-        const updatePassword = document.querySelector('#updatePassword');
-        edit.classList.add("s-atbottom");
-        edit.classList.remove("s-attop");
-        updatePassword.classList.add("l-attop");
-        updatePassword.classList.remove("l-atbottom");
+        // setActive('changePassword');
+        // const edit = document.querySelector('#edit');
+        // const updatePassword = document.querySelector('#updatePassword');
+        // edit.classList.add("s-atbottom");
+        // edit.classList.remove("s-attop");
+        // updatePassword.classList.add("l-attop");
+        // updatePassword.classList.remove("l-atbottom");
     }
     
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingUpdatePassword');
-        const resultText = document.querySelector('#loadingUpdatePasswordText');
-        const resultButton = document.querySelector('#loadingUpdatePasswordOk');
-        const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
-        const resultImg = document.querySelector('#loadingUpdatePasswordImg');
-        if (active==='editProfile') {
+        // const resultContainer = document.querySelector('#loadingUpdatePassword');
+        const resultText = document.querySelector('#loadingLoginText');
+        // const resultButton = document.querySelector('#loadingUpdatePasswordOk');
+        // const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
+        // const resultImg = document.querySelector('#loadingUpdatePasswordImg');
+        if (activeWindow.active==='signup') {
             // shortcut
             if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
-                resultContainer.style.display='block';
-                resultImg.style.display='none';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft=0;
+                dispatchResultInfo({type: 'tryAgain'})
                 resultText.innerText=`Passwords must be at least 8 characters long.`;
                 return
             }
-            resultContainer.style.display='block';
-            resultImg.style.display='block';
             const updatedUser = {
                 firstname: userEdit.firstname?userEdit.firstname:user[0],
                 lastname: userEdit.lastname?userEdit.lastname:user[1],
@@ -135,13 +152,13 @@ function UserProfile(props) {
             
             try {
                 /* LOCAL */
-                // const res = await axios.patch(`http://localhost:3000/api/v1/users/updateuser/${user[4]}`, updatedUser);
+                // const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user[4]}`, updatedUser);
                 /* TESTING */
-                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}', newUser);
+                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 /* STAGING */
-                const res = await axios.patch('https://findaharp-api-staging.herokuapp.com/api/v1/users/updateuser/${user[4]}', newUser);
+                const res = await axios.patch('https://findaharp-api-staging.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 /* PRODUCTION */
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', newUser);
+                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 if (res.status===200) {
                     console.log('result', res.data)
                     resultImg.style.display='none';
@@ -159,34 +176,31 @@ function UserProfile(props) {
                     ]);
                 }
             } catch (e) {
-                resultImg.style.display='none';
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
+                // resultImg.style.display='none';
+                // resultButton.style.display='block';
+                // resultButtonTryAgain.style.display='block';
+                // resultButtonTryAgain.style.marginLeft='30px';
+                dispatchResultInfo({type: 'tryAgain'});
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update.'}`
                 // resultText.innerText=`Something went wrong on edit. Log in as guest user?`
             }
         }       
-        if (active==='changePassword') {   
-            resultContainer.style.display='block';
+        if (activeWindow.active==='login') {   
+            debugger
+            // check password length
             if (userUpdatePassword.oldpassword.length<8 || userUpdatePassword.newpassword.length<8) {
-                resultImg.style.display='none';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft=0;
+                dispatchResultInfo({type: 'tryAgain'});
                 resultText.innerText=`Passwords must be at least 8 characters long.`;
                 return
             }
-            // passwords match 
+            // check if passwords match 
             if (userUpdatePassword.newpassword !== userUpdatePassword.confirmpassword) {
-                resultContainer.style.display='block';
-                resultImg.style.display='none';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft=0;
+                dispatchResultInfo({type: 'tryAgain'});
                 resultText.innerText=`Passwords do not match.`;
                 return
             }
-            resultText.innerText='Loading...';
-            resultImg.style.display='block';
+            resultText.innerText=``;
+            dispatchResultInfo({type: 'loadingImage'})
             try {
                 /* LOCAL */
                 // await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
@@ -196,24 +210,26 @@ function UserProfile(props) {
                 const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* PRODUCTION */
                 // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
-                console.log('gothere')
+                dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
-                resultImg.style.display='none';
-                resultButton.style.display= 'block';
+                // resultImg.style.display='none';
+                // resultButton.style.display= 'block';
             } catch(e) {
                 console.dir(e)
                 if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
-                    resultImg.style.display='none';
+                    // resultImg.style.display='none';
+                    dispatchResultInfo({type: 'okTryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'A.Something went wrong on updatePassword.'}`;
-                    resultButton.style.display='block';
-                    resultButtonTryAgain.style.display='block';
-                    resultButtonTryAgain.style.marginLeft='30px';
+                    // resultButton.style.display='block';
+                    // resultButtonTryAgain.style.display='block';
+                    // resultButtonTryAgain.style.marginLeft='30px';
                 } else {
-                    resultImg.style.display='none';
+                    // resultImg.style.display='none';
+                    dispatchResultInfo({type: 'okTryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'B.Something went wrong on updatePassword.'}`;
-                    resultButton.style.display='block';
-                    resultButtonTryAgain.style.display='block';
-                    resultButtonTryAgain.style.marginLeft='30px';
+                    // resultButton.style.display='block';
+                    // resultButtonTryAgain.style.display='block';
+                    // resultButtonTryAgain.style.marginLeft='30px';
                 }
             }
         }
@@ -225,17 +241,18 @@ function UserProfile(props) {
         Router.push('/');
     }
     async function handleDelete(e) {
-        const resultContainer = document.querySelector('#loadingUpdatePassword');
-        const resultText = document.querySelector('#loadingUpdatePasswordText');
-        const resultButton = document.querySelector('#loadingUpdatePasswordOk');
-        const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
-        const resultImg = document.querySelector('#loadingUpdatePasswordImg');
+        // const resultContainer = document.querySelector('#loadingUpdatePassword');
+        const resultText = document.querySelector('#loadingLoginText');
+        // const resultButton = document.querySelector('#loadingUpdatePasswordOk');
+        // const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
+        // const resultImg = document.querySelector('#loadingUpdatePasswordImg');
         e.preventDefault();
         if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
-            resultContainer.style.display='block';
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display='block';
-            resultButtonTryAgain.style.marginLeft=0;
+            // resultContainer.style.display='block';
+            // resultImg.style.display='none';
+            // resultButtonTryAgain.style.display='block';
+            // resultButtonTryAgain.style.marginLeft=0;
+            dispatchResultInfo({type: 'tryAgain'});
             resultText.innerText=`Passwords must be at least 8 characters long.`;
             return
         }
@@ -243,7 +260,7 @@ function UserProfile(props) {
         
         try {
             // LOCAL
-            // const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user[4]}`);
+            // const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user[4]}`);
             // TESTING
             // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // STAGING
@@ -251,33 +268,60 @@ function UserProfile(props) {
             // PRODUCTION
             // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // const returnedUser = res.user;
+            dispatchResultInfo({type: 'OK'});
             resultText.innerText=`Account ${user[2]} has been deleted`;
-            resultContainer.style.display='block';
-            resultImg.style.display='none';
-            resultButton.style.display= 'block';
+            // resultContainer.style.display='block';
+            // resultImg.style.display='none';
+            // resultButton.style.display= 'block';
             await setUser(['Login','','','miles','']);
         } catch(e) {
             console.dir(e)
-            resultContainer.style.display='block';
-            resultImg.style.display='none';
+            dispatchResultInfo({type: 'OK'})
+            // resultContainer.style.display='block';
+            // resultImg.style.display='none';
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
-            resultButton.style.display='block';
-        }
-        
+            // resultButton.style.display='block';
+        }    
     }
     return (
        <>
         <div className='updatePassword-edit-container'>
             <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
-            <div id="loadingUpdatePassword">
+            <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+                <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingLoginText"></p>
+                <div className='flex-sb'>
+                    <button 
+                        id='loadingLoginOk'
+                        type='button' 
+                        className='submit-btn' 
+                        onClick={updatePasswordGuest}
+                        style={{display: resultInfo.resultOkButton}} 
+                    >
+                        OK
+                    </button>
+                    <button 
+                        id='loadingLoginTryAgain' 
+                        type='button' 
+                        className='submit-btn submit-btn-tryAgain' 
+                        onClick={()=>dispatchResultInfo({type:'initial'})}
+                        style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}} 
+                    >
+                        Try Again
+                    </button>
+                </div>
+            </div>
+            
+            
+            {/* <div id="loadingUpdatePassword">
                 <img id='loadingUpdatePasswordImg' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingUpdatePasswordText"></p>
                 <div className='flex-sb'>
                     <button id='loadingUpdatePasswordOk' type='button' className='submit-btn' onClick={updatePasswordGuest}>OK</button>
                     <button id='loadingUpdatePasswordTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                 </div>
-            </div>
-            <div className="updatePassword-edit s-atbottom" id="edit" onClick={()=>handleEditClick()}>
+            </div> */}
+            <div className={activeWindow.signupClasses} id="signup" onClick={()=>handleEditClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="updatePassword-edit-title">
                         Edit User Profile
@@ -293,8 +337,8 @@ function UserProfile(props) {
                             value={userEdit.editpassword}
                             onChange={handleChange}
                             name='editpassword'
-                            required={active==='editProfile'}
-                            disabled={active==='changePassword'}
+                            required={activeWindow.active==='editProfile'}
+                            disabled={activeWindow.active==='changePassword'}
                         />
                         <div className="input-name">
                             <h3>First Name</h3>
@@ -306,7 +350,7 @@ function UserProfile(props) {
                             onChange={handleChange}
                             name='firstname'
                             placeholder={user[0]}
-                            disabled={active==='changePassword'}
+                            disabled={activeWindow.active==='changePassword'}
                         />
                         <div className="input-name">
                             <h3>Last Name</h3>
@@ -318,7 +362,7 @@ function UserProfile(props) {
                             onChange={handleChange}
                             name='lastname'
                             placeholder={user[1]}
-                            disabled={active==='passwordChange'}
+                            disabled={activeWindow.active==='passwordChange'}
                         />
                         <div className="input-name input-margin">
                             <h3>E-Mail</h3>
@@ -331,8 +375,8 @@ function UserProfile(props) {
                             onChange={handleChange}
                             name='editemail'
                             placeholder={user[2]}
-                            required={active==='editProfile'}
-                            disabled={active==='changePassword'}
+                            required={activeWindow.active==='editProfile'}
+                            disabled={activeWindow.active==='changePassword'}
                         />
                         <div className="input-name input-margin">
                             <h3>I prefer distances in</h3>
@@ -345,7 +389,7 @@ function UserProfile(props) {
                                 value='miles'
                                 onChange={handleChange}
                                 name='distanceunit'
-                                disabled={active==='changePassword'}
+                                disabled={activeWindow.active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
                                 defaultChecked = {user[3]==='miles'}
                             />
@@ -357,7 +401,7 @@ function UserProfile(props) {
                                 value='kms'
                                 onChange={handleChange}
                                 name='distanceunit'
-                                disabled={active==='changePassword'}
+                                disabled={activeWindow.active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
                                 defaultChecked = {user[3]!=='miles'}
                             />
@@ -375,12 +419,12 @@ function UserProfile(props) {
                     </button>
                 </form>
             </div>
-            <div style={{transform: 'translate(28%, -145%)'}} className="updatePassword-edit l-attop" id="updatePassword" onClick={handleUpdatePasswordClick}>
+            <div style={{transform: 'translate(28%, -145%)'}} className={activeWindow.loginClasses} id="login" onClick={handleUpdatePasswordClick}>
                 <div className="updatePassword-edit-title">
-                    {needVerify&&active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
+                    {needVerify&&activeWindow.active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
                 </div>
                 <form onSubmit={handleSubmit}>
-                        {needVerify&&active==='changePassword'
+                        {needVerify&&activeWindow.active==='changePassword'
                         ?
                             <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
                                 <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
@@ -399,8 +443,8 @@ function UserProfile(props) {
                                     value={userUpdatePassword.oldpassword}
                                     onChange={handleChange}
                                     name='oldpassword'
-                                    required={active==='changePassword'}
-                                    disabled={active==='editProfile'}
+                                    required={activeWindow.active==='changePassword'}
+                                    disabled={activeWindow.active==='editProfile'}
                                 />
                                 <div className="input-name input-margin">
                                     <h3>New Password</h3>
@@ -412,8 +456,8 @@ function UserProfile(props) {
                                     value={userUpdatePassword.newpassword}
                                     onChange={handleChange}
                                     name='newpassword'
-                                    required={active==='changePassword'}
-                                    disabled={active==='editProfile'}
+                                    required={activeWindow.active==='changePassword'}
+                                    disabled={activeWindow.active==='editProfile'}
                                 />
                                 <div className="input-name input-margin">
                                     <h3>Confirm New Password</h3>
@@ -425,8 +469,8 @@ function UserProfile(props) {
                                     value={userUpdatePassword.confirmpassword}
                                     onChange={handleChange}
                                     name='confirmpassword'
-                                    required={active==='changePassword'}
-                                    disabled={active==='editProfile'}
+                                    required={activeWindow.active==='changePassword'}
+                                    disabled={activeWindow.active==='editProfile'}
                                 />
                             </div>
                             <button type='submit' className="submit-btn updatePassword-edit-title">

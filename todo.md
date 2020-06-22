@@ -4,6 +4,7 @@
 - resend verify email for user who misplaces it
 - extensive testing
 - change store email on contact seller forms to store emails
+- location does not work if location already selected
 
 ### internal
 - separate store partner program info into a component
@@ -18,6 +19,7 @@
 
 ### UI/UX
 
+- get image natural height and width and limit change that object-fit: cover is doing
 - email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
