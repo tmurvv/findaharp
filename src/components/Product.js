@@ -37,22 +37,16 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     }
     
     useEffect(() => {
+        // if image is squarish, adjusts the height so image not stretched out
         var img = document.createElement('img');
-        console.dir('imin')
-        // img.src = evt.target.getAttribute('src');
         img.src = productdetail.productImageUrl;
 
         var poll = setInterval(function () {
             if (img.naturalWidth) {
                 clearInterval(poll);
-                console.log(img.naturalWidth, img.naturalHeight);
-                console.log(img.naturalWidth/img.naturalHeight);
                 if (img.naturalWidth/img.naturalHeight > .85) setUseNaturalHeight(img.naturalHeight);
-                if (img.naturalWidth/img.naturalHeight > .85) console.log(productdetail.productTitle);
             }
         }, 10);
-
-        // img.onload = function () { console.log('Fully loaded'); }
     })
     return (
         <div 

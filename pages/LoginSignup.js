@@ -179,6 +179,7 @@ function LoginSignup(props) {
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
+                // console.dir(e);
                 // display error-user email not verified
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                
@@ -186,6 +187,12 @@ function LoginSignup(props) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 // other error
+                } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
+                    dispatchResultInfo({type: 'okTryAgain'});
+                } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
+                    dispatchResultInfo({type: 'okTryAgain'});
                 } else {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});

@@ -46,26 +46,7 @@ function ActivateEmail(props) {
                             </div>
                         </>
                     }
-                    </div>
-                    // <div className="login-signup" style={{ transform: 'translate(0,0)'}} id="login">
-                    //     <div className="login-signup-title">
-                    //         {found?<p>Email Verified, Login Successful</p>:<p>Email not found, please try signing up again.</p>}
-                    //     </div>
-                    //     <div className="login-signup-content">
-                    //         <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
-                    //             <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
-                    //             {found?
-                    //                 <img height='100%' src='./img/golden_harp_full.png' alt='golden harp' />
-                    //                 :<img height='100%' src='./img/not_found.png' alt='golden harp' />}
-                    //         </div>
-                    //         <div>
-                    //             {found?
-                    //                 <a href='https://findaharp.com'><button className='submit-btn'>Go to Harp Listings</button></a>
-                    //                 :<a href='https://findaharp.com/LoginSignup'><button className='submit-btn'>Go to Login/Signup</button></a>
-                    //             }
-                    //         </div>
-                    //     </div>
-                    // </div>              
+                    </div>              
                 }
             <LoginSignupCSS />
         </div>

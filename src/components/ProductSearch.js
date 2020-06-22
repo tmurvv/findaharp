@@ -142,7 +142,8 @@ function ProductSearch(props) {
                 location,
                 searchInfo: getSearchInfo(newState)
             });
-            if (location!=='All Locations') setMenus(initialState);
+            console.log('abobe set menus', location)
+            setMenus(initialState);
         }
         const addDistances = () => {
             props.products.map(async product => {
@@ -152,13 +153,14 @@ function ProductSearch(props) {
         }
         if (location==='ltActivate') {
             await addDistances();
-            location='All Locations';
+            // location='All Locations';
             updateState();
         } else {
             updateState();
-        }  
+        }
     }
     function handleClick(e) {
+        console.log('handleclick', e.target.name, menus.location)
         switch(e.target.name) {
             case 'size':
                 setMenus({
@@ -191,11 +193,12 @@ function ProductSearch(props) {
                 });
                 break;
             case 'finish':
+                console.log('finish')
                 setMenus({
                     size: false,
                     maker: false,
                     model: false,
-                    finish: !menus.finish,
+                    finish: true, // BREAKING
                     price: false,
                     location: false
                 });
@@ -253,17 +256,8 @@ function ProductSearch(props) {
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
     }
     useEffect(() => {
-        
         triggerLazy();
-        
     },[]);
-    //implement distance filter here or in getInitial or useEffect?
-    // let filteredProducts;
-    // if (allState.location && allState.location.startsWith('lt')) {
-    //     filteredProducts = getFilteredProductsAsync();
-    // } else {
-    //     // filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
-    // }
     
     const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
 
@@ -372,7 +366,7 @@ function ProductSearch(props) {
             </div>
             <h3 className='searchTitle'>Further refine your search.</h3>
             <div className='mobileSearchLine2'>
-                <div className='searchLine2'>
+                <div ref={ref} className='searchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
                     <FinishMenu 
                         handleFinishChange = {handleFinishSelection} 
