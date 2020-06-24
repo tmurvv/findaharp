@@ -186,7 +186,6 @@ function UserProfile(props) {
             }
         }       
         if (activeWindow.active==='login') {   
-            debugger
             // check password length
             if (userUpdatePassword.oldpassword.length<8 || userUpdatePassword.newpassword.length<8) {
                 dispatchResultInfo({type: 'tryAgain'});

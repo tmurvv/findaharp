@@ -44,7 +44,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
         var poll = setInterval(function () {
             if (img.naturalWidth) {
                 clearInterval(poll);
-                if (img.naturalWidth/img.naturalHeight > .85) setUseNaturalHeight(img.naturalHeight);
+                if (img.naturalWidth/img.naturalHeight > .80) setUseNaturalHeight(img.naturalHeight);
             }
         }, 10);
     })
