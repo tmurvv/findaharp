@@ -34,7 +34,7 @@ export default function StorePartners() {
                 maintitle='Our Store Partners' 
                 subtitle='Find a Harp is proud to partner with the following harp sellers' 
             />
-            <h3 className={`subTitle`} style={{width: 'fit-content', margin: 'auto', marginBottom: '-10px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA', textDecoration: 'underline'}}>Click here</button>for information on becoming a store partner.</h3>
+            <h3 className={`subTitle`} style={{width: 'fit-content', marginBottom: '0px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA', textDecoration: 'underline'}}>Click here</button>for information on becoming a store partner.</h3>
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container">
                     {addPlaceHolders.map(partner=> 

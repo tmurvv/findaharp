@@ -27,7 +27,7 @@ function PartnerProspects() {
 									<td>cameron.warner.jones@<br></br>gmail.com</td>
 									<td>888-287-4277</td>
 									<td>May 20, 2020</td>
-									<td><textarea value="awaiting response"/></td>
+									<td><textarea value="June 28th, 2020 - said they do not want to dilute their brand, awaiting response"/></td>
 								</tr>
 								<tr>
 									<td>Harps Etc</td> 
@@ -99,7 +99,7 @@ function PartnerProspects() {
 									<td>david@vaharpcenter.com</td>
 									<td>804-378-3761</td>
 									<td>May 28th, 2020</td>
-									<td><textarea value='June 24th, followed up. June 9th, Talked about program. He will think and get back.'/></td>
+									<td><textarea value='June 25thish said it would not work for their business. June 24th, followed up. June 9th, Talked about program. He will think and get back.'/></td>
 								</tr>
 								<tr>
 									<td>Michigan Harp Center</td>

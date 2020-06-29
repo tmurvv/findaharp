@@ -232,6 +232,7 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
     // size filter
     if (allState.size&&allState.size.toUpperCase() !== "ALL SIZES") 
         filteredProducts = filteredProducts.filter(
+            
             product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase())
         );
     return filteredProducts;

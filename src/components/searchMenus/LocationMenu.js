@@ -47,7 +47,6 @@ export default function LocationMenu(props) {
                 >Less than 500 {distanceUnit}</li>      
                 <li 
                     onClick={handleClose} 
-                    
                     hidden={!activateDriving} 
                     // key={uuid()}
                     name='Less than 300'
@@ -94,7 +93,7 @@ export default function LocationMenu(props) {
                     hidden={activateDriving}
                     // key={uuid()} 
                     name='Pacific'
-                >Pacific</li>
+                >US-Pacific</li>
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}

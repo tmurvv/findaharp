@@ -14,9 +14,9 @@
         - Search
         - ProdCont
         - Footer
-    - contact us
+    - contact us & store partners
         - test become store partner here
-# done to here June 24, 2020
+# done to here June 30, 2020
 ### functionality - search
     - each menu
     - menu combos

@@ -6,6 +6,11 @@ function StorePartnersCSS() {
                 padding-top: 70px;
                 padding-bottom: 70px;
             }
+            @media only screen and (max-width: 550px) {
+                .subTitle {
+                    max-width: 300px;
+                }
+            }
         `}</style>
     )
 }

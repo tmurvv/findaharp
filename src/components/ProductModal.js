@@ -39,7 +39,7 @@ function ProductModal(props) {
     return (
         <>
         <div className='detailContainer'>
-            <h1>{productMaker} {productModel}</h1>
+            <h1>{productModel.indexOf(productMaker)>-1?'':productMaker} {productModel}</h1>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
             <div className='detailInfo'>
             <div className={`detailImg`}><img src= {productImageUrl} alt={productTitle} /></div>

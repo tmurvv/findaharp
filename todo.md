@@ -1,6 +1,10 @@
 ### prelaunch
 
 - photos come out stretched after changing to driving distance
+- take out dimmed models, just too many
+- if #strings not listed take out word strings
+- make sure Mid-West lists Michigan harps
+- take other out of finish
 - extensive testing
 - change store email on contact seller forms to store emails
 
@@ -25,6 +29,7 @@
 - sometimes when messing with window size, harp photos get stretched
 
 ### functionality
+- continue trouble shooting why Markwood not showing up in medium lever
 - resend verification email is hacked
 - add way to ask about becoming a store partner to store partner page
 - trouble shoot distance needing two clicks
@@ -51,10 +56,11 @@
 
 - finish writing tests for helper file
 
-<div>Font made from <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>is licensed by CC BY 3.0</div>
+<div>Font made from <a href="http://www.onlinewebfonts.com">online Web Fonts</a>is licensed by CC BY 3.0</div>
 
 ### FUTURE IDEAS:
 
+- list of all makers and models
 - add edit pencils to user profile and disable fields
 - on mobile menu highlight, put in fancy corners
 - New Listings Page
