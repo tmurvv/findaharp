@@ -4,33 +4,46 @@
 ### first do regular deploy checklist
 
 ### page by page links
-    - home page
-        - NavBar
-        - Search
-        - ProdCont
-        - Footer
-    - test all responsive
-        - NavBar
-        - Search
-        - ProdCont
-        - Footer
-    - contact us & store partners
-        - test become store partner here
-# done to here June 30, 2020
+    [x] home page
+        [x] NavBar
+        [x] Search
+        [x] ProdCont
+        [x] Footer
+    [x] test all responsive
+        [x] NavBar
+        [x] Search
+        [x] ProdCont
+        [x] Footer
+    [x] contact us page
+        [x] test become store partner here
+        [x] become store partner responsive
+    [x] store partner page
+        [x] test become store partner here
+        [x] become store partner responsive
+
 ### functionality - search
-    - each menu
-    - menu combos
-    - driving distance
-    - clear one, clear all
+    [x] each menu
+    [x] menu combos
+    [x] driving distance
+    [x] clear one, clear all
 
 ### functionality - auth
-    - all signup
-    - all login
-    - forgot password
-    - change password
-    - edit profile
-    - delete account
+    [x] all login
+        [x] success
+        [x] errors
+            [x] email not found
+            [x] password not long enough
+            [x] password incorrect
+    [] all signup
+        [] success 
+            [x] verify email sent
+            [] verify email works
+        [] errors
+    [] forgot password
+    [] change password
+    [] edit profile
+    [] delete account
 
 ### functionality - contacts
-    - contact seller
-    - contact users
+    [] contact seller
+    [] contact users

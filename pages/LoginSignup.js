@@ -134,7 +134,7 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                const res = await axios.post(`{process.env.backend}/api/v1/users/createuser`, newUser);
+                const res = await axios.post(`${process.env.backend}/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
@@ -150,6 +150,8 @@ function LoginSignup(props) {
                 }
             // Error on signup
             } catch (e) {
+                console.dir(e)
+                console.log(e.response.data.message)
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`;
                 dispatchResultInfo({type: 'okTryAgain'});
             }
@@ -179,7 +181,8 @@ function LoginSignup(props) {
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
-                // console.dir(e);
+                console.dir(e);
+                console.log(e.response.data.message)
                 // display error-user email not verified
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                

@@ -257,7 +257,6 @@ function ProductSearch(props) {
     },[]);
     
     const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
-    console.log(filteredProducts)
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -462,7 +461,7 @@ function ProductSearch(props) {
             </div>
             <div className='selected'>
                 <p>
-                    SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)} (${filteredProducts.length})`:`${allState.searchInfo}`}
+                    SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}
                 </p>
                 <div onClick={handleClear} style={{display: 'none'}} className='clearAll clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>

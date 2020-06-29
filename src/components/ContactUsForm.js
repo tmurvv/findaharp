@@ -101,7 +101,7 @@ function ContactUsForm(props) {
                     <h3>Suggestions</h3>
                     <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p><br></br><br></br>
                     <h3>Do you sell harps?</h3>
-                    <p>We are always looking for more harps to list on our site to show off our extensive search capabilities. <button onClick={()=>{console.log('in');setOpenStoreOwnerInq(true)}} style={{margin: '0', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA', textDecoration: 'underline'}}>Click here</button> for information on becoming a store partner at findaharp.com.</p><br></br><br></br>
+                    <p>We are always looking for more harps to list on our site to show off our extensive search capabilities. <button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: '0', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA', textDecoration: 'underline'}}>Click here</button> for information on becoming a store partner at findaharp.com.</p><br></br><br></br>
                     <h3>Submissions to our Buyer's Guide</h3>
                     <p>We would love for our Buyer's Guide to be a collaborative undertaking by the harp community. Please submit anything you feel we have left out.</p><br></br><br></br>
                     <h3>Problems with Harp Advertisements</h3>

@@ -1,10 +1,7 @@
 ### prelaunch
 
-- photos come out stretched after changing to driving distance
-- take out dimmed models, just too many
-- if #strings not listed take out word strings
+- photos come out stretched after coming from different window
 - make sure Mid-West lists Michigan harps
-- take other out of finish
 - extensive testing
 - change store email on contact seller forms to store emails
 
