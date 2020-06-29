@@ -80,10 +80,10 @@ function PartnerProspects() {
 								<tr>
 									<td>Classic Harps Northwest</td>
 									<td>Marni Williams</td>
-									<td>marni@classicharpsnw.com</td>
+									<td>marni@classicharpsnw.com</td> 
 									<td>503-251-6920<br/>360-798-2188c</td>
 									<td>May 28, 2020</td>
-									<td><textarea value='Tried to phone on June 12, not there'/></td>
+									<td><textarea value='Tried to phone on June 12, not there, tried again June 24'/></td>
 								</tr>
 								<tr>
 									<td>Kolacny Music</td>
@@ -99,7 +99,7 @@ function PartnerProspects() {
 									<td>david@vaharpcenter.com</td>
 									<td>804-378-3761</td>
 									<td>May 28th, 2020</td>
-									<td><textarea value='June 9th, Talked about program. He will think and get back.'/></td>
+									<td><textarea value='June 24th, followed up. June 9th, Talked about program. He will think and get back.'/></td>
 								</tr>
 								<tr>
 									<td>Michigan Harp Center</td>
@@ -107,7 +107,7 @@ function PartnerProspects() {
 									<td>michiganharpcenter@gmail.com</td>
 									<td>248-288-4277</td>
 									<td>May 29th, 2020</td>
-									<td><textarea /></td>
+									<td><textarea value="June 24, said yes!! June 24, spoke with her by phone and she will get back to me"/></td>
 								</tr>
 								<tr>
 									<td>Emerald Harp</td>

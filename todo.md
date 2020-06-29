@@ -1,6 +1,6 @@
 ### prelaunch
 
-- redo password reset and activate email functionality
+- photos come out stretched after changing to driving distance
 - extensive testing
 - change store email on contact seller forms to store emails
 
@@ -17,10 +17,12 @@
 
 ### UI/UX
 
+- store partner info from store partner page images not quite right
 - email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - When update user encounters problem on backend, spinner persists, needs to show error message
+- sometimes when messing with window size, harp photos get stretched
 
 ### functionality
 - resend verification email is hacked

@@ -1,3 +1,37 @@
+//LOGIN/SIGNUP CSS
+// .check-input label:after {
+            //     opacity: 0;
+            //     content: "";
+            //     position: absolute;
+            //     width: 7px;
+            //     height: 4px;
+            //     background: transparent;
+            //     top: 3px;
+            //     left: 3px;
+            //     border: 2px solid #FFF;
+            //     border-top: none;
+            //     border-right: none;
+            //     -webkit-transform: rotate(-45deg);
+            //     -moz-transform: rotate(-45deg);
+            //     -o-transform: rotate(-45deg);
+            //     -ms-transform: rotate(-45deg);
+            //     transform: rotate(-45deg);
+            // }
+            
+            // .check-input label:hover:after {
+            //     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+            //     filter: alpha(opacity=50);
+            //     opacity: 0.5;
+            // }
+            
+            // .check-input input[type=checkbox]:checked + label:after {
+            //     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+            //     filter: alpha(opacity=100);
+            //     opacity: 1;
+            // }
+
+
+
 // <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc.substr(0,240):productLongDesc}              
 // <span className='moreButton' onClick={()=>{
 //    if (!longDesc) document.querySelector('.longDesc').style.overflowY='none';

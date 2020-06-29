@@ -85,48 +85,13 @@ function LoginSignupCSS() {
                 margin-top: 30px;
                 margin-bottom: 30px;
                 display: flex;
-            }
-            // .check-input label:after {
-            //     opacity: 0;
-            //     content: "";
-            //     position: absolute;
-            //     width: 7px;
-            //     height: 4px;
-            //     background: transparent;
-            //     top: 3px;
-            //     left: 3px;
-            //     border: 2px solid #FFF;
-            //     border-top: none;
-            //     border-right: none;
-            //     -webkit-transform: rotate(-45deg);
-            //     -moz-transform: rotate(-45deg);
-            //     -o-transform: rotate(-45deg);
-            //     -ms-transform: rotate(-45deg);
-            //     transform: rotate(-45deg);
-            // }
-            
-            // .check-input label:hover:after {
-            //     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-            //     filter: alpha(opacity=50);
-            //     opacity: 0.5;
-            // }
-            
-            // .check-input input[type=checkbox]:checked + label:after {
-            //     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-            //     filter: alpha(opacity=100);
-            //     opacity: 1;
-            // }
-            
+            }           
             .submit-btn {
                 width: 100%;
-                // margin-top: 28px;
-                // text-align: center;
-                // padding: 5px 0;
                 border-radius: 3px;
                 background-color: #ffe58a;
                 color: #000;
                 border: none;
-                // transition: 0.5s cubic-bezier(0.72, 0.15, 0.53, 0.84);
             }
             .submit-btn-tryAgain {
                 background-color: #333333;
@@ -156,7 +121,6 @@ function LoginSignupCSS() {
                 opacity: 0.6;
             }
             .s-attop {
-                // transform: translate3d(100px, -506.5px, 0);
                 z-index: 1;
                 -webkit-filter: blur(0);
                 filter: blur(0);
@@ -164,7 +128,6 @@ function LoginSignupCSS() {
                 opacity: 1;
             }
             .l-attop {
-                // transform: translate3d(100px, -506.5px, 0);
                 z-index: 1;
                 -webkit-filter: blur(0);
                 filter: blur(0);
@@ -186,6 +149,14 @@ function LoginSignupCSS() {
             }
             #signup {
                 transform: translateX(-28%);
+            }
+            @media only screen and (max-width: 550px) {
+                #login {
+                    transform: translate(0%, -184%);
+                }
+                #signup {
+                    transform: translateX(-10%);
+                }
             }
             #loadingLogin {
                 display: none;
@@ -215,16 +186,6 @@ function LoginSignupCSS() {
             #loadingLoginText {
                 text-align: center;
             }
-            // .detailButton {
-            //     background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
-            //     padding-top: 5px;
-            //     font-size: 16px;
-            //     border-radius: 3px;
-            //     outline: none;
-            //     border-style: none;
-            //     border-color: none;
-            //     box-shadow: 1.5px 1.5px 1.5px 0px #555555;
-            // }
             .profileDivider {
                 margin: 20px auto 50px;
                 height: 2px;

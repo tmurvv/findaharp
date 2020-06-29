@@ -1,4 +1,4 @@
-## June 7, 2020
+## June 26, 2020
 ### DEPLOY TO TESTING, 
 ### LOGIN/SIGNUP GOES TO TESTING API, LIVE DB
 
@@ -7,6 +7,7 @@
 - check for debuggek
 - check which API is connecting index, login, profile, reset password, images
 - is contact form submitting or not submitting as you want
+- check 
 - check next.config.js for deployment environment
 - for testing, make sure test data has correct data set for images...
     - findaharp-api only for findaharp.com

@@ -10,7 +10,6 @@ import {removeDashOE} from '../utils/helpers';
 function ContactSellerForm(props) {
     if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
     const {product} = props;
-    console.log(product)
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
@@ -60,8 +59,7 @@ function ContactSellerForm(props) {
         if (!user.contactemail) return alert('Email is required');
         resultContainer.style.display='block';
         resultImg.style.display='block';
-        // BREAKING
-        // alert('Under Construction. Email not sent'); 
+        
         const contact = {
             contactid: uuid(),
             date: new Date(Date.now()),
@@ -175,7 +173,7 @@ function ContactSellerForm(props) {
                         />
                     </div>         
                     <div className='inputGroup'>
-                        <label className="label" name='contactcomments'>Comments </label>
+                        <label className="label" name='contactcomments'>Inquiry </label>
                         <textarea
                             id={uuid()}
                             name='contactcomments'

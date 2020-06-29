@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 
 // internal
 import ContactUsFormCSS from '../styles/ContactUsForm.css';
-import ProductModalCSS from '../styles/ProductModal.css';
+import StorePartnerInfo from '../components/StorePartnerInfo';
 
 function ContactUsForm(props) {
     const [user, setUser] = useState({
@@ -94,44 +94,14 @@ function ContactUsForm(props) {
     }
    return (
         <>  
-        <div className='detailContainer' hidden={!openStoreOwnerInq}>
-            <h2>Store Partner Program Details</h2>
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
-            <div className='detailInfo'>
-            <div className={`detailImg`} style={{marginTop: '43px'}}>
-                <img src= '/img/golden_harp_cropped.png' alt='findaharp golden harp logo' />
-                <img src= '/img/logo_findaharp_black.png' alt='findaharp golden harp logo' />
-            </div>
-            <div className={`detailText`}>
-                <p><span><img src='/img/golden_harp_full.png' style={{transform: 'translateY(2.5px)', width: '14px', marginRight: '3px'}}/></span> No monthly fee<br></br>
-                <span><img src='/img/golden_harp_full.png' style={{transform: 'translateY(2.5px)', width: '14px', marginRight: '3px'}}/></span> No per harp fee<br></br>
-                <span><img src='/img/golden_harp_full.png' style={{transform: 'translateY(2.5px)', width: '14px', marginRight: '3px'}}/></span> No signup time requirements<br></br>
-                <span><img src='/img/golden_harp_full.png' style={{transform: 'translateY(2.5px)', width: '14px', marginRight: '3px'}}/></span> No extra working uploading or updating your listings, ask for details (free)<br></br>
-                <span><img src='/img/golden_harp_full.png' style={{transform: 'translateY(2.5px)', width: '14px', marginRight: '3px'}}/></span> Small finders fee only if findaharp connects you with a customer that eventually purchases a harp<br></br>
-                <span><img src='/img/golden_harp_full.png' style={{transform: 'translateY(2.5px)', width: '14px', marginRight: '3px'}}/></span> Email tisha@findaharp.com for more information or to sign up</p>
-                
-                <br></br>
-                <br></br>
-                <div className='longDesc'><span>Testimonials and Statistics</span><br></br>Coming soon !! Testimonials. Findaharp.com website traffic statistics. Number of findaharp.com community members. Number of referrals.</div>
-                <br></br>
-                {/* <p><span>Location</span> {sellerRegion?sellerRegion:'unavailable'}<br></br>
-                <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p> */}
-                <button className='detailButton'><a href='mailto:tisha@findaharp.com?subject=store partner inquiry&body="I would like more information about the Store Partner Program at findaharp.com."' style={{color: 'black'}}>Store Partner Inquiry</a></button>        
-            </div>
-
-            <div onClick={(evt) => setOpenStoreOwnerInq(false)} className='clearModal'>
-                <img src='/img/clear_search.png' alt='clear filters'/>
-            </div>  
-        </div>
-        </div>
-        <ProductModalCSS />
+            {openStoreOwnerInq?<StorePartnerInfo open={openStoreOwnerInq} close={()=>setOpenStoreOwnerInq(false)}/>:''}
             <div className='contactFormContainer'> 
                 <div className={`contactArea`}>
                 <div className={`contactText`}>    
                     <h3>Suggestions</h3>
                     <p>We welcome your suggestions to make our site as thorough and as easy to use as possible.</p><br></br><br></br>
                     <h3>Do you sell harps?</h3>
-                    <p>We are always looking for more harps to list on our site to show off our extensive search capabilities. <button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: '0', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA', textDecoration: 'underline'}}>Click here</button> for information on becoming a store partner at findaharp.com.</p><br></br><br></br>
+                    <p>We are always looking for more harps to list on our site to show off our extensive search capabilities. <button onClick={()=>{console.log('in');setOpenStoreOwnerInq(true)}} style={{margin: '0', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA', textDecoration: 'underline'}}>Click here</button> for information on becoming a store partner at findaharp.com.</p><br></br><br></br>
                     <h3>Submissions to our Buyer's Guide</h3>
                     <p>We would love for our Buyer's Guide to be a collaborative undertaking by the harp community. Please submit anything you feel we have left out.</p><br></br><br></br>
                     <h3>Problems with Harp Advertisements</h3>

@@ -103,8 +103,6 @@ const Index = (props) => {
         const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
         const resultImg = document.querySelector('#loadingLoginImg');
         
-        console.log(userLogin, 'resetpass')
-        console.log('iminsubmit')
         resultContainer.style.display='block';
         if (userLogin.newpassword.length<8) {
             resultImg.style.display='none';
@@ -124,7 +122,6 @@ const Index = (props) => {
         }
         resultText.innerText='Loading...';
         resultImg.style.display='block';
-        console.log('imhere')
         try {
             /* LOCAL */
             const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${Router.query.resetpasswordemail}`, {resetpassword: userLogin.newpassword});
@@ -134,11 +131,10 @@ const Index = (props) => {
             // const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* PRODUCTION */
             // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
-            console.log('res', res)
             resultText.innerText=`Password change successful.`;
             resultImg.style.display='none';
             resultButton.style.display= 'block';
-            // Router.push('/LoginSignup'); //BREAKING
+            Router.push('/LoginSignup');
         } catch(e) {
             console.dir(e)
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
@@ -316,7 +312,7 @@ Index.getInitialProps = async (props) => {
     // console.log('getinit', props);
     if (props.query.activateemail) {
         try {
-            const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/emailverify', { email: activateEmail});
+            const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
             if (res) return { verifying: true, found: true };
         } catch (error ) {
             console.error('error', error);

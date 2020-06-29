@@ -134,6 +134,7 @@ function ProductSearch(props) {
         setMenus(initialState);
     }
     async function handleLocationSelection(location) {
+        // if (location==='ltActivate') location = 'All Locations';
         function updateState() {
             const newState = {...allState, 
                 location
@@ -142,7 +143,6 @@ function ProductSearch(props) {
                 location,
                 searchInfo: getSearchInfo(newState)
             });
-            console.log('abobe set menus', location)
             setMenus(initialState);
         }
         const addDistances = () => {
@@ -153,14 +153,13 @@ function ProductSearch(props) {
         }
         if (location==='ltActivate') {
             await addDistances();
-            // location='All Locations';
+            location='All Locations';
             updateState();
         } else {
             updateState();
         }
     }
     function handleClick(e) {
-        console.log('handleclick', e.target.name, menus.location)
         switch(e.target.name) {
             case 'size':
                 setMenus({
@@ -193,12 +192,11 @@ function ProductSearch(props) {
                 });
                 break;
             case 'finish':
-                console.log('finish')
                 setMenus({
                     size: false,
                     maker: false,
                     model: false,
-                    finish: true, // BREAKING
+                    finish: !menus.finish,
                     price: false,
                     location: false
                 });
@@ -235,7 +233,6 @@ function ProductSearch(props) {
           }
     }
     function handleClear(evt) {
-        console.log('imin')
         document.querySelector('.clearAll').style.display='none';
         setAllState({
             ...allState,
@@ -465,14 +462,14 @@ function ProductSearch(props) {
             </div>
             <div className='selected'>
                 <p>
-                    SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1):allState.searchInfo}
+                    SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)} (${filteredProducts.length})`:`${allState.searchInfo} (${filteredProducts.length})`}
                 </p>
                 <div onClick={handleClear} style={{display: 'none'}} className='clearAll clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
                     <p>Clear</p> 
                 </div>
             </div>
-            <h3 className='searchTitle'>Findaharp.com is brand new and in the process of adding harps.<br/>Check back soon if you don't see the harp of your dreams!!</h3>
+            <h3 className={`searchTitle`} style={{width: '100%'}}>Findaharp.com is brand new and in the process of adding harps. Check back soon!!</h3>
             <ProductSearchCss />
             <ProductContainer 
                 data-test="component-ProductContainer" 

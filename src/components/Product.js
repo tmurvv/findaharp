@@ -4,7 +4,7 @@ import LazyLoad from 'react-lazyload';
 // styles
 import ProductCss from '../styles/Product.css';
 // internal
-import { removeDashOE, geoDistance } from '../utils/helpers';
+import { removeDashOE, findPriceRange } from '../utils/helpers';
 
 
 function Product({productdetail, handleopendetail, handleclosedetail, handleopencontact, handleclosecontact, clientlat, clientlong}) {
@@ -47,6 +47,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                 if (img.naturalWidth/img.naturalHeight > .80) setUseNaturalHeight(img.naturalHeight);
             }
         }, 10);
+        
     })
     return (
         <div 
@@ -67,12 +68,11 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                         onError={(evt) => {evt.target.src='./img/not_found.png'; evt.target.style.height='85%';}} 
                         onLoad={(evt) => handleImageLoad(evt)}
                         alt={productdetail.productTitle}
-
                     />
                 </LazyLoad>
             </div>
             <div className={`grid-item productSmallDisplay-text`}>
-                <p>{productdetail.productMaker} {productdetail.productModel}<br></br>
+                <p>{productdetail.productModel.indexOf(productdetail.productMaker)>-1?'':productdetail.productMaker} {productdetail.productModel}<br></br>
                 {productdetail.productSize!==0?`${productdetail.productSize} Strings`:''}<br></br>
                 <span 
                     onClick={(e)=>handleOpenContactModal(e, productdetail)} 

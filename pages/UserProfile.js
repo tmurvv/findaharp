@@ -152,15 +152,14 @@ function UserProfile(props) {
             
             try {
                 /* LOCAL */
-                // const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user[4]}`, updatedUser);
+                const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user[4]}`, updatedUser);
                 /* TESTING */
                 // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 /* STAGING */
-                const res = await axios.patch('https://findaharp-api-staging.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
+                // const res = await axios.patch('https://findaharp-api-staging.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 /* PRODUCTION */
                 // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 if (res.status===200) {
-                    console.log('result', res.data)
                     resultImg.style.display='none';
                     resultButton.style.display='block';
                     resultText.innerText=`Update Successful.`;
@@ -202,11 +201,11 @@ function UserProfile(props) {
             dispatchResultInfo({type: 'loadingImage'})
             try {
                 /* LOCAL */
-                // await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                await axios.patch(`{process.env.backend}/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* TESTING */
                 // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* STAGING */
-                const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                // const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* PRODUCTION */
                 // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 dispatchResultInfo({type: 'OK'});
@@ -259,11 +258,11 @@ function UserProfile(props) {
         
         try {
             // LOCAL
-            // const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user[4]}`);
+            const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user[4]}`);
             // TESTING
             // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // STAGING
-            const res=await axios.delete(`https://findaharp-api-staging.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
+            // const res=await axios.delete(`https://findaharp-api-staging.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // PRODUCTION
             // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // const returnedUser = res.user;
@@ -427,7 +426,7 @@ function UserProfile(props) {
                         ?
                             <div style={{padding: '20px 20px 40px', height: '250px', display:'flex', flexDirection: 'column', alignItems:"center"}}>
                                 <img height='35px' src='./img/logo_findaharp_black.png' alt='text logo' />
-                                <img height='100%' src='./img/not_found.png' alt='golden harp' />}
+                                <img height='100%' src='./img/not_found.png' alt='golden harp' />
                             </div>
                         :
                         <>

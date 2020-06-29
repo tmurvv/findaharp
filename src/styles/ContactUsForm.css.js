@@ -23,6 +23,11 @@ function ContactUsFormCSS() {
                 max-width: 1300px;
                 margin: auto;
             }
+            @media only screen and (max-width: 650px) {
+                .contactFormContainer {
+                    padding: 0;
+                }
+            }
             .contactFormContainer p {
                 width: fit-content;
             }

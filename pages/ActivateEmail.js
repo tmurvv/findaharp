@@ -55,10 +55,8 @@ function ActivateEmail(props) {
 }
 ActivateEmail.getInitialProps = async (props) => {
     const activateEmail = props.query.email; 
-    console.log('activate', props)
-    console.log(activateEmail)   
     try {
-        const res = await axios.post('https://findaharp-api-staging.herokuapp.com/api/v1/emailverify', { email: activateEmail});
+        const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
         if (res) return {emailFound: true};
     } catch (error ) {
         console.error('error', error);

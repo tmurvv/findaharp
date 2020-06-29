@@ -61,6 +61,19 @@ export const STORE_PARTNERS = [
     },
     {
         id: uuid(),
+        sellerCountry: "USA",
+        sellerRegion: "Clawson, MI",
+        productTitle: "Michigan Harp Center",
+        productPrice: "",
+        productLongDesc: ` Welcome to the Michigan Harp Center. We have harps to rent or purchase for students of all ages and abilities. If you need a professional harpist for your special occasion, Ms Kelly Yousoufian,owner and teacher is available.`,
+        productMaker: "Michigan Harp Center",
+        productImageUrl: "/img/StorePartners/michiganHarpCenter.jpg",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'www.michiganharpcenter.com',
+        sellerEmail: 'michiganharpcenter@gmail.com'
+    },
+    {
+        id: uuid(),
         sellerCountry: "Canada",
         sellerRegion: "Nanaimo, BC, Canada",
         productTitle: "West Coast Harps",

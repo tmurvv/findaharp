@@ -19,11 +19,11 @@ function PedalLeverTut() {
         </div>
         <div className='pedalLeverTutMobile'>
             <div className='flexSB'>
-                <figure className='pedalLeverTutImg'>      
+                <figure className='pedalLeverTutImg' style={{marginInlineStart: '0', marginInlineEnd: '0'}}>      
                     <img src='./img/ReesAberdeen.jpg' alt='lever harp example'/>
                     <figcaption>lever harp</figcaption>
                 </figure>
-                <figure className='pedalLeverTutImg'>
+                <figure className='pedalLeverTutImg' style={{marginInlineStart: '0', marginInlineEnd: '0'}}>
                     <img src='./img/SwansonLaScuola.jpg' alt='pedal harp example'/>
                     <figcaption>pedal harp</figcaption>
                 </figure>

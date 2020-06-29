@@ -14,9 +14,6 @@ function ResetPassword(props) {
     const Router = useRouter();
         let email; 
         if (Router.query.useremail) email = Router.query.useremail.substr(0,Router.query.useremail.length-1);
-        console.log('router', Router.query)
-        if (email) console.log('email', email)
-        console.log(props);
 
     const [userSignup, setUserSignup] = useState({
         firstname: '',
@@ -113,7 +110,6 @@ function ResetPassword(props) {
         }
         resultText.innerText='Loading...';
         resultImg.style.display='block';
-        console.log(userLogin, 'resetpass')
         try {
             /* LOCAL */
             const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
