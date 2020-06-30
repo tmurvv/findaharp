@@ -676,7 +676,7 @@ const testData = [
         "productModel": "Troubadour VI",
         "productType": "lever",
         "productSize": 36,
-        "productImageUrl": "https://findaharp-api.herokuapp.com/assets/img/LHTroub-2.jpg",
+        "productImageUrl": "",
         "productImageBestColor": "#d6bcb4",
         "divider": "00000000000000000000000"
     },

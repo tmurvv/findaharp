@@ -112,8 +112,18 @@ function ContactUsForm(props) {
                         <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
                         <p id="loadingLoginText"></p>
                         <div className='flex-sb'>
-                            <button id='loadingLoginOk' type='button' className='submit-btn' onClick={resetResults}>OK</button>
-                            <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                            <button 
+                                id='loadingLoginOk' 
+                                type='button' 
+                                className='submit-btn' 
+                                onClick={resetResults}
+                            >OK</button>
+                            <button 
+                                id='loadingLoginTryAgain' 
+                                type='button' 
+                                className='submit-btn submit-btn-tryAgain' 
+                                onClick={resetResults}
+                            >Try Again</button>
                         </div>
                     </div>    
                     <div className='inputGroup'>

@@ -45,5 +45,5 @@
     [] delete account
 
 ### functionality - contacts
-    [] contact seller
-    [] contact users
+    [x] contact seller - price is not working, email to me not them
+    [x] contact findaharp - working

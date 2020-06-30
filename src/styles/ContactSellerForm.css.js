@@ -17,7 +17,7 @@ function ContactSellerFormCSS() {
                 left: 50%;
                 transform: translate(-50%,-50%);
                 text-align: center;
-                z-index: 2000;
+                // z-index: 2000;
             }
             @media only screen and (max-width: 500px) {
                 .detailContainer {
@@ -143,7 +143,7 @@ function ContactSellerFormCSS() {
                 border-right: none;
                 border-bottom: none none 1px solid #bbbbbb;
             }
-            #loadingLogin {
+            #loadingLoginContactSeller {
                 display: none;
                 color: #6A75AA;
                 border: 2px solid #6A75AA;
@@ -158,17 +158,17 @@ function ContactSellerFormCSS() {
                 transform: translate(50%, 50%);
                 z-index: 5000;
             }
-            #loadingLoginImg {
+            #loadingLoginImgContactSeller {
                 display: block;
                 height: 50px;
                 margin: auto;
             }
-            #loadingLoginOk,
-            #loadingLoginTryAgain {
+            #loadingLoginOkContactSeller,
+            #loadingLoginTryAgainContactSeller {
                 display: none;
                 padding: 7px;
             }
-            #loadingLoginText {
+            #loadingLoginTextContactSeller {
                 text-align: center;
             }
             .submit-btn {

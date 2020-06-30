@@ -83,7 +83,7 @@ function PartnerProspects() {
 									<td>marni@classicharpsnw.com</td> 
 									<td>503-251-6920<br/>360-798-2188c</td>
 									<td>May 28, 2020</td>
-									<td><textarea value='Tried to phone on June 12, not there, tried again June 24'/></td>
+									<td><textarea value='June 29th sent a follow-up email. Tried to phone on June 12, not there, tried again June 24'/></td>
 								</tr>
 								<tr>
 									<td>Kolacny Music</td>
@@ -99,7 +99,7 @@ function PartnerProspects() {
 									<td>david@vaharpcenter.com</td>
 									<td>804-378-3761</td>
 									<td>May 28th, 2020</td>
-									<td><textarea value='June 25thish said it would not work for their business. June 24th, followed up. June 9th, Talked about program. He will think and get back.'/></td>
+									<td><textarea value='June 25th said it would not work for their business. June 24th, followed up. June 9th, Talked about program. He will think and get back.'/></td>
 								</tr>
 								<tr>
 									<td>Michigan Harp Center</td>
@@ -127,11 +127,11 @@ function PartnerProspects() {
 								</tr>
 								<tr>
 								<td>Harp in LA</td>
-								<td></td>
+								<td>Paul Baker or Heidi</td>
 								<td>infoharpinla@yahoo.com</td>
 								<td>818-495-4652</td>
 								<td>June 4, 2020</td>
-								<td><textarea /></td>
+								<td><textarea value="sent follow up email on June 29th to 'heidiharpinla-info@yahoo.com'"/></td>
 								</tr>
 								<tr>
 								<td>Harp Studio, The</td>
@@ -203,7 +203,7 @@ function PartnerProspects() {
 									<td>harpgal1@gmail.com</td>
 									<td>(518) 466-4084</td>
 									<td>June 15th, 2020</td>
-									<td><textarea value='Harps not on website'/></td>
+									<td><textarea value='Do not see used harps. Harps not on website'/></td>
 								</tr>
 								<tr>
 									<td>Budget Harp Rentals</td>
@@ -219,7 +219,7 @@ function PartnerProspects() {
 									<td>contact form only</td>
 									<td>(214) 282-5354</td>
 									<td>June 15, 2020</td>
-									<td><textarea value='via contact form, Dallas area'/></td>
+									<td><textarea value='June 29th, spoke by phone, sent her an email with deets. June 15th via contact form, Dallas area'/></td>
 								</tr>
 								<tr>
 									<td></td>

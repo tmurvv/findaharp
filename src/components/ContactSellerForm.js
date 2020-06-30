@@ -51,11 +51,11 @@ function ContactSellerForm(props) {
     }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLogin');
-        const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
+        const resultContainer = document.querySelector('#loadingLoginContactSeller');
+        const resultText = document.querySelector('#loadingLoginTextContactSeller');
+        const resultButton = document.querySelector('#loadingLoginOkContactSeller');
+        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgainContactSeller');
+        const resultImg = document.querySelector('#loadingLoginImgContactSeller');
         if (!user.contactemail) return alert('Email is required');
         resultContainer.style.display='block';
         resultImg.style.display='block';
@@ -82,7 +82,8 @@ function ContactSellerForm(props) {
             // const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/contactsellerform`, contact);
             // production
             // const res = await axios.post(`https://findaharp-api.herokuapp.com/api/v1/contactsellerform`, contact);
-            resultText.innerText=`Email has been sent to seller.`;
+            
+            resultText.innerText=`Inquiry has been sent to seller.`;
             // resultText.innerText=`Email regarding ${product.productMaker} ${product.productModel} has been sent to seller.`;
             resultImg.style.display='none';
             resultButton.style.display= 'block';
@@ -91,16 +92,43 @@ function ContactSellerForm(props) {
             resultImg.style.display='none';
             resultButtonTryAgain.style.display= 'block';
         }
+        // clearForm();
+    }
+    function clearForm() {
+        setUser({
+            firstname: '',
+            lastname: '',
+            contactemail: '',
+            contactcomments: '',
+            change: false
+        });
+    }
+    function resetResults() {
+        document.querySelector('#loadingLoginContactSeller').style.display='none';
+        document.querySelector('#loadingLoginTextContactSeller').innerText='';
+        document.querySelector('#loadingLoginOkContactSeller').style.display='none';
+        document.querySelector('#loadingLoginTryAgainContactSeller').style.display='none';
+        document.querySelector('#loadingLoginImgContactSeller').style.display='none';
     }
    return (
         <>
         <div className='detailContainer'>
-            <div id="loadingLogin">
-                <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingLoginText"></p>
+            <div id="loadingLoginContactSeller">
+                <img id='loadingLoginImgContactSeller' src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingLoginTextContactSeller"></p>
                 <div className='flex-sb'>
-                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={props.handleCloseContact}>OK</button>
-                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                    <button 
+                        id='loadingLoginOkContactSeller' 
+                        type='button'
+                        className='submit-btn'
+                        onClick={props.handleCloseContact}
+                    >OK</button>
+                    <button 
+                        id='loadingLoginTryAgainContactSeller' 
+                        type='button' 
+                        className='submit-btn submit-btn-tryAgain' 
+                        onClick={resetResults}
+                    >Try Again</button>
                 </div>
             </div>
             <h1>Contact {removeDashOE(product.sellerName)}</h1>           
