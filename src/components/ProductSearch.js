@@ -143,7 +143,9 @@ function ProductSearch(props) {
                 location,
                 searchInfo: getSearchInfo(newState)
             });
-            setMenus(initialState);
+            console.log('loc', location)
+            if (location!=='ltActivate') setMenus(initialState);
+            location='All Locations';
         }
         const addDistances = () => {
             props.products.map(async product => {
@@ -153,13 +155,14 @@ function ProductSearch(props) {
         }
         if (location==='ltActivate') {
             await addDistances();
-            location='All Locations';
             updateState();
         } else {
             updateState();
         }
     }
     function handleClick(e) {
+        console.log('click', e.target.name, menus.model)
+
         switch(e.target.name) {
             case 'size':
                 setMenus({
@@ -181,7 +184,7 @@ function ProductSearch(props) {
                     location: false
                 });
                 break;
-            case 'model':
+            case 'model':   
                 setMenus({
                     size: false,
                     maker: false,
@@ -189,7 +192,7 @@ function ProductSearch(props) {
                     finish: false,
                     price: false,
                     location: false
-                });
+                });               
                 break;
             case 'finish':
                 setMenus({
@@ -230,7 +233,7 @@ function ProductSearch(props) {
                     price: false,
                     location: false
                 });
-          }
+        }
     }
     function handleClear(evt) {
         document.querySelector('.clearAll').style.display='none';
@@ -257,6 +260,7 @@ function ProductSearch(props) {
     },[]);
     
     const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
+    
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -389,7 +393,6 @@ function ProductSearch(props) {
                     /> 
                 </div>
                 <div className="searchLine2Sub">
-                        
                         <div 
                             id="selectedFinish" 
                             className={`search-grid-item`} 

@@ -39,22 +39,9 @@ export const STORE_PARTNERS = [
         sellerRegion: "Walnut Grove, CA",
         productTitle: "Harps Etc.",
         productPrice: "$2,900",
-        productLongDesc: ` carries most major harp lines including: Lyon & Healy, Salvi, Dusty Strings, Triplett, Music Maker, William Rees, Sharpsicle, Stoney End and others.  We have numerous new and used pedal, lever and lap harps in our showroom.  We also have the ability to order any other harp for you.  In addition to harps, we keep harp cases, strings, sheet music and countless harp accessories available for purchase at our store and online.
-    
-        Harps Etc. Inc. was inspired by our love of the harp, teaching and working with the public.  By combining a storefront location with an online store, the mission at Harps Etc. Inc. is to create greater awareness, access and appreciation of the harp around the world. 
-        
-        We pledge to:
-        
-        Provide customer service beyond your expectations
-        Offer excellent musical education programs, workshops and performance opportunities
-        Help you keep your harp in great condition with our Harp Doctor hints, workshops and by bringing harp technicians to you
-        Bring the world closer together through music
-        Offer a wide variety of pedal and lever harps, music, strings, CDs, accessories and musical gift items
-        Harps Etc. Inc. is staffed by professional harpists with over 75 years of combined experience and knowledge.  
-        
-        We are located in the San Francisco East Bay in beautiful Walnut Creek.  Walnut Creek is known as the shopping mecca of the East Bay and is the gateway to the Diablo Valley, Livermore and Napa Valley wine country, Lake Tahoe and Reno.  Come visit our store when you are in the area.  We’re a 40-minute ride from downtown San Francisco by car or by BART. Harps Etc. Inc. is just a few blocks away from the Walnut Creek BART station and the Ygnacio Valley Rd. exit on Interstate 680.`,
+        productLongDesc: ` carries most major harp lines including: Lyon & Healy, Salvi, Dusty Strings, Triplett, Music Maker, William Rees, Sharpsicle, Stoney End and others.  We have numerous new and used pedal, lever and lap harps in our showroom.  We also have the ability to order any other harp for you.  In addition to harps, we keep harp cases, strings, sheet music and countless harp accessories available for purchase at our store and online. Harps Etc. Inc. was inspired by our love of the harp, teaching and working with the public.  By combining a storefront location with an online store, the mission at Harps Etc. Inc. is to create greater awareness, access and appreciation of the harp around the world. We are located in the San Francisco East Bay in beautiful Walnut Creek.`,
         productMaker: "Harps Etc.",
-        productImageUrl: "/img/StorePartners/harpsetc_logo.png",
+        productImageUrl: "/img/storePartners/harpsetc_logo.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'www.harpsetc.com',
         sellerEmail: 'info@harpsetc.com'
@@ -67,7 +54,7 @@ export const STORE_PARTNERS = [
         productPrice: "",
         productLongDesc: ` Welcome to the Michigan Harp Center. We have harps to rent or purchase for students of all ages and abilities. If you need a professional harpist for your special occasion, Ms Kelly Yousoufian,owner and teacher is available.`,
         productMaker: "Michigan Harp Center",
-        productImageUrl: "/img/StorePartners/michiganHarpCenter.jpg",
+        productImageUrl: "/img/storePartners/michiganHarpCenter.jpg",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'www.michiganharpcenter.com',
         sellerEmail: 'michiganharpcenter@gmail.com'
@@ -87,7 +74,7 @@ export const STORE_PARTNERS = [
         
         Subscribe to our free Harp Notes Newsletter - emailed to you 2 - 4 X per year`,
         productMaker: "West Coast Harps",
-        productImageUrl: "/img/StorePartners/westCoastHarps.jpg",
+        productImageUrl: "/img/storePartners/westCoastHarps.jpg",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'www.westcoastharps.com',
         sellerEmail: 'alison@westcoastharps.com'
@@ -99,7 +86,7 @@ export const STORE_PARTNERS = [
         productTitle: "Find a Harp",
         productLongDesc: " is mainly interested in connecting buyers with sellers, but also has a few harps of it's own for sale and rent. Located at the foot of the Rocky Mountains, Find a Harp is always searching for a wide variety of pre-owned instruments for harp lovers and aspiring students alike.",
         productMaker: "Find a Harp",
-        productImageUrl: "/img/StorePartners/findaharp_store_logo.png",
+        productImageUrl: "/img/storePartners/findaharp_store_logo.png",
         sellerWebsite: 'www.findaharp.com',
         sellerEmail: 'tisha@findaharp.com'
     },
@@ -107,18 +94,18 @@ export const STORE_PARTNERS = [
         id: uuid(),
         sellerCountry: "Canada",
         sellerRegion: "Canmore, AB, Canada",
-        productTitle: "Harp Angel",
+        productTitle: "Harp Angel Store",
         productPrice: "$2,900",
         productLongDesc: ` 
-        harpist, Deborah Nyack, is one of the premiere harpists in the world today. Deborah Nyack is the resident harpist Fairmont Banff Springs Hotel and performs every afternoon in the Main Lobby May through September and all holidays and long weekends.
+        sells pedal and lever harps as well as harps on consignment. It is located in the heart of the Canadian Rocky Mountains and run by harpist, Deborah Nyack, one of the premiere harpists in the world today. Deborah Nyack is the resident harpist Fairmont Banff Springs Hotel and performs every afternoon in the Main Lobby May through September and all holidays and long weekends.
         
         Harp Angel performs & concertizes extensively world-wide. Her harp performances include small intimate settings to famous concert halls such as Carnegie Hall, NY, and Kennedy Center, Washington DC. She has performed for royalty, heads of State, movie stars, and countless fans! Also, Harp Angel harpist performs for numerous types of special events, receptions, dinners and gala festivals.
         
         As an international recording harpist, her five solo Cds are best sellers and her music is heard regularly on TV and radio. Her harp performances are heralded as a creative blend of virtuosic technique and sensitive expressions of her interpretations and arrangements. She plays anything on the harp!
         
         Deborah trained at Eastman & Julliard , New York, USA, at the Royal Academy of Music London, England and the Banff Centre, Canada. She holds a Bachelor of Music, highest honours, Masters of Music, & awarded a Performer’s Diploma for outstanding performances. Harp Angel is on the Faculty of the Banff Centre for the Arts.`,
-        productMaker: "Harp Angel",
-        productImageUrl: "/img/StorePartners/harpangel_logo.png",
+        productMaker: "Harp Angel Store",
+        productImageUrl: "/img/storePartners/harpangel_logo.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'www.harpangel.com',
         sellerEmail: 'info@harpangel.com'

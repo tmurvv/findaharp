@@ -20,7 +20,6 @@ const initialState = {
 }
 const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clientlong }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
-    const [adjProducts, setAdjProducts] = useState(filteredproductscontainer);
     const size = getWindowSize();
     function handleOpenDetail(product) {
         dispatch({type:'detail', product});
@@ -76,12 +75,12 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
             </div>
         );
     } else {
-        return(
+        return (
             <>
                 <h3 style={{textAlign: 'center', marginBlockEnd: 0}}>Not found in our listings</h3>
-                <h3 style={{textAlign: 'center', marginBlockStart: 0}}>Select "Clear all filters" to see harp listings.</h3>    
+                <h3 style={{textAlign: 'center', marginBlockStart: 0}}>Select "Clear" to see harp listings.</h3>    
                 <div data-test='component-ProductContainer' className='notFoundContainer'>
-                    <img src= './img/not_found.png' alt='not found, humourous harp with broken strings'/>
+                    <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
                 </div>
                 <ProductContainerCss />
             </>

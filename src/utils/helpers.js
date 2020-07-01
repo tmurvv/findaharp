@@ -235,6 +235,7 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
             
             product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase())
         );
+        // console.log('helper', filteredProducts)
     return filteredProducts;
 }
 /**

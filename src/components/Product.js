@@ -12,6 +12,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     const [openContactModal, setOpenContactModal] = useState(false);
     const [useNaturalHeight, setUseNaturalHeight] = useState(0);
     
+    if (productdetail.productImageUrl.indexOf('genericHarp')>-1) productdetail.productImageUrl="";
     function handleOpenProductModal() {
         setOpenProductModal(true);
         handleopendetail(productdetail); 
@@ -32,8 +33,8 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     // }
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
-        if (evt.target.style.height !== '85%') evt.target.style.height="100%";
-        if (useNaturalHeight > 0) evt.target.style.height=`auto`;
+        if (evt.target.style.height !== '30%') evt.target.style.height="100%";
+        if (productdetail.naturalHeight && productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
     
     useEffect(() => {
@@ -44,7 +45,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
         var poll = setInterval(function () {
             if (img.naturalWidth) {
                 clearInterval(poll);
-                if (img.naturalWidth/img.naturalHeight > .80) setUseNaturalHeight(img.naturalHeight);
+                if (img.naturalWidth/img.naturalHeight > .80) {setUseNaturalHeight(img.naturalHeight);productdetail.naturalHeight = img.naturalHeight;}
             }
         }, 10);
         
@@ -65,7 +66,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                     <img 
                         id={productdetail.id} 
                         src={productdetail.productImageUrl} 
-                        onError={(evt) => {evt.target.src='./img/not_found.png'; evt.target.style.height='85%';}} 
+                        onError={(evt) => {evt.target.src='./img/not_found.png'; evt.target.style.height='30%';}} 
                         onLoad={(evt) => handleImageLoad(evt)}
                         alt={productdetail.productTitle}
                     />

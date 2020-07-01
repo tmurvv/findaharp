@@ -311,19 +311,17 @@ const Index = (props) => {
 Index.getInitialProps = async (props) => {
     // console.log('getinit', props);
     if (props.query.activateemail) {
-        try {
-            const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
-            if (res) return { verifying: true, found: true };
-        } catch (error ) {
-            console.error('error', error);
-            return { verifying: true, found: false };
-        }        
-        return { verifying: true, found: false };
+        // try { // BREAKING
+        //     // const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
+        //     // if (res) return { verifying: true, found: true };
+        // } catch (error ) {
+        //     console.error('error', error);
+        //     return { verifying: true, found: false };
+        // }        
+        // return { verifying: true, found: false };
     } else if (props.query.resetpasswordemail) {
-        return { verifying: false, reset: true }
-    } else {
-
-    
+        // return { verifying: false, reset: true } //BREAKING
+    } else {   
         /******************
          * LOCAL DATA
          ******************/
@@ -334,20 +332,17 @@ Index.getInitialProps = async (props) => {
         /*******************
          * API DATA
          *******************/
-        // PRODUCTION API
-        // const res = await axios.get('https://findaharp-api.herokuapp.com/');
-        // STAGING API
-        // const res = await axios.get('https://findaharp-api-staging.herokuapp.com/');
-        // TESTING API
-        // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
-        // LOCAL API
+        // API
         const res = await axios.get(`${process.env.backend}`);
         
         // API DATA Populate variables
         const products = res.data.harpData;
         const makesModels = res.data.harpMakesModels;
         products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
-        
+        products.map(product => console.log(product.productModel))
+        const productsSet = [...new Set(products)]
+        console.log('0000000000000')
+        productsSet.map(product => console.log(product.productModel))
         return { products, makesModels, verifying: false, found: false };
     }
     
@@ -360,6 +355,7 @@ Index.getInitialProps = async (props) => {
 
     /*******************
      * API DATA
+     * 
      *******************/
     // PRODUCTION API
     // const res = await axios.get('https://findaharp-api.herokuapp.com/');
@@ -368,14 +364,14 @@ Index.getInitialProps = async (props) => {
     // TESTING API
     // const res = await axios.get('https://findaharp-api-testing.herokuapp.com/');
     // LOCAL API
-    const res = await axios.get(`${process.env.backend}`);
+    // const res = await axios.get(`${process.env.backend}`);
     
-    // API DATA Populate variables
-    const products = res.data.harpData;
-    const makesModels = res.data.harpMakesModels;
-    products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
+    // // API DATA Populate variables
+    // const products = res.data.harpData;
+    // const makesModels = res.data.harpMakesModels;
+    // products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
      
-    return { products, makesModels };
+    // return { products, makesModels };
 }
 
 export default Index;

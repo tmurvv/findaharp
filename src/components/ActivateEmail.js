@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 
 // internal
-import LoginSignupCSS from '../src/styles/LoginSignup.css';
-import { UserContext } from '../src/contexts/UserContext';
+import LoginSignupCSS from '../styles/LoginSignup.css';
+import { UserContext } from '../contexts/UserContext';
 
 function ActivateEmail(props) {
     const user = useContext(UserContext);
