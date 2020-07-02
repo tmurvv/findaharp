@@ -76,22 +76,23 @@ function ResetPassword(props) {
         });
     }
     function resetResults() {
-        document.querySelector('#loadingLogin').style.display='none';
-        document.querySelector('#loadingLoginText').innerText='';
-        document.querySelector('#loadingLoginOk').style.display='none';
-        document.querySelector('#loadingLoginTryAgain').style.display='none';
-        document.querySelector('#loadingLoginImg').style.display='none';
+        document.querySelector('#loadingloginReset').style.display='none';
+        document.querySelector('#loadingloginResetText').innerText='';
+        document.querySelector('#loadingloginResetOk').style.display='none';
+        document.querySelector('#loadingloginResetTryAgain').style.display='none';
+        document.querySelector('#loadingloginResetImg').style.display='none';
     }
     
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLogin');
-        const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
+        debugger
+        const resultContainerReset = document.querySelector('#loadingloginReset');
+        const resultText = document.querySelector('#loadingloginResetText');
+        const resultButton = document.querySelector('#loadingloginResetOk');
+        const resultButtonTryAgain = document.querySelector('#loadingloginResetTryAgain');
+        const resultImg = document.querySelector('#loadingloginResetImg');
                
-        resultContainer.style.display='block';
+        resultContainerReset.style.display='block';
         if (userLogin.newpassword.length<8) {
             resultImg.style.display='none';
             resultButtonTryAgain.style.display='block';
@@ -101,7 +102,7 @@ function ResetPassword(props) {
         }
         // passwords match 
         if (userLogin.newpassword !== userLogin.confirmpassword) {
-            resultContainer.style.display='block';
+            resultContainerReset.style.display='block';
             resultImg.style.display='none';
             resultButtonTryAgain.style.display='block';
             resultButtonTryAgain.style.marginLeft=0;
@@ -123,7 +124,7 @@ function ResetPassword(props) {
             resultText.innerText=`Password change successful.`;
             resultImg.style.display='none';
             resultButton.style.display= 'block';
-            Router.push('/LoginSignup');
+            
         } catch(e) {
             console.dir(e)
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
@@ -145,18 +146,18 @@ function ResetPassword(props) {
     }
     function loginGuest() {
         resetResults();
-        Router.push('/');
+        // Router.push('/LoginSignup');
     }
     return (
        <>
-        <div className='login-signup-container'>
+        <div className='loginReset-signupReset-container'>
             <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
-            <div id="loadingLogin">
-                <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingLoginText"></p>
+            <div id="loadingloginReset">
+                <img id='loadingloginResetImg' src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingloginResetText"></p>
                 <div className='flex-sb'>
-                    <button id='loadingLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
-                    <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                    <button id='loadingloginResetOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
+                    <button id='loadingloginResetTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                 </div>
             </div>
             

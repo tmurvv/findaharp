@@ -25,9 +25,9 @@ const activeWindowInitialState = {
 }
 function UserProfile(props) {
     const { user, setUser} = useContext(UserContext);
+    console.log(user)
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
-    // const [active, setActive] = useState('changePassword');
     const [needVerify, setNeedVerify] = useState(false);
     const [userEdit, setUserEdit] = useState({
         firstname: '',
@@ -36,6 +36,7 @@ function UserProfile(props) {
         editpassword: '',
         confirmpassword: '',
         distanceunit: '',
+        newsletter: false,
         editchange: false
     });
     const [userUpdatePassword, setUserUpdatePassword] = useState({
@@ -57,6 +58,9 @@ function UserProfile(props) {
                 break
             case 'editpassword':
                 setUserEdit({...userEdit, editpassword: evt.target.value, editchange: true});
+                break
+            case 'newsletter': 
+                setUserEdit({...userEdit, newsletter: evt.target.checked, editchange: true});
                 break
             case 'distanceunit': 
                 setUserEdit({...userEdit, distanceunit: evt.target.value, editchange: true});
@@ -94,46 +98,18 @@ function UserProfile(props) {
     }
     function resetResults() {
         dispatchResultInfo({type: 'initial'});
-        // document.querySelector('#loadingUpdatePassword').style.display='none';
-        // document.querySelector('#loadingUpdatePasswordText').innerText='';
-        // document.querySelector('#loadingUpdatePasswordOk').style.display='none';
-        // document.querySelector('#loadingUpdatePasswordTryAgain').style.display='none';
-        // document.querySelector('#loadingUpdatePasswordImg').style.display='none';
     }
     function handleEditClick(evt) {
-        // resetLoginForm();
         dispatchActiveWindow({type: 'signup'});
         resetUpdatePasswordForm();
-        // setActive('editProfile');
-        // const edit = document.querySelector('#edit');
-        // const updatePassword = document.querySelector('#updatePassword');
-        // edit.classList.remove("s-atbottom");
-        // edit.classList.add("s-attop");
-        // updatePassword.classList.remove("l-attop");
-        // updatePassword.classList.add("l-atbottom");
     }
     function handleUpdatePasswordClick(evt) {
-        // if (userSignup.signupchange===true) {if (!confirm('changes will be lost')) return};
-        // resetSignupForm();
-        // if (userEdit.editchange===true) {if (!confirm('changes will be lost')) return};
         dispatchActiveWindow({type: 'login'});
         resetEditForm();
-        // setActive('changePassword');
-        // const edit = document.querySelector('#edit');
-        // const updatePassword = document.querySelector('#updatePassword');
-        // edit.classList.add("s-atbottom");
-        // edit.classList.remove("s-attop");
-        // updatePassword.classList.add("l-attop");
-        // updatePassword.classList.remove("l-atbottom");
-    }
-    
+    } 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        // const resultContainer = document.querySelector('#loadingUpdatePassword');
         const resultText = document.querySelector('#loadingLoginText');
-        // const resultButton = document.querySelector('#loadingUpdatePasswordOk');
-        // const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
-        // const resultImg = document.querySelector('#loadingUpdatePasswordImg');
         if (activeWindow.active==='signup') {
             // shortcut
             if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
@@ -147,9 +123,9 @@ function UserProfile(props) {
                 email: userEdit.editemail?userEdit.editemail:user[2],
                 distanceunit: userEdit.distanceunit?userEdit.distanceunit:user[3],
                 password: userEdit.editpassword,
-                userid: user[4]
+                userid: user[4],
+                newsletter: userEdit.newsletter
             };
-            
             try {
                 /* LOCAL */
                 const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user[4]}`, updatedUser);
@@ -160,28 +136,24 @@ function UserProfile(props) {
                 /* PRODUCTION */
                 // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 if (res.status===200) {
-                    resultImg.style.display='none';
-                    resultButton.style.display='block';
                     resultText.innerText=`Update Successful.`;
+                    dispatchResultInfo({type: 'OK'});
                     setNeedVerify(true);
                     
                     const { userCopy } = res.data;
                     setUser([
                         userCopy.firstname, 
                         userCopy.lastname, 
-                        userCopy.email, 
+                        userCopy.email,
+                        userCopy.newsletter,
                         userCopy.distanceunit,
                         userCopy._id
                     ]);
                 }
             } catch (e) {
-                // resultImg.style.display='none';
-                // resultButton.style.display='block';
-                // resultButtonTryAgain.style.display='block';
-                // resultButtonTryAgain.style.marginLeft='30px';
+                console.dir(e)
                 dispatchResultInfo({type: 'tryAgain'});
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update.'}`
-                // resultText.innerText=`Something went wrong on edit. Log in as guest user?`
             }
         }       
         if (activeWindow.active==='login') {   
@@ -201,7 +173,7 @@ function UserProfile(props) {
             dispatchResultInfo({type: 'loadingImage'})
             try {
                 /* LOCAL */
-                await axios.patch(`{process.env.backend}/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* TESTING */
                 // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* STAGING */
@@ -210,24 +182,14 @@ function UserProfile(props) {
                 // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
-                // resultImg.style.display='none';
-                // resultButton.style.display= 'block';
             } catch(e) {
                 console.dir(e)
-                if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
-                    // resultImg.style.display='none';
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     dispatchResultInfo({type: 'okTryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'A.Something went wrong on updatePassword.'}`;
-                    // resultButton.style.display='block';
-                    // resultButtonTryAgain.style.display='block';
-                    // resultButtonTryAgain.style.marginLeft='30px';
                 } else {
-                    // resultImg.style.display='none';
                     dispatchResultInfo({type: 'okTryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'B.Something went wrong on updatePassword.'}`;
-                    // resultButton.style.display='block';
-                    // resultButtonTryAgain.style.display='block';
-                    // resultButtonTryAgain.style.marginLeft='30px';
                 }
             }
         }
@@ -239,17 +201,9 @@ function UserProfile(props) {
         Router.push('/');
     }
     async function handleDelete(e) {
-        // const resultContainer = document.querySelector('#loadingUpdatePassword');
         const resultText = document.querySelector('#loadingLoginText');
-        // const resultButton = document.querySelector('#loadingUpdatePasswordOk');
-        // const resultButtonTryAgain = document.querySelector('#loadingUpdatePasswordTryAgain');
-        // const resultImg = document.querySelector('#loadingUpdatePasswordImg');
         e.preventDefault();
         if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
-            // resultContainer.style.display='block';
-            // resultImg.style.display='none';
-            // resultButtonTryAgain.style.display='block';
-            // resultButtonTryAgain.style.marginLeft=0;
             dispatchResultInfo({type: 'tryAgain'});
             resultText.innerText=`Passwords must be at least 8 characters long.`;
             return
@@ -268,17 +222,11 @@ function UserProfile(props) {
             // const returnedUser = res.user;
             dispatchResultInfo({type: 'OK'});
             resultText.innerText=`Account ${user[2]} has been deleted`;
-            // resultContainer.style.display='block';
-            // resultImg.style.display='none';
-            // resultButton.style.display= 'block';
             await setUser(['Login','','','miles','']);
         } catch(e) {
             console.dir(e)
             dispatchResultInfo({type: 'OK'})
-            // resultContainer.style.display='block';
-            // resultImg.style.display='none';
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
-            // resultButton.style.display='block';
         }    
     }
     return (
@@ -308,9 +256,7 @@ function UserProfile(props) {
                         Try Again
                     </button>
                 </div>
-            </div>
-            
-            
+            </div>           
             {/* <div id="loadingUpdatePassword">
                 <img id='loadingUpdatePasswordImg' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingUpdatePasswordText"></p>
@@ -376,6 +322,17 @@ function UserProfile(props) {
                             required={activeWindow.active==='editProfile'}
                             disabled={activeWindow.active==='changePassword'}
                         />
+                        
+                        <div className="input-name input-margin">
+                            <h3>
+                                <input 
+                                type='checkbox'
+                                name='newsletter'
+                                onChange={handleChange}
+                                style={{marginLeft: '0'}}
+                                defaultChecked = {user[5]}
+                            />Signup for newsletter?</h3>
+                        </div>
                         <div className="input-name input-margin">
                             <h3>I prefer distances in</h3>
                         </div>
@@ -474,7 +431,7 @@ function UserProfile(props) {
                             <button type='submit' className="submit-btn updatePassword-edit-title">
                                 Submit
                             </button>
-                            <div className="forgot-pass" onClick={()=>alert('forgot password under construction')}>
+                            <div className="forgot-pass" onClick={()=>alert('Forgot old password under construction. To reset your password, refresh page, go to login, select "forgot password."')}>
                                 <a href="#">Forgot Old Password?</a>
                             </div>
                         </>

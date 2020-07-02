@@ -167,18 +167,22 @@ function LoginSignup(props) {
                 // login user
                 const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
+                console.log('ret', returnedUser)
                 // set user context to added user
                 await setUser([
                     returnedUser.firstname, 
                     returnedUser.lastname, 
                     returnedUser.email, 
                     returnedUser.distanceunit, 
-                    returnedUser._id
+                    returnedUser._id,
+                    returnedUser.newsletter
                 ]);
+                // console.log('login', user)
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
+                console.log(e)
                 // display error-user email not verified
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                

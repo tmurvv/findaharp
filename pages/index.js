@@ -88,40 +88,46 @@ const Index = (props) => {
         });
     }
     function resetResults() {
-        document.querySelector('#loadingLogin').style.display='none';
-        document.querySelector('#loadingLoginText').innerText='';
-        document.querySelector('#loadingLoginOk').style.display='none';
-        document.querySelector('#loadingLoginTryAgain').style.display='none';
-        document.querySelector('#loadingLoginImg').style.display='none';
+        document.querySelector('#loadingResetLogin').style.display='none';
+        document.querySelector('#loadingResetLoginText').innerText='';
+        document.querySelector('#loadingResetLoginOk').style.display='none';
+        document.querySelector('#loadingResetLoginTryAgain').style.display='none';
+        document.querySelector('#loadingResetLoginImg').style.display='none';
+        document.querySelector('#loadingVerifyLogin').style.display='none';
+        document.querySelector('#loadingVerifyLoginText').innerText='';
+        document.querySelector('#loadingVerifyLoginOk').style.display='none';
+        document.querySelector('#loadingVerifyLoginTryAgain').style.display='none';
+        document.querySelector('#loadingVerifyLoginImg').style.display='none';
     }
     
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLogin');
-        const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
+        debugger
+        const resultResetContainer = document.querySelector('#loadingResetLogin');
+        const resultResetText = document.querySelector('#loadingResetLoginText');
+        const resultResetButton = document.querySelector('#loadingResetLoginOk');
+        const resultResetButtonTryAgain = document.querySelector('#loadingResetLoginTryAgain');
+        const resultResetImg = document.querySelector('#loadingResetLoginImg');
         
-        resultContainer.style.display='block';
+        resultResetContainer.style.display='block';
         if (userLogin.newpassword.length<8) {
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display='block';
-            resultButtonTryAgain.style.marginLeft=0;
-            resultText.innerText=`Passwords must be at least 8 characters long.`;
+            resultResetImg.style.display='none';
+            resultResetButtonTryAgain.style.display='block';
+            resultResetButtonTryAgain.style.marginLeft=0;
+            resultResetText.innerText=`Passwords must be at least 8 characters long.`;
             return
         }
         // passwords match 
         if (userLogin.newpassword !== userLogin.confirmpassword) {
-            resultContainer.style.display='block';
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display='block';
-            resultButtonTryAgain.style.marginLeft=0;
-            resultText.innerText=`Passwords do not match.`;
+            resultResetContainer.style.display='block';
+            resultResetImg.style.display='none';
+            resultResetButtonTryAgain.style.display='block';
+            resultResetButtonTryAgain.style.marginLeft=0;
+            resultResetText.innerText=`Passwords do not match.`;
             return
         }
-        resultText.innerText='Loading...';
-        resultImg.style.display='block';
+        resultResetText.innerText='Loading...';
+        resultResetImg.style.display='block';
         try {
             /* LOCAL */
             const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${Router.query.resetpasswordemail}`, {resetpassword: userLogin.newpassword});
@@ -131,24 +137,25 @@ const Index = (props) => {
             // const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* PRODUCTION */
             // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
-            resultText.innerText=`Password change successful.`;
-            resultImg.style.display='none';
-            resultButton.style.display= 'block';
-            Router.push('/LoginSignup');
+            resultResetText.innerText=`Password change successful.`;
+            resultResetImg.style.display='none';
+            resultResetButton.style.display= 'block';
+            resultResetButtonTryAgain.style.display= 'none';
+            // Router.push('/LoginSignup');
         } catch(e) {
             console.dir(e)
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
-                resultImg.style.display='none';
-                resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
+                resultResetImg.style.display='none';
+                resultResetText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
+                resultResetButton.style.display='block';
+                resultResetButtonTryAgain.style.display='block';
+                resultResetButtonTryAgain.style.marginLeft='30px';
             } else {
-                resultImg.style.display='none';
-                resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
+                resultResetImg.style.display='none';
+                resultResetText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
+                resultResetButton.style.display='block';
+                resultResetButtonTryAgain.style.display='block';
+                resultResetButtonTryAgain.style.marginLeft='30px';
             }
         }
         resetSignupForm();
@@ -156,7 +163,7 @@ const Index = (props) => {
     }
     function loginGuest() {
         resetResults();
-        Router.push('/');
+        Router.push('/LoginSignup');
     }
 
 
@@ -191,33 +198,33 @@ const Index = (props) => {
             <title>Find a Harp Pre-owned, Used</title>
             <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
         </Head>
-        <div className='login-signup-container' style={{padding: '40px'}} hidden={!props.verifying}>
+        <div className='loginVerify-signup-container' style={{padding: '40px'}} hidden={!props.verifying}>
                 {props.verifying && !found ? 
-                <div id="loadingLogin" style={{display: 'block', top: '25%'}}>
-                    <img id='loadingLoginImg' src='/img/spinner.gif' style={{display: 'block'}} alt='loading spinner' />
-                    <p id="loadingLoginText">VERIFYING EMAIL and Logging In</p>
+                <div id="loadingVerifyLogin" style={{display: 'block', top: '25%'}}>
+                    <img id='loadingVerifyLoginImg' src='/img/spinner.gif' style={{display: 'block'}} alt='loading spinner' />
+                    <p id="loadingVerifyLoginText">VERIFYING EMAIL and Logging In</p>
                     <div className='flex-sb'>
-                        <button id='loadingLoginOk' type='button' style={{display: 'none'}} className='submit-btn'>OK</button>
-                        {/* <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button> */}
+                        <button id='loadingVerifyLoginOk' type='button' style={{display: 'none'}} className='submit-btn'>OK</button>
+                        <button id='loadingVerifyLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                     </div>
                 </div>
                 :   
-                    <div id="loadingLogin" style={{display: 'block'}}>
+                    <div id="loadingVerifyLogin" style={{display: 'block'}}>
                         {props.found?
                         <>
-                        <img id='loadingLoginImg' src='/img/spinner.gif' style={{display: 'none'}} alt='loading spinner' />
-                        <p id="loadingLoginText">Thank you for verifying your email.</p>
+                        <img id='loadingVerifyLoginImg' src='/img/spinner.gif' style={{display: 'none'}} alt='loading spinner' />
+                        <p id="loadingVerifyLoginText">Thank you for verifying your email.</p>
                         <div className='flex-sb'>
-                            <button id='loadingLoginOk' type='button' style={{display: 'block'}} className='submit-btn' onClick={()=>Router.push('/')}>OK</button>
-                            {/* <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button> */}
+                            <button id='loadingVerifyLoginOk' type='button' style={{display: 'block'}} className='submit-btn' onClick={()=>Router.push('/')}>OK</button>
+                            <button id='loadingVerifyLoginTryAgain' type='button' style={{display: 'none'}} className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                         </div>
                         </>
                         : <>
-                            <img id='loadingLoginImg' src='/img/spinner.gif' style={{display: 'none'}} alt='loading spinner' />
-                            <p id="loadingLoginText">Unable to verify email. Logging in as guest.</p>
+                            <img id='loadingVerifyLoginImg' src='/img/spinner.gif' style={{display: 'none'}} alt='loading spinner' />
+                            <p id="loadingVerifyLoginText">Unable to verify email. Logging in as guest.</p>
                             <div className='flex-sb'>
-                                <button id='loadingLoginOk' type='button' style={{display: 'block'}} className='submit-btn' onClick={()=>Router.push('/')}>OK</button>
-                                {/* <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button> */}
+                                <button id='loadingVerifyLoginOk' type='button' style={{display: 'block'}} className='submit-btn' onClick={()=>Router.push('/')}>OK</button>
+                                <button id='loadingVerifyLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                             </div>
                         </>
                     }
@@ -227,14 +234,14 @@ const Index = (props) => {
         </div>
         {props.reset?
         <>
-            <div className='login-signup-container'>
+            <div className='loginReset-signup-container'>
                 <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
-                <div id="loadingLogin">
-                    <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
-                    <p id="loadingLoginText"></p>
+                <div id="loadingResetLogin">
+                    <img id='loadingResetLoginImg' src='/img/spinner.gif' alt='loading spinner' />
+                    <p id="loadingResetLoginText"></p>
                     <div className='flex-sb'>
-                        <button id='loadingLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
-                        <button id='loadingLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                        <button id='loadingResetLoginOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
+                        <button id='loadingResetLoginTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
                     </div>
                 </div>
                 
@@ -280,7 +287,7 @@ const Index = (props) => {
                                 required={true}
                             />
                         </div>
-                        <button type='submit' className="submit-btn login-signup-title">
+                        <button type='button' onClick={handleSubmit} className="submit-btn login-signup-title">
                             Submit
                         </button>
                     </form>
@@ -311,16 +318,16 @@ const Index = (props) => {
 Index.getInitialProps = async (props) => {
     // console.log('getinit', props);
     if (props.query.activateemail) {
-        // try { // BREAKING
-        //     // const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
-        //     // if (res) return { verifying: true, found: true };
-        // } catch (error ) {
-        //     console.error('error', error);
-        //     return { verifying: true, found: false };
-        // }        
-        // return { verifying: true, found: false };
+        try { // BREAKING
+            const res = await axios.post(`http://localhost:3000/api/v1/emailverify`, { email: props.query.activateemail});
+            if (res) return { verifying: true, found: true };
+        } catch (error ) {
+            console.error('error', error);
+            return { verifying: true, found: false };
+        }        
+        return { verifying: true, found: false };
     } else if (props.query.resetpasswordemail) {
-        // return { verifying: false, reset: true } //BREAKING
+        return { verifying: false, reset: true } //BREAKING
     } else {   
         /******************
          * LOCAL DATA
@@ -339,10 +346,6 @@ Index.getInitialProps = async (props) => {
         const products = res.data.harpData;
         const makesModels = res.data.harpMakesModels;
         products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
-        products.map(product => console.log(product.productModel))
-        const productsSet = [...new Set(products)]
-        console.log('0000000000000')
-        productsSet.map(product => console.log(product.productModel))
         return { products, makesModels, verifying: false, found: false };
     }
     

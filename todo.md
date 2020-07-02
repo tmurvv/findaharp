@@ -1,8 +1,7 @@
 ### prelaunch
 
-- why are stock photos still showing
+- login/signup lost some formatting
 - photos come out stretched after coming from different window (in element, height 100% when stretched, auto when not stretched)
-- make sure Mid-West lists Michigan harps
 - extensive testing
 - change store email on contact seller forms to store emails
 

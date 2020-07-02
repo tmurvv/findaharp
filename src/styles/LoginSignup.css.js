@@ -8,7 +8,9 @@ function LoginSignupCSS() {
                 button {
                 outline: 0;
             }
-            .login-signup-container {
+            .login-signup-container,
+            .loginReset-signup-container,
+            .loginVerify-signup-container {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 overflow: hidden;
                 position: relative;
@@ -158,7 +160,9 @@ function LoginSignupCSS() {
                     transform: translateX(-10%);
                 }
             }
-            #loadingLogin {
+            #loadingLogin,
+            #loadingResetLogin,
+            #loadingVerifyLogin {
                 display: none;
                 color: #6A75AA;
                 border: 2px solid #6A75AA;
@@ -173,17 +177,25 @@ function LoginSignupCSS() {
                 transform: translate(50%, 50%);
                 z-index: 5000;
             }
-            #loadingLoginImg {
+            #loadingLoginImg,
+            #loadingResetLoginImg,
+            #loadingVerifyLoginImg {
                 display: block;
                 height: 50px;
                 margin: auto;
             }
             #loadingLoginOk,
-            #loadingLoginTryAgain {
+            #loadingVerifyLoginOk,
+            #loadingResetLoginOk,
+            #loadingLoginTryAgain,
+            #loadingVerifyTryAgain,
+            #loadingResetTryAgain {
                 display: none;
                 padding: 7px;
             }
-            #loadingLoginText {
+            #loadingLoginText,
+            #loadingResetLoginText, 
+            #loadingVerifyLoginText {
                 text-align: center;
             }
             .profileDivider {

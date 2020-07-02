@@ -1,49 +1,77 @@
-## Run through from computer, iPad, then phone
-## Then recheck regular deploy instructions, then deploy and do same 
+# Production Deploy Checklist
+xx means stays checked when resetting for ipad and android phone
 
-### first do regular deploy checklist
+    [xx] first do regular deploy checklist
+
+### macro
+    [xx] Local
+        [xx] test all responsive
+            [xx] NavBar
+            [xx] Search
+            [xx] ProdCont
+            [xx] Footer
+    [ ] Staging
+        [ ] Done on PC
+        [ ] Done on iPad
+        [ ] Done on android phone
+    [ ] Production
+        [ ] Done on PC
+        [ ] Done on iPad
+        [ ] Done on android phone
 
 ### page by page links
-    [x] home page
-        [x] NavBar
-        [x] Search
-        [x] ProdCont
-        [x] Footer
-    [x] test all responsive
-        [x] NavBar
-        [x] Search
-        [x] ProdCont
-        [x] Footer
-    [x] contact us page
-        [x] test become store partner here
-        [x] become store partner responsive
-    [x] store partner page
-        [x] test become store partner here
-        [x] become store partner responsive
+    [ ] home page
+        [ ] NavBar
+        [ ] Search
+        [ ] ProdCont
+        [ ] Footer
+    [ ] contact us page
+        [ ] test become store partner here
+        [ ] become store partner responsive
+    [ ] store partner page
+        [ ] test become store partner here
+        [ ] become store partner responsive
 
 ### functionality - search
-    [x] each menu
-    [x] menu combos
-    [x] driving distance
-    [x] clear one, clear all
+    [ ] each menu
+    [ ] menu combos
+    [ ] driving distance
+    [ ] clear one, clear all
 
 ### functionality - auth
-    [x] all login
-        [x] success
-        [x] errors
-            [x] email not found
-            [x] password not long enough
-            [x] password incorrect
-    [] all signup
-        [] success 
-            [x] verify email sent
-            [] verify email works
-        [] errors
-    [] forgot password
-    [] change password
-    [] edit profile
-    [] delete account
+    [ ] all login
+        [ ] success
+        [ ] errors
+            [ ] email not found
+            [ ] password not long enough
+            [ ] password incorrect
+            [ ] email not verified
+    [ ] all signup
+        [ ] success 
+            [ ] verify email sent
+            [ ] verify email works
+            [ ] verify all data correct
+            [ ] customer can log in
+        [ ] errors
+            [ ] duplicate email (July 1, 2020, not yet implemented)
+            [ ] password not long enough
+            [ ] passwords do not match
+    [ ] forgot password
+        [ ] reset email gets sent
+        [ ]  success
+        [ ]  error
+            [ ]  password not long enough
+            [ ]  passwords do not match
+            [ ]  new password works 
+    [ ] change password
+        [ ] success
+        [ ] error
+            [ ] password not long enough
+            [ ] passwords do not match       
+    [ ] edit profile
+    [ ] delete account
 
 ### functionality - contacts
-    [x] contact seller - price is not working, email to me not them
-    [x] contact findaharp - working
+    [ ] contact seller - price is not working, email to me not them
+    [ ] contact findaharp - working
+

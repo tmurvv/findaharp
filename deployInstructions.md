@@ -11,6 +11,7 @@
 - check 
 - check next.config.js for deployment environment
 - check next.config.js for backend environment
+- index.js getinit has to be manually changed for backend environment
 - for testing, make sure test data has correct data set for images...
     - findaharp-api only for findaharp.com
     - findaharp-api-testing for others

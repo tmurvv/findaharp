@@ -259,7 +259,8 @@ function ProductSearch(props) {
         triggerLazy();
     },[]);
     
-    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
+    const filteredProducts = [];
+    // const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
     
     return (
         <>       
