@@ -25,7 +25,6 @@ const activeWindowInitialState = {
 }
 function UserProfile(props) {
     const { user, setUser} = useContext(UserContext);
-    console.log(user)
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
@@ -151,7 +150,6 @@ function UserProfile(props) {
                     ]);
                 }
             } catch (e) {
-                console.dir(e)
                 dispatchResultInfo({type: 'tryAgain'});
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update.'}`
             }
@@ -183,7 +181,6 @@ function UserProfile(props) {
                 dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
             } catch(e) {
-                console.dir(e)
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     dispatchResultInfo({type: 'okTryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'A.Something went wrong on updatePassword.'}`;
@@ -224,7 +221,6 @@ function UserProfile(props) {
             resultText.innerText=`Account ${user[2]} has been deleted`;
             await setUser(['Login','','','miles','']);
         } catch(e) {
-            console.dir(e)
             dispatchResultInfo({type: 'OK'})
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
         }    

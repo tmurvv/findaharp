@@ -134,7 +134,7 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                const res = await axios.post(`${process.env.backend}/api/v1/users/createuser`, newUser);
+                const res = await axios.post(`https:findaharp-api-staging.herokuapp.com/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
@@ -145,13 +145,20 @@ function LoginSignup(props) {
                         addeduser.lastname, 
                         addeduser.email,
                         addeduser.distanceunit,
-                        addeduser._id
+                        addeduser._id,
+                        addedUser.newsletter
                     ]);
                 }
             // Error on signup
             } catch (e) {
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`;
-                dispatchResultInfo({type: 'okTryAgain'});
+                if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('duplicate')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
+                    dispatchResultInfo({type: 'okTryAgain'});
+                } else {
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`;
+                    dispatchResultInfo({type: 'okTryAgain'});
+                }
+                
             }
         }       
         if (activeWindow.active==='login') {   
@@ -167,7 +174,6 @@ function LoginSignup(props) {
                 // login user
                 const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
-                console.log('ret', returnedUser)
                 // set user context to added user
                 await setUser([
                     returnedUser.firstname, 
@@ -177,12 +183,10 @@ function LoginSignup(props) {
                     returnedUser._id,
                     returnedUser.newsletter
                 ]);
-                // console.log('login', user)
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
-                console.log(e)
                 // display error-user email not verified
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                

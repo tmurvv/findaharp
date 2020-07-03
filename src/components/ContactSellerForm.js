@@ -148,7 +148,7 @@ function ContactSellerForm(props) {
                 <div className={`detailImg`}>
                     <img src= {product.productImageUrl} alt={product.productTitle}/>
                     <p><span className='label'>
-                        {product.productMaker} {product.productModel}
+                    {product.productModel.indexOf(product.productMaker)>-1?'':product.productMaker} {product.productModel}
                     </span></p><p>{removeDashOE(product.sellerName)}</p>
                 </div>
                 

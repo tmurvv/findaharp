@@ -85,7 +85,6 @@ function ResetPassword(props) {
     
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        debugger
         const resultContainerReset = document.querySelector('#loadingloginReset');
         const resultText = document.querySelector('#loadingloginResetText');
         const resultButton = document.querySelector('#loadingloginResetOk');
@@ -126,7 +125,6 @@ function ResetPassword(props) {
             resultButton.style.display= 'block';
             
         } catch(e) {
-            console.dir(e)
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                 resultImg.style.display='none';
                 resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;

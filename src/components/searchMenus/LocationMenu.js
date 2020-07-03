@@ -61,18 +61,21 @@ export default function LocationMenu(props) {
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
+                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()}
                     name='North-East'
                 >US-NorthEastern</li>    
                 <li 
                     onClick={handleClose}
-                    hidden={activateDriving} 
+                    hidden={activateDriving}
+                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='Eastern'
                 >US-Eastern</li>
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
+                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='South'
                 >US-South</li>
@@ -85,6 +88,7 @@ export default function LocationMenu(props) {
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
+                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='West'
                 >US-West</li>
@@ -97,6 +101,7 @@ export default function LocationMenu(props) {
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
+                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='Canada-East'
                 >Canada-East</li>              

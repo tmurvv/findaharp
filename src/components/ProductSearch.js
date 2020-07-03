@@ -55,16 +55,16 @@ function ProductSearch(props) {
         location: 'All Locations',
         searchInfo: 'All Harps'
     }); 
-    useOutsideClick(ref, () => {
-        setMenus({
-            size: false,
-            maker: false,
-            model: false,
-            finish: false,
-            price: false,
-            location: false
-        });
-    });
+    // useOutsideClick(ref, () => {
+    //     setMenus({
+    //         size: false,
+    //         maker: false,
+    //         model: false,
+    //         finish: false,
+    //         price: false,
+    //         location: false
+    //     });
+    // });
     function handleMakerSelection(maker) {
         const newState = {...allState, 
             maker,
@@ -143,7 +143,6 @@ function ProductSearch(props) {
                 location,
                 searchInfo: getSearchInfo(newState)
             });
-            console.log('loc', location)
             if (location!=='ltActivate') setMenus(initialState);
             location='All Locations';
         }
@@ -161,8 +160,6 @@ function ProductSearch(props) {
         }
     }
     function handleClick(e) {
-        console.log('click', e.target.name, menus.model)
-
         switch(e.target.name) {
             case 'size':
                 setMenus({
@@ -259,8 +256,7 @@ function ProductSearch(props) {
         triggerLazy();
     },[]);
     
-    const filteredProducts = [];
-    // const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
+    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
     
     return (
         <>       
@@ -276,8 +272,6 @@ function ProductSearch(props) {
                     currentselected={allState.size?allState.size:'Harp Size'}
                     handleclick={handleClick}
                     open={menus.size}
-                    trigger={trigger}
-                    
                 />
                 <MakerMenu 
                     handleMakerChange = {handleMakerSelection}
@@ -380,9 +374,9 @@ function ProductSearch(props) {
                     <PriceMenu 
                         handlePriceChange = {handlePriceSelection}
                         products={props.products}
-                        producttype={allState.productType}
+                        // producttype={allState.productType}
                         makesmodels={props.makesmodels}
-                        currentselected={allState.price?allState.price:'Harp Price'}
+                        // currentselected={allState.price?allState.price:'Harp Price'}
                         open={menus.price}
                         handleclick={handleClick}
                     />

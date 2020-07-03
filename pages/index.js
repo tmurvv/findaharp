@@ -130,7 +130,7 @@ const Index = (props) => {
         resultResetImg.style.display='block';
         try {
             /* LOCAL */
-            const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${Router.query.resetpasswordemail}`, {resetpassword: userLogin.newpassword});
+            const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${Router.query.resetpasswordemail}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
             // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* STAGING */
@@ -319,7 +319,7 @@ Index.getInitialProps = async (props) => {
     // console.log('getinit', props);
     if (props.query.activateemail) {
         try { // BREAKING
-            const res = await axios.post(`http://localhost:3000/api/v1/emailverify`, { email: props.query.activateemail});
+            const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/emailverify`, { email: props.query.activateemail});
             if (res) return { verifying: true, found: true };
         } catch (error ) {
             console.error('error', error);
@@ -340,7 +340,7 @@ Index.getInitialProps = async (props) => {
          * API DATA
          *******************/
         // API
-        const res = await axios.get(`${process.env.backend}`);
+        const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/`);
         
         // API DATA Populate variables
         const products = res.data.harpData;

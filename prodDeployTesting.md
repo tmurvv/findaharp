@@ -20,54 +20,56 @@ xx means stays checked when resetting for ipad and android phone
         [ ] Done on android phone
 
 ### page by page links
-    [ ] home page
-        [ ] NavBar
-        [ ] Search
-        [ ] ProdCont
-        [ ] Footer
-    [ ] contact us page
-        [ ] test become store partner here
-        [ ] become store partner responsive
-    [ ] store partner page
-        [ ] test become store partner here
-        [ ] become store partner responsive
+    [x] home page
+        [x] NavBar
+        [x] Search
+        [x] ProdCont
+        [x] Footer
+    [x] become store partner
+        [x] contact page
+        [x] store partner page
+    [x] buyers guide
+        [x] survey
+        [x] other links
 
 ### functionality - search
-    [ ] each menu
-    [ ] menu combos
-    [ ] driving distance
-    [ ] clear one, clear all
+    [x] each menu
+    [x] menu combos
+    [x] driving distance
+    [x] clear one, clear all
 
 ### functionality - auth
-    [ ] all login
-        [ ] success
-        [ ] errors
-            [ ] email not found
-            [ ] password not long enough
-            [ ] password incorrect
-            [ ] email not verified
+    [x] all login
+        [x] success
+        [x] errors
+            [x] email not found
+            [x] password not long enough
+            [x] password incorrect
+            [x] email not verified (will be checked during resend verify email check)
     [ ] all signup
         [ ] success 
-            [ ] verify email sent
-            [ ] verify email works
-            [ ] verify all data correct
-            [ ] customer can log in
-        [ ] errors
-            [ ] duplicate email (July 1, 2020, not yet implemented)
+            [x] verify email sent
+            [no] verify email works
+            [x] verify all data correct
+            [x] customer can log in
+        [x] errors
+            [x] duplicate email
+            [x] password not long enough
+            [x] passwords do not match
+    [ ] forgot password
+        [x] email not entered
+        [x] reset email gets sent
+        [ ] success
+        [ ] error           
             [ ] password not long enough
             [ ] passwords do not match
-    [ ] forgot password
-        [ ] reset email gets sent
-        [ ]  success
-        [ ]  error
-            [ ]  password not long enough
-            [ ]  passwords do not match
-            [ ]  new password works 
+            [ ] new password works 
     [ ] change password
-        [ ] success
+        [x] success
         [ ] error
-            [ ] password not long enough
-            [ ] passwords do not match       
+            [ ] old password incorrect
+            [x] password not long enough
+            [x] passwords do not match       
     [ ] edit profile
     [ ] delete account
 

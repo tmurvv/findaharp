@@ -1,13 +1,12 @@
 ### prelaunch
 
-- login/signup lost some formatting
-- photos come out stretched after coming from different window (in element, height 100% when stretched, auto when not stretched)
 - extensive testing
 - change store email on contact seller forms to store emails
 
 ### high priority
+- on change password error message for old password incorrect
 - check that emails are being sent encoded
-- something is calling findaharp/emailverify page is not being found
+- useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
 - separate store partner program info into a component
