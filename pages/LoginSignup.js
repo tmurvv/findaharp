@@ -82,7 +82,7 @@ function LoginSignup(props) {
             signupemail: '',
             signuppassword: '',
             confirmpassword: '',
-            newsletter: '',
+            newsletter: false,
             distanceunit: 'miles',
             signupchange: false
         });
@@ -122,7 +122,7 @@ function LoginSignup(props) {
                 resultText.innerText=`Passwords do not match.`;
                 dispatchResultInfo({type: 'tryAgain'});
                 return
-            }
+            } 
             // create signup user object
             const newUser = {
                 firstname: userSignup.firstname,
@@ -134,10 +134,11 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                const res = await axios.post(`https:findaharp-api-staging.herokuapp.com/api/v1/users/createuser`, newUser);
+                const res = await axios.post(`http://localhost:3000/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
+                    console.log(res.data)
                     const {addeduser} = res.data;
                     // setNeedVerify(true);
                     setUser([
@@ -146,7 +147,7 @@ function LoginSignup(props) {
                         addeduser.email,
                         addeduser.distanceunit,
                         addeduser._id,
-                        addedUser.newsletter
+                        addeduser.newsletter
                     ]);
                 }
             // Error on signup
@@ -158,7 +159,6 @@ function LoginSignup(props) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 }
-                
             }
         }       
         if (activeWindow.active==='login') {   
@@ -207,7 +207,6 @@ function LoginSignup(props) {
             }
         }
         resetSignupForm();
-        // if (!needVerify) resetLoginForm();
     }
     // handle forgotPassword click
     async function handleForgot() {
@@ -231,8 +230,6 @@ function LoginSignup(props) {
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset.'} Log in as guest user?`
             dispatchResultInfo({type: 'okTryAgain'});
         }
-        // resetResults();
-        // Router.push('/');
     }
     async function loginGuest(evt) {
         evt.preventDefault();       
@@ -253,7 +250,7 @@ function LoginSignup(props) {
                 dispatchResultInfo({type: 'OK'});
                 setNeedVerify(false);
                 // send forgot password email
-                const res = await axios.post(`${process.env.backend}/api/v1/resendverify`, forgotPasswordUser);
+                await axios.post(`${process.env.backend}/api/v1/resendverify`, forgotPasswordUser);
             } catch (e) {
                 // display error
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong sending verification email.'} Log in as guest user?`;

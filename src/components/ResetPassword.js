@@ -1,52 +1,36 @@
 // packages
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext, useReducer } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import uuid from 'react-uuid';
+import uuid from 'uuid';
 
 // internal
-import PageTitle from '../src/components/PageTitle';
-import { UserContext } from '../src/contexts/UserContext';
-import LoginSignupCSS from '../src/styles/LoginSignup.css';
+import LoginSignupCSS from '../styles/LoginSignup.css';
+import { UserContext } from '../contexts/UserContext';
+import PageTitle from '../components/PageTitle';
+import { resultInfoReducer } from '../reducers/reducers';
 
+const resultInfoInitialState = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
 function ResetPassword(props) {
-    const { user, setUser} = useContext(UserContext);
+    // const { user, setUser} = useContext(UserContext);
+    const [verifying] = useState(false);
+    const [found] = useState(props.emailFound);
     const Router = useRouter();
-        let email; 
-        if (Router.query.useremail) email = Router.query.useremail.substr(0,Router.query.useremail.length-1);
-
-    const [userSignup, setUserSignup] = useState({
-        firstname: '',
-        lastname: '',
-        signupemail: '',
-        signuppassword: '',
-        confirmpassword: '',
-        distanceunit: '',
-        signupchange: false
-    });
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const [userLogin, setUserLogin] = useState({
-        oldpassword: '',
         newpassword: '',
         confirmpassword: '',
         loginchange: false
     });
     const handleChange = (evt) => {
         switch (evt.target.name) {
-            case 'firstname': 
-                setUserSignup({...userSignup, firstname: evt.target.value, signupchange: true});
-                break
-            case 'lastname': 
-                setUserSignup({...userSignup, lastname: evt.target.value, signupchange: true});
-                break
-            case 'signupemail': 
-                setUserSignup({...userSignup, signupemail: evt.target.value, signupchange: true});
-                break
-            case 'distanceunit': 
-                setUserSignup({...userSignup, distanceunit: evt.target.value, signupchange: true});
-                break
-            case 'oldpassword': 
-                setUserLogin({...userLogin, oldpassword: evt.target.value, loginchange: true});
-                break
             case 'newpassword': 
                 setUserLogin({...userLogin, newpassword: evt.target.value, loginchange: true});
                 break
@@ -55,17 +39,6 @@ function ResetPassword(props) {
                 break
             default :
         }
-    }
-    function resetSignupForm() {
-        setUserSignup({
-            firstname: '',
-            lastname: '',
-            signupemail: '',
-            signuppassword: '',
-            confirmpassword: '',
-            distanceUnit: 'miles',
-            signupchange: false
-        });
     }
     function resetLoginForm() { 
         setUserLogin({
@@ -76,43 +49,30 @@ function ResetPassword(props) {
         });
     }
     function resetResults() {
-        document.querySelector('#loadingloginReset').style.display='none';
-        document.querySelector('#loadingloginResetText').innerText='';
-        document.querySelector('#loadingloginResetOk').style.display='none';
-        document.querySelector('#loadingloginResetTryAgain').style.display='none';
-        document.querySelector('#loadingloginResetImg').style.display='none';
-    }
-    
+        dispatchResultInfo({type: 'initial'});
+    }    
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainerReset = document.querySelector('#loadingloginReset');
-        const resultText = document.querySelector('#loadingloginResetText');
-        const resultButton = document.querySelector('#loadingloginResetOk');
-        const resultButtonTryAgain = document.querySelector('#loadingloginResetTryAgain');
-        const resultImg = document.querySelector('#loadingloginResetImg');
-               
-        resultContainerReset.style.display='block';
-        if (userLogin.newpassword.length<8) {
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display='block';
-            resultButtonTryAgain.style.marginLeft=0;
-            resultText.innerText=`Passwords must be at least 8 characters long.`;
-            return
-        }
-        // passwords match 
-        if (userLogin.newpassword !== userLogin.confirmpassword) {
-            resultContainerReset.style.display='block';
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display='block';
-            resultButtonTryAgain.style.marginLeft=0;
-            resultText.innerText=`Passwords do not match.`;
-            return
-        }
+        // start loading Image
+        const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText='Loading...';
-        resultImg.style.display='block';
+        dispatchResultInfo({type: 'loadingImage'});
+        // check password length
+        if (userLogin.newpassword.length<8) {
+            resultText.innerText=`Passwords must be at least 8 characters long.`;
+            dispatchResultInfo({type: 'tryAgain'});
+            return
+        }
+        // do passwords match 
+        if (userLogin.newpassword !== userLogin.confirmpassword) {
+            resultText.innerText=`Passwords do not match.`;
+            dispatchResultInfo({type: 'tryAgain'});
+            return
+        }
+        // update password
         try {
             /* LOCAL */
-            const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
+            const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${Router.query.resetpasswordemail}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
             // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* STAGING */
@@ -121,41 +81,48 @@ function ResetPassword(props) {
             // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             
             resultText.innerText=`Password change successful.`;
-            resultImg.style.display='none';
-            resultButton.style.display= 'block';
-            
+            dispatchResultInfo({type: 'OK'});
         } catch(e) {
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
-                resultImg.style.display='none';
                 resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
+                dispatchResultInfo({type: 'okTryAgain'});
             } else {
-                resultImg.style.display='none';
                 resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
-                resultButton.style.display='block';
-                resultButtonTryAgain.style.display='block';
-                resultButtonTryAgain.style.marginLeft='30px';
+                dispatchResultInfo({type: 'okTryAgain'});
             }
         }
-        resetSignupForm();
         resetLoginForm();
     }
     function loginGuest() {
         resetResults();
-        // Router.push('/LoginSignup');
+        Router.push('/LoginSignup');
     }
     return (
-       <>
-        <div className='loginReset-signupReset-container'>
-            <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
-            <div id="loadingloginReset">
-                <img id='loadingloginResetImg' src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingloginResetText"></p>
+        <>
+        <div className='login-signup-container'>
+            <PageTitle maintitle='User Profile' subtitle='Reset Password' />
+            <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+                <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
+                <p id="loadingLoginText"></p>
                 <div className='flex-sb'>
-                    <button id='loadingloginResetOk' type='button' className='submit-btn' onClick={loginGuest}>OK</button>
-                    <button id='loadingloginResetTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
+                    <button 
+                        id='loadingLoginOk'
+                        type='button' 
+                        className='submit-btn' 
+                        onClick={loginGuest}
+                        style={{display: resultInfo.resultOkButton}} 
+                    >
+                        OK
+                    </button>
+                    <button 
+                        id='loadingLoginTryAgain' 
+                        type='button' 
+                        className='submit-btn submit-btn-tryAgain' 
+                        onClick={resetResults}
+                        style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}} 
+                    >
+                        Try Again
+                    </button>
                 </div>
             </div>
             
@@ -172,7 +139,7 @@ function ResetPassword(props) {
                             className="field-input"
                             type='email'
                             id={uuid()}
-                            placeholder={email}
+                            placeholder={Router.query.resetpasswordemail.substr(0,Router.query.resetpasswordemail.length-1)}
                             name='email'
                             disabled={true}
                         />
@@ -201,15 +168,26 @@ function ResetPassword(props) {
                             required={true}
                         />
                     </div>
-                    <button type='submit' className="submit-btn login-signup-title">
+                    <button type='button' onClick={handleSubmit} className="submit-btn login-signup-title">
                         Submit
                     </button>
                 </form>
             </div>
             <LoginSignupCSS />
         </div>
-        </>
+    </>
     )
 }
+// ActivateEmail.getInitialProps = async (props) => {
+//     const activateEmail = props.query.email; 
+//     try {
+//         const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
+//         if (res) return {emailFound: true};
+//     } catch (error ) {
+//         console.error('error', error);
+//         return {emailFound: false};
+//     }        
+//     return {emailFound: false};
+// }
 
 export default ResetPassword;

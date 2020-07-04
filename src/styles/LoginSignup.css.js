@@ -9,7 +9,6 @@ function LoginSignupCSS() {
                 outline: 0;
             }
             .login-signup-container,
-            .loginReset-signup-container,
             .loginVerify-signup-container {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 overflow: hidden;
@@ -161,7 +160,6 @@ function LoginSignupCSS() {
                 }
             }
             #loadingLogin,
-            #loadingResetLogin,
             #loadingVerifyLogin {
                 display: none;
                 color: #6A75AA;
@@ -178,7 +176,6 @@ function LoginSignupCSS() {
                 z-index: 5000;
             }
             #loadingLoginImg,
-            #loadingResetLoginImg,
             #loadingVerifyLoginImg {
                 display: block;
                 height: 50px;
@@ -186,15 +183,12 @@ function LoginSignupCSS() {
             }
             #loadingLoginOk,
             #loadingVerifyLoginOk,
-            #loadingResetLoginOk,
             #loadingLoginTryAgain,
-            #loadingVerifyTryAgain,
-            #loadingResetTryAgain {
+            #loadingVerifyTryAgain {
                 display: none;
                 padding: 7px;
             }
             #loadingLoginText,
-            #loadingResetLoginText, 
             #loadingVerifyLoginText {
                 text-align: center;
             }

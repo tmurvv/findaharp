@@ -131,7 +131,7 @@ function UserProfile(props) {
                 /* TESTING */
                 // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 /* STAGING */
-                // const res = await axios.patch('https://findaharp-api-staging.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
+                // const res = await axios.patch('http://localhost:3000/api/v1/users/updateuser/${user[4]}', updatedUser);
                 /* PRODUCTION */
                 // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
                 if (res.status===200) {
@@ -175,7 +175,7 @@ function UserProfile(props) {
                 /* TESTING */
                 // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* STAGING */
-                // const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* PRODUCTION */
                 // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 dispatchResultInfo({type: 'OK'});
@@ -213,7 +213,7 @@ function UserProfile(props) {
             // TESTING
             // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // STAGING
-            // const res=await axios.delete(`https://findaharp-api-staging.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
+            // const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user[4]}`);
             // PRODUCTION
             // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
             // const returnedUser = res.user;

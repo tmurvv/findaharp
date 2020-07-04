@@ -1,7 +1,6 @@
 // import App from 'next/app'
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 // css
 import 'react-phone-input-2/lib/style.css'
 
@@ -11,22 +10,14 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
+import ActivateEmail from '../src/components/ActivateEmail';
+import ResetPassword from '../src/components/ResetPassword';
 
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState(['Login', '', '', 'miles']); // firstname, lastname, email, distanceunit
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
-    try {
-        if (props.router && props.router.query && props.router.query.findpath === 'resetpassword') props.router.push(`/ResetPassword?useremail=${props.router.query.useremail}`);
-    } catch (e) {
-        console.error('from props.router', e)
-    }
-    try {
-        if (props.router && props.router.query && props.router.query.findpath === 'activateemail') props.router.push('/ActivateEmail?email=tmurv@shaw.ca');
-    } catch (e) {
-        console.error('from props.router', e)
-    }
     
     useEffect(() => {
         setWindowWidth(window.innerWidth);
@@ -40,7 +31,7 @@ function MyApp(props) {
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
-    return(
+    return( 
         <>  
             <Head>
                 <title>Find a Harp Pre-owned, Used</title>
@@ -49,10 +40,18 @@ function MyApp(props) {
             </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
-                <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                <Component {...pageProps} />
+            {props.router.query.resetpasswordemail
+                ?<ResetPassword found={true} />
+                :props.router.query.activateemail
+                    ?<ActivateEmail found={true}/>
+                    :
+                        <>
+                            <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                            <Component {...pageProps} />
+                            <Footer />
+                        </>
+            }
             </UserContext.Provider>
-            <Footer />
             <AppCss />
         </>
     )

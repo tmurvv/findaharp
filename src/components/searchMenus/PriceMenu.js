@@ -15,7 +15,7 @@ export default function PriceMenu(props) {
                 onClick={(e)=>{props.handleclick(e);}}
                 style={{color: '#000000'}}
             >
-                PRICE RANGE <span style={{fontStyle: 'italic', color: 'black'}}>usd</span>
+                PRICE <span style={{fontStyle: 'italic', color: 'black'}}>usd</span>
             </button>               
             <ul
                 id="price-select"
@@ -33,7 +33,7 @@ export default function PriceMenu(props) {
                     onClick={()=>alert('Change to Canadian Dollars coming soon!!')} 
                     // key={uuid()} 
                     name='All Prices'
-                >Change to Canadian Dollars</li>
+                >US Dollars <span style={{color: 'blue', textDecoration: 'underline', fontStyle: 'italic'}}>change</span></li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()}

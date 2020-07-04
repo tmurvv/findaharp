@@ -70,7 +70,7 @@ function ContactUsForm(props) {
             // testing
             // const res = await axios.post(`https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, contact);
             // staging
-            // const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/contactform`, contact);
+            // const res = await axios.post(`http://localhost:3000/api/v1/contactform`, contact);
             // production
             // const res = await axios.post(`https://findaharp-api.herokuapp.com/api/v1/contactform`, contact);
             // alert("Email sent.");

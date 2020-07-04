@@ -68,14 +68,6 @@ export default function LocationMenu(props) {
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
-                    style={{color: 'rgb(182, 169, 13)'}}
-                    // key={uuid()} 
-                    name='Eastern'
-                >US-Eastern</li>
-                <li 
-                    onClick={handleClose}
-                    hidden={activateDriving}
-                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='South'
                 >US-South</li>

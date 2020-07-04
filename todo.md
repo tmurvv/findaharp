@@ -1,5 +1,7 @@
 ### prelaunch
 
+- email verify with encrypted email
+- do forgot password and then login
 - extensive testing
 - change store email on contact seller forms to store emails
 
@@ -9,8 +11,8 @@
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
+- result component needs to be componetized
 - separate store partner program info into a component
-- cleanup activate email
 - make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
 - make addPlaceholders remove any placeholders that may be there already
@@ -65,27 +67,3 @@
 - on mobile menu highlight, put in fancy corners
 - New Listings Page
 - From Rachael, I feel that there should be a way for the user to flick back and forth between the form and the harp information, and without losing anything that they've already typed in if possible. Right now if one clicks on "Contact Seller" the only way to look at the full harp information again is to close the form and click on the harp again. 
-
-/*******************
-*ERROR MESSAGE
-*******************/
-[    ] Exporting (9/13)error { Error: Request failed with status code 400
-    at createError (D:\myProjects\FindAHarp-fe\node_modules\axios\lib\core\createError.js:16:15)
-    at settle (D:\myProjects\FindAHarp-fe\node_modules\axios\lib\core\settle.js:17:12)
-    at IncomingMessage.handleStreamEnd (D:\myProjects\FindAHarp-fe\node_modules\axios\lib\adapters\http.js:236:11)
-    at IncomingMessage.emit (events.js:194:15)
-    at endReadableNT (_stream_readable.js:1103:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)
-  config:
-   { url: '{process.env.backend}/api/v1/emailverify',
-     method: 'post',
-     data: '{}',
-     headers:
-      { Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json;charset=utf-8',
-        'User-Agent': 'axios/0.19.2',
-        'Content-Length': 2 },
-     transformRequest: [ [Function: transformRequest] ],
-     transformResponse: [ [Function: transformResponse] ],
-     timeout: 0,
-     adapter: [Function: httpAdapter],
