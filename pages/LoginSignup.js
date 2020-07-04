@@ -36,7 +36,8 @@ function LoginSignup(props) {
         confirmpassword: '',
         newsletter: false,
         distanceunit: 'miles',
-        signupchange: false
+        signupchange: false,
+        currency: 'USD'
     });
     const [userLogin, setUserLogin] = useState({
         loginemail: '',
@@ -72,6 +73,9 @@ function LoginSignup(props) {
             case 'distanceunit': 
                 setUserSignup({...userSignup, distanceunit: evt.target.value, signupchange: true});
                 break
+            case 'currency': 
+                setUserSignup({...userSignup, currency: evt.target.value, signupchange: true});
+                break
             default :
         }
     }
@@ -84,7 +88,8 @@ function LoginSignup(props) {
             confirmpassword: '',
             newsletter: false,
             distanceunit: 'miles',
-            signupchange: false
+            signupchange: false,
+            currency: 'USD'
         });
     }
     function resetResults() {
@@ -130,7 +135,8 @@ function LoginSignup(props) {
                 email: userSignup.signupemail,
                 password: userSignup.signuppassword,
                 newsletter: userSignup.newsletter,
-                distanceunit: userSignup.distanceunit
+                distanceunit: userSignup.distanceunit,
+                currency: userSignup.currency
             };
             // signup user
             try {
@@ -138,7 +144,6 @@ function LoginSignup(props) {
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
-                    console.log(res.data)
                     const {addeduser} = res.data;
                     // setNeedVerify(true);
                     setUser([
@@ -147,7 +152,8 @@ function LoginSignup(props) {
                         addeduser.email,
                         addeduser.distanceunit,
                         addeduser._id,
-                        addeduser.newsletter
+                        addeduser.newsletter,
+                        addeduser.currency
                     ]);
                 }
             // Error on signup
@@ -181,7 +187,8 @@ function LoginSignup(props) {
                     returnedUser.email, 
                     returnedUser.distanceunit, 
                     returnedUser._id,
-                    returnedUser.newsletter
+                    returnedUser.newsletter,
+                    returnedUser.currency
                 ]);
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
@@ -406,6 +413,34 @@ function LoginSignup(props) {
                                 style={{marginRight: '10px', width: 'fit-content'}}
                             />
                             <label htmlFor="Kms">Kms</label>
+                        </div>   
+                        <div className="input-name input-margin">
+                            <h3>I prefer prices in</h3>
+                        </div>
+                        <div className='flex'>
+                            <input 
+                                className="field-input"
+                                type='radio'
+                                id={uuid()}
+                                value='USD'
+                                onChange={handleChange}
+                                name='currency'
+                                disabled={activeWindow.active==='login'}
+                                style={{marginRight: '10px', width: 'fit-content'}}
+                                defaultChecked
+                            />
+                            <label style={{marginRight: '30px'}} htmlFor="miles">USD</label>
+                            <input 
+                                className="field-input"
+                                type='radio'
+                                id={uuid()}
+                                value='CAD'
+                                onChange={handleChange}
+                                name='currency'
+                                disabled={activeWindow.active==='login'}
+                                style={{marginRight: '10px', width: 'fit-content'}}
+                            />
+                            <label htmlFor="Kms">CAD</label>
                         </div>   
                     </div>
                     <button type='submit' className="submit-btn login-signup-title" onClick={handleSubmit}>

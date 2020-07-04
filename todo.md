@@ -1,6 +1,8 @@
 ### prelaunch
 
 - email verify with encrypted email
+- store partners needs scroll or take out lazyload
+- add money in CAD
 - do forgot password and then login
 - extensive testing
 - change store email on contact seller forms to store emails

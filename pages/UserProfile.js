@@ -36,7 +36,8 @@ function UserProfile(props) {
         confirmpassword: '',
         distanceunit: '',
         newsletter: false,
-        editchange: false
+        editchange: false,
+        currency: 'USD'
     });
     const [userUpdatePassword, setUserUpdatePassword] = useState({
         oldpassword: '',
@@ -64,6 +65,9 @@ function UserProfile(props) {
             case 'distanceunit': 
                 setUserEdit({...userEdit, distanceunit: evt.target.value, editchange: true});
                 break
+            case 'currency': 
+                setUserEdit({...userEdit, currency: evt.target.value, editchange: true});
+                break
             case 'oldpassword': 
                 setUserUpdatePassword({...userUpdatePassword, oldpassword: evt.target.value, updatePasswordchange: true});
                 break
@@ -84,7 +88,8 @@ function UserProfile(props) {
             editpassword: '',
             confirmpassword: '',
             distanceUnit: 'miles',
-            editchange: false
+            editchange: false,
+            currency: 'USD'
         });
     }
     function resetUpdatePasswordForm() { 
@@ -110,6 +115,8 @@ function UserProfile(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (activeWindow.active==='signup') {
+            console.log(user)
+                console.log('dflskj', userEdit)
             // shortcut
             if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
                 dispatchResultInfo({type: 'tryAgain'})
@@ -123,7 +130,8 @@ function UserProfile(props) {
                 distanceunit: userEdit.distanceunit?userEdit.distanceunit:user[3],
                 password: userEdit.editpassword,
                 userid: user[4],
-                newsletter: userEdit.newsletter
+                newsletter: userEdit.newsletter,
+                currency: userEdit.currency
             };
             try {
                 /* LOCAL */
@@ -146,7 +154,8 @@ function UserProfile(props) {
                         userCopy.email,
                         userCopy.newsletter,
                         userCopy.distanceunit,
-                        userCopy._id
+                        userCopy._id,
+                        userCopy.currency
                     ]);
                 }
             } catch (e) {
@@ -170,6 +179,7 @@ function UserProfile(props) {
             resultText.innerText=``;
             dispatchResultInfo({type: 'loadingImage'})
             try {
+                
                 /* LOCAL */
                 await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* TESTING */
@@ -181,12 +191,13 @@ function UserProfile(props) {
                 dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
             } catch(e) {
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
+                console.dir(e)
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     dispatchResultInfo({type: 'okTryAgain'});
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'A.Something went wrong on updatePassword.'}`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Old password does not match our records.'}`;
                 } else {
                     dispatchResultInfo({type: 'okTryAgain'});
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'B.Something went wrong on updatePassword.'}`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong on updatePassword.'}`;
                 }
             }
         }
@@ -219,7 +230,7 @@ function UserProfile(props) {
             // const returnedUser = res.user;
             dispatchResultInfo({type: 'OK'});
             resultText.innerText=`Account ${user[2]} has been deleted`;
-            await setUser(['Login','','','miles','']);
+            await setUser(['Login','','','miles','','USD']);
         } catch(e) {
             dispatchResultInfo({type: 'OK'})
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
@@ -358,6 +369,35 @@ function UserProfile(props) {
                             />
                             <label htmlFor="Kms">Kms</label>
                         </div>   
+                        <div className="input-name input-margin">
+                            <h3>I prefer prices in</h3>
+                        </div>
+                        <div className='flex'>
+                            <input 
+                                className="field-input"
+                                type='radio'
+                                id={uuid()}
+                                value='USD'
+                                onChange={handleChange}
+                                name='currency'
+                                disabled={activeWindow.active==='changePassword'}
+                                style={{marginRight: '10px', width: 'fit-content'}}
+                                defaultChecked = {user[6]==='USD'}
+                            />
+                            <label style={{marginRight: '30px'}} htmlFor="miles">USD</label>
+                            <input 
+                                className="field-input"
+                                type='radio'
+                                id={uuid()}
+                                value='CAD'
+                                onChange={handleChange}
+                                name='currency'
+                                disabled={activeWindow.active==='changePassword'}
+                                style={{marginRight: '10px', width: 'fit-content'}}
+                                defaultChecked = {user[6]!=='USD'}
+                            />
+                            <label htmlFor="Kms">CAD</label>
+                        </div>   
                     </div>
                     <button type='submit' className="submit-btn updatePassword-edit-title" onClick={handleSubmit}>
                         Submit
@@ -427,9 +467,6 @@ function UserProfile(props) {
                             <button type='submit' className="submit-btn updatePassword-edit-title">
                                 Submit
                             </button>
-                            <div className="forgot-pass" onClick={()=>alert('Forgot old password under construction. To reset your password, refresh page, go to login, select "forgot password."')}>
-                                <a href="#">Forgot Old Password?</a>
-                            </div>
                         </>
                     }
                 </form>

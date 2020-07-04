@@ -45,35 +45,39 @@ xx means stays checked when resetting for ipad and android phone
             [x] email not found
             [x] password not long enough
             [x] password incorrect
-            [x] email not verified (will be checked during resend verify email check)
-    [ ] all signup
-        [ ] success 
+            [x] email not verified
+                [x] resend verification resends email
+                [x] resend verification email works
+    [x] all signup
+        [x] success 
             [x] verify email sent
-            [no] verify email works
+            [x] verify email works
             [x] verify all data correct
             [x] customer can log in
         [x] errors
             [x] duplicate email
             [x] password not long enough
             [x] passwords do not match
-    [ ] forgot password
+    [x] forgot password
         [x] email not entered
         [x] reset email gets sent
-        [ ] success
-        [ ] error           
-            [ ] password not long enough
-            [ ] passwords do not match
-            [ ] new password works 
-    [ ] change password
         [x] success
-        [ ] error
-            [ ] old password incorrect
+            [x] success message displayed
+            [x] new password works in login
+        [x] error           
+            [x] password not long enough
+            [x] passwords do not match
+            [x] new password works 
+    [x] change password
+        [x] success
+        [x] error
+            [x] old password incorrect
             [x] password not long enough
             [x] passwords do not match       
     [ ] edit profile
     [ ] delete account
 
 ### functionality - contacts
-    [ ] contact seller - price is not working, email to me not them
+    [ ] contact seller - email to me not them
     [ ] contact findaharp - working
 
