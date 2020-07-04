@@ -140,24 +140,25 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                const res = await axios.post(`http://localhost:3000/api/v1/users/createuser`, newUser);
+                const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
                     const {addeduser} = res.data;
                     // setNeedVerify(true);
-                    setUser([
-                        addeduser.firstname, 
-                        addeduser.lastname, 
-                        addeduser.email,
-                        addeduser.distanceunit,
-                        addeduser._id,
-                        addeduser.newsletter,
-                        addeduser.currency
-                    ]);
+                    setUser({
+                        firstname: addeduser.firstname, 
+                        lastname: addeduser.lastname, 
+                        email: addeduser.email,
+                        distanceunit: addeduser.distanceunit,
+                        _id: addeduser._id,
+                        newsletter: addeduser.newsletter,
+                        currency: addeduser.currency
+                    });
                 }
             // Error on signup
             } catch (e) {
+                console.dir(e)
                 if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('duplicate')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
@@ -181,15 +182,15 @@ function LoginSignup(props) {
                 const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
                 // set user context to added user
-                await setUser([
-                    returnedUser.firstname, 
-                    returnedUser.lastname, 
-                    returnedUser.email, 
-                    returnedUser.distanceunit, 
-                    returnedUser._id,
-                    returnedUser.newsletter,
-                    returnedUser.currency
-                ]);
+                await setUser({
+                    firstname: returnedUser.firstname, 
+                    lastname: returnedUser.lastname, 
+                    email: returnedUser.email, 
+                    distanceunit: returnedUser.distanceunit, 
+                    _id: returnedUser._id,
+                    newsletter: returnedUser.newsletter,
+                    currency: returnedUser.currency
+                });
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});

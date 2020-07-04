@@ -40,8 +40,8 @@ function MyApp(props) {
             </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
-            {props.router.query.resetpasswordemail
-                ?<ResetPassword found={true} />
+            {props.router.query.reset
+                ?<ResetPassword />
                 :props.router.query.activateemail
                     ?<ActivateEmail found={true}/>
                     :

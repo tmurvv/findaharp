@@ -149,7 +149,7 @@ function ProductSearch(props) {
         const addDistances = () => {
             props.products.map(async product => {
                 let distance = await getDrivingDistance(props.clientlat, props.clientlong, product.sellerLat, product.sellerLong);
-                product.distance = user[3]==='miles'?(distance*0.000621).toFixed(0):(distance/1000).toFixed(0);
+                product.distance = user.distanceunit==='miles'?(distance*0.000621).toFixed(0):(distance/1000).toFixed(0);
             });
         }
         if (location==='ltActivate') {
@@ -256,7 +256,7 @@ function ProductSearch(props) {
         triggerLazy();
     },[]);
     
-    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user[3]);
+    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user.distanceunit);
     
     return (
         <>       

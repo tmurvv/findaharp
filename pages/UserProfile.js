@@ -115,8 +115,6 @@ function UserProfile(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (activeWindow.active==='signup') {
-            console.log(user)
-                console.log('dflskj', userEdit)
             // shortcut
             if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
                 dispatchResultInfo({type: 'tryAgain'})
@@ -124,39 +122,40 @@ function UserProfile(props) {
                 return
             }
             const updatedUser = {
-                firstname: userEdit.firstname?userEdit.firstname:user[0],
-                lastname: userEdit.lastname?userEdit.lastname:user[1],
-                email: userEdit.editemail?userEdit.editemail:user[2],
-                distanceunit: userEdit.distanceunit?userEdit.distanceunit:user[3],
+                firstname: userEdit.firstname?userEdit.firstname:user.firstname,
+                lastname: userEdit.lastname?userEdit.lastname:user.lastname,
+                email: userEdit.editemail?userEdit.editemail:user.email,
+                distanceunit: userEdit.distanceunit?userEdit.distanceunit:user.distanceunit,
                 password: userEdit.editpassword,
-                userid: user[4],
-                newsletter: userEdit.newsletter,
-                currency: userEdit.currency
+                userid: user._id,
+                newsletter: userEdit.newsletter?userEdit.newsletter:user.newsletter,
+                currency: userEdit.currency?userEdit.currency:user.currency
             };
             try {
                 /* LOCAL */
-                const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user[4]}`, updatedUser);
+                const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user._id}`, updatedUser);
                 /* TESTING */
-                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
+                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user._id}', updatedUser);
                 /* STAGING */
-                // const res = await axios.patch('http://localhost:3000/api/v1/users/updateuser/${user[4]}', updatedUser);
+                // const res = await axios.patch('http://localhost:3000/api/v1/users/updateuser/${user._id}', updatedUser);
                 /* PRODUCTION */
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user[4]}', updatedUser);
+                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user._id}', updatedUser);
                 if (res.status===200) {
                     resultText.innerText=`Update Successful.`;
                     dispatchResultInfo({type: 'OK'});
                     setNeedVerify(true);
                     
                     const { userCopy } = res.data;
-                    setUser([
-                        userCopy.firstname, 
-                        userCopy.lastname, 
-                        userCopy.email,
-                        userCopy.newsletter,
-                        userCopy.distanceunit,
-                        userCopy._id,
-                        userCopy.currency
-                    ]);
+                    setUser({
+                            firstname: userCopy.firstname, 
+                            lastname: userCopy.lastname, 
+                            email: userCopy.email,
+                            newsletter: userCopy.newsletter,
+                            distanceunit: userCopy.distanceunit,
+                            _id: userCopy._id,
+                            currency: userCopy.currency
+                        }
+                    );
                 }
             } catch (e) {
                 dispatchResultInfo({type: 'tryAgain'});
@@ -179,15 +178,14 @@ function UserProfile(props) {
             resultText.innerText=``;
             dispatchResultInfo({type: 'loadingImage'})
             try {
-                
                 /* LOCAL */
-                await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user[4]}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* TESTING */
-                // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user._id}`, {userid: user._id, password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* STAGING */
-                // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user._id}`, {userid: user._id, password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 /* PRODUCTION */
-                // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user[4]}`, {userid: user[4], password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
+                // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user._id}`, {userid: user._id, password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
             } catch(e) {
@@ -216,21 +214,29 @@ function UserProfile(props) {
             resultText.innerText=`Passwords must be at least 8 characters long.`;
             return
         }
-        if (prompt('Are you sure you want to delete your account? Please type in your account email to confirm.')!==user[2]) return alert('Email does not match.');
+        if (prompt('Are you sure you want to delete your account? Please type in your account email to confirm.')!==user.email) return alert('Email does not match.');
         
         try {
             // LOCAL
-            const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user[4]}`);
+            const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user._id}`);
             // TESTING
-            // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
+            // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user._id}`);
             // STAGING
-            // const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user[4]}`);
+            // const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user._id}`);
             // PRODUCTION
-            // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user[4]}`);
+            // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user._id}`);
             // const returnedUser = res.user;
             dispatchResultInfo({type: 'OK'});
-            resultText.innerText=`Account ${user[2]} has been deleted`;
-            await setUser(['Login','','','miles','','USD']);
+            resultText.innerText=`Account ${user.email} has been deleted`;
+            await setUser({
+                firstname: '',
+                lastname: '',
+                email: '',
+                newsletter: false,
+                distanceunit: 'miles',
+                currency: 'USD',
+                _id: '',
+            });
         } catch(e) {
             dispatchResultInfo({type: 'OK'})
             resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
@@ -300,7 +306,7 @@ function UserProfile(props) {
                             value={userEdit.firstname}
                             onChange={handleChange}
                             name='firstname'
-                            placeholder={user[0]}
+                            placeholder={user.firstname}
                             disabled={activeWindow.active==='changePassword'}
                         />
                         <div className="input-name">
@@ -312,7 +318,7 @@ function UserProfile(props) {
                             value={userEdit.lastname}
                             onChange={handleChange}
                             name='lastname'
-                            placeholder={user[1]}
+                            placeholder={user.lastname}
                             disabled={activeWindow.active==='passwordChange'}
                         />
                         <div className="input-name input-margin">
@@ -325,7 +331,7 @@ function UserProfile(props) {
                             value={userEdit.editemail}
                             onChange={handleChange}
                             name='editemail'
-                            placeholder={user[2]}
+                            placeholder={user.email}
                             required={activeWindow.active==='editProfile'}
                             disabled={activeWindow.active==='changePassword'}
                         />
@@ -337,7 +343,7 @@ function UserProfile(props) {
                                 name='newsletter'
                                 onChange={handleChange}
                                 style={{marginLeft: '0'}}
-                                defaultChecked = {user[5]}
+                                defaultChecked = {user.newsletter}
                             />Signup for newsletter?</h3>
                         </div>
                         <div className="input-name input-margin">
@@ -353,7 +359,7 @@ function UserProfile(props) {
                                 name='distanceunit'
                                 disabled={activeWindow.active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked = {user[3]==='miles'}
+                                defaultChecked = {user.distanceunit==='miles'}
                             />
                             <label style={{marginRight: '30px'}} htmlFor="miles">Miles</label>
                             <input 
@@ -365,7 +371,7 @@ function UserProfile(props) {
                                 name='distanceunit'
                                 disabled={activeWindow.active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked = {user[3]!=='miles'}
+                                defaultChecked = {user.distanceunit!=='miles'}
                             />
                             <label htmlFor="Kms">Kms</label>
                         </div>   
@@ -382,7 +388,7 @@ function UserProfile(props) {
                                 name='currency'
                                 disabled={activeWindow.active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked = {user[6]==='USD'}
+                                defaultChecked = {user.currency==='USD'}
                             />
                             <label style={{marginRight: '30px'}} htmlFor="miles">USD</label>
                             <input 
@@ -394,7 +400,7 @@ function UserProfile(props) {
                                 name='currency'
                                 disabled={activeWindow.active==='changePassword'}
                                 style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked = {user[6]!=='USD'}
+                                defaultChecked = {user.currency!=='USD'}
                             />
                             <label htmlFor="Kms">CAD</label>
                         </div>   
@@ -410,7 +416,7 @@ function UserProfile(props) {
                     </button>
                 </form>
             </div>
-            <div style={{transform: 'translate(28%, -145%)'}} className={activeWindow.loginClasses} id="login" onClick={handleUpdatePasswordClick}>
+            <div style={{transform: 'translate(28%, -187%)'}} className={activeWindow.loginClasses} id="login" onClick={handleUpdatePasswordClick}>
                 <div className="updatePassword-edit-title">
                     {needVerify&&activeWindow.active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
                 </div>

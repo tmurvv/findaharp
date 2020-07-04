@@ -146,7 +146,7 @@ function LoginSignupCSS() {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
             #login {
-                transform: translate(28%, -184%);
+                transform: translate(28%, -203%);
             }
             #signup {
                 transform: translateX(-28%);

@@ -1,12 +1,12 @@
 // packages
-import React, { useState, useContext, useReducer } from 'react';
+import React, { useState, useReducer } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import uuid from 'uuid';
+import atob from 'atob';
 
 // internal
 import LoginSignupCSS from '../styles/LoginSignup.css';
-import { UserContext } from '../contexts/UserContext';
 import PageTitle from '../components/PageTitle';
 import { resultInfoReducer } from '../reducers/reducers';
 
@@ -20,9 +20,8 @@ const resultInfoInitialState = {
 }
 function ResetPassword(props) {
     // const { user, setUser} = useContext(UserContext);
-    const [verifying] = useState(false);
-    const [found] = useState(props.emailFound);
     const Router = useRouter();
+    const decodeEmail = atob(Router.query.reset);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const [userLogin, setUserLogin] = useState({
         newpassword: '',
@@ -72,14 +71,13 @@ function ResetPassword(props) {
         // update password
         try {
             /* LOCAL */
-            const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${Router.query.resetpasswordemail}`, {resetpassword: userLogin.newpassword});
+            const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${decodeEmail}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
             // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* STAGING */
             // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* PRODUCTION */
             // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
-            
             resultText.innerText=`Password change successful.`;
             dispatchResultInfo({type: 'OK'});
         } catch(e) {
@@ -139,7 +137,7 @@ function ResetPassword(props) {
                             className="field-input"
                             type='email'
                             id={uuid()}
-                            placeholder={Router.query.resetpasswordemail.substr(0,Router.query.resetpasswordemail.length-1)}
+                            placeholder={decodeEmail}
                             name='email'
                             disabled={true}
                         />
@@ -178,16 +176,5 @@ function ResetPassword(props) {
     </>
     )
 }
-// ActivateEmail.getInitialProps = async (props) => {
-//     const activateEmail = props.query.email; 
-//     try {
-//         const res = await axios.post(`{process.env.backend}/api/v1/emailverify`, { email: activateEmail});
-//         if (res) return {emailFound: true};
-//     } catch (error ) {
-//         console.error('error', error);
-//         return {emailFound: false};
-//     }        
-//     return {emailFound: false};
-// }
 
 export default ResetPassword;

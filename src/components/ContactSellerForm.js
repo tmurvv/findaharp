@@ -92,16 +92,6 @@ function ContactSellerForm(props) {
             resultImg.style.display='none';
             resultButtonTryAgain.style.display= 'block';
         }
-        // clearForm();
-    }
-    function clearForm() {
-        setUser({
-            firstname: '',
-            lastname: '',
-            contactemail: '',
-            contactcomments: '',
-            change: false
-        });
     }
     function resetResults() {
         document.querySelector('#loadingLoginContactSeller').style.display='none';

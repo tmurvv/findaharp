@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/UserContext';
 export default function LocationMenu(props) {
     const [activateDriving, setActivateDriving] = useState(false);
     const { user } = useContext(UserContext);
-    const distanceUnit = user[3];
+    const distanceUnit = user.distanceunit;
     const handleClose = async (evt) => {
         if (evt.target.value === 'All Locations') return;
         props.handleLocationChange(evt.target.getAttribute('name'));
@@ -34,7 +34,7 @@ export default function LocationMenu(props) {
                     name='All Locations'
                 >All Locations</li>
                 <li 
-                    onClick={(e) => {setActivateDriving(!activateDriving); handleClose(e);}}
+                    onClick={(e) => {setActivateDriving(!activateDriving);}}
                     // key={uuid()}
                     name='ltActivate'
                     style={{color: '#6A75AA', textDecoration: 'underline'}}

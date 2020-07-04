@@ -8,7 +8,15 @@ import {UserContext} from '../contexts/UserContext';
 export default function NavBar(props) {
     // const  {value, setValue}= useContext(UserContext);
     const { user, setUser } = useContext(UserContext);
-    if (!user[0]) setUser(['Login', '','','Miles','']);
+    if (!user.firstname) setUser({
+        firstname: 'login',
+        lastname: '',
+        email: '',
+        newsletter: false,
+        distanceunit: 'miles',
+        currency: 'USD',
+        _id: '',
+    });
     
     return(
         <>
@@ -37,9 +45,9 @@ export default function NavBar(props) {
                     <Link href='/Contact' as='Contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user[0]==='Login'?'/LoginSignup':'/UserProfile'} as={user[0]==='Login'?'/LoginSignup':'/UserProfile'}>
+                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/UserProfile':'/LoginSignup'} as={user.firstname==='Login'?'/LoginSignup':'/UserProfile'}>
                         {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
-                        <a id='userName' onClick={props.handleNavOpen}>{user[0]}</a>
+                        <a id='userName' onClick={props.handleNavOpen}>{user.firstname}</a>
                     </Link>
                     <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Contact/About</a>

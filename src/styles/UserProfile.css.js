@@ -185,7 +185,7 @@ function UserProfileCSS() {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
             #login {
-                transform: translate(28%, -165%);
+                transform: translate(28%, -203%);
             }
             #signup {
                 transform: translateX(-28%);

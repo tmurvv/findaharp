@@ -74,10 +74,10 @@ xx means stays checked when resetting for ipad and android phone
             [x] old password incorrect
             [x] password not long enough
             [x] passwords do not match       
-    [ ] edit profile
-    [ ] delete account
+    [x] edit profile
+    [x] delete account
 
 ### functionality - contacts
-    [ ] contact seller - email to me not them
-    [ ] contact findaharp - working
+    [x] contact seller - email to me not them
+    [x] contact findaharp
 

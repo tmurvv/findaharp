@@ -1,4 +1,4 @@
-## June 30, 2020
+## July 4, 2020
 ### DEPLOY TO STAGING, 
 ### LOGIN/SIGNUP GOES TO TESTING API, LIVE DB
 
@@ -16,7 +16,6 @@
     - findaharp-api-testing for others
 - check that makesModels not local
 - run tests
-- test links including seller name on main page
 - good idea to commit and push
 - do build npm run build
 - ftp files in "out" folder to findaharp.com
