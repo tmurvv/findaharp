@@ -176,7 +176,6 @@ export function getModelList(productMakesModels, size) {
  */
 export function getFilteredProducts(allProducts, allState, clientLat, clientLong, distanceUnit) {
     let filteredProducts = [...allProducts];
-    
     // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
     // apply filters // not yet implemented map from array or refactor to function
@@ -196,7 +195,7 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
         filteredProducts = filteredProducts.filter(
             product => product.productMaker&&product.productMaker === allState.maker
         );
-    if (allState.location&&allState.location.toUpperCase() !== "ALL LOCATIONS") 
+    if (allState.location&&allState.location.toUpperCase() !== "ALL LOCATIONS") {
         if (allState.location.startsWith('Less than')) {
             if(allState.location.startsWith('Less than 100')) {
                 filteredProducts = filteredProducts.filter(
@@ -218,6 +217,7 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
                 product => product.sellerRegion&&product.sellerRegion === allState.location
             );
         }
+    }
     if (allState.finish&&allState.finish.toUpperCase() !== "ALL FINISHES") 
         filteredProducts = filteredProducts.filter(
             product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()

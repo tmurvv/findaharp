@@ -1,6 +1,5 @@
 ## July 4, 2020
-### DEPLOY TO STAGING, 
-### LOGIN/SIGNUP GOES TO TESTING API, LIVE DB
+### DEPLOY TO STAGING
 
 - check for console.loks
 - check for BREAKINk

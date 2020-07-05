@@ -255,9 +255,7 @@ function ProductSearch(props) {
     useEffect(() => {
         triggerLazy();
     },[]);
-    
     const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user.distanceunit);
-    
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -265,6 +263,7 @@ function ProductSearch(props) {
             <div className='mobileSearchLine1'>
             <div  ref={ref} className='searchLine1'>  
                 <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
+                
                 <SizeMenu 
                     handleSizeChange={handleSizeSelection} 
                     products={props.products}
