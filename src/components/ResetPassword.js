@@ -71,7 +71,9 @@ function ResetPassword(props) {
         // update password
         try {
             /* LOCAL */
-            const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${decodeEmail}`, {resetpassword: userLogin.newpassword});
+            // const res = await axios.patch(`https://findaharp-api-staging.herokuapp.com/api/v1/users/updatepassword/${decodeEmail}`, {resetpassword: userLogin.newpassword});
+            // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${decodeEmail}`, {resetpassword: userLogin.newpassword});
+            const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${decodeEmail}`, {resetpassword: userLogin.newpassword});
             /* TESTING */
             // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             /* STAGING */

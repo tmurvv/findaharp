@@ -101,6 +101,7 @@ function UserProfile(props) {
         });
     }
     function resetResults() {
+        document.querySelector('#loadingLoginText').innerText='';   
         dispatchResultInfo({type: 'initial'});
     }
     function handleEditClick(evt) {
@@ -158,8 +159,13 @@ function UserProfile(props) {
                     );
                 }
             } catch (e) {
-                dispatchResultInfo({type: 'tryAgain'});
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update.'}`
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
+                    dispatchResultInfo({type: 'okTryAgain'});
+                } else {
+                    dispatchResultInfo({type: 'tryAgain'});
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update. Please check your netword connection.'}`
+                }
             }
         }       
         if (activeWindow.active==='login') {   
@@ -218,7 +224,8 @@ function UserProfile(props) {
         
         try {
             // LOCAL
-            const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user._id}`);
+            const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user._id}?editpassword=${userEdit.editpassword}`, {editpassword: userEdit.editpassword});
+            // await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
             // TESTING
             // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user._id}`);
             // STAGING
@@ -238,8 +245,15 @@ function UserProfile(props) {
                 _id: '',
             });
         } catch(e) {
-            dispatchResultInfo({type: 'OK'})
-            resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
+            console.dir(e)
+            if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
+                dispatchResultInfo({type: 'okTryAgain'});
+            } else {
+                dispatchResultInfo({type: 'okTryAgain'})
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
+            }
+            
         }    
     }
     return (

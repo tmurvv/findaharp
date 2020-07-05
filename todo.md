@@ -1,6 +1,7 @@
 ### prelaunch
 
 - store partners needs scroll or take out lazyload
+- Michigan camac electric price wonky
 - extensive testing
 - change store email on contact seller forms to store emails
 

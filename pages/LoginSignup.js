@@ -93,6 +93,7 @@ function LoginSignup(props) {
         });
     }
     function resetResults() {
+        document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
     }
     function resetLoginForm() { 
@@ -114,7 +115,6 @@ function LoginSignup(props) {
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
-        
         if (activeWindow.active==='signup') {
             // shortcut - password not long enough
             if ((!userSignup.signuppassword)||userSignup.signuppassword.length<8) {
@@ -140,7 +140,9 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser`, newUser);
+                // const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser`, newUser);
+                // const res = await axios.post(`http://localhost:3000/api/v1/users/createuser`, newUser);
+                const res = await axios.post(`${process.env.backend}/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
@@ -163,7 +165,7 @@ function LoginSignup(props) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 } else {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup.'} Log in as guest user?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup. Please check your netword connection.'} Log in as guest user?`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 }
             }
@@ -209,7 +211,7 @@ function LoginSignup(props) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 } else {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login.'} Login as guest?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 }
             }
@@ -235,12 +237,12 @@ function LoginSignup(props) {
             }
         } catch (e) {
             // display error
-            resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset.'} Log in as guest user?`
+            resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset. Please check your netword connection.'} Log in as guest user?`
             dispatchResultInfo({type: 'okTryAgain'});
         }
     }
     async function loginGuest(evt) {
-        evt.preventDefault();       
+        evt.preventDefault();  
         if (needVerify) {
             // display loader
             const resultText = document.querySelector('#loadingLoginText');
@@ -261,7 +263,7 @@ function LoginSignup(props) {
                 await axios.post(`${process.env.backend}/api/v1/resendverify`, forgotPasswordUser);
             } catch (e) {
                 // display error
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong sending verification email.'} Log in as guest user?`;
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong sending verification email. Please check your network connection.'} Log in as guest user?`;
                 dispatchResultInfo({type: 'okTryAgain'});
             }
         }
