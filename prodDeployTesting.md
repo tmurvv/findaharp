@@ -39,43 +39,47 @@ xx means stays checked when resetting for ipad and android phone
     [x] clear one, clear all
 
 ### functionality - auth
-    [ ] all login
-        [ ] success
-        [ ] errors
-            [ ] email not found
-            [ ] password not long enough
-            [ ] password incorrect
-            [ ] email not verified
-                [ ] resend verification resends email
-                [ ] resend verification email works
+    [x] all login
+        [x] success
+        [x] errors
+            [x] email not found
+            [x] password not long enough
+            [x] password incorrect
+            [x] email not verified
+                [x] resend verification resends email
+                [x] resend verification email works
     [ ] all signup
-        [ ] success 
-            [ ] verify email sent
-            [ ] verify email works
+        [x] success 
+            [x] verify email sent
+            [x] verify email works
             [ ] verify all data correct
-            [ ] customer can log in
+            [x] customer can log in
         [ ] errors
             [ ] duplicate email
-            [ ] password not long enough
-            [ ] passwords do not match
-    [ ] forgot password
-        [ ] email not entered
-        [ ] reset email gets sent
-        [ ] success
-            [ ] success message displayed
-            [ ] new password works in login
-        [ ] error           
-            [ ] password not long enough
-            [ ] passwords do not match
-            [ ] new password works 
+            [x] password not long enough
+            [x] passwords do not match
+    [x] forgot password
+        [x] email not entered
+        [x] reset email gets sent
+        [x] success
+            [x] success message displayed
+            [x] new password works in login
+        [x] error       
+            [x] password not long enough
+            [x] passwords do not match
+            [x] new password works 
     [ ] change password
-        [ ] success
-        [ ] error
-            [ ] old password incorrect
-            [ ] password not long enough
-            [ ] passwords do not match       
-    [ ] edit profile
-    [ ] delete account
+        [x] success
+        [x] error
+            [x] old password incorrect
+            [x] password not long enough
+            [x] passwords do not match       
+    [x] edit profile
+        [x] success
+        [x] error
+            [x] old password incorrect
+            [x] password not long enough
+    [x] delete account
 
 ### functionality - contacts
     [ ] contact seller - email to me not them

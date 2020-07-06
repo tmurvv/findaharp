@@ -1,12 +1,12 @@
 ### prelaunch
 
-- store partners needs scroll or take out lazyload
+- Pratt coming up under $2000 cause no price listed
 - Michigan camac electric price wonky
 - extensive testing
 - change store email on contact seller forms to store emails
 
 ### high priority
-- on change password error message for old password incorrect
+- on change password error message for incorrect old password incorrect
 - check that emails are being sent encoded
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 

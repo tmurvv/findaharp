@@ -116,6 +116,7 @@ function UserProfile(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (activeWindow.active==='signup') {
+            console.log(userEdit.newsletter)
             // shortcut
             if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
                 dispatchResultInfo({type: 'tryAgain'})
@@ -129,11 +130,13 @@ function UserProfile(props) {
                 distanceunit: userEdit.distanceunit?userEdit.distanceunit:user.distanceunit,
                 password: userEdit.editpassword,
                 userid: user._id,
-                newsletter: userEdit.newsletter?userEdit.newsletter:user.newsletter,
+                newsletter: userEdit.newsletter,
                 currency: userEdit.currency?userEdit.currency:user.currency
             };
+            console.log(updatedUser)
             try {
                 /* LOCAL */
+               
                 const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user._id}`, updatedUser);
                 /* TESTING */
                 // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user._id}', updatedUser);
@@ -159,6 +162,7 @@ function UserProfile(props) {
                     );
                 }
             } catch (e) {
+                console.dir(e)
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
@@ -183,6 +187,7 @@ function UserProfile(props) {
             }
             resultText.innerText=``;
             dispatchResultInfo({type: 'loadingImage'})
+            console.log(user)
             try {
                 /* LOCAL */
                 await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
@@ -245,7 +250,6 @@ function UserProfile(props) {
                 _id: '',
             });
         } catch(e) {
-            console.dir(e)
             if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
                 dispatchResultInfo({type: 'okTryAgain'});
@@ -351,15 +355,15 @@ function UserProfile(props) {
                         />
                         
                         <div className="input-name input-margin">
-                            <h3>
                                 <input 
                                 type='checkbox'
                                 name='newsletter'
                                 onChange={handleChange}
                                 style={{marginLeft: '0'}}
                                 defaultChecked = {user.newsletter}
-                            />Signup for newsletter?</h3>
-                        </div>
+                                />
+                                <label htmlFor="newsletter" style={{marginLeft: '7px'}}>Signup for newsletter? Fun talk about harps every other month.</label>
+                                </div>
                         <div className="input-name input-margin">
                             <h3>I prefer distances in</h3>
                         </div>

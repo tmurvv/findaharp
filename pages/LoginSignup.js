@@ -386,7 +386,7 @@ function LoginSignup(props) {
                                 {/* <label className="rememberme-blue" htmlFor="newsletter"></label> */}
                             {/* </div> */}
                             <div className="rememberme">
-                                <label htmlFor="remember-me-2" style={{marginLeft: '7px'}}>Signup for newsletter?</label>
+                                <label htmlFor="remember-me-2" style={{marginLeft: '7px'}}>Signup for newsletter? Fun talk about harps every other month.</label>
                             </div>
                         </div>
                         <div className="input-name input-margin">
