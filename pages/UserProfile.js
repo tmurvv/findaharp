@@ -116,7 +116,6 @@ function UserProfile(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (activeWindow.active==='signup') {
-            console.log(userEdit.newsletter)
             // shortcut
             if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
                 dispatchResultInfo({type: 'tryAgain'})
@@ -133,7 +132,6 @@ function UserProfile(props) {
                 newsletter: userEdit.newsletter,
                 currency: userEdit.currency?userEdit.currency:user.currency
             };
-            console.log(updatedUser)
             try {
                 /* LOCAL */
                
@@ -187,7 +185,6 @@ function UserProfile(props) {
             }
             resultText.innerText=``;
             dispatchResultInfo({type: 'loadingImage'})
-            console.log(user)
             try {
                 /* LOCAL */
                 await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});

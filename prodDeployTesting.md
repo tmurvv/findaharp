@@ -11,7 +11,7 @@ xx means stays checked when resetting for ipad and android phone
             [xx] ProdCont
             [xx] Footer
     [ ] Staging
-        [ ] Done on PC
+        [x] Done on PC
         [ ] Done on iPad
         [ ] Done on android phone
     [ ] Production
@@ -39,37 +39,39 @@ xx means stays checked when resetting for ipad and android phone
     [x] clear one, clear all
 
 ### functionality - auth
-    [x] all login
+    [ ] all login
         [x] success
-        [x] errors
-            [x] email not found
-            [x] password not long enough
-            [x] password incorrect
-            [x] email not verified
-                [x] resend verification resends email
-                [x] resend verification email works
+        [ ] errors
+            [ ] email not found
+            [ ] password not long enough
+            [ ] password incorrect
+            [ ] email not verified
+                [ ] resend verification resends email
+                [ ] resend verification email works
     [ ] all signup
-        [x] success 
-            [x] verify email sent
-            [x] verify email works
+        [ ] success 
+            [ ] verify email sent
+            [ ] verify email works
             [ ] verify all data correct
-            [x] customer can log in
+            [ ] customer can log in
         [ ] errors
             [ ] duplicate email
-            [x] password not long enough
-            [x] passwords do not match
-    [x] forgot password
-        [x] email not entered
-        [x] reset email gets sent
+            [ ] password not long enough
+            [ ] passwords do not match
+    [ ] forgot password
+        [ ] email not entered
+        [ ] reset email gets sent
+        [ ] success
+            [ ] success message displayed
+            [ ] new password works in login
+        [ ] error       
+            [ ] password not long enough
+            [ ] passwords do not match
+            [ ] new password works 
+    [x] change password
         [x] success
-            [x] success message displayed
-            [x] new password works in login
-        [x] error       
-            [x] password not long enough
-            [x] passwords do not match
-            [x] new password works 
-    [ ] change password
-        [x] success
+            [x] success message
+            [x] new password works
         [x] error
             [x] old password incorrect
             [x] password not long enough
@@ -79,7 +81,7 @@ xx means stays checked when resetting for ipad and android phone
         [x] error
             [x] old password incorrect
             [x] password not long enough
-    [x] delete account
+    [ ] delete account
 
 ### functionality - contacts
     [ ] contact seller - email to me not them

@@ -91,14 +91,19 @@ export function findSizeWords(strings, type) {
  * @returns {String} - Price Range from Price Menu
  */
 export function findPriceRange(price) {
+    // HACK 'Contact 4harpmusic.com' returns 4
+    if (price&&price.toUpperCase().indexOf('CONTACT')>-1) price = 'contact seller';
+    // convert price string to number
     price = parseNum(price);
+    // determine price range
     if (price<2000) return 'Less than $2,000';
     if (price>=2000&&price<5000) return '$2,000-4,999';
     if (price>=5000&&price<9999) return '$5,000-9,999';
     if (price>=10000&&price<19999) return '$10,000-19,999'; 
     if (price>=20000&&price<29999) return '$20,000-29,999'; 
     if (price>29999&&price<150000) return '$30,000 plus';
-    return 'price not found'
+    // if no number
+    return 'contact seller'
 }
 export const findProductType= (productMakesModels, maker, model) => {
     // short circuit

@@ -1,13 +1,11 @@
 ### prelaunch
 
-- Pratt coming up under $2000 cause no price listed
 - Michigan camac electric price wonky
+- try with location services turned off
 - extensive testing
 - change store email on contact seller forms to store emails
 
 ### high priority
-- on change password error message for incorrect old password incorrect
-- check that emails are being sent encoded
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal

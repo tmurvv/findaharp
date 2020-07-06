@@ -47,7 +47,7 @@ function ProductModal(props) {
                 <p><span>Maker</span> {productMaker}<br></br>
                 <span>Model</span> {productModel}<br></br>
                 <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
-                <span>Price</span> {productPrice?`${productPrice} usd`:'unavailable'}<br></br>
+                <span>Price</span> {productPrice?`${productPrice} ${productPrice.indexOf('usd')>-1||productPrice==='contact seller'?'':'usd'}`:'unavailable'}<br></br>
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
                 <span>Distance</span> {drivingDistance===0
                     ?<button 

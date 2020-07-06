@@ -74,7 +74,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
             </div>
             <div className={`grid-item productSmallDisplay-text`}>
                 <p>{productdetail.productModel.indexOf(productdetail.productMaker)>-1?'':productdetail.productMaker} {productdetail.productModel}<br></br>
-                {productdetail.productSize>0?`${productdetail.productSize} Strings`:productdetail.productTitle===''?'':'? Strings'}<br></br>
+                {productdetail.productSize>0?`${productdetail.productSize} Strings`:''}<br></br>
                 <span 
                     onClick={(e)=>handleOpenContactModal(e, productdetail)} 
                     style={{color: '#6A75AA'}}

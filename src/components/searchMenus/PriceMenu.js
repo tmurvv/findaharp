@@ -15,7 +15,7 @@ export default function PriceMenu(props) {
                 onClick={(e)=>{props.handleclick(e);}}
                 style={{color: '#000000'}}
             >
-                PRICE <span style={{fontStyle: 'italic', color: 'black'}}>usd</span>
+                PRICE usd
             </button>               
             <ul
                 id="price-select"
