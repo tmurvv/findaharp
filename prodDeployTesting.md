@@ -11,14 +11,20 @@ xx means stays checked when resetting for ipad and android phone
             [xx] ProdCont
             [xx] Footer
     [ ] Staging
-        [x] Done on PC
+        [xx] Done on PC
         [ ] Done on iPad
-        [ ] Done on android phone
+            [ ] reponsive landscape   
+            [ ] reponsive portrait
+        [ ] Done on android 
+            [xx] reponsive portrait
+
     [ ] Production
         [ ] Done on PC
         [ ] Done on iPad
+            [ ] reponsive landscape   
+            [ ] reponsive portrait
         [ ] Done on android phone
-
+            [ ] reponsive landscape 
 ### page by page links
     [x] home page
         [x] NavBar
@@ -30,7 +36,6 @@ xx means stays checked when resetting for ipad and android phone
         [x] store partner page
     [x] buyers guide
         [x] survey
-        [x] other links
 
 ### functionality - search
     [x] each menu
@@ -42,9 +47,9 @@ xx means stays checked when resetting for ipad and android phone
     [ ] all login
         [x] success
         [ ] errors
-            [ ] email not found
-            [ ] password not long enough
-            [ ] password incorrect
+            [x] email not found
+            [x] password not long enough
+            [x] password incorrect
             [ ] email not verified
                 [ ] resend verification resends email
                 [ ] resend verification email works
@@ -65,7 +70,7 @@ xx means stays checked when resetting for ipad and android phone
             [ ] success message displayed
             [ ] new password works in login
         [ ] error       
-            [ ] password not long enough
+            [x password not long enough
             [ ] passwords do not match
             [ ] new password works 
     [x] change password
@@ -81,7 +86,11 @@ xx means stays checked when resetting for ipad and android phone
         [x] error
             [x] old password incorrect
             [x] password not long enough
-    [ ] delete account
+    [x] delete account
+        [x] success
+        [x] error
+            [x] old password incorrect
+            [x] password not long enough
 
 ### functionality - contacts
     [ ] contact seller - email to me not them

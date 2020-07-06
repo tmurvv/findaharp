@@ -28,6 +28,7 @@ function ProductModalCSS() {
             @media only screen and (max-width: 550px) {
                 .detailContainer {
                     flex-direction: column;
+                    padding: 30px 0;
                 }
                 .detailInfo {
                     flex-direction: column

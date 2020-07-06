@@ -82,6 +82,11 @@ function ContactCSS() {
                     padding: 20px;
                 }
             }
+            @media only screen and (max-width: 700px) {
+                .about {
+                    padding: 20px 0;
+                }
+            }
             .about h2 {
                 margin-bottom: 40px;
             }

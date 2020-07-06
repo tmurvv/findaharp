@@ -1,12 +1,13 @@
 ### prelaunch
 
 - Michigan camac electric price wonky
-- try with location services turned off
-- extensive testing
 - change store email on contact seller forms to store emails
 
 ### high priority
+- on signup, if they messup, it does not work
+- delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
+- survey func on buyers guide played some, not sure, wide
 
 ### internal
 - result component needs to be componetized
@@ -21,6 +22,7 @@
 
 ### UI/UX
 
+- footer messed up on my phone
 - store partner info from store partner page images not quite right
 - email verification can be prettier
 - email verifictaion error not correct on remote deploy

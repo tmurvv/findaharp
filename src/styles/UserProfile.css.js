@@ -185,10 +185,18 @@ function UserProfileCSS() {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
             #login {
-                transform: translate(28%, -203%);
+                transform: translate(25%, -187%);
             }
             #signup {
                 transform: translateX(-28%);
+            }
+            @media only screen and (max-width: 550px) {
+                #login {
+                    transform: translate(0%, -187%);
+                }
+                #signup {
+                    transform: translateX(-10%);
+                }
             }
             #loadingLogin {
                 display: none;

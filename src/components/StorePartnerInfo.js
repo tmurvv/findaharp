@@ -28,7 +28,7 @@ function StorePartnerInfo(props) {
                     <br></br>
                     <div className='longDesc'><span>Testimonials and Statistics</span><br></br>Coming soon !! Testimonials. Findaharp.com website traffic statistics. Number of findaharp.com community members. Number of referrals.</div>
                     <br></br>
-                    <button className='detailButton'><a href='mailto:tisha@findaharp.com?subject=store partner inquiry&body="I would like more information about the Store Partner Program at findaharp.com."' style={{color: 'black'}}>Store Partner Inquiry</a></button>        
+                    <button className='detailButton'><a href='mailto:tisha@findaharp.com?subject=store partner inquiry' style={{color: 'black'}}>Store Partner Inquiry</a></button>        
                 </div>
 
                 <div onClick={() => props.close()} className='clearModal'>

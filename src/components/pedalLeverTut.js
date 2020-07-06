@@ -3,7 +3,7 @@ function PedalLeverTut() {
         <>
         <div className='pedalLeverTut'>
             <figure className='pedalLeverTutImg'>      
-                <img src='./img/ReesAberdeen.jpg' alt='lever harp example'/>
+                <img src='./img/pilgrim.jpg' alt='lever harp example'/>
                 <figcaption>lever harp</figcaption>
             </figure>
             <div className='pedalLeverTutText'>
@@ -13,18 +13,18 @@ function PedalLeverTut() {
                 <p>Bottom line: a pedal harp is the type of harp you would see in an orchestra. A lever harp is the type of harp you would see in the fields of Ireland.</p>
             </div>
             <figure className='pedalLeverTutImg'>
-                <img src='./img/SwansonLaScuola.jpg' alt='pedal harp example'/>
+                <img src='./img/Lindeman.jpg' alt='pedal harp example'/>
                 <figcaption>pedal harp</figcaption>
             </figure>
         </div>
         <div className='pedalLeverTutMobile'>
             <div className='flexSB'>
                 <figure className='pedalLeverTutImg' style={{marginInlineStart: '0', marginInlineEnd: '0'}}>      
-                    <img src='./img/ReesAberdeen.jpg' alt='lever harp example'/>
+                    <img src='./img/pilgrim.jpg' alt='lever harp example'/>
                     <figcaption>lever harp</figcaption>
                 </figure>
                 <figure className='pedalLeverTutImg' style={{marginInlineStart: '0', marginInlineEnd: '0'}}>
-                    <img src='./img/SwansonLaScuola.jpg' alt='pedal harp example'/>
+                    <img src='./img/Lindeman.jpg' alt='pedal harp example'/>
                     <figcaption>pedal harp</figcaption>
                 </figure>
             </div>

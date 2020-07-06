@@ -115,7 +115,7 @@ function StorePartnerInfoCSS() {
             .clearModal {
                 position: absolute;
                 top: 20px;
-                right: 20px;
+                right: 10px;
                 color: black;
                 height: 28px;
             }

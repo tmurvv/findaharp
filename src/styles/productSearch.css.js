@@ -191,6 +191,7 @@ function ProductSearchCss() {
                 margin-left: 10px;
                 color: #333333
                 z-index: 1000;
+                padding-bottom: 2px;
             }
             input {
                 margin-bottom: 15px;
@@ -220,6 +221,7 @@ function ProductSearchCss() {
             .clearSearch img {
                 z-index: 1000;
                 width: 15px;
+                padding-bottom: 2px;
             }
             .clearSearch p {
                 font-size: 14px;
@@ -234,6 +236,7 @@ function ProductSearchCss() {
                 }
                 .clearSearch img{
                     width: 25px;
+                    padding-bottom: 2px;
                 }  
             }
             @media only screen and (max-width: 550px) {

@@ -35,7 +35,7 @@ export default function LocationMenu(props) {
                     name='All Locations'
                 >All Locations</li>
                 <li 
-                    onClick={(e) => {setActivateDriving(!activateDriving); handleClose(e)}}
+                    onClick={(e) => {if(activateDriving===false) alert('Please be aware that location must be turned on for driving distance to work.'); setActivateDriving(!activateDriving); handleClose(e)}}
                     // key={uuid()}
                     name='ltActivate'
                     style={{color: '#6A75AA', textDecoration: 'underline'}}

@@ -164,9 +164,12 @@ function UserProfile(props) {
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
+                } else if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address. Log in as guest user?'}`;
+                    dispatchResultInfo({type: 'okTryAgain'});
                 } else {
                     dispatchResultInfo({type: 'tryAgain'});
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update. Please check your netword connection.'}`
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update. Please check your network connection.'}`
                 }
             }
         }       
@@ -431,7 +434,7 @@ function UserProfile(props) {
                     </button>
                 </form>
             </div>
-            <div style={{transform: 'translate(28%, -187%)'}} className={activeWindow.loginClasses} id="login" onClick={handleUpdatePasswordClick}>
+            <div className={activeWindow.loginClasses} id="login" onClick={handleUpdatePasswordClick}>
                 <div className="updatePassword-edit-title">
                     {needVerify&&activeWindow.active==='changePassword'?"Email not verified. Please check inbox for verification email from Findaharp.com.": "Change Password"}
                 </div>

@@ -35,7 +35,21 @@ function ProductModal(props) {
         const geoDist = getGeoDistance(lat1, long1, lat2, long2).toFixed(0);
         miles?setGeoDistance(geoDist):setGeoDistance((geoDist*1.609).toFixed(0));
     }
-
+    function checkprice(price) {
+        const checkIt = ['1','2','3','4','5','6','7','8','9','0','.',',','$']
+        let endIndex = price.length;
+        let stop = false;
+        price=[...price];
+        price.map((digit,idx) => {
+            if (checkIt.indexOf(digit)<0) {
+                if(!stop){
+                    endIndex=idx; 
+                    stop=true
+                }
+            };
+        })
+        return endIndex;
+    }
     return (
         <>
         <div className='detailContainer'>
@@ -47,7 +61,7 @@ function ProductModal(props) {
                 <p><span>Maker</span> {productMaker}<br></br>
                 <span>Model</span> {productModel}<br></br>
                 <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
-                <span>Price</span> {productPrice?`${productPrice} ${productPrice.indexOf('usd')>-1||productPrice==='contact seller'?'':'usd'}`:'unavailable'}<br></br>
+                <span>Price</span> {productPrice?`${productPrice.substring(0, checkprice(productPrice))} ${productPrice.indexOf('usd')>-1||productPrice==='contact seller'?'':'usd'}`:'unavailable'}<br></br>
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
                 <span>Distance</span> {drivingDistance===0
                     ?<button 
@@ -56,7 +70,7 @@ function ProductModal(props) {
                         onClick={()=>getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong)}
                         style={{backgroundColor: 'white', outline: 'none', color:'#6A75AA', textDecoration:'none', border: 'none', fontSize: '14px'}}
                     >
-                    Click here
+                        Click here
                     </button>
                     :`Driving: ${drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance}${miles?'Mi':'Kms'}`
                     }

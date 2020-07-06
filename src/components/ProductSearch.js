@@ -44,7 +44,6 @@ function ProductSearch(props) {
     const ref = useRef();
 
     const [menus, setMenus] = useState(initialState);
-    const [trigger, setTrigger] = useState(false);
     const [allState, setAllState] = useState({
         selectionType: '',
         maker: 'All Makers',

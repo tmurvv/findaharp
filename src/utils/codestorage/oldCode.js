@@ -45,18 +45,18 @@
         
 //     const copyProds = [filteredproductscontainer];
      
-//     console.log('useEffect', copyProds);
+//     console.lok('useEffect', copyProds);
     // let numNeeded;
     // if (size.width > 1200) {
     //     numNeeded = 5-(copyProds.length%5);
-    //     console.log(numNeeded);
+    //     console.lok(numNeeded);
     // }
     // if (size.width <= 1200 && size.width > 950) {
     //     numNeeded = 4-(copyProds.length%4);
     // }
     // if (size.width <= 950 && size.width > 700) {
     //     numNeeded = 3-(copyProds.length%3);
-    //     console.log(numNeeded);
+    //     console.lok(numNeeded);
     // }
     // let newAd = {
     //     divider: "00000000000000000000000",
@@ -76,7 +76,7 @@
     //     sellerName: "_",
     //     sellerRegion: "Mid-West"
     // }
-    // // // console.log(iterProds.length)
+    // // // console.lok(iterProds.length)
     // for (var x = 0; x<numNeeded; x++) {
     //     const adId = {...newAd, id:x}
     //     copyProds.push(adId);

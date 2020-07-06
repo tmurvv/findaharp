@@ -164,8 +164,11 @@ function LoginSignup(props) {
                 if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('duplicate')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
+                } else if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address. Log in as guest user?'}`;
+                    dispatchResultInfo({type: 'okTryAgain'});
                 } else {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup. Please check your netword connection.'} Log in as guest user?`;
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup. Please check your network connection. Log in as guest user?'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 }
             }

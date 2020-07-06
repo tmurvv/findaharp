@@ -93,8 +93,9 @@ function BuyersGuideCSS() {
                 width: 95%;
                 max-width:100%;
                 max-height:100%;
-                object-fit: cover;
+                object-fit: contain;
                 overflow: hidden;
+                min-width: 100px;
             }
             .shortcutButton {
                 margin: 25px auto;
