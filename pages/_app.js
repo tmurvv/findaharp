@@ -1,6 +1,9 @@
 // import App from 'next/app'
 import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
+import Router from 'next/router'
+import * as gtag from '../lib/gtag'
+
 // css
 import 'react-phone-input-2/lib/style.css'
 
@@ -19,6 +22,18 @@ function MyApp(props) {
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
+    // Google Analytics
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            gtag.pageview(url)
+        }
+        Router.events.on('routeChangeComplete', handleRouteChange)
+        return () => {
+            Router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [])
+
+    // reset window width on window resize
     useEffect(() => {
         setWindowWidth(window.innerWidth);
         const handleResize = () => {
@@ -33,21 +48,9 @@ function MyApp(props) {
     }
     return( 
         <>  
-            <Head>
-                !-- Global site tag (gtag.js) - Google Analytics -->
-                <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172071483-1"></script>
-                <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'UA-172071483-1');
-                </script>
-
-                <title>Find a Harp Pre-owned, Used</title>
-                <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
-                <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
-            </Head>
+            <title>Find a Harp Pre-owned, Used</title>
+            <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+            <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
             {props.router.query.reset
