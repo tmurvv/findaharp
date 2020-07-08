@@ -74,7 +74,18 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
             </div>
             <div className={`grid-item productSmallDisplay-text`}>
                 <p>{productdetail.productModel.indexOf(productdetail.productMaker)>-1?'':productdetail.productMaker} {productdetail.productModel}<br></br>
-                {productdetail.productSize>0?`${productdetail.productSize} Strings`:''}<br></br>
+                {productdetail.productSize>0?`${productdetail.productSize} Strings`:''}
+                {productdetail.productTitle?<button 
+                        onClick={() => handleOpenProductModal(productdetail)} 
+                        style={{
+                            margin: 'auto', 
+                            padding: '5px 7px', 
+                            fontSize: '14px', 
+                            backgroundColor: 'transparent', 
+                            border: 'none', 
+                            color: '#6A75AA'}}
+                    >more...</button>:''}
+                    <br />
                 <span 
                     onClick={(e)=>handleOpenContactModal(e, productdetail)} 
                     style={{color: '#6A75AA'}}

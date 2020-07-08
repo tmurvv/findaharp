@@ -17,10 +17,10 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
 function ProductModal(props) {
     const { user } = useContext(UserContext);
     const [longDesc, setLongDesc] = useState(true);
-    const [miles, setMiles] = useState(user.distanceunit==='miles');
+    const [miles] = useState(user.distanceunit==='miles');
     const [geoDistance, setGeoDistance] = useState(0); //miles
     const [drivingDistance, setDrivingDistance] = useState(0); //miles
-    const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerRegion, sellerName, sellerLat, sellerLong} = props.product;
+    const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerCountry, sellerName, sellerLat, sellerLong} = props.product;
     if (props.product===undefined||!props.product) return props.handleCloseDetail();
     
     function handleClick(evt, product, openContact) {
@@ -61,8 +61,14 @@ function ProductModal(props) {
                 <p><span>Maker</span> {productMaker}<br></br>
                 <span>Model</span> {productModel}<br></br>
                 <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
-                <span>Price</span> {productPrice?`${productPrice.substring(0, checkprice(productPrice))} ${productPrice.indexOf('usd')>-1||productPrice==='contact seller'?'':'usd'}`:'unavailable'}<br></br>
+                <span>Price</span> {productPrice
+                    ?`${productPrice.substring(0, checkprice(productPrice))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':'usd'}`
+                    :'contact seller'}<br />
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
+                <br></br>
+                <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div>
+                <br></br>
+                <p><span>Location</span> {sellerCountry?sellerCountry:'unavailable'}<br></br>
                 <span>Distance</span> {drivingDistance===0
                     ?<button 
                         type='button'
@@ -73,12 +79,7 @@ function ProductModal(props) {
                         Click here
                     </button>
                     :`Driving: ${drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance}${miles?'Mi':'Kms'}`
-                    }
-                <br></br>
-                <br></br>
-                <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div>
-                <br></br>
-                <p><span>Location</span> {sellerRegion?sellerRegion:'unavailable'}<br></br>
+                    }<br />
                 <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
                 <button className='detailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
             </div>

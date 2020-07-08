@@ -1,13 +1,9 @@
-### prelaunch
-
-- Michigan camac electric price wonky
-- change store email on contact seller forms to store emails
-
 ### high priority
 - on signup, if they messup, it does not work
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 - survey func on buyers guide played some, not sure, wide
+- paraguayan harp not showing up on lever-free
 
 ### internal
 - result component needs to be componetized
@@ -29,8 +25,10 @@
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - When update user encounters problem on backend, spinner persists, needs to show error message
 - sometimes when messing with window size, harp photos get stretched
+- delete extra blank place holders
 
 ### functionality
+- tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present
 - continue trouble shooting why Markwood not showing up in medium lever
 - resend verification email is hacked
 - add way to ask about becoming a store partner to store partner page

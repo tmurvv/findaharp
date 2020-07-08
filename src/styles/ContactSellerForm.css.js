@@ -17,7 +17,7 @@ function ContactSellerFormCSS() {
                 left: 50%;
                 transform: translate(-50%,-50%);
                 text-align: center;
-                // z-index: 2000;
+                z-index: 2000;
             }
             @media only screen and (max-width: 500px) {
                 .detailContainer {
