@@ -28,6 +28,7 @@
 - delete extra blank place holders
 
 ### functionality
+- rebuild site once a day https://pomb.us/nextjs-static-props/
 - tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present
 - continue trouble shooting why Markwood not showing up in medium lever
 - resend verification email is hacked

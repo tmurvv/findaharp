@@ -27,7 +27,7 @@ function PartnerProspects() {
 									<td>cameron.warner.jones@<br></br>gmail.com</td>
 									<td>888-287-4277</td>
 									<td>May 20, 2020</td>
-									<td><textarea value="June 28th, 2020 - said they do not want to dilute their brand, awaiting response"/></td>
+									<td><textarea value="July 8th, sent launch update. June 28th, 2020 - said they do not want to dilute their brand, awaiting response"/></td>
 								</tr>
 								<tr>
 									<td>Harps Etc</td> 
@@ -123,7 +123,7 @@ function PartnerProspects() {
 								<td>Contact form only</td>
 								<td>253-770-0550</td>
 								<td>June 5, 2020</td>
-								<td><textarea value='Puyallup WA'/></td>
+								<td><textarea value='Puyallup WA phoned July 9, 2020 and then sent email with the info.'/></td>
 								</tr>
 								<tr>
 								<td>Harp in LA</td>
@@ -131,7 +131,7 @@ function PartnerProspects() {
 								<td>infoharpinla@yahoo.com</td>
 								<td>818-495-4652</td>
 								<td>June 4, 2020</td>
-								<td><textarea value="sent follow up email on June 29th to 'heidiharpinla-info@yahoo.com'"/></td>
+								<td><textarea value="Sent another email on July 7, 2020. sent follow up email on June 29th to 'heidiharpinla-info@yahoo.com'"/></td>
 								</tr>
 								<tr>
 								<td>Harp Studio, The</td>
@@ -187,7 +187,7 @@ function PartnerProspects() {
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><textarea value=''/></td>
+									<td><textarea value='June 29, 2020, emailed, said did not want non-local exposure'/></td>
 								</tr>
 								<tr>
 									<td>Harps By the Sea</td>
@@ -211,7 +211,7 @@ function PartnerProspects() {
 									<td></td>
 									<td></td>
 									<td></td>
-									<td><textarea value='no mention of selling, but lots of harps'/></td>
+									<td><textarea value='July 8,2020 sent email to see if they sell harps at all. No mention of selling, but lots of harps'/></td>
 								</tr>
 								<tr>
 									<td>4harpmusic.com</td>
@@ -295,9 +295,8 @@ function PartnerProspects() {
 								color: #fff;
 								border-bottom: solid 1px rgba(255,255,255,0.1);
 								overflow-x: scroll;
-							}
-						
-							
+								column-width: 100px
+							}							
 							@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 							section{
 								background-image: -webkit-linear-gradient(left, #25c481, #25b7c4);
@@ -305,8 +304,6 @@ function PartnerProspects() {
 								font-family: 'Roboto', sans-serif;
 								padding: 25px;
 							}
-							
-							
 							.made-with-love {
 								margin-top: 40px;
 								padding: 10px;
@@ -345,11 +342,14 @@ function PartnerProspects() {
 							}
 							input,
 							textarea {
-										border-radius: 7px;
-										padding: 5px 7px;
-										background-color: #e2f4ec;
-										border: 1px solid #106d75;
-										margin-right: 15px
+								border-radius: 7px;
+								padding: 5px 7px;
+								background-color: #e2f4ec;
+								border: 1px solid #106d75;
+								margin-right: 15px
+							}
+							textarea {
+								width: 300px;
 							}
 				`}</style>
 				</section>

@@ -103,6 +103,14 @@ function ContactSellerForm(props) {
    return (
         <>
         <div className='detailContainer'>
+            <div 
+                className='clearModal' 
+                onClick={() => 
+                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                }} 
+            >
+                <img src='/img/clear_search.png' alt='clear filters'/>
+            </div>
             <div id="loadingLoginContactSeller">
                 <img id='loadingLoginImgContactSeller' src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginTextContactSeller"></p>
@@ -124,14 +132,6 @@ function ContactSellerForm(props) {
             <h1>Contact {removeDashOE(product.sellerName)}</h1>           
             <div className='heading'>
                 <p>Your name, email, and inquiry will be forwarded to {product.sellerName}.<br></br></p>
-            </div>
-            <div 
-                className='clearModal' 
-                onClick={() => 
-                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                }} 
-            >
-                <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
             <div className='contactContainer'>

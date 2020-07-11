@@ -53,6 +53,9 @@ function ProductModal(props) {
     return (
         <>
         <div className='detailContainer'>
+            <div onClick={(evt) => handleClick(evt, props.product, false)} className='clearModal'>
+                <img src='/img/clear_search.png' alt='clear filters'/>
+            </div> 
             <h1>{productModel.indexOf(productMaker)>-1?'':productMaker} {productModel}</h1>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
             <div className='detailInfo'>
@@ -82,11 +85,7 @@ function ProductModal(props) {
                     }<br />
                 <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
                 <button className='detailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
-            </div>
-
-            <div onClick={(evt) => handleClick(evt, props.product, false)} className='clearModal'>
-                <img src='/img/clear_search.png' alt='clear filters'/>
-            </div>  
+            </div>          
         </div>
         </div>
         <ProductModalCSS />

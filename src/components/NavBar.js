@@ -36,16 +36,16 @@ export default function NavBar(props) {
                     <Link href='/'>
                         <a onClick={props.handleNavOpen}>Find a Harp</a>
                     </Link>
-                    <Link href='/StorePartners' as='/StorePartners'>
+                    <Link href='/storepartners' as='/storepartners'>
                         <a onClick={props.handleNavOpen}>Our Store Partners</a>
                     </Link>
-                    <Link href='/BuyersGuide' as='/BuyersGuide'>
+                    <Link href='/buyersguide' as='/buyersguide'>
                         <a onClick={props.handleNavOpen}>Buyer's Guide</a>
                     </Link>        
-                    <Link href='/Contact' as='Contact'>
+                    <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/UserProfile':'/LoginSignup'} as={user.firstname==='Login'?'/LoginSignup':'/UserProfile'}>
+                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname==='Login'?'/loginsignup':'/userprofile'}>
                         {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
                         <a id='userName' onClick={props.handleNavOpen}>{user.firstname}</a>
                     </Link>

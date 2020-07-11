@@ -88,14 +88,15 @@ function ContactSellerFormCSS() {
                 margin-top: 40px;
             }
             .clearModal {
-                position: absolute;
-                top: 15px;
-                right: 15px;
+                float: right;
+                position: sticky;
+                top: 5px;
+                right: 1px;
                 color: black;
                 opacity: .4;
             }
             .clearModal img{
-                width: 28px;
+                width: 25px;
             }
             .inputGroup {
                 margin-top: 15px;

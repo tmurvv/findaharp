@@ -11,7 +11,8 @@ export const STORE_PARTNERS = [
         productMaker: "Harps Etc.",
         productImageUrl: "/img/storePartners/harpsetc_logo.png",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'www.harpsetc.com',
+        sellerWebsite: 'https://harpsetc.com',
+        sellerWebsiteText: 'harpsetc.com',
         sellerEmail: 'info@harpsetc.com'
     },
     {
@@ -24,7 +25,8 @@ export const STORE_PARTNERS = [
         productMaker: "Michigan Harp Center",
         productImageUrl: "/img/storePartners/michiganHarpCenter.jpg",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'www.michiganharpcenter.com',
+        sellerWebsite: 'https://michiganharpcenter.com',
+        sellerWebsiteText: 'michiganharpcenter.com',
         sellerEmail: 'michiganharpcenter@gmail.com'
     },
     {
@@ -44,7 +46,8 @@ export const STORE_PARTNERS = [
         productMaker: "West Coast Harps",
         productImageUrl: "/img/storePartners/westCoastHarps.jpg",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'www.westcoastharps.com',
+        sellerWebsite: 'https://westcoastharps.com',
+        sellerWebsiteText: 'westcoastharps.com',
         sellerEmail: 'alison@westcoastharps.com'
     },
     {
@@ -55,7 +58,8 @@ export const STORE_PARTNERS = [
         productLongDesc: " is mainly interested in connecting buyers with sellers, but also has a few harps of it's own for sale and rent. Located at the foot of the Rocky Mountains, Find a Harp is always searching for a wide variety of pre-owned instruments for harp lovers and aspiring students alike.",
         productMaker: "Find a Harp",
         productImageUrl: "/img/storePartners/findaharp_store_logo.png",
-        sellerWebsite: 'www.findaharp.com',
+        sellerWebsite: 'https://findaharp.com',
+        sellerWebsiteText: 'findaharp.com',
         sellerEmail: 'tisha@findaharp.com'
     },
     {
@@ -75,7 +79,8 @@ export const STORE_PARTNERS = [
         productMaker: "Harp Angel Store",
         productImageUrl: "/img/storePartners/harpangel_logo.png",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'www.harpangel.com',
+        sellerWebsite: 'https://harpangel.com',
+        sellerWebsiteText: 'harpangel.com',
         sellerEmail: 'info@harpangel.com'
     },
     {
@@ -88,7 +93,8 @@ export const STORE_PARTNERS = [
         productMaker: "4HarpMusic",
         productImageUrl: "/img/storePartners/4HarpMusicLogo.jpg",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'www.4harpmusic.com',
+        sellerWebsite: 'http://4harpmusic.com',
+        sellerWebsiteText: '4harpmusic.com',
         sellerEmail: 'txabby@gmail.com'
     }
 ];

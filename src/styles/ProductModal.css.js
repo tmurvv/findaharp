@@ -23,12 +23,12 @@ function ProductModalCSS() {
             .detailInfo {
                 display: flex;
                 align-items: flex-start;
-                padding: 30px 20px 20px;
+                padding: 15px 20px 20px;
             }
             @media only screen and (max-width: 550px) {
                 .detailContainer {
                     flex-direction: column;
-                    padding: 30px 0;
+                    padding: 15px 0;
                 }
                 .detailInfo {
                     flex-direction: column
@@ -93,14 +93,15 @@ function ProductModalCSS() {
                 margin-top: 10px;
             }
             .clearModal {
-                position: absolute;
-                top: 20px;
-                right: 20px;
+                float: right;
+                position: sticky;
+                top: 5px;
+                right: 1px;
                 color: black;
                 height: 28px;
             }
             .clearModal img {
-                width: 28px;
+                width: 25px;
                 opacity: .4;
             }
             .moreButton {

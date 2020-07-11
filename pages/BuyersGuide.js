@@ -51,7 +51,8 @@ function BuyersGuide(props) {
             return window.scrollBy(0, -100);
         }
         if (harptype()==='notsureharp') {
-            if (musictype()==='classicalmusic' || musictype()==='variety') {
+            console.log(musictype())
+            if (musictype()==='classicalmusic' || musictype()==='varietymusic') {
                 document.querySelector('#guidePedalGeneral').scrollIntoView();
                 return window.scrollBy(0, -100);
             }
