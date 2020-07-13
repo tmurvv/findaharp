@@ -2,10 +2,10 @@
 - on signup, if they messup, it does not work
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
-- survey func on buyers guide played some, not sure, wide
 - paraguayan harp not showing up on lever-free
 
 ### internal
+- figure out option to dangerinnerhtml in store partners
 - result component needs to be componetized
 - separate store partner program info into a component
 - make it easier to change api on deployment

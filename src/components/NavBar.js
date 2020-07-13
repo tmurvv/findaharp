@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 
 //internal
 import NavBarCss from '../styles/NavBar.css';
-import {UserContext} from '../contexts/UserContext';
+import { UserContext } from '../contexts/UserContext';
 
 export default function NavBar(props) {
     // const  {value, setValue}= useContext(UserContext);

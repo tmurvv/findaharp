@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 // internal
 import ProductModalCSS from '../styles/ProductModal.css';
@@ -21,8 +21,8 @@ function ProductModal(props) {
     const [geoDistance, setGeoDistance] = useState(0); //miles
     const [drivingDistance, setDrivingDistance] = useState(0); //miles
     const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerCountry, sellerName, sellerLat, sellerLong} = props.product;
+    // let productLongDescMine = "hilo <br /> here we are"
     if (props.product===undefined||!props.product) return props.handleCloseDetail();
-    
     function handleClick(evt, product, openContact) {
         setLongDesc(true);
         props.handleCloseDetail(evt, product, openContact);
@@ -50,6 +50,9 @@ function ProductModal(props) {
         })
         return endIndex;
     }
+    useEffect(() => {
+        document.querySelector('.longDesc').innerHTML = `<span>Description</span>${productLongDesc}`;
+    }, []);
     return (
         <>
         <div className='detailContainer'>
@@ -69,7 +72,9 @@ function ProductModal(props) {
                     :'contact seller'}<br />
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
                 <br></br>
-                <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div>
+                <div className='longDesc'></div>
+                {/* <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div> */}
+                
                 <br></br>
                 <p><span>Location</span> {sellerCountry?sellerCountry:'unavailable'}<br></br>
                 <span>Distance</span> {drivingDistance===0

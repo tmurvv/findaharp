@@ -222,12 +222,12 @@ function PartnerProspects() {
 									<td><textarea value='June 29th, spoke by phone, sent her an email with deets. June 15th via contact form, Dallas area'/></td>
 								</tr>
 								<tr>
+									<td>Harps International</td>
 									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
-									<td></td>
-									<td><textarea value=''/></td>
+									<td><textarea value='info@harps-international.com'/></td>
 								</tr>
 								<tr>
 									<td></td>

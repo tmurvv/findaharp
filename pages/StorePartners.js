@@ -1,5 +1,5 @@
 // packages
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 
 //internal
@@ -22,6 +22,7 @@ export default function StorePartners() {
     const size = getWindowSize();
     // add blank placeholders for grid
     const addPlaceHolders=addPlaceholderStorePartners(storePartnersShuffled, size.width);
+    
     return (
         <>
         <Head>
