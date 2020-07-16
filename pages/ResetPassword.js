@@ -113,12 +113,6 @@ function ResetPassword(props) {
         try {
             /* LOCAL */
             const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${email}`, {resetpassword: userLogin.newpassword});
-            /* TESTING */
-            // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
-            /* STAGING */
-            // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
-            /* PRODUCTION */
-            // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${Router.query}`, {resetpassword: userLogin.newpassword});
             
             resultText.innerText=`Password change successful.`;
             resultImg.style.display='none';

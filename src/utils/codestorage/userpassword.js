@@ -133,15 +133,9 @@ function UserProfile(props) {
                 currency: userEdit.currency?userEdit.currency:user.currency
             };
             try {
-                /* LOCAL */
-               
+                //update user
                 const res = await axios.patch(`${process.env.backend}/api/v1/users/updateuser/${user._id}`, updatedUser);
-                /* TESTING */
-                // const res = await axios.patch('https://findaharp-api-testing.herokuapp.com/api/v1/users/updateuser/${user._id}', updatedUser);
-                /* STAGING */
-                // const res = await axios.patch('http://localhost:3000/api/v1/users/updateuser/${user._id}', updatedUser);
-                /* PRODUCTION */
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/users/updateuser/${user._id}', updatedUser);
+                
                 if (res.status===200) {
                     resultText.innerText=`Update Successful.`;
                     dispatchResultInfo({type: 'OK'});
@@ -160,7 +154,6 @@ function UserProfile(props) {
                     );
                 }
             } catch (e) {
-                console.dir(e)
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
@@ -189,18 +182,11 @@ function UserProfile(props) {
             resultText.innerText=``;
             dispatchResultInfo({type: 'loadingImage'})
             try {
-                /* LOCAL */
+                //update password
                 await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
-                /* TESTING */
-                // const res = await axios.patch(`https://findaharp-api-testing.herokuapp.com/api/v1/users/updatepassword/${user._id}`, {userid: user._id, password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
-                /* STAGING */
-                // const res = await axios.patch(`http://localhost:3000/api/v1/users/updatepassword/${user._id}`, {userid: user._id, password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
-                /* PRODUCTION */
-                // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/users/updatepassword/${user._id}`, {userid: user._id, password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
             } catch(e) {
-                console.dir(e)
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     dispatchResultInfo({type: 'okTryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Old password does not match our records.'}`;
@@ -228,16 +214,8 @@ function UserProfile(props) {
         if (prompt('Are you sure you want to delete your account? Please type in your account email to confirm.')!==user.email) return alert('Email does not match.');
         
         try {
-            // LOCAL
+            // Delete User
             const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user._id}?editpassword=${userEdit.editpassword}`, {editpassword: userEdit.editpassword});
-            // await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
-            // TESTING
-            // const res=await axios.delete(`https://findaharp-api-testing.herokuapp.com/api/v1/users/deleteuser/${user._id}`);
-            // STAGING
-            // const res=await axios.delete(`http://localhost:3000/api/v1/users/deleteuser/${user._id}`);
-            // PRODUCTION
-            // const res=await axios.delete(`https://findaharp-api.herokuapp.com/api/v1/users/deleteuser/${user._id}`);
-            // const returnedUser = res.user;
             dispatchResultInfo({type: 'OK'});
             resultText.innerText=`Account ${user.email} has been deleted`;
             await setUser({
@@ -256,8 +234,7 @@ function UserProfile(props) {
             } else {
                 dispatchResultInfo({type: 'okTryAgain'})
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
-            }
-            
+            }   
         }    
     }
     return (

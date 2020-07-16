@@ -13,6 +13,7 @@ function ContactUsForm(props) {
         lastname: '',
         contactemail: '',
         contactcomments: '',
+        newsletter: false,
         change: false
     });
     const [openStoreOwnerInq, setOpenStoreOwnerInq] = useState(false);
@@ -30,6 +31,9 @@ function ContactUsForm(props) {
             case 'contactcomments': 
                 setUser({...user, contactcomments: evt.target.value, change: true});
                 break     
+            case 'newsletter': 
+                setUser({...user, newsletter: !user.newsletter, change: true});
+                break     
             default :
         }
     }
@@ -39,6 +43,7 @@ function ContactUsForm(props) {
             lastname: '',
             contactemail: '',
             contactcomments: '',
+            newsletter: false,
             change: false
         });
     }
@@ -62,19 +67,12 @@ function ContactUsForm(props) {
             lastname: user.lastname,
             email: user.contactemail,
             comments: user.contactcomments,
-            selleremail: 'tisha@findaharp.com'
+            selleremail: 'tisha@findaharp.com',
+            newsletter: user.newsletter
         }
         try {
-            // local
+            // send contactUs inq
             const res = await axios.post(`${process.env.backend}/api/v1/contactform`, contact);
-            // testing
-            // const res = await axios.post(`https://findaharp-api-testing.herokuapp.com/api/v1/contactform`, contact);
-            // staging
-            // const res = await axios.post(`http://localhost:3000/api/v1/contactform`, contact);
-            // production
-            // const res = await axios.post(`https://findaharp-api.herokuapp.com/api/v1/contactform`, contact);
-            // alert("Email sent.");
-            // alert('under construction, contact form not sent')
             resultText.innerText=`Contact form has been sent to findaharp.com.`;
             resultImg.style.display='none';
             resultButton.style.display= 'block';
@@ -164,7 +162,18 @@ function ContactUsForm(props) {
                             onChange={handleChange}
                             rows='6'
                         />
-                    </div>         
+                    </div>   
+                    <div style={{marginBottom: '-15px', marginTop:'25px'}}>
+                        <input 
+                            id={uuid()}
+                            type='checkbox'
+                            name='newsletter'
+                            onChange={handleChange}
+                            style={{marginLeft: '0'}}
+                            checked={user.newsletter}
+                        />
+                        <label style={{marginLeft: '5px'}} name='contactcomments'>Signup for Find a Harp newsletter?<br />Fun talk about harps every other month. </label>
+                    </div>      
                     <div className='buttons'>
                         <button
                             className='detailButton'

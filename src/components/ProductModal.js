@@ -51,7 +51,7 @@ function ProductModal(props) {
         return endIndex;
     }
     useEffect(() => {
-        document.querySelector('.longDesc').innerHTML = `<span>Description</span>${productLongDesc}`;
+        document.querySelector('.longDesc').innerHTML = `<span>Description</span> ${productLongDesc}`;
     }, []);
     return (
         <>

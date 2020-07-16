@@ -74,14 +74,8 @@ function ContactSellerForm(props) {
             comments: user.contactcomments
         }
         try {
-            // local
+            // send Inq
             const res = await axios.post(`${process.env.backend}/api/v1/contactsellerform`, contact);
-            // testing
-            // const res = await axios.post(`https://findaharp-api-testing.herokuapp.com/api/v1/contactsellerform`, contact);
-            // staging
-            // const res = await axios.post(`http://localhost:3000/api/v1/contactsellerform`, contact);
-            // production
-            // const res = await axios.post(`https://findaharp-api.herokuapp.com/api/v1/contactsellerform`, contact);
             
             resultText.innerText=`Inquiry has been sent to seller.`;
             // resultText.innerText=`Email regarding ${product.productMaker} ${product.productModel} has been sent to seller.`;

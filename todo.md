@@ -19,21 +19,15 @@
 ### UI/UX
 
 - footer messed up on my phone
-- store partner info from store partner page images not quite right
-- email verification can be prettier
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - When update user encounters problem on backend, spinner persists, needs to show error message
-- sometimes when messing with window size, harp photos get stretched
 - delete extra blank place holders
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/
 - tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present
-- continue trouble shooting why Markwood not showing up in medium lever
 - resend verification email is hacked
-- add way to ask about becoming a store partner to store partner page
-- trouble shoot distance needing two clicks
 - CRUD operations on upload listings
 - add close form to private listings
 

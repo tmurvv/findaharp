@@ -140,8 +140,6 @@ function LoginSignup(props) {
             };
             // signup user
             try {
-                // const res = await axios.post(`https://findaharp-api-staging.herokuapp.com/api/v1/users/createuser`, newUser);
-                // const res = await axios.post(`http://localhost:3000/api/v1/users/createuser`, newUser);
                 const res = await axios.post(`${process.env.backend}/api/v1/users/createuser`, newUser);
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
