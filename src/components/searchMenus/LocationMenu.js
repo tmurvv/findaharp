@@ -60,11 +60,11 @@ export default function LocationMenu(props) {
                     name='Less than 100'
                 >Less than 100 {distanceUnit}</li>
                 <li 
-                    onClick={handleClose}
                     hidden={activateDriving}
                     style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()}
                     name='North-East'
+                    aria-disabled={true}
                 >US-NorthEastern</li>    
                 <li 
                     onClick={handleClose}
@@ -79,11 +79,11 @@ export default function LocationMenu(props) {
                     name='Mid-West'
                 >US-MidWest</li>
                 <li 
-                    onClick={handleClose}
                     hidden={activateDriving}
                     style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='West'
+                    aria-disabled={true}
                 >US-West</li>
                 <li 
                     onClick={handleClose}
@@ -92,11 +92,11 @@ export default function LocationMenu(props) {
                     name='Pacific'
                 >US-Pacific</li>
                 <li 
-                    onClick={handleClose}
                     hidden={activateDriving}
                     style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()} 
                     name='Canada-East'
+                    aria-disabled={true}
                 >Canada-East</li>              
                 <li 
                     onClick={handleClose}
