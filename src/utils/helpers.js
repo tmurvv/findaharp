@@ -74,7 +74,7 @@ export function setOpacity(yesNo) {
 }
 export function findSizeWords(strings, type) {
     strings = parseInt(strings);
-    if (strings<29&&type==='lever-free') return 'lever-free';
+    if (strings<29&&type=='lever-free') return 'lever-free';
     if (strings<29&&type==='lever') return 'small lever';
     if (strings<35&&type==='lever') return 'medium lever';
     if (strings<44&&type==='lever' ) return 'large lever';  
@@ -235,11 +235,11 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
     if (allState.size&&(allState.size.toUpperCase() === "ALL PEDAL"||allState.size.toUpperCase() === "ALL LEVER")) 
         return filteredProducts;
     // size filter
-    if (allState.size&&allState.size.toUpperCase() !== "ALL SIZES") 
+    if (allState.size&&allState.size.toUpperCase() !== "ALL SIZES") {
         filteredProducts = filteredProducts.filter(
-            
             product => allState.size.toUpperCase().startsWith(findSizeWords(product.productSize, product.productType).toUpperCase())
         );
+    }
     return filteredProducts;
 }
 /**

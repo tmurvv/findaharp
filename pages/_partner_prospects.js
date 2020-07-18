@@ -195,7 +195,7 @@ function PartnerProspects() {
 									<td>contact form only</td>
 									<td></td>
 									<td>June 11, 2020</td>
-									<td><textarea value='Santa Barbara'/></td>
+									<td><textarea value='Left phone message July 17th. e-mailed July 9thish. Santa Barbara'/></td>
 								</tr>
 								<tr>
 									<td>Harp Place, The</td>
@@ -223,11 +223,11 @@ function PartnerProspects() {
 								</tr>
 								<tr>
 									<td>Harps International</td>
+									<td>peterreis@harps-international.com</td>
 									<td></td>
 									<td></td>
-									<td></td>
-									<td></td>
-									<td><textarea value='info@harps-international.com'/></td>
+									<td>July 17, 2020</td>
+									<td><textarea value='emailed July 17, 2020'/></td>
 								</tr>
 								<tr>
 									<td></td>

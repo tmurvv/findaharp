@@ -1,13 +1,24 @@
 // packages
-import React, {useState} from 'react';
+import React, { useState, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
 import ContactUsFormCSS from '../styles/ContactUsForm.css';
 import StorePartnerInfo from '../components/StorePartnerInfo';
+import { resultInfoReducer } from '../reducers/reducers';
+
+const resultInfoInitialState = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
 
 function ContactUsForm(props) {
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
@@ -50,16 +61,18 @@ function ContactUsForm(props) {
     const handleSubmit = async (evt) => {
         // {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Clear contact form?')) clearForm();}
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLogin');
+        // const resultContainer = document.querySelector('#loadingLogin');
         const resultText = document.querySelector('#loadingLoginText');
-        const resultButton = document.querySelector('#loadingLoginOk');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        const resultImg = document.querySelector('#loadingLoginImg');
-        if (!user.contactemail) return alert('Email is required');
-        resultContainer.style.display='block';
-        resultImg.style.display='block';
+        // const resultButton = document.querySelector('#loadingLoginOk');
+        // const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
+        // const resultImg = document.querySelector('#loadingLoginImg');
         
-        if (!user.contactemail) return alert('Email is required');
+        if (!user.contactemail) {
+            resultText.innerText = "Email is required";
+            dispatchResultInfo({type: 'tryAgain'});
+            return;
+        }
+        
         const contact = {
             contactid: uuid(),
             date: new Date(Date.now()),
@@ -73,22 +86,18 @@ function ContactUsForm(props) {
         try {
             // send contactUs inq
             const res = await axios.post(`${process.env.backend}/api/v1/contactform`, contact);
+            console.log('here', res.data)
             resultText.innerText=`Contact form has been sent to findaharp.com.`;
-            resultImg.style.display='none';
-            resultButton.style.display= 'block';
+            dispatchResultInfo({type: 'OK'});
         } catch(e) {
             resultText.innerText=`Something went wrong. Please try again or send an email to harps@findaharp.com. ${e.message}`;
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display= 'block';
+            dispatchResultInfo({type: 'tryAgain'});
         }  
         clearForm();
     }
     function resetResults() {
-        document.querySelector('#loadingLogin').style.display='none';
         document.querySelector('#loadingLoginText').innerText='';
-        document.querySelector('#loadingLoginOk').style.display='none';
-        document.querySelector('#loadingLoginTryAgain').style.display='none';
-        document.querySelector('#loadingLoginImg').style.display='none';
+        dispatchResultInfo({type: 'initial'});
     }
    return (
         <>  
@@ -106,8 +115,8 @@ function ContactUsForm(props) {
                     <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
                 </div>
                 <form className='contactForm'> 
-                    <div id="loadingLogin">
-                        <img id='loadingLoginImg' src='/img/spinner.gif' alt='loading spinner' />
+                    <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+                        <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                         <p id="loadingLoginText"></p>
                         <div className='flex-sb'>
                             <button 
@@ -115,12 +124,14 @@ function ContactUsForm(props) {
                                 type='button' 
                                 className='submit-btn' 
                                 onClick={resetResults}
+                                style={{display: resultInfo.resultOkButton}}
                             >OK</button>
                             <button 
                                 id='loadingLoginTryAgain' 
                                 type='button' 
                                 className='submit-btn submit-btn-tryAgain' 
                                 onClick={resetResults}
+                                style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}}
                             >Try Again</button>
                         </div>
                     </div>    

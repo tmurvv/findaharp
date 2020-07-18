@@ -9,6 +9,7 @@ import {removeDashOE} from '../utils/helpers';
 
 function ContactSellerForm(props) {
     if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
+    
     const {product} = props;
     const [user, setUser] = useState({
         firstname: '',

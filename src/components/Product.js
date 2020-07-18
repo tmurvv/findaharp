@@ -12,7 +12,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     const [openContactModal, setOpenContactModal] = useState(false);
     const [useNaturalHeight, setUseNaturalHeight] = useState(0);
     
-    if (productdetail.productImageUrl.indexOf('genericHarp')>-1) productdetail.productImageUrl="";
+    // if (productdetail.productImageUrl.indexOf('genericHarp')>-1) productdetail.productImageUrl="";
     function handleOpenProductModal() {
         setOpenProductModal(true);
         handleopendetail(productdetail); 

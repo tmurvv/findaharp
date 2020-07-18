@@ -1,5 +1,4 @@
 ### high priority
-- on signup, if they messup, it does not work
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 - paraguayan harp not showing up on lever-free

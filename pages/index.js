@@ -182,7 +182,13 @@ Index.getInitialProps = async (props) => {
         // API DATA Populate variables
         const products = res.data.harpData;
         const makesModels = res.data.harpMakesModels;
+        products.map(product => {
+            product.productImageUrl.indexOf('genericHarp.png')>-1?product.productModel=`zz${product.productModel}`:'';
+        });
         products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
+        products.map(product => {
+            product.productModel.startsWith('zz')?product.productModel=`${product.productModel.substr(2)}`:'';
+        });
         return { products, makesModels, verifying: false, found: false };
 }
 
