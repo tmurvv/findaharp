@@ -63,9 +63,9 @@ export default function LocationMenu(props) {
                     hidden={activateDriving}
                     style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()}
-                    name='North-East'
+                    name='Eastern'
                     aria-disabled={true}
-                >US-NorthEastern</li>    
+                >US-Eastern</li>    
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}
