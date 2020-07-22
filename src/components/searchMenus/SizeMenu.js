@@ -63,6 +63,12 @@ export default function SizeMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
+                    name='Wire/Cross/Double/Triple'
+                >Wire/Cross/Double/Triple</li>
+                
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
                     name='Concert Grand Pedal'
                 >Concert Grand Pedal</li>
                 <li 

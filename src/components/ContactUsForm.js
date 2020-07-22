@@ -86,7 +86,6 @@ function ContactUsForm(props) {
         try {
             // send contactUs inq
             const res = await axios.post(`${process.env.backend}/api/v1/contactform`, contact);
-            console.log('here', res.data)
             resultText.innerText=`Contact form has been sent to findaharp.com.`;
             dispatchResultInfo({type: 'OK'});
         } catch(e) {

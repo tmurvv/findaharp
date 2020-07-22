@@ -73,14 +73,19 @@ export function setOpacity(yesNo) {
     document.querySelector('.searchLine2Sub').style.opacity='1';
 }
 export function findSizeWords(strings, type) {
+    // short cut if not lever or pedal harp
+    if (type && type=='lever-free') return 'lever-free';
+    if (strings&&strings.toString().toUpperCase()=='WIRE/CROSS/DOUBLE/TRIPLE') return 'wire/cross/double/triple';
+    // strings to number type
     strings = parseInt(strings);
-    if (strings<29&&type=='lever-free') return 'lever-free';
+    // return size ranges
     if (strings<29&&type==='lever') return 'small lever';
     if (strings<35&&type==='lever') return 'medium lever';
     if (strings<44&&type==='lever' ) return 'large lever';  
     if (strings<46) return 'small pedal';
     if (strings===46) return 'semi-grand pedal';
-    if (strings>29) return 'concert grand pedal';
+    if (strings>46) return 'concert grand pedal';
+    // return not found
     return 'size not found'
 }
 /**
@@ -232,7 +237,7 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
             product => product.productPrice&&findPriceRange(product.productPrice)===allState.price
     );
     // if size all pedal or all lever ready for return
-    if (allState.size&&(allState.size.toUpperCase() === "ALL PEDAL"||allState.size.toUpperCase() === "ALL LEVER")) 
+    if (allState.size&&(allState.size.toUpperCase() === "ALL PEDAL"||allState.size.toUpperCase() === "ALL LEVER"||allState.size.toUpperCase() === "LEVER-FREE"))
         return filteredProducts;
     // size filter
     if (allState.size&&allState.size.toUpperCase() !== "ALL SIZES") {

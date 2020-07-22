@@ -72,7 +72,6 @@ function AppCss() {
                 color: #fafbfc;
                 background-color: #000000;
                 font-size: 14px;
-                padding-top: 9px;
                 position: absolute;
                 cursor: pointer;
                 z-index: 2000;
@@ -81,6 +80,7 @@ function AppCss() {
                 padding-inline-start: 0;
                 width: 75%;
                 transform: translateX(16.5%);
+                padding: 9px;
             }
             @media only screen and (max-width: 550px) {
                 .plainTextSelectLine1 {
