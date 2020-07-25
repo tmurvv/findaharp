@@ -1,15 +1,27 @@
 // packages
-import React, {useState} from 'react';
+import React, { useState, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
 import ContactSellerFormCSS from '../styles/ContactSellerForm.css';
+import { resultInfoReducer } from '../reducers/reducers';
 import {removeDashOE} from '../utils/helpers';
 
+const resultInfoInitialState = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
+
 function ContactSellerForm(props) {
+    // shortcut
     if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
-    
+    // declare variables
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const {product} = props;
     const [user, setUser] = useState({
         firstname: '',
@@ -20,6 +32,7 @@ function ContactSellerForm(props) {
         contactcomments: '',
         change: false
     });
+    // handle controlled input
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'firstname': 
@@ -42,25 +55,23 @@ function ContactSellerForm(props) {
                 break     
             default :
         }
-    }
+    } 
+    // reset result window
     function resetResults() {
-        document.querySelector('#loadingLogin').style.display='none';
-        document.querySelector('#loadingLoginText').innerText='';
-        document.querySelector('#loadingLoginOk').style.display='none';
-        document.querySelector('#loadingLoginTryAgain').style.display='none';
-        document.querySelector('#loadingLoginImg').style.display='none';
+        document.querySelector('#loadingLoginTextContactSeller').innerText='';
+        dispatchResultInfo({type: 'initial'});
     }
+    // handle form submit
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultContainer = document.querySelector('#loadingLoginContactSeller');
         const resultText = document.querySelector('#loadingLoginTextContactSeller');
-        const resultButton = document.querySelector('#loadingLoginOkContactSeller');
-        const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgainContactSeller');
-        const resultImg = document.querySelector('#loadingLoginImgContactSeller');
-        if (!user.contactemail) return alert('Email is required');
-        resultContainer.style.display='block';
-        resultImg.style.display='block';
-        
+        // shortcut
+        if (!user.contactemail) {
+            resultText.innerText = "Email is required";
+            dispatchResultInfo({type: 'tryAgain'});
+            return;
+        }
+        // prepare communication object
         const contact = {
             contactid: uuid(),
             date: new Date(Date.now()),
@@ -74,26 +85,15 @@ function ContactSellerForm(props) {
             productprice: product.productPrice,
             comments: user.contactcomments
         }
+        // send communication
         try {
-            // send Inq
-            const res = await axios.post(`${process.env.backend}/api/v1/contactsellerform`, contact);
-            
+            await axios.post(`${process.env.backend}/api/v1/contactsellerform`, contact);   
             resultText.innerText=`Inquiry has been sent to seller.`;
-            // resultText.innerText=`Email regarding ${product.productMaker} ${product.productModel} has been sent to seller.`;
-            resultImg.style.display='none';
-            resultButton.style.display= 'block';
+            dispatchResultInfo({type: 'OK'});
         } catch(e) {
             resultText.innerText=`Something went wrong. Please try again or contact the webmaster. ${e.message}`;
-            resultImg.style.display='none';
-            resultButtonTryAgain.style.display= 'block';
+            dispatchResultInfo({type: 'tryAgain'});
         }
-    }
-    function resetResults() {
-        document.querySelector('#loadingLoginContactSeller').style.display='none';
-        document.querySelector('#loadingLoginTextContactSeller').innerText='';
-        document.querySelector('#loadingLoginOkContactSeller').style.display='none';
-        document.querySelector('#loadingLoginTryAgainContactSeller').style.display='none';
-        document.querySelector('#loadingLoginImgContactSeller').style.display='none';
     }
    return (
         <>
@@ -106,20 +106,22 @@ function ContactSellerForm(props) {
             >
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
-            <div id="loadingLoginContactSeller">
-                <img id='loadingLoginImgContactSeller' src='/img/spinner.gif' alt='loading spinner' />
+            <div id="loadingLoginContactSeller" style={{display: resultInfo.resultContainer}}>
+                <img id='loadingLoginImgContactSeller'style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginTextContactSeller"></p>
                 <div className='flex-sb'>
                     <button 
                         id='loadingLoginOkContactSeller' 
                         type='button'
                         className='submit-btn'
+                        style={{display: resultInfo.resultOkButton}}
                         onClick={props.handleCloseContact}
                     >OK</button>
                     <button 
                         id='loadingLoginTryAgainContactSeller' 
                         type='button' 
                         className='submit-btn submit-btn-tryAgain' 
+                        style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}}
                         onClick={resetResults}
                     >Try Again</button>
                 </div>

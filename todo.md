@@ -12,7 +12,6 @@
 - make addPlaceholders remove any placeholders that may be there already
 - add findaharp known finish listing to Mongo
 - refactor getFilteredProducts
-- in login/signup, install reducer for result states
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX

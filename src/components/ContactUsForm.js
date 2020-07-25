@@ -59,13 +59,8 @@ function ContactUsForm(props) {
         });
     }
     const handleSubmit = async (evt) => {
-        // {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Clear contact form?')) clearForm();}
         evt.preventDefault();
-        // const resultContainer = document.querySelector('#loadingLogin');
         const resultText = document.querySelector('#loadingLoginText');
-        // const resultButton = document.querySelector('#loadingLoginOk');
-        // const resultButtonTryAgain = document.querySelector('#loadingLoginTryAgain');
-        // const resultImg = document.querySelector('#loadingLoginImg');
         
         if (!user.contactemail) {
             resultText.innerText = "Email is required";

@@ -10,6 +10,7 @@ import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 
+// initialize reducer objects
 const resultInfoInitialState = {
     resultContainer: 'none',
     resultText: 'none',
@@ -24,6 +25,7 @@ const activeWindowInitialState = {
     signupClasses: 'login-signup s-atbottom'
 }
 function LoginSignup(props) {
+    // declare variables
     const { setUser } = useContext(UserContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);

@@ -27,6 +27,10 @@ function FooterCss() {
             .copy {
                 font-size: 12px;
             }
+            .copy>a {
+                color: #ffe58a; 
+                font-size: 12px;
+            }
         `}
         </style>
     )

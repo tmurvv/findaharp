@@ -469,4 +469,3 @@ export function shuffleStorePartners(partnerArray) {
     indexArray.map(idx => storePartners.push(partnerArray[idx]));
     return storePartners
 }
-

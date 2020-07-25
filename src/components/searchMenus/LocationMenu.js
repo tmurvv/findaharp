@@ -54,17 +54,15 @@ export default function LocationMenu(props) {
                 >Less than 300 {distanceUnit}</li>      
                 <li 
                     onClick={handleClose} 
-                    
                     hidden={!activateDriving} 
                     // key={uuid()}
                     name='Less than 100'
                 >Less than 100 {distanceUnit}</li>
                 <li 
+                    onClick={handleClose}
                     hidden={activateDriving}
-                    style={{color: 'rgb(182, 169, 13)'}}
                     // key={uuid()}
                     name='Eastern'
-                    aria-disabled={true}
                 >US-Eastern</li>    
                 <li 
                     onClick={handleClose}
