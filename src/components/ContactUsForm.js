@@ -177,7 +177,10 @@ function ContactUsForm(props) {
                             style={{marginLeft: '0'}}
                             checked={user.newsletter}
                         />
-                        <label style={{marginLeft: '5px'}} name='contactcomments'>Signup for Find a Harp newsletter?<br />Fun talk about harps every other month. </label>
+                        <label style={{marginLeft: '5px'}} name='newsletter'>
+                            Signup for Find a Harp newsletter?<br />
+                            Fun talk about harps every other month.
+                        </label>
                     </div>      
                     <div className='buttons'>
                         <button

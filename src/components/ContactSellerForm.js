@@ -30,6 +30,7 @@ function ContactSellerForm(props) {
         contactmaker: product.productMaker||'',
         contactmodel: product.productModel||'',
         contactcomments: '',
+        contactnewsletter: false,
         change: false
     });
     // handle controlled input
@@ -52,6 +53,9 @@ function ContactSellerForm(props) {
                 break     
             case 'contactcomments': 
                 setUser({...user, contactcomments: evt.target.value, change: true});
+                break     
+            case 'contactnewsletter': 
+                setUser({...user, contactnewsletter: !user.contactnewsletter, change: true});
                 break     
             default :
         }
@@ -83,7 +87,8 @@ function ContactSellerForm(props) {
             productmaker: user.contactmaker,
             productmodel: user.contactmodel,
             productprice: product.productPrice,
-            comments: user.contactcomments
+            comments: user.contactcomments,
+            newsletter: user.contactnewsletter
         }
         // send communication
         try {
@@ -196,7 +201,21 @@ function ContactSellerForm(props) {
                             onChange={handleChange}
                             rows='6'
                         />
-                    </div>         
+                    </div>   
+                    <div style={{marginBottom: '10px', marginTop:'35px', display: 'flex', justifyContent: 'center'}}>
+                        <input 
+                            id={uuid()}
+                            type='checkbox'
+                            name='contactnewsletter'
+                            onChange={handleChange}
+                            style={{transform: 'translate(20px, 3px)', zIndex: '3000'}}
+                            checked={user.contactnewsletter}
+                        />
+                        <label style={{marginLeft: '5px'}} name='contactnewsletter'>
+                            <p>Signup for Find a Harp newsletter?</p>
+                            <p>Fun talk about harps every other month.</p>
+                        </label>
+                    </div>       
                     <div>
                         <button
                             className='detailButton'

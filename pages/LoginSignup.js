@@ -146,8 +146,8 @@ function LoginSignup(props) {
                 if (res.status===200) {
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     dispatchResultInfo({type: 'OK'});
+                    // set userContext to added user
                     const {addeduser} = res.data;
-                    // setNeedVerify(true);
                     setUser({
                         firstname: addeduser.firstname, 
                         lastname: addeduser.lastname, 
@@ -160,13 +160,15 @@ function LoginSignup(props) {
                 }
             // Error on signup
             } catch (e) {
-                console.dir(e)
+                // duplicate email
                 if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('duplicate')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
+                // email not valid
                 } else if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address. Log in as guest user?'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
+                // other error
                 } else {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup. Please check your network connection. Log in as guest user?'}`;
                     dispatchResultInfo({type: 'okTryAgain'});
@@ -186,7 +188,7 @@ function LoginSignup(props) {
                 // login user
                 const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
-                // set user context to added user
+                // set user context to login user
                 await setUser({
                     firstname: returnedUser.firstname, 
                     lastname: returnedUser.lastname, 
@@ -200,19 +202,21 @@ function LoginSignup(props) {
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
-                // display error-user email not verified
+                // email not verified
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                
                     await setUserLogin({...userLogin, loginemail: e.response.data.useremail})
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
                     dispatchResultInfo({type: 'okTryAgain'});
-                // other error
+                // passwords don't match
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
+                // email not found
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
+                // other error
                 } else {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});

@@ -102,6 +102,12 @@ export default function LocationMenu(props) {
                     // key={uuid()} 
                     name='Canada-West'
                 >Canada-West</li>              
+                <li 
+                    onClick={handleClose}
+                    hidden={activateDriving}
+                    // key={uuid()} 
+                    name='Canada-Pacific'
+                >Canada-Pacific</li>              
             </ul>     
         </div>
     );

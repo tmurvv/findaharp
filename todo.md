@@ -7,15 +7,12 @@
 - figure out option to dangerinnerhtml in store partners
 - result component needs to be componetized
 - separate store partner program info into a component
-- make it easier to change api on deployment
 - check do we need to pass all open/close functions to Product
-- make addPlaceholders remove any placeholders that may be there already
 - add findaharp known finish listing to Mongo
 - refactor getFilteredProducts
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
-
 - footer messed up on my phone
 - email verifictaion error not correct on remote deploy
 - Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
@@ -24,10 +21,10 @@
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/
+- logout button
 - tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present
 - resend verification email is hacked
 - CRUD operations on upload listings
-- add close form to private listings
 
 ### AUTHENTICATION
 - add validate email on edit profile
