@@ -235,15 +235,15 @@ function PartnerProspects() {
 									<td></td>
 									<td></td>
 									<td>July 21, 2020</td>
-									<td><textarea value='Sent a contact message about the Markwood Stand.'/></td>
+									<td><textarea value='July 24, signed up!! Sent a contact message about the Markwood Stand.'/></td>
 								</tr>
 								<tr>
-									<td></td> 
+									<td>Marini Made Harps</td> 
+									<td>susan@marinimadeharps.com</td>
 									<td></td>
 									<td></td>
-									<td></td>
-									<td></td>
-									<td><textarea value=''/></td>
+									<td>August 3, 2020</td>
+									<td><textarea value='sent email'/></td>
 								</tr>
 								<tr>
 									<td></td>

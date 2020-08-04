@@ -1,10 +1,11 @@
 // packages
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
 import ContactSellerFormCSS from '../styles/ContactSellerForm.css';
+import { UserContext } from '../contexts/UserContext';
 import { resultInfoReducer } from '../reducers/reducers';
 import {removeDashOE} from '../utils/helpers';
 
@@ -23,10 +24,12 @@ function ContactSellerForm(props) {
     // declare variables
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
     const {product} = props;
-    const [user, setUser] = useState({
-        firstname: '',
-        lastname: '',
-        contactemail: '',
+    const { user } = useContext(UserContext);
+    
+    const [userContact, setUserContact] = useState({
+        firstname: user.firstname,
+        lastname: user.lastname,
+        contactemail: user.email,
         contactmaker: product.productMaker||'',
         contactmodel: product.productModel||'',
         contactcomments: '',
@@ -37,25 +40,25 @@ function ContactSellerForm(props) {
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'firstname': 
-                setUser({...user, firstname: evt.target.value, change: true});
+                setUserContact({...userContact, firstname: evt.target.value, change: true});
                 break
             case 'lastname': 
-                setUser({...user, lastname: evt.target.value, change: true});
+                setUserContact({...userContact, lastname: evt.target.value, change: true});
                 break
             case 'contactemail': 
-                setUser({...user, contactemail: evt.target.value, change: true});
+                setUserContact({...userContact, contactemail: evt.target.value, change: true});
                 break
             case 'contactmaker': 
-                setUser({...user, contactmaker: evt.target.value, change: true});
+                setUserContact({...userContact, contactmaker: evt.target.value, change: true});
                 break
             case 'contactmodel': 
-                setUser({...user, contactmodel: evt.target.value, change: true});
+                setUserContact({...userContact, contactmodel: evt.target.value, change: true});
                 break     
             case 'contactcomments': 
-                setUser({...user, contactcomments: evt.target.value, change: true});
+                setUserContact({...userContact, contactcomments: evt.target.value, change: true});
                 break     
             case 'contactnewsletter': 
-                setUser({...user, contactnewsletter: !user.contactnewsletter, change: true});
+                setUserContact({...userContact, contactnewsletter:!userContact.contactnewsletter, change: true});
                 break     
             default :
         }
@@ -70,7 +73,7 @@ function ContactSellerForm(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginTextContactSeller');
         // shortcut
-        if (!user.contactemail) {
+        if (!userContact.contactemail) {
             resultText.innerText = "Email is required";
             dispatchResultInfo({type: 'tryAgain'});
             return;
@@ -79,16 +82,16 @@ function ContactSellerForm(props) {
         const contact = {
             contactid: uuid(),
             date: new Date(Date.now()),
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.contactemail,
+            firstname:userContact.firstname,
+            lastname:userContact.lastname,
+            email:userContact.contactemail,
             sellername: product.sellerName,
             selleremail: product.sellerEmail,
-            productmaker: user.contactmaker,
-            productmodel: user.contactmodel,
+            productmaker:userContact.contactmaker,
+            productmodel:userContact.contactmodel,
             productprice: product.productPrice,
-            comments: user.contactcomments,
-            newsletter: user.contactnewsletter
+            comments:userContact.contactcomments,
+            newsletter:userContact.contactnewsletter
         }
         // send communication
         try {
@@ -106,7 +109,7 @@ function ContactSellerForm(props) {
             <div 
                 className='clearModal' 
                 onClick={() => 
-                    {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                    {if (!userContact.change ||userContact.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
                 }} 
             >
                 <img src='/img/clear_search.png' alt='clear filters'/>
@@ -149,7 +152,7 @@ function ContactSellerForm(props) {
                         <label className="label" className="label" name='firstname'>First Name </label>
                         <input
                             id={uuid()}
-                            value={user.firstname}
+                            value={userContact.firstname}
                             onChange={handleChange}
                             name='firstname'
                         />
@@ -159,7 +162,7 @@ function ContactSellerForm(props) {
                         <input
                             id={uuid()}id="outlined-helperText"
                             label="Last Name"
-                            value={user.lastname}
+                            value={userContact.lastname}
                             onChange={handleChange}
                             name ='lastname'
                         />
@@ -169,7 +172,7 @@ function ContactSellerForm(props) {
                         <input
                             id={uuid()}
                             name='contactemail'
-                            value={user.contactemail}
+                            value={userContact.contactemail}
                             onChange={handleChange}
                             required
                         />
@@ -179,7 +182,7 @@ function ContactSellerForm(props) {
                         <input
                             id={uuid()}
                             name='contactmaker'
-                            value={user.contactmaker}
+                            value={userContact.contactmaker}
                             onChange={handleChange}
                         />
                     </div>         
@@ -188,7 +191,7 @@ function ContactSellerForm(props) {
                         <input
                             id={uuid()}
                             name='contactmodel'
-                            value={user.contactmodel}
+                            value={userContact.contactmodel}
                             onChange={handleChange}
                         />
                     </div>         
@@ -197,7 +200,7 @@ function ContactSellerForm(props) {
                         <textarea
                             id={uuid()}
                             name='contactcomments'
-                            value={user.contactcomments}
+                            value={userContact.contactcomments}
                             onChange={handleChange}
                             rows='6'
                         />
@@ -209,7 +212,7 @@ function ContactSellerForm(props) {
                             name='contactnewsletter'
                             onChange={handleChange}
                             style={{transform: 'translate(20px, 3px)', zIndex: '3000'}}
-                            checked={user.contactnewsletter}
+                            checked={userContact.contactnewsletter}
                         />
                         <label style={{marginLeft: '5px'}} name='contactnewsletter'>
                             <p>Signup for Find a Harp newsletter?</p>
@@ -227,7 +230,7 @@ function ContactSellerForm(props) {
                             className={`detailButton detailButton-cancel`}
                             type='button'
                             onClick={() => 
-                                {if (!user.change || user.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                                {if (!userContact.change ||userContact.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
                             }}
                         >Cancel
                         </button>

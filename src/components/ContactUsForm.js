@@ -1,10 +1,11 @@
 // packages
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
 import ContactUsFormCSS from '../styles/ContactUsForm.css';
+import { UserContext } from '../contexts/UserContext';
 import StorePartnerInfo from '../components/StorePartnerInfo';
 import { resultInfoReducer } from '../reducers/reducers';
 
@@ -19,10 +20,12 @@ const resultInfoInitialState = {
 
 function ContactUsForm(props) {
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
-    const [user, setUser] = useState({
-        firstname: '',
-        lastname: '',
-        contactemail: '',
+    
+    const { user } = useContext(UserContext);
+    const [userContact, setUserContact] = useState({
+        firstname: user.firstname,
+        lastname: user.lastname,
+        contactemail: user.email,
         contactcomments: '',
         newsletter: false,
         change: false
@@ -31,25 +34,25 @@ function ContactUsForm(props) {
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'firstname': 
-                setUser({...user, firstname: evt.target.value, change: true});
+                setUserContact({...userContact, firstname: evt.target.value, change: true});
                 break
             case 'lastname': 
-                setUser({...user, lastname: evt.target.value, change: true});
+                setUserContact({...userContact, lastname: evt.target.value, change: true});
                 break
             case 'contactemail': 
-                setUser({...user, contactemail: evt.target.value, change: true});
+                setUserContact({...userContact, contactemail: evt.target.value, change: true});
                 break
             case 'contactcomments': 
-                setUser({...user, contactcomments: evt.target.value, change: true});
+                setUserContact({...userContact, contactcomments: evt.target.value, change: true});
                 break     
             case 'newsletter': 
-                setUser({...user, newsletter: !user.newsletter, change: true});
+                setUserContact({...userContact, newsletter: !user.newsletter, change: true});
                 break     
             default :
         }
     }
     function clearForm() {
-        setUser({
+        setUserContact({
             firstname: '',
             lastname: '',
             contactemail: '',
@@ -62,7 +65,7 @@ function ContactUsForm(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         
-        if (!user.contactemail) {
+        if (!userContact.contactemail) {
             resultText.innerText = "Email is required";
             dispatchResultInfo({type: 'tryAgain'});
             return;
@@ -71,12 +74,12 @@ function ContactUsForm(props) {
         const contact = {
             contactid: uuid(),
             date: new Date(Date.now()),
-            firstname: user.firstname,
-            lastname: user.lastname,
-            email: user.contactemail,
-            comments: user.contactcomments,
+            firstname: userContact.firstname,
+            lastname: userContact.lastname,
+            email: userContact.contactemail,
+            comments: userContact.contactcomments,
             selleremail: 'tisha@findaharp.com',
-            newsletter: user.newsletter
+            newsletter: userContact.newsletter
         }
         try {
             // send contactUs inq
@@ -133,7 +136,7 @@ function ContactUsForm(props) {
                         <label name='firstname'>First Name </label>
                         <input
                             id={uuid()}
-                            value={user.firstname}
+                            value={userContact.firstname}
                             onChange={handleChange}
                             name='firstname'
                         />
@@ -143,7 +146,7 @@ function ContactUsForm(props) {
                         <input
                             id={uuid()}id="outlined-helperText"
                             label="Last Name"
-                            value={user.lastname}
+                            value={userContact.lastname}
                             onChange={handleChange}
                             name ='lastname'
                         />
@@ -153,7 +156,7 @@ function ContactUsForm(props) {
                         <input
                             id={uuid()}
                             name='contactemail'
-                            value={user.contactemail}
+                            value={userContact.contactemail}
                             onChange={handleChange}
                             required
                         />
@@ -163,7 +166,7 @@ function ContactUsForm(props) {
                         <textarea
                             id={uuid()}
                             name='contactcomments'
-                            value={user.contactcomments}
+                            value={userContact.contactcomments}
                             onChange={handleChange}
                             rows='6'
                         />
@@ -175,7 +178,7 @@ function ContactUsForm(props) {
                             name='newsletter'
                             onChange={handleChange}
                             style={{marginLeft: '0'}}
-                            checked={user.newsletter}
+                            checked={userContact.newsletter}
                         />
                         <label style={{marginLeft: '5px'}} name='newsletter'>
                             Signup for Find a Harp newsletter?<br />

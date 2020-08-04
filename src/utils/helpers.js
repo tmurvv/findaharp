@@ -250,32 +250,35 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
 /**
  * Finds the maker of a certain Model from makers/models JSON-style object
  * @function addPlaceholderProducts
- * @param {array} filteredproductscontainer Product Array
+ * @param {array} filteredproductscontainer Filtered Product Array
  * @param {number} width inner window width
  * @returns {array} - Product array with placeholders
  */
 export function addPlaceholderProducts(filteredproductscontainer, width) {
+    // copy data and remove current placeholders
+    const filteredProductsCopy = filteredproductscontainer.filter(product => product.productTitle !== '');  
     //shortcut
-    if (width<=850) return filteredproductscontainer;
+    if (width<=850) return filteredProductsCopy;
     //determine number of placeholders needed
     let numNeeded;
     if (width > 1200) {
-        numNeeded = 5-(filteredproductscontainer.length%5);
+        numNeeded = 5-(filteredProductsCopy.length%5);
     }
     if (width <= 1200 && width > 950) {
-        numNeeded = 4-(filteredproductscontainer.length%4);
+        numNeeded = 4-(filteredProductsCopy.length%4);
     }
     if (width <= 950 && width > 700) {
-        numNeeded = 3-(filteredproductscontainer.length%3);
+        numNeeded = 3-(filteredProductsCopy.length%3);
     }
     //add placeholders
-    let newAd = {...PRODUCTAD_PLACEHOLDER}
+    let blankAd = {...PRODUCTAD_PLACEHOLDER}
     for (var x = 0; x<numNeeded; x++) {
-        const adId = {...newAd, id:x}
-        filteredproductscontainer.push(adId);
+        const adId = {...blankAd, id:x}
+        filteredProductsCopy.push(adId);
     }
+    console.log(filteredProductsCopy.length);
     //return array
-    return filteredproductscontainer;
+    return filteredProductsCopy;
 }
 /**
  * Finds the maker of a certain Model from makers/models JSON-style object

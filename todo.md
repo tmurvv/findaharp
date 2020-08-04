@@ -1,7 +1,6 @@
 ### high priority
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
-- paraguayan harp not showing up on lever-free
 
 ### internal
 - figure out option to dangerinnerhtml in store partners
@@ -15,9 +14,7 @@
 ### UI/UX
 - footer messed up on my phone
 - email verifictaion error not correct on remote deploy
-- Have have user context be object with firstname, lastname, then fill in form fields automatically in contact us 
 - When update user encounters problem on backend, spinner persists, needs to show error message
-- delete extra blank place holders
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/
@@ -39,7 +36,7 @@
 - All SEO checks in Google Guide
 
 ### PERFORMANCE
-- cache images
+- cache images with service worker
 - Lighthouse
 
 ### TESTING
@@ -52,6 +49,5 @@
 
 - list of all makers and models
 - add edit pencils to user profile and disable fields
-- on mobile menu highlight, put in fancy corners
 - New Listings Page
 - From Rachael, I feel that there should be a way for the user to flick back and forth between the form and the harp information, and without losing anything that they've already typed in if possible. Right now if one clicks on "Contact Seller" the only way to look at the full harp information again is to close the form and click on the harp again. 
