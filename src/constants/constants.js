@@ -1,5 +1,14 @@
 import uuid from 'uuid';
 
+export const RESULTS_INITIAL_STATE = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
+
 export const STOREPARTNER_PLACEHOLDER = {   
     id: "",
     sellerCountry: "",

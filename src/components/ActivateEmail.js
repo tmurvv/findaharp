@@ -17,8 +17,8 @@ function ActivateEmail(props) {
                         <button id='loadingLoginTryAgain' style={{display: 'none'}} type='button' className='submit-btn submit-btn-tryAgain'>Try Again</button>
                     </div>
                 </div>
+            </div>
             <LoginSignupCSS />
-        </div>
         </>
     )
 }

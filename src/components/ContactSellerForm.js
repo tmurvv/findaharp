@@ -4,25 +4,18 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
+import { RESULTS_INITIAL_STATE } from '../constants/constants';
 import ContactSellerFormCSS from '../styles/ContactSellerForm.css';
 import { UserContext } from '../contexts/UserContext';
+import Results from './Results';
 import { resultInfoReducer } from '../reducers/reducers';
 import {removeDashOE} from '../utils/helpers';
-
-const resultInfoInitialState = {
-    resultContainer: 'none',
-    resultText: 'none',
-    resultOkButton: 'none',
-    resultTryAgainButton: 'none',
-    tryAgainMarginLeft: '0',
-    resultImg: 'none'
-}
 
 function ContactSellerForm(props) {
     // shortcut
     if (!props.product || props.product===undefined) {props.handleCloseContact(); return null; }
     // declare variables
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const {product} = props;
     const { user } = useContext(UserContext);
     
@@ -63,15 +56,33 @@ function ContactSellerForm(props) {
             default :
         }
     } 
+    function clearForm() {
+        setUserContact({
+            firstname: '',
+            lastname: '',
+            contactemail: '',
+            contactmaker: '',
+            contactmodel: '',
+            contactcomments: '',
+            contactnewsletter: false,
+            change: false
+        });
+    }
     // reset result window
     function resetResults() {
-        document.querySelector('#loadingLoginTextContactSeller').innerText='';
+        document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
+    }
+    function loginGuest() { 
+        // called from the 'OK' button, no need to login guest here, just to reset results
+        resetResults();
+        clearForm();
+        props.handleCloseContact()
     }
     // handle form submit
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultText = document.querySelector('#loadingLoginTextContactSeller');
+        const resultText = document.querySelector('#loadingLoginText');
         // shortcut
         if (!userContact.contactemail) {
             resultText.innerText = "Email is required";
@@ -98,10 +109,12 @@ function ContactSellerForm(props) {
             await axios.post(`${process.env.backend}/api/v1/contactsellerform`, contact);   
             resultText.innerText=`Inquiry has been sent to seller.`;
             dispatchResultInfo({type: 'OK'});
+            clearForm();
         } catch(e) {
-            resultText.innerText=`Something went wrong. Please try again or contact the webmaster. ${e.message}`;
+            resultText.innerText=`Something went wrong. Please check your network connection.`;
             dispatchResultInfo({type: 'tryAgain'});
         }
+        resetResults();
     }
    return (
         <>
@@ -114,26 +127,11 @@ function ContactSellerForm(props) {
             >
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div>
-            <div id="loadingLoginContactSeller" style={{display: resultInfo.resultContainer}}>
-                <img id='loadingLoginImgContactSeller'style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingLoginTextContactSeller"></p>
-                <div className='flex-sb'>
-                    <button 
-                        id='loadingLoginOkContactSeller' 
-                        type='button'
-                        className='submit-btn'
-                        style={{display: resultInfo.resultOkButton}}
-                        onClick={props.handleCloseContact}
-                    >OK</button>
-                    <button 
-                        id='loadingLoginTryAgainContactSeller' 
-                        type='button' 
-                        className='submit-btn submit-btn-tryAgain' 
-                        style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}}
-                        onClick={resetResults}
-                    >Try Again</button>
-                </div>
-            </div>
+            <Results 
+                resultInfo={resultInfo} 
+                resetResults={resetResults}
+                loginGuest={loginGuest}
+            />
             <h1>Contact {removeDashOE(product.sellerName)}</h1>           
             <div className='heading'>
                 <p>Your name, email, and inquiry will be forwarded to {product.sellerName}.<br></br></p>

@@ -4,23 +4,15 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
+import Results from './Results';
+import StorePartnerInfo from '../components/StorePartnerInfo';
 import ContactUsFormCSS from '../styles/ContactUsForm.css';
 import { UserContext } from '../contexts/UserContext';
-import StorePartnerInfo from '../components/StorePartnerInfo';
+import { RESULTS_INITIAL_STATE } from '../constants/constants';
 import { resultInfoReducer } from '../reducers/reducers';
 
-const resultInfoInitialState = {
-    resultContainer: 'none',
-    resultText: 'none',
-    resultOkButton: 'none',
-    resultTryAgainButton: 'none',
-    tryAgainMarginLeft: '0',
-    resultImg: 'none'
-}
-
 function ContactUsForm(props) {
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
-    
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const { user } = useContext(UserContext);
     const [userContact, setUserContact] = useState({
         firstname: user.firstname,
@@ -61,16 +53,18 @@ function ContactUsForm(props) {
             change: false
         });
     }
+    function resetResults() {
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const resultText = document.querySelector('#loadingLoginText');
-        
+        const resultText = document.querySelector('#loadingLoginText');        
         if (!userContact.contactemail) {
             resultText.innerText = "Email is required";
             dispatchResultInfo({type: 'tryAgain'});
             return;
-        }
-        
+        }   
         const contact = {
             contactid: uuid(),
             date: new Date(Date.now()),
@@ -84,20 +78,28 @@ function ContactUsForm(props) {
         try {
             // send contactUs inq
             const res = await axios.post(`${process.env.backend}/api/v1/contactform`, contact);
-            resultText.innerText=`Contact form has been sent to findaharp.com.`;
+            resultText.innerText=`Contact Us form has been sent to findaharp.com.`;
             dispatchResultInfo({type: 'OK'});
+            clearForm();
         } catch(e) {
-            resultText.innerText=`Something went wrong. Please try again or send an email to harps@findaharp.com. ${e.message}`;
+            resultText.innerText=`Something went wrong. Please check your network connection.`;
             dispatchResultInfo({type: 'tryAgain'});
-        }  
-        clearForm();
+        }
+        resetResults()
     }
-    function resetResults() {
-        document.querySelector('#loadingLoginText').innerText='';
-        dispatchResultInfo({type: 'initial'});
+    function loginGuest() { 
+        if (userContact.change&&confirm('Clear the "Contact Us" form?')) {
+            resetResults();
+            clearForm();
+        }
     }
    return (
         <>  
+            <Results 
+                resultInfo={resultInfo} 
+                resetResults={resetResults}
+                loginGuest={loginGuest}
+            />
             {openStoreOwnerInq?<StorePartnerInfo open={openStoreOwnerInq} close={()=>setOpenStoreOwnerInq(false)}/>:''}
             <div className='contactFormContainer'> 
                 <div className={`contactArea`}>
@@ -112,7 +114,7 @@ function ContactUsForm(props) {
                     <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
                 </div>
                 <form className='contactForm'> 
-                    <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+                    {/* <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
                         <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                         <p id="loadingLoginText"></p>
                         <div className='flex-sb'>
@@ -131,7 +133,7 @@ function ContactUsForm(props) {
                                 style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}}
                             >Try Again</button>
                         </div>
-                    </div>    
+                    </div>     */}
                     <div className='inputGroup'>
                         <label name='firstname'>First Name </label>
                         <input
@@ -196,7 +198,7 @@ function ContactUsForm(props) {
                         <button
                             className={`detailButton detailButton-cancel`}
                             type='button'
-                            onClick={handleSubmit}
+                            onClick={loginGuest}
                         >Cancel
                         </button>
                     </div>         

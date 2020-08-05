@@ -8,21 +8,15 @@ import atob from 'atob';
 // internal
 import LoginSignupCSS from '../styles/LoginSignup.css';
 import PageTitle from '../components/PageTitle';
+import Results from './Results';
+import { RESULTS_INITIAL_STATE } from '../constants/constants';
 import { resultInfoReducer } from '../reducers/reducers';
 
-const resultInfoInitialState = {
-    resultContainer: 'none',
-    resultText: 'none',
-    resultOkButton: 'none',
-    resultTryAgainButton: 'none',
-    tryAgainMarginLeft: '0',
-    resultImg: 'none'
-}
 function ResetPassword(props) {
     // const { user, setUser} = useContext(UserContext);
     const Router = useRouter();
     const decodeEmail = atob(Router.query.reset);
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [userLogin, setUserLogin] = useState({
         newpassword: '',
         confirmpassword: '',
@@ -39,7 +33,7 @@ function ResetPassword(props) {
             default :
         }
     }
-    function resetLoginForm() { 
+    function clearForm() { 
         setUserLogin({
             oldpassword: '',
             newpassword: '',
@@ -47,9 +41,15 @@ function ResetPassword(props) {
             loginchange: false
         });
     }
+    // reset result window
     function resetResults() {
+        document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
-    }    
+    }
+    function loginGuest() {
+        resetResults();
+        Router.push('/LoginSignup');
+    }  
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         // start loading Image
@@ -73,6 +73,7 @@ function ResetPassword(props) {
             const res = await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${decodeEmail}`, {resetpassword: userLogin.newpassword});
             resultText.innerText=`Password change successful.`;
             dispatchResultInfo({type: 'OK'});
+            clearForm()
         } catch(e) {
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                 resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
@@ -82,17 +83,18 @@ function ResetPassword(props) {
                 dispatchResultInfo({type: 'okTryAgain'});
             }
         }
-        resetLoginForm();
-    }
-    function loginGuest() {
         resetResults();
-        Router.push('/LoginSignup');
     }
     return (
         <>
         <div className='login-signup-container'>
             <PageTitle maintitle='User Profile' subtitle='Reset Password' />
-            <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+            <Results 
+                resultInfo={resultInfo} 
+                resetResults={resetResults}
+                loginGuest={loginGuest}
+            />
+            {/* <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
                 <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
                 <div className='flex-sb'>
@@ -115,7 +117,7 @@ function ResetPassword(props) {
                         Try Again
                     </button>
                 </div>
-            </div>
+            </div> */}
             
             <div style={{transform: 'none'}} className="login-signup l-attop" id="login">
                 <div className="login-signup-title">

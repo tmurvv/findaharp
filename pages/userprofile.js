@@ -6,18 +6,12 @@ import uuid from 'react-uuid';
 
 // internal
 import PageTitle from '../src/components/PageTitle';
+import Results from '../src/components/Results';
 import UserProfileCSS from '../src/styles/UserProfile.css';
+import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import { UserContext } from '../src/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 
-const resultInfoInitialState = {
-    resultContainer: 'none',
-    resultText: 'none',
-    resultOkButton: 'none',
-    resultTryAgainButton: 'none',
-    tryAgainMarginLeft: '0',
-    resultImg: 'none'
-}
 const activeWindowInitialState = {
     activeWindow: 'changePassword',
     loginClasses: 'login-signup l-attop',
@@ -25,7 +19,7 @@ const activeWindowInitialState = {
 }
 function UserProfile(props) {
     const { user, setUser} = useContext(UserContext);
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
     const [userEdit, setUserEdit] = useState({
@@ -80,37 +74,56 @@ function UserProfile(props) {
             default :
         }
     }
-    function resetEditForm() {
-        setUserEdit({
-            firstname: '',
-            lastname: '',
-            editemail: '',
-            editpassword: '',
-            confirmpassword: '',
-            distanceUnit: 'miles',
-            editchange: false,
-            currency: 'USD'
-        });
-    }
-    function resetUpdatePasswordForm() { 
-        setUserUpdatePassword({
-            oldpassword: '',
-            newpassword: '',
-            confirmpassword: '',
-            updatePasswordchange: false
-        });
-    }
+    // reset result window
     function resetResults() {
-        document.querySelector('#loadingLoginText').innerText='';   
+        document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
+    }
+    function loginGuest() { 
+        // called from the 'OK' button, no need to login guest here, just to reset results
+        clearForm('Both');
+        resetResults();
+    }
+    function clearForm(form) {
+        const clearEdit = () => {
+            setUserEdit({
+                firstname: '',
+                lastname: '',
+                editemail: '',
+                editpassword: '',
+                confirmpassword: '',
+                distanceUnit: 'miles',
+                editchange: false,
+                currency: 'USD'
+            });
+        };
+        const clearPassword= () => {
+            setUserUpdatePassword({
+                oldpassword: '',
+                newpassword: '',
+                confirmpassword: '',
+                updatePasswordchange: false
+            });
+        };
+        switch (form) {
+            case 'Password': 
+                clearEdit();
+                break;
+            case 'Edit': 
+                clearPassword();
+                break;
+            default:
+                clearPassword();
+                clearEdit();
+        }  
     }
     function handleEditClick(evt) {
         dispatchActiveWindow({type: 'signup'});
-        resetUpdatePasswordForm();
+        clearForm('Edit');
     }
     function handleUpdatePasswordClick(evt) {
         dispatchActiveWindow({type: 'login'});
-        resetEditForm();
+        clearForm('Password');
     } 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
@@ -153,6 +166,7 @@ function UserProfile(props) {
                         }
                     );
                 }
+                clearForm('Both');
             } catch (e) {
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
@@ -186,6 +200,7 @@ function UserProfile(props) {
                 await axios.patch(`${process.env.backend}/api/v1/users/updatepassword/${user._id}`, {password: userUpdatePassword.newpassword, oldpassword: userUpdatePassword.oldpassword});
                 dispatchResultInfo({type: 'OK'});
                 resultText.innerText=`Password change successful.`;
+                clearForm('Both');
             } catch(e) {
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     dispatchResultInfo({type: 'okTryAgain'});
@@ -196,12 +211,6 @@ function UserProfile(props) {
                 }
             }
         }
-        resetEditForm();
-        resetUpdatePasswordForm();
-    }
-    function updatePasswordGuest() {
-        resetResults();
-        Router.push('/');
     }
     async function handleDelete(e) {
         const resultText = document.querySelector('#loadingLoginText');
@@ -235,44 +244,18 @@ function UserProfile(props) {
                 dispatchResultInfo({type: 'okTryAgain'})
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
             }   
-        }    
+        }
+        clearForm('Both');
     }
     return (
        <>
         <div className='updatePassword-edit-container'>
             <PageTitle maintitle='User Profile' subtitle='Change Password / Edit Profile' />
-            <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
-                <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingLoginText"></p>
-                <div className='flex-sb'>
-                    <button 
-                        id='loadingLoginOk'
-                        type='button' 
-                        className='submit-btn' 
-                        onClick={updatePasswordGuest}
-                        style={{display: resultInfo.resultOkButton}} 
-                    >
-                        OK
-                    </button>
-                    <button 
-                        id='loadingLoginTryAgain' 
-                        type='button' 
-                        className='submit-btn submit-btn-tryAgain' 
-                        onClick={()=>dispatchResultInfo({type:'initial'})}
-                        style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}} 
-                    >
-                        Try Again
-                    </button>
-                </div>
-            </div>           
-            {/* <div id="loadingUpdatePassword">
-                <img id='loadingUpdatePasswordImg' src='/img/spinner.gif' alt='loading spinner' />
-                <p id="loadingUpdatePasswordText"></p>
-                <div className='flex-sb'>
-                    <button id='loadingUpdatePasswordOk' type='button' className='submit-btn' onClick={updatePasswordGuest}>OK</button>
-                    <button id='loadingUpdatePasswordTryAgain' type='button' className='submit-btn submit-btn-tryAgain' onClick={resetResults}>Try Again</button>
-                </div>
-            </div> */}
+            <Results 
+                resultInfo={resultInfo} 
+                resetResults={resetResults}
+                loginGuest={loginGuest}
+            />
             <div className={activeWindow.signupClasses} id="signup" onClick={()=>handleEditClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="updatePassword-edit-title">

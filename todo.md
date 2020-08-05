@@ -1,10 +1,10 @@
 ### high priority
+- keep login from entering as first name
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
 - figure out option to dangerinnerhtml in store partners
-- result component needs to be componetized
 - separate store partner program info into a component
 - check do we need to pass all open/close functions to Product
 - add findaharp known finish listing to Mongo
@@ -15,6 +15,7 @@
 - footer messed up on my phone
 - email verifictaion error not correct on remote deploy
 - When update user encounters problem on backend, spinner persists, needs to show error message
+- if no user, userProfile needs to divert to login
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/

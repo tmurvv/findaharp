@@ -7,18 +7,12 @@ import uuid from 'react-uuid';
 // internal
 import LoginSignupCSS from '../src/styles/LoginSignup.css';
 import PageTitle from '../src/components/PageTitle';
+import Results from '../src/components/Results';
+import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import { UserContext } from '../src/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 
-// initialize reducer objects
-const resultInfoInitialState = {
-    resultContainer: 'none',
-    resultText: 'none',
-    resultOkButton: 'none',
-    resultTryAgainButton: 'none',
-    tryAgainMarginLeft: '0',
-    resultImg: 'none'
-}
+// initialize reducer object
 const activeWindowInitialState = {
     activeWindow: 'login',
     loginClasses: 'login-signup l-attop',
@@ -27,7 +21,7 @@ const activeWindowInitialState = {
 function LoginSignup(props) {
     // declare variables
     const { setUser } = useContext(UserContext);
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, resultInfoInitialState);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
     const [userSignup, setUserSignup] = useState({
@@ -274,6 +268,7 @@ function LoginSignup(props) {
                 dispatchResultInfo({type: 'okTryAgain'});
             }
         }
+        resetResults();
         // go to main window
         Router.push('/');
     }
@@ -281,7 +276,12 @@ function LoginSignup(props) {
        <>
         <div className='login-signup-container'>
             <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />
-            <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
+            <Results 
+                resultInfo={resultInfo} 
+                loginGuest={loginGuest}
+                resetResults={resetResults} 
+            />
+            {/* <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
                 <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
                 <div className='flex-sb'>
@@ -304,7 +304,7 @@ function LoginSignup(props) {
                         Try Again
                     </button>
                 </div>
-            </div>
+            </div> */}
             <div className={activeWindow.signupClasses} id="signup" onClick={()=>handleSignupClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="login-signup-title">

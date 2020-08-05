@@ -144,34 +144,34 @@ function ContactSellerFormCSS() {
                 border-right: none;
                 border-bottom: none none 1px solid #bbbbbb;
             }
-            #loadingLoginContactSeller {
-                display: none;
-                color: #6A75AA;
-                border: 2px solid #6A75AA;
-                background-color: #fff;
-                padding: 30px;
-                border-radius: 3px;
-                width: 294px;
-                margin:auto;
-                position: absolute;
-                top: 25%;
-                right: 50%;
-                transform: translate(50%, 50%);
-                z-index: 5000;
-            }
-            #loadingLoginImgContactSeller {
-                display: block;
-                height: 50px;
-                margin: auto;
-            }
-            #loadingLoginOkContactSeller,
-            #loadingLoginTryAgainContactSeller {
-                display: none;
-                padding: 7px;
-            }
-            #loadingLoginTextContactSeller {
-                text-align: center;
-            }
+            // #loadingLoginContactSeller {
+            //     display: none;
+            //     color: #6A75AA;
+            //     border: 2px solid #6A75AA;
+            //     background-color: #fff;
+            //     padding: 30px;
+            //     border-radius: 3px;
+            //     width: 294px;
+            //     margin:auto;
+            //     position: absolute;
+            //     top: 25%;
+            //     right: 50%;
+            //     transform: translate(50%, 50%);
+            //     z-index: 5000;
+            // }
+            // #loadingLoginImgContactSeller {
+            //     display: block;
+            //     height: 50px;
+            //     margin: auto;
+            // }
+            // #loadingLoginOkContactSeller,
+            // #loadingLoginTryAgainContactSeller {
+            //     display: none;
+            //     padding: 7px;
+            // }
+            // #loadingLoginTextContactSeller {
+            //     text-align: center;
+            // }
             .submit-btn {
                 width: 100%;
                 // margin-top: 28px;

@@ -276,7 +276,6 @@ export function addPlaceholderProducts(filteredproductscontainer, width) {
         const adId = {...blankAd, id:x}
         filteredProductsCopy.push(adId);
     }
-    console.log(filteredProductsCopy.length);
     //return array
     return filteredProductsCopy;
 }
