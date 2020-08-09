@@ -464,8 +464,6 @@ function ProductSearch(props) {
                     <p>Clear</p> 
                 </div>
             </div>
-            <h3 className={`searchTitle`} style={{width: '100%'}}>Findaharp.com is brand new and in the process of adding harps. Check back soon!!</h3>
-            <ProductSearchCss />
             <ProductContainer 
                 data-test="component-ProductContainer" 
                 filteredproductscontainer={filteredProducts} 
@@ -473,7 +471,8 @@ function ProductSearch(props) {
                 allstate={allState}
                 clientlat={props.clientlat}
                 clientlong={props.clientlong}
-            />              
+            />    
+            <ProductSearchCss />             
         </div>
         </>
     );

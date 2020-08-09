@@ -20,7 +20,7 @@ function ContactSellerForm(props) {
     const { user } = useContext(UserContext);
     
     const [userContact, setUserContact] = useState({
-        firstname: user.firstname,
+        firstname: user.firstname!=="login"?user.firstname:'',
         lastname: user.lastname,
         contactemail: user.email,
         contactmaker: product.productMaker||'',
@@ -109,12 +109,10 @@ function ContactSellerForm(props) {
             await axios.post(`${process.env.backend}/api/v1/contactsellerform`, contact);   
             resultText.innerText=`Inquiry has been sent to seller.`;
             dispatchResultInfo({type: 'OK'});
-            clearForm();
         } catch(e) {
             resultText.innerText=`Something went wrong. Please check your network connection.`;
             dispatchResultInfo({type: 'tryAgain'});
         }
-        resetResults();
     }
    return (
         <>

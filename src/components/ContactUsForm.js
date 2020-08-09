@@ -15,7 +15,7 @@ function ContactUsForm(props) {
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const { user } = useContext(UserContext);
     const [userContact, setUserContact] = useState({
-        firstname: user.firstname,
+        firstname: user.firstname!=="login"?user.firstname:'',
         lastname: user.lastname,
         contactemail: user.email,
         contactcomments: '',
@@ -80,18 +80,14 @@ function ContactUsForm(props) {
             const res = await axios.post(`${process.env.backend}/api/v1/contactform`, contact);
             resultText.innerText=`Contact Us form has been sent to findaharp.com.`;
             dispatchResultInfo({type: 'OK'});
-            clearForm();
         } catch(e) {
             resultText.innerText=`Something went wrong. Please check your network connection.`;
             dispatchResultInfo({type: 'tryAgain'});
         }
-        resetResults()
     }
     function loginGuest() { 
-        if (userContact.change&&confirm('Clear the "Contact Us" form?')) {
-            resetResults();
-            clearForm();
-        }
+        resetResults();
+        clearForm();
     }
    return (
         <>  
@@ -114,26 +110,6 @@ function ContactUsForm(props) {
                     <p>Our harp advertisements are automatically updated from our store partner websites. Please let us know if you see something that is confusing or incorrect.</p>
                 </div>
                 <form className='contactForm'> 
-                    {/* <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
-                        <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
-                        <p id="loadingLoginText"></p>
-                        <div className='flex-sb'>
-                            <button 
-                                id='loadingLoginOk' 
-                                type='button' 
-                                className='submit-btn' 
-                                onClick={resetResults}
-                                style={{display: resultInfo.resultOkButton}}
-                            >OK</button>
-                            <button 
-                                id='loadingLoginTryAgain' 
-                                type='button' 
-                                className='submit-btn submit-btn-tryAgain' 
-                                onClick={resetResults}
-                                style={{display: resultInfo.resultTryAgainButton, marginLeft: resultInfo.tryAgainMarginLeft}}
-                            >Try Again</button>
-                        </div>
-                    </div>     */}
                     <div className='inputGroup'>
                         <label name='firstname'>First Name </label>
                         <input
@@ -198,7 +174,7 @@ function ContactUsForm(props) {
                         <button
                             className={`detailButton detailButton-cancel`}
                             type='button'
-                            onClick={loginGuest}
+                            onClick={()=>userContact.change&&confirm('Clear the "Contact Us" form?')?loginGuest():""}
                         >Cancel
                         </button>
                     </div>         

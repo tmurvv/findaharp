@@ -1,7 +1,9 @@
 ### high priority
-- keep login from entering as first name
+- first shot at less than distance not work
+- square photos not showing correctly
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
+- check if delete account is done after update account without leaving user profile
 
 ### internal
 - figure out option to dangerinnerhtml in store partners

@@ -91,7 +91,7 @@ function PartnerProspects() {
 									<td>harpdavidk@kolacnymusic.com</td>
 									<td>303-722-6081</td>
 									<td>May 29th, 2020</td>
-									<td><textarea value='Tried to phone back on June 12, not there'/></td>
+									<td><textarea value='July 24th, sent lengthy email. Tried to phone back on June 12, not there'/></td>
 								</tr>
 								<tr>
 									<td>Virginia Harp Center<br></br>Atlanta Harp Center</td>
@@ -123,7 +123,7 @@ function PartnerProspects() {
 								<td>Contact form only</td>
 								<td>253-770-0550</td>
 								<td>June 5, 2020</td>
-								<td><textarea value='Puyallup WA phoned July 9, 2020 and then sent email with the info.'/></td>
+								<td><textarea value='Aug 6th, sent email with opening month numbers. July 17th sent followup email. Puyallup WA phoned July 9, 2020 and then sent email with the info.'/></td>
 								</tr>
 								<tr>
 								<td>Harp in LA</td>
@@ -131,7 +131,7 @@ function PartnerProspects() {
 								<td>infoharpinla@yahoo.com</td>
 								<td>818-495-4652</td>
 								<td>June 4, 2020</td>
-								<td><textarea value="Sent another email on July 7, 2020. sent follow up email on June 29th to 'heidiharpinla-info@yahoo.com'"/></td>
+								<td><textarea value="Sent another email on July 9, 2020. sent follow up email on June 29th to 'heidiharpinla-info@yahoo.com'"/></td>
 								</tr>
 								<tr>
 								<td>Harp Studio, The</td>
@@ -243,7 +243,7 @@ function PartnerProspects() {
 									<td></td>
 									<td></td>
 									<td>August 3, 2020</td>
-									<td><textarea value='sent email'/></td>
+									<td><textarea value='sent email August 5th, said no thank you'/></td>
 								</tr>
 								<tr>
 									<td></td>

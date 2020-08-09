@@ -204,7 +204,7 @@ function ProductSearchCss() {
             .selected {
                 width: fit-content;
                 height: fit-content;
-                margin: 20px auto -15px;
+                margin: 20px auto;
                 display: flex;
                 justify-content: center;
             }
