@@ -1,5 +1,5 @@
 // packages
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useLayoutEffect } from 'react';
 import LazyLoad from 'react-lazyload';
 // styles
 import ProductCss from '../styles/Product.css';
@@ -11,6 +11,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     const [openProductModal, setOpenProductModal] = useState(false);
     const [openContactModal, setOpenContactModal] = useState(false);
     const [useNaturalHeight, setUseNaturalHeight] = useState(0);
+    let poll;
     
     // if (productdetail.productImageUrl.indexOf('genericHarp')>-1) productdetail.productImageUrl="";
     function handleOpenProductModal() {
@@ -38,19 +39,18 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     }
     
     useEffect(() => {
+        let mounted = true;
         // if image is squarish, adjusts the height so image not stretched out
-        var img = document.createElement('img');
+        const img = document.createElement('img');
         img.src = productdetail.productImageUrl;
 
-        var poll = setInterval(function () {
-            if (img.naturalWidth) {
-                if (img.naturalWidth/img.naturalHeight > .80) {
-                    setUseNaturalHeight(img.naturalHeight);
-                    productdetail.naturalHeight = img.naturalHeight;
-                }
+        poll = setInterval(function () {
+            if (img.naturalWidth&&mounted) {
+                clearInterval(poll);
+                if (img.naturalWidth/img.naturalHeight > .80) {setUseNaturalHeight(img.naturalHeight);productdetail.naturalHeight = img.naturalHeight;}
             }
-        }, 10);
-        clearInterval(poll) 
+        }, 30);
+        return () => mounted = false;
     },[]);
     return (
         <div 

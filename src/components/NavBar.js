@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
 
 //internal
@@ -8,15 +8,17 @@ import { UserContext } from '../contexts/UserContext';
 export default function NavBar(props) {
     // const  {value, setValue}= useContext(UserContext);
     const { user, setUser } = useContext(UserContext);
-    if (!user.firstname) setUser({
-        firstname: 'login',
-        lastname: '',
-        email: '',
-        newsletter: false,
-        distanceunit: 'miles',
-        currency: 'USD',
-        _id: '',
-    });
+    useEffect(()=> {
+        if (!user.firstname) setUser({
+            firstname: 'login',
+            lastname: '',
+            email: '',
+            newsletter: false,
+            distanceunit: 'miles',
+            currency: 'USD',
+            _id: '',
+        });
+    },[]);
     
     return(
         <>
