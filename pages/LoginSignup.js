@@ -149,7 +149,8 @@ function LoginSignup(props) {
                         distanceunit: addeduser.distanceunit,
                         _id: addeduser._id,
                         newsletter: addeduser.newsletter,
-                        currency: addeduser.currency
+                        currency: addeduser.currency,
+                        role: 'not set'
                     });
                 }
             // Error on signup
@@ -190,7 +191,8 @@ function LoginSignup(props) {
                     distanceunit: returnedUser.distanceunit, 
                     _id: returnedUser._id,
                     newsletter: returnedUser.newsletter,
-                    currency: returnedUser.currency
+                    currency: returnedUser.currency,
+                    role: returnedUser.role
                 });
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;

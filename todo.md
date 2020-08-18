@@ -18,6 +18,8 @@
 - email verifictaion error not correct on remote deploy
 - When update user encounters problem on backend, spinner persists, needs to show error message
 - if no user, userProfile needs to divert to login
+- make upload ad look like login
+- logout button
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/

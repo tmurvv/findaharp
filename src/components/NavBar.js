@@ -6,7 +6,6 @@ import NavBarCss from '../styles/NavBar.css';
 import { UserContext } from '../contexts/UserContext';
 
 export default function NavBar(props) {
-    // const  {value, setValue}= useContext(UserContext);
     const { user, setUser } = useContext(UserContext);
     useEffect(()=> {
         if (!user.firstname) setUser({
@@ -17,17 +16,20 @@ export default function NavBar(props) {
             distanceunit: 'miles',
             currency: 'USD',
             _id: '',
+            role: 'not set'
         });
     },[]);
     
     return(
         <>
         <div className='navBarOuter'>
+            {/* show mobile menu icon */}
             {props.mobile&&(!props.open||props.open===undefined)?
                 <div className='hamburgerMenu' onClick={() => props.handleNavOpen()}>
                     <img src='/img/hamburger.png' alt="open mobile menu icon"/>
                 </div>:''
             }
+            {/* show menu */}
             {!props.mobile || props.mobile&&props.open?
                 <div className='navLinks'>
                     {props.mobile&&props.open?
@@ -48,7 +50,6 @@ export default function NavBar(props) {
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
                     <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
-                        {/* <a id='userName'>{user.name==='guest'?'Login':user.name}</a> */}
                         <a id='userName' onClick={props.handleNavOpen}>{user.firstname}</a>
                     </Link>
                     <Link href='/ActivateEmail' as='/activateemail'>

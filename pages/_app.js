@@ -18,7 +18,16 @@ import ResetPassword from '../src/components/ResetPassword';
 
 function MyApp(props) {
     const { Component, pageProps } = props;
-    const [user, setUser] = useState(['Login', '', '', 'miles']); // firstname, lastname, email, distanceunit
+    const [user, setUser] = useState({
+        firstname: '', 
+        lastname: '', 
+        email: '', 
+        distanceunit: 'mi', 
+        _id: '',
+        newsletter: '',
+        currency: 'USD',
+        role: 'not set'
+    }); // firstname, lastname, email, distanceunit
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     

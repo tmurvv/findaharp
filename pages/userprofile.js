@@ -1,6 +1,6 @@
 // packages
 import React, { useState, useContext, useReducer } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
@@ -19,6 +19,7 @@ const activeWindowInitialState = {
 }
 function UserProfile(props) {
     const { user, setUser} = useContext(UserContext);
+    const Router = useRouter();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
@@ -162,7 +163,8 @@ function UserProfile(props) {
                             newsletter: userCopy.newsletter,
                             distanceunit: userCopy.distanceunit,
                             _id: userCopy._id,
-                            currency: userCopy.currency
+                            currency: userCopy.currency,
+                            role: userCopy.role
                         }
                     );
                 }
@@ -235,6 +237,7 @@ function UserProfile(props) {
                 distanceunit: 'miles',
                 currency: 'USD',
                 _id: '',
+                role: 'not set'
             });
         } catch(e) {
             if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
@@ -256,6 +259,12 @@ function UserProfile(props) {
                 resetResults={resetResults}
                 loginGuest={loginGuest}
             />
+            {user&&user.role&&user.role==='seller'
+                ?<div style={{width: 'fit-content', margin: '50px auto', boxShadow: '3px 3px 5px 0px grey'}}>
+                    <button className='submit-btn updatePassword-edit-title' onClick={()=>Router.push('/uploadlisting')}>Upload harp listing</button>
+                </div>
+                :''
+            }
             <div className={activeWindow.signupClasses} id="signup" onClick={()=>handleEditClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="updatePassword-edit-title">
