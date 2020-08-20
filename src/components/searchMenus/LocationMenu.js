@@ -8,10 +8,19 @@ export default function LocationMenu(props) {
     const { user } = useContext(UserContext);
     const distanceUnit = user.distanceunit;
     const handleClose = async (evt) => {
-
         if (evt.target.value === 'All Locations') return;
         props.handleLocationChange(evt.target.getAttribute('name'));
     };
+    const locationEnabled = (e) => {
+        if(activateDriving) {
+            if (!navigator.geolocation) {
+                alert('Location is not enabled on this device or computer. Please check your location settings.'); 
+                return;
+            }
+        }
+        setActivateDriving(!activateDriving); 
+        handleClose(e);
+    }
     return (
         <div className='relative'>
             <button 
@@ -35,7 +44,7 @@ export default function LocationMenu(props) {
                     name='All Locations'
                 >All Locations</li>
                 <li 
-                    onClick={(e) => {if(activateDriving===false) alert('Please be aware that location must be turned on for driving distance to work.'); setActivateDriving(!activateDriving); handleClose(e)}}
+                    onClick={(e)=>locationEnabled(e)}
                     // key={uuid()}
                     name='ltActivate'
                     style={{color: '#6A75AA', textDecoration: 'underline'}}
@@ -90,11 +99,10 @@ export default function LocationMenu(props) {
                     name='Pacific'
                 >US-Pacific</li>
                 <li 
+                    onClick={handleClose}  
                     hidden={activateDriving}
-                    style={{color: 'rgb(182, 169, 13)'}}
-                    // key={uuid()} 
+                   // key={uuid()} 
                     name='Canada-East'
-                    aria-disabled={true}
                 >Canada-East</li>              
                 <li 
                     onClick={handleClose}

@@ -50,6 +50,14 @@ function ProductModal(props) {
         })
         return endIndex;
     }
+    const locationEnabled = () => {
+        if (navigator.geolocation) {
+            return getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong);
+        } else {
+            alert('Location is not enabled on this device or computer. Please check location settings.');
+            return;
+        }
+    }
     useEffect(() => {
         document.querySelector('.longDesc').innerHTML = `<span>Description</span> ${productLongDesc}`;
     }, []);
@@ -81,7 +89,7 @@ function ProductModal(props) {
                     ?<button 
                         type='button'
                         className='blueFontButton'
-                        onClick={()=>getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong)}
+                        onClick={()=>locationEnabled()}
                         style={{backgroundColor: 'white', outline: 'none', color:'#6A75AA', textDecoration:'none', border: 'none', fontSize: '14px'}}
                     >
                         Click here

@@ -24,14 +24,14 @@ const Index = (props) => {
             });
         }
        }, []);
-    useEffect(() => {
-        if (navigator&&navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
-                setClientLat(position.coords.latitude.toFixed(4));
-                setClientLong(position.coords.longitude.toFixed(4));
-            });
-        }
-       }, []);
+    // useEffect(() => {
+    //     if (navigator&&navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
+    //             setClientLat(position.coords.latitude.toFixed(4));
+    //             setClientLong(position.coords.longitude.toFixed(4));
+    //         });
+    //     }
+    //    }, []);
     return (
         <>
         <Head>

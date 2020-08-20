@@ -63,14 +63,15 @@ function AboutPartnerStoresCSS() {
             .productSmallDisplay {
                 display: flex;
                 flex-direction: column;
-                margin-bottom: 50px;
+                margin: 5px 3px 50px 3px;
                 text-align: center;
                 font-size: 16px;
-                height: 335px;
+                height: 450px;
                 min-width: 360px;
                 max-width: 100%;
                 width: 19%;
                 border: 2px solid #f9bf1e;
+                border-radius: 3px;
                 padding: 20px 20px 3px;
                 background-color: #ffffff;
             }
@@ -100,11 +101,12 @@ function AboutPartnerStoresCSS() {
                 cursor: pointer;
             }
             .productSmallDisplay-img {
-                flex:4;
+                flex:6;
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                margin-bottom: 17px;
             }
             .productSmallDisplay-img img{
                 height: 267px;
@@ -115,11 +117,12 @@ function AboutPartnerStoresCSS() {
                 overflow: hidden;
             }
             .productSmallDisplay-LongDesc {
-                flex: 3;
+                flex: 8;
                 text-align: left;
-                height: 98px;
                 overflow-y: scroll;
                 margin-top: 29px;
+                max-height: 70%;
+                margin-bottom: 20px
             }
             .productSmallDisplay-LongDesc span {
                 font-family: 'Metropolis Extra Bold';
@@ -182,12 +185,14 @@ function AboutPartnerStoresCSS() {
                 font-size: 20px;
                 border-radius: 3px;
             }
-            .detailImg {}
+            .detailImg {
+            }
             .detailImg img {
                 height: 100%;
                 max-height: 130px;
                 margin: 0 auto;
                 padding-top: 10px;
+                border-radius: 5px;
             }
             @media only screen and (max-width: 750px) {
                 .detailImg img {

@@ -7,7 +7,6 @@ import { STORE_PARTNERS } from '../src/constants/storePartners';
 import PageTitle from '../src/components/PageTitle';
 import AboutPartnerStore from '../src/components/AboutPartnerStore';
 import StorePartnersCSS from '../src/styles/StorePartners.css';
-import ProductModalCSS from '../src/styles/ProductModal.css';
 import { 
     getWindowSize,
     shuffleStorePartners,
@@ -35,7 +34,7 @@ export default function StorePartners() {
                 maintitle='Our Store Partners' 
                 subtitle='Find a Harp is proud to partner with the following harp sellers' 
             />
-            <h3 className={`subTitle`} style={{width: 'fit-content', marginBottom: '0px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA'}}>Click here</button>for information on becoming a store partner.</h3>
+            <h3 className={`subTitle`} style={{width: 'fit-content', marginTop: '-45px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA'}}>Click here</button>for more information.</h3>
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container">
                     {addPlaceHolders.map(partner=> 

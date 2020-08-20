@@ -76,6 +76,11 @@ export default function FinishMenu(props) {
                     // key={uuid()} 
                     name='Blue'
                 >Blue</li>              
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='Sapele'
+                >Sapele</li>              
             </ul>
         </div>
     );

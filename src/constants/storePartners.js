@@ -129,5 +129,28 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'http://vavraharp.com',
         sellerWebsiteText: 'vavraharp.com',
         sellerEmail: 'vavra@vavraharp.com'
+    },
+    {
+        id: uuid(),
+        sellerCountry: "Canada",
+        sellerRegion: "Ottawa, ON, Canada",
+        productTitle: "Vixen Harps",
+        productPrice: "",
+        productLongDesc: `<p>At <strong>Vixen Harps</strong> we know that quantity and quality are not synonymous. Our expertise stems from being the first harp specialty retailer of our kind in Canada since 1994.</p>
+        <p>We are a business that has chosen to focus foremost on quality of service, customer satisfaction and sustaining after-care.&nbsp; We believe these goals can only be met through personalized attention to each client and his/her needs.&nbsp; As a family-run business we understand the importance of knowing our clients, not just as potential customers, but as people first. At Vixen Harps you have a name, not an order number.</p>
+        <p>This unique business model has enabled Vixen Harps to remain loyal to our early ideals in offering personalized service, expert harp-fitting, sustained after-service care, and great savings for all our clients.</p>
+        <p>Our dedication to honest business coupled with a strong backing of integrity has provided Vixen Harps with the truest measure of success we could have hoped for; a solid and respected name in the Harp community. Through the years our clients have ranged from internationally acclaimed artists to budding beginners seeking their own special place in the world of music. We consider it a privilege and an honour to continue serving our musical community on all levels.</p>
+        <p>We invite you to <a href="http://www.vixenharps.com/contact.html" target="_self">contact us</a> for more information about our services and products.</p>
+        <p>Again, welcome to Vixen Harps. We hope to see you soon!</p>
+        <p>~ <a href="http://www.vixenharps.com/kathy.html" target="_self">Kathy Elarte</a>,<br />
+        Owner of Vixen Harps</p>
+        <p>To learn more about the inspiration behind Vixen Harps, <a href="http://www.vixenharps.com/kathy.html" target="_self">click here</a>.</p>
+        `,
+        productMaker: "Vixen Harps",
+        productImageUrl: "/img/storePartners/vixen_logo.gif",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'http://vixenharps.com',
+        sellerWebsiteText: 'vixenharps.com',
+        sellerEmail: 'info@vixenharps.com'
     }
 ];
