@@ -50,6 +50,13 @@ export default function LocationMenu(props) {
                     style={{color: '#6A75AA', textDecoration: 'underline'}}
                 >{activateDriving?'by Region':'by Driving Distance'}</li>      
                 <li 
+                    onClick={()=>alert('Km/Miles preference is located in your profile. Please login or signup to change your distance unit preference.')}
+                    hidden={!activateDriving}
+                    style={{color: '#6A75AA', textDecoration: 'underline'}}
+                    // key={uuid()}
+                    name='Preference'
+                >I prefer {distanceUnit==='miles'?'kms':'miles'}</li>      
+                <li 
                     onClick={handleClose}
                     hidden={!activateDriving} 
                     // key={uuid()}

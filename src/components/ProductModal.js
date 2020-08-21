@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import parseNum from 'parse-num';
 // internal
 import ProductModalCSS from '../styles/ProductModal.css';
 import { removeDashOE, getGeoDistance } from '../utils/helpers';
 import { UserContext } from '../contexts/UserContext';
+import { CurrencyContext } from '../contexts/CurrencyContext';
 
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
@@ -16,6 +18,7 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
 
 function ProductModal(props) {
     const { user } = useContext(UserContext);
+    const { currencyMultiplier, setCurrencyMultiplier } = useContext(CurrencyContext);
     const [longDesc, setLongDesc] = useState(true);
     const [miles] = useState(user.distanceunit==='miles');
     const [geoDistance, setGeoDistance] = useState(0); //miles
@@ -50,17 +53,25 @@ function ProductModal(props) {
         })
         return endIndex;
     }
-    const locationEnabled = () => {
-        if (navigator.geolocation) {
-            return getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong);
-        } else {
-            alert('Location is not enabled on this device or computer. Please check location settings.');
-            return;
-        }
+    const convertPrice = (price) => {
+        if (user.currency.toUpperCase()==="CAD") price = `$${(parseNum(price)*currencyMultiplier).toFixed(2)}`;
+        return price;
     }
     useEffect(() => {
         document.querySelector('.longDesc').innerHTML = `<span>Description</span> ${productLongDesc}`;
     }, []);
+    useEffect(() => {
+        
+    }, []);
+    // get currency conversions, if necessary
+    useEffect(() => {
+        async function getMultiplier() {
+            const multiplier = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_CAD&compact=ultra&apiKey=33d9a2db5c4410feb3f2');
+            setCurrencyMultiplier(multiplier.data.USD_CAD);
+        }
+        
+        if (user.currency.toUpperCase()==="CAD"&&!currencyMultiplier) getMultiplier();
+      }, []);
     return (
         <>
         <div className='detailContainer'>
@@ -76,8 +87,22 @@ function ProductModal(props) {
                 <span>Model</span> {productModel}<br></br>
                 <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
                 <span>Price</span> {productPrice
-                    ?`${productPrice.substring(0, checkprice(productPrice))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':'usd'}`
-                    :'contact seller'}<br />
+                    ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
+                    :'contact seller'} <button
+                    onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
+                    style={{
+                        color: '#6A75AA', 
+                        textDecoration: 'underline', 
+                        backgroundColor: 'transparent', 
+                        border: 'none', 
+                        outline: 'none', 
+                        fontSize: '12px', 
+                        cursor: 'pointer'
+                    }}
+                    // key={uuid()}
+                    name='Preference'
+                >I prefer {user.currency.toUpperCase()==='USD'?'Canadian Dollars':'US Dollars'}</button>        <br />
+                
                 <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
                 <br></br>
                 <div className='longDesc'></div>
@@ -89,7 +114,11 @@ function ProductModal(props) {
                     ?<button 
                         type='button'
                         className='blueFontButton'
-                        onClick={()=>locationEnabled()}
+                        onClick={()=>
+                            navigator.geolocation
+                            ?getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong)
+                            :alert('Location is not enabled on this device or computer. Please check location settings.')
+                        }
                         style={{backgroundColor: 'white', outline: 'none', color:'#6A75AA', textDecoration:'none', border: 'none', fontSize: '14px'}}
                     >
                         Click here

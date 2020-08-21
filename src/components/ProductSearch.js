@@ -17,6 +17,7 @@ import FinishMenu from './searchMenus/FinishMenu';
 import PriceMenu from './searchMenus/PriceMenu';
 import LocationMenu from './searchMenus/LocationMenu';
 import { UserContext } from '../contexts/UserContext';
+import { CurrencyContext } from '../contexts/CurrencyContext';
 import {
     getFilteredProducts,
     getSearchInfo,
@@ -41,6 +42,7 @@ const initialState = {
 }
 function ProductSearch(props) {
     const { user } = useContext(UserContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const ref = useRef();
 
     const [menus, setMenus] = useState(initialState);
@@ -254,7 +256,7 @@ function ProductSearch(props) {
     useEffect(() => {
         triggerLazy();
     },[]);
-    const filteredProducts = getFilteredProducts(props.products, allState, props.clientlat, props.clientlong, user.distanceunit);
+    const filteredProducts = getFilteredProducts(props.products, allState, user, currencyMultiplier);
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>

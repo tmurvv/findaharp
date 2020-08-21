@@ -95,11 +95,11 @@ export function findSizeWords(strings, type) {
  * @requires parseNum turns price string into number with typeof number
  * @returns {String} - Price Range from Price Menu
  */
-export function findPriceRange(price) {
+export function findPriceRange(price, rate) {
     // HACK 'Contact 4harpmusic.com' returns 4
     if (price&&price.toUpperCase().indexOf('CONTACT')>-1) price = 'contact seller';
-    // convert price string to number
-    price = parseNum(price);
+    // convert price string to number and convert currency if necessary
+    price = parseNum(price)*rate;
     // determine price range
     if (price<2000) return 'Less than $2,000';
     if (price>=2000&&price<5000) return '$2,000-4,999';
@@ -184,7 +184,7 @@ export function getModelList(productMakesModels, size) {
  * @param {array} allState list of filters selected by user
  * @returns {String} - Product List with filetersApplied
  */
-export function getFilteredProducts(allProducts, allState, clientLat, clientLong, distanceUnit) {
+export function getFilteredProducts(allProducts, allState, user, rate) {
     let filteredProducts = [...allProducts];
     // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
@@ -232,10 +232,9 @@ export function getFilteredProducts(allProducts, allState, clientLat, clientLong
         filteredProducts = filteredProducts.filter(
             product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()
         );
-    if (allState.size&&allState.price.toUpperCase() !== "ALL PRICES") 
-        filteredProducts = filteredProducts.filter(
-            product => product.productPrice&&findPriceRange(product.productPrice)===allState.price
-    );
+    if (allState.size&&allState.price.toUpperCase() !== "ALL PRICES") {
+        filteredProducts = filteredProducts.filter(product => product.productPrice&&findPriceRange(product.productPrice, user.currency==="USD"?1:rate)===allState.price);
+    }
     // if size all pedal or all lever ready for return
     if (allState.size&&(allState.size.toUpperCase() === "ALL PEDAL"||allState.size.toUpperCase() === "ALL LEVER"||allState.size.toUpperCase() === "LEVER-FREE"))
         return filteredProducts;

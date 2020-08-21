@@ -1,6 +1,6 @@
 import React from "react";
 
-function FooterCss() {
+function ResultsCss() {
     return (
         <style jsx="true">{`
         #loadingLogin,
@@ -36,9 +36,21 @@ function FooterCss() {
         #loadingVerifyLoginText {
             text-align: center;
         }
+        .submit-btn {
+            width: 100%;
+            border-radius: 3px;
+            background-color: #ffe58a;
+            color: #000;
+            border: none;
+        }
+        .submit-btn-tryAgain {
+            background-color: #333333;
+            margin-left: 30px;
+            color: white;
+        } 
         `}
         </style>
     )
 }
 
-export default FooterCss;
+export default ResultsCss;

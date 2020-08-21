@@ -1,9 +1,7 @@
 ### high priority
 - first shot at less than distance not work
-- square photos not showing correctly
 - delete account not working on Samsung
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
-- check if delete account is done after update account without leaving user profile
 
 ### internal
 - figure out option to dangerinnerhtml in store partners
@@ -20,6 +18,7 @@
 - if no user, userProfile needs to divert to login
 - make upload ad look like login
 - logout button
+- make it so we don't have to log in again to upload a second harp listing (cookies?)
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/

@@ -9,12 +9,14 @@ import 'react-phone-input-2/lib/style.css'
 
 // internal
 import {UserContext} from "../src/contexts/UserContext";
+import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
+import UploadListingResult from '../src/components/UploadListingResult';
 
 function MyApp(props) {
     const { Component, pageProps } = props;
@@ -28,6 +30,7 @@ function MyApp(props) {
         currency: 'USD',
         role: 'not set'
     }); // firstname, lastname, email, distanceunit
+    const [currencyMultiplier, setCurrencyMultiplier] = useState();
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -62,17 +65,20 @@ function MyApp(props) {
             <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
-            {props.router.query.reset
-                ?<ResetPassword />
-                :props.router.query.activateemail
-                    ?<ActivateEmail found={true}/>
-                    :
-                        <>
-                            <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                            <Component {...pageProps} />
-                            <Footer />
-                        </>
-            }
+                <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                    {props.router.query.reset
+                        ?<ResetPassword />
+                        :props.router.query.activateemail
+                            ?<ActivateEmail found={true}/>
+                            :props.router.query.uploadlisting
+                                ?<UploadListingResult success={true}/>
+                                :<>
+                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                    <Component {...pageProps} />
+                                    <Footer />
+                                </>
+                    }
+                </CurrencyContext.Provider>
             </UserContext.Provider>
             <AppCss />
         </>
