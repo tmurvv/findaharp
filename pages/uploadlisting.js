@@ -3,12 +3,11 @@ import React, { useContext } from 'react';
 import { UserContext } from '../src/contexts/UserContext';
 function uploadlisting() {
     const { user } = useContext(UserContext);
-    console.log(user)
     return (
         <>
             <h1>Upload Harp Listing</h1>           
             <div className='formContainer'>
-                <form action="http://localhost:3000/api/v1/uploadlisting" method="post" encType="multipart/form-data">
+                <form action="https://findaharp-api.herokuapp.com/api/v1/uploadlisting" method="post" encType="multipart/form-data">
                     <div className='inputGroup'>
                         <label name="sellername">Seller Name: </label>
                         <input type="text" name="sellername" defaultValue={`${user.firstname} ${user.lastname}`} disabled />

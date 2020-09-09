@@ -185,6 +185,7 @@ export function getModelList(productMakesModels, size) {
  * @returns {String} - Product List with filetersApplied
  */
 export function getFilteredProducts(allProducts, allState, user, rate) {
+    console.log('filter prod', allProducts.length)
     let filteredProducts = [...allProducts];
     // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');

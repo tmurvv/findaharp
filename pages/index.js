@@ -66,8 +66,6 @@ Index.getInitialProps = async (props) => {
          *******************/
         // API
         const res = await axios.get(`https://findaharp-api.herokuapp.com`);
-        const cadRate = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_CAD&compact=ultra&apiKey=33d9a2db5c4410feb3f2');
-        console.log('index', cadRate.data.USD_CAD.toFixed(2));
         // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
         // const res = await axios.get(`http://localhost:3000`);
         // API DATA Populate variables

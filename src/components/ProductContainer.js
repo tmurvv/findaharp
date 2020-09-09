@@ -75,14 +75,22 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
             </div>
         );
     } else {
-        return (
-            <>
-                <h3 style={{textAlign: 'center', marginBlockEnd: 0}}>Not found in our listings</h3>
-                <h3 style={{textAlign: 'center', marginBlockStart: 0}}>Select "Clear" to see harp listings.</h3>    
-                <div data-test='component-ProductContainer' className='notFoundContainer'>
-                    <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
+        return (            
+            <> 
+            {allstate.location!=='ltActivate'
+                ?
+                <>
+                    <h3 style={{textAlign: 'center', marginBlockEnd: 0}}>Not Found. Select "Clear" to see harp listings.</h3>
+                    <h3 style={{textAlign: 'center', marginBlockStart: 0}}>Searching by Driving Distance? Be sure location is enabled on your device.</h3>    
+                    <div data-test='component-ProductContainer' className='notFoundContainer'>
+                        <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
+                    </div>
+                    <ProductContainerCss />
+                </>
+                :
+                <div style={{height: '300px'}}>
                 </div>
-                <ProductContainerCss />
+            }
             </>
         );
     }    

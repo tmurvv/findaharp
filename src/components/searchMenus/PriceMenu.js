@@ -84,7 +84,8 @@ export default function PriceMenu(props) {
                     style={{color: '#6A75AA', textDecoration: 'underline'}}
                     key={uuid()}
                     name='Preference'
-                >I prefer {user.currency.toUpperCase()==='USD'?'Canadian Dollars':'US Dollars'}</li>        
+            >Change Currency</li>        
+            {/*>I prefer {user.currency.toUpperCase()==='USD'?'Canadian Dollars':'US Dollars'}</li>        */}
             </ul>     
         </div>
     );

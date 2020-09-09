@@ -15,6 +15,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     
     // if (productdetail.productImageUrl.indexOf('genericHarp')>-1) productdetail.productImageUrl="";
     function handleOpenProductModal() {
+        if (!productdetail||!productdetail.productTitle) return;
         setOpenProductModal(true);
         handleopendetail(productdetail); 
     }

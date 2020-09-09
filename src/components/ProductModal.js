@@ -12,7 +12,8 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
         return response.data.routes[0].distance;
     } catch (error) {
-        console.error(error);
+        alert("Something went wrong fetching driving distance. Please check your network connection.")
+        return NaN;
     }
 }
 
@@ -31,8 +32,13 @@ function ProductModal(props) {
         props.handleCloseDetail(evt, product, openContact);
     }
     async function getDistances(lat1, long1, lat2, long2) {
+        console.log('imin')
         // Driving Distance
         const resultDist = await getDrivingDistance(lat1, long1, lat2, long2);
+        if (resultDist===NaN) {
+            alert("Something went wrong. Check network connection and be sure location settings are enabled.");
+            setDrivingDistance(0);
+        }
         miles?setDrivingDistance((resultDist*0.000621).toFixed(0)):setDrivingDistance((resultDist/1000).toFixed(0));
         // Geographical Distance
         const geoDist = getGeoDistance(lat1, long1, lat2, long2).toFixed(0);
@@ -81,54 +87,52 @@ function ProductModal(props) {
             <h1>{productModel.indexOf(productMaker)>-1?'':productMaker} {productModel}</h1>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
             <div className='detailInfo'>
-            <div className={`detailImg`}><img src= {productImageUrl} alt={productTitle} /></div>
-            <div className={`detailText`}>
-                <p><span>Maker</span> {productMaker}<br></br>
-                <span>Model</span> {productModel}<br></br>
-                <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
-                <span>Price</span> {productPrice
-                    ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
-                    :'contact seller'} <button
-                    onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
-                    style={{
-                        color: '#6A75AA', 
-                        textDecoration: 'underline', 
-                        backgroundColor: 'transparent', 
-                        border: 'none', 
-                        outline: 'none', 
-                        fontSize: '12px', 
-                        cursor: 'pointer'
-                    }}
-                    // key={uuid()}
-                    name='Preference'
-                >I prefer {user.currency.toUpperCase()==='USD'?'Canadian Dollars':'US Dollars'}</button>        <br />
-                
-                <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
-                <br></br>
-                <div className='longDesc'></div>
-                {/* <div className='longDesc'><span>Description</span><br></br>{longDesc?productLongDesc:''}</div> */}
-                
-                <br></br>
-                <p><span>Location</span> {sellerCountry?sellerCountry:'unavailable'}<br></br>
-                <span>Distance</span> {drivingDistance===0
-                    ?<button 
-                        type='button'
-                        className='blueFontButton'
-                        onClick={()=>
-                            navigator.geolocation
-                            ?getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong)
-                            :alert('Location is not enabled on this device or computer. Please check location settings.')
-                        }
-                        style={{backgroundColor: 'white', outline: 'none', color:'#6A75AA', textDecoration:'none', border: 'none', fontSize: '14px'}}
-                    >
-                        Click here
-                    </button>
-                    :`Driving: ${drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance}${miles?'Mi':'Kms'}`
-                    }<br />
-                <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
-                <button className='detailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
-            </div>          
-        </div>
+                <div className={`detailImg`}><img src= {productImageUrl} alt={productTitle} /></div>
+                <div className={`detailText`}>
+                    <p><span>Maker</span> {productMaker}<br></br>
+                    <span>Model</span> {productModel}<br></br>
+                    <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
+                    <span>Price</span> {productPrice
+                        ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
+                        :'contact seller'} <button
+                        onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
+                        style={{
+                            color: '#6A75AA', 
+                            textDecoration: 'underline', 
+                            backgroundColor: 'transparent', 
+                            border: 'none', 
+                            outline: 'none', 
+                            fontSize: '12px', 
+                            cursor: 'pointer'
+                        }}
+                        // key={uuid()}
+                        name='Preference'
+                    >Change Currency</button>        <br />
+                    
+                    <span>Finish</span> {productFinish?productFinish:'unavailable'}</p>
+                    <br />
+                    <div className='longDesc'></div>
+                    <br />
+                    <p><span>Location</span> {sellerCountry?sellerCountry:'unavailable'}<br></br>
+                    <span>Distance</span> {drivingDistance===0
+                        ?<button 
+                            type='button'
+                            className='blueFontButton'
+                            onClick={()=>
+                                navigator.geolocation
+                                ?getDistances(props.clientlat, props.clientlong, sellerLat, sellerLong)
+                                :alert('Location is not enabled on this device or computer. Please check location settings.')
+                            }
+                            style={{backgroundColor: 'white', outline: 'none', color:'#6A75AA', textDecoration:'none', border: 'none', fontSize: '14px'}}
+                        >
+                            Click here
+                        </button>
+                        :`Driving: ${drivingDistance==='NaN'?'Not Found ':drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance==="NaN"?'Not Found ':geoDistance}${miles?'Mi':'Kms'}`
+                        }<br />
+                    <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
+                    <button className='detailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
+                </div> 
+            </div>
         </div>
         <ProductModalCSS />
         </>

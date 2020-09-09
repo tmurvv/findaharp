@@ -269,6 +269,14 @@ function PartnerProspects() {
 									<td>August 16th, 2020</td>
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value=''/></td>
 								</tr>
+								<tr>
+									<td>Véronique Couturier</td>
+									<td>harpiste.ca</td>
+									<td>contact form only</td>
+									<td></td>
+									<td></td>
+									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value=''/></td>
+								</tr>
 						</tbody>
 						</table>
 				</div>

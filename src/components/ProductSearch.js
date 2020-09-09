@@ -257,6 +257,7 @@ function ProductSearch(props) {
         triggerLazy();
     },[]);
     const filteredProducts = getFilteredProducts(props.products, allState, user, currencyMultiplier);
+    const showing = allState.location!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";
     return (
         <>       
         <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
@@ -459,7 +460,7 @@ function ProductSearch(props) {
             </div>
             <div className='selected'>
                 <p>
-                    SHOWING&nbsp;&nbsp;{allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}
+                    {showing}
                 </p>
                 <div onClick={handleClear} style={{display: 'none'}} className='clearAll clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>

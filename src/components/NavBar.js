@@ -50,7 +50,7 @@ export default function NavBar(props) {
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
                     <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
-                        <a id='userName' onClick={props.handleNavOpen}>{user.firstname} Profile</a>
+                        <a id='userName' onClick={props.handleNavOpen}>{user.firstname}</a>
                     </Link>
                     <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>
