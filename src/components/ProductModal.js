@@ -32,7 +32,6 @@ function ProductModal(props) {
         props.handleCloseDetail(evt, product, openContact);
     }
     async function getDistances(lat1, long1, lat2, long2) {
-        console.log('imin')
         // Driving Distance
         const resultDist = await getDrivingDistance(lat1, long1, lat2, long2);
         if (resultDist===NaN) {

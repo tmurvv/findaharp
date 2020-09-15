@@ -250,6 +250,22 @@ function UserProfile(props) {
         }
         clearForm('Both');
     }
+    function logoutUser() {
+        document.cookie = "JWT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; 
+        setUser({
+            firstname: '',
+            lastname: '',
+            editemail: '',
+            editpassword: '',
+            confirmpassword: '',
+            distanceunit: '',
+            newsletter: false,
+            editchange: false,
+            currency: 'USD'
+        }); 
+        clearForm('both');
+        Router.push('/')
+    }
     return (
        <>
         <div className='updatePassword-edit-container'>
@@ -259,12 +275,17 @@ function UserProfile(props) {
                 resetResults={resetResults}
                 loginGuest={loginGuest}
             />
-            {user&&user.role&&user.role==='seller'
-                ?<div style={{width: 'fit-content', margin: '50px auto', boxShadow: '3px 3px 5px 0px grey'}}>
-                    <button className='submit-btn updatePassword-edit-title' onClick={()=>Router.push('/uploadlisting')}>Upload harp listing</button>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                {user&&user.role&&user.role==='seller'
+                    ?<div style={{width: '25%', margin: '0 50px 50px', boxShadow: '3px 3px 5px 0px grey'}}>
+                        <button className='submit-btn updatePassword-edit-title' onClick={()=>Router.push('/uploadlisting')}>Upload harp listing</button>
+                    </div>
+                    :''
+                }
+                <div style={{width: '25%', margin: '0 50px 50px', boxShadow: '3px 3px 5px 0px grey'}}>
+                    <button className='submit-btn updatePassword-edit-title' onClick={()=> logoutUser()}>Logout</button>
                 </div>
-                :''
-            }
+            </div>
             <div className={activeWindow.signupClasses} id="signup" onClick={()=>handleEditClick()}>
                 <form onSubmit={()=>handleSubmit()}>
                     <div className="updatePassword-edit-title">

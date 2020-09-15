@@ -185,7 +185,6 @@ export function getModelList(productMakesModels, size) {
  * @returns {String} - Product List with filetersApplied
  */
 export function getFilteredProducts(allProducts, allState, user, rate) {
-    console.log('filter prod', allProducts.length)
     let filteredProducts = [...allProducts];
     // Eliminate findaharp known finish listing in object NOT YET IMPLEMENTED - transfer this info to Mongo
     filteredProducts = filteredProducts.filter(product => product.productMaker !== 'findaharpFinishes');
@@ -471,3 +470,13 @@ export function shuffleStorePartners(partnerArray) {
     indexArray.map(idx => storePartners.push(partnerArray[idx]));
     return storePartners
 }
+
+export function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};

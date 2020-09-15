@@ -277,6 +277,14 @@ function PartnerProspects() {
 									<td></td>
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value=''/></td>
 								</tr>
+								<tr>
+									<td>Melanie Wiltse</td>
+									<td>no website</td>
+									<td>mlwiltse@gmail.com</td>
+									<td></td>
+									<td>Monday, Sept. 9, 2020</td>
+									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='sent email on 09-Sept-2020' /></td>
+								</tr>
 						</tbody>
 						</table>
 				</div>

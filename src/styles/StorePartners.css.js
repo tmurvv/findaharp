@@ -5,6 +5,7 @@ function StorePartnersCSS() {
                 background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 padding-top: 70px;
                 padding-bottom: 70px;
+                position: relative;
             }
             @media only screen and (max-width: 550px) {
                 .subTitle {

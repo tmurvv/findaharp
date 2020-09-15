@@ -1,5 +1,6 @@
 // import App from 'next/app'
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import Head from 'next/head';
 import Router from 'next/router'
 import * as gtag from '../lib/gtag'
@@ -17,6 +18,7 @@ import Footer from '../src/components/Footer';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
+import { parseJwt } from '../src/utils/helpers';
 
 function MyApp(props) {
     const { Component, pageProps } = props;
@@ -54,6 +56,55 @@ function MyApp(props) {
         window.addEventListener('resize', handleResize);
         return () => { window.removeEventListener('resize', handleResize) }
     }, []);
+    
+    useEffect(() => {
+        if (typeof window !== 'undefined' && !user._id) {
+            let jwtToken;
+            try {console.log('here1')} catch (e) {}
+            try {
+                try {console.log('here2')} catch (e) {}
+                jwtToken = document.cookie.split('; ').find(row => row.startsWith('JWT')).split('=')[1];
+                try {console.log('here3')} catch (e) {}
+            } catch(e) {
+                // JWT not found
+            }
+            if (jwtToken) {
+                try {console.log('here4')} catch (e) {}
+                const userId = parseJwt(jwtToken).id;
+                try {console.log('here5')} catch (e) {}
+                (async () => {
+                    try {
+                        try {console.log('here6')} catch (e) {}
+                        const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {cookieId: userId});
+                        try {console.log('here7')} catch (e) {}
+                        const returnedUser = res.data.user;
+                        const jwt = res.data.token;
+                        document.cookie = `JWT=${jwt}`
+                        await setUser({
+                            firstname: returnedUser.firstname, 
+                            lastname: returnedUser.lastname, 
+                            email: returnedUser.email, 
+                            distanceunit: returnedUser.distanceunit, 
+                            _id: returnedUser._id,
+                            newsletter: returnedUser.newsletter,
+                            currency: returnedUser.currency,
+                            role: returnedUser.role
+                        });
+                    } catch (e) {
+                        console.log('why', e.message)
+                    }
+                    
+                })();
+            }       
+            // if (navigator&&navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
+            //         setClientLat(position.coords.latitude.toFixed(4));
+            //         setClientLong(position.coords.longitude.toFixed(4));
+            //     });
+            // }
+        }   
+    }, []);
+
     function handleNavOpen() {
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);

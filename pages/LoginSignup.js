@@ -11,6 +11,8 @@ import Results from '../src/components/Results';
 import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import { UserContext } from '../src/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
+import { parseJwt } from '../src/utils/helpers';
+
 
 // initialize reducer object
 const activeWindowInitialState = {
@@ -181,8 +183,10 @@ function LoginSignup(props) {
             dispatchResultInfo({type:'loadingImage'});        
             try {
                 // login user
+                console.log(`${process.env.backend}/api/v1/users/loginuser`)
                 const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
                 const returnedUser = res.data.user;
+                const jwt = res.data.token;
                 // set user context to login user
                 await setUser({
                     firstname: returnedUser.firstname, 
@@ -194,6 +198,9 @@ function LoginSignup(props) {
                     currency: returnedUser.currency,
                     role: returnedUser.role
                 });
+                // set JWT cookie
+                // sets the cookie cookie1
+                 document.cookie = `JWT=${jwt}`
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});

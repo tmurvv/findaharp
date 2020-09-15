@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -7,23 +7,19 @@ import axios from 'axios';
 import IndexCss from '../src/styles/index.css.js';
 import ProductSearch from '../src/components/ProductSearch';
 import PageTitle from '../src/components/PageTitle';
+import { UserContext } from '../src/contexts/UserContext';
+import { parseJwt } from '../src/utils/helpers';
 
 // // local test data
 // import testData from '../src/utils/testData';
 // import testMakesModels from '../src/utils/testMakesModels';
 
 const Index = (props) => {
+    const { user, setUser } = useContext(UserContext);
     const [clientLat, setClientLat] = useState();
     const [clientLong, setClientLong] = useState();
-   
-    useEffect(() => {
-        if (navigator&&navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
-                setClientLat(position.coords.latitude.toFixed(4));
-                setClientLong(position.coords.longitude.toFixed(4));
-            });
-        }
-       }, []);
+    // check for login cookie
+    
     // useEffect(() => {
     //     if (navigator&&navigator.geolocation) {
     //         navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
@@ -31,7 +27,8 @@ const Index = (props) => {
     //             setClientLong(position.coords.longitude.toFixed(4));
     //         });
     //     }
-    //    }, []);
+    // }, []);
+
     return (
         <>
         <Head>
@@ -65,9 +62,10 @@ Index.getInitialProps = async (props) => {
          * API DATA
          *******************/
         // API
-        const res = await axios.get(`https://findaharp-api.herokuapp.com`);
+        // const res = await axios.get(`https://findaharp-api.herokuapp.com`); // BREAKING
         // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
-        // const res = await axios.get(`http://localhost:3000`);
+        // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
+        const res = await axios.get(`http://localhost:3000`);
         // API DATA Populate variables
         const products = res.data.harpData;
         const makesModels = res.data.harpMakesModels;

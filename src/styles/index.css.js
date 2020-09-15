@@ -8,6 +8,7 @@ function IndexCss() {
                 margin: 0;
                 padding-top: 70px;
                 height: fit-content;
+                position: relative;
             }
             .index h2 {
                 margin-block-end:0;

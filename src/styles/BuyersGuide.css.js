@@ -11,6 +11,7 @@ function BuyersGuideCSS() {
                 margin-top: 0;
                 text-align: center;
                 margin: auto;
+                position: relative;
             }
             h1 {
                 margin-block-start: 0;

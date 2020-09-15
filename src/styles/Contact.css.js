@@ -9,6 +9,7 @@ function ContactCSS() {
                 padding-top: 70px;
                 height: fit-content;
                 margin-top: 0;
+                position: relative;
             }
             .contact {
                 width: 100%;

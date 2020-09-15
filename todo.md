@@ -12,13 +12,13 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
-- footer messed up on my phone
-- email verifictaion error not correct on remote deploy
+- get NavBar to show Name (doesn't work on cookie check)
 - When update user encounters problem on backend, spinner persists, needs to show error message
 - if no user, userProfile needs to divert to login
 - make upload ad look like login
 - logout button
 - make it so we don't have to log in again to upload a second harp listing (cookies?)
+- cancel button on upload harp listing
 
 ### functionality
 - rebuild site once a day https://pomb.us/nextjs-static-props/
