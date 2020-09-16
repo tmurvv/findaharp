@@ -91,8 +91,10 @@ function LoginSignup(props) {
         });
     }
     function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
+    
     }
     function resetLoginForm() { 
         setUserLogin({
@@ -139,11 +141,10 @@ function LoginSignup(props) {
             // signup user
             try {
                 const res = await axios.post(`${process.env.backend}/api/v1/users/createuser`, newUser);
-                if (res.status===200) {
-                    resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
-                    dispatchResultInfo({type: 'OK'});
+                if (res.status===201 || res.status===200) {                   
                     // set userContext to added user
-                    const {addeduser} = res.data;
+                    const addeduser = res.data.user;
+                    console.log('data', res.data.user.firstname);
                     setUser({
                         firstname: addeduser.firstname, 
                         lastname: addeduser.lastname, 
@@ -154,6 +155,8 @@ function LoginSignup(props) {
                         currency: addeduser.currency,
                         role: 'not set'
                     });
+                    resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
+                    dispatchResultInfo({type: 'OK'});  
                 }
             // Error on signup
             } catch (e) {
@@ -183,10 +186,11 @@ function LoginSignup(props) {
             dispatchResultInfo({type:'loadingImage'});        
             try {
                 // login user
-                console.log(`${process.env.backend}/api/v1/users/loginuser`)
                 const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {email: userLogin.loginemail, password: userLogin.loginpassword});
+                
                 const returnedUser = res.data.user;
                 const jwt = res.data.token;
+
                 // set user context to login user
                 await setUser({
                     firstname: returnedUser.firstname, 
@@ -199,14 +203,19 @@ function LoginSignup(props) {
                     role: returnedUser.role
                 });
                 // set JWT cookie
-                // sets the cookie cookie1
                  document.cookie = `JWT=${jwt}`
                 // display result window
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
+                console.log(e.response.data.message)
+                console.log(e.message)
+                // email not found #1
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Cannot read property 'emailverified' of null") {
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
+                    dispatchResultInfo({type: 'okTryAgain'});
                 // email not verified
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
+                } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                
                     await setUserLogin({...userLogin, loginemail: e.response.data.useremail})
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
@@ -215,7 +224,7 @@ function LoginSignup(props) {
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
-                // email not found
+                // email not found #2
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});

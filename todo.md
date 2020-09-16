@@ -43,6 +43,12 @@
 - cache images with service worker
 - Lighthouse
 
+### HEAD-SCRATCHERS
+- JWT Cookie check sometimes trips CORS
+- Click outside menus
+- Signup newsletter not working if error encountered. Not resetting properly. If no error on signup, it works.
+- NaN still not working
+
 ### TESTING
 
 - finish writing tests for helper file

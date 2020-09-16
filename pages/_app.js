@@ -1,7 +1,6 @@
 // import App from 'next/app'
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Head from 'next/head';
 import Router from 'next/router'
 import * as gtag from '../lib/gtag'
 
@@ -57,26 +56,20 @@ function MyApp(props) {
         return () => { window.removeEventListener('resize', handleResize) }
     }, []);
     
+    // if no user, check for JWT cookie in browser
     useEffect(() => {
         if (typeof window !== 'undefined' && !user._id) {
             let jwtToken;
-            try {console.log('here1')} catch (e) {}
             try {
-                try {console.log('here2')} catch (e) {}
                 jwtToken = document.cookie.split('; ').find(row => row.startsWith('JWT')).split('=')[1];
-                try {console.log('here3')} catch (e) {}
             } catch(e) {
                 // JWT not found
             }
             if (jwtToken) {
-                try {console.log('here4')} catch (e) {}
                 const userId = parseJwt(jwtToken).id;
-                try {console.log('here5')} catch (e) {}
                 (async () => {
                     try {
-                        try {console.log('here6')} catch (e) {}
                         const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {cookieId: userId});
-                        try {console.log('here7')} catch (e) {}
                         const returnedUser = res.data.user;
                         const jwt = res.data.token;
                         document.cookie = `JWT=${jwt}`
@@ -91,17 +84,10 @@ function MyApp(props) {
                             role: returnedUser.role
                         });
                     } catch (e) {
-                        console.log('why', e.message)
-                    }
-                    
+                        console.log('Something went wrong retrieving user with JWT cookie:', e.message)
+                    }       
                 })();
-            }       
-            // if (navigator&&navigator.geolocation) {
-            //     navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
-            //         setClientLat(position.coords.latitude.toFixed(4));
-            //         setClientLong(position.coords.longitude.toFixed(4));
-            //     });
-            // }
+            }
         }   
     }, []);
 

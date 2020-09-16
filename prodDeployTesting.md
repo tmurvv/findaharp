@@ -1,49 +1,51 @@
 # Production Deploy Checklist
-xx means stays checked when resetting for ipad and android phone
+Double letter before 'y' means stays checked when resetting for ipad and android phone
 
-    [xx] first do regular deploy checklist
+    [] first do regular deploy checklist
 
 ### macro
-    [xx] Local
-        [xx] test all responsive
-            [xx] NavBar
-            [xx] Search
-            [xx] ProdCont
-            [xx] Footer
+    [] Local
+        [] test all responsive
+            [] NavBar
+            [] Search
+            [] ProdCont
+            [] Footer
     [] Staging
-        [xx] Done on PC
+        [] Done on PC
         [] Done on iPad
             [] reponsive landscape   
             [] reponsive portrait
         [] Done on android 
-            [xx] reponsive portrait
+            [] reponsive portrait
 
     [] Production
-        [xx] Done on PC
+        [] Done on PC
         [] Done on iPad
             [] reponsive landscape   
             [] reponsive portrait
         [] Done on android phone
             [] reponsive landscape 
 ### page by page links
-    [x] home page
-        [x] NavBar
-        [x] Search
-        [x] ProdCont
-        [x] Footer
-    [x] become store partner
-        [x] contact page
-        [x] store partner page
-    [x] buyers guide
-        [x] survey
+    [] home page
+        [] NavBar
+        [] Search
+        [] ProdCont
+        [] Footer
+    [] become store partner
+        [] contact page
+        [] store partner page
+    [] buyers guide
+        [] survey
 
 ### functionality - search
-    [x] each menu
-    [x] menu combos
-    [x] driving distance
-    [x] clear one, clear all
+    [] each menu
+    [] menu combos
+    [] driving distance
+    [] clear one, clear all
 
 ### functionality - auth
+    [x] cookie
+    [x] logout
     [x] all login
         [x] success
         [x] errors

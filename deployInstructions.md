@@ -1,5 +1,5 @@
-## July 4, 2020
-### DEPLOY TO STAGING
+## September 15, 2020
+### DEPLOY TO STAGINg
 
 - check for console.loks
 - check for BREAKINk
