@@ -144,7 +144,6 @@ function LoginSignup(props) {
                 if (res.status===201 || res.status===200) {                   
                     // set userContext to added user
                     const addeduser = res.data.user;
-                    console.log('data', res.data.user.firstname);
                     setUser({
                         firstname: addeduser.firstname, 
                         lastname: addeduser.lastname, 
@@ -208,8 +207,6 @@ function LoginSignup(props) {
                 resultText.innerText=`Login Successful: Welcome ${returnedUser.firstname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
-                console.log(e.response.data.message)
-                console.log(e.message)
                 // email not found #1
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Cannot read property 'emailverified' of null") {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;

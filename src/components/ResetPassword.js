@@ -48,7 +48,7 @@ function ResetPassword(props) {
     }
     function loginGuest() {
         resetResults();
-        Router.push('/LoginSignup');
+        Router.push('/loginsignup');
     }  
     const handleSubmit = async (evt) => {
         evt.preventDefault();
@@ -75,6 +75,7 @@ function ResetPassword(props) {
             dispatchResultInfo({type: 'OK'});
             clearForm()
         } catch(e) {
+            try{console.log('here', e.message, e.response.data.message)}catch(e){}
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                 resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
                 dispatchResultInfo({type: 'okTryAgain'});
@@ -83,7 +84,6 @@ function ResetPassword(props) {
                 dispatchResultInfo({type: 'okTryAgain'});
             }
         }
-        resetResults();
     }
     return (
         <>
@@ -131,7 +131,6 @@ function ResetPassword(props) {
                         <input 
                             className="field-input"
                             type='email'
-                            id={uuid()}
                             placeholder={decodeEmail}
                             name='email'
                             disabled={true}
@@ -142,7 +141,6 @@ function ResetPassword(props) {
                         <input 
                             className="field-input"
                             type='password'
-                            id={uuid()}
                             value={userLogin.newpassword}
                             onChange={handleChange}
                             name='newpassword'
@@ -154,7 +152,6 @@ function ResetPassword(props) {
                         <input 
                             className="field-input"
                             type='password'
-                            id={uuid()}
                             value={userLogin.confirmpassword}
                             onChange={handleChange}
                             name='confirmpassword'
