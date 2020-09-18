@@ -287,7 +287,7 @@ function LoginSignup(props) {
         // go to main window
         Router.push('/');
     }
-    return (
+    return ( 
        <>
         <div className='login-signup-container'>
             <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />

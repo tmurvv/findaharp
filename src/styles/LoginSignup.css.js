@@ -10,7 +10,7 @@ function LoginSignupCSS() {
             }
             .login-signup-container,
             .loginVerify-signup-container {
-                background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
+                // background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 overflow: hidden;
                 position: relative;
                 padding: 50px;

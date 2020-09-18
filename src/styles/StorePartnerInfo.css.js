@@ -42,7 +42,6 @@ function StorePartnerInfoCSS() {
             }
             .detailButton {
                 margin: 40px 0;
-                /*background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);*/
                 background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
                 // padding: 5px 10px;
                 font-size: 16px;

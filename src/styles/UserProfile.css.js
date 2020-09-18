@@ -9,7 +9,7 @@ function UserProfileCSS() {
                 outline: 0;
             }
             .updatePassword-edit-container {
-                background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
+                // background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 overflow: hidden;
                 position: relative;
                 padding: 50px;

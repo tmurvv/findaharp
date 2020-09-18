@@ -28,6 +28,7 @@ function AppCss() {
                 margin-block-start: 0 !important;
                 font-family: avenir;
                 color: #5c5b5b;
+                background-image: linear-gradient(to bottom, #fffedf, #fffedf 250px, #ffffff 450px);
             }
             h2 {
                 margin-block-end:0;

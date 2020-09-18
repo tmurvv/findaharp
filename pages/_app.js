@@ -1,24 +1,33 @@
 // import App from 'next/app'
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import Router from 'next/router'
-import * as gtag from '../lib/gtag'
+import Router from 'next/router';
+import Head from 'next/head';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import * as gtag from '../lib/gtag';
 
 // css
 import 'react-phone-input-2/lib/style.css'
 
 // internal
+import {CartContext} from "../src/contexts/CartContext";
+import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
+import Cart from '../src/components/Cart';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
 import { parseJwt } from '../src/utils/helpers';
 
+const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+const cartOpenInit = false;
+const cartInit = [];
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
@@ -31,6 +40,8 @@ function MyApp(props) {
         currency: 'USD',
         role: 'not set'
     }); // firstname, lastname, email, distanceunit
+    const [cart, setCart] = useState(cartInit);
+    const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [currencyMultiplier, setCurrencyMultiplier] = useState();
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
@@ -97,25 +108,35 @@ function MyApp(props) {
     }
     return( 
         <>  
-            <title>Find a Harp Pre-owned, Used</title>
-            <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
-            <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
+            <Head>
+                <title>Find a Harp Pre-owned, Used</title>
+                <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
+                <script src="https://js.stripe.com/v3/" />
+            </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
-                <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
-                    {props.router.query.reset
-                        ?<ResetPassword />
-                        :props.router.query.activateemail
-                            ?<ActivateEmail found={true}/>
-                            :props.router.query.uploadlisting
-                                ?<UploadListingResult success={true}/>
-                                :<>
-                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                    <Component {...pageProps} />
-                                    <Footer />
-                                </>
-                    }
-                </CurrencyContext.Provider>
+                <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
+                    <CartContext.Provider value={{cart, setCart}}>
+                        <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                            {props.router.query.reset
+                                ?<ResetPassword />
+                                :props.router.query.activateemail
+                                    ?<ActivateEmail found={true}/>
+                                    :props.router.query.uploadlisting
+                                        ?<UploadListingResult success={true}/>
+                                        :<>
+                                            <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                            <Cart cartopen={cartOpen} style={{zIndex: 8000}}/>
+                                            <Elements stripe={promise}>
+                                                <Component {...pageProps} />
+                                            </Elements>
+                                            <Footer />
+                                        </>
+                            }
+                        </CurrencyContext.Provider>
+                    </CartContext.Provider>
+                </CartOpenContext.Provider>
             </UserContext.Provider>
             <AppCss />
         </>
