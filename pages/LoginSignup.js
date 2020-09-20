@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useContext, useReducer } from 'react';
+import React, { useState, useContext, useReducer, useEffect } from 'react';
 import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
@@ -287,6 +287,10 @@ function LoginSignup(props) {
         // go to main window
         Router.push('/');
     }
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    });
     return ( 
        <>
         <div className='login-signup-container'>

@@ -1,6 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { UserContext } from '../src/contexts/UserContext';
+// display cart??
+useEffect(()=>{
+    if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
+});
 function uploadlisting() {
     const { user } = useContext(UserContext);
     return (

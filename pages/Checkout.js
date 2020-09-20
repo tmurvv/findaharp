@@ -107,6 +107,10 @@ function Checkout(props) {
     //         console.log(result.error.message);
     //       });
       };
+      // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    });
     return (
         <>
             <header>
@@ -215,7 +219,7 @@ function Checkout(props) {
                                     <legend><img id='paypallogo' src="img/paypal.png" alt="PayPal Logo" className="paypal" /></legend>
                                 </div>
                             </div> */}
-                            <div style={{display: 'flex'}}>
+                            {/* <div style={{display: 'flex'}}>
                                 <button 
                                     className="orderButton"
                                     type="button" 
@@ -224,8 +228,48 @@ function Checkout(props) {
                                     value="Place Order" 
                                     style={{margin: 'auto'}}
                                 >Place Order</button>
-                            </div>
+                            </div> */}
                             
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                {/* <button 
+                                    className="orderButton"
+                                    type="button" 
+                                    name="submit" 
+                                    onClick={handleSubmit} 
+                                    value="Place Order" 
+                                    style={{margin: 'auto'}}
+                                > */}
+                                    <p>Pay with Credit Card:</p>
+                                    <img onClick={handleSubmit} style={{width: 'fit-content', marginTop: '30px 50px -15px'}} src='img/creditcardgroup.jpg' alt='credit card logos, mastercard, visa, discover, AmEx' />
+                                    {/* </button> */}
+                                {/* <button 
+                                    className="orderButton"
+                                    type="button" 
+                                    name="submit" 
+                                    //onClick={handleSubmit} 
+                                    value="Place Order" 
+                                    style={{margin: 'auto'}}
+                                > */}
+                                <p>Pay with PayPal:</p>
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                                    <input type="hidden" name="cmd" value="_xclick"/>
+                                    <input type="hidden" name="business" value="W6ELYHGQCWECA"/>
+                                    <input type="hidden" name="lc" value="CA"/>
+                                    <input type="hidden" name="item_name" value="Order Total (see emailed receipt for details):"/>
+                                    <input type="hidden" name="button_subtype" value="services"/>
+                                    <input type="hidden" name="no_note" value="0"/>
+                                    <input type="hidden" name="cn" value="Add special instructions to the seller"/>
+                                    <input type="hidden" name="no_shipping" value="2"/>
+                                    <input name="amount" value={getTotal(cart,user).toString()}/>
+                                    <input type="hidden" name="currency_code" value="CAD"/>
+                                    <input type="hidden" name="return" value="https://harptisha.com"/>
+                                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"/>
+                                    <button type="submit"><img width='100%' src="../img/paypal_secure.png" alt="Secure Payments by PayPal" /></button>
+                                    {/* <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/> */}
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+                                </form>
+                                {/* </button> */}
+                            </div>
                         </div>
                         <CheckoutCss />
                     </form>

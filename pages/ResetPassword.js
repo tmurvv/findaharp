@@ -1,5 +1,5 @@
 // packages
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
@@ -140,6 +140,10 @@ function ResetPassword(props) {
         resetResults();
         // Router.push('/LoginSignup');
     }
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
+    });
     return (
        <>
         <div className='loginReset-signupReset-container'>

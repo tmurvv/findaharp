@@ -13,6 +13,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { getTotal } from "../src/utils/checkoutHelpers";
 import IndexCss from "../src/styles/index.css";
+import CheckoutFormCss from "../src/styles/CheckoutForm.css";
 
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);
@@ -101,6 +102,10 @@ export default function CheckoutForm() {
         resultText.innerText=`Something went wrong on payment. Return to home page?`;
         dispatchResultInfo({type: 'tryAgain'});
     }
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
+    });
     return (
         <div className='index' style={{minHeight:"90vh"}}>
             <Results 
@@ -147,9 +152,12 @@ export default function CheckoutForm() {
                 <h2>Paypal Payment</h2>
                 <h3 style={{margin: '25px 0'}}>Total: {getTotal(cart, user)}</h3>
                 <p>Paypal payment under construction</p>
-                
+                <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+                <script>paypal.Buttons().render('body');</script>
             </form>
             <IndexCss />
+            <CheckoutFormCss />
+            
         </div>
     );
 }

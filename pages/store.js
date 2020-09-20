@@ -1,5 +1,5 @@
 // packages
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 
 // internal
@@ -21,7 +21,10 @@ const Store = (props) => {
         setHarpName(e.target.getAttribute('data-id'))
     }
     function reset() {setContactUsForm(false)}
-
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    });
     return (
         <>
         <div className='index' style={{height: 'fit-content'}}>

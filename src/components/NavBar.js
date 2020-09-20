@@ -61,6 +61,9 @@ export default function NavBar(props) {
                     <Link href='/ResetPassword' as='/resetpassword'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Reset Password</a>
                     </Link>
+                    <Link href='/cart' as='/cart'>
+                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
+                    </Link>
                 </div>:''
             }
         </div>

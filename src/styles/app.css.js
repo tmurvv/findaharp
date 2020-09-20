@@ -140,6 +140,10 @@ function AppCss() {
                 display: flex;
                 justify-content: space-around;
             }
+            .flexSB {
+                display: flex;
+                justify-content: space-between;
+            }
             .relative {
                 position: relative;
             }
@@ -156,6 +160,14 @@ function AppCss() {
                 text-decoration: 'none'; 
                 border: 'none'; 
                 font-size: '14px';
+            }
+            .submit-btn {
+                width: 100%;
+                border-radius: 3px;
+                background-color: #ffe58a;
+                color: #000;
+                border: none;
+                padding: 10px 7px;
             }
         `}
         </style>

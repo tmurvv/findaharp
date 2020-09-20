@@ -21,7 +21,10 @@ export default function StorePartners() {
     const size = getWindowSize();
     // add blank placeholders for grid
     const addPlaceHolders=addPlaceholderStorePartners(storePartnersShuffled, size.width);
-    
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    });
     return (
         <>
         <Head>

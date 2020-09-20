@@ -1,5 +1,5 @@
 // packages
-import React, { useState, useContext, useReducer } from 'react';
+import React, { useState, useContext, useReducer, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
@@ -266,6 +266,10 @@ function UserProfile(props) {
         clearForm('both');
         Router.push('/')
     }
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    });
     return (
        <>
         <div className='updatePassword-edit-container'>

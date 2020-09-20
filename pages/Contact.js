@@ -1,5 +1,5 @@
 // packages
-import React from 'react';
+import {useEffect} from 'react';
 import Head from 'next/head';
 
 // internal
@@ -8,6 +8,9 @@ import ContactUsForm from '../src/components/ContactUsForm';
 import ContactCSS from '../src/styles/Contact.css';
 
 function Contact() {
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    });
     return (
         <>
         <Head>

@@ -19,7 +19,7 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
-import Cart from '../src/components/Cart';
+import CartButton from '../src/components/CartButton';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
@@ -127,7 +127,8 @@ function MyApp(props) {
                                         ?<UploadListingResult success={true}/>
                                         :<>
                                             <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                            <Cart cartopen={cartOpen} style={{zIndex: 8000}}/>
+                                            <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
+                                            {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
                                             <Elements stripe={promise}>
                                                 <Component {...pageProps} />
                                             </Elements>
