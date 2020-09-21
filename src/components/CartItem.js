@@ -3,8 +3,6 @@ import CartItemCss from '../styles/CartItem.css';
 import { CartContext } from '../contexts/CartContext';
 
 import {
-    getNumItems,
-    getSubTotal,
     incQty,
     decQty,
     deleteItem
@@ -13,7 +11,6 @@ import {
 function CartItem(props) {
     const { item } = props;
     const { cart, setCart } = useContext(CartContext);
-    
     return (
         <>
             <div className='item mobileItem'>
@@ -21,13 +18,12 @@ function CartItem(props) {
                     <img src={item.product_image} />
                 </div>   
                 <div className='description'>
-                    <h1>{item.description}</h1>
+                    <p><span style={{fontWeight: "600"}}>{item.name}</span> - {item.description}</p>
                 </div>
                 <div className='price'>${(item.price*item.product_quantity).toFixed(2)}</div>
                 <div className='product_quantity'>
                     <button 
-                        onClick={e => deleteItem(e, cart, setCart)} 
-                        dataid={item.id}
+                        onClick={() => deleteItem(cart, setCart, item.id)} 
                         style={{
                             border: 'none',
                             outline: 'none',
@@ -41,9 +37,9 @@ function CartItem(props) {
                     </button>
                 
                     <div className='quantity_button'>
-                        <div className='add' onClick={(e) => incQty(e, cart, setCart)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
+                        <div className='add' onClick={() => decQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
                         <div className='how_many'>{item.product_quantity}</div>
-                        <div className='sub' onClick={(e) => decQty(e, cart, setCart)} data-item-name={item.description}><img src='img/circlePlus.png' alt='decrease quantity' /></div>
+                        <div className='sub' onClick={() => incQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div>
                     </div>
                 </div>
                    

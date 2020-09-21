@@ -12,9 +12,11 @@ import 'react-phone-input-2/lib/style.css'
 
 // internal
 import {CartContext} from "../src/contexts/CartContext";
+import {CartSubtotalsContext} from "../src/contexts/CartSubtotalsContext";
 import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
+import {StatusContext} from "../src/contexts/StatusContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -27,7 +29,12 @@ import { parseJwt } from '../src/utils/helpers';
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 const cartOpenInit = false;
-const cartInit = [];
+const cartItemsInit = [
+];
+const cartSubtotalsInit = {
+    shipping: '---',
+    taxes: '---'
+}
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
@@ -40,8 +47,10 @@ function MyApp(props) {
         currency: 'USD',
         role: 'not set'
     }); // firstname, lastname, email, distanceunit
-    const [cart, setCart] = useState(cartInit);
+    const [cart, setCart] = useState(cartItemsInit);
+    const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
+    const [status, setStatus] = useState('idle')
     const [currencyMultiplier, setCurrencyMultiplier] = useState();
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
@@ -116,8 +125,10 @@ function MyApp(props) {
             </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
+            <StatusContext.Provider value={{status, setStatus}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
+                    <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                         <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
                             {props.router.query.reset
                                 ?<ResetPassword />
@@ -136,9 +147,12 @@ function MyApp(props) {
                                         </>
                             }
                         </CurrencyContext.Provider>
+                    </CartSubtotalsContext.Provider>
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
+            </StatusContext.Provider>
             </UserContext.Provider>
+            
             <AppCss />
         </>
     )

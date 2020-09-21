@@ -11,10 +11,7 @@ import CartCss from '../src/styles/cart.css';
 import IndexCss from '../src/styles/index.css'; 
 import {
     getNumItems,
-    getSubTotal,
-    incQty,
-    decQty,
-    deleteItem
+    getSubTotal
 } from '../src/utils/storeHelpers';
 
 
@@ -41,7 +38,7 @@ function Cart(props) {
                             </div>
                             <button 
                                 className='submit-btn'
-                                onClick={()=>Router.push('/Checkout')}
+                                onClick={()=>Router.push('/checkout')}
                                 style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
                             >
                                 Continue to Checkout

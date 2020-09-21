@@ -21,7 +21,8 @@ const StoreProduct = (props) => {
             const cartCopy = [...cart];
             const thisItem = {
                 id: uuid(), 
-                description: e.target.getAttribute('data-item-name'), 
+                name: e.target.getAttribute('data-item-name'), 
+                description: e.target.getAttribute('data-item-description'), 
                 price: e.target.getAttribute('data-item-price'), 
                 product_image: e.target.getAttribute('data-item-url'),
                 product_quantity: '1'    
@@ -47,6 +48,7 @@ const StoreProduct = (props) => {
                     onClick={(e)=>handleAdd(e)}
                     data-item-id={props.product.id}
                     data-item-name={props.product.name}
+                    data-item-description={props.product.description}
                     data-item-price={props.product.price}
                     data-item-url={props.product.image}
                     data-item-image={props.product.image}

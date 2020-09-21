@@ -63,7 +63,6 @@ function CartCss() {
             margin: 0;
             padding-left: 15px;
             display: flex;
-            height: 440px; 
             overflow-y:scroll;
             overflow-x:hidden;
             background-color: #fffeee;
@@ -124,10 +123,7 @@ function CartCss() {
             color: #fff;
         }
         
-        form {
-            font-size: 14px;
-            color: #1ABC9C;
-        }
+        
         
         input[type=checkbox] {
             margin-right: 5px;

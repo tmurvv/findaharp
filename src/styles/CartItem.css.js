@@ -10,6 +10,7 @@ function CartItemCss() {
             margin: 10px auto;
             text-align: left;
             display: flex;
+            border-radius: 3px;
         }
         @media only screen and (max-width: 1000px) {
             .item {
@@ -25,7 +26,6 @@ function CartItemCss() {
             display: flex;
             justify-content: center;
             padding-top: 10px;
-            padding-bottom: 25px;
         }
         .product_image img {
            // display: block;
@@ -33,16 +33,19 @@ function CartItemCss() {
             // padding: 0; 
             // margin: 0 auto; 
             // margin-top: 10px; 
-            width: 90px; 
+            width: 90px;
+            border-radius: 3px; 
         }
         .description { 
             margin-top: 15px;
             margin-left: 10px;
+            margin-bottom: 10px;
+            max-height: 100px;
+            overflow-y: scroll;
         }
         
-        .description h1 {
-            font-size: 14px; 
-            color: ${cssVariables.primaryColour}
+        .description p {
+            font-size: 14px;
         }
         
         .description h2 {
