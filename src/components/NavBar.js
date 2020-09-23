@@ -43,8 +43,8 @@ export default function NavBar(props) {
                     <Link href='/storepartners' as='/storepartners'>
                         <a onClick={props.handleNavOpen}>Our Store Partners</a>
                     </Link>
-                    <Link href='/store' as='/store'>
-                        <a onClick={props.handleNavOpen}>Harp Music/CDs</a>
+                    <Link href='/store' as='/storedirectory'>
+                        <a onClick={props.handleNavOpen}>Music/Strings and more</a>
                     </Link>        
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>

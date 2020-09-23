@@ -24,7 +24,7 @@ function Payment() {
     
     function changeRadio(e) {
         console.log('here', e.target.checked, e.target.value)
-        if (e.target.checked===true) setMethod(e.target.value);
+        if (e.target.checked===true) {setMethod(e.target.value);}
     }
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
@@ -43,7 +43,7 @@ function Payment() {
                 <h3>Payment</h3>
                 <div className='paymentInfo'>
                     <div className='paymentMethod' style={{fontSize: '20px', fontWeight: 'bold', paddingBottom: '20px', marginBottom: '20px', borderBottom: '1px solid lightgrey'}}>
-                        <input id="stripe" onClick={(e)=>changeRadio(e)} type='radio' id='cc' name='paymentMethod' value='stripe' style={{transform: 'scale(2)', marginRight: '15px'}} checked/>
+                        <input id="stripe" onClick={(e)=>changeRadio(e)} type='radio' id='cc' name='paymentMethod' value='stripe' style={{transform: 'scale(2)', marginRight: '15px'}}/>
                         <label htmlFor='cc'>Credit Card</label>
                     </div>
                     <StripeCheckout method={method} />

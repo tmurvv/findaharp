@@ -9,11 +9,11 @@ function StoreCss() {
                     margin: -20px;
                 }
             }
-            h2 {
-                width: fit-content;
-                margin: auto;
-                font-size: 20px;
-            }
+            // h2 {
+            //     width: fit-content;
+            //     margin: auto;
+            //     font-size: 20px;
+            // }
             .product-list {
                 display: flex; 
                 flex-wrap: wrap; 

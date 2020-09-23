@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import LazyLoad from 'react-lazyload';
-import AboutPartnerStoresCSS from '../styles/AboutPartnerStores.css';
+import OnlineStorePartnerCSS from '../styles/onlineStore/OnlineStorePartner.css';
 
-function AboutPartnerStore(props) {
+function OnlineStorePartner(props) {
     let partnerStore = props.product;
     if (!partnerStore) props.handleClose;
     if (!partnerStore.productLongDesc) partnerStore={...partnerStore, productLongDesc: "description not found"};
@@ -33,19 +33,22 @@ function AboutPartnerStore(props) {
                     />
                 </LazyLoad>
             </div>
+            <div className={`grid-item productSmallDisplay-text`}>
+                <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerStore.onlineStoreBlurb}} /> 
+                <div>Ships: {partnerStore.onlineStoreShipsTo}</div>
+                <div>{partnerStore.sellerRegion}</div>     
+            </div> 
             <div className='buyerDivider'>
                 <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
             </div>
-            <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerStore.productLongDesc}} />
-            <div className={`grid-item productSmallDisplay-text`}>
-                <p><a href={`${partnerStore.sellerWebsite}`} style={{color: '#6A75AA', fontSize: '18px'}} target="_blank">{partnerStore.sellerWebsiteText}</a></p>
-                <p>{partnerStore.sellerRegion}</p>     
-            </div>           
-            <AboutPartnerStoresCSS />          
+            <div className='enterStore'>
+                <button style={{width:'80%',margin:'auto'}} className='submit-btn'>Enter store here</button>
+            </div>        
         </div>
+        <OnlineStorePartnerCSS /> 
         </>
 
     )
 }
 
-export default AboutPartnerStore;
+export default OnlineStorePartner;

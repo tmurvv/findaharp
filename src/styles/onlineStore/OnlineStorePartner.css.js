@@ -1,4 +1,4 @@
-  function AboutPartnerStoresCSS() {
+function OnlineStorePartnerCSS() {
     return ( 
         <style jsx="true">{`
             h2 {
@@ -73,30 +73,14 @@
                 border: 2px solid #f9bf1e;
                 border-radius: 3px;
                 padding: 20px 20px 3px;
-                background-color: #ffffff;
+                background-color: #fff;
             }
-            
-            @media only screen and (max-width: 1500px) {
-                .productSmallDisplay {
-                    width: 24%;
-                }
-            }      
-            @media only screen and (max-width: 1250px) {
-                .productSmallDisplay {
-                  width: 42%;
-                  margin: 10px auto;
-                }
+            .shortMode {
+                height: 200px;
+                min-width: 160px;
+                width: 160px;
             }
-            @media only screen and (max-width: 1010px) {
-                .productSmallDisplay {
-                    width: 80vw;  
-                }
-            }
-            @media only screen and (max-width: 850px) {
-                .productSmallDisplay {
-                    min-width: 300px;  
-                }
-            }
+            // // BREAKING
             .productSmallDisplay span {
                 cursor: pointer;
             }
@@ -117,18 +101,17 @@
                 overflow: hidden;
             }
             .productSmallDisplay-LongDesc {
-                flex: 8;
                 text-align: left;
-                overflow-y: scroll;
                 margin-top: 29px;
-                max-height: 70%;
-                margin-bottom: 20px
+                margin-bottom: 20px;
+                width: 80%;
+                margin: 10px 10%;
             }
             .productSmallDisplay-LongDesc span {
                 font-family: 'Metropolis Extra Bold';
             }
             .productSmallDisplay-text {
-                flex: 2;
+                flex: 4;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -140,12 +123,17 @@
                 margin-block-end: 0;
                 text-align: left;
             }
+            .enterStore {
+                flex: 4;
+                padding-top: 50px;
+            }
             .productSmallDisplay-text p a {
                 text-decoration: none;
                 cursor: pointer;
                 color: #333333;
             }
             .buyerDivider {
+                flex: 1;
                 height: 9px;
             }
             .buyerDivider img {
@@ -178,6 +166,7 @@
                 font-size: 20px;
                 font-weight: 600;
             }
+            
             .detailButton {
                 margin: 15px auto;
                 background-color: #f9bf1e;
@@ -198,14 +187,6 @@
                 .detailImg img {
                     max-height: 120px;
                 }
-            }
-            .longDesc {
-                
-            }
-            @media only screen and (max-width: 550px) {
-                .longDesc {
-                    text-align: center;
-                }         
             }
             .marginTop {
                 margin-top: 10px;
@@ -228,4 +209,4 @@
     )
 }
 
-export default AboutPartnerStoresCSS;
+export default OnlineStorePartnerCSS;

@@ -46,7 +46,6 @@ function Cart(props) {
                                 className='submit-btn'
                                 onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
                                 style={{fontSize:'15px', fontWeight:'600', padding:'15px'}} //BREAKING needs error message if cart empty
-                                // disabled={!getTotal(cart,user)||getTotal(cart,user)===0}
                             >
                                 Continue to Checkout
                             </button>

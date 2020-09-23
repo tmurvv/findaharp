@@ -43,7 +43,7 @@ export const PRODUCTAD_PLACEHOLDER = {
 
 export const STORE_PARTNERS = [
     {
-        id: uuid(),
+        id: "harpsetc",
         sellerCountry: "USA",
         sellerRegion: "Walnut Creek, CA",
         productTitle: "Harps Etc.",
@@ -74,10 +74,12 @@ export const STORE_PARTNERS = [
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'https://harpsetc.com',
         sellerWebsiteText: 'harpsetc.com',
-        sellerEmail: 'info@harpsetc.com'
+        sellerEmail: 'info@harpsetc.com',
+        onlineStoreShipsTo: 'US only',
+        onlineStoreBlurb: '<p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
     },
     {
-        id: uuid(),
+        id: 'michiganharpcenter',
         sellerCountry: "USA",
         sellerRegion: "Clawson, MI",
         productTitle: "Michigan Harp Center",
@@ -92,7 +94,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'michiganharpcenter@gmail.com'
     },
     {
-        id: uuid(),
+        id: 'westcoastharps',
         sellerCountry: "Canada",
         sellerRegion: "Nanaimo, BC, Canada",
         productTitle: "West Coast Harps",
@@ -113,7 +115,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'alison@westcoastharps.com'
     },
     {
-        id: uuid(),
+        id: 'findaharp',
         sellerCountry: "Canada",
         sellerRegion: "Calgary, AB, Canada",
         productTitle: "Find a Harp",
@@ -122,10 +124,12 @@ export const STORE_PARTNERS = [
         productImageUrl: "/img/storePartners/findaharp_store_logo.png",
         sellerWebsite: 'https://findaharp.com',
         sellerWebsiteText: 'findaharp.com',
-        sellerEmail: 'tisha@findaharp.com'
+        sellerEmail: 'tisha@findaharp.com',
+        onlineStoreShipsTo: "anywhere",
+        onlineStoreBlurb: "<ul><li>Pre-loved music</li><li>CDs by Tisha Murvihill</li><li>Digital Downloads</li></ul>"
     },
     {
-        id: uuid(),
+        id: 'harpangelstore',
         sellerCountry: "Canada",
         sellerRegion: "Canmore, AB, Canada",
         productTitle: "Harp Angel Store",
@@ -144,7 +148,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'info@harpangel.com'
     },
     {
-        id: uuid(),
+        id: 'fourharpmusic',
         sellerCountry: "USA",
         sellerRegion: "Dallas, TX",
         productTitle: "4HarpMusic",
@@ -158,7 +162,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'txabby@gmail.com'
     },
     {
-        id: uuid(),
+        id: 'vavraharp',
         sellerCountry: "USA",
         sellerRegion: "Upstate South Carolina",
         productTitle: "Vavra Harp",
@@ -172,7 +176,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'vavra@vavraharp.com'
     },
     {
-        id: uuid(),
+        id: 'vixenharps',
         sellerCountry: "Canada",
         sellerRegion: "Ottawa, ON, Canada",
         productTitle: "Vixen Harps",
@@ -195,7 +199,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'info@vixenharps.com'
     },
     {
-        id: uuid(),
+        id: 'theharpplace',
         sellerCountry: "USA",
         sellerRegion: "Albany, New York area",
         productTitle: "The Harp Place",
@@ -210,6 +214,8 @@ export const STORE_PARTNERS = [
         productImageUrl: "/img/storePartners/harpplace_logo.png",
         sellerWebsite: 'https://theharpplace.com',
         sellerWebsiteText: 'theharpplace.com',
-        sellerEmail: 'harpgal1@gmail.com'
+        sellerEmail: 'harpgal1@gmail.com',
+        onlineStoreShipsTo: 'US and Canada',
+        onlineStoreBlurb: 'Offering digital download music and accessories'
     }
 ];
