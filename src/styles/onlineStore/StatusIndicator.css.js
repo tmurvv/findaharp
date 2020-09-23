@@ -3,11 +3,14 @@ import React from 'react';
 function StatusIndicatorCss() {
     return (
         <style jsx="true">{`
+            body {
+                background-image: none;
+            }
             .statusIndicator {
                 display: flex;
                 justify-content: space-evenly;
                 list-style: none;
-                padding: 15px;
+                padding: 0 15px 15px;
             }
             .statusItem {
                 flex: 1;

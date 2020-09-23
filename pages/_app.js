@@ -32,8 +32,8 @@ const cartOpenInit = false;
 const cartItemsInit = [
 ];
 const cartSubtotalsInit = {
-    shipping: '---',
-    taxes: '---'
+    shipping: 0,
+    taxes: 0
 }
 function MyApp(props) {
     const { Component, pageProps } = props;

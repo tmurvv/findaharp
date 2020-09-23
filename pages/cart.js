@@ -3,6 +3,8 @@ import uuid from 'react-uuid';
 import Router, { withRouter } from 'next/router';
 
 import { CartContext } from '../src/contexts/CartContext';
+import { UserContext } from '../src/contexts/UserContext';
+import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import PageTitle from '../src/components/PageTitle';
 import CartItem from '../src/components/CartItem';
 import { branding } from '../src/constants/branding';
@@ -13,10 +15,13 @@ import {
     getNumItems,
     getSubTotal
 } from '../src/utils/storeHelpers';
+import { getTotal } from '../src/utils/checkoutHelpers';
 
 
 function Cart(props) {
     const { cart, setCart } = useContext(CartContext);
+    const { user, setUser } = useContext(UserContext);
+    const { currency } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
@@ -25,6 +30,7 @@ function Cart(props) {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
     });
+    console.log(cart[0])
     return (
         <>
             <div className="index" style={{backgroundColor:'#fff'}}>  
@@ -38,8 +44,9 @@ function Cart(props) {
                             </div>
                             <button 
                                 className='submit-btn'
-                                onClick={()=>Router.push('/checkout')}
-                                style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
+                                onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
+                                style={{fontSize:'15px', fontWeight:'600', padding:'15px'}} //BREAKING needs error message if cart empty
+                                // disabled={!getTotal(cart,user)||getTotal(cart,user)===0}
                             >
                                 Continue to Checkout
                             </button>
@@ -54,6 +61,7 @@ function Cart(props) {
                             :cart.map(item => 
                                 <li key={uuid()}>
                                     <CartItem item={item}/>
+                                    
                                     {/* <div className='item mobileItem'>
                                         <div className='itemLine1'>
                                             <div className='product_image'><img src={item.product_image} /></div>

@@ -3,66 +3,73 @@ import { useEffect, useContext, useState } from 'react';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Router from 'next/router';
 // internal
-import ShippingCss from '../src/styles/Shipping.css';
+import ShippingCss from '../src/styles/onlineStore/Shipping.css';
 import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
 import Subtotal from '../src/components/Subtotal';
 import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import { UserContext } from '../src/contexts/UserContext';
+import { CartContext } from '../src/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { StatusContext } from '../src/contexts/StatusContext';
 import { 
     selectCountry,
-    selectRegion
+    selectRegion,
+    getTotal, 
+    shipping,
+    tax
 } from '../src/utils/checkoutHelpers';
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);
+    const { cart } = useContext(CartContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
     
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'fname': 
-                setUser({...user, fname: evt.target.value});
+                setUser({...user, shippingfname: evt.target.value});
                 setChange(true);
                 break
             case 'lname': 
-                setUser({...user, lname: evt.target.value});
+                setUser({...user, shippinglname: evt.target.value});
                 setChange(true);
                 break
             case 'email': 
-                setUser({...user, email: evt.target.value});
+                setUser({...user, shippingemail: evt.target.value});
                 setChange(true);
                 break
             case 'phone': 
-                setUser({...user, phone: evt.target.value});
+                setUser({...user, shippingphone: evt.target.value});
                 setChange(true);
                 break
             case 'address': 
-                setUser({...user, address: evt.target.value});
+                setUser({...user, shippingaddress1: evt.target.value});
                 setChange(true);
                 break
             case 'address2': 
-                setUser({...user, address2: evt.target.value});
+                setUser({...user, shippingaddress2: evt.target.value});
                 setChange(true);
                 break
             case 'city': 
-                setUser({...user, city: evt.target.value});
+                setUser({...user, shippingcity: evt.target.value});
                 setChange(true);
                 break 
             case 'zip_postal': 
-                setUser({...user, zip_postal: evt.target.value});
+                setUser({...user, shippingzip_postal: evt.target.value});
                 setChange(true);
                 break
-            case 'country': 
-                setUser({...user, country: evt.target.value});
+            case 'shippingcountry': 
+                setUser({...user, shippingcountry: evt.target.value});
                 setChange(true);
                 break
-            case 'region': 
-                setUser({...user, region: evt.target.value});
+            case 'shippingregion': 
+                setUser({...user, shippingregion: evt.target.value});
                 setChange(true);
                 break
             case 'notes': 
-                setUser({...user, notes: evt.target.value});
+                setUser({...user, shippingnotes: evt.target.value});
                 setChange(true);
                 break
             case 'shippingDifferent': 
@@ -76,6 +83,23 @@ function Shipping() {
             default :
         }
     }
+    function changeCountry(val) {
+        console.log(val)
+        selectCountry(val, user, setUser); 
+        setCartSubtotals({...cartSubtotals, 
+            shipping: shipping(val), 
+            taxes: 0
+        });
+    }
+    function changeRegion(val) {
+        console.log(val)
+        selectRegion(val, user, setUser); 
+        if (user.shippingcountry==="Canada") {
+            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val)});
+        } else {
+            setCartSubtotals({...cartSubtotals, taxes: 0});
+        }
+    }
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
     });
@@ -84,7 +108,7 @@ function Shipping() {
     });
     return (
         <div className='whiteWallPaper'>
-            <StatusIndicator status='shipping'/>
+            <StatusIndicator />
             <Subtotal />
             <div className='shippingContainer'>
             <form method="get">
@@ -109,6 +133,7 @@ function Shipping() {
                     <label htmlFor="address">Address</label>
                     <input type="text" name="address" value={user.address} onChange={handleChange} id="address" required />
                     <input type="text" name="address2" value={user.address2} onChange={handleChange} id="address2" placeholder="Optional" />
+                    <br />
                     <label htmlFor="city">Town / City</label>
                     <input type="text" name="city" value={user.city} onChange={handleChange} id="city" required />
                     
@@ -123,9 +148,9 @@ function Shipping() {
                                     marginBottom: '20px',
                                     marginTop: '5px'
                                 }}
-                                value={user.country}
-                                name='country'
-                                onChange={(val) => selectCountry(val, user, setUser)} 
+                                value={user.shippingcountry}
+                                name='shippingcountry'
+                                onChange={(val)=> changeCountry(val)} 
                             />
                         </div>
                         <div className='flex-sb'>
@@ -134,7 +159,7 @@ function Shipping() {
                             <input type="text" name="zip_postal" value={user.zip_postal} onChange={handleChange} id="zip_postal" placeholder="Postcode / Zip" required />
                         </div>
                         <div className='regionDrop'>
-                            <label htmlFor="country">State/Prov</label>
+                            <label htmlFor="country">State/Province</label>
                             <RegionDropdown
                                 style={{
                                     width: '98%',
@@ -144,11 +169,16 @@ function Shipping() {
                                     marginBottom: '20px',
                                     marginTop: '5px'
                                 }}
-                                country={user.country}
-                                value={user.state_prov}
-                                name='state_prov'
-                                defaultOptionLabel='Select Region'
-                                onChange={(val) => selectRegion(val, user, setUser)} 
+                                country={user.shippingcountry}
+                                value={user.shippingregion}
+                                name='shippingregion'
+                                defaultOptionLabel='Select State/Province'
+                                onChange={(val) => {
+                                    console.log("change", user.shippingcountry)
+                                    
+                                        changeRegion(val)
+                                    
+                                }} 
                                 placeholder='select country, then state/prov/region'
                             />
                         </div>
@@ -164,16 +194,19 @@ function Shipping() {
                     <label htmlFor="notes" className="notes">Order Notes</label>
                     <textarea name="notes" value={user.notes} onChange={handleChange} id="notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                 </div> */}
-            </form>
-            </div>
-            <OrderSummary />   
+                <OrderSummary />   
             <button 
+                type='button'
                 className='submit-btn'
                 onClick={()=>Router.push('/payment')}
                 style={{width:'90%', marginLeft: '5%', marginBottom: '50px', fontSize:'15px', fontWeight:'600', padding:'15px'}}
+                disabled={cart&&user&&!getTotal(cart, user) || getTotal(cart,user)<=0}
             >
                 Continue
             </button>
+            </form>
+            </div>
+            
             <ShippingCss />
         </div>
     )

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import CartItemCss from '../styles/CartItem.css';
 import { CartContext } from '../contexts/CartContext';
+import { CurrencyContext } from '../contexts/CurrencyContext';
 
 import {
     incQty,
@@ -11,6 +12,7 @@ import {
 function CartItem(props) {
     const { item } = props;
     const { cart, setCart } = useContext(CartContext);
+    const { currency } = useContext(CurrencyContext);
     return (
         <>
             <div className='item mobileItem'>
@@ -21,7 +23,7 @@ function CartItem(props) {
                     <p><span style={{fontWeight: "600"}}>{item.name}</span> - {item.description}</p>
                 </div>
                 <div className='price'>${(item.price*item.product_quantity).toFixed(2)}</div>
-                <div className='product_quantity'>
+                <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 
                         onClick={() => deleteItem(cart, setCart, item.id)} 
                         style={{
@@ -42,7 +44,10 @@ function CartItem(props) {
                         <div className='sub' onClick={() => incQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div>
                     </div>
                 </div>
-                   
+                <div style={{fontWeight: 'bold'}} className='flex-sb'>
+                    <p>Product Total:</p>
+                    <p>${(item.price*item.product_quantity).toFixed(2)}{currency}</p>
+                </div>
             </div>
             <CartItemCss />
         </>

@@ -1,5 +1,4 @@
 import React from "react";
-import { cssVariables } from '../constants/cssVariables';
 
 function CheckoutFormCss() {
     return (

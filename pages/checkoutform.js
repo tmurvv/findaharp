@@ -148,7 +148,7 @@ export default function CheckoutForm() {
                 </p>
                 <img style={{width: 'auto', marginTop: '30px', marginBottom: '-15px'}} src='img/creditcardgroup.jpg' alt='credit card logos, mastercard, visa, discover, AmEx' />
             </form>
-            <form id="payment-form" onSubmit={handleSubmit} style={{margin: 'auto', marginTop: '50px'}}>
+            <form id="payment-form" style={{margin: 'auto', marginTop: '50px'}}>
                 <h2>Paypal Payment</h2>
                 <h3 style={{margin: '25px 0'}}>Total: {getTotal(cart, user)}</h3>
                 <p>Paypal payment under construction</p>

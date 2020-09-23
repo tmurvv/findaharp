@@ -2,7 +2,7 @@ import { getSubTotal } from './storeHelpers';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
 export function selectCountry(val, user, setUser) {
-    setUser({...user, country: val});
+    setUser({...user, shippingcountry: val, shippingregion: null});
 }
 export function getProvCode(prov) {
     switch (prov) {
@@ -33,11 +33,12 @@ export function getProvCode(prov) {
         case "Nunavut":
             return "NU";
         default:
+            return null;
     }
 }
-export function shipping(user) {
-    if (!user.country) return 'select country';
-    switch (user.country) {
+export function shipping(shippingcountry) {
+    if (!shippingcountry) return 'select country';
+    switch (shippingcountry) {
         case 'Canada':
             return 8.00;
         case 'United States':
@@ -48,11 +49,10 @@ export function shipping(user) {
             return 15.00;
     }
 }
-export function tax(cart, user) {
+export function tax(cart, shippingregion) {
     try {
         const tax = new SalesTax(
-            // getProvCode(user.state_prov),
-            getProvCode(user.state_prov),
+            getProvCode(shippingregion),
             getSubTotal(cart),
             2
         );
@@ -62,9 +62,14 @@ export function tax(cart, user) {
     }       
 }
 export function getTotal(cart, user) {
-    if (!user.country || !user.state_prov || getSubTotal(cart) === 0) return '---.--';
-    return (Number(getSubTotal(cart)) + Number(shipping(user)) + Number(tax(cart,user))).toFixed(2);
+    if (!user.shippingcountry || !user.shippingregion) return getSubTotal(cart);
+    if (user.shippingcountry==="Canada") {
+        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
+    } else {
+        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry))).toFixed(2);
+    }
+    
 }
 export function selectRegion(val, user, setUser) {
-    setUser({...user, state_prov: val});
+    setUser({...user, shippingregion: val});
 }

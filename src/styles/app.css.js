@@ -22,13 +22,13 @@ function AppCss() {
                 src: url('./fonts/metropolis_ff/Metropolis-ExtraBold.otf') format('opentype');
             }
             body {
-                // overflow-x: hidden;
+                overflow-x: hidden;
                 margin: 0;
-                // margin-block-end: 0 !important;
-                // margin-block-start: 0 !important;
-                // font-family: avenir;
-                // color: #5c5b5b;
-                // background-image: linear-gradient(to bottom, #fffedf, #fffedf 250px, #ffffff 450px);
+                margin-block-end: 0 !important;
+                margin-block-start: 0 !important;
+                font-family: avenir;
+                color: #5c5b5b;
+                background-image: linear-gradient(to bottom, #fffedf, #fffedf 250px, #ffffff 450px);
             }
             h2 {
                 margin-block-end:0;
@@ -173,6 +173,7 @@ function AppCss() {
                 width: 100%;
                 height: 100%;
                 background-color: #fff;
+                margin-top: -20px;
             }
         `}
         </style>

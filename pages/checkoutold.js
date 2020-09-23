@@ -184,7 +184,6 @@ function Checkout(props) {
                                         value={user.state_prov}
                                         name='state_prov'
                                         onChange={(val) => selectRegion(val, user, setUser)} 
-                                        placeholder='select country, then state/prov/region'
                                     />
                                 </div>
                             </div>
