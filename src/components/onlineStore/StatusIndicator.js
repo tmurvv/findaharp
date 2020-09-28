@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { StatusContext } from '../../contexts/StatusContext';
-import StatusIndicatorCss from '../../styles/onlineStore/StatusIndicator.css'
+import StatusIndicatorCss from '../../styles/onlinestore/StatusIndicator.css'
 
 function StatusIndicator() {
     const { status } = useContext(StatusContext);
@@ -9,7 +9,6 @@ function StatusIndicator() {
         <>
             <h1 style={{padding: '15px 0 0 15px'}}>Checkout</h1>
             <div className="statusIndicator">
-            
                 <div style={{flex: '1'}}>
                     <div className="statusItem">
                         <p style={status==='shipping'?{backgroundColor: '#333', color: '#fff'}:{backgroundColor: '#fff', color: '#333'}}>1</p>
@@ -17,9 +16,7 @@ function StatusIndicator() {
                     </div>
                 </div>
                 <div style={{flex: '2'}}>
-                    <div className="statusLine">
-                        
-                    </div>
+                    <div className="statusLine"></div>
                 </div>
                 <div style={{flex: '1'}}>
                     <div className="statusItem">
@@ -28,14 +25,12 @@ function StatusIndicator() {
                     </div>
                 </div>
                 <div style={{flex: '2'}}>
-                    <div className="statusLine">
-                        
-                    </div>
+                    <div className="statusLine"></div>
                 </div>
                 <div style={{flex: '1'}}>
                     <div className="statusItem">
-                        <p style={status==='review'?{backgroundColor: '#333', color: '#fff'}:{backgroundColor: '#fff', color: '#333'}}>3</p>
-                        <a>Review</a>
+                        <p style={status==='completed'?{backgroundColor: '#333', color: '#fff'}:{backgroundColor: '#fff', color: '#333'}}>3</p>
+                        <a>Completed</a>
                     </div>
                 </div>
             </div>

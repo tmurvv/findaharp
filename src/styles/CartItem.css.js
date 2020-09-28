@@ -11,15 +11,8 @@ function CartItemCss() {
             text-align: left;
             display: flex;
             border-radius: 3px;
-        }
-        @media only screen and (max-width: 1000px) {
-            .item {
-                display: block;
-                height: auto;
-                width: auto;
-                background-color: #fff;
-                padding: 10px;
-            }
+            background-color: #fff;
+            padding: 10px;
         }
         .product_image {
             width: 100%;
@@ -33,8 +26,9 @@ function CartItemCss() {
             // padding: 0; 
             // margin: 0 auto; 
             // margin-top: 10px; 
-            width: 90px;
-            border-radius: 3px; 
+            width: 140px;
+            border-radius: 3px;
+            box-shadow: 3px 5px 3px lightgrey;
         }
         .description { 
             margin-top: 15px;

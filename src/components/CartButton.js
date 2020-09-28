@@ -18,7 +18,7 @@ function CartButton() {
             >
                 <p>{getNumItems(cart)}</p>
                 <img 
-                    src='img/shoppingCart.png'
+                    src='../../../img/shoppingCart.png'
                     alt='shopping cart'
                 />
             </div>

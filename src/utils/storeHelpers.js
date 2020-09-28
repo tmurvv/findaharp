@@ -23,7 +23,7 @@ export function incQty(cart, setCart, prodId) {
     setCart(tempCart);
 }
 export function deleteItem(cart, setCart, prodId) {
-    if (!confirm("Are you sure you want to delete this line item?")) return;
+    if (!confirm("Are you sure you want to delete this item from your cart?")) return;
     let tempCart = [...cart]
     tempCart = tempCart.filter(item => item.id!==prodId);
     setCart(tempCart);

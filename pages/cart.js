@@ -5,8 +5,8 @@ import Router, { withRouter } from 'next/router';
 import { CartContext } from '../src/contexts/CartContext';
 import { UserContext } from '../src/contexts/UserContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import PageTitle from '../src/components/PageTitle';
 import CartItem from '../src/components/CartItem';
+import OrderSummary from '../src/components/onlinestore/OrderSummary';
 import { branding } from '../src/constants/branding';
 import { cssVariables } from '../src/constants/cssVariables';
 import CartCss from '../src/styles/cart.css'; 
@@ -16,6 +16,7 @@ import {
     getSubTotal
 } from '../src/utils/storeHelpers';
 import { getTotal } from '../src/utils/checkoutHelpers';
+import GetPostalZip from '../src/components/onlinestore/GetZipPostal';
 
 
 function Cart(props) {
@@ -33,7 +34,7 @@ function Cart(props) {
     console.log(cart[0])
     return (
         <>
-            <div className="index" style={{backgroundColor:'#fff'}}>  
+            <div className="index cartContainer" style={{backgroundColor:'#fff'}}>  
                 <div id='cart'>
                     <div className='cartBody'>
                         <h1>Your Cart</h1>
@@ -60,8 +61,26 @@ function Cart(props) {
                             :cart.map(item => 
                                 <li key={uuid()}>
                                     <CartItem item={item}/>
-                                    
-                                    {/* <div className='item mobileItem'>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                <div>
+                    <GetPostalZip />
+                    <OrderSummary />
+                </div>            
+            </div>
+            <CartCss />
+            <IndexCss />
+        </>
+    )       
+}
+
+export default Cart;
+
+{/* <div className='item mobileItem'>
                                         <div className='itemLine1'>
                                             <div className='product_image'><img src={item.product_image} /></div>
                                             <div className='product_quantity'>
@@ -92,20 +111,8 @@ function Cart(props) {
                                             </button>
                                         </div>    
                                     </div> */}
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-                    </div>
-                </div>              
-            </div>
-            <CartCss />
-            <IndexCss />
-        </>
-    )       
-}
 
-export default Cart;
+
 
 // {screenWidth>=1000?
 //     <div className='item'>

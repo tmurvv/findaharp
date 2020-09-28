@@ -75,8 +75,9 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://harpsetc.com',
         sellerWebsiteText: 'harpsetc.com',
         sellerEmail: 'info@harpsetc.com',
-        onlineStoreShipsTo: 'US only',
-        onlineStoreBlurb: '<p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
+        onlinestoreUrl: 'storeentry/harpsetc',
+        onlinestoreShipsTo: 'US only',
+        onlinestoreBlurb: '<p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
     },
     {
         id: 'michiganharpcenter',
@@ -125,8 +126,9 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://findaharp.com',
         sellerWebsiteText: 'findaharp.com',
         sellerEmail: 'tisha@findaharp.com',
-        onlineStoreShipsTo: "anywhere",
-        onlineStoreBlurb: "<ul><li>Pre-loved music</li><li>CDs by Tisha Murvihill</li><li>Digital Downloads</li></ul>"
+        onlinestoreUrl: 'storeentry/findaharp',
+        onlinestoreShipsTo: "anywhere",
+        onlinestoreBlurb: "<ul><li>Pre-loved music</li><li>CDs</li><li>Digital Downloads</li></ul>"
     },
     {
         id: 'harpangelstore',
@@ -215,7 +217,8 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://theharpplace.com',
         sellerWebsiteText: 'theharpplace.com',
         sellerEmail: 'harpgal1@gmail.com',
-        onlineStoreShipsTo: 'US and Canada',
-        onlineStoreBlurb: 'Offering digital download music and accessories'
+        onlinestoreUrl: 'storeentry/theharpplace',
+        onlinestoreShipsTo: 'US and Canada',
+        onlinestoreBlurb: 'Offering digital download music and accessories'
     }
 ];

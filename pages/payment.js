@@ -3,21 +3,20 @@ import { useEffect, useContext, useState } from 'react';
 import Router from 'next/router';
 
 // internal
-import PaymentCss from '../src/styles/onlineStore/Payment.css';
-import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
+import PaymentCss from '../src/styles/onlinestore/Payment.css';
+import StatusIndicator from '../src/components/onlinestore/StatusIndicator';
 import Subtotal from '../src/components/Subtotal';
-import StripeCheckout from '../src/components/onlineStore/StripeCheckout';
-import PaypalCheckout from '../src/components/onlineStore/PaypalCheckout';
-import OrderSummary from '../src/components/onlineStore/OrderSummary';
+import StripeCheckout from '../src/components/onlinestore/StripeCheckout';
+import PaypalCheckout from '../src/components/onlinestore/PaypalCheckout';
+import OrderSummary from '../src/components/onlinestore/OrderSummary';
 import { UserContext } from '../src/contexts/UserContext';
 import { StatusContext } from '../src/contexts/StatusContext';
-import { 
-    selectCountry,
-    selectRegion
-} from '../src/utils/checkoutHelpers';
+import { CartContext } from '../src/contexts/CartContext';
+import { getTotal } from '../src/utils/checkoutHelpers'
 
 function Payment() {
     const { user, setUser } = useContext(UserContext);
+    const { cart, setCart } = useContext(CartContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
     const [ method, setMethod ]  = useState('stripe');
@@ -31,12 +30,14 @@ function Payment() {
     });
     useEffect(()=>{
         setStatus('payment');
-        console.log('beg payment', user)
     });
     return (
         <div className='whiteWallPaper'>
             <StatusIndicator />
-            <Subtotal />
+            <div className='flex-sb' style={{padding: '15px'}}>
+                <p style={{fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Total: </p>
+                <p>${getTotal(cart, user)}</p>
+            </div>
             <div className='shippingContainer'>
                
             <form method="get">

@@ -1,13 +1,13 @@
 function ContactUsFormCSS() {
     return (
         <style jsx="true">{`
-            h2 {
+            .contactText h2 {
                 font-size: 36px;
                 margin-bottom: 50px;
                 margin-block-start: 0;
                 margin-block-end: 0;
             }
-            h3 {
+            .contactText h3 {
                 margin-block-end: 0;
                 margin-block-start: 0;
                 font-family: 'Metropolis Extra Bold';

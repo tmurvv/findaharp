@@ -15,14 +15,14 @@ function CartItem(props) {
     const { currency } = useContext(CurrencyContext);
     return (
         <>
-            <div className='item mobileItem'>
+            <div className='item'>
                 <div className='product_image'>
                     <img src={item.product_image} />
                 </div>   
                 <div className='description'>
-                    <p><span style={{fontWeight: "600"}}>{item.name}</span> - {item.description}</p>
+                    <p><span style={{fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span> - {item.description}</p>
                 </div>
-                <div className='price'>${(item.price*item.product_quantity).toFixed(2)}</div>
+                <div className='price'>${Number(item.price).toFixed(2)} each</div>
                 <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 
                         onClick={() => deleteItem(cart, setCart, item.id)} 

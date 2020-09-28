@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import Router from 'next/router';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import axios from 'axios';
+import uuid from 'react-uuid';
 
 import { CartContext } from '../../contexts/CartContext';
+import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
+import { StatusContext } from '../../contexts/StatusContext';
+
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import { resultInfoReducer } from '../../reducers/reducers';
@@ -12,14 +17,17 @@ import {
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
-import { getTotal } from "../../utils/checkoutHelpers";
+import { getTotal, generateReceiptEmailHtml } from "../../utils/checkoutHelpers";
 import IndexCss from "../../styles/index.css";
-import CheckoutFormCss from "../../styles/onlineStore/CheckoutForm.css";
-import ShippingCss from "../../styles/onlineStore/Shipping.css";
+import CheckoutFormCss from "../../styles/onlinestore/CheckoutForm.css";
+import ShippingCss from "../../styles/onlinestore/Shipping.css";
 
 export default function StripeCheckout(props) {
     const { cart, setCart } = useContext(CartContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
+    const { currency } = useContext(CurrencyContext);
     const { user, setUser } = useContext(UserContext);
+    const { setStatus } = useContext(StatusContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
@@ -28,6 +36,11 @@ export default function StripeCheckout(props) {
     const [clientSecret, setClientSecret] = useState('');
     const stripe = useStripe();
     const elements = useElements();
+
+    console.log('cart', cart)
+    console.log('user', user)
+    console.log('cartSubtotals', cartSubtotals)
+    console.log('currency', currency)
     useEffect(() => {
         if (getTotal(cart, user)&&getTotal(cart,user)>0) {
             try {
@@ -51,8 +64,7 @@ export default function StripeCheckout(props) {
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
-            alert('Cart is Empty')
-            console.log('cart total null or 0'); // BREAKING need user error message
+           console.log('cart total null or 0'); // BREAKING need user error message
             Router.push('/');
         }
     }, []);
@@ -99,7 +111,30 @@ export default function StripeCheckout(props) {
             setError(null);
             setProcessing(false);
             setSucceeded(true);
-            setCart([]);
+            
+            // prepare communication object
+            const receipt = {
+                email: user.shippingemail,
+                html: generateReceiptEmailHtml(cart, cartSubtotals, user, currency===1?'USD':'CAD')
+            }
+            // email receipt
+            try {
+                await axios.post(`http://localhost:3000/api/v1/sendreceipt`, receipt);
+                setCart([]);
+                setCartSubtotals([]);
+                setStatus('completed');
+                Router.push('/receipt')
+            } catch (e) {
+                alert(e.message)
+                alert('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.')
+                setCart([]);
+                setCartSubtotals([]);
+                setStatus('completed');
+                Router.push('/receipt')
+            }
+            
+            // take customer to receipt page
+            
             // BREAKING needs success dialog
             // resultText.innerText=`Payment Successful.`;
             // dispatchResultInfo({type: 'OK'});

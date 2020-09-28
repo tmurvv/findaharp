@@ -43,8 +43,8 @@ export default function NavBar(props) {
                     <Link href='/storepartners' as='/storepartners'>
                         <a onClick={props.handleNavOpen}>Our Store Partners</a>
                     </Link>
-                    <Link href='/store' as='/storedirectory'>
-                        <a onClick={props.handleNavOpen}>Music/Strings and more</a>
+                    <Link href='/storeentry' as='/storeentry'>
+                        <a onClick={props.handleNavOpen}>Music/Strings...</a>
                     </Link>        
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
@@ -62,6 +62,9 @@ export default function NavBar(props) {
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Reset Password</a>
                     </Link>
                     <Link href='/cart' as='/cart'>
+                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
+                    </Link>
+                    <Link href='/storeentry/findaharp' as='/storeentry/findaharp'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
                     </Link>
                 </div>:''

@@ -1,3 +1,4 @@
+import uuid from 'react-uuid';
 import { getSubTotal } from './storeHelpers';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
@@ -73,3 +74,148 @@ export function getTotal(cart, user) {
 export function selectRegion(val, user, setUser) {
     setUser({...user, shippingregion: val});
 }
+
+export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
+    // prepare today's date for formatting
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+    const today = new Date();
+    const todayDate = today.getDate();
+    const monthName = months[today.getMonth()];
+    const todayYear = today.getFullYear();
+    // create html for cart items
+    let itemHtml = '';
+    cart.map(item => itemHtml = itemHtml + `
+        <div style="
+            border-radius: 3px;
+            background-color: #fff;
+            margin: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;"
+        >  
+            <div style='font-size: 16px; width: 10%'>${item.product_quantity}</div> 
+            <div style='width: 70%;'>
+                <div style='font-size: 14px; font-weight: 600; width: 70%'>${item.title} ${item.artist?',':''} ${item.artist}</div>
+            </div>
+            <div style='font-weight: 600; width: 20%; text-align: right'>
+                <div>$${(item.price*item.product_quantity).toFixed(2)}</div>
+            </div>
+        </div>
+   `);
+   // return html for entire order
+    return `
+        <html>
+        <body style="color:#083a08; font-family: Lato, Arial, Helvetica, sans-serif; line-height:1.8em;">
+            <h3>Find a Harp</h3>
+            <h1>Order Receipt</h1>
+            <div>Date: ${todayDate}-${monthName}-${todayYear}</div>
+            <div>Order Number: ${uuid().substr(0,7)}</div>
+                <div style="
+                    padding: 5px;
+                    background-color: #fffeee; 
+                    border-bottom: 1px solid #868686; 
+                    margin-top: 30px;"
+                >  
+                <h3>Order Items:<h3/>${itemHtml}
+                <div class="orderSummary" style="
+                    padding:15px;
+                    background-color: #fffeee; 
+                    border-bottom:1px solid #868686;"
+                >
+                    <div style='display:flex; justify-content: space-between; background-color:#fff; margin: 5px;padding:15px;'>
+                        <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Products Subtotal: </div>
+                        <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(getSubTotal(cart)).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currency}</span></div>
+                    </div>
+                    <div style='display:flex; justify-content: space-between;background-color: #fff; margin: 5px;padding:15px;'>
+                        <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</div>
+                        <div style="text-align:right; font-size:18px;font-weight:600;">$${Number(cartSubtotals.shipping).toFixed(2)}</div>
+                    </div>
+                    <div style='display:flex; justify-content: space-between; background-color: #fff; margin: 5px;padding:15px;'>
+                        <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold;">Taxes:</div>
+                        <div style="text-align:right; font-size: 18px; font-weight: 600;">$${Number(cartSubtotals.taxes).toFixed(2)}</div>
+                    </div>
+                </div>
+                <div style="padding:15px; display:flex; justify-content: space-between; background-color: #fff; border-bottom: 1px solid #868686;">
+                    <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Total:</div>
+                    <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(getTotal(cart, user)).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currency}</span></div>
+                </div>
+                <div style="
+                    width: 100%;
+                    text-align:center;
+                    font-size:18px;
+                    font-weight:800;
+                    font-style: italic; 
+                    margin-top: 10px;"
+                >
+                    Thank you for your order
+                </div>
+            </div>
+        </body>
+    </html>`
+}
+
+// <html>
+//         <body style="color:#083a08; font-family: Lato, Arial, Helvetica, sans-serif; line-height:1.8em;">
+//         <div style="
+//         min-width: 300px;
+//         margin: 0;
+//         padding-left: 15px;
+//         background-color: #fffeee;">                       
+//         <ul style='list-style: none'>
+//             ${itemHtml}
+//         </ul>
+//     </div>
+//                 <div class="orderSummary" style="padding:15px;border-bottom:1px solid #868686">
+//                     <div class="flex-sb">
+//                         <p style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Products Subtotal: </p>
+//                         <p style="text-align:right">$${Number(getSubTotal(cart)).toFixed(2)}${currency}</p>
+//                     </div>
+//                     <div class="flex-sb">
+//                         <p style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</p>
+//                         <p style="text-align:right">$${Number(cartSubtotals.shipping).toFixed(2)}</p>
+//                     </div>
+//                     <div class="flex-sb">
+//                         <p style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Taxes:</p>
+//                         <p style="text-align:right">$${Number(cartSubtotals.taxes).toFixed(2)}</p>
+//                     </div>
+//                 </div>
+//                 <div class="flex-sb" style="padding:15px">
+//                     <h4 style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Total:</h4>
+//                     <p style="text-align:right">$${Number(getTotal(cart, user)).toFixed(2)}${currency}</p>
+//                 </div>
+                
+//                     </div>
+
+//         </body>
+//     </html>
+
+
+
+
+// <li><div style="width: 660px; 
+// height: 100px;
+// border-radius: 3px;
+// background-color: #fff;
+// margin: 15px;">  
+// <div style='font-size: 16px;
+// font-family: 'Metropolis Extra Bold';'>${item.product_quantity}</div> 
+// <div style='max-height: 100px;'>
+//     <p><span style='font-size: 14px; font-weight: 600; max-width: 250px;'>${item.title} ${item.artist?',':''} ${item.artist}</span></p>
+// </div>
+// <div style='font-weight: 600;'>
+//     <p>Product Total: ${(item.price*item.product_quantity).toFixed(2)}${currency}</p>
+// </div>
+// </div></li>

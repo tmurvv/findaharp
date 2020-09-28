@@ -7,6 +7,8 @@ function ShippingCss() {
                 background-color: #fffeee;
                 padding: 15px;
                 font-family: avenir;
+                max-width: 600px;
+                margin: auto;
             }
             .shippingContainer input {
                 padding: 15px;
