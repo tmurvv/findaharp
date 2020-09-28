@@ -4,6 +4,7 @@
 - check for console.loks
 - check for BREAKINk
 - check for debuggek
+- check pages dir for file capitaliztion, should be all lower case
 - is contact form submitting or not submitting as you want 
 - is contact seller form submitting to findaharp or to the seller as you want
 - check next.config.js for deployment environment

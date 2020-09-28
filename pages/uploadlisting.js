@@ -7,7 +7,9 @@ function uploadlisting() {
         <>
             <h1>Upload Harp Listing</h1>           
             <div className='formContainer'>
+                {/* <form action="https://findaharp-api-testing.herokuapp.com/api/v1/uploadlisting" method="post" encType="multipart/form-data"> */}
                 <form action="https://findaharp-api.herokuapp.com/api/v1/uploadlisting" method="post" encType="multipart/form-data">
+                {/* <form action="http://localhost:3000/api/v1/uploadlisting" method="post" encType="multipart/form-data"> */}
                     <div className='inputGroup'>
                         <label name="sellername">Seller Name: </label>
                         <input type="text" name="sellername" defaultValue={`${user.firstname} ${user.lastname}`} disabled />
@@ -18,12 +20,12 @@ function uploadlisting() {
                         <p style={{fontSize: '12px', fontStyle: "italics", color: 'grey', marginTop: '-5px', marginBottom:'-5px'}}>example: "Stunning Gold Aoyama Monarch, 47 strings"</p>
                     </div>
                     <div className='inputGroup'>
-                        <label name="make">Harp Maker: </label>
-                        <input type="text" name="make" />
+                        <label name="make"><span style={{color: 'red'}}>*</span>Harp Maker: </label>
+                        <input type="text" name="make" required/>
                     </div>
                     <div className='inputGroup'>
-                        <label name="model">Harp Model: </label>
-                        <input type="text" name="model" />
+                        <label name="model"><span style={{color: 'red'}}>*</span>Harp Model: </label>
+                        <input type="text" name="model" required/>
                     </div>
                     <div className='inputGroup'>
                         <label name="price">Price: </label>

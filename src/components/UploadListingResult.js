@@ -25,7 +25,7 @@ function UploadListingResult(props) {
                             style={{display: "block"}}
                             type='button' 
                             className='submit-btn submit-btn-tryAgain' 
-                            onClick={()=>Router.push('/loginsignup')}
+                            onClick={()=>Router.push('/userprofile')}
                         >Upload Another</button>
                     </div>
                 </div>
