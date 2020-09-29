@@ -19,7 +19,7 @@ const Findaharp = () => {
         <>
         <div className='index' style={{height: 'fit-content'}}>
         <PageTitle maintitle="Find a Harp Online Store" subtitle='Pre-loved Music, CDs, Digital Downloads' /> 
-        <button style={{width: '30%', margin:'0 35% 40px 35%'}} onClick={()=>Router.push('/')}><a>Back to Harp Listings</a></button>
+        {/* <button style={{width: '30%', margin:'0 35% 40px 35%'}} onClick={()=>Router.push('/')}><a>Back to Harp Listings</a></button> */}
             <div className='store'>
                 <div >
                     <div className="product-list-header" style={{textAlign: 'center', letterSpacing: '2.5px'}}>CDs</div>

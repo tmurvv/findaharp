@@ -20,11 +20,13 @@ function FindaharpOnlineStoreCss() {
             }
             .product-list-header {
                 padding: 10px 25px;
-                background-color: ${cssVariables.greyColour};
+                background-color: #6A75AA;
                 color: white;
                 border-radius: 3px;
                 font-weight: 600;
                 font-size: 24px;
+                width: 60%;
+                margin: auto;
             }
             .product-list-header h3 {
                 font-family: "avenir";
@@ -34,7 +36,6 @@ function FindaharpOnlineStoreCss() {
             .product {
                 background-color: #fff;
                 padding: 15px;
-
             }
             .logo>img {
                 height: 100%;
