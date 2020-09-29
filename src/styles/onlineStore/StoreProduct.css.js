@@ -41,7 +41,7 @@ function StoreProductCss() {
                 padding-right: 5px;
                 width: 97.5%;
                 height: 60px;
-                overflow: scroll;
+                overflow-y: auto;
             }
             .product__image {
                 width: auto;
@@ -80,6 +80,18 @@ function StoreProductCss() {
                     width: 25%;
                     opacity: 0;
                 }
+            }
+            ::-webkit-scrollbar {
+                height: 0px;
+                width: 6px;
+                background: #fff;
+            } 
+            ::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            } 
+            ::-webkit-scrollbar-thumb {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                    background-color: #ffe58a; 
             }
         `}
         </style>

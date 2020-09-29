@@ -44,7 +44,7 @@ const StoreProduct = (props) => {
                 alt={props.product.title} 
                 className="product__image"
             />
-            <div className="product__title" style={{width: '95%', margin: '15px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow: 'scroll'}}>
+            <div className="product__title" style={{width: '95%', margin: '15px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow:'auto'}}>
                 <div style={{fontSize: '20px'}}>{props.product.title}</div>
                 <div style={{fontSize: '16px', fontStyle: 'italic'}}>{props.product.artist?props.product.artist:"_"}</div>
             </div>
