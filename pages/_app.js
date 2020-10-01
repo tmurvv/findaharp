@@ -21,7 +21,7 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
-import CartButton from '../src/components/CartButton';
+import CartButton from '../src/components/onlinestore/CartButton';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';

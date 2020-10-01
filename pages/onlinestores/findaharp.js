@@ -17,21 +17,42 @@ const Findaharp = () => {
     });
     return (
         <>
-        <div className='index' style={{height: 'fit-content'}}>
+        <div className='index' style={{height: 'fit-content', backgroundColor: '#fffeee'}}>
         <PageTitle maintitle="Find a Harp Online Store" subtitle='Pre-loved Music, CDs, Digital Downloads' /> 
-        {/* <button style={{width: '30%', margin:'0 35% 40px 35%'}} onClick={()=>Router.push('/')}><a>Back to Harp Listings</a></button> */}
             <div className='store'>
                 <div >
-                    <div className="product-list-header" style={{textAlign: 'center', letterSpacing: '2.5px'}}>CDs</div>
-                    <div className="product-list">
-                        {FINDAHARP_PRODUCTS.products_cds.map((product, index) => <StoreProduct product={product} key={index}/>)}
+                    <div className='divider'>
+                        <img src='../../img/golden_tapered_line.png' alt="decorative divider"/>
+                    </div>
+                    <div className='product-list-header'>
+                        <h1 className="" style={{textAlign: 'center', letterSpacing: '2.5px'}}>CDs</h1>
+                        <div className="product-list">
+                            {FINDAHARP_PRODUCTS.products_cds.map((product, index) => <StoreProduct product={product} key={index}/>)}
+                        </div>                   
                     </div>
                 </div>
                 {/* <img  id="music"className= 'divider' src="../../../img/purplegrey_tapered_line.png" style={{width: '100%', maxHeight: '7px'}}/> */}
                 <div>
-                    <div className="product-list-header" style={{textAlign:'center', letterSpacing:'2.5px'}}>Preloved Music</div>
-                    <div className="product-list">
-                        {FINDAHARP_PRODUCTS.products_music.map((product, index) => <StoreProduct product={product} key={index}/>)}
+                    <div className='divider'>
+                        <img src='../../img/golden_tapered_line.png' alt="decorative divider"/>
+                    </div>
+                    <div className='product-list-header'>
+                        <h1 className="" style={{textAlign: 'center', letterSpacing: '2.5px'}}>Preloved Music</h1>
+                        <div className="product-list">
+                            {FINDAHARP_PRODUCTS.products_music.map((product, index) => <StoreProduct product={product} key={index}/>)}
+                        </div>                  
+                    </div>
+                </div>
+                <div >
+                    <div className='divider'>
+                        <img src='../../img/golden_tapered_line.png' alt="decorative divider"/>
+                    </div>
+                    <div className='product-list-header'>
+                        <h1 className="" style={{textAlign: 'center', letterSpacing: '2.5px'}}>Digital Downloads</h1>
+                        <div className="product-list" style={{textAlign: 'center', width: '50%', margin: 'auto'}}>
+                            Coming Soon!! Sign up for our newsletter to be notified when digital downloads is up and running. Choose login/profile from the above menu to sign up.
+                            {/* {FINDAHARP_PRODUCTS.products_cds.map((product, index) => <StoreProduct product={product} key={index}/>)} */}
+                        </div>                   
                     </div>
                 </div>
             </div>

@@ -23,6 +23,11 @@ export const STOREPARTNER_PLACEHOLDER = {
     sellerEmail: ''   
 }
 
+export const SHIPPING_CALCULATIONS = {
+    Canada: 15,
+    USA: 20,
+    default: 30
+}
 export const PRODUCTAD_PLACEHOLDER = {
         id: "",
         productFinish: "",
@@ -65,19 +70,15 @@ export const STORE_PARTNERS = [
     <p>Harps Etc. Inc. is staffed by professional harpists with over 75 years of combined experience and knowledge. &nbsp;</p>
     
     <p>We are located in the San Francisco East Bay in beautiful Walnut Creek.&nbsp; Walnut Creek is known as the shopping mecca of the East Bay and is the gateway to the Diablo Valley, Livermore and Napa Valley wine country, Lake Tahoe and Reno.&nbsp; Come visit our store when you are in the area.&nbsp; We’re a 40-minute ride from downtown San Francisco by car or by BART. Harps Etc. Inc. is just a few blocks away from the Walnut Creek BART station and the Ygnacio Valley Rd. exit on Interstate 680.</p>`,
-    
-    
-        
-        // productLongDesc: ` carries most major harp lines including: Lyon & Healy, Salvi, Dusty Strings, Triplett, Music Maker, William Rees, Sharpsicle, Stoney End and others.  We have numerous new and used pedal, lever and lap harps in our showroom.  We also have the ability to order any other harp for you.  In addition to harps, we keep harp cases, strings, sheet music and countless harp accessories available for purchase at our store and online. Harps Etc. Inc. was inspired by our love of the harp, teaching and working with the public.  By combining a storefront location with an online store, the mission at Harps Etc. Inc. is to create greater awareness, access and appreciation of the harp around the world. We are located in the San Francisco East Bay in beautiful Walnut Creek.`,
         productMaker: "Harps Etc.",
         productImageUrl: "/img/storePartners/harpsetc_logo.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'https://harpsetc.com',
         sellerWebsiteText: 'harpsetc.com',
         sellerEmail: 'info@harpsetc.com',
-        onlinestoreUrl: 'storeentry/harpsetc',
+        onlinestoreUrl: 'onlinestores/harpsetc',
         onlinestoreShipsTo: 'US only',
-        onlinestoreBlurb: '<p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
+        onlinestoreBlurb: '<h3>Harps Etc. moving in late October, 2020. Check back soon!! </h3><p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
     },
     {
         id: 'michiganharpcenter',
@@ -126,9 +127,9 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://findaharp.com',
         sellerWebsiteText: 'findaharp.com',
         sellerEmail: 'tisha@findaharp.com',
-        onlinestoreUrl: 'storeentry/findaharp',
-        onlinestoreShipsTo: "anywhere",
-        onlinestoreBlurb: "<ul><li>Pre-loved music</li><li>CDs</li><li>Digital Downloads</li></ul>"
+        onlinestoreUrl: 'onlinestores/findaharp',
+        onlinestoreShipsTo: "International",
+        onlinestoreBlurb: "<ul style='list-style: none; text-align: center'><li>Pre-loved music</li><li>CDs</li><li>Digital Downloads (coming soon)</li></ul>"
     },
     {
         id: 'harpangelstore',
@@ -220,5 +221,20 @@ export const STORE_PARTNERS = [
         onlinestoreUrl: 'storeentry/theharpplace',
         onlinestoreShipsTo: 'US and Canada',
         onlinestoreBlurb: 'Offering digital download music and accessories'
+    },
+    {
+        id: 'underConstruction',
+        sellerCountry: "Canada",
+        sellerRegion: "North America",
+        productTitle: "The Next Harp Store",
+        productLongDesc: "",
+        productMaker: "under construction",
+        productImageUrl: "/img/harpLogo.png",
+        sellerWebsite: '',
+        sellerWebsiteText: '',
+        sellerEmail: '',
+        onlinestoreUrl: 'onlinestores/underconstruction',
+        onlinestoreShipsTo: "We'll find out soon!",
+        onlinestoreBlurb: "<p>Our Harp 'Mini-Mall' is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose login/profile from the above menu to sign up.<p>"
     }
 ];

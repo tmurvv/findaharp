@@ -43,8 +43,8 @@ const StoreDirectory = (props) => {
                     placeholder={false}
                 />
                 <OnlineStorePartner 
-                    key={'theharpplace'} 
-                    product={STORE_PARTNERS[8]} 
+                    key={'underConstruction'} 
+                    product={STORE_PARTNERS[9]} 
                     placeholder={false}
                 />
             </div>

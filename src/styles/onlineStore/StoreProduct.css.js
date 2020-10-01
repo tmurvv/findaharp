@@ -7,7 +7,8 @@ function StoreProductCss() {
                 margin: 30px;
                 width: 45%;
                 text-align: center;
-                max-width: 375px;
+                max-width: 375px;,
+                padding: 15px;
             }
             .productDetails {
                 display: flex;

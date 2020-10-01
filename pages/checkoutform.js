@@ -13,7 +13,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { getTotal } from "../src/utils/checkoutHelpers";
 import IndexCss from "../src/styles/index.css";
-import CheckoutFormCss from "../src/styles/CheckoutForm.css";
+import CheckoutFormCss from "../src/styles/onlinestore/CheckoutForm.css";
 
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);

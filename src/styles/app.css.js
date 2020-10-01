@@ -127,6 +127,10 @@ function AppCss() {
                 width: 90%;
                 height: 7px;
                 margin: auto;
+                background-color: transparent;
+            }
+            .divider img {
+                width: 100%;
             }
             .flex {
                 display: flex;

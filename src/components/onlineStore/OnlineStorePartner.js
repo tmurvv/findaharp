@@ -44,7 +44,7 @@ function OnlineStorePartner(props) {
                 <img src='../../img/golden_tapered_line.png' alt="decorative divider"/>
             </div>
             <div className='enterStore'>
-                <button onClick={()=>Router.push('onlinestores/findaharp')} style={{width:'80%',margin:'auto'}} className='submit-btn'>Enter store here</button>
+                <button onClick={()=>Router.push(partnerStore.onlinestoreUrl)} style={{width:'80%',margin:'auto'}} className='submit-btn'>Enter store here</button>
             </div>        
         </div>
         <OnlineStorePartnerCSS /> 

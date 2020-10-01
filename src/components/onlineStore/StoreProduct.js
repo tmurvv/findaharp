@@ -15,8 +15,10 @@ const StoreProduct = (props) => {
         void e.target.offsetWidth;
         e.target.classList.add("flyToCart");
         // update cart
-        if (cart.findIndex(item=>item.description===e.target.getAttribute('data-item-name'))>-1) {
-            incQty(e, cart, setCart);
+        console.log('handleadd', cart[0], e.target)
+        if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
+            incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+            // incQty(e, cart, setCart);// BREAKING
         } else {
             const cartCopy = [...cart];
             const thisItem = {

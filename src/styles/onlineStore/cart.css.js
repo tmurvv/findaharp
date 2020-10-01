@@ -1,5 +1,5 @@
 import React from "react"; 
-import { cssVariables } from '../constants/cssVariables';
+import { cssVariables } from '../../constants/cssVariables';
 function CartCss() {
     return (
         <style jsx="true">{`
@@ -9,24 +9,15 @@ function CartCss() {
             display: flex;
             flex-direction: row;
         }
-        @media only screen and (min-width: 550px;) {
+        @media only screen and (max-width: 715px) {
             .cartContainer {
                 flex-direction: column;
             }
         }
         #cart {
-            // width: fit-content;
-            // background-color: #ECF0F1;
-            // border: 1px lightgrey solid;
-            // box-shadow: 2px 2px 2px rgba(0,0,0,.3);
-            // position: absolute;
-            // top: 50%;
-            // left: 50%;
-            // transform: translate(-50%, -50%);
-            // z-index: 1000;
+            flex: 7;
             margin-top: -15px;
             height: fit-content;
-            max-width: 600px;
             margin: auto;
         }
         #cart h1 {
@@ -40,11 +31,6 @@ function CartCss() {
             }
         }
         .cartBody {
-            // display: flex;
-            // flex-direction: space-between;
-            // border: 1px lightgrey solid;
-            // box-shadow: 2px 2px 2px rgba(0,0,0,.3);
-            
             padding: 15px;
             margin-top: -50px;
         }

@@ -1,13 +1,13 @@
 import { useContext } from 'react';
-import CartItemCss from '../styles/CartItem.css';
-import { CartContext } from '../contexts/CartContext';
-import { CurrencyContext } from '../contexts/CurrencyContext';
+import CartItemCss from '../../styles/onlineStore/CartItem.css';
+import { CartContext } from '../../contexts/CartContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
 
 import {
     incQty,
     decQty,
     deleteItem
-} from '../utils/storeHelpers';
+} from '../../utils/storeHelpers';
 
 function CartItem(props) {
     const { item } = props;

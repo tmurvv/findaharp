@@ -5,15 +5,6 @@ export const FINDAHARP_PRODUCTS = {
         {
             id: uuid(),
             category: 'cd',
-            title: "Live Test Item", 
-            artist: "",
-            price: '1.50',
-            image: "../../../img/factoryFloor.jpg", 
-            description: "This item is included for testing the strore functionality. Please choose credit card payment and use the following card: '4242 4242 4242 4242 exp. 04/24 CVC 242 zip 42424"
-        },
-        {
-            id: uuid(),
-            category: 'cd',
             title: "A Quiet Afternoon", 
             artist: "Tisha Murvihill",
             price: '15.00',
@@ -38,22 +29,18 @@ export const FINDAHARP_PRODUCTS = {
             image: "../../../img/store/findaharp/cds/ComeJustAs.webp", 
             description: "Come Just As You Are is a follow-up CD to Tisha’s award winning CD, A Quiet Afternoon. The CD features 14 inspirational praise and worship songs including Amazing Grace, Draw Me Close to You, Lord Be Glorified, and You Are My All in All."
         },
-    ],  
-    products_music: [
         {
             id: uuid(),
-            category: 'music', 
-            title: "Christmas Harpist", 
-            artist: "Marylyn Marzuki",
-            price: '5.00', 
-            condition: '6',
-            level: 'Beg-Int',
-            harptype: 'pedal',
-            newprice: '12.95',
-            notes: 'Some markings. Some yellowing from age.',
-            image: "../../../img/store/findaharp/sheetmusic/christmasharpist.jpg", 
-            description: "Beautiful Christmas arrangements for pedal harp."
+            category: 'cd',
+            title: "Live Test Item", 
+            artist: "",
+            price: '1.50',
+            image: "../../../img/factoryFloor.jpg", 
+            description: "This item is included for testing the strore functionality. Please choose credit card payment and use the following card: '4242 4242 4242 4242 exp. 04/24 CVC 242 zip 42424"
         },
+    ],  
+    products_music: [
+        
         {
             id: uuid(),
             artist: 'Rossini',
@@ -79,7 +66,7 @@ export const FINDAHARP_PRODUCTS = {
             newprice: '15.00',
             notes: 'Good shape. No markings. Small water mark in upper l.h. corner.',
             image: "../../../img/store/findaharp/sheetmusic/ravelgreek.jpg", 
-            description: ""
+            description: "A hidden gem. Rarely played, stunning work by Ravel. 5 short melodies from the folk tradition."
         },
         {
             id: uuid(),
@@ -126,15 +113,29 @@ export const FINDAHARP_PRODUCTS = {
         {
             id: uuid(),
             category: 'music', 
-            title: "Canon in D for harp solo or duet", 
-            artist: "Pachelbel/Woods",
+            title: "Christmas Harpist", 
+            artist: "Marylyn Marzuki",
             price: '5.00', 
-            condition: '8',
-            level: 'Int',
-            harptype: 'lever',
-            notes: 'Like new. No markings.',
-            image: "../../../img/store/findaharp/sheetmusic/canonind.jpg", 
-            description: "Versatile arrangement of a classic. Can be played as a solo or with a 2nd harp or with flute or violin."
-        }
+            condition: '6',
+            level: 'Beg-Int',
+            harptype: 'pedal',
+            newprice: '12.95',
+            notes: 'Some markings. Some yellowing from age.',
+            image: "../../../img/store/findaharp/sheetmusic/christmasharpist.jpg", 
+            description: "Beautiful Christmas arrangements for pedal harp."
+        },
+        // {
+        //     id: uuid(),
+        //     category: 'music', 
+        //     title: "Canon in D for harp solo or duet", 
+        //     artist: "Pachelbel/Woods",
+        //     price: '5.00', 
+        //     condition: '8',
+        //     level: 'Int',
+        //     harptype: 'lever',
+        //     notes: 'Like new. No markings.',
+        //     image: "../../../img/store/findaharp/sheetmusic/canonind.jpg", 
+        //     description: "Versatile arrangement of a classic. Can be played as a solo or with a 2nd harp or with flute or violin."
+        // }
     ]   
 }

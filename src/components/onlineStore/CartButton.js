@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import Router from 'next/router';
 
-import { CartContext } from '../contexts/CartContext';
-import CartCss from '../styles/cart.css';
+import { CartContext } from '../../contexts/CartContext';
+import CartCss from '../../styles/onlinestore/cart.css';
 import {
     getNumItems
-} from '../utils/storeHelpers';
+} from '../../utils/storeHelpers';
 
 function CartButton() {
     const { cart } = useContext(CartContext);

@@ -1,7 +1,7 @@
 import React from "react";
 import { cssVariables } from '../../../constants/cssVariables'
 
-function FindaharpOnlineStoreCss() {
+function HarpsEtcOnlineStoreCss() {
     return (
         <style jsx="true">{`
             @media only screen and (max-width: 550px) {
@@ -16,12 +16,17 @@ function FindaharpOnlineStoreCss() {
                 padding-top: 25px;
                 justify-content: space-between;
                 position: relative;
-                background-color: #fffeee;
-                margin-top: -20px;
+                background-color: #fffeee
             }
             .product-list-header {
-                background-color: '#fffeee';
-                padding-top: 30px;
+                padding: 10px 25px;
+                background-color: #6A75AA;
+                color: white;
+                border-radius: 3px;
+                font-weight: 600;
+                font-size: 24px;
+                width: 60%;
+                margin: auto;
             }
             .product-list-header h3 {
                 font-family: "avenir";
@@ -29,7 +34,7 @@ function FindaharpOnlineStoreCss() {
                 text-align: center;
             }
             .product {
-                background-color: #fffeee;
+                background-color: #fff;
                 padding: 15px;
             }
             .logo>img {
@@ -83,4 +88,4 @@ function FindaharpOnlineStoreCss() {
     )
 }
 
-export default FindaharpOnlineStoreCss;
+export default HarpsEtcOnlineStoreCss;
