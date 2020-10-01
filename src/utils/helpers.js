@@ -74,7 +74,7 @@ export function setOpacity(yesNo) {
 }
 export function findSizeWords(strings, type) {
     // short cut if not lever or pedal harp
-    if (type && type=='lever-free') return 'lever-free';
+    if (type && type=='lever-free'&&!strings.toString().toUpperCase().startsWith('WIRE')) return 'lever-free';
     if (strings&&strings.toString().toUpperCase()=='WIRE/CROSS/DOUBLE/TRIPLE') return 'wire/cross/double/triple';
     // strings to number type
     strings = parseInt(strings);
@@ -232,7 +232,7 @@ export function getFilteredProducts(allProducts, allState, user, rate) {
         filteredProducts = filteredProducts.filter(
             product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()
         );
-    if (allState.size&&allState.price.toUpperCase() !== "ALL PRICES") {
+    if (allState.price&&allState.price.toUpperCase() !== "ALL PRICES") { // BREAKING make sure price works
         filteredProducts = filteredProducts.filter(product => product.productPrice&&findPriceRange(product.productPrice, user.currency==="USD"?1:rate)===allState.price);
     }
     // if size all pedal or all lever ready for return

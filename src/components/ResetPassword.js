@@ -75,7 +75,6 @@ function ResetPassword(props) {
             dispatchResultInfo({type: 'OK'});
             clearForm()
         } catch(e) {
-            try{console.log('here', e.message, e.response.data.message)}catch(e){}
             if (e.response&&e.response.data&&e.response.data.data.message&&e.response.data.data.message.includes('verified')) {
                 resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong resetting password.'} Login as guest?`;
                 dispatchResultInfo({type: 'okTryAgain'});
