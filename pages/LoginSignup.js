@@ -290,7 +290,7 @@ function LoginSignup(props) {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
-    });
+    },[]);
     return ( 
        <>
         <div className='login-signup-container'>

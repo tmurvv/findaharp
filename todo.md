@@ -4,6 +4,7 @@
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
+- getTotal, subTotal figure out whether to return string or number, be consistent, toFixed returns string
 - figure out option to dangerinnerhtml in store partners
 - separate store partner program info into a component
 - check do we need to pass all open/close functions to Product

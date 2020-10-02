@@ -4,12 +4,15 @@ import { cssVariables } from '../../../constants/cssVariables'
 function FindaharpOnlineStoreCss() {
     return (
         <style jsx="true">{`
-            @media only screen and (max-width: 550px) {
-                .store {
-                    margin: -20px;
-                }
+            .divider img {
+                max-height: 5px;
             }
-            .product-list {
+            .fah {
+                width: 100%;
+                margin: auto;
+                box-sizing: border-box;
+            }
+            .fahproduct-list {
                 display: flex; 
                 flex-wrap: wrap; 
                 padding: 50px;
@@ -19,34 +22,35 @@ function FindaharpOnlineStoreCss() {
                 background-color: #fffeee;
                 margin-top: -20px;
             }
-            .product-list-header {
+            @media only screen and (max-width: 550px) {
+                .fahproduct-list {
+                    padding: 0px;
+                }
+                
+            }
+            .fahproduct-list-header {
                 background-color: '#fffeee';
                 padding-top: 30px;
             }
-            .product-list-header h3 {
+            .fahproduct-list-header h3 {
                 font-family: "avenir";
                 margin: auto;
                 text-align: center;
             }
-            .product {
+            .fahproduct {
                 background-color: #fffeee;
-                padding: 15px;
             }
-            .logo>img {
+            .fahlogo>img {
                 height: 100%;
             }
-            .flexSB {
-                display: flex;
-                justify-content: space-between;
-            }
-            .copy {
+            .fahcopy {
                 font-size: 12px;
             }
-            .storeButtons {
+            .fahstoreButtons {
                 width: 90%;
                 margin: 50px auto 0;
             }
-            .storeButton {
+            .fahstoreButton {
                 margin:10px;
                 width: 25%;
                 background: #6A75AA;
@@ -62,16 +66,16 @@ function FindaharpOnlineStoreCss() {
                 transition: all 0.2s ease;
                 box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
             }
-            .storeButton a {
+            .fahstoreButton a {
                 transform: scale(1);
             }
             @media only screen and (max-width: 600px) {
-                .storeButton a {
+                .fahstoreButton a {
                     font-size: 12px;
                     
                 }
             }
-            .harpContact {
+            .fahharpContact {
                 position: fixed;
                 top: 50%;
                 left: 50%;

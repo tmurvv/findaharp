@@ -3,12 +3,18 @@ import React from 'react';
 function PaymentCss() {
     return (
         <style jsx="true">{`
-            .shippingContainer {
+            .paymentContainer {
+                max-width: 800px;
+                margin: auto
+            }
+            .paymentshippingContainer {
+                box-sizing: border-box;
                 background-color: #fffeee;
                 padding: 15px;
                 font-family: avenir;
+                width: 100%;
             }
-            .shippingContainer input {
+            .paymentshippingContainer input {
                 padding: 15px;
                 width: 85%;
                 border-radius: 3px;

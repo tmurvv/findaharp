@@ -105,7 +105,7 @@ export default function CheckoutForm() {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-    });
+    },[]);
     return (
         <div className='index' style={{minHeight:"90vh"}}>
             <Results 

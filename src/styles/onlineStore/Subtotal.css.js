@@ -4,7 +4,7 @@ function SubtotalCss() {
     return (
         <style jsx="true">{`
             .subtotal {
-                padding: 15px;
+                // padding: 15px;
             }
         `}
         </style>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { StatusContext } from '../../contexts/StatusContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
@@ -11,7 +11,9 @@ import {
     getSubTotal
 } from '../../utils/storeHelpers';
 import {
-    getTotal
+    getTotal,
+    shipping,
+    tax
 } from '../../utils/checkoutHelpers';
 
 function OrderSummary() {
@@ -20,6 +22,18 @@ function OrderSummary() {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
+    
+    useEffect(() => {
+        if (getNumItems(cart)>0&&user.shippingcountry) {
+            setCartSubtotals({...cartSubtotals, 
+                shipping: shipping(user.shippingcountry), 
+                taxes: 0
+            });
+            if (user.shippingcountry==="Canada"&&user.shippingregion) {
+                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingregion)});
+            }
+        }
+    }, []);
     return (
         <>
              <div className="orderSummary" style={{padding: '15px', borderBottom: '1px solid #868686'}}>

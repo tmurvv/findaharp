@@ -65,7 +65,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                     once={true}
                     offset={300}
                     placeholder={<img src={`/img/golden_harp_full_loading.png`} alt="Image Not Found with store logo" />}
-                >
+                > {/* BREAKING image stretched out */}
                     <img 
                         id={productdetail.id} 
                         src={productdetail.productImageUrl} 

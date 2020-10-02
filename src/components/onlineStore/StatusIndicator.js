@@ -7,7 +7,7 @@ function StatusIndicator() {
     const { status } = useContext(StatusContext);
     return (
         <>
-            <h1 style={{padding: '15px 0 0 15px'}}>Checkout</h1>
+            <h1 style={{margin:'auto',textAlign:'center'}}>Checkout</h1>
             <div className="statusIndicator">
                 <div style={{flex: '1'}}>
                     <div className="statusItem">

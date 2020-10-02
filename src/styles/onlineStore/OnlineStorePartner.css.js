@@ -60,20 +60,22 @@ function OnlineStorePartnerCSS() {
                     width: 60vw;
                 }
             }
-            .productSmallDisplay {
+            .onlineSmallDisplay {
                 display: flex;
                 flex-direction: column;
-                margin: 5px 3px 50px 3px;
                 text-align: center;
                 font-size: 16px;
                 height: 450px;
-                min-width: 360px;
-                max-width: 100%;
-                width: 19%;
+                width: 100%;
+                max-width: 360px;
                 border: 2px solid #f9bf1e;
                 border-radius: 3px;
                 padding: 20px 20px 3px;
                 background-color: #fff;
+                margin: 10px;
+            }
+            @media only screen and (max-width: 550px) {
+                flex-direction: row;
             }
             .shortMode {
                 height: 200px;
@@ -81,10 +83,10 @@ function OnlineStorePartnerCSS() {
                 width: 160px;
             }
             // // BREAKING
-            .productSmallDisplay span {
+            .onlineSmallDisplay .productSmallDisplay span {
                 cursor: pointer;
             }
-            .productSmallDisplay-img {
+            .onlineSmallDisplay .productSmallDisplay-img {
                 flex:6;
                 overflow: hidden;
                 display: flex;
@@ -92,7 +94,7 @@ function OnlineStorePartnerCSS() {
                 align-items: center;
                 margin-bottom: 17px;
             }
-            .productSmallDisplay-img img{
+            .onlineSmallDisplay .productSmallDisplay-img img{
                 height: 267px;
                 width: auto;
                 max-width:100%;
@@ -100,17 +102,17 @@ function OnlineStorePartnerCSS() {
                 object-fit: contain;
                 overflow: hidden;
             }
-            .productSmallDisplay-LongDesc {
+            .onlineSmallDisplay .productSmallDisplay-LongDesc {
                 text-align: left;
                 margin-top: 29px;
                 margin-bottom: 20px;
                 width: 80%;
                 margin: 10px 10%;
             }
-            .productSmallDisplay-LongDesc span {
+            .onlineSmallDisplay .productSmallDisplay-LongDesc span {
                 font-family: 'Metropolis Extra Bold';
             }
-            .productSmallDisplay-text {
+            .onlineSmallDisplay .productSmallDisplay-text {
                 flex: 4;
                 display: flex;
                 flex-direction: column;
@@ -118,7 +120,7 @@ function OnlineStorePartnerCSS() {
                 align-items: center;
                 padding-bottom: 10px;
             }
-            .productSmallDisplay-text p {
+            .onlineSmallDisplay .productSmallDisplay-text p {
                 margin-block-start: 0;
                 margin-block-end: 0;
                 text-align: left;
@@ -127,7 +129,7 @@ function OnlineStorePartnerCSS() {
                 flex: 4;
                 padding-top: 50px;
             }
-            .productSmallDisplay-text p a {
+            .onlineSmallDisplay .productSmallDisplay-text p a {
                 text-decoration: none;
                 cursor: pointer;
                 color: #333333;

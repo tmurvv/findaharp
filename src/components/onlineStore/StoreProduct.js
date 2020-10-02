@@ -11,9 +11,9 @@ const StoreProduct = (props) => {
     const { cart, setCart } = useContext(CartContext);
     function handleAdd(e) {  
         // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
-        e.target.classList.remove("flyToCart");
+        e.target.classList.remove("fahflyToCart");
         void e.target.offsetWidth;
-        e.target.classList.add("flyToCart");
+        e.target.classList.add("fahflyToCart");
         // update cart
         console.log('handleadd', cart[0], e.target)
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
@@ -40,27 +40,27 @@ const StoreProduct = (props) => {
         }
     }
     return (
-        <div className="product">
+        <div className="fahproduct">
             <img 
                 src={props.product.image} 
                 alt={props.product.title} 
-                className="product__image"
+                className="fahproduct__image"
             />
-            <div className="product__title" style={{width: '95%', margin: '15px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow:'auto'}}>
+            <div className="fahproduct__title" style={{width: '95%', margin: '25px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow:'auto'}}>
                 <div style={{fontSize: '20px'}}>{props.product.title}</div>
                 <div style={{fontSize: '16px', fontStyle: 'italic'}}>{props.product.artist?props.product.artist:"_"}</div>
             </div>
-            <p className="product__description">{props.product.description}</p>
+            <p className="fahproduct__description">{props.product.description}</p>
             {props.product.category==='music'
-            ?<div className="productDetails">
+            ?<div className="fahproductDetails">
                 <div><span>Level:</span> {props.product.level}</div>
                 <div><span>Harp Type:</span> {props.product.harptype}</div>
                 <div><span>Condition (1-10):</span> {props.product.condition}</div>
                 <div style={{height: '40px'}}><span>Notes:</span> {props.product.notes}</div>
             </div>
             :''}
-            <div className="product__price-button-container">
-                <div className="product__price">${Number(props.product.price).toFixed(2)}</div>
+            <div className="fahproduct__price-button-container">
+                <div className="fahproduct__price">${Number(props.product.price).toFixed(2)}</div>
                 <button 
                     className='submit-btn'
                     style={{marginTop: '0px', marginBottom: '25px'}}

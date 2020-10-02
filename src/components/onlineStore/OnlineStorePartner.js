@@ -17,10 +17,12 @@ function OnlineStorePartner(props) {
         <div 
             key={partnerStore.id} 
             id={partnerStore.id} 
-            className={`productSmallDisplay`}
+            className={`onlineSmallDisplay`}
             style={props.placeholder?{opacity:'0'}:{}} 
         >
-            <div className={`productSmallDisplay-img`}>
+            <div 
+                className={`productSmallDisplay-img`}
+            >
                 <LazyLoad
                     once={true}
                     offset={300}
@@ -49,7 +51,6 @@ function OnlineStorePartner(props) {
         </div>
         <OnlineStorePartnerCSS /> 
         </>
-
     )
 }
 

@@ -3,12 +3,6 @@ import React from "react";
 function StoreCss() {
     return (
         <style jsx="true">{`
-            @media only screen and (max-width: 550px) {
-                .store {
-                    margin: -20px;
-                }
-            }
-            
             .product-list {
                 display: flex; 
                 flex-wrap: wrap; 
@@ -64,7 +58,6 @@ function StoreCss() {
             @media only screen and (max-width: 600px) {
                 .storeButton a {
                     font-size: 12px;
-                    
                 }
             }
             .harpContact {

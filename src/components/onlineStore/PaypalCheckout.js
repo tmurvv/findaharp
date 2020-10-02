@@ -10,7 +10,11 @@ function PaypalCheckout(props) {
     if (props.method==='paypal') {
         return (
             <>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <form 
+                    action="https://www.paypal.com/cgi-bin/webscr" 
+                    method="post" 
+                    style={{margin:'auto',width:'fit-content',marginTop:'20px'}}
+                >
                     <input type="hidden" name="cmd" value="_xclick"/>
                     <input type="hidden" name="business" value="W6ELYHGQCWECA"/>
                     <input type="hidden" name="lc" value="CA"/>
@@ -23,7 +27,7 @@ function PaypalCheckout(props) {
                     <input type="hidden" name="currency_code" value="CAD"/>
                     <input type="hidden" name="return" value="https://findaharp.com"/>
                     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"/>
-                    <button type="submit" style={{width:'100%',marginTop:'25px auto',backgroundColor:'#fff',boxShadow:'box-shadow: 3px 5px 3px lightgrey;',border:'none'}}><img width='80%' src="../img/PayPal-PayNow-Button-300x61.png" alt="Pay Now with Paypal" /></button>
+                    <button type="submit" style={{width:'fit-content',marginTop:'25px auto',backgroundColor:'#fff',boxShadow:'box-shadow: 3px 5px 3px lightgrey;',border:'none'}}><img style={{width:'100%', maxWidth:'250px'}} src="../img/PayPal-PayNow-Button-300x61.png" alt="Pay Now with Paypal" /></button>
                     {/* <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/> */}
                     {/* <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/> */}
                 </form>

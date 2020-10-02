@@ -7,6 +7,7 @@ import { UserContext } from '../src/contexts/UserContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import CartItem from '../src/components/onlinestore/CartItem';
 import OrderSummary from '../src/components/onlinestore/OrderSummary';
+import Subtotal from '../src/components/onlinestore/Subtotal';
 import { branding } from '../src/constants/branding';
 import { cssVariables } from '../src/constants/cssVariables';
 import CartCss from '../src/styles/onlineStore/cart.css'; 
@@ -17,6 +18,7 @@ import {
 } from '../src/utils/storeHelpers';
 import { getTotal } from '../src/utils/checkoutHelpers';
 import GetZipPostal from '../src/components/onlinestore/GetZipPostal';
+import PageTitle from '../src/components/PageTitle';
 
 
 function Cart(props) {
@@ -26,24 +28,23 @@ function Cart(props) {
     const [screenWidth, setScreenWidth] = useState();
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
-    });
+    }, []);
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-    });
-    console.log(cart[0])
+    }, []);
     return (
         <>
-            <div className="index cartContainer" style={{backgroundColor:'#fff'}}>  
+            <div className='index' style={{width: '100%', backgroundColor: '#fffeee'}}>
+                <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
+                
+            <div className="cartContainer">  
                 <div id='cart'>
                     <div className='cartBody'>
-                        <h1>Your Cart</h1>
+                        {/* <h1>Your Cart</h1> */}
                         {screenWidth<=715
                         ?<div className='subTotal'>
-                            <div className='flexSB'>
-                                <h3>SubTotal:</h3>
-                                <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${getSubTotal(cart).toFixed(2)}</h3>
-                            </div>
+                            <Subtotal type="subtotal"/>
                             <button 
                                 className='submit-btn'
                                 onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
@@ -55,7 +56,7 @@ function Cart(props) {
                         :''}
                     </div>
                     <div className='itemsContainer'>
-                        <h4>Shipping and Tax <br/> calculated at checkout. </h4>
+                        {/* <h4>Shipping and Tax <br/> calculated at checkout. </h4> */}
                     <div className='items'>                       
                         <ul>
                             {cart.length===0?
@@ -85,6 +86,7 @@ function Cart(props) {
             </div>
             <CartCss />
             <IndexCss />
+            </div>
         </>
     )       
 }

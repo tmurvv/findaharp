@@ -3,17 +3,16 @@ import React from 'react';
 function ShippingCss() {
     return (
         <style jsx="true">{`
-            box-sizing:border-box;
             table {
-                border-spacing: 20px;
-                border: 1px solid black;
-                border-collapse: collapse;
                 width: 100%;
+                border-collapse: collapse;
+                box-sizing:border-box;
             }
             td {
                 width: 25%;
             }
             .shippingContainer {
+                box-sizing:border-box;
                 background-color: #fffeee;
                 padding: 30px;
                 font-family: avenir;
@@ -21,23 +20,13 @@ function ShippingCss() {
                 display: flex;
                 width: 100%;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .shippingContainer {
                     display: block;
                 }
             }
-            .whole {
-                width: 100%;
-            }
-            .half {
-                width: 50%;
-            }
-            .quarter {
-                width: 25%;
-            }
             .labelGroup {
                 display: block;
-                // width: 100%;
             }
             .shippingContainer input {
                 width:100%;

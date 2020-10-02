@@ -151,8 +151,7 @@ export default function StripeCheckout(props) {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-        console.log(user)
-    });
+    },[]);
     if (props.method==='stripe') {
         return (
             <>

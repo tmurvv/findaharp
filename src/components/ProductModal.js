@@ -65,9 +65,6 @@ function ProductModal(props) {
     useEffect(() => {
         document.querySelector('.longDesc').innerHTML = `<span>Description</span> ${productLongDesc}`;
     }, []);
-    useEffect(() => {
-        
-    }, []);
     // get currency conversions, if necessary
     useEffect(() => {
         async function getMultiplier() {

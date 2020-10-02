@@ -10,7 +10,7 @@ import ContactCSS from '../src/styles/Contact.css';
 function Contact() {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
-    });
+    },[]);
     return (
         <>
         <Head>

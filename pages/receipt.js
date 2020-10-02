@@ -24,15 +24,15 @@ function Receipt() {
     useEffect(()=>{
        setStatus('completed');
     }, []);
-    return (
+    return ( 
         <>
-            <div style={{backgroundColor: '#fff', marginTop: '-20px', paddingBottom: '25px'}}>
+            <div className='index' style={{backgroundColor: '#fffeee', paddingBottom: '25px'}}>
                 <StatusIndicator />
             </div>
             <div style={{backgroundColor: '#fffeee', padding: '20px 0'}}>
-                <div style={{backgroundColor: '#fff', padding: '20px 0'}} >
+                <div style={{backgroundColor: '#fff', padding: '20px 0', maxWidth: '650px', margin: 'auto'}} >
                     <PageTitle maintitle='Order Completed' subtitle={`A receipt for your order will be emailed to you. Thank you for your order.`} />
-                    <div style={{display: 'flex', justifyContent: 'space-evenly',margin: '50px 0'}}>
+                    <div style={{display: 'flex', justifyContent: 'space-evenly',margin: '50px', maxWidth: '650px'}}>
                         <button style={{width: '30%'}} className='submit-btn' onClick={()=>Router.push('/')}>Back to Harps</button>
                         <button style={{width: '30%'}} className='submit-btn' onClick={()=>Router.push('/storeentry')}>Back to Harp MiniMall</button>
                     </div>
@@ -40,7 +40,6 @@ function Receipt() {
             </div>
             <CartCss />
             <IndexCss />
-            <ProductModalCSS />
         </>
     )       
 }

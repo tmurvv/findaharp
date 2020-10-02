@@ -3,40 +3,40 @@ import React from "react";
 function StoreProductCss() {
     return (
         <style jsx="true">{`
-            .product {
+            .fahproduct {
                 margin: 30px;
                 width: 45%;
                 text-align: center;
                 max-width: 375px;,
                 padding: 15px;
             }
-            .productDetails {
+            .fahproductDetails {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
                 text-align: left;
             }
-            .productDetails div {
+            .fahproductDetails div {
                 font-family: 'Metropolitan Extra Bold';
             }
-            .productDetails span {
+            .fahproductDetails span {
                 font-weight: 800;
             }
             @media only screen and (max-width: 1000px) {
-                .product {
+                .fahproduct {
                     margin: 30px auto;
                     width: 100%;
                 }
             }
             @media only screen and (max-width: 550px) {
-                .product {
+                .fahproduct {
                     display: flex;
                     flex-direction: column;
                     border-bottom: 1px solid lightgrey;
                     margin-bottom: 40px;
                 }
             }
-            .product__description {
+            .fahproduct__description {
                 text-align: justify;
                 margin-bottom: 25px;
                 padding-right: 5px;
@@ -44,31 +44,45 @@ function StoreProductCss() {
                 height: 60px;
                 overflow-y: auto;
             }
-            .product__image {
-                width: auto;
-                height: 350px;
-                margin-top: 20px;
-                max-width: 100%;
-                box-shadow: 3px 5px 3px lightgrey;
+            .fahproduct__image img {
+                width: 100%;
             }
-            .product__price {
+            .fahproduct__image {
+                margin-top: 20px;
+                box-shadow: 3px 5px 3px lightgrey;
+                height: auto;
+                max-width: 100%;
+            }
+            // .music .fahproduct__image {
+            //     margin-top: 20px;
+            //     box-shadow: 3px 5px 3px lightgrey;
+            //     height: 350px;
+            //     width: 250px;
+            //     margin: auto;
+            // }
+            // @media only screen and (max-width:750) {
+            //     .music .fahproduct_image {
+            //         width: 175px;
+            //     }
+            // }
+            .fahproduct__price {
                 margin: 25px 0;
                 width: 100%;
                 text-align: center;
                 font-weight: 600;
             }
-            .product__price-button-container {
+            .fahproduct__price-button-container {
                 order: 4;
             }
-            .flyToCart {
+            .fahflyToCart {
                 position: relative;
-                animation-name: flyToCart;
+                animation-name: fahflyToCart;
                 animation-duration: .75s;  
                 animation-delay: 0;
                 animation-fill-mode: backwards;
                 animation-timing-function: ease-in;
             }
-            @keyframes flyToCart {
+            @keyframes fahflyToCart {
                 from {
                     bottom: 0px;
                     left: 0px;

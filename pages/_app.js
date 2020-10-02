@@ -26,6 +26,7 @@ import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
 import { parseJwt } from '../src/utils/helpers';
+import { getNumItems } from '../src/utils/storeHelpers'
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 const cartOpenInit = false;
@@ -65,7 +66,7 @@ function MyApp(props) {
         return () => {
             Router.events.off('routeChangeComplete', handleRouteChange)
         }
-    }, [])
+    }, []);
 
     // reset window width on window resize
     useEffect(() => {
@@ -76,6 +77,34 @@ function MyApp(props) {
         window.addEventListener('resize', handleResize);
         return () => { window.removeEventListener('resize', handleResize) }
     }, []);
+    // reset window width on window resize
+    useEffect(() => {
+        window.addEventListener("beforeunload", function (e) {
+            if (cart&&getNumItems(cart)>0) confirm("You have items in your cart. They will not be saved. Continue?")
+        });
+    }, []);
+
+    const handleWindowClose = (e) => {
+        if (isDirty) {
+          e.preventDefault();
+          return e.returnValue = 'You have unsaved changes - are you sure you wish to close?';
+        }
+    
+      };
+    
+    useEffect(() => {
+        if (cart&&getNumItems(cart)>0) {
+            window.addEventListener('beforeunload', function (e) { // from MDN
+                
+                // Cancel the event
+                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+                // Chrome requires returnValue to be set
+                e.returnValue = '';
+                
+            });
+        }
+    },[]);
+
     
     // if no user, check for JWT cookie in browser
     useEffect(() => {

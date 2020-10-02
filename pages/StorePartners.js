@@ -24,7 +24,7 @@ export default function StorePartners() {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
-    });
+    },[]);
     return (
         <>
         <Head>

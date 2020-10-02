@@ -5,9 +5,9 @@ import Router from 'next/router';
 // internal
 import ShippingCss from '../src/styles/onlinestore/Shipping.css';
 import StatusIndicator from '../src/components/onlinestore/StatusIndicator';
-import Subtotal from '../src/components/Subtotal';
+import Subtotal from '../src/components/onlinestore/Subtotal';
 import OrderSummary from '../src/components/onlinestore/OrderSummary';
-import GetZipPostal from '../src/components/onlinestore/GetZipPostal';
+import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
@@ -19,7 +19,9 @@ import {
     shipping,
     tax
 } from '../src/utils/checkoutHelpers';
-import { Translate } from '@material-ui/icons';
+import { 
+    getNumItems
+} from '../src/utils/storeHelpers';
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);
@@ -43,6 +45,10 @@ function Shipping() {
                 setChange(true);
                 break
             case 'shippingphone': 
+                setUser({...user, shippingphone: evt.target.value});
+                setChange(true);
+                break
+            case 'shippingaltphone': 
                 setUser({...user, shippingphone: evt.target.value});
                 setChange(true);
                 break
@@ -101,23 +107,48 @@ function Shipping() {
         }
     }
     useEffect(()=>{
-        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-    });
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    },[]);
     const [screenWidth, setScreenWidth] = useState();
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
-    });
+    },[]);
     useEffect(()=>{
         setStatus('shipping');
-    });
+    },[]);
     return (
         <div className='whiteWallPaper'>
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
-                {screenWidth<551?<Subtotal />:''}
+                {screenWidth<551?<div style={{padding: '0 35px'}}><Subtotal type="total"/></div>:''}
+                <h3 style={{marginLeft:'35px',marginBottom:'-10px'}}>Shipping Address</h3>
                 <div className='shippingContainer'>
-                    <form method="get" style={{flex: 7}}>
-                        <table>
+                    {screenWidth>1000
+                    ?<form method="get" style={{flex: 8}}>
+                        <table style={{borderSpacing: '10px'}}>
+                            <tr>
+                                <td colspan='2'>
+                                    <div className='countryDrop'>
+                                        <label htmlFor="country">Country</label>
+                                        <CountryDropdown
+                                            style={{
+                                                minWidth: '100%',
+                                                padding: '15px',
+                                                border: '2px solid black',
+                                                borderRadius: '3px',
+                                                marginBottom: '20px',
+                                                marginTop: '5px'
+                                            }}
+                                            value={user.shippingcountry}
+                                            name='shippingcountry'
+                                            onChange={(val)=> changeCountry(val)} 
+                                        />
+                                    </div>
+                                </td>
+                                <td colspan='2'>
+
+                                </td>
+                            </tr>
                             <tr>
                                 <td colspan='2'>
                                     <div>
@@ -188,7 +219,7 @@ function Shipping() {
                                     </div>
                                 </td>
                                 <td colspan='1'>
-                                    <div>
+                                    <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
                                         <RegionDropdown
                                             style={{
@@ -196,7 +227,7 @@ function Shipping() {
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 minWidth: '100%',
-                                                transform: 'translate(0, -10px)'
+                                                marginTop: '2.5px'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
@@ -221,54 +252,184 @@ function Shipping() {
                                         />
                                     </div>
                                 </td>
-                                
                             </tr>
                             <tr>
                                 <td>
-                                    
+                                    <div>
+                                        <label htmlFor="phone">Phone</label>
+                                        <input type="text" name="shippingphone" value={user.phone} onChange={handleChange} id="phone" />
+                                    </div> 
                                 </td>
                                 <td>
-
+                                    <div>
+                                        <label htmlFor="phone">Alternate Phone</label>
+                                        <input type="text" name="shippingaltphone" value={user.altphone} onChange={handleChange} id="altphone" />
+                                    </div> 
                                 </td>
-                                <td>
-
-                                </td>
-                                <td>
-
-                                </td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table> 
                     </form> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    :<form name='mobile' method="get" style={{flex: 7}}>
+                        <table style={{borderSpacing: '10px'}}>
+                            <tr>
+                                <td colspan='4'>
+                                    <div className='countryDrop'>
+                                        <label htmlFor="country">Country</label>
+                                        <CountryDropdown
+                                            style={{
+                                                minWidth: '100%',
+                                                padding: '15px',
+                                                border: '2px solid black',
+                                                borderRadius: '3px',
+                                                marginBottom: '20px',
+                                                marginTop: '5px'
+                                            }}
+                                            value={user.shippingcountry}
+                                            name='shippingcountry'
+                                            onChange={(val)=> changeCountry(val)} 
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='4'>
+                                    <div>
+                                        <label htmlFor="fname">First Name</label>
+                                        <input 
+                                            type="text" 
+                                            name="fname" 
+                                            value={user.fname} 
+                                            onChange={handleChange} 
+                                            id="fname" 
+                                            required 
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='4'>
+                                    <div>
+                                        <label htmlFor="lname">Last Name</label>
+                                        <input 
+                                            type="text" 
+                                            name="lname" 
+                                            value={user.lname} 
+                                            onChange={handleChange} 
+                                            id="lname" 
+                                            required 
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='4'>
+                                    <label htmlFor="address">Address</label>
+                                    <input 
+                                        type="text" 
+                                        name="address" v
+                                        alue={user.address} 
+                                        onChange={handleChange} 
+                                        id="address" 
+                                        required 
+                                    />
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan='4'>
+                                    <input 
+                                        type="text" 
+                                        name="address2" 
+                                        value={user.address2} 
+                                        onChange={handleChange} 
+                                        id="address2" 
+                                        placeholder="Optional" 
+                                    />
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                <td colspan='4'>
+                                    <div>
+                                        <label htmlFor="city">Town / City</label>
+                                        <input 
+                                            type="text" 
+                                            name="city" 
+                                            value={user.city} 
+                                            onChange={handleChange} 
+                                            id="city" 
+                                            required 
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'>
+                                    <div style={{transform: 'translate(0, -8px)'}}>
+                                        <label htmlFor="shippingRegion">State/Province</label>
+                                        <RegionDropdown
+                                            style={{
+                                                padding: '15px',
+                                                border: '2px solid black',
+                                                borderRadius: '3px',
+                                                minWidth: '100%',
+                                                marginTop: '2.5px'
+                                            }}
+                                            country={user.shippingcountry}
+                                            value={user.shippingregion}
+                                            name='shippingregion'
+                                            defaultOptionLabel='Select State/Province'
+                                            onChange={(val) => {changeRegion(val)}} 
+                                            placeholder='select country, then state/prov/region'
+                                        />
+                                    </div>
+                                </td>
+                                <td colspan='2'>
+                                    <div>
+                                        <label htmlFor="zip_postal">Zip/Postal Code</label>
+                                        <input 
+                                            type="text" 
+                                            name="zip_postal" 
+                                            value={user.zip_postal} 
+                                            onChange={handleChange} 
+                                            id="zip_postal" 
+                                            placeholder="Postcode / Zip" 
+                                            required 
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2'>
+                                    <div>
+                                        <label htmlFor="phone">Phone</label>
+                                        <input type="text" name="shippingphone" value={user.phone} onChange={handleChange} id="phone" />
+                                    </div> 
+                                </td>
+                                <td colspan='2'>
+                                    <div>
+                                        <label htmlFor="phone">Alternate Phone</label>
+                                        <input type="text" name="shippingaltphone" value={user.altphone} onChange={handleChange} id="altphone" />
+                                    </div> 
+                                </td>
+                            </tr>
+                        </table> 
+                    </form>
+                } 
                 <div style={{ flex: 4, backgroundColor: '#fff', marginLeft: '20px' }}>
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
                     <OrderSummary />
-                    {screenWidth>=715
-                    ?<button 
+                    {/* {screenWidth>=715? */}
+                    <button 
                         className='submit-btn'
-                        onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
+                        onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/payment')}
                         style={{fontSize:'15px', fontWeight:'600', padding:'15px'}} //BREAKING needs error message if cart empty
                     >
-                        Continue to Checkout
+                        Continue to Payment
                     </button>
-                    :''}
+                    {/* :''} */}
                 </div>
                 </div>
                 

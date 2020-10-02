@@ -143,7 +143,7 @@ function ResetPassword(props) {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-    });
+    },[]);
     return (
        <>
         <div className='loginReset-signupReset-container'>

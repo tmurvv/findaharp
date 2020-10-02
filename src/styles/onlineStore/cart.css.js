@@ -3,11 +3,12 @@ import { cssVariables } from '../../constants/cssVariables';
 function CartCss() {
     return (
         <style jsx="true">{`
-        // body, ul, h1, h2, h3, form, input, li { margin: 0; padding: 0 }
-       
         .cartContainer {
             display: flex;
             flex-direction: row;
+            justify-content: space-around;
+            margin: auto;
+            margin-bottom: 50px;
         }
         @media only screen and (max-width: 715px) {
             .cartContainer {
@@ -15,10 +16,8 @@ function CartCss() {
             }
         }
         #cart {
-            flex: 7;
             margin-top: -15px;
             height: fit-content;
-            margin: auto;
         }
         #cart h1 {
             margin: -15px auto 20px;
@@ -30,21 +29,13 @@ function CartCss() {
                 // box-shadow: 0;
             }
         }
-        .cartBody {
-            padding: 15px;
-            margin-top: -50px;
-        }
-        @media only screen and (max-width: 600px) {
-            // .cartBody {
-            //     flex-direction: column;
-            // }
-        }
         .itemsContainer {
             background-color: #fffeee;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 20px 10px;
+            max-width: 650px;
         }
         .itemsContainer h4 {
             width: fit-content;

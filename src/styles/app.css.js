@@ -22,6 +22,9 @@ function AppCss() {
                 src: url('./fonts/metropolis_ff/Metropolis-ExtraBold.otf') format('opentype');
             }
             body {
+                -webkit-box-sizing:border-box;
+                -moz-box-sizing:border-box;
+                box-sizing:border-box;
                 overflow-x: hidden;
                 margin: 0;
                 margin-block-end: 0 !important;
@@ -172,12 +175,17 @@ function AppCss() {
                 color: #000;
                 border: none;
                 padding: 10px 7px;
+                outline-color: #fbd960;
+            }
+            .submit-btn:active {
+                outline-color: #fbd960;
             }
             .whiteWallPaper {
+                box-sizing: border-box;
                 width: 100%;
                 height: 100%;
                 background-color: #fffeee;
-                margin-top: -20px;
+                padding-top: 50px;
             }
         `}
         </style>

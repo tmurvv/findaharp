@@ -127,7 +127,7 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://findaharp.com',
         sellerWebsiteText: 'findaharp.com',
         sellerEmail: 'tisha@findaharp.com',
-        onlinestoreUrl: 'onlinestores/findaharp',
+        onlinestoreUrl: '/findaharp',
         onlinestoreShipsTo: "International",
         onlinestoreBlurb: "<ul style='list-style: none; text-align: center'><li>Pre-loved music</li><li>CDs</li><li>Digital Downloads (coming soon)</li></ul>"
     },

@@ -4,11 +4,6 @@ import { cssVariables } from '../../../constants/cssVariables'
 function HarpsEtcOnlineStoreCss() {
     return (
         <style jsx="true">{`
-            @media only screen and (max-width: 550px) {
-                .store {
-                    margin: -20px;
-                }
-            }
             .product-list {
                 display: flex; 
                 flex-wrap: wrap; 

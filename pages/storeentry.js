@@ -9,7 +9,7 @@ import OnlineStorePartner from '../src/components/onlinestore/OnlineStorePartner
 import PageTitle from '../src/components/PageTitle';
 import ContactUsForm from '../src/components/ContactUsForm';
 import IndexCss from '../src/styles/index.css';
-import StoreDirectoryCSS from '../src/styles/onlinestore/StoreDirectory.css';
+import StoreDirectoryCSS from '../src/styles/onlineStore/StoreDirectory.css';
 
 const StoreDirectory = (props) => {
     const [ view, setView ] = useState('harps')
@@ -26,12 +26,12 @@ const StoreDirectory = (props) => {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
-    });
+    },[]);
     return (
         <>
         <div className='index' style={{height: 'fit-content'}}>
             <PageTitle maintitle="Store Partner MiniMall" subtitle='Music, Strings, and Accessories Available Here' />  
-            <div style={{display:'flex',justifyContent:'space-evenly',flexWrap:'wrap'}}>
+            <div className='storeEntriesContainer'>
                 <OnlineStorePartner 
                     key={'harpsetc'} 
                     product={STORE_PARTNERS[0]} 
