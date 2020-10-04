@@ -13,6 +13,7 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+- country/region not styled on ios
 - get NavBar to show Name (doesn't work on cookie check)
 - When update user encounters problem on backend, spinner persists, needs to show error message
 - if no user, userProfile needs to divert to login

@@ -37,6 +37,9 @@ function OnlineStorePartner(props) {
                     />
                 </LazyLoad>
             </div>
+            <div className='buyerDivider'>
+                <img src='../../img/golden_tapered_line.png' alt="decorative divider"/>
+            </div>
             <div className={`grid-item productSmallDisplay-text`}>
                 <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerStore.onlinestoreBlurb}} /> 
                 <div>Ships: {partnerStore.onlinestoreShipsTo}</div>

@@ -78,7 +78,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'info@harpsetc.com',
         onlinestoreUrl: 'onlinestores/harpsetc',
         onlinestoreShipsTo: 'US only',
-        onlinestoreBlurb: '<h3>Harps Etc. moving in late October, 2020. Check back soon!! </h3><p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
+        onlinestoreBlurb: '<h3 style="text-align:center">Harps Etc. moving in late October, 2020. Check back soon!! </h3><p>We offer a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations. </p>'
     },
     {
         id: 'michiganharpcenter',
@@ -129,7 +129,7 @@ export const STORE_PARTNERS = [
         sellerEmail: 'tisha@findaharp.com',
         onlinestoreUrl: '/findaharp',
         onlinestoreShipsTo: "International",
-        onlinestoreBlurb: "<ul style='list-style: none; text-align: center'><li>Pre-loved music</li><li>CDs</li><li>Digital Downloads (coming soon)</li></ul>"
+        onlinestoreBlurb: "<h3 style='text-align: center'>Find a Harp Online Store</br>Available now:</h3><ul style='list-style: none; text-align: center'><li>&bull;&nbsp;Pre-loved music</li><li>&bull;&nbsp;CDs</li><li>&bull;&nbsp;Digital Downloads (coming soon)</li></ul>"
     },
     {
         id: 'harpangelstore',
@@ -227,7 +227,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "Canada",
         sellerRegion: "North America",
         productTitle: "The Next Harp Store",
-        productLongDesc: "",
+        productLongDesc: "Look here for the next harp store to be added!",
         productMaker: "under construction",
         productImageUrl: "/img/harpLogo.png",
         sellerWebsite: '',
@@ -235,6 +235,6 @@ export const STORE_PARTNERS = [
         sellerEmail: '',
         onlinestoreUrl: 'onlinestores/underconstruction',
         onlinestoreShipsTo: "We'll find out soon!",
-        onlinestoreBlurb: "<p>Our Harp 'Mini-Mall' is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose login/profile from the above menu to sign up.<p>"
+        onlinestoreBlurb: "<p><strong>Our Harp 'Mini-Mall'</strong> is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose login/profile from the above menu to sign up.<p>"
     }
 ];

@@ -29,18 +29,17 @@ export const FINDAHARP_PRODUCTS = {
             image: "../../../img/store/findaharp/cds/ComeJustAs.webp", 
             description: "Come Just As You Are is a follow-up CD to Tisha’s award winning CD, A Quiet Afternoon. The CD features 14 inspirational praise and worship songs including Amazing Grace, Draw Me Close to You, Lord Be Glorified, and You Are My All in All."
         },
-        {
-            id: uuid(),
-            category: 'cd',
-            title: "Live Test Item", 
-            artist: "",
-            price: '1.50',
-            image: "../../../img/factoryFloor.jpg", 
-            description: "This item is included for testing the strore functionality. Please choose credit card payment and use the following card: '4242 4242 4242 4242 exp. 04/24 CVC 242 zip 42424"
-        },
+        // {
+        //     id: uuid(),
+        //     category: 'cd',
+        //     title: "Live Test Item", 
+        //     artist: "",
+        //     price: '1.50',
+        //     image: "../../../img/factoryFloor.jpg", 
+        //     description: "This item is included for testing the strore functionality. Please choose credit card payment and use the following card: '4242 4242 4242 4242 exp. 04/24 CVC 242 zip 42424"
+        // },
     ],  
     products_music: [
-        
         {
             id: uuid(),
             artist: 'Rossini',

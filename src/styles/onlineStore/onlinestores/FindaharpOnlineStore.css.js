@@ -17,7 +17,7 @@ function FindaharpOnlineStoreCss() {
                 flex-wrap: wrap; 
                 padding: 50px;
                 padding-top: 25px;
-                justify-content: space-between;
+                justify-content: space-around;
                 position: relative;
                 background-color: #fffeee;
                 margin-top: -20px;

@@ -1,6 +1,5 @@
 // packages
 import { useState, useEffect } from 'react';
-import uuid from 'react-uuid';
 
 // internal
 import { STORE_PARTNERS } from '../src/constants/constants';
@@ -9,9 +8,9 @@ import OnlineStorePartner from '../src/components/onlinestore/OnlineStorePartner
 import PageTitle from '../src/components/PageTitle';
 import ContactUsForm from '../src/components/ContactUsForm';
 import IndexCss from '../src/styles/index.css';
-import StoreDirectoryCSS from '../src/styles/onlineStore/StoreDirectory.css';
+import StoreEntryCSS from '../src/styles/onlineStore/StoreEntry.css';
 
-const StoreDirectory = (props) => {
+const StoreEntry = (props) => {
     const [ view, setView ] = useState('harps')
     const [ contactUsForm, setContactUsForm ] = useState(false);
     const [ harpName, setHarpName ] = useState(false);
@@ -33,13 +32,13 @@ const StoreDirectory = (props) => {
             <PageTitle maintitle="Store Partner MiniMall" subtitle='Music, Strings, and Accessories Available Here' />  
             <div className='storeEntriesContainer'>
                 <OnlineStorePartner 
-                    key={'harpsetc'} 
-                    product={STORE_PARTNERS[0]} 
+                    key={'findaharp'} 
+                    product={STORE_PARTNERS[3]} 
                     placeholder={false}
                 />
                 <OnlineStorePartner 
-                    key={'findaharp'} 
-                    product={STORE_PARTNERS[3]} 
+                    key={'harpsetc'} 
+                    product={STORE_PARTNERS[0]} 
                     placeholder={false}
                 />
                 <OnlineStorePartner 
@@ -49,8 +48,8 @@ const StoreDirectory = (props) => {
                 />
             </div>
         </div>
-        <StoreDirectoryCSS />
+        <StoreEntryCSS />
         </>
     )
 }
-export default StoreDirectory;
+export default StoreEntry;

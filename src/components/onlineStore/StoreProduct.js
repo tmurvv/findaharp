@@ -18,7 +18,7 @@ const StoreProduct = (props) => {
         console.log('handleadd', cart[0], e.target)
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             incQty(cart, setCart, e.target.getAttribute('data-item-title'));
-            // incQty(e, cart, setCart);// BREAKING
+            // incQty(e, cart, setCart);// BREAKING investigate why this is marked breaking
         } else {
             const cartCopy = [...cart];
             const thisItem = {
@@ -41,11 +41,14 @@ const StoreProduct = (props) => {
     }
     return (
         <div className="fahproduct">
-            <img 
-                src={props.product.image} 
-                alt={props.product.title} 
-                className="fahproduct__image"
-            />
+            <div height='50%'>
+                <img 
+                    src={props.product.image} 
+                    alt={props.product.title} 
+                    className="fahproduct__image"
+                />
+            </div>
+            
             <div className="fahproduct__title" style={{width: '95%', margin: '25px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow:'auto'}}>
                 <div style={{fontSize: '20px'}}>{props.product.title}</div>
                 <div style={{fontSize: '16px', fontStyle: 'italic'}}>{props.product.artist?props.product.artist:"_"}</div>

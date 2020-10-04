@@ -17,13 +17,20 @@ const UnderConstruction = () => {
     },[]);
     return (
         <>
-            <div className='index' style={{height: 'fit-content'}}>
+            <div className='index' style={{height: 'fit-content', padding: '15px'}}>
                 <PageTitle maintitle="The Next Harp Store" subtitle='This Space Under Construction' /> 
             
                 <div className='store' style={{width: '50%', paddingBottom: '50px', margin: 'auto', textAlign: 'center'}}>
                     <h3>Coming Soon!</h3>
                     Our Harp 'Mini-Mall' is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose login/profile from the above menu to sign up.
                 </div>
+                <button onClick={()=>Router.push('/storeentry')}
+                    className='submit-btn'
+                    style={{
+                        margin: 'auto',
+                        marginBottom: '50px',
+                    }}>Back to MiniMall
+                </button>
             </div>
             <IndexCss />
             <HarpsEtcOnlineStoreCss />

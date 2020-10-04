@@ -4,19 +4,19 @@ import uuid from 'react-uuid';
 import Router from 'next/router';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import CheckoutCss from '../src/styles/checkout.css';
-import { CartContext } from '../src/contexts/CartContext';
-import { UserContext } from '../src/contexts/UserContext';
+import { CartContext } from '../../contexts/CartContext';
+import { UserContext } from '../../contexts/UserContext';
 import {
     getNumItems,
     getSubTotal
-} from '../src/utils/storeHelpers';
+} from '../storeHelpers';
 import { 
     selectCountry,
     selectRegion,
     shipping,
     tax,
     getTotal
-} from '../src/utils/checkoutHelpers';
+} from '../checkoutHelpers';
 
 function Checkout(props) {
     const { cart, setCart } = useContext(CartContext);

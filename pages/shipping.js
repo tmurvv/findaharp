@@ -20,7 +20,7 @@ import {
     tax
 } from '../src/utils/checkoutHelpers';
 import { 
-    getNumItems
+    getNumItems, getSubTotal
 } from '../src/utils/storeHelpers';
 
 function Shipping() {
@@ -29,7 +29,12 @@ function Shipping() {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
-    
+    const [ readyToContinue, setEeadyToContinue ]  = useState(false);
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/payment')
+    }
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'fname': 
@@ -123,34 +128,41 @@ function Shipping() {
                 {screenWidth<551?<div style={{padding: '0 35px'}}><Subtotal type="total"/></div>:''}
                 <h3 style={{marginLeft:'35px',marginBottom:'-10px'}}>Shipping Address</h3>
                 <div className='shippingContainer'>
+                <form 
+                    method="get" 
+                    onSubmit={(e)=>handleSubmit(e)}
+                >
                     {screenWidth>1000
-                    ?<form method="get" style={{flex: 8}}>
-                        <table style={{borderSpacing: '10px'}}>
+                    ?
+                        <table style={{borderSpacing: '10px', flex:'12'}}>
                             <tr>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div className='countryDrop'>
                                         <label htmlFor="country">Country</label>
                                         <CountryDropdown
+                                            classes="dropDown"
                                             style={{
                                                 minWidth: '100%',
                                                 padding: '15px',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 marginBottom: '20px',
-                                                marginTop: '5px'
+                                                marginTop: '5px',
+                                                backgroundColor: '#fff'
                                             }}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
+                                            required
                                         />
                                     </div>
                                 </td>
-                                <td colspan='2'>
+                                <td colSpan='2'>
 
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div>
                                         <label htmlFor="fname">First Name</label>
                                         <input 
@@ -163,13 +175,13 @@ function Shipping() {
                                         />
                                     </div>
                                 </td>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div>
                                         <label htmlFor="lname">Last Name</label>
                                         <input 
                                             type="text" 
                                             name="lname" 
-                                            value={user.lname} 
+                                            value={user.lname}
                                             onChange={handleChange} 
                                             id="lname" 
                                             required 
@@ -178,7 +190,7 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <label htmlFor="address">Address</label>
                                     <input 
                                         type="text" 
@@ -192,7 +204,7 @@ function Shipping() {
                                 
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <input 
                                         type="text" 
                                         name="address2" 
@@ -205,7 +217,7 @@ function Shipping() {
                                 
                             </tr>
                             <tr>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div>
                                         <label htmlFor="city">Town / City</label>
                                         <input 
@@ -218,16 +230,18 @@ function Shipping() {
                                         />
                                     </div>
                                 </td>
-                                <td colspan='1'>
+                                <td colSpan='1'>
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
                                         <RegionDropdown
+                                            className="dropDown"
                                             style={{
                                                 padding: '15px',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 minWidth: '100%',
-                                                marginTop: '2.5px'
+                                                marginTop: '2.5px',
+                                                backgroundColor: '#fff'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
@@ -238,7 +252,7 @@ function Shipping() {
                                         />
                                     </div>
                                 </td>
-                                <td colspan='1'>
+                                <td colSpan='1'>
                                     <div>
                                         <label htmlFor="zip_postal">Zip/Postal Code</label>
                                         <input 
@@ -270,21 +284,22 @@ function Shipping() {
                                 <td></td>
                             </tr>
                         </table> 
-                    </form> 
-                    :<form name='mobile' method="get" style={{flex: 7}}>
-                        <table style={{borderSpacing: '10px'}}>
+                     
+                    :<table style={{borderSpacing: '10px', flex:'8'}}>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <div className='countryDrop'>
                                         <label htmlFor="country">Country</label>
                                         <CountryDropdown
+                                            className="dropDown"
                                             style={{
                                                 minWidth: '100%',
                                                 padding: '15px',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 marginBottom: '20px',
-                                                marginTop: '5px'
+                                                marginTop: '5px',
+                                                backgroundColor: '#fff'
                                             }}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
@@ -294,7 +309,7 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <div>
                                         <label htmlFor="fname">First Name</label>
                                         <input 
@@ -309,7 +324,7 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <div>
                                         <label htmlFor="lname">Last Name</label>
                                         <input 
@@ -324,12 +339,12 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <label htmlFor="address">Address</label>
                                     <input 
                                         type="text" 
-                                        name="address" v
-                                        alue={user.address} 
+                                        name="address"
+                                        value={user.address} 
                                         onChange={handleChange} 
                                         id="address" 
                                         required 
@@ -338,7 +353,7 @@ function Shipping() {
                                 
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <input 
                                         type="text" 
                                         name="address2" 
@@ -351,7 +366,7 @@ function Shipping() {
                                 
                             </tr>
                             <tr>
-                                <td colspan='4'>
+                                <td colSpan='4'>
                                     <div>
                                         <label htmlFor="city">Town / City</label>
                                         <input 
@@ -366,27 +381,29 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
                                         <RegionDropdown
+                                            className="dropDown"
                                             style={{
                                                 padding: '15px',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 minWidth: '100%',
-                                                marginTop: '2.5px'
+                                                marginTop: '2.5px',
+                                                backgroundColor: '#fff'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
                                             name='shippingregion'
                                             defaultOptionLabel='Select State/Province'
                                             onChange={(val) => {changeRegion(val)}} 
-                                            placeholder='select country, then state/prov/region'
+                                            required
                                         />
                                     </div>
                                 </td>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div>
                                         <label htmlFor="zip_postal">Zip/Postal Code</label>
                                         <input 
@@ -402,13 +419,13 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div>
                                         <label htmlFor="phone">Phone</label>
                                         <input type="text" name="shippingphone" value={user.phone} onChange={handleChange} id="phone" />
                                     </div> 
                                 </td>
-                                <td colspan='2'>
+                                <td colSpan='2'>
                                     <div>
                                         <label htmlFor="phone">Alternate Phone</label>
                                         <input type="text" name="shippingaltphone" value={user.altphone} onChange={handleChange} id="altphone" />
@@ -416,7 +433,7 @@ function Shipping() {
                                 </td>
                             </tr>
                         </table> 
-                    </form>
+                    
                 } 
                 <div style={{ flex: 4, backgroundColor: '#fff', marginLeft: '20px' }}>
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
@@ -424,13 +441,16 @@ function Shipping() {
                     {/* {screenWidth>=715? */}
                     <button 
                         className='submit-btn'
-                        onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/payment')}
-                        style={{fontSize:'15px', fontWeight:'600', padding:'15px'}} //BREAKING needs error message if cart empty
+                        type='submit'
+                        
+                        style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
+                        // disabled={!readyToContinue}
                     >
                         Continue to Payment
                     </button>
                     {/* :''} */}
                 </div>
+                </form>
                 </div>
                 
                 <ShippingCss />

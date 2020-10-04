@@ -113,7 +113,7 @@ function MyApp(props) {
             try {
                 jwtToken = document.cookie.split('; ').find(row => row.startsWith('JWT')).split('=')[1];
             } catch(e) {
-                // JWT not found
+                // if JWT not found, just continue
             }
             if (jwtToken) {
                 const userId = parseJwt(jwtToken).id;

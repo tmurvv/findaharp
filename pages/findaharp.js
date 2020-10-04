@@ -38,7 +38,7 @@ const Findaharp = () => {
                     </div>
                     <div className='fahproduct-list-header'>
                         <h1 className="" style={{textAlign: 'center', letterSpacing: '2.5px'}}>Preloved Music</h1>
-                        <div className="fahproduct-list music">
+                        <div className="fahproduct-list">
                             {FINDAHARP_PRODUCTS.products_music.map((product, index) => <StoreProduct product={product} key={index}/>)}
                         </div>                  
                     </div>

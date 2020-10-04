@@ -1,4 +1,4 @@
-function StoreDirectoryCSS() {
+function StoreEntryCSS() {
     return ( 
         <style jsx="true">{`
             .storeEntriesContainer {
@@ -89,7 +89,6 @@ function StoreDirectoryCSS() {
             //     min-width: 160px;
             //     width: 160px;
             // }
-            // // // BREAKING
             // .productSmallDisplay span {
             //     cursor: pointer;
             // }
@@ -218,4 +217,4 @@ function StoreDirectoryCSS() {
     )
 }
 
-export default StoreDirectoryCSS;
+export default StoreEntryCSS;

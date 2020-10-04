@@ -9,6 +9,7 @@ function StoreProductCss() {
                 text-align: center;
                 max-width: 375px;,
                 padding: 15px;
+                height: 700px;
             }
             .fahproductDetails {
                 display: flex;
@@ -44,13 +45,13 @@ function StoreProductCss() {
                 height: 60px;
                 overflow-y: auto;
             }
-            .fahproduct__image img {
-                width: 100%;
-            }
             .fahproduct__image {
+               
+                
+                height:350px;
+            
                 margin-top: 20px;
                 box-shadow: 3px 5px 3px lightgrey;
-                height: auto;
                 max-width: 100%;
             }
             // .music .fahproduct__image {

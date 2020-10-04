@@ -1,40 +1,24 @@
 import { useContext } from 'react';
-import axios from 'axios';
 
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import { StatusContext } from '../../contexts/StatusContext';
-import { CurrencyContext } from '../../contexts/CurrencyContext';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
-import {
-    getNumItems,
-    getSubTotal
-} from '../../utils/storeHelpers';
 import { 
-    selectCountry,
     selectRegion,
-    getTotal, 
-    shipping,
     tax
 } from '../../utils/checkoutHelpers';
 
 function GetPostalZip() {
-    const { status } = useContext(StatusContext);
-    const { currency } = useContext(CurrencyContext);
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
 
-    const handleChange = (evt) => {
-        setUser({...user, shippingzip_postal: evt.target.value});
-    }
     const handleCountryChange = (val) => {
         if (!val) return alert('Please select country.');
         setUser({...user, shippingcountry: val})
-        console.log('here', user.shippingcountry)
         switch(val) {
             case 'Canada':
                 setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
@@ -71,7 +55,8 @@ function GetPostalZip() {
                         border: '2px solid black',
                         borderRadius: '3px',
                         marginBottom: '20px',
-                        marginTop: '5px'
+                        marginTop: '5px',
+                        backgroundColor: '#fff'
                     }}
                     value={user.shippingcountry}
                     name='shippingcountry'
@@ -88,7 +73,8 @@ function GetPostalZip() {
                         border: '2px solid black',
                         borderRadius: '3px',
                         marginBottom: '20px',
-                        marginTop: '5px'
+                        marginTop: '5px',
+                        backgroundColor: '#fff'
                     }}
                     country={user.shippingcountry}
                     value={user.shippingregion}
@@ -98,20 +84,6 @@ function GetPostalZip() {
                 />
             </div>
             :''}
-            {/* <label htmlFor="zip_postal">Zip/Postal Code</label>
-            <input 
-                style={{padding: '10px',
-                    width: '150px',
-                    borderRadius: '3px',
-                    marginTop: '10px',
-                    marginBottom: '30px',
-                    display:'block'}}
-                onChange={(e)=>handleChange(e)}
-                name='zip_postal'
-                value={user.shippingzip_postal?user.shippingzip_postal:''}
-            />
-            <button className='submit-btn' type='button' onClick={()=>handleSubmit()}>Submit</button>
-            </form> */}
             <ShippingCss />
         </div>
     )

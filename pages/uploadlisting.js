@@ -2,14 +2,15 @@ import React, { useContext, useEffect } from 'react';
 
 import { UserContext } from '../src/contexts/UserContext';
 // display cart??
-useEffect(()=>{
-    if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-},[]);
+// useEffect(()=>{
+//     if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
+// },[]);
 function uploadlisting() {
     const { user } = useContext(UserContext);
     return (
         <>
-            <h1>Upload Harp Listing</h1>           
+            <h1>BREAKING -- this component causing a build error. Needs to be debugged.</h1>
+            {/* <h1>Upload Harp Listing</h1>           
             <div className='formContainer'>
                 <form action="https://findaharp-api.herokuapp.com/api/v1/uploadlisting" method="post" encType="multipart/form-data">
                     <div className='inputGroup'>
@@ -103,7 +104,7 @@ function uploadlisting() {
                     height: 100%;
                 }
             `}
-            </style>
+            </style> */}
         </>
     )
 }

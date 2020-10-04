@@ -53,7 +53,7 @@ export default function StripeCheckout(props) {
                     },
                     // body: JSON.stringify({items: [{ id: "xl-tshirt" }]}) // Format for listing all stripe items
                     body: JSON.stringify({"total": getTotal(cart, user)*100})
-                })
+                }) 
                 .then(res => {
                     return res.json();
                 })
@@ -64,7 +64,7 @@ export default function StripeCheckout(props) {
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
-           console.log('cart total null or 0'); // BREAKING need user error message
+            alert('Total owed is $0.00. Please try again. If problem persists, please send an email via the contact page.');
             Router.push('/');
         }
     }, []);
@@ -119,25 +119,18 @@ export default function StripeCheckout(props) {
             }
             // email receipt
             try {
-                await axios.post(`http://localhost:3000/api/v1/sendreceipt`, receipt);
+                await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
                 Router.push('/receipt')
             } catch (e) {
-                alert(e.message)
-                alert('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.')
+                alert(e.message, 'Error emailing receipt, but order has been placed successfully.Please contact orders@findaharp.com to have a receipt emailed.') // BREAKING
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
                 Router.push('/receipt')
             }
-            
-            // take customer to receipt page
-            
-            // BREAKING needs success dialog
-            // resultText.innerText=`Payment Successful.`;
-            // dispatchResultInfo({type: 'OK'});
         }
     };
     function resetResults() {
@@ -183,21 +176,18 @@ export default function StripeCheckout(props) {
                     )}
                     {/* Show a success message upon completion */}
                     <p className={succeeded ? "result-message" : "result-message hidden"}>
-                        Payment succeeded, see the result in your
-                        <a
+                        Payment succeeded... loading...
+                        {/* <a
                         href={`https://dashboard.stripe.com/test/payments`}
                         >
                         {" "}
                         Stripe dashboard.
-                        </a> Refresh the page to pay again.
+                        </a> Refresh the page to pay again. */}
                     </p>
-                    
                 </form>
-               
                 <IndexCss />
                 <CheckoutFormCss />
                 <ShippingCss />
-                
             </>
         );
     } else {

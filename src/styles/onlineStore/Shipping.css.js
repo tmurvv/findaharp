@@ -4,9 +4,16 @@ function ShippingCss() {
     return (
         <style jsx="true">{`
             table {
-                width: 100%;
                 border-collapse: collapse;
                 box-sizing:border-box;
+            }
+            .dropDown {
+                padding: '15px',
+                border: '2px solid black',
+                borderRadius: '3px',
+                minWidth: '100%',
+                marginTop: '2.5px',
+                backgroundColor: '#fff'
             }
             td {
                 width: 25%;
@@ -17,11 +24,14 @@ function ShippingCss() {
                 padding: 30px;
                 font-family: avenir;
                 margin: auto;
-                display: flex;
                 width: 100%;
             }
+            .shippingContainer>form {
+                display: flex;
+                // width: 100%;
+            }
             @media only screen and (max-width: 750px) {
-                .shippingContainer {
+                .shippingContainer>form{
                     display: block;
                 }
             }

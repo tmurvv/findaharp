@@ -70,7 +70,7 @@ function OnlineStorePartnerCSS() {
                 max-width: 360px;
                 border: 2px solid #f9bf1e;
                 border-radius: 3px;
-                padding: 20px 20px 3px;
+                padding: 30px 20px 3px;
                 background-color: #fff;
                 margin: 10px;
             }
@@ -82,12 +82,11 @@ function OnlineStorePartnerCSS() {
                 min-width: 160px;
                 width: 160px;
             }
-            // // BREAKING
             .onlineSmallDisplay .productSmallDisplay span {
                 cursor: pointer;
             }
             .onlineSmallDisplay .productSmallDisplay-img {
-                flex:6;
+                flex:4;
                 overflow: hidden;
                 display: flex;
                 justify-content: center;
@@ -113,7 +112,7 @@ function OnlineStorePartnerCSS() {
                 font-family: 'Metropolis Extra Bold';
             }
             .onlineSmallDisplay .productSmallDisplay-text {
-                flex: 4;
+                flex: 6;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
