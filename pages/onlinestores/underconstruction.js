@@ -22,7 +22,7 @@ const UnderConstruction = () => {
             
                 <div className='store' style={{width: '50%', paddingBottom: '50px', margin: 'auto', textAlign: 'center'}}>
                     <h3>Coming Soon!</h3>
-                    Our Harp 'Mini-Mall' is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose login/profile from the above menu to sign up.
+                    Our Harp 'Mini-Mall' is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose Login/Profile from the above menu to sign up.
                 </div>
                 <button onClick={()=>Router.push('/storeentry')}
                     className='submit-btn'

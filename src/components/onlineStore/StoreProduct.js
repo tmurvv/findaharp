@@ -5,10 +5,12 @@ import {
     incQty
 } from '../../utils/storeHelpers';
 import { CartContext } from '../../contexts/CartContext';
+import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
 
 const StoreProduct = (props) => {
     const { cart, setCart } = useContext(CartContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     function handleAdd(e) {  
         // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
         e.target.classList.remove("fahflyToCart");
@@ -24,7 +26,8 @@ const StoreProduct = (props) => {
             const thisItem = {
                 id: uuid(), 
                 title: e.target.getAttribute('data-item-title'),
-                artist: e.target.getAttribute('data-item-artist'),
+                artist: e.target.getAttribute('data-item-artist_first'),
+                artist: e.target.getAttribute('data-item-artist_last'),
                 description: e.target.getAttribute('data-item-description'), 
                 price: e.target.getAttribute('data-item-price'), 
                 condition: e.target.getAttribute('data-item-condition'),
@@ -37,46 +40,48 @@ const StoreProduct = (props) => {
             }
             cartCopy.push(thisItem);
             setCart(cartCopy);
+            setCartSubtotals({...cartSubtotals, currentStore: 'findaharp'})
         }
     }
     return (
         <div className="fahproduct">
             <div height='50%'>
                 <img 
-                    src={props.product.image} 
-                    alt={props.product.title} 
+                    src={props.productdetail.image} 
+                    alt={props.productdetail.title} 
                     className="fahproduct__image"
                 />
             </div>
             
             <div className="fahproduct__title" style={{width: '95%', margin: '25px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow:'auto'}}>
-                <div style={{fontSize: '20px'}}>{props.product.title}</div>
-                <div style={{fontSize: '16px', fontStyle: 'italic'}}>{props.product.artist?props.product.artist:"_"}</div>
+                <div style={{fontSize: '20px'}}>{props.productdetail.title}</div>
+                <div style={{fontSize: '16px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
             </div>
-            <p className="fahproduct__description">{props.product.description}</p>
-            {props.product.category==='music'
+            <p className="fahproduct__description">{props.productdetail.description}</p>
+            {props.productdetail.category==='music'
             ?<div className="fahproductDetails">
-                <div><span>Level:</span> {props.product.level}</div>
-                <div><span>Harp Type:</span> {props.product.harptype}</div>
-                <div><span>Condition (1-10):</span> {props.product.condition}</div>
-                <div style={{height: '40px'}}><span>Notes:</span> {props.product.notes}</div>
+                <div><span>Level:</span> {props.productdetail.level}</div>
+                <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
+                <div><span>Condition (1-10):</span> {props.productdetail.condition}</div>
+                <div style={{height: '40px'}}><span>Notes:</span> {props.productdetail.notes}</div>
             </div>
             :''}
             <div className="fahproduct__price-button-container">
-                <div className="fahproduct__price">${Number(props.product.price).toFixed(2)}</div>
+                <div className="fahproduct__price">${Number(props.productdetail.price).toFixed(2)}</div>
                 <button 
                     className='submit-btn'
                     style={{marginTop: '0px', marginBottom: '25px'}}
                     onClick={(e)=>handleAdd(e)}
-                    data-item-id={props.product.id}
-                    data-item-title={props.product.title}
-                    data-item-artist={props.product.artist}
-                    data-item-description={props.product.description}
-                    data-item-price={props.product.price}
-                    data-item-url={props.product.image}
-                    data-item-image={props.product.image}
-                    data-item-level={props.product.level}
-                    data-item-harptype={props.product.harptype}
+                    data-item-id={props.productdetail.id}
+                    data-item-title={props.productdetail.title}
+                    data-item-artist={props.productdetail.artist_first}
+                    data-item-artist={props.productdetail.artist_last}
+                    data-item-description={props.productdetail.description}
+                    data-item-price={props.productdetail.price}
+                    data-item-url={props.productdetail.image}
+                    data-item-image={props.productdetail.image}
+                    data-item-level={props.productdetail.level}
+                    data-item-harptype={props.productdetail.harptype}
                 >
                     Add to cart
                 </button>

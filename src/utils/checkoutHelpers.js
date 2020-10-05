@@ -64,6 +64,7 @@ export function tax(cart, shippingregion) {
     }       
 }
 export function getTotal(cart, user) {
+    console.log('from getTotal',cart, user)
     if (!user.shippingcountry) return getSubTotal(cart);
     if (user.shippingcountry==="Canada") {
         return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
@@ -98,38 +99,44 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
     // create html for cart items
     let itemHtml = '';
     cart.map(item => itemHtml = itemHtml + `
-        <div style="
-            border-radius: 3px;
-            background-color: #fff;
-            margin: 15px;
-            padding: 15px;
-            display: flex;
-            align-items: center;"
-        >  
-            <div style='font-size: 16px; width: 10%'>${item.product_quantity}</div> 
-            <div style='width: 70%;'>
-                <div style='font-size: 14px; font-weight: 600; width: 70%'>${item.title} ${item.artist?',':''} ${item.artist}</div>
-            </div>
-            <div style='font-weight: 600; width: 20%; text-align: right'>
-                <div>$${(item.price*item.product_quantity).toFixed(2)}</div>
-            </div>
-        </div>
+                <tr>
+                    <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">${item.product_quantity}</td>
+                    <td colSpan="8" style="padding: 5px 7px; border: 1px solid #868686">${item.title}${item.artist?',&nbsp;':''}${item.artist}</td>
+                    <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">$${(item.price*item.product_quantity).toFixed(2)}</td>
+                </tr>
    `);
    // return html for entire order
     return `
         <html>
         <body style="color:#083a08; font-family: Lato, Arial, Helvetica, sans-serif; line-height:1.8em;">
+            <img style="width: 75px" src="https://findaharp.com/img/golden_harp_cropped.png" alt="find a harp logo" />
             <h3>Find a Harp</h3>
+            <p>Contact Us: orders@findaharp.com</p>
             <h1>Order Receipt</h1>
             <div>Date: ${todayDate}-${monthName}-${todayYear}</div>
             <div>Order Number: ${uuid().substr(0,7)}</div>
+            <div>
+                <h3>Shipping Address:</h3>
+                <p>${user.shippingfname} ${user.shippinglname}<br />
+                    ${user.shippingaddress}<br />
+                    ${user.shippingaddress2?user.shippingaddress2:''}${user.shippingaddress2?'<br />':''}
+                    ${user.shippingcity}, ${user.shippingregion} ${user.shippingzip_postal}<br />
+                    ${user.shippingcountry}
+                <p>
+
                 <div style="
                     padding: 5px;
                     background-color: #fffeee; 
                     border-bottom: 1px solid #868686; 
                     margin-top: 30px;"
-                >  
-                <h3>Order Items:<h3/>${itemHtml}
+                >
+                <h3>Order Items:<h3/>
+                <table style="width: 90%; background-color: #fff; margin: 0 20px; padding: 15px">
+                    <th>Qty</th>
+                    <th colSpan="8">Item</th>
+                    <th>Amount</th>
+                    ${itemHtml}
+                </table>
                 <div class="orderSummary" style="
                     padding:15px;
                     background-color: #fffeee; 

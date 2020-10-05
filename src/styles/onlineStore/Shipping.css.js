@@ -22,23 +22,23 @@ function ShippingCss() {
                 box-sizing:border-box;
                 background-color: #fffeee;
                 padding: 30px;
+                padding-top: 0;
                 font-family: avenir;
                 margin: auto;
                 width: 100%;
-            }
-            .shippingContainer>form {
                 display: flex;
-                // width: 100%;
             }
+            
             @media only screen and (max-width: 750px) {
-                .shippingContainer>form{
+                .shippingContainer{
                     display: block;
                 }
             }
             .labelGroup {
                 display: block;
             }
-            .shippingContainer input {
+            .shippingContainer input,
+            .shippingemail input {
                 width:100%;
                 box-sizing:border-box; /* add vendor prefix or a script to do so if needed */
                 padding: 15px;

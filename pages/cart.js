@@ -3,6 +3,7 @@ import uuid from 'react-uuid';
 import Router, { withRouter } from 'next/router';
 
 import { CartContext } from '../src/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { UserContext } from '../src/contexts/UserContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import CartItem from '../src/components/onlinestore/CartItem';
@@ -23,6 +24,7 @@ import PageTitle from '../src/components/PageTitle';
 
 function Cart(props) {
     const { cart, setCart } = useContext(CartContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user, setUser } = useContext(UserContext);
     const { currency } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
@@ -36,6 +38,14 @@ function Cart(props) {
     return (
         <>
             <div className='index' style={{width: '100%', backgroundColor: '#fffeee'}}>
+                <button className='submit-btn' style={{
+                        position: 'absolute', 
+                        top: '15px', 
+                        right: '15px', 
+                        width: 'fit-content'
+                    }} 
+                    onClick={()=>cartSubtotals.currentStore?Router.push(`/${cartSubtotals.currentStore}`):Router.push('/storeentry')}
+                    >Continue Shopping</button>
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
                 
             <div className="cartContainer">  
@@ -48,7 +58,7 @@ function Cart(props) {
                             <button 
                                 className='submit-btn'
                                 onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
-                                style={{fontSize:'15px', fontWeight:'600', padding:'15px'}} //BREAKING needs error message if cart empty
+                                style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
                             >
                                 Continue to Checkout
                             </button>
@@ -77,7 +87,7 @@ function Cart(props) {
                     ?<button 
                         className='submit-btn'
                         onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
-                        style={{fontSize:'15px', fontWeight:'600', padding:'15px'}} //BREAKING needs error message if cart empty
+                        style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
                     >
                         Continue to Checkout
                     </button>

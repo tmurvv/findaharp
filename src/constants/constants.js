@@ -235,6 +235,6 @@ export const STORE_PARTNERS = [
         sellerEmail: '',
         onlinestoreUrl: 'onlinestores/underconstruction',
         onlinestoreShipsTo: "We'll find out soon!",
-        onlinestoreBlurb: "<p><strong>Our Harp 'Mini-Mall'</strong> is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose login/profile from the above menu to sign up.<p>"
+        onlinestoreBlurb: "<p><strong>Our Harp 'Mini-Mall'</strong> is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose Login/Profile from the above menu to sign up.<p>"
     }
 ];

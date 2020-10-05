@@ -89,9 +89,6 @@ export default function CheckoutForm() {
             setProcessing(false);
             setSucceeded(true);
             setCart([]);
-            // BREAKING needs success dialog
-            resultText.innerText=`Payment Successful.`;
-            dispatchResultInfo({type: 'OK'});
         }
     };
     function resetResults() {

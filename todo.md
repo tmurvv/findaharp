@@ -23,6 +23,7 @@
 - cancel button on upload harp listing
 
 ### functionality
+- add option to create account on shipping page
 - rebuild site once a day https://pomb.us/nextjs-static-props/
 - logout button
 - tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present

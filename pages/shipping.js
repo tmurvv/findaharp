@@ -29,7 +29,6 @@ function Shipping() {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
-    const [ readyToContinue, setEeadyToContinue ]  = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -37,11 +36,11 @@ function Shipping() {
     }
     const handleChange = (evt) => {
         switch (evt.target.name) {
-            case 'fname': 
+            case 'shippingfname': 
                 setUser({...user, shippingfname: evt.target.value});
                 setChange(true);
                 break
-            case 'lname': 
+            case 'shippinglname': 
                 setUser({...user, shippinglname: evt.target.value});
                 setChange(true);
                 break
@@ -58,7 +57,7 @@ function Shipping() {
                 setChange(true);
                 break
             case 'shippingaddress': 
-                setUser({...user, shippingaddress1: evt.target.value});
+                setUser({...user, shippingaddress: evt.target.value});
                 setChange(true);
                 break
             case 'shippingaddress2': 
@@ -125,16 +124,42 @@ function Shipping() {
         <div className='whiteWallPaper'>
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
+                
                 {screenWidth<551?<div style={{padding: '0 35px'}}><Subtotal type="total"/></div>:''}
-                <h3 style={{marginLeft:'35px',marginBottom:'-10px'}}>Shipping Address</h3>
-                <div className='shippingContainer'>
-                <form 
+               
+               <form 
                     method="get" 
                     onSubmit={(e)=>handleSubmit(e)}
                 >
+                    <div style={{display:'flex'}}>
+                    <table style={{borderSpacing: '10px', flex:'12'}}>
+                        <tr>
+                            <td colSpan='2'>
+                            <h3 style={{marginLeft:'30px'}}>Contact Information</h3>
+                                <div className="shippingemail" style={{marginBottom:'0px',marginLeft:'30px'}}>
+                                    <label htmlFor="shippingemail">Email</label>
+                                    <input 
+                                        type="email" 
+                                        name="shippingemail" 
+                                        value={user.shippingemail} 
+                                        onChange={handleChange} 
+                                        id="shippingemail" 
+                                        required 
+                                    />
+                                </div>
+                                <div style={{padding: '30px', marginTop: '-40px', marginBottom: '-15px', width: '60%', fontStyle: 'italic', color: '#adadad'}}>Shipping updates and order receipt will be sent to this address.</div>
+                            </td>
+                            <td colSpan='2'></td>
+                        </tr>
+                    </table>
+                    <div style={{flex: '4'}}></div>
+                    </div>
+                    <div className='shippingContainer'>
+                    <div style={{flex: '12'}}>
+                    <h3>Shipping Address</h3>
                     {screenWidth>1000
                     ?
-                        <table style={{borderSpacing: '10px', flex:'12'}}>
+                        <table style={{borderSpacing: '10px'}}>
                             <tr>
                                 <td colSpan='2'>
                                     <div className='countryDrop'>
@@ -164,26 +189,26 @@ function Shipping() {
                             <tr>
                                 <td colSpan='2'>
                                     <div>
-                                        <label htmlFor="fname">First Name</label>
+                                        <label htmlFor="shippingfname">First Name</label>
                                         <input 
                                             type="text" 
-                                            name="fname" 
-                                            value={user.fname} 
+                                            name="shippingfname" 
+                                            value={user.shippingfname} 
                                             onChange={handleChange} 
-                                            id="fname" 
+                                            id="shippingfname" 
                                             required 
                                         />
                                     </div>
                                 </td>
                                 <td colSpan='2'>
                                     <div>
-                                        <label htmlFor="lname">Last Name</label>
+                                        <label htmlFor="shippinglname">Last Name</label>
                                         <input 
                                             type="text" 
-                                            name="lname" 
-                                            value={user.lname}
+                                            name="shippinglname" 
+                                            value={user.shippinglname}
                                             onChange={handleChange} 
-                                            id="lname" 
+                                            id="shippinglname" 
                                             required 
                                         />
                                     </div>
@@ -191,13 +216,13 @@ function Shipping() {
                             </tr>
                             <tr>
                                 <td colSpan='4'>
-                                    <label htmlFor="address">Address</label>
+                                    <label htmlFor="shippingaddress">Address</label>
                                     <input 
                                         type="text" 
-                                        name="address" v
-                                        alue={user.address} 
+                                        name="shippingaddress" v
+                                        alue={user.shippingaddress} 
                                         onChange={handleChange} 
-                                        id="address" 
+                                        id="shippingaddress" 
                                         required 
                                     />
                                 </td>
@@ -207,10 +232,10 @@ function Shipping() {
                                 <td colSpan='4'>
                                     <input 
                                         type="text" 
-                                        name="address2" 
-                                        value={user.address2} 
+                                        name="shippingaddress2" 
+                                        value={user.shippingaddress2} 
                                         onChange={handleChange} 
-                                        id="address2" 
+                                        id="shippingaddress2" 
                                         placeholder="Optional" 
                                     />
                                 </td>
@@ -219,13 +244,13 @@ function Shipping() {
                             <tr>
                                 <td colSpan='2'>
                                     <div>
-                                        <label htmlFor="city">Town / City</label>
+                                        <label htmlFor="shippingcity">Town / City</label>
                                         <input 
                                             type="text" 
-                                            name="city" 
-                                            value={user.city} 
+                                            name="shippingcity" 
+                                            value={user.shippingcity} 
                                             onChange={handleChange} 
-                                            id="city" 
+                                            id="shippingcity" 
                                             required 
                                         />
                                     </div>
@@ -254,13 +279,13 @@ function Shipping() {
                                 </td>
                                 <td colSpan='1'>
                                     <div>
-                                        <label htmlFor="zip_postal">Zip/Postal Code</label>
+                                        <label htmlFor="shippingzip_postal">Zip/Postal Code</label>
                                         <input 
                                             type="text" 
-                                            name="zip_postal" 
+                                            name="shippingzip_postal" 
                                             value={user.zip_postal} 
                                             onChange={handleChange} 
-                                            id="zip_postal" 
+                                            id="shippingzip_postal" 
                                             placeholder="Postcode / Zip" 
                                             required 
                                         />
@@ -311,13 +336,13 @@ function Shipping() {
                             <tr>
                                 <td colSpan='4'>
                                     <div>
-                                        <label htmlFor="fname">First Name</label>
+                                        <label htmlFor="shippingfname">First Name</label>
                                         <input 
                                             type="text" 
-                                            name="fname" 
-                                            value={user.fname} 
+                                            name="shippingfname" 
+                                            value={user.shippingfname} 
                                             onChange={handleChange} 
-                                            id="fname" 
+                                            id="shippingfname" 
                                             required 
                                         />
                                     </div>
@@ -326,13 +351,13 @@ function Shipping() {
                             <tr>
                                 <td colSpan='4'>
                                     <div>
-                                        <label htmlFor="lname">Last Name</label>
+                                        <label htmlFor="shippinglname">Last Name</label>
                                         <input 
                                             type="text" 
-                                            name="lname" 
-                                            value={user.lname} 
+                                            name="shippinglname" 
+                                            value={user.shippinglname} 
                                             onChange={handleChange} 
-                                            id="lname" 
+                                            id="shippinglname" 
                                             required 
                                         />
                                     </div>
@@ -340,13 +365,13 @@ function Shipping() {
                             </tr>
                             <tr>
                                 <td colSpan='4'>
-                                    <label htmlFor="address">Address</label>
+                                    <label htmlFor="shippingaddress">Address</label>
                                     <input 
                                         type="text" 
-                                        name="address"
-                                        value={user.address} 
+                                        name="shippingaddress"
+                                        value={user.shippingaddress} 
                                         onChange={handleChange} 
-                                        id="address" 
+                                        id="shippingaddress" 
                                         required 
                                     />
                                 </td>
@@ -356,10 +381,10 @@ function Shipping() {
                                 <td colSpan='4'>
                                     <input 
                                         type="text" 
-                                        name="address2" 
-                                        value={user.address2} 
+                                        name="shippingaddress2" 
+                                        value={user.shippingaddress2} 
                                         onChange={handleChange} 
-                                        id="address2" 
+                                        id="shippingaddress2" 
                                         placeholder="Optional" 
                                     />
                                 </td>
@@ -368,13 +393,13 @@ function Shipping() {
                             <tr>
                                 <td colSpan='4'>
                                     <div>
-                                        <label htmlFor="city">Town / City</label>
+                                        <label htmlFor="shippingcity">Town / City</label>
                                         <input 
                                             type="text" 
-                                            name="city" 
-                                            value={user.city} 
+                                            name="shippingcity" 
+                                            value={user.shippingcity} 
                                             onChange={handleChange} 
-                                            id="city" 
+                                            id="shippingcity" 
                                             required 
                                         />
                                     </div>
@@ -405,13 +430,13 @@ function Shipping() {
                                 </td>
                                 <td colSpan='2'>
                                     <div>
-                                        <label htmlFor="zip_postal">Zip/Postal Code</label>
+                                        <label htmlFor="shippingzip_postal">Zip/Postal Code</label>
                                         <input 
                                             type="text" 
-                                            name="zip_postal" 
-                                            value={user.zip_postal} 
+                                            name="shippingzip_postal" 
+                                            value={user.shippingzip_postal} 
                                             onChange={handleChange} 
-                                            id="zip_postal" 
+                                            id="shippingzip_postal" 
                                             placeholder="Postcode / Zip" 
                                             required 
                                         />
@@ -435,24 +460,22 @@ function Shipping() {
                         </table> 
                     
                 } 
-                <div style={{ flex: 4, backgroundColor: '#fff', marginLeft: '20px' }}>
+                </div>
+                <div style={{ flex: 4, backgroundColor: '#fff', marginLeft: '20px', marginTop: '-190px' }}>
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
                     <OrderSummary />
                     {/* {screenWidth>=715? */}
                     <button 
                         className='submit-btn'
                         type='submit'
-                        
                         style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
-                        // disabled={!readyToContinue}
                     >
                         Continue to Payment
                     </button>
                     {/* :''} */}
                 </div>
-                </form>
                 </div>
-                
+                </form>
                 <ShippingCss />
             </div>
         </div>
