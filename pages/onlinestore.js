@@ -19,6 +19,12 @@ const OnlineStore = () => {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
     },[]);
+    // sort products
+    useEffect(()=>{
+        console.log('abv', filteredProducts)
+        filteredProducts = products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
+        console.log('bel', filteredProducts)
+    },[]);
     return (
         <>
             <div className='index' style={{height: 'fit-content', backgroundColor: '#fffeee', padding: '15px', paddingTop: '70px'}}>
