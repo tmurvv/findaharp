@@ -4,12 +4,17 @@ function StoreProductCss() {
     return (
         <style jsx="true">{`
             .fahproduct {
-                margin: 30px;
-                width: 45%;
+                margin: 10px;
+                margin-top: 25px;
                 text-align: center;
-                max-width: 375px;,
-                padding: 15px;
-                height: 700px;
+                min-width: 225px;
+                max-width: 265px;
+                max-height: 600px;
+                position: relative;
+            }
+            .fahproduct__title {
+                width: 95%;
+                margin: 25px auto 15px;
             }
             .fahproductDetails {
                 display: flex;
@@ -45,14 +50,17 @@ function StoreProductCss() {
                 height: 60px;
                 overflow-y: auto;
             }
-            .fahproduct__image {
-               
-                
-                height:350px;
-            
-                margin-top: 20px;
+            .fahproduct__imgcontainer {
+                height: 50%;
+            }
+            .fahproduct__imgcontainer img {
+                height: 100%;
+                width: auto;
+                max-width:100%;
+                max-height:100%;
+                object-fit: cover;
+                overflow: hidden;
                 box-shadow: 3px 5px 3px lightgrey;
-                max-width: 100%;
             }
             // .music .fahproduct__image {
             //     margin-top: 20px;
@@ -74,6 +82,10 @@ function StoreProductCss() {
             }
             .fahproduct__price-button-container {
                 order: 4;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                left: 0px;
             }
             .fahflyToCart {
                 position: relative;

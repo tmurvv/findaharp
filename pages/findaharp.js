@@ -23,11 +23,6 @@ const Findaharp = () => {
         <PageTitle maintitle="Find a Harp Online Store" subtitle='Pre-loved Music, CDs, Digital Downloads' /> 
             <StoreProductSearch />
             <StoreProductContainer />
-
-
-
-
-
             {/* <div className='fah'>
                 <div>
                     <div className='divider'>

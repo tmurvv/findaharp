@@ -364,7 +364,7 @@ function StoreProductSearch(props) {
                 <div ref={ref} className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
                     <SoloEnsembleMenu 
-                        handleSoloEnsembleChange = {handleSoloEnsembleSelection} 
+                        handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
                         makestitles={props.makestitles}
                         currentselected={allState.soloensemble?allState.soloensemble:'Harp SoloEnsemble'}

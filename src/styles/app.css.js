@@ -176,6 +176,7 @@ function AppCss() {
                 border: none;
                 padding: 10px 7px;
                 outline-color: #fbd960;
+                font-family: avenir;
             }
             .submit-btn:active {
                 outline-color: #fbd960;

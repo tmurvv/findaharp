@@ -1,4 +1,45 @@
 /**
+ * Searches for the occurance of text with the value of any key/value pair in an object
+ * @function findNested
+ * @param {Sbject} obj product object
+ * @param {String} key recursively goes through each key/value pair to check for value
+ * @param {String} value text being searched for
+ * @returns {Object} - if value occurs, object is returned
+ */
+export function findNested(obj, key, value) {
+    // Base case
+    if (String(obj[key]).toUpperCase().indexOf(value.toUpperCase())>-1) {
+        return obj;
+    } else {
+        for (var i = 0, len = Object.keys(obj).length; i < len; i++) {
+            if (typeof obj[i] == 'object') {
+                var found = this.findNested(obj[i], key, value);
+                if (found) {
+                    // If the object was found in the recursive call, bubble it up.
+                    return found;
+                }
+            }
+        }
+    }
+}
+/**
+ * Finds the artist of a certain Title from artists/titles JSON-style object
+ * @function soloensembleFilter
+ * @param {array} allProducts Product list
+ * @param {categoryFilter} allState category filter selected by user
+ * @returns {String} - Product List with filter Applied
+ */
+function soloensembleFilter(filteredProducts, soloensemble) {
+    const returnProducts=[];
+
+    filteredProducts.map(product=>{
+        if (product.subcategories) product.subcategories.map(subcategory => {
+            if (subcategory.toUpperCase()===soloensemble.toUpperCase()) returnProducts.push(product);
+        });
+    });  
+    return returnProducts;
+}
+/**
  * Finds the artist of a certain Title from artists/titles JSON-style object
  * @function categoryFilter
  * @param {array} allProducts Product list
@@ -18,7 +59,6 @@ function categoryFilter(filteredProducts, category) {
         return filteredProducts.filter(
             product => product.harptype&&(product.harptype.toUpperCase() === 'PEDAL'|| product.harptype.toUpperCase() === 'ALL')
         ); 
-    console.log('catfilt', filteredProducts[1],category, category)
     if (category!=="ALL CATEGORIES"&&category!=="ALL CATEGORYS")
         return filteredProducts.filter(
             product => String(product.category).toUpperCase() === category.toUpperCase()
@@ -34,18 +74,13 @@ function categoryFilter(filteredProducts, category) {
  */
 export function getFilteredStoreProducts(allProducts, allState, user, rate) {
     let filteredProducts = [...allProducts];
-    console.log('here', filteredProducts.length);
-    console.log(filteredProducts[5])
-    console.log(allState.category.toUpperCase())
     filteredProducts = categoryFilter(filteredProducts, allState.category.toUpperCase());
     // if (allState.category&&allState.category.toUpperCase()!=="ALL CATEGORIES") categoryFilter(allProducts, allState.category.toUpperCase())
     // apply filters // not yet implemented map from array or refactor to function
        
      
-    // if (allState.category&&allState.category.toUpperCase() === "ALL LEVER") 
-    //     filteredProducts = filteredProducts.filter(
-    //         product => product.productType&&product.productType === 'lever'
-    //     );
+    if (allState.soloensemble&&allState.soloensemble.toUpperCase() !== "ALL SOLO/ENSEMBLE")
+        filteredProducts = soloensembleFilter(filteredProducts, allState.soloensemble);
     // if (allState.title&&allState.title.toUpperCase() !== "ALL MODELS") 
     //     filteredProducts = filteredProducts.filter(
     //         product => product.productTitle&&product.productTitle === allState.title

@@ -1,5 +1,16 @@
+import { Help } from '@material-ui/icons';
 import uuid from 'uuid';
 
+export const SOLO_ENSEMBLE = [
+    'solo',
+    'fl/hp',
+    'vn/hp',
+    'voice/hp',
+    'harp ensemble',
+    'other',
+    'concerto',
+    'orchestra part'
+]
 export const RESULTS_INITIAL_STATE = {
     resultContainer: 'none',
     resultText: 'none',

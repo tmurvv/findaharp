@@ -1,23 +1,30 @@
-import { useContext } from 'react';
+import { useContext,useState } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
 import {
     incQty
 } from '../../utils/storeHelpers';
 import { CartContext } from '../../contexts/CartContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
 
 const StoreProduct = (props) => {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-    function handleAdd(e) {  
+    const { currency } = useContext(CurrencyContext);
+    const [ openModal, setOpenModal ] = useState(false);
+    function handleOpenModal() {
+        // if (!props.productdetail||!props.productdetail.productTitle) return;
+        setOpenModal(true);
+        props.handleopendetail(props.productdetail); 
+    }
+    function handleAdd(e) {   
         // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
         e.target.classList.remove("fahflyToCart");
         void e.target.offsetWidth;
         e.target.classList.add("fahflyToCart");
         // update cart
-        console.log('handleadd', cart[0], e.target)
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             incQty(cart, setCart, e.target.getAttribute('data-item-title'));
             // incQty(e, cart, setCart);// BREAKING investigate why this is marked breaking
@@ -25,6 +32,7 @@ const StoreProduct = (props) => {
             const cartCopy = [...cart];
             const thisItem = {
                 id: uuid(), 
+                store: e.target.getAttribute('data-item-store'),
                 title: e.target.getAttribute('data-item-title'),
                 artist: e.target.getAttribute('data-item-artist_first'),
                 artist: e.target.getAttribute('data-item-artist_last'),
@@ -35,6 +43,7 @@ const StoreProduct = (props) => {
                 harptype: e.target.getAttribute('data-item-harptype'),
                 newprice: e.target.getAttribute('data-item-newprice'),
                 notes: e.target.getAttribute('data-item-notes'),
+                newused: e.target.getAttribute('data-item-newused'),
                 product_image: e.target.getAttribute('data-item-url'),
                 product_quantity: '1'    
             }
@@ -44,35 +53,37 @@ const StoreProduct = (props) => {
         }
     }
     return (
-        <div className="fahproduct">
-            <div height='50%'>
+        <div className="fahproduct">  
+            <div className="fahproduct__imgcontainer">
                 <img 
                     src={props.productdetail.image} 
-                    alt={props.productdetail.title} 
-                    className="fahproduct__image"
+                    alt={props.productdetail.title}
+                    onClick={()=>handleOpenModal()} 
                 />
             </div>
             
-            <div className="fahproduct__title" style={{width: '95%', margin: '25px auto 0', marginTop: '15px', whiteSpace: 'nowrap', overflow:'auto'}}>
-                <div style={{fontSize: '20px'}}>{props.productdetail.title}</div>
-                <div style={{fontSize: '16px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
+            <div className="fahproduct__title" >
+                <div style={{fontSize: '18px'}}>{props.productdetail.title}</div>
+                <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
             </div>
-            <p className="fahproduct__description">{props.productdetail.description}</p>
+            {/* <p className="fahproduct__description">{props.productdetail.description}</p> */}
             {props.productdetail.category==='music'
             ?<div className="fahproductDetails">
                 <div><span>Level:</span> {props.productdetail.level}</div>
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
-                <div><span>Condition (1-10):</span> {props.productdetail.condition}</div>
-                <div style={{height: '40px'}}><span>Notes:</span> {props.productdetail.notes}</div>
+                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
+                <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div>
+                {/* <div style={{height: '40px'}}><span>Notes:</span> {props.productdetail.notes}</div> */}
             </div>
-            :''}
+            :<div><span>New Item</span></div>}
             <div className="fahproduct__price-button-container">
-                <div className="fahproduct__price">${Number(props.productdetail.price).toFixed(2)}</div>
+                <div className="fahproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
                 <button 
                     className='submit-btn'
-                    style={{marginTop: '0px', marginBottom: '25px'}}
+                    style={{marginTop: '0px'}}
                     onClick={(e)=>handleAdd(e)}
                     data-item-id={props.productdetail.id}
+                    data-item-store={props.productdetail.store}
                     data-item-title={props.productdetail.title}
                     data-item-artist={props.productdetail.artist_first}
                     data-item-artist={props.productdetail.artist_last}
@@ -82,8 +93,9 @@ const StoreProduct = (props) => {
                     data-item-image={props.productdetail.image}
                     data-item-level={props.productdetail.level}
                     data-item-harptype={props.productdetail.harptype}
+                    data-item-newused={props.productdetail.newused}
                 >
-                    Add to cart
+                    Add to Cart
                 </button>
             </div>        
             <StoreProductCss />

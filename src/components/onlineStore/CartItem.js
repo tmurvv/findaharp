@@ -46,7 +46,7 @@ function CartItem(props) {
                 </div>
                 <div style={{fontWeight: 'bold'}} className='flex-sb'>
                     <p>Product Total:</p>
-                    <p>${(item.price*item.product_quantity).toFixed(2)}{currency}</p>
+                    <p>${(item.price*item.product_quantity).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></p>
                 </div>
             </div>
             <CartItemCss />

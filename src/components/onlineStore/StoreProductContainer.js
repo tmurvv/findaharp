@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 // styles
 import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
 // internal
-// import ProductModal from './ProductModal';
+import StoreProductModal from './StoreProductModal';
 import StoreProduct from './StoreProduct';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../utils/helpers';
 import { productsReducer } from '../../reducers/reducers';
@@ -19,15 +19,20 @@ const initialState = {
 }
 const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat, clientlong }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
+    const [ detailProduct, setDetailProduct ] = useState([]);
+
     const size = getWindowSize();
     function handleOpenDetail(product) {
-        dispatch({type:'detail', product});
-        setOpacity(true); 
+        console.log('inhad', product)
+        // dispatch({type:'detail', product});
+        setDetailProduct(product);
+        // setOpacity(true); 
     }
     function handleCloseDetail(evt, product, openContact) {
-        dispatch({type: 'initial'})
-        setOpacity(false);
-        if (openContact) handleOpenContact(evt, product);
+        // dispatch({type: 'initial'})
+        // setOpacity(false);
+        // if (openContact) handleOpenContact(evt, product);
+        setDetailProduct([]);
     }
     function handleOpenContact(evt, product) {
         evt.stopPropagation();
@@ -42,9 +47,11 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
         let addPlaces=filteredproductscontainer;
-        return(  
+        return(
+            
             <div data-test='component-ProductContainer' className='storeproductContainer'>
-                <div className="storegrid-container" style={{'opacity': `${state.opacity}`}}>
+                
+                <div className="storegrid-container">
                     {addPlaces.map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
@@ -57,16 +64,18 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                         />
                     )}
                 </div>
-                {/* {state.openDetail
-                    &&<ProductModal 
-                        product={state.productSelect} 
+                {detailProduct&&detailProduct.title?
+                
+                    <StoreProductModal 
+                        product={detailProduct} 
                         handleCloseDetail={handleCloseDetail} 
                         handleOpenContact={handleOpenContact} 
                         handleCloseContact={handleCloseContact}
                         clientlat={clientlat}
                         clientlong={clientlong}
-                />}
-                {state.openContact
+                />:''
+                }
+                {/* {state.openContact
                     &&<ContactSellerForm 
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     

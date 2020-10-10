@@ -44,7 +44,7 @@ function Cart(props) {
                         right: '15px', 
                         width: 'fit-content'
                     }} 
-                    onClick={()=>cartSubtotals.currentStore?Router.push(`/${cartSubtotals.currentStore}`):Router.push('/storeentry')}
+                    onClick={()=>Router.push('onlinestore')}
                     >Continue Shopping</button>
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
                 

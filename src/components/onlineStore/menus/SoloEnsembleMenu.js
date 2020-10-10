@@ -24,8 +24,8 @@ export default function SoloEnsembleMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='All'       
-                >All</li>
+                    name='All Solo/Ensemble'       
+                >All Solo/Ensemble</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()}
