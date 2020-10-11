@@ -12,6 +12,7 @@ import IndexCss from '../src/styles/index.css';
 import OnlineStoreCss from '../src/styles/onlinestore/onlinestores/FindaharpOnlineStore.css';
 import StoreProductSearch from '../src/components/onlineStore/StoreProductSearch';
 import GlobalStoreSearch from '../src/components/onlineStore/GlobalStoreSearch';
+import StoreProductContainerCss from '../src/styles/onlinestore/StoreProductContainer.css';
 
 const OnlineStore = () => {
     const [ filteredProducts, setFilteredProducts ] = useState(FINDAHARP_PRODUCTS);

@@ -90,7 +90,6 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                 ? */}
                 <>
                     <h3 style={{textAlign: 'center', marginBlockEnd: 0}}>Not Found. Select "Clear" to see harp listings.</h3>
-                    <h3 style={{textAlign: 'center', marginBlockStart: 0}}>Searching by Driving Distance? Be sure location is enabled on your device.</h3>    
                     <div data-test='component-ProductContainer' className='storenotFoundContainer'>
                         <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
                     </div>

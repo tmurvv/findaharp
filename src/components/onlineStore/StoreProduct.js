@@ -19,19 +19,9 @@ const StoreProduct = (props) => {
         setOpenModal(true);
         props.handleopendetail(props.productdetail); 
     }
-    function handleAdd(e) {  
-        e.preventDefault(); 
-        // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
-        e.target.classList.remove("storeflyToCart");
-        
-        void e.target.offsetWidth;
-        console.log('abv',e.target.classList);
-        e.target.classList.add("storeflyToCart");
-        console.log('bel',e.target.classList)
-        // update cart
+    function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             incQty(cart, setCart, e.target.getAttribute('data-item-title'));
-            // incQty(e, cart, setCart);// BREAKING investigate why this is marked breaking
         } else {
             const cartCopy = [...cart];
             const thisItem = {
@@ -54,6 +44,11 @@ const StoreProduct = (props) => {
             cartCopy.push(thisItem);
             setCart(cartCopy);
         }
+    }
+    function handleAdd(e) {  
+        e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
+        e.target.addEventListener("animationend", (e)=>updateCart(e))
+        e.target.classList.add("storeflyToCart");  
     }
     return (
         <div className="storeproduct">  
@@ -84,6 +79,7 @@ const StoreProduct = (props) => {
                 <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
                 <button 
                     className='submit-btn'
+                    type="button"
                     style={{marginTop: '0px'}}
                     onClick={(e)=>handleAdd(e)}
                     data-item-id={props.productdetail.id}
