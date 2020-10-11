@@ -19,11 +19,15 @@ const StoreProduct = (props) => {
         setOpenModal(true);
         props.handleopendetail(props.productdetail); 
     }
-    function handleAdd(e) {   
+    function handleAdd(e) {  
+        e.preventDefault(); 
         // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
-        e.target.classList.remove("fahflyToCart");
+        e.target.classList.remove("storeflyToCart");
+        
         void e.target.offsetWidth;
-        e.target.classList.add("fahflyToCart");
+        console.log('abv',e.target.classList);
+        e.target.classList.add("storeflyToCart");
+        console.log('bel',e.target.classList)
         // update cart
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             incQty(cart, setCart, e.target.getAttribute('data-item-title'));
@@ -49,12 +53,11 @@ const StoreProduct = (props) => {
             }
             cartCopy.push(thisItem);
             setCart(cartCopy);
-            setCartSubtotals({...cartSubtotals, currentStore: 'findaharp'})
         }
     }
     return (
-        <div className="fahproduct">  
-            <div className="fahproduct__imgcontainer">
+        <div className="storeproduct">  
+            <div className="storeproduct__imgcontainer">
                 <img 
                     src={props.productdetail.image} 
                     alt={props.productdetail.title}
@@ -62,22 +65,23 @@ const StoreProduct = (props) => {
                 />
             </div>
             
-            <div className="fahproduct__title" >
+            <div className="storeproduct__title" >
                 <div style={{fontSize: '18px'}}>{props.productdetail.title}</div>
                 <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
             </div>
-            {/* <p className="fahproduct__description">{props.productdetail.description}</p> */}
+            {/* <p className="storeproduct__description">{props.productdetail.description}</p> */}
             {props.productdetail.category==='music'
-            ?<div className="fahproductDetails">
+            ?<div className="storeproductDetails">
                 <div><span>Level:</span> {props.productdetail.level}</div>
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
                 {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
                 <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div>
                 {/* <div style={{height: '40px'}}><span>Notes:</span> {props.productdetail.notes}</div> */}
             </div>
-            :<div><span>New Item</span></div>}
-            <div className="fahproduct__price-button-container">
-                <div className="fahproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
+            :<><div><span>New Item</span></div><br />
+            <div style={{textAlign: 'left', minHeight: '200px'}}>{String(props.productdetail.description).substr(0,70)} <span style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
+            <div className="storeproduct__price-button-container">
+                <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
                 <button 
                     className='submit-btn'
                     style={{marginTop: '0px'}}

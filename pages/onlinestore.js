@@ -22,7 +22,8 @@ const OnlineStore = () => {
     // sort products
     useEffect(()=>{
         console.log('abv', filteredProducts)
-        filteredProducts = products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
+        
+        setFilteredProducts(filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
         console.log('bel', filteredProducts)
     },[]);
     return (
