@@ -49,7 +49,7 @@ function StoreProductSearch(props) {
         category: 'All Categories',
         soloensemble: 'All Solo/Ensembles',
         level: 'All Levels',
-        publicationtype: 'All PublicationTypes',
+        publicationtype: 'All Publication Types',
         searchInfo: 'All Harps'
     }); 
     // useOutsideClick(ref, () => {
@@ -113,6 +113,8 @@ function StoreProductSearch(props) {
             soloensemble: soloensemble==='All Solo/Ensembles'?'All Solo/Ensembles':soloensemble,
             productType: 'all',
         }
+        props.setEnsembleSearch(soloensemble);
+        props.handleChange(allState.level, soloensemble, allState.publicationtype);
         setAllState({...allState, 
             soloensemble: soloensemble==='All Solo/Ensembles'?'All Solo/Ensembles':soloensemble,
             productType: 'all',
@@ -129,32 +131,22 @@ function StoreProductSearch(props) {
             searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
+        props.setEnsembleSearch(level);
+        props.handleChange(level, allState.soloensemble, allState.publicationtype);
     }
     async function handlePublicationTypeSelection(publicationtype) {
-        // if (publicationtype==='ltActivate') publicationtype = 'All PublicationTypes';
-        function updateState() {
-            const newState = {...allState, 
-                publicationtype
-            }
-            setAllState({...allState, 
-                publicationtype,
-                searchInfo: getSearchInfo(newState)
-            });
-            if (publicationtype!=='ltActivate') setMenus(initialState);
-            publicationtype='All PublicationTypes';
+        const newState = {...allState, 
+            publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
+            productType: 'all',
         }
-        const addDistances = () => {
-            props.products.map(async product => {
-                let distance = await getDrivingDistance(props.clientlat, props.clientlong, product.sellerLat, product.sellerLong);
-                product.distance = user.distanceunit==='miles'?(distance*0.000621).toFixed(0):(distance/1000).toFixed(0);
-            });
-        }
-        if (publicationtype==='ltActivate') {
-            await addDistances();
-            updateState();
-        } else {
-            updateState();
-        }
+        props.setEnsembleSearch(publicationtype);
+        props.handleChange(allState.level, allState.soloensemble, publicationtype);
+        setAllState({...allState, 
+            publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
+            productType: 'all',
+            searchInfo: getSearchInfo(newState)
+        });
+        setMenus(initialState);
     }
     function handleClick(e) {
         switch(e.target.name) {
@@ -235,7 +227,7 @@ function StoreProductSearch(props) {
             ...allState,
             soloensemble: 'All Solo/Ensembles',
             level: 'All Levels',
-            publicationtype: 'All PublicationTypes',
+            publicationtype: 'All Publication Types',
             category: "All Categories",
             artist: "All Artists",
             title: "All Titles",
@@ -244,24 +236,25 @@ function StoreProductSearch(props) {
     }
     function clearOneFilter(e) {
         let menuClick = e.target.name;
+        console.log('clear',menuClick)
+        menuClick==="soloensemble"?menuClick="Solo/Ensemble":''; // hack change e.target.name to 'Solo/Ensemble'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
-        if (menuClick==='soloensemble') menuClick = 'soloensemblee';
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
     }
     useEffect(() => {
         triggerLazy();
     },[]);
-    console.log('search', FINDAHARP_PRODUCTS.length)
+    // console.log('search', FINDAHARP_PRODUCTS.length)
     // const filteredProducts = getFilteredProducts(props.products, allState, user, currencyMultiplier);
     const filteredProducts = getFilteredStoreProducts(FINDAHARP_PRODUCTS, allState, user, currencyMultiplier);
     // const showing = allState.publicationtype!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";
     const showing = "Not Yet Implemented"
     return (
         <>       
-        <h3 className='storesearchTitle'>Use the filters below to narrow your results.</h3>
+        {/* <h3 className='storesearchTitle'>Use the filters below to narrow your results.</h3> */}
         <div className='storeproductSearchOuter'>
-            <div className='storemobileSearchLine1'>
+            {/* <div className='storemobileSearchLine1'>
             <div  ref={ref} className='storesearchLine1'>  
                 <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
                 
@@ -357,9 +350,9 @@ function StoreProductSearch(props) {
                         :''
                     }
                 </div>
-            </div>
-            </div>
-            <h3 className='storesearchTitle'>Further refine your search.</h3>
+            </div> */}
+            {/* </div> */}
+            <h3 className='storesearchTitle'>Searching for music? Refine your search here.</h3>
             <div className='storemobileSearchLine2'>
                 <div ref={ref} className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
@@ -382,7 +375,7 @@ function StoreProductSearch(props) {
                     />
                     <PublicationTypeMenu 
                         handlePublicationTypeChange = {handlePublicationTypeSelection}
-                        currentselected={allState.publicationtype?allState.publicationtype:'Harp All PublicationTypes'}
+                        currentselected={allState.publicationtype?allState.publicationtype:'Harp All Publication Types'}
                         open={menus.publicationtype}
                         handleclick={handleClick}
                     /> 
@@ -434,13 +427,13 @@ function StoreProductSearch(props) {
                             
                         </div>
                         <div 
-                            id="selectedAll PublicationTypes" 
+                            id="selectedAll Publication Types" 
                             className={`storesearch-grid-item`} 
                             value={allState.publicationtype}
                             onClick={()=>handleClick({target: {name: 'publicationtype'}})}
                         >
                             {allState.publicationtype}
-                            {allState.publicationtype!=="All PublicationTypes"
+                            {allState.publicationtype!=="All Publication Types"
                                 ?<img 
                                     name='publicationtypes'
                                     onClick={
@@ -466,14 +459,14 @@ function StoreProductSearch(props) {
                     <p>Clear</p> 
                 </div>
             </div>
-            <StoreProductContainer 
+            {/* <StoreProductContainer 
                 data-test="component-ProductContainer" 
                 filteredproductscontainer={filteredProducts} 
                 searchInfo={allState.searchInfo}
                 allstate={allState}
                 clientlat={props.clientlat}
                 clientlong={props.clientlong}
-            />    
+            />     */}
             <StoreProductSearchCss />             
         </div>
         </>

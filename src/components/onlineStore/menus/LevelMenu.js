@@ -40,8 +40,8 @@ export default function LevelMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Beg/Int'
-                >Beg/Int</li>
+                    name='Beg-Int'
+                >Beg-Int</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -50,8 +50,8 @@ export default function LevelMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Int/Adv'
-                >Int/Adv</li>
+                    name='Int-Adv'
+                >Int-Adv</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 

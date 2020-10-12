@@ -6,7 +6,7 @@ import uuid from 'react-uuid';
 export default function PublicationTypeMenu(props) {
     
     const handleClose = (evt) => {
-        if (evt.target.value === 'All PublicationTypes') return;
+        if (evt.target.value === 'All Publication Types') return;
         props.handlePublicationTypeChange(evt.target.getAttribute('name')); 
     };
     // get currency conversions

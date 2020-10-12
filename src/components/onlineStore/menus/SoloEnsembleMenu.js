@@ -10,22 +10,22 @@ export default function SoloEnsembleMenu(props) {
         <div className='relative'>
             <button 
                 className="menuButton" 
-                name='soloensemble' 
+                name='Solo/Ensemble' 
                 onClick={(e)=>{props.handleclick(e);}}
                 style={{color: '#000000'}}
-            >Solo/Ensemble</button>
+            >Solo/Ensembles</button>
             <ul
                 id="soloensemble-select"
                 onClose={handleClose}
                 hidden={!props.open}
-                name='SoloEnsemble Menu'
+                name='Solo/Ensemble Menu'
                 className='plainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='All Solo/Ensemble'       
-                >All Solo/Ensemble</li>
+                    name='All Solo/Ensembles'       
+                >All Solo/Ensembles</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()}
