@@ -114,7 +114,7 @@ function StoreProductSearch(props) {
             productType: 'all',
         }
         props.setEnsembleSearch(soloensemble);
-        props.handleChange(allState.level, soloensemble, allState.publicationtype);
+        props.handleChange(soloensemble, allState.level, allState.publicationtype);
         setAllState({...allState, 
             soloensemble: soloensemble==='All Solo/Ensembles'?'All Solo/Ensembles':soloensemble,
             productType: 'all',
@@ -131,16 +131,16 @@ function StoreProductSearch(props) {
             searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
-        props.setEnsembleSearch(level);
-        props.handleChange(level, allState.soloensemble, allState.publicationtype);
+        props.setLevelSearch(level);
+        props.handleChange(allState.soloensemble, level, allState.publicationtype);
     }
     async function handlePublicationTypeSelection(publicationtype) {
         const newState = {...allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
         }
-        props.setEnsembleSearch(publicationtype);
-        props.handleChange(allState.level, allState.soloensemble, publicationtype);
+        props.setPublicationSearch(publicationtype);
+        props.handleChange(allState.soloensemble, allState.level, publicationtype);
         setAllState({...allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
@@ -234,13 +234,20 @@ function StoreProductSearch(props) {
             searchInfo: 'All Harps'
         });
     }
-    function clearOneFilter(e) {
+   function clearOneFilter(e) {
+       console.log(e.target.name)
         let menuClick = e.target.name;
-        console.log('clear',menuClick)
+        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Solo/Ensembles"); props.handleChange("All Solo/Ensembles", allState.level, allState.publicationtype);}
+        if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange(allState.soloensemble, "All Levels", allState.publicationtype);}
+        if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleChange(allState.soloensemble, allState.level, "All Publication Types");}
+        console.log('clear',e.target.name)
         menuClick==="soloensemble"?menuClick="Solo/Ensemble":''; // hack change e.target.name to 'Solo/Ensemble'
+        menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Solo/Ensemble'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
+        
+        //props.handleChange(allState.soloensemble, allState.level, allState.publicationtype);
     }
     useEffect(() => {
         triggerLazy();
@@ -357,6 +364,7 @@ function StoreProductSearch(props) {
                 <div ref={ref} className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
                     <SoloEnsembleMenu 
+                        id="soloensemblemenu"
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
                         makestitles={props.makestitles}
