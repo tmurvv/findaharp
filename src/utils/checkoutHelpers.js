@@ -101,7 +101,7 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
     cart.map(item => itemHtml = itemHtml + `
                 <tr>
                     <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">${item.product_quantity}</td>
-                    <td colSpan="8" style="padding: 5px 7px; border: 1px solid #868686">${item.title}${item.artist?',&nbsp;':''}${item.artist}</td>
+                    <td colSpan="8" style="padding: 5px 7px; border: 1px solid #868686">${item.title}</td>
                     <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">$${(item.price*item.product_quantity).toFixed(2)}</td>
                 </tr>
    `);
@@ -109,8 +109,7 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
     return `
         <html>
         <body style="color:#083a08; font-family: Lato, Arial, Helvetica, sans-serif; line-height:1.8em;">
-            <img style="width: 75px" src="https://findaharp.com/img/golden_harp_cropped.png" alt="find a harp logo" />
-            <h3>Find a Harp</h3>
+            <img style="width:300px;background-color:#f9bf1e" src="https://findaharp.com/img/storePartners/findaharp_store_logo.png" alt="find a harp logo" />
             <p>Contact Us: orders@findaharp.com</p>
             <h1>Order Receipt</h1>
             <div>Date: ${todayDate}-${monthName}-${todayYear}</div>
@@ -123,10 +122,8 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
                     ${user.shippingcity}, ${user.shippingregion} ${user.shippingzip_postal}<br />
                     ${user.shippingcountry}
                 <p>
-
                 <div style="
                     padding: 5px;
-                    background-color: #fffeee; 
                     border-bottom: 1px solid #868686; 
                     margin-top: 30px;"
                 >
@@ -139,7 +136,6 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
                 </table>
                 <div class="orderSummary" style="
                     padding:15px;
-                    background-color: #fffeee; 
                     border-bottom:1px solid #868686;"
                 >
                     <div style='display:flex; justify-content: space-between; background-color:#fff; margin: 5px;padding:15px;'>

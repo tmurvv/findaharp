@@ -38,14 +38,7 @@ function Cart(props) {
     return (
         <>
             <div className='index' style={{width: '100%', backgroundColor: '#fffeee'}}>
-                <button className='submit-btn' style={{
-                        position: 'absolute', 
-                        top: '15px', 
-                        right: '15px', 
-                        width: 'fit-content'
-                    }} 
-                    onClick={()=>Router.push('onlinestore')}
-                    >Continue Shopping</button>
+                
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
                 
             <div className="cartContainer">  
@@ -55,13 +48,28 @@ function Cart(props) {
                         {screenWidth<=715
                         ?<div className='subTotal'>
                             <Subtotal type="subtotal"/>
-                            <button 
-                                className='submit-btn'
-                                onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
-                                style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
-                            >
-                                Continue to Checkout
-                            </button>
+                            <div style={{display: 'flex'}}>
+                                <button className='submit-btn' style={{
+                                    marginRight: '2.5px', 
+                                    marginLeft: '15px', 
+                                    fontSize:'15px',
+                                    padding:'15px'
+                                    }} 
+                                    onClick={()=>Router.push('onlinestore')}
+                                >Continue Shopping</button>
+                                <button 
+                                    className='submit-btn'
+                                    onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
+                                    style={{
+                                        marginLeft: '2.5px',
+                                        marginRight: '15px', 
+                                        backgroundColor: '#000', 
+                                        color: '#fff', 
+                                        fontSize:'15px', 
+                                        padding:'15px'
+                                    }}
+                                >Continue to Checkout</button>
+                            </div>
                         </div>
                         :''}
                     </div>
@@ -84,14 +92,38 @@ function Cart(props) {
                     <GetZipPostal />
                     <OrderSummary />
                     {screenWidth>=715
-                    ?<button 
+                    ?
+                    <div style={{display: 'flex'}}>
+                                <button className='submit-btn' style={{
+                                    marginRight: '2.5px',
+                                    fontSize:'14px', 
+                                    padding:'15px'
+                                    }} 
+                                    onClick={()=>Router.push('onlinestore')}
+                                >Continue Shopping</button>
+                                <button 
+                                    className='submit-btn'
+                                    onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
+                                    style={{
+                                        marginLeft: '2.5px',
+                                        backgroundColor: '#000', 
+                                        color: '#fff', 
+                                        fontSize:'14px',
+                                        outlineColor: '#fff'
+                                    }}
+                                >Continue to Checkout</button>
+                            </div>
+                     :''}
+                    
+                    
+                    {/*<button 
                         className='submit-btn'
                         onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
                         style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
                     >
                         Continue to Checkout
-                    </button>
-                    :''}
+                    </button>*/}
+                   
                 </div>            
             </div>
             <CartCss />

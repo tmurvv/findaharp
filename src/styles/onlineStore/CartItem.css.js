@@ -10,7 +10,6 @@ function CartItemCss() {
             text-align: left;
             display: flex;
             border-radius: 3px;
-            background-color: #fff;
             padding: 10px;
         }
         .product_image {
@@ -34,7 +33,7 @@ function CartItemCss() {
             margin-left: 10px;
             margin-bottom: 10px;
             max-height: 100px;
-            overflow-y: scroll;
+            overflow-y: auto;
         }
         
         .description p {
@@ -55,26 +54,6 @@ function CartItemCss() {
             width: 100px;  
             text-align: center;
             margin: 15px 0;
-        }
-        
-        .description h3.delete {
-            background-color: #c0392b;
-            color: #fff;
-        }
-        
-        .description h3.save {
-            background-color: #1ABC9C;
-            color: #fff;
-        }
-        
-        .item img { 
-            // display: block;
-            // border: 0; 
-            // padding: 0; 
-            // margin: 0 auto; 
-            // margin-top: 10px; 
-            // width: 75px; 
-            // height: 80px; 
         }
         .product_quantity {
             // width: 100px; 
@@ -107,7 +86,6 @@ function CartItemCss() {
             height: 26px;
             line-height: 30px;
             font-size: 1.25em;
-            background-color: #fff;
             color: #7F8C8D;
             padding: 0 25px; 
             text-align: center;

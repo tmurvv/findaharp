@@ -10,6 +10,7 @@ function StoreProductCss() {
                 min-width: 225px;
                 max-width: 265px;
                 max-height: 600px;
+                height: 550px;
                 position: relative;
             }
             .storeproduct__title {
@@ -52,10 +53,11 @@ function StoreProductCss() {
             }
             .storeproduct__imgcontainer {
                 height: 50%;
+                min-height: 50%;
             }
             .storeproduct__imgcontainer img {
-                height: 100%;
-                width: auto;
+                // height: auto;
+                // width: auto;
                 max-width:100%;
                 max-height:100%;
                 object-fit: cover;

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function SoloEnsembleMenu(props) {
     const handleClose = (evt) => {
-        if (evt.target.value === 'All Solo/Ensembles') return;
+        if (evt.target.value === 'All Lever/Pedal/Ens') return;
         props.handleSoloEnsembleChange(evt.target.getAttribute('name')); 
     };
 
@@ -10,42 +10,37 @@ export default function SoloEnsembleMenu(props) {
         <div className='relative'>
             <button 
                 className="menuButton" 
-                name='Solo/Ensemble' 
+                name='Lever/Pedal/Ens' 
                 onClick={(e)=>{props.handleclick(e);}}
                 style={{color: '#000000'}}
-            >Solo/Ensembles</button>
+            >Lever/Pedal/Ens</button>
             <ul
                 id="soloensemble-select"
                 onClose={handleClose}
                 hidden={!props.open}
-                name='Solo/Ensemble Menu'
+                name='Lever/Pedal/Ens Menu'
                 className='plainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='All Solo/Ensembles'       
-                >All Solo/Ensembles</li>
+                    name='All Lever/Pedal/Ens'       
+                >All Lever/Pedal/Ens</li>
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()}
+                    name='Lever Harp'
+                >Lever Harp</li>      
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()}
+                    name='Pedal Harp'
+                >Pedal Harp</li>      
                 <li 
                     onClick={handleClose} 
                     // key={uuid()}
                     name='Harp Solo'
                 >Harp Solo</li>      
-                <li 
-                    onClick={handleClose} 
-                    // key={uuid()} 
-                    name='Method Books'
-                >Method Books</li>
-                <li 
-                    onClick={handleClose} 
-                    // key={uuid()} 
-                    name='Exercise Books'
-                >Exercise Books</li>
-                <li 
-                    onClick={handleClose} 
-                    // key={uuid()} 
-                    name='Instructional Books'
-                >Instructional Books</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 

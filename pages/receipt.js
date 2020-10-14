@@ -26,15 +26,15 @@ function Receipt() {
     }, []);
     return ( 
         <>
-            <div className='index' style={{backgroundColor: '#fffeee', paddingBottom: '25px'}}>
+            <div className='index' style={{paddingBottom: '25px'}}>
                 <StatusIndicator />
             </div>
-            <div style={{backgroundColor: '#fffeee', padding: '20px 0'}}>
-                <div style={{backgroundColor: '#fff', padding: '20px 0', maxWidth: '650px', margin: 'auto'}} >
+            <div style={{ padding: '20px 0'}}>
+                <div style={{padding: '20px 0', maxWidth: '650px', margin: 'auto'}} >
                     <PageTitle maintitle='Order Completed' subtitle={`A receipt for your order will be emailed to you. Thank you for your order.`} />
                     <div style={{display: 'flex', justifyContent: 'space-evenly',margin: '50px', maxWidth: '650px'}}>
-                        <button style={{width: '30%'}} className='submit-btn' onClick={()=>Router.push('/')}>Back to Harps</button>
-                        <button style={{width: '30%'}} className='submit-btn' onClick={()=>Router.push('/storeentry')}>Back to Harp MiniMall</button>
+                        <button style={{fontSize: '14px', marginRight: '2.5px'}} className='submit-btn' onClick={()=>Router.push('/')}>Back to Harps</button>
+                        <button style={{fontSize: '14px', marginLeft: '2.5px'}} className='submit-btn' onClick={()=>Router.push('/onlinestore')}>Back to Shopping</button>
                     </div>
                 </div>
             </div>

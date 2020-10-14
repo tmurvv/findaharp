@@ -96,14 +96,19 @@ export default function StripeCheckout(props) {
         const resultText = document.querySelector('#loadingLoginText');
         ev.preventDefault();
         setProcessing(true);
-        const payload = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: elements.getElement(CardElement),
-            billing_details: {
-            name: ev.target.name.value
-            }
+        let payload;
+        try {
+            payload = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: elements.getElement(CardElement),
+                    billing_details: {
+                    name: ev.target.name.value
+                    }
+                }
+                });
+        } catch (e) {
+            alert('Problem connecting with payment provider. Please check your connection and try again.')
         }
-        });
         if (payload.error) {
             setError(`Payment failed ${payload.error.message}`);
             setProcessing(false);

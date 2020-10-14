@@ -13,9 +13,13 @@ function GlobalStoreSearchCss() {
             background-position: 10px 12px;
             background-repeat: no-repeat;
             width: 100%;
+            height: 100%;
             font-size: 16px;
             padding: 12px 20px;
-            border: 1px solid #ffe58a;
+            border-top: none;
+            border-bottom: none;
+            border-left: 1px solid #ffe58a;
+            border-right: 1px solid #ffe58a;
             margin-bottom: 0px;
             max-width: 650px;
           }
@@ -23,17 +27,20 @@ function GlobalStoreSearchCss() {
           {
             font-size: 16px;
             padding: 12px 20px;
-            border: 1px solid #ffe58a;
+            border: none;
             margin-bottom: 0px;
           }
           
           select:active,
           select:hover {
-            outline-color: #f9bf1e;
+            outline-color: #ffe499;
           }
           input:active,
           input:hover {
-            outline-color: #f9bf1e;
+            outline-color: #ffe499;
+          }
+          select:focus, input:focus{
+            outline-color: #ffe499;
           }
           
           #myUL {

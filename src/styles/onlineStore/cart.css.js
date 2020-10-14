@@ -51,7 +51,7 @@ function CartCss() {
             margin: 0;
             padding-left: 15px;
             display: flex;
-            overflow-y:scroll;
+            overflow-y:auto;
             overflow-x:hidden;
             background-color: #fffeee;
         }      

@@ -79,7 +79,7 @@ export function getFilteredStoreProducts(allProducts, allState, user, rate) {
     // apply filters // not yet implemented map from array or refactor to function
        
      
-    if (allState.soloensemble&&allState.soloensemble.toUpperCase() !== "ALL Solo/Ensembles")
+    if (allState.soloensemble&&allState.soloensemble.toUpperCase() !== "ALL Lever/Pedal/Ens")
         filteredProducts = soloensembleFilter(filteredProducts, allState.soloensemble);
     // if (allState.title&&allState.title.toUpperCase() !== "ALL MODELS") 
     //     filteredProducts = filteredProducts.filter(

@@ -11,6 +11,8 @@ function StatusIndicatorCss() {
                 justify-content: space-evenly;
                 list-style: none;
                 padding: 0 15px 15px;
+                max-width: 800px;
+                margin: auto;
             }
             .statusItem {
                 flex: 1;

@@ -37,11 +37,14 @@ function CartItem(props) {
                         <img style={{height:'20px', width:'20px', color: 'cadetblue'}} src='img/trashCanRed.png' alt="red trash can" />
                         <p style={{fontSize:'14px', color:'#556f82', marginLeft:'7px'}}>Remove</p>
                     </button>
-                
+                    
                     <div className='quantity_button'>
-                        <div className='add' onClick={() => decQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
+                        {item.newused==='new'
+                        ?<><div className='add' onClick={() => decQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
                         <div className='how_many'>{item.product_quantity}</div>
-                        <div className='sub' onClick={() => incQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div>
+                        <div className='sub' onClick={() => incQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div></>
+                        :<p style={{fontSize:'14px', color:'#556f82', marginLeft:'7px'}}>Only 1 in stock</p>}
+                        
                     </div>
                 </div>
                 <div style={{fontWeight: 'bold'}} className='flex-sb'>

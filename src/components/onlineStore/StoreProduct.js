@@ -21,15 +21,20 @@ const StoreProduct = (props) => {
     }
     function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
-            incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+            const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
+            if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
+                alert('Only 1 in stock. This item already in cart.')
+            } else {
+                incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+            }   
         } else {
             const cartCopy = [...cart];
             const thisItem = {
                 id: uuid(), 
                 store: e.target.getAttribute('data-item-store'),
                 title: e.target.getAttribute('data-item-title'),
-                artist: e.target.getAttribute('data-item-artist_first'),
-                artist: e.target.getAttribute('data-item-artist_last'),
+                artist_first: e.target.getAttribute('data-item-artist_first'),
+                artist_last: e.target.getAttribute('data-item-artist_last'),
                 description: e.target.getAttribute('data-item-description'), 
                 price: e.target.getAttribute('data-item-price'), 
                 condition: e.target.getAttribute('data-item-condition'),
@@ -74,8 +79,9 @@ const StoreProduct = (props) => {
                 {/* <div style={{height: '40px'}}><span>Notes:</span> {props.productdetail.notes}</div> */}
             </div>
             :<><div><span>New Item</span></div><br />
-            <div style={{textAlign: 'left', minHeight: '200px'}}>{String(props.productdetail.description).substr(0,70)} <span style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
-            <div className="storeproduct__price-button-container">
+                {/* <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div> */}
+                <div style={{textAlign: 'left', minHeight: '200px'}}>{String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
+                <div className="storeproduct__price-button-container">
                 <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
                 <button 
                     className='submit-btn'

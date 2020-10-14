@@ -28,7 +28,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         setDetailProduct(product);
         // setOpacity(true); 
     }
-    function handleCloseDetail(evt, product, openContact) {
+    function handleCloseDetail() {
         // dispatch({type: 'initial'})
         // setOpacity(false);
         // if (openContact) handleOpenContact(evt, product);

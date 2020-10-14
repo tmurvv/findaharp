@@ -36,22 +36,24 @@ const initialState = {
     level: false, 
     publicationtype: false
 }
+const initialStateText = {
+    selectionType: '',
+    artist: 'All Artists',
+    title: 'All Titles',
+    category: 'All Categories',
+    soloensemble: 'All Lever/Pedal/Ens',
+    level: 'All Levels',
+    publicationtype: 'All Publication Types',
+    searchInfo: 'All Harps'
+}
+
 function StoreProductSearch(props) {
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const ref = useRef();
 
     const [menus, setMenus] = useState(initialState);
-    const [allState, setAllState] = useState({
-        selectionType: '',
-        artist: 'All Artists',
-        title: 'All Titles',
-        category: 'All Categories',
-        soloensemble: 'All Solo/Ensembles',
-        level: 'All Levels',
-        publicationtype: 'All Publication Types',
-        searchInfo: 'All Harps'
-    }); 
+    const [allState, setAllState] = useState(initialStateText); 
     // useOutsideClick(ref, () => {
     //     setMenus({
     //         category: false,
@@ -110,13 +112,13 @@ function StoreProductSearch(props) {
     }
     function handleSoloEnsembleSelection(soloensemble) {
         const newState = {...allState, 
-            soloensemble: soloensemble==='All Solo/Ensembles'?'All Solo/Ensembles':soloensemble,
+            soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
             productType: 'all',
         }
         props.setEnsembleSearch(soloensemble);
         props.handleChange(soloensemble, allState.level, allState.publicationtype);
         setAllState({...allState, 
-            soloensemble: soloensemble==='All Solo/Ensembles'?'All Solo/Ensembles':soloensemble,
+            soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
@@ -180,7 +182,7 @@ function StoreProductSearch(props) {
                     publicationtype: false
                 });               
                 break;
-            case 'soloensemble':
+            case 'Lever/Pedal/Ens':
                 setMenus({
                     category: false,
                     artist: false,
@@ -221,28 +223,21 @@ function StoreProductSearch(props) {
                 });
         }
     }
-    function handleClear(evt) {
-        document.querySelector('.clearAll').style.display='none';
-        setAllState({
-            ...allState,
-            soloensemble: 'All Solo/Ensembles',
-            level: 'All Levels',
-            publicationtype: 'All Publication Types',
-            category: "All Categories",
-            artist: "All Artists",
-            title: "All Titles",
-            searchInfo: 'All Harps'
-        });
+    function handleClear() {
+        setMenus(initialState);
+        setAllState(initialStateText);
+        // document.querySelector('#storeselected').style.display='none';
+        props.handleClear();
     }
    function clearOneFilter(e) {
        console.log(e.target.name)
         let menuClick = e.target.name;
-        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Solo/Ensembles"); props.handleChange("All Solo/Ensembles", allState.level, allState.publicationtype);}
+        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleChange("All Lever/Pedal/Ens", allState.level, allState.publicationtype);}
         if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange(allState.soloensemble, "All Levels", allState.publicationtype);}
         if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleChange(allState.soloensemble, allState.level, "All Publication Types");}
         console.log('clear',e.target.name)
-        menuClick==="soloensemble"?menuClick="Solo/Ensemble":''; // hack change e.target.name to 'Solo/Ensemble'
-        menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Solo/Ensemble'
+        menuClick==="soloensemble"?menuClick="Lever/Pedal/Ens":''; // hack change e.target.name to 'Lever/Pedal/Ens'
+        menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
@@ -368,11 +363,12 @@ function StoreProductSearch(props) {
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
                         makestitles={props.makestitles}
-                        currentselected={allState.soloensemble?allState.soloensemble:'Harp SoloEnsemble'}
+                        // currentselected={allState.soloensemble?allState.soloensemble:'Harp SoloEnsemble'}
                         handleclick={handleClick}
                         open={menus.soloensemble}
                     />
                     <LevelMenu 
+                        id="levelmenu"
                         handleLevelChange = {handleLevelSelection}
                         products={props.products}
                         // producttype={allState.productType}
@@ -382,6 +378,7 @@ function StoreProductSearch(props) {
                         handleclick={handleClick}
                     />
                     <PublicationTypeMenu 
+                        id='publicationtypemenu'
                         handlePublicationTypeChange = {handlePublicationTypeSelection}
                         currentselected={allState.publicationtype?allState.publicationtype:'Harp All Publication Types'}
                         open={menus.publicationtype}
@@ -396,7 +393,7 @@ function StoreProductSearch(props) {
                             onClick={()=>handleClick({target: {name: 'soloensemble'}})}
                         >
                             {allState.soloensemble}
-                            {allState.soloensemble!=="All Solo/Ensembles"
+                            {allState.soloensemble!=="All Lever/Pedal/Ens"
                                 ?<img 
                                     name='soloensemble'
                                     onClick={
@@ -459,12 +456,12 @@ function StoreProductSearch(props) {
                 </div>
             </div>
             <div className='storeselected'>
-                <p>
+                {/* <p>
                     {showing}
-                </p>
-                <div onClick={handleClear} style={{display: 'none'}} className='clearAll clearSearch'>
+                </p> */}
+                <div onClick={handleClear} id='clearSearch' style={{display: 'none'}} className='clearAll clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                    <p>Clear</p> 
+                    <p>Clear All Search</p> 
                 </div>
             </div>
             {/* <StoreProductContainer 

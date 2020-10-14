@@ -29,7 +29,9 @@ function GlobalStoreSearch(props) {
     const [ levelSearch, setLevelSearch ] = useState();
     const [ publicationSearch, setPublicationSearch ] = useState();
 
-    function handleChange(soloensemble, level, publicationtype) {
+    function handleChange(soloensemble, level, publicationtype, reset) {
+        console.log('top', soloensemble, level, publicationtype, reset)
+        // initialize variables
         let productListCopy = [...FINDAHARP_PRODUCTS];
         let levelProductList=[];
         let soloensembleProductList=[];
@@ -39,7 +41,8 @@ function GlobalStoreSearch(props) {
         let finalProductList=[];
         let categoryFilter;
         let searchTerm;
-
+        // add clear searches button
+        if (document&&document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display=reset?"none":"flex";
         // check level
         if (level&&level.toUpperCase()!=='ALL LEVELS') {
             productListCopy.map(product=> {
@@ -49,11 +52,18 @@ function GlobalStoreSearch(props) {
             levelProductList=[...productListCopy];
         }
         finalProductList=[...levelProductList];
-        
         // check soloensemble
         if (soloensemble&&soloensemble.toUpperCase()!=="ALL SOLO/ENSEMBLES") {
             levelProductList.map(product=> {
-                if (product.subcategories) {
+                if (String(soloensemble).toUpperCase()==="LEVER HARP") {
+                    if (product.harptype) {
+                        if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
+                    }
+                } else if (String(soloensemble).toUpperCase()==="PEDAL HARP") {
+                    if (product.harptype) {
+                        if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
+                    }
+                } else if (product.subcategories) {
                     product.subcategories.map(subcategory=>{
                         if (subcategory.toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
                     })
@@ -78,11 +88,11 @@ function GlobalStoreSearch(props) {
             publicationProductList=[...soloensembleProductList];
         }
         finalProductList=[...publicationProductList];
-
         // category
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
         }
+        if (reset) categoryFilter="All";
         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
             publicationProductList.map(product=>{
                 if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
@@ -98,7 +108,6 @@ function GlobalStoreSearch(props) {
             categoryProductList = [...publicationProductList]
         }
         finalProductList=[...categoryProductList];
-        
         //search term
         if (document.querySelector('#searchInput').value) searchTerm = document.querySelector('#searchInput').value;
         if(searchTerm) {
@@ -115,6 +124,16 @@ function GlobalStoreSearch(props) {
         finalProductList=[...searchProductList];
         props.setFilteredProducts(finalProductList)
     }
+    function handleClear(evt) {
+        document.querySelector('#categoryfilter').value='All';
+        console.log('her',document.querySelector('#categoryfilter').value)
+        document.querySelector('#searchInput').value='';
+        
+        setEnsembleSearch('All Lever/Pedal/Ens');
+        setLevelSearch('All Levels');
+        setPublicationSearch('All Publication Types');
+        handleChange('All Lever/Pedal/Ens', 'All Levels', 'All Publication Types', true)
+    }
     useEffect(()=>{
         if(props.filteredProducts&&props.filteredProducts.length===0) {
             document.querySelector('#searchInput').focus();
@@ -125,20 +144,19 @@ function GlobalStoreSearch(props) {
         <>
             <div style={{width: '100%', maxWidth: '650px', margin: 'auto', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', border: '1px solid #ffe58a', backgroundColor: '#fff'}}>
                 <select onChange={()=>handleChange(ensembleSearch,levelSearch,publicationSearch)} style={{flex: '2'}} id='categoryfilter'>
-                  <option>All</option>
-                  <option disabled>Strings</option>
-                  <option>Music</option>
-                  <option>Accessories</option>
-                  <option>Books</option>
-                  <option disabled>Gifts</option>
-                  <option>CDs</option>
-                  <option>Digital Downloads</option>
-                  <option disabled>Other</option>
+                  <option name='All'>All</option>
+                  <option name='Strings'>Strings</option>
+                  <option name='Music'>Music</option>
+                  <option name='Accessories'>Accessories</option>
+                  <option name='Books'>Books</option>
+                  <option name='Gifts'>Gifts</option>
+                  <option name='CDs'>CDs</option>
+                  <option name='Digital Downloads'>Digital Downloads</option>
                 </select>
-                <input style={{flex: '8',height: '100%'}} type="text" id="searchInput" onChange={()=>handleChange()} placeholder="Search" title="Type in a name" />
-                <img style={{color: 'lightgrey',padding: '5px', opacity: '.25'}} height='40px' src='/img/searchicon.png' alt='search icon' />
+                <input style={{flex: '8'}} type="text" id="searchInput" onChange={()=>handleChange(ensembleSearch,levelSearch,publicationSearch, false)} placeholder="Search" />
+                <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
-            <StoreProductSearch handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
+            <StoreProductSearch handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />
         </>

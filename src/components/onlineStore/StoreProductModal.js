@@ -39,16 +39,17 @@ function StoreProductModal(props) {
     function handleClick(evt, product, openContact) {
         props.handleCloseDetail(evt, product, openContact);
     }
-    function handleAdd(e) {   
-        // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
-        e.target.classList.remove("fahflyToCart");
-        void e.target.offsetWidth;
-        e.target.classList.add("fahflyToCart");
+
+    const updateCart = (e) => {
+        
         // update cart
-        console.log('handleadd', cart[0], e.target)
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
-            incQty(cart, setCart, e.target.getAttribute('data-item-title'));
-            // incQty(e, cart, setCart);// BREAKING investigate why this is marked breaking
+            const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
+            if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
+                alert('Only 1 in stock. This item already in cart.')
+            } else {
+                incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+            }
         } else {
             const cartCopy = [...cart];
             const thisItem = {
@@ -71,6 +72,14 @@ function StoreProductModal(props) {
             cartCopy.push(thisItem);
             setCart(cartCopy);
         }
+    }
+    function handleAdd(e) {   
+        // a trick to restart animation courtesy Chris Coyier. Does not work in strict mode
+        
+        e.target.addEventListener("webkitAnimationend", updateCart(e));
+        e.target.addEventListener("animationend", updateCart(e));
+        e.target.classList.add("storeflyToCart");
+        
     }
     // async function getDistances(lat1, long1, lat2, long2) {
     //     // Driving Distance
@@ -103,9 +112,6 @@ function StoreProductModal(props) {
     //     if (user.currency.toUpperCase()==="CAD") price = `$${(parseNum(price)*currencyMultiplier).toFixed(2)}`;
     //     return price;
     // }
-    useEffect(() => {
-        console.log('modal',props)
-    }, []);
     // // get currency conversions, if necessary
     // useEffect(() => {
     //     async function getMultiplier() {
@@ -127,13 +133,17 @@ function StoreProductModal(props) {
             <div className='storedetailInfo' style={{marginTop: '15px'}}>
                 <div className={`storedetailImg`}><img src= {image} alt={title} /></div>
                 <div className={`storedetailText`}>
-                    <p>{description} <br/><br/>
-                    <span>Level:</span> {level}<br/>
-                    <span>Harp Type:</span> {harptype}<br/>
-                    <span>Condition (1-10):</span> {condition}<br/>
-                    <span>Notes:</span> {notes}
                     <div>
-                        <div className="fahproduct__price">${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
+                        <p>{description} <br/><br/>
+                            <span>Level:</span> {level}<br/>
+                            <span>Harp Type:</span> {harptype}<br/>
+                            <span>Condition (1-10):</span> {condition}<br/>
+                            <span>Notes:</span> {notes}
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <div className="fahproduct__price" style={{textAlign:'center',marginBottom:'10px'}}>${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
                         <button 
                             className='submit-btn'
                             style={{marginTop: '0px', marginBottom: '25px'}}
@@ -170,7 +180,7 @@ function StoreProductModal(props) {
                     >Change Currency</button>        <br /> */}
                     
                     {/* <span>Finish</span> {productFinish?productFinish:'unavailable'} */}
-                    </p>
+                    
                     {/* <br />
                     <p><span>Location</span> {sellerCountry?sellerCountry:'unavailable'}<br></br>
                     <span>Distance</span> 
