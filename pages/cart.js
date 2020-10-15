@@ -38,9 +38,7 @@ function Cart(props) {
     return (
         <>
             <div className='index' style={{width: '100%', backgroundColor: '#fffeee'}}>
-                
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
-                
             <div className="cartContainer">  
                 <div id='cart'>
                     <div className='cartBody'>

@@ -3,6 +3,7 @@ import Router from 'next/router';
 
 import { CartContext } from '../src/contexts/CartContext';
 import { UserContext } from '../src/contexts/UserContext';
+import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import Results from '../src/components/Results';
 import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import { resultInfoReducer } from '../src/reducers/reducers';
@@ -18,6 +19,7 @@ import CheckoutFormCss from "../src/styles/onlinestore/CheckoutForm.css";
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);
     const { user, setUser } = useContext(UserContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
@@ -35,7 +37,7 @@ export default function CheckoutForm() {
                 "Content-Type": "application/json"
             },
             // body: JSON.stringify({items: [{ id: "xl-tshirt" }]}) // Format for listing all stripe items
-            body: JSON.stringify({"total": getTotal(cart, user)*100})
+            body: JSON.stringify({"total": getTotal(cart, user, currencyMultiplier)*100})
         })
         .then(res => {
             return res.json();
@@ -113,7 +115,7 @@ export default function CheckoutForm() {
             <form id="payment-form" onSubmit={handleSubmit} style={{margin: 'auto', marginTop: '50px'}}>
                 <h2>Credit Card Payment</h2>
                 <h4 style={{fontStyle:'italic', color: 'lightgrey', fontWeight: '300', marginTop: '0'}}>Powered by Stripe</h4>
-                <h3 style={{margin: 'auto', marginBottom: '25px'}}>Total: {getTotal(cart, user)}</h3>
+                <h3 style={{margin: 'auto', marginBottom: '25px'}}>Total: {getTotal(cart, user, currencyMultiplier)}</h3>
                 <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
                 <button
                     disabled={processing || disabled || succeeded}
@@ -147,7 +149,7 @@ export default function CheckoutForm() {
             </form>
             <form id="payment-form" style={{margin: 'auto', marginTop: '50px'}}>
                 <h2>Paypal Payment</h2>
-                <h3 style={{margin: '25px 0'}}>Total: {getTotal(cart, user)}</h3>
+                <h3 style={{margin: '25px 0'}}>Total: {getTotal(cart, user, currencyMultiplier)}</h3>
                 <p>Paypal payment under construction</p>
                 <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
                 <script>paypal.Buttons().render('body');</script>

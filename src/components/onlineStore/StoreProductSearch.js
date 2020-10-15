@@ -236,7 +236,7 @@ function StoreProductSearch(props) {
         if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange(allState.soloensemble, "All Levels", allState.publicationtype);}
         if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleChange(allState.soloensemble, allState.level, "All Publication Types");}
         console.log('clear',e.target.name)
-        menuClick==="soloensemble"?menuClick="Lever/Pedal/Ens":''; // hack change e.target.name to 'Lever/Pedal/Ens'
+        menuClick==="soloensemble"?menuClick="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);

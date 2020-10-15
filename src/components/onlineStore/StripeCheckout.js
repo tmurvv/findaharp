@@ -25,7 +25,7 @@ import ShippingCss from "../../styles/onlinestore/Shipping.css";
 export default function StripeCheckout(props) {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-    const { currency } = useContext(CurrencyContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const { user, setUser } = useContext(UserContext);
     const { setStatus } = useContext(StatusContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
@@ -42,7 +42,7 @@ export default function StripeCheckout(props) {
     console.log('cartSubtotals', cartSubtotals)
     console.log('currency', currency)
     useEffect(() => {
-        if (getTotal(cart, user)&&getTotal(cart,user)>0) {
+        if (getTotal(cart, user)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
                 // Create PaymentIntent as soon as the page loads
                 window
@@ -52,7 +52,7 @@ export default function StripeCheckout(props) {
                         "Content-Type": "application/json"
                     },
                     // body: JSON.stringify({items: [{ id: "xl-tshirt" }]}) // Format for listing all stripe items
-                    body: JSON.stringify({"total": getTotal(cart, user)*100})
+                    body: JSON.stringify({"total": getTotal(cart, user, currencyMultiplier)*100})
                 }) 
                 .then(res => {
                     return res.json();

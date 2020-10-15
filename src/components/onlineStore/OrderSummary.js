@@ -18,7 +18,7 @@ import {
 
 function OrderSummary() {
     const { status } = useContext(StatusContext);
-    const { currency } = useContext(CurrencyContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
@@ -39,7 +39,8 @@ function OrderSummary() {
              <div className="orderSummary" style={{padding: '15px', borderBottom: '1px solid #868686'}}>
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Products Subtotal:</p>
-                    <p style={{textAlign: 'right'}}>${Number(getSubTotal(cart)).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></p>
+                    {user.currency==='USD'?<p style={{textAlign: 'right'}}>${Number(getSubTotal(cart)).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
+                    :<p style={{textAlign: 'right'}}>${(Number(getSubTotal(cart))*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping:</p>
@@ -53,9 +54,9 @@ function OrderSummary() {
             </div>
             <div className='flex-sb' style={{padding: '15px'}}>
                     <h4 style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Total:</h4>
-                    <p style={{textAlign: 'right'}}>${Number(getTotal(cart, user)).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></p>
+                    {user.currency==="USD"?<p style={{textAlign: 'right'}}>${Number(getTotal(cart, user)).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
+                    :<p style={{textAlign: 'right'}}>${Number(getTotal(cart, user, currencyMultiplier)).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
             </div>
-            
             <OrderSummaryCss />
         </>
     )

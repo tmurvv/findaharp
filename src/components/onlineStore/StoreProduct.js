@@ -4,15 +4,17 @@ import uuid from 'react-uuid';
 import {
     incQty
 } from '../../utils/storeHelpers';
+import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
 
 const StoreProduct = (props) => {
+    const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-    const { currency } = useContext(CurrencyContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const [ openModal, setOpenModal ] = useState(false);
     function handleOpenModal() {
         // if (!props.productdetail||!props.productdetail.productTitle) return;
@@ -56,7 +58,7 @@ const StoreProduct = (props) => {
         e.target.classList.add("storeflyToCart");  
     }
     return (
-        <div className="storeproduct">  
+        <div className="storeproduct">
             <div className="storeproduct__imgcontainer">
                 <img 
                     src={props.productdetail.image} 
@@ -82,7 +84,10 @@ const StoreProduct = (props) => {
                 {/* <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div> */}
                 <div style={{textAlign: 'left', minHeight: '200px'}}>{String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
                 <div className="storeproduct__price-button-container">
-                <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
+                {user&&user.currency==="USD"?    
+                <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
+                :<div className="storeproduct__price">${(Number(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                }
                 <button 
                     className='submit-btn'
                     type="button"

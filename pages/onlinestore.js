@@ -1,5 +1,5 @@
 // packages
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import uuid from 'react-uuid';
 import Router from 'next/router';
 
@@ -13,9 +13,11 @@ import OnlineStoreCss from '../src/styles/onlinestore/onlinestores/FindaharpOnli
 import StoreProductSearch from '../src/components/onlineStore/StoreProductSearch';
 import GlobalStoreSearch from '../src/components/onlineStore/GlobalStoreSearch';
 import StoreProductContainerCss from '../src/styles/onlinestore/StoreProductContainer.css';
+import { UserContext } from '../src/contexts/UserContext';
 
 const OnlineStore = () => {
     const [ filteredProducts, setFilteredProducts ] = useState(FINDAHARP_PRODUCTS);
+    const { user } = useContext(UserContext);
     // display cart
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';

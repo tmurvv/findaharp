@@ -63,11 +63,10 @@ export function tax(cart, shippingregion) {
         return 'select region';
     }       
 }
-export function getTotal(cart, user) {
-    console.log('from getTotal',cart, user)
+export function getTotal(cart, user, currencyMultiplier) {
     if (!user.shippingcountry) return getSubTotal(cart);
     if (user.shippingcountry==="Canada") {
-        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
+        return (Number(getSubTotal(cart)*currencyMultiplier) + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
     } else {
         return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry))).toFixed(2);
     }

@@ -53,7 +53,7 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.32);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -105,7 +105,10 @@ function MyApp(props) {
         }
     },[]);
 
-    
+    //get currency multiplier
+    useEffect(() => {
+        // const response = axios.get('https://free.currconv.com/api/v7/convert?q=USD_PHP&compact=ultra&apiKey=f99db690b27b4653acc2');
+    });
     // if no user, check for JWT cookie in browser
     useEffect(() => {
         if (typeof window !== 'undefined' && !user._id) {

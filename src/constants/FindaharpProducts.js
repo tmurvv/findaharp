@@ -1102,7 +1102,7 @@ export const FINDAHARP_PRODUCTS = [
             id: 'JustAs-NUAA',
             store: 'findaharp',
             category: 'music', 
-            title: "The First Digital Download", 
+            title: "To Zanarkand (Test Item)", 
             subcategories: ['movie music', 'digital downloads'], 
             artist_first: "The",
             artist_last: "z-Arranger",
@@ -1111,7 +1111,7 @@ export const FINDAHARP_PRODUCTS = [
             harptype: 'pedal harp',
             notes: '',
             price: 15.00,
-            image: "../../../img/store/findaharp/sheetmusic/MoonRiver.jpg", 
+            image: "../../../img/store/findaharp/sheetmusic/Zanarkand.PNG", 
             description: "A test item for the digital download functionality.",
             newused: 'new'
         },

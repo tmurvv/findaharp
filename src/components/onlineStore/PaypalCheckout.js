@@ -2,11 +2,13 @@ import { useContext } from 'react';
 
 import { CartContext } from '../../contexts/CartContext';
 import { UserContext } from '../../contexts/UserContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
 
 import { getTotal } from "../../utils/checkoutHelpers";
 function PaypalCheckout(props) {
     const { cart } = useContext(CartContext);
     const { user } = useContext(UserContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     if (props.method==='paypal') {
         return (
             <>
@@ -23,7 +25,7 @@ function PaypalCheckout(props) {
                     <input type="hidden" name="no_note" value="0"/>
                     <input type="hidden" name="cn" value="Add special instructions to the seller"/>
                     <input type="hidden" name="no_shipping" value="2"/>
-                    <input type="hidden" name="amount" value={getTotal(cart,user).toString()}/>
+                    <input type="hidden" name="amount" value={getTotal(cart,user, currencyMultiplier).toString()}/>
                     <input type="hidden" name="currency_code" value="CAD"/>
                     <input type="hidden" name="return" value="https://findaharp.com"/>
                     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"/>

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import CartItemCss from '../../styles/onlineStore/CartItem.css';
 import { CartContext } from '../../contexts/CartContext';
+import { UserContext } from '../../contexts/UserContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 
 import {
@@ -12,7 +13,8 @@ import {
 function CartItem(props) {
     const { item } = props;
     const { cart, setCart } = useContext(CartContext);
-    const { currency } = useContext(CurrencyContext);
+    const { user } = useContext(UserContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     return (
         <>
             <div className='item'>
@@ -22,7 +24,8 @@ function CartItem(props) {
                 <div className='description'>
                     <p><span style={{fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span> - {item.description}</p>
                 </div>
-                <div className='price'>${Number(item.price).toFixed(2)} each</div>
+                {user.currency==="UDS"?<div className='price'>${Number(item.price).toFixed(2)} each</div>
+                :<div className='price'>${(Number(item.price)*currencyMultiplier).toFixed(2)} each</div>}
                 <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 
                         onClick={() => deleteItem(cart, setCart, item.id)} 
@@ -49,7 +52,8 @@ function CartItem(props) {
                 </div>
                 <div style={{fontWeight: 'bold'}} className='flex-sb'>
                     <p>Product Total:</p>
-                    <p>${(item.price*item.product_quantity).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></p>
+                    {user.currency==="USD"?<p>${(item.price*item.product_quantity).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
+                    :<p>${(item.price*item.product_quantity*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
             </div>
             <CartItemCss />
