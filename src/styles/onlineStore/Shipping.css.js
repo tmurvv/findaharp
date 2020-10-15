@@ -21,7 +21,6 @@ function ShippingCss() {
             .shippingContainer {
                 box-sizing:border-box;
                 background-color: #fffeee;
-                padding: 30px;
                 padding-top: 0;
                 font-family: avenir;
                 margin: auto;
@@ -29,7 +28,7 @@ function ShippingCss() {
                 display: flex;
             }
             
-            @media only screen and (max-width: 750px) {
+            @media only screen and (max-width: 1000px) {
                 .shippingContainer{
                     display: block;
                 }
@@ -45,7 +44,14 @@ function ShippingCss() {
                 border-radius: 3px;
                 margin-top: 5px;
                 margin-bottom: 20px;
+                max-width: 100%;
             }
+            @media only screen and (min-width: 550px) {
+                .shippingemail input {
+                    width: 50%;
+                }
+            }
+            
             .shippingContainer label {
                 display: block;
             }

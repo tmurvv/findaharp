@@ -42,7 +42,7 @@ function Subtotal(props) {
                 <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${Number(getSubTotal(cart)).toFixed(2)}</h3>
             </div>
             :<div className='flexSB subtotal'>
-                <h3>Estimated Total:</h3>
+                <h3>Total:</h3>
                 {/* <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${Number(getTotal(cart,user).toFixed(2))}</h3> */}
                 <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${getTotal(cart,user)}<span style={{fontStyle:'italic',fontSize:'10px'}}>{currencyMultiplier===1?'USD':'CAD'}</span></h3> {/*// BREAKING needs error handling */}
             </div>

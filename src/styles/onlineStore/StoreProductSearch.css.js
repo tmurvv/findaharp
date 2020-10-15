@@ -26,7 +26,7 @@ function ProductSearchCss() {
             }
             @media only screen and (max-width: 550px) {
                 .storeproductSearchOuter {
-                    width: 90%;
+                    width: 100%;
                 }
             } 
             .storesearchLine1 {
@@ -69,7 +69,6 @@ function ProductSearchCss() {
                     display: flex;
                     justify-content: space-evenly;
                     margin: auto;
-                    width: 80%;
                     margin-top: 10px;
                 }
                 .storesearchLine1 {
@@ -140,7 +139,6 @@ function ProductSearchCss() {
                     display: flex;
                     justify-content: space-evenly;
                     margin: auto;
-                    width: 80%;
                     margin-bottom: 40px;
                 }
                 .storesearchLine2 {

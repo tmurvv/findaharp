@@ -7,10 +7,8 @@ function StoreProductCss() {
                 margin: 10px;
                 margin-top: 25px;
                 text-align: center;
-                min-width: 225px;
-                max-width: 265px;
+                width: 265px;
                 max-height: 600px;
-                height: 550px;
                 position: relative;
             }
             .storeproduct__title {
@@ -32,7 +30,6 @@ function StoreProductCss() {
             @media only screen and (max-width: 1000px) {
                 .storeproduct {
                     margin: 30px auto;
-                    width: 100%;
                 }
             }
             @media only screen and (max-width: 550px) {
@@ -41,6 +38,7 @@ function StoreProductCss() {
                     flex-direction: column;
                     border-bottom: 1px solid lightgrey;
                     margin-bottom: 40px;
+                    width: 100%;
                 }
             }
             .storeproduct__description {
@@ -60,8 +58,9 @@ function StoreProductCss() {
                 // width: auto;
                 max-width:100%;
                 max-height:100%;
-                object-fit: cover;
-                overflow: hidden;
+                // min-width: 100%;
+                // object-fit: cover;
+                // overflow: hidden;
                 box-shadow: 3px 5px 3px lightgrey;
             }
             // .music .storeproduct__image {

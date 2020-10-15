@@ -125,19 +125,20 @@ function Shipping() {
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
                 
-                {screenWidth<551?<div style={{padding: '0 35px'}}><Subtotal type="total"/></div>:''}
+                <div><Subtotal type="total"/></div>
                
                <form 
                     method="get" 
                     onSubmit={(e)=>handleSubmit(e)}
+                    style={{padding: '15px'}}
                 >
-                    <div style={{display:'flex'}}>
+                    <div>
                     <table style={{borderSpacing: '10px', flex:'12'}}>
                         <tr>
-                            <td colSpan='2'>
-                            <h3 style={{marginLeft:'30px'}}>Contact Information</h3>
-                                <div className="shippingemail" style={{marginBottom:'0px',marginLeft:'30px'}}>
-                                    <label htmlFor="shippingemail">Email</label>
+                            <td colSpan='4'>
+                            <h3>Contact Information</h3>
+                                <div className="shippingemail" style={{marginBottom:'0px',}}>
+                                    <label style={{display:'block'}} htmlFor="shippingemail">Email</label>
                                     <input 
                                         type="email" 
                                         name="shippingemail" 
@@ -147,12 +148,10 @@ function Shipping() {
                                         required 
                                     />
                                 </div>
-                                <div style={{padding: '30px', marginTop: '-40px', marginBottom: '-15px', width: '60%', fontStyle: 'italic', color: '#adadad'}}>Shipping updates and order receipt will be sent to this address.</div>
+                                <div style={{fontStyle: 'italic', color: '#adadad'}}>Shipping updates and order receipt will be sent to this address.</div>
                             </td>
-                            <td colSpan='2'></td>
                         </tr>
                     </table>
-                    <div style={{flex: '4'}}></div>
                     </div>
                     <div className='shippingContainer'>
                     <div style={{flex: '12'}}>
@@ -175,6 +174,7 @@ function Shipping() {
                                                 marginTop: '5px',
                                                 backgroundColor: '#fff'
                                             }}
+                                            whitelist={['US', 'CA']}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
@@ -226,7 +226,6 @@ function Shipping() {
                                         required 
                                     />
                                 </td>
-                                
                             </tr>
                             <tr>
                                 <td colSpan='4'>
@@ -326,6 +325,7 @@ function Shipping() {
                                                 marginTop: '5px',
                                                 backgroundColor: '#fff'
                                             }}
+                                            whitelist={['US', 'CA']}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
@@ -375,7 +375,6 @@ function Shipping() {
                                         required 
                                     />
                                 </td>
-                                
                             </tr>
                             <tr>
                                 <td colSpan='4'>
@@ -461,7 +460,7 @@ function Shipping() {
                     
                 } 
                 </div>
-                <div style={{ flex: 4, backgroundColor: '#fff', marginLeft: '20px', marginTop: '-190px' }}>
+                <div style={{ flex: 4, backgroundColor: '#fff'}}>
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
                     <OrderSummary />
                     {/* {screenWidth>=715? */}
@@ -506,6 +505,7 @@ export default Shipping;
                                     marginBottom: '20px',
                                     marginTop: '5px'
                                 }}
+                                whitelist={['US', 'CA']}
                                 value={user.shippingcountry}
                                 name='shippingcountry'
                                 onChange={(val)=> changeCountry(val)} 

@@ -9,6 +9,11 @@ function OnlineStoreCss() {
             .divider img {
                 max-height: 5px;
             }
+            @media only screen and (max-width: 550px) {
+                .subTitle {
+                    font-size: 8px;
+                }
+            }
             .onlinestore {
                 width: 100%;
                 margin: auto;

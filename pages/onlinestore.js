@@ -30,8 +30,7 @@ const OnlineStore = () => {
     return (
         <>
             <div className='index' style={{height: 'fit-content', backgroundColor: '#fffeee', padding: '15px', paddingTop: '70px'}}>
-                <PageTitle maintitle="Online Store" subtitle='Currently offering a few pre-loved music titles and CDs. Check back in November, 2020 for thousands more items.' /> 
-                {/* <ul style={{width:'40%',margin:'-25px auto 50px',fontStyle:'italic',color:'#868686'}}><li>Harp Strings (Bow Brand gut, wires, nylon, Dusty and Triplett string sets, etc.)</li><li>New Music (hundreds of titles)</li><li>Harp Accessories (lots of them)</li><li>and More!</li></ul> */}
+                <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November.' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
                 <StoreProductContainer filteredproductscontainer={filteredProducts}/>
             </div>

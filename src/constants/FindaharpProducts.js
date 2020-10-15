@@ -60,7 +60,7 @@ export const FINDAHARP_PRODUCTS = [
             store: 'findaharp',
             category: 'music',
             subcategories: ['all ensemble','other ensembles'], 
-            title: "Three Wedding Marches for woodwind quintermediateet and harp.", 
+            title: "Three Wedding Marches for woodwind quintet and harp.", 
             artist_first: "",
             artist_last: "Wagner, Mozart, Mendelssohn",
             price: '10.00', 

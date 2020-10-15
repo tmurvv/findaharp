@@ -25,6 +25,7 @@ function CartItemCss() {
             // margin: 0 auto; 
             // margin-top: 10px; 
             width: 140px;
+            max-height: 100%;
             border-radius: 3px;
             box-shadow: 3px 5px 3px lightgrey;
         }
@@ -90,25 +91,7 @@ function CartItemCss() {
             padding: 0 25px; 
             text-align: center;
         }
-            
-        .add {
-            // line-height: 13px;
-            // width: 100%;
-            // font-size: 10px;
-            // color: #1ABC9C;
-            // text-align: center;
-            // font-weight: bold;
-            // cursor: pointer;
-        } 
-        .sub {
-            // line-height: 13px;
-            // font-size: 14px;
-            // color: #E74C3C;
-            // text-align: center;
-            // width: 100%;
-            // font-weight: bold;
-            // cursor: pointer;
-        }
+        
         .price  { 
             font-size: 16px;
             font-family: 'Metropolis Extra Bold';

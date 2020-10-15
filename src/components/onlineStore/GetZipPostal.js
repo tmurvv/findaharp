@@ -44,7 +44,9 @@ function GetPostalZip() {
                 <img style={{height:'33px', marginRight: '4px'}} src='img/store/fastTruck.png' alt='humorous fast truck' />
                 <h2>Where are we shipping to?</h2>
             </div>
-            <div style={{marginBottom: '15px'}}>It will help us estimate shipping costs.</div>
+            <div style={{marginBottom: '15px'}}>
+                <p>Now shipping to US and Canada. More countries coming soon.</p>
+            </div>
             {/* <form style={{display: 'block'}}> */}
                 <div className='countryDrop'>
                 <label htmlFor="country">Country</label>
@@ -56,15 +58,17 @@ function GetPostalZip() {
                         borderRadius: '3px',
                         marginBottom: '20px',
                         marginTop: '5px',
-                        backgroundColor: '#fff'
+                        backgroundColor: '#fff',
+                        minWidth: '260px'
                     }}
+                    whitelist={['US', 'CA']}
                     value={user.shippingcountry}
                     name='shippingcountry'
                     onChange={(val)=> handleCountryChange(val)} 
                 />
             </div>
             {user.shippingcountry==='Canada'
-            ?<div className='regionDrop' style={{marginLeft: '0'}}>
+            ?<><div className='regionDrop' style={{marginLeft: '0'}}>
                 <label htmlFor="country">Select Province to calculate taxes</label>
                 <RegionDropdown
                     style={{
@@ -83,6 +87,7 @@ function GetPostalZip() {
                     onChange={(val) => {changeRegion(val)}} 
                 />
             </div>
+            </>
             :''}
             <ShippingCss />
         </div>

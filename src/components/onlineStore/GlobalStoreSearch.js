@@ -42,7 +42,7 @@ function GlobalStoreSearch(props) {
         let categoryFilter;
         let searchTerm;
         // add clear searches button
-        if (document&&document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display=reset?"none":"flex";
+        if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";}
         // check level
         if (level&&level.toUpperCase()!=='ALL LEVELS') {
             productListCopy.map(product=> {
@@ -52,8 +52,9 @@ function GlobalStoreSearch(props) {
             levelProductList=[...productListCopy];
         }
         finalProductList=[...levelProductList];
+        console.log('level', finalProductList.length)
         // check soloensemble
-        if (soloensemble&&soloensemble.toUpperCase()!=="ALL SOLO/ENSEMBLES") {
+        if (soloensemble&&soloensemble.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
             levelProductList.map(product=> {
                 if (String(soloensemble).toUpperCase()==="LEVER HARP") {
                     if (product.harptype) {
@@ -73,6 +74,7 @@ function GlobalStoreSearch(props) {
             soloensembleProductList=[...levelProductList];
         }
         finalProductList=[...soloensembleProductList];
+        console.log('soloens', finalProductList.length)
         // check publication
         if (publicationtype&&publicationtype.toUpperCase()!=="ALL PUBLICATION TYPES") {
             console.log('inpub', soloensembleProductList.length)
@@ -83,7 +85,7 @@ function GlobalStoreSearch(props) {
                         if (subcategory.toUpperCase()===publicationtype.toUpperCase()) publicationProductList.push(product);
                     })
                 }
-            });
+            }); 
         }else {
             publicationProductList=[...soloensembleProductList];
         }

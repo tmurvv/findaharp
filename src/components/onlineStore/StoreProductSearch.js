@@ -226,7 +226,7 @@ function StoreProductSearch(props) {
     function handleClear() {
         setMenus(initialState);
         setAllState(initialStateText);
-        // document.querySelector('#storeselected').style.display='none';
+        document.querySelector('#clearSearch').style.display='none';
         props.handleClear();
     }
    function clearOneFilter(e) {
@@ -254,106 +254,7 @@ function StoreProductSearch(props) {
     const showing = "Not Yet Implemented"
     return (
         <>       
-        {/* <h3 className='storesearchTitle'>Use the filters below to narrow your results.</h3> */}
         <div className='storeproductSearchOuter'>
-            {/* <div className='storemobileSearchLine1'>
-            <div  ref={ref} className='storesearchLine1'>  
-                <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
-                
-                <MainCategoryMenu 
-                    handleCategoryChange={handleCategorySelection} 
-                    products={props.products}
-                    makestitles={props.makestitles}
-                    currentselected={allState.category?allState.category:'Category'}
-                    handleclick={handleClick}
-                    open={menus.category}
-                />
-                <ArtistMenu
-                    handleArtistChange = {handleArtistSelection}
-                    open={!menus.artist} 
-                    products={props.products}
-                    makestitles={props.makestitles}
-                    handleclick={handleClick}
-                />
-                <TitleMenu
-                    handleTitleChange={handleTitleSelection}
-                    products={props.products}
-                    productArtist={allState.artist}
-                    productCategory={allState.category}
-                    makestitles={props.makestitles}
-                    open={menus.title}
-                    handleclick={handleClick}
-                />
-            </div>
-            <div className="storesearchLine1Sub">
-                <div 
-                    id="selectedCategory" 
-                    className={`storesearch-grid-item`} 
-                    value={allState.category}
-                    onClick={()=>handleClick({target: {name: 'category'}})}
-                >
-                    {allState.category}
-                    {allState.category!=="All Categories"
-                        ?<img 
-                            name='category'
-                            onClick={
-                                (e)=>{
-                                    e.stopPropagation(); 
-                                    clearOneFilter({target:{name:'category'}});
-                                }
-                            } 
-                            src='/img/clear_search.png' 
-                            alt='clear filters'
-                        />
-                        :''
-                    }
-                </div>
-                <div 
-                    id="selectedArtist" 
-                    className={`storesearch-grid-item`} 
-                    value={allState.artist}
-                    onClick={()=>handleClick({target: {name: 'artist'}})}
-                >
-                    {allState.artist}
-                    {allState.artist!=="All Artists"
-                        ?<img 
-                            name='artist'
-                            onClick={
-                                (e)=>{
-                                    e.stopPropagation(); 
-                                    clearOneFilter({target:{name:'artist'}});
-                                }
-                            }
-                            src='/img/clear_search.png' 
-                            alt='clear filters'
-                        />
-                        :''
-                    }
-                </div>
-                <div 
-                    id="selectedTitle" 
-                    className={`storesearch-grid-item`} 
-                    value={allState.title}
-                    onClick={()=>handleClick({target: {name: 'title'}})}
-                >
-                    {allState.title}
-                    {allState.title!=="All Titles"
-                        ?<img 
-                        onClick={
-                            (e)=>{
-                                e.stopPropagation(); 
-                                clearOneFilter({target:{name:'title'}});
-                            }
-                        }
-                            src='/img/clear_search.png'
-                            name='title' 
-                            alt='clear title filters'
-                        />
-                        :''
-                    }
-                </div>
-            </div> */}
-            {/* </div> */}
             <h3 className='storesearchTitle'>Searching for music? Refine your search here.</h3>
             <div className='storemobileSearchLine2'>
                 <div ref={ref} className='storesearchLine2'>
@@ -455,23 +356,15 @@ function StoreProductSearch(props) {
                         </div>
                 </div>
             </div>
-            <div className='storeselected'>
+            <div className='storeselected' id='clearSearch' style={{display:'none'}}>
                 {/* <p>
                     {showing}
                 </p> */}
-                <div onClick={handleClear} id='clearSearch' style={{display: 'none'}} className='clearAll clearSearch'>
+                <div onClick={handleClear} className='clearAll clearSearch'>
                     <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
                     <p>Clear All Search</p> 
                 </div>
             </div>
-            {/* <StoreProductContainer 
-                data-test="component-ProductContainer" 
-                filteredproductscontainer={filteredProducts} 
-                searchInfo={allState.searchInfo}
-                allstate={allState}
-                clientlat={props.clientlat}
-                clientlong={props.clientlong}
-            />     */}
             <StoreProductSearchCss />             
         </div>
         </>

@@ -43,8 +43,9 @@ function OrderSummary() {
                 </div>
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping:</p>
-                    <p style={{textAlign: 'right'}}>${Number(cartSubtotals.shipping).toFixed(2)}</p>
+                    <p style={{textAlign: 'right'}}>${Number(cartSubtotals.shipping).toFixed(2)}{String(user.shippingcountry).toUpperCase()==="CANADA"?'*':''}</p>
                 </div>
+                {String(user.shippingcountry).toUpperCase()==="CANADA"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''}
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Taxes:</p>
                     <p style={{textAlign: 'right'}}>${Number(cartSubtotals.taxes).toFixed(2)}</p>

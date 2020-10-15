@@ -143,7 +143,7 @@ function StoreProductModal(props) {
                     </div>
                     
                     <div>
-                        <div className="fahproduct__price" style={{textAlign:'center',marginBottom:'10px'}}>${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
+                        <div className="fahproduct__price" style={{textAlign:'center',marginBottom:'10px', marginTop: '30px'}}>${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>{!currency||currency===1?'USD':'CAD'}</span></div>
                         <button 
                             className='submit-btn'
                             style={{marginTop: '0px', marginBottom: '25px'}}

@@ -11,11 +11,6 @@ function SubtotalCss() {
                     padding: 15px;
                 }
             }
-            @media only screen and (max-width: 550px) {
-                .subtotal {
-                    padding: 0px;
-                }
-            }
         `}
         </style>
     )

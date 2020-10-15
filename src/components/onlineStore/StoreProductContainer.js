@@ -89,7 +89,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
             {/* {allstate.location!=='ltActivate'
                 ? */}
                 <>
-                    <h3 style={{textAlign: 'center', marginBlockEnd: 0}}>Not Found. Select "Clear" to see harp listings.</h3>
+                    <h3 style={{textAlign: 'center', marginBlockEnd: 0}}>Not Found.<br />Select "Clear All Search" to browse items.</h3>
                     <div data-test='component-ProductContainer' className='storenotFoundContainer'>
                         <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
                     </div>

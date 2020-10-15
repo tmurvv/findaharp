@@ -108,8 +108,9 @@ export default function StripeCheckout(props) {
                 });
         } catch (e) {
             alert('Problem connecting with payment provider. Please check your connection and try again.')
+            return Router.push('/cart');
         }
-        if (payload.error) {
+        if (payload&&payload.error) {
             setError(`Payment failed ${payload.error.message}`);
             setProcessing(false);
         } else {
@@ -249,6 +250,7 @@ export default function StripeCheckout(props) {
                                         marginTop: '5px',
                                         backgroundColor: '#fff'
                                     }}
+                    whitelist={['US', 'CA']}
                                     value={user.country}
                                     name='country'
                                     onChange={(val) => selectCountry(val, user, setUser)} 
