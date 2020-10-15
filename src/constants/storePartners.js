@@ -23,10 +23,7 @@ export const STORE_PARTNERS = [
     
     <p>Harps Etc. Inc. is staffed by professional harpists with over 75 years of combined experience and knowledge. &nbsp;</p>
     
-    <p>We are located in the San Francisco East Bay in beautiful Walnut Creek.&nbsp; Walnut Creek is known as the shopping mecca of the East Bay and is the gateway to the Diablo Valley, Livermore and Napa Valley wine country, Lake Tahoe and Reno.&nbsp; Come visit our store when you are in the area.&nbsp; We’re a 40-minute ride from downtown San Francisco by car or by BART. Harps Etc. Inc. is just a few blocks away from the Walnut Creek BART station and the Ygnacio Valley Rd. exit on Interstate 680.</p>`,
-    
-    
-        
+    <p>We are located in the San Francisco East Bay in beautiful Walnut Creek.&nbsp; Walnut Creek is known as the shopping mecca of the East Bay and is the gateway to the Diablo Valley, Livermore and Napa Valley wine country, Lake Tahoe and Reno.&nbsp; Come visit our store when you are in the area.&nbsp; We’re a 40-minute ride from downtown San Francisco by car or by BART. Harps Etc. Inc. is just a few blocks away from the Walnut Creek BART station and the Ygnacio Valley Rd. exit on Interstate 680.</p>`, 
         // productLongDesc: ` carries most major harp lines including: Lyon & Healy, Salvi, Dusty Strings, Triplett, Music Maker, William Rees, Sharpsicle, Stoney End and others.  We have numerous new and used pedal, lever and lap harps in our showroom.  We also have the ability to order any other harp for you.  In addition to harps, we keep harp cases, strings, sheet music and countless harp accessories available for purchase at our store and online. Harps Etc. Inc. was inspired by our love of the harp, teaching and working with the public.  By combining a storefront location with an online store, the mission at Harps Etc. Inc. is to create greater awareness, access and appreciation of the harp around the world. We are located in the San Francisco East Bay in beautiful Walnut Creek.`,
         productMaker: "Harps Etc.",
         productImageUrl: "/img/storePartners/harpsetc_logo.png",
@@ -152,5 +149,26 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'http://vixenharps.com',
         sellerWebsiteText: 'vixenharps.com',
         sellerEmail: 'info@vixenharps.com'
+    },
+    {
+        id: uuid(),
+        sellerCountry: "USA",
+        sellerRegion: "Western Colorado",
+        productTitle: "Blevins Harps",
+        productPrice: "",
+        productLongDesc: `
+            <div>
+                <p>Welcome to <span>Blevins Harps</span> where our mission is to build quality instruments, one at a time, for our amazing customers. Because picking out a harp is personal, we endeavour to help each customer select just the right harp.</p>
+                <p class="" style="white-space:pre-wrap;">Blevins Harps began in 1992 when Dwight Blevins left an audio engineering career in radio and TV broadcasting to set up a workshop in Western Colorado. Dwight not only loved the sound, but also the visual artistic form of the harp. This can be seen in every one of Dwight’s designs. He was willing to explore different shapes and wood types to bring out the best possible sound and visual beauty of each harp.&nbsp;&nbsp;&nbsp;</p>
+                <p>Since Blevins Harp's humble beginning, over 3200 harps have been lovingly built and shipped worldwide.</p>
+                <p>Soon after Dwight’s retirement in 2018, we providentially found Dwight and purchased the Blevins brand. Dale and Jamin, a father and son team, previously worked as carpenters for many years and share a passion for woodworking. Laurie studied the harp at the University of Northern Colorado under Kathy Bundock Moore and our fourteen year old daughter also plays the harp. This was a great fit for our family and we so much enjoyed working with Dwight and Cindy in the transition.&nbsp;&nbsp;</p>
+                <p>We especially love the customer centered focus of Blevins Harps. and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p><p class="" style="white-space:pre-wrap;">All The Best, Dale, Laurie and Jamin Wright</p>
+            </div>`,
+        productMaker: "Blevins Harps",
+        productImageUrl: "/img/storePartners/blevins_harps_logo_brightness.png",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'https://blevinsharps.com',
+        sellerWebsiteText: 'blevinsharps.com',
+        sellerEmail: 'blevinsharps@gmail.com'
     }
 ];

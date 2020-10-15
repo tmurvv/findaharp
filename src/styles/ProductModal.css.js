@@ -115,10 +115,12 @@ function ProductModalCSS() {
                 text-align: left;
                 overflow-y: auto;
             }
+            .longDesc a {
+                color:#6A75AA;
+            }
             .blueFontButton {
                 background-color: 'white';
                 outline: 'none';
-                color:'#6A75AA';
                 text-decoration: 'none'; 
                 border: 'none'; 
                 font-size: '14px';

@@ -46,10 +46,11 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
         img.src = productdetail.productImageUrl;
 
         poll = setInterval(function () {
+            
             if (img.naturalWidth&&mounted) {
                 clearInterval(poll);
                 if (img.naturalWidth/img.naturalHeight > .80) {setUseNaturalHeight(img.naturalHeight);productdetail.naturalHeight = img.naturalHeight;}
-            }
+                }
         }, 30);
         return () => mounted = false;
     },[]);
