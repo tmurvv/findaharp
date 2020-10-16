@@ -94,11 +94,10 @@ export default function LocationMenu(props) {
                     name='Mid-West'
                 >US-MidWest</li>
                 <li 
+                    onClick={handleClose}
                     hidden={activateDriving}
-                    style={{color: 'rgb(182, 169, 13)'}}
                     key={uuid()} 
                     name='West'
-                    aria-disabled={true}
                 >US-West</li>
                 <li 
                     onClick={handleClose}

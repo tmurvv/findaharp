@@ -75,6 +75,7 @@ export function setOpacity(yesNo) {
 export function findSizeWords(strings, type) {
     // short cut if not lever or pedal harp
     if (type && type=='lever-free'&&!strings.toString().toUpperCase().startsWith('WIRE')) return 'lever-free';
+    if (type && type.toUpperCase()==='ELECTRIC') return 'Electric';
     if (strings&&strings.toString().toUpperCase()=='WIRE/CROSS/DOUBLE/TRIPLE') return 'wire/cross/double/triple';
     // strings to number type
     strings = parseInt(strings);

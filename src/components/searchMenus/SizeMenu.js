@@ -81,6 +81,11 @@ export default function SizeMenu(props) {
                     // key={uuid()} 
                     name='Small Pedal'
                 >Small Pedal</li>               
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='Electric'
+                >Electric</li>               
             </ul>     
         </div>
     );
