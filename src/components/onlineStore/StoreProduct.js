@@ -66,7 +66,7 @@ const StoreProduct = (props) => {
                     onClick={()=>handleOpenModal()} 
                 />
             </div>
-            
+             
             <div className="storeproduct__title" >
                 <div style={{fontSize: '18px'}}>{props.productdetail.title}</div>
                 <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
@@ -88,6 +88,11 @@ const StoreProduct = (props) => {
                 <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
                 :<div className="storeproduct__price">${(Number(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                 }
+                <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
+                    <div style={{width:'fit-content'}}>Ships From: Canada</div>
+                    <div style={{fontSize: '20px', transform: 'translateY(-3px)'}}>&#8594;</div>
+                    <div style={{width:'fit-content'}}>To: Anywhere</div>
+                </div>
                 <button 
                     className='submit-btn'
                     type="button"

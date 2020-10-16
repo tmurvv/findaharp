@@ -63,18 +63,6 @@ function StoreProductCss() {
                 // overflow: hidden;
                 box-shadow: 3px 5px 3px lightgrey;
             }
-            // .music .storeproduct__image {
-            //     margin-top: 20px;
-            //     box-shadow: 3px 5px 3px lightgrey;
-            //     height: 350px;
-            //     width: 250px;
-            //     margin: auto;
-            // }
-            // @media only screen and (max-width:750) {
-            //     .music .storeproduct_image {
-            //         width: 175px;
-            //     }
-            // }
             .storeproduct__price {
                 margin: 25px 0;
                 width: 100%;

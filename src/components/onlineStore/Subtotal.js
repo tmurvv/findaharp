@@ -39,12 +39,13 @@ function Subtotal(props) {
             {props.type==='subtotal'
             ?<div className='flexSB subtotal'>
                 <h3>SubTotal:</h3>
-                <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${Number(getSubTotal(cart)).toFixed(2)}</h3>
+                {user.currency==="USD"?<h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${Number(getSubTotal(cart)).toFixed(2)}</h3>
+                :<h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${Number(getSubTotal(cart)*currencyMultiplier).toFixed(2)}</h3>}
             </div>
             :<div className='flexSB subtotal'>
                 <h3>Total:</h3>
-                {/* <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${Number(getTotal(cart,user).toFixed(2))}</h3> */}
-                <h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${getTotal(cart,user,currencyMultiplier)}<span style={{fontStyle:'italic',fontSize:'10px'}}>{currencyMultiplier===1?'USD':'CAD'}</span></h3> {/*// BREAKING needs error handling */}
+                {user.currency==="USD"?<h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${getTotal(cart,user,currencyMultiplier)}<span style={{fontStyle:'italic',fontSize:'10px'}}>USD</span></h3>
+                :<h3><span style={{color: '#868686', fontSize: '11px', fontWeight: '100'}}>({getNumItems(cart)} {getNumItems(cart)===1?'item':'items'})</span>  ${getTotal(cart,user,currencyMultiplier)}<span style={{fontStyle:'italic',fontSize:'10px'}}>CAD</span></h3>}
             </div>
             }
             <SubtotalCss />

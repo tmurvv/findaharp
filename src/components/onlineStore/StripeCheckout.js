@@ -37,10 +37,6 @@ export default function StripeCheckout(props) {
     const stripe = useStripe();
     const elements = useElements();
 
-    console.log('cart', cart)
-    console.log('user', user)
-    console.log('cartSubtotals', cartSubtotals)
-    console.log('currency', currency)
     useEffect(() => {
         if (getTotal(cart, user)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
@@ -121,7 +117,7 @@ export default function StripeCheckout(props) {
             // prepare communication object
             const receipt = {
                 email: user.shippingemail,
-                html: generateReceiptEmailHtml(cart, cartSubtotals, user, currency===1?'USD':'CAD')
+                html: generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)
             }
             // email receipt
             try {

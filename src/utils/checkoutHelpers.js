@@ -39,7 +39,7 @@ export function getProvCode(prov) {
     }
 }
 export function shipping(shippingcountry) {
-    if (!shippingcountry) return 'select country';
+    if (!shippingcountry) return 0.00;
     switch (shippingcountry) {
         case 'Canada':
             return SHIPPING_CALCULATIONS.Canada;
@@ -52,6 +52,7 @@ export function shipping(shippingcountry) {
     }
 }
 export function tax(cart, shippingregion) {
+    if (!shippingregion) return 0.00;
     try {
         const tax = new SalesTax(
             getProvCode(shippingregion),
@@ -64,9 +65,12 @@ export function tax(cart, shippingregion) {
     }       
 }
 export function getTotal(cart, user, currencyMultiplier) {
-    if (!user.shippingcountry) return getSubTotal(cart);
-    if (user.shippingcountry==="Canada") {
-        return (Number(getSubTotal(cart)*currencyMultiplier) + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
+    const subTotal = getSubTotal(cart);
+    if (!subTotal || subTotal===0) return 0.00;
+    if (!user.currency) return subTotal;
+    console.log('gettot', subTotal )
+    if (user.currency==="CAD") {
+        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
     } else {
         return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry))).toFixed(2);
     }
@@ -75,7 +79,12 @@ export function selectRegion(val, user, setUser) {
     setUser({...user, shippingregion: val});
 }
 
-export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
+export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier) {
+    const subTotal = user.currency==="USD"?getSubTotal(cart):getSubTotal(cart)*currencyMultiplier;
+    const total = (Number(getTotal(cart, user, currencyMultiplier))).toFixed(2);
+    const currencyText = user.currency==='USD'?'USD':"CAD";
+    console.log('gettot', subTotal, cartSubtotals.shipping, cartSubtotals.tax, total, currencyText);
+    console.log(cartSubtotals);
     // prepare today's date for formatting
     const months = [
         'January',
@@ -101,7 +110,7 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
                 <tr>
                     <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">${item.product_quantity}</td>
                     <td colSpan="8" style="padding: 5px 7px; border: 1px solid #868686">${item.title}</td>
-                    <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">$${(item.price*item.product_quantity).toFixed(2)}</td>
+                    <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">$${(item.price*item.product_quantity*(user.currency==='USD'?1:currencyMultiplier)).toFixed(2)}</td>
                 </tr>
    `);
    // return html for entire order
@@ -139,7 +148,7 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
                 >
                     <div style='display:flex; justify-content: space-between; background-color:#fff; margin: 5px;padding:15px;'>
                         <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Products Subtotal: </div>
-                        <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(getSubTotal(cart)).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currency}</span></div>
+                        <div style="text-align:right;font-size:18px;font-weight:600;">${Number(subTotal).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText}</span></div>
                     </div>
                     <div style='display:flex; justify-content: space-between;background-color: #fff; margin: 5px;padding:15px;'>
                         <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</div>
@@ -152,7 +161,7 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currency) {
                 </div>
                 <div style="padding:15px; display:flex; justify-content: space-between; background-color: #fff; border-bottom: 1px solid #868686;">
                     <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Total:</div>
-                    <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(getTotal(cart, user)).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currency}</span></div>
+                    <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(total).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText}</span></div>
                 </div>
                 <div style="
                     width: 100%;

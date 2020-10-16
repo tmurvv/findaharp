@@ -24,7 +24,7 @@ function CartItem(props) {
                 <div className='description'>
                     <p><span style={{fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span> - {item.description}</p>
                 </div>
-                {user.currency==="UDS"?<div className='price'>${Number(item.price).toFixed(2)} each</div>
+                {user.currency==="USD"?<div className='price'>${Number(item.price).toFixed(2)} each</div>
                 :<div className='price'>${(Number(item.price)*currencyMultiplier).toFixed(2)} each</div>}
                 <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 

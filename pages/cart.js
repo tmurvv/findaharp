@@ -26,7 +26,7 @@ function Cart(props) {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user, setUser } = useContext(UserContext);
-    const { currency } = useContext(CurrencyContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
     useEffect(()=> {
         setScreenWidth(window.innerWidth);

@@ -19,7 +19,7 @@ function StoreProductModalCSS() {
                 padding: 30px;
                 color: #000000
                 opacity: 1;
-                height: 550px;
+                height: 485px;
             }
             .storedetailInfo {
                 display: flex;
@@ -63,7 +63,7 @@ function StoreProductModalCSS() {
             }
             .storedetailImg img {
                 height: 95%;
-                width: 95%;
+                width: 80%;
                 max-width:100%;
                 max-height:100%;
                 object-fit: cover;
@@ -76,8 +76,9 @@ function StoreProductModalCSS() {
                 text-align: left;
                 display: flex;
                 flex-direction: column;
-                height: 365px;
+                height: 290px;
                 justify-content: space-between;
+                width: 100%;
             }
             @media only screen and (max-width: 550px) {
                 .storedetailText {
