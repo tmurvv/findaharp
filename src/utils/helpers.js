@@ -233,7 +233,7 @@ export function getFilteredProducts(allProducts, allState, user, rate) {
         filteredProducts = filteredProducts.filter(
             product => product.productFinish&&product.productFinish.toUpperCase() === allState.finish.toUpperCase()
         );
-    if (allState.price&&allState.price.toUpperCase() !== "ALL PRICES") { // BREAKING make sure price works
+    if (allState.price&&allState.price.toUpperCase() !== "ALL PRICES") {
         filteredProducts = filteredProducts.filter(product => product.productPrice&&findPriceRange(product.productPrice, user.currency==="USD"?1:rate)===allState.price);
     }
     // if size all pedal or all lever ready for return
