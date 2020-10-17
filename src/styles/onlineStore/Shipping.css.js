@@ -8,11 +8,11 @@ function ShippingCss() {
                 box-sizing:border-box;
             }
             .dropDown {
-                padding: '15px',
-                border: '2px solid black',
-                borderRadius: '3px',
-                minWidth: '100%',
-                marginTop: '2.5px',
+                padding: '15px 0';
+                border: '2px solid black';
+                borderRadius: '3px';
+                minWidth: '100%';
+                marginTop: '2.5px';
                 backgroundColor: '#fff'
             }
             td {
@@ -80,6 +80,11 @@ function ShippingCss() {
             .regionDrop {
                 flex: 5;
                 margin-left: 20px;
+            }
+            @media only screen and (min-width: 550px) {
+                .regionDrop {
+                    min-width: unset;
+                }
             }
         `}
         </style>

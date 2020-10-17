@@ -5,11 +5,11 @@ function StoreProductCss() {
         <style jsx="true">{`
             .storeproduct {
                 margin: 10px;
-                margin-top: 25px;
                 text-align: center;
                 width: 265px;
-                max-height: 600px;
+                max-height: 650px;
                 position: relative;
+                margin-bottom: 60px;
             }
             .storeproduct__title {
                 width: 95%;
@@ -20,6 +20,7 @@ function StoreProductCss() {
                 flex-direction: column;
                 justify-content: flex-start;
                 text-align: left;
+                margin-bottom: 50px;
             }
             .storeproductDetails div {
                 font-family: 'Metropolitan Extra Bold';
@@ -75,6 +76,7 @@ function StoreProductCss() {
                 position: absolute;
                 bottom: 0;
                 left: 0px;
+                margin-top: 20px;
             }
             .storeflyToCart {
                 position: relative;

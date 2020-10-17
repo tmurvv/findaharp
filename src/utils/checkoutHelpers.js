@@ -4,7 +4,12 @@ import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-countr
 import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
 export function selectCountry(val, user, setUser) {
-    setUser({...user, shippingcountry: val, shippingregion: null});
+    if (val==='Canada' && user.currency!=="CAD") {
+        alert('Currency is being changed to Canadian.');
+        setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: null});
+    } else {
+        setUser({...user, shippingcountry: val, currency: 'USD', shippingregion: null});
+    }
 }
 export function getProvCode(prov) {
     switch (prov) {
@@ -66,13 +71,15 @@ export function tax(cart, shippingregion) {
 }
 export function getTotal(cart, user, currencyMultiplier) {
     const subTotal = getSubTotal(cart);
+    // if international order, shipping is marked -1, this adds it back in to total
+    const addOneInternational = user.shippingcountry&&user.shippingcountry!=='United States'&&user.shippingcountry!=="Canada"?1:0;
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
     console.log('gettot', subTotal )
     if (user.currency==="CAD") {
         return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
     } else {
-        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry))).toFixed(2);
+        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(addOneInternational)).toFixed(2);
     }
 }
 export function selectRegion(val, user, setUser) {

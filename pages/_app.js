@@ -77,19 +77,12 @@ function MyApp(props) {
         window.addEventListener('resize', handleResize);
         return () => { window.removeEventListener('resize', handleResize) }
     }, []);
-    // reset window width on window resize
-    useEffect(() => {
-        window.addEventListener("beforeunload", function (e) {
-            if (cart&&getNumItems(cart)>0) confirm("You have items in your cart. They will not be saved. Continue?")
-        });
-    }, []);
-
+    
     const handleWindowClose = (e) => {
         if (isDirty) {
           e.preventDefault();
           return e.returnValue = 'You have unsaved changes - are you sure you wish to close?';
-        }
-    
+        }   
       };
     
     useEffect(() => {

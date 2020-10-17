@@ -79,7 +79,20 @@ function StoreProductModal(props) {
     function handleAdd(e) { 
         e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
         e.target.addEventListener("animationend", (e)=>updateCart(e))
-        e.target.classList.add("storeflyToCart");  
+        e.target.classList.add("storeflyToCart"); 
+
+        window.removeEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            // Chrome requires returnValue to be set
+            e.returnValue = '';
+        }); 
+        window.addEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            // Chrome requires returnValue to be set
+            e.returnValue = '';
+        }); 
     }
     return (
         <>
@@ -94,14 +107,14 @@ function StoreProductModal(props) {
                 <div className={`storedetailImg`}><img src= {image} alt={title} /></div>
                 <div className={`storedetailText`}>
                     <div>
-                        <p>{description} <br/><br/>
+                        <p>{description}</p> <br/>
+                        <div style={category==='music'?{display: 'block'}:{display: 'none'}}>
                             <span>Level:</span> {level}<br/>
                             <span>Harp Type:</span> {harptype}<br/>
                             <span>Condition (1-10):</span> {condition}<br/>
                             <span>Notes:</span> {notes}
-                        </p>
+                        </div>
                     </div>
-                    
                     <div>
                         {user&&user.currency==="USD"?    
                         <div className="storeproduct__price">${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
@@ -109,7 +122,7 @@ function StoreProductModal(props) {
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                             <div style={{width:'fit-content'}}>Ships From: Canada</div>
-                            <div style={{fontSize: '20px', transform: 'translateY(-3px)'}}>&#8594;</div>
+                            <img style={{width: '25px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                             <div style={{width:'fit-content'}}>To: Anywhere</div>
                         </div>
                         <button 

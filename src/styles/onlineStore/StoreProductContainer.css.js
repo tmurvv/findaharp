@@ -39,7 +39,7 @@ function StoreProductContainerCss() {
             }
             @media only screen and (max-width: 550px) {
                 .storegrid-container {
-                    width: 60vw;
+                    margin: 0 20px;
                 }
             }
             // .storeproductSmallDisplay {

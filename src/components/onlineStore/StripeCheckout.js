@@ -60,8 +60,8 @@ export default function StripeCheckout(props) {
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
-            alert('Total owed is $0.00. Please try again. If problem persists, please send an email via the contact page.');
-            Router.push('/');
+            alert('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase."');
+            Router.push('/cart');
         }
     }, []);
     const cardStyle = {
@@ -127,7 +127,7 @@ export default function StripeCheckout(props) {
                 setStatus('completed');
                 Router.push('/receipt')
             } catch (e) {
-                alert(e.message, 'Error emailing receipt, but order has been placed successfully.Please contact orders@findaharp.com to have a receipt emailed.') // BREAKING
+                alert(e.message, 'Error emailing receipt, but order has been placed successfully.Please contact orders@findaharp.com to have a receipt emailed.')
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');

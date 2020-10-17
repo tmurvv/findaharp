@@ -55,7 +55,13 @@ const StoreProduct = (props) => {
     function handleAdd(e) {  
         e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
         e.target.addEventListener("animationend", (e)=>updateCart(e))
-        e.target.classList.add("storeflyToCart");  
+        e.target.classList.add("storeflyToCart"); 
+        window.addEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            // Chrome requires returnValue to be set
+            e.returnValue = '';
+        }); 
     }
     return (
         <div className="storeproduct">
@@ -78,11 +84,9 @@ const StoreProduct = (props) => {
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
                 {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
                 <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div>
-                {/* <div style={{height: '40px'}}><span>Notes:</span> {props.productdetail.notes}</div> */}
             </div>
-            :<><div><span>New Item</span></div><br />
-                {/* <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div> */}
-                <div style={{textAlign: 'left', minHeight: '200px'}}>{String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
+            :<>
+                <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
                 <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
                 <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
@@ -90,10 +94,11 @@ const StoreProduct = (props) => {
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                     <div style={{width:'fit-content'}}>Ships From: Canada</div>
-                    <div style={{fontSize: '20px', transform: 'translateY(-3px)'}}>&#8594;</div>
+                    <img style={{width: '25px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                     <div style={{width:'fit-content'}}>To: Anywhere</div>
                 </div>
                 <button 
+                    disabled={props.productdetail.sold&&String(props.productdetail.sold).toUpperCase()==='SOLD'}
                     className='submit-btn'
                     type="button"
                     style={{marginTop: '0px'}}
@@ -111,7 +116,7 @@ const StoreProduct = (props) => {
                     data-item-harptype={props.productdetail.harptype}
                     data-item-newused={props.productdetail.newused}
                 >
-                    Add to Cart
+                    {props.productdetail.sold&&String(props.productdetail.sold).toUpperCase()==='SOLD'?'SOLD':'Add to Cart'}
                 </button>
             </div>        
             <StoreProductCss />

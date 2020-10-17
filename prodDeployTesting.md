@@ -44,55 +44,104 @@ Double letter before 'y' means stays checked when resetting for ipad and android
     [] clear one, clear all
 
 ### functionality - auth
-    [x] cookie
-    [x] logout
-    [x] all login
-        [x] success
-        [x] errors
-            [x] email not found
-            [x] password not long enough
-            [x] password incorrect
-            [x] email not verified
-                [x] resend verification resends email
-                [x] resend verification email works
-    [x] all signup
-        [x] success 
-            [x] verify email sent
-            [x] verify email works
-            [x] verify all data correct
-            [x] customer can log in
-        [x] errors
-            [x] duplicate email
-            [x] password not long enough
-            [x] passwords do not match
-    [x] forgot password
-        [x] email not entered
-        [x] reset email gets sent
-        [x] success
-            [x] success message displayed
-            [x] new password works in login
-        [x] error       
-            [x] password not long enough
-            [x] passwords do not match
-    [x] change password
-        [x] success
-            [x] success message
-            [x] new password works
-        [x] error
-            [x] old password incorrect
-            [x] password not long enough
-            [x] passwords do not match       
-    [x] edit profile
-        [x] success
-        [x] error
-            [x] old password incorrect
-            [x] password not long enough
-    [x] delete account
-        [x] success
-        [x] error
-            [x] old password incorrect
-            [x] password not long enough
+    [] cookie
+    [] logout
+    [] all login
+        [] success
+        [] errors
+            [] email not found
+            [] password not long enough
+            [] password incorrect
+            [] email not verified
+                [] resend verification resends email
+                [] resend verification email works
+    [] all signup
+        [] success 
+            [] verify email sent
+            [] verify email works
+            [] verify all data correct
+            [] customer can log in
+        [] errors
+            [] duplicate email
+            [] password not long enough
+            [] passwords do not match
+    [] forgot password
+        [] email not entered
+        [] reset email gets sent
+        [] success
+            [] success message displayed
+            [] new password works in login
+        [] error       
+            [] password not long enough
+            [] passwords do not match
+    [] change password
+        [] success
+            [] success message
+            [] new password works
+        [] error
+            [] old password incorrect
+            [] password not long enough
+            [] passwords do not match       
+    [] edit profile
+        [] success
+        [] error
+            [] old password incorrect
+            [] password not long enough
+    [] delete account
+        [] success
+        [] error
+            [] old password incorrect
+            [] password not long enough
 
 ### functionality - contacts
-    [x] contact seller
-    [x] contact findaharp
+    [] contact seller
+    [] contact findaharp
+
+# store testing
+    [xx] desktop
+    [] phone
+    [] tablet
+
+## main page
+    [] container layout
+    [] add to cart button
+    [] view cart button
+    [] open modal via image
+    [] open modal via more...
+    
+    ### search
+    [] category
+    [] search input
+    [] ens
+    [] level
+    [] publication type
+    [] combinations
+    [] clear one filter
+    [] clear all filters
+
+    ### modal
+
+    [] add to cart button works
+    [] condition etc, headers appear only for music
+    [] spacing looks good
+    [] close button closes
+
+    ### cart
+    [] only 1 in stock appears for used
+    [] add and sub item works
+    [] remove item works
+    [] select country works
+    [] back to shopping works
+    [] continue to checkout works
+
+    ### shipping
+    [] all fields work
+    [] country field fills in shipping correctly
+    [] region field fills in taxes correctly
+    [] continue to payment button works
+    [] continue to payment button works correctly for international
+
+    ### payment
+
+    ### receipt
+

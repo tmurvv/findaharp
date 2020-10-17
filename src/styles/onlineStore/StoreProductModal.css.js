@@ -61,6 +61,11 @@ function StoreProductModalCSS() {
                 flex: 4;
                 height: 100%;
             }
+            @media only screen and (max-width: 550px) {
+                .storedetailImg {
+                    width: 100%;
+                }
+            }
             .storedetailImg img {
                 height: 95%;
                 width: 80%;
@@ -69,6 +74,13 @@ function StoreProductModalCSS() {
                 object-fit: cover;
                 overflow: hidden;
                 box-shadow: 3px 5px 3px lightgrey;
+            }
+            @media only screen and (max-width: 550px) {
+                .storedetailImg img {
+                    max-height: 150px;
+                    width: auto;
+                    margin: auto;
+                }
             }
             .storedetailText {
                 flex: 6;

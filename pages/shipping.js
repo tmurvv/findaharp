@@ -2,6 +2,7 @@
 import { useEffect, useContext, useState } from 'react';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Router from 'next/router';
+import axios from 'axios';
 // internal
 import ShippingCss from '../src/styles/onlinestore/Shipping.css';
 import StatusIndicator from '../src/components/onlinestore/StatusIndicator';
@@ -11,8 +12,10 @@ import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
+import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import { StatusContext } from '../src/contexts/StatusContext';
-import { 
+import {
+    generateReceiptEmailHtml, 
     selectCountry,
     selectRegion,
     getTotal, 
@@ -25,14 +28,41 @@ import {
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/payment')
+        if (getNumItems(cart)===0) return alert('Cart is Empty');
+        // for international shipping estimate
+        if (cartSubtotals.shipping===-1) {
+            document.querySelector('#spinner').style.display="block";
+            // prepare communication object
+            const receipt = {
+                email: user.shippingemail,
+                shipping: cartSubtotals.shipping,
+                html: generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)
+            }
+            // email order to Find a Harp for estimate
+            try {
+                await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
+                setCart([]);
+                setCartSubtotals([]);
+                setStatus('completed');
+                alert("Your order has been sent to Find a Harp. You will receive an order total including shipping by email within 24 hours.")
+            } catch (e) {
+                alert(e.message, 'Error emailing to Find a Harp, please check your connection and try again. If problem persists, please contact Find a Harp via the Contact Page.')
+                setCart([]);
+                setCartSubtotals([]);
+                setStatus('completed');
+            }
+            document.querySelector('#spinner').style.display="none";
+            return Router.push('/');
+        }
+        Router.push('/payment')
     }
     const handleChange = (evt) => {
         switch (evt.target.name) {
@@ -122,6 +152,7 @@ function Shipping() {
     },[]);
     return (
         <div className='whiteWallPaper'>
+            <img id='spinner' style={{display: 'none', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}src='/img/spinner.gif' alt='spinner' />
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
                 
@@ -174,7 +205,6 @@ function Shipping() {
                                                 marginTop: '5px',
                                                 backgroundColor: '#fff'
                                             }}
-                                            whitelist={['US', 'CA']}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
@@ -317,15 +347,13 @@ function Shipping() {
                                         <CountryDropdown
                                             className="dropDown"
                                             style={{
-                                                minWidth: '100%',
-                                                padding: '15px',
+                                                padding: '15px 0',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 marginBottom: '20px',
                                                 marginTop: '5px',
                                                 backgroundColor: '#fff'
                                             }}
-                                            whitelist={['US', 'CA']}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
@@ -387,7 +415,6 @@ function Shipping() {
                                         placeholder="Optional" 
                                     />
                                 </td>
-                                
                             </tr>
                             <tr>
                                 <td colSpan='4'>
@@ -411,12 +438,11 @@ function Shipping() {
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
-                                                padding: '15px',
-                                                border: '2px solid black',
-                                                borderRadius: '3px',
-                                                minWidth: '100%',
-                                                marginTop: '2.5px',
-                                                backgroundColor: '#fff'
+                                                padding:'15px 0',
+                                                border:'2px solid black',
+                                                borderRadius:'3px',
+                                                marginTop:'2.5px',
+                                                backgroundColor:'#fff'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
@@ -463,15 +489,13 @@ function Shipping() {
                 <div style={{ flex: 4, backgroundColor: '#fff'}}>
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
                     <OrderSummary />
-                    {/* {screenWidth>=715? */}
                     <button 
                         className='submit-btn'
                         type='submit'
                         style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
                     >
-                        Continue to Payment
+                        {cartSubtotals.shipping===-1?'Submit order':'Continue to Payment'}
                     </button>
-                    {/* :''} */}
                 </div>
                 </div>
                 </form>
@@ -482,116 +506,3 @@ function Shipping() {
 }
 
 export default Shipping;
-
-
-{/* <form method="get" style={{flex: 7}}>
-                        <h3>Shipping</h3>
-                        <div className='shippingUpdatesContact'>
-                            <h4>Contact Information</h4>
-                            <p>Email Address</p>
-                            <input type='email' name='shippingemail' value={user.shippingemail} onChange={handleChange} id="shippingemail" required />
-                            <p>We'll send a receipt and order updates to this email</p>
-                        </div>
-                        <div className='shippingInfo'>
-                        <h4>Shipping Address</h4>
-                        <div className='countryDrop'>
-                            <label htmlFor="country">Country</label>
-                            <CountryDropdown
-                                style={{
-                                    width: '50%',
-                                    padding: '15px',
-                                    border: '2px solid black',
-                                    borderRadius: '3px',
-                                    marginBottom: '20px',
-                                    marginTop: '5px'
-                                }}
-                                whitelist={['US', 'CA']}
-                                value={user.shippingcountry}
-                                name='shippingcountry'
-                                onChange={(val)=> changeCountry(val)} 
-                            />
-                        </div>
-                        <div className='customerName whole'>
-                                <div className='labelGroup half'>
-                                    <label htmlFor="fname">First Name</label>
-                                    <input 
-                                        className='whole' 
-                                        type="text" 
-                                        name="fname" 
-                                        value={user.fname} 
-                                        onChange={handleChange} 
-                                        id="fname" 
-                                        required 
-                                    />
-                                </div>   
-                                <div className='labelGroup half' style={{float: 'right'}}>
-                                    <label htmlFor="lname">Last Name</label>
-                                    <input 
-                                        className='whole' 
-                                        type="text" 
-                                        name="lname" 
-                                        value={user.lname} 
-                                        onChange={handleChange} 
-                                        id="lname" 
-                                        required 
-                                    />
-                                </div>
-                        </div>
-                        
-                        <br />
-                        
-                        <label htmlFor="address">Address</label>
-                        <input width='100%' type="text" name="address" value={user.address} onChange={handleChange} id="address" required />
-                        <input width='100%' type="text" name="address2" value={user.address2} onChange={handleChange} id="address2" placeholder="Optional" />
-                        
-                        <br />
-                        
-                        <div className="labelGroup flex-sb">
-                            <div className='labelGroup'>
-                                <label htmlFor="city">Town / City</label>
-                                <input type="text" name="city" value={user.city} onChange={handleChange} id="city" required />
-                            </div>
-                            <div className='regionDrop'>
-                                <label htmlFor="country">State/Province</label>
-                                <RegionDropdown
-                                    style={{
-                                        padding: '15px',
-                                        border: '2px solid black',
-                                        borderRadius: '3px',
-                                        minWidth: '90%',
-                                        marginTop: '5px'
-                                    }}
-                                    country={user.shippingcountry}
-                                    value={user.shippingregion}
-                                    name='shippingregion'
-                                    defaultOptionLabel='Select State/Province'
-                                    onChange={(val) => {changeRegion(val)}} 
-                                    placeholder='select country, then state/prov/region'
-                                />
-                            </div>
-                            <div className='zipPostal'>
-                                <label htmlFor="zip_postal">Zip/Postal Code</label>
-                                <input type="text" name="zip_postal" value={user.zip_postal} onChange={handleChange} id="zip_postal" placeholder="Postcode / Zip" required />
-                            </div>
-                        </div>
-                        <div>
-                            <label htmlFor="phone">Phone</label>
-                            <input type="text" name="phone" value={user.phone} onChange={handleChange} id="phone" required />
-                        </div>
-                    </div>
-                        {/* <div style={{display: 'block'}}>
-                            <h3 className="topborder"><span>Shipping Address</span></h3>
-                            <input type="checkbox" value="3" name="shippingDifferent" onChange={handleChange} checked={user.shippingDifferent} /><p>Ship to a different address?</p>
-                            <label htmlFor="notes" className="notes">Order Notes</label>
-                            <textarea name="notes" value={user.notes} onChange={handleChange} id="notes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                        </div> */}
-                        {/* <OrderSummary />    */}
-                    {/* <button 
-                        type='button'
-                        className='submit-btn'
-                        onClick={()=>Router.push('/payment')}
-                        style={{width:'90%', marginLeft: '5%', marginBottom: '50px', fontSize:'15px', fontWeight:'600', padding:'15px'}}
-                        disabled={cart&&user&&!getTotal(cart, user) || getTotal(cart,user)<=0}
-                    >
-                        Continue
-                    </button> */}

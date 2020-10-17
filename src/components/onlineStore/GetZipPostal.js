@@ -17,8 +17,13 @@ function GetPostalZip() {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
 
     const handleCountryChange = (val) => {
-        if (!val) return alert('Please select country.');
-        setUser({...user, shippingcountry: val})
+        if (val==='Canada' && user.currency!=="CAD") {
+            alert('Currency is being changed to Canadian.');
+            setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
+        } else {
+            setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+        }
+        
         switch(val) {
             case 'Canada':
                 setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
@@ -45,10 +50,9 @@ function GetPostalZip() {
                 <h2>Where are we shipping to?</h2>
             </div>
             <div style={{marginBottom: '15px'}}>
-                <p>Now shipping to US and Canada. More countries coming soon.</p>
+                <p>It will help us estimate shipping costs.</p>
             </div>
-            {/* <form style={{display: 'block'}}> */}
-                <div className='countryDrop'>
+            <div className='countryDrop'>
                 <label htmlFor="country">Country</label>
                 <CountryDropdown
                     style={{
@@ -61,7 +65,7 @@ function GetPostalZip() {
                         backgroundColor: '#fff',
                         minWidth: '260px'
                     }}
-                    whitelist={['US', 'CA']}
+                    // whitelist={['US', 'CA']}
                     value={user.shippingcountry}
                     name='shippingcountry'
                     onChange={(val)=> handleCountryChange(val)} 

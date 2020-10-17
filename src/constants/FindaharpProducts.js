@@ -170,7 +170,7 @@ export const FINDAHARP_PRODUCTS = [
             id: 'FrEx-DCUJ',
             store: 'findaharp',
             category: 'music', 
-            subcategories: ['harp solo', 'exercises'],
+            subcategories: ['harp solo', 'exercise books'],
             title: "Harp Excercises for Speed and Agility", 
             artist_first: "Deborah",
             artist_last: "Friou",
@@ -182,7 +182,8 @@ export const FINDAHARP_PRODUCTS = [
             notes: 'A few markings. Otherwise excellent.',
             image: "../../../img/store/findaharp/sheetmusic/Agility.jpg", 
             description: "Excellent exercise book.",
-            newused: 'used'
+            newused: 'used',
+            sold: 'sold'
         },
         {
             id: 'Disw-NBSV',
@@ -582,7 +583,7 @@ export const FINDAHARP_PRODUCTS = [
             store: 'findaharp',
             store: 'findaharp',
             category: 'music', 
-            subcategories: ['books'],
+            subcategories: ['books', 'instructional books'],
             title: "Writing for the Pedal Harp", 
             artist_first: "Ruth K.",
             artist_last: "Inglefield",
@@ -600,7 +601,7 @@ export const FINDAHARP_PRODUCTS = [
             id: "SwGd-UAIV",
             store: 'findaharp',
             category: 'music', 
-            subcategories: ['books'],
+            subcategories: ['books', 'instructional books'],
             title: "Guide For Harpists", 
             artist_first: "Carl",
             artist_last: "Swanson",

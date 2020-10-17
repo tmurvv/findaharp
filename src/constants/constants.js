@@ -37,7 +37,7 @@ export const STOREPARTNER_PLACEHOLDER = {
 export const SHIPPING_CALCULATIONS = {
     Canada: 20,
     USA: 20,
-    default: 30
+    default: -1
 }
 export const PRODUCTAD_PLACEHOLDER = {
         id: "",
