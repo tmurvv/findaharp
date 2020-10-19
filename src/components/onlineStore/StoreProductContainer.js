@@ -1,7 +1,6 @@
 // packages
 import React, {useReducer, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
-import LazyLoad from 'react-lazyload';
 // styles
 import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
 // internal
@@ -9,6 +8,9 @@ import StoreProductModal from './StoreProductModal';
 import StoreProduct from './StoreProduct';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../utils/helpers';
 import { productsReducer } from '../../reducers/reducers';
+import {
+    triggerLazy
+} from '../../utils/helpers';
 
 const initialState = {
     openDetail: false,
@@ -43,7 +45,9 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         dispatch({type:'initial'})
         setOpacity(false);
     }
-    
+    useEffect(() => {
+        triggerLazy();
+    },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
         let addPlaces=filteredproductscontainer;

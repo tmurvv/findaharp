@@ -5,7 +5,7 @@ import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
 export function selectCountry(val, user, setUser) {
     if (val==='Canada' && user.currency!=="CAD") {
-        alert('Currency is being changed to Canadian.');
+        // alert('Currency is being changed to Canadian.');
         setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: null});
     } else {
         setUser({...user, shippingcountry: val, currency: 'USD', shippingregion: null});

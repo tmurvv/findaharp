@@ -1,6 +1,7 @@
-import { useContext,useState } from 'react';
+import { useContext, useState, useReducer } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
+import LazyLoad from 'react-lazyload';
 import {
     incQty
 } from '../../utils/storeHelpers';
@@ -9,6 +10,12 @@ import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
+import { resultInfoReducer } from '../../reducers/reducers';
+import Results from '../Results';
+import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import {
+    triggerLazy
+} from '../../utils/helpers';
 
 const StoreProduct = (props) => {
     const { user } = useContext(UserContext);
@@ -16,6 +23,27 @@ const StoreProduct = (props) => {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [ openModal, setOpenModal ] = useState(false);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
+    function handleClick(msg) {
+        dispatchResultInfo({type: 'OK'});
+        const resultText = document.querySelector('#loadingLoginText');
+        resultText.innerText=msg;
+    }
+    function loginGuest(evt) {
+        // if (evt) evt.preventDefault();  
+        resetResults();
+    }
+    function handleImageLoad(evt) {
+        if (evt.target.style.height !== '30%') evt.target.style.height="auto"; //BREAKING
+        // if (evt.target.style.height !== '30%') evt.target.style.height="100%"; //BREAKING
+        if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
+    }
     function handleOpenModal() {
         // if (!props.productdetail||!props.productdetail.productTitle) return;
         setOpenModal(true);
@@ -25,7 +53,7 @@ const StoreProduct = (props) => {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
-                alert('Only 1 in stock. This item already in cart.')
+                handleClick('Only 1 in stock. Item already in cart.')
             } else {
                 incQty(cart, setCart, e.target.getAttribute('data-item-title'));
             }   
@@ -65,14 +93,38 @@ const StoreProduct = (props) => {
     }
     return (
         <div className="storeproduct">
-            <div className="storeproduct__imgcontainer">
+            <Results 
+                resultInfo={resultInfo} 
+                loginGuest={loginGuest}
+                resetResults={resetResults} 
+                zipMsg='Only 1 in stock. Item already in cart.'
+            />
+            {/* <div className="storeproduct__imgcontainer">
                 <img 
                     src={props.productdetail.image} 
                     alt={props.productdetail.title}
                     onClick={()=>handleOpenModal()} 
                 />
+            </div> */}
+            <div className={`storeproduct__imgcontainer`}>
+                <LazyLoad
+                    once={true}
+                    offset={300}
+                    placeholder={<img src={`/img/golden_harp_full_loading.png`} alt="Image Not Found with store logo" />}
+                >
+                    <img 
+                        id={props.productdetail.id} 
+                        src={props.productdetail.image} 
+                        onError={(evt) => {
+                            evt.target.src='./img/not_found.png'; 
+                            evt.target.style.height='30%';
+                        }} 
+                        onLoad={(evt) => handleImageLoad(evt)}
+                        alt={props.productdetail.title}
+                        onClick={()=>handleOpenModal()}
+                    />
+                </LazyLoad>
             </div>
-             
             <div className="storeproduct__title" >
                 <div style={{fontSize: '18px'}}>{props.productdetail.title}</div>
                 <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
@@ -94,7 +146,7 @@ const StoreProduct = (props) => {
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                     <div style={{width:'fit-content'}}>Ships From: Canada</div>
-                    <img style={{width: '25px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                    <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                     <div style={{width:'fit-content'}}>To: Anywhere</div>
                 </div>
                 <button 

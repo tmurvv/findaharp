@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useReducer } from 'react';
 
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
@@ -6,6 +6,9 @@ import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
+import { resultInfoReducer } from '../../reducers/reducers';
+import Results from '../Results';
+import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
 import { 
     selectRegion,
     tax
@@ -15,10 +18,28 @@ function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+    
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
+    function handleClick(msg) {
+        console.log('here', msg);
+        dispatchResultInfo({type: 'OK'});
+        const resultText = document.querySelector('#loadingLoginText');
+        console.log(resultText)
+        resultText.innerText=msg;
+        console.log(resultText.innerText)
+    }
+    function loginGuest(evt) {
+        // if (evt) evt.preventDefault();  
+        resetResults();
+    }
     const handleCountryChange = (val) => {
         if (val==='Canada' && user.currency!=="CAD") {
-            alert('Currency is being changed to Canadian.');
+            handleClick('Currency is being changed to Canadian.')
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
             setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
@@ -45,6 +66,12 @@ function GetPostalZip() {
     }
     return (
         <div style={{padding: '15px', borderBottom: '1px solid #868686'}}>
+            <Results 
+                resultInfo={resultInfo} 
+                loginGuest={loginGuest}
+                resetResults={resetResults} 
+                zipMsg='Currecy is being changed to Canadian.'
+            />
             <div style={{display:'flex'}}>
                 <img style={{height:'33px', marginRight: '4px'}} src='img/store/fastTruck.png' alt='humorous fast truck' />
                 <h2>Where are we shipping to?</h2>

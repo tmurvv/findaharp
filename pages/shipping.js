@@ -1,5 +1,5 @@
 // packages
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useReducer } from 'react';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Router from 'next/router';
 import axios from 'axios';
@@ -14,6 +14,9 @@ import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import { StatusContext } from '../src/contexts/StatusContext';
+import { resultInfoReducer } from '../src/reducers/reducers';
+import Results from '../src/components/Results';
+import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../src/constants/constants';
 import {
     generateReceiptEmailHtml, 
     selectCountry,
@@ -33,10 +36,27 @@ function Shipping() {
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
-
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+    
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
+    function handleClick(msg) {
+        const resultText = document.querySelector('#loadingLoginText');
+        resultText.innerText=msg;
+        dispatchResultInfo({type: 'OK'});
+    }
+    function loginGuest(evt) {
+        // if (evt) evt.preventDefault();  
+        resetResults();
+        Router.push('/onlinestore');
+    }
+    
     async function handleSubmit(e) {
         e.preventDefault();
-        if (getNumItems(cart)===0) return alert('Cart is Empty');
+        if (getNumItems(cart)===0) return handleClick("Cart is Empty");
         // for international shipping estimate
         if (cartSubtotals.shipping===-1) {
             document.querySelector('#spinner').style.display="block";
@@ -52,17 +72,20 @@ function Shipping() {
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
-                alert("Your order has been sent to Find a Harp. You will receive an order total including shipping by email within 24 hours.")
+                setUser({...user, RESET_SHIPPING_INFO});
+                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.");    
             } catch (e) {
-                alert(e.message, 'Error emailing to Find a Harp, please check your connection and try again. If problem persists, please contact Find a Harp via the Contact Page.')
+                handleClick('Error sending email to Find a Harp, please check your connection and try again.')
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
+                setUser({...user, RESET_SHIPPING_INFO});
             }
             document.querySelector('#spinner').style.display="none";
-            return Router.push('/');
+        } else {
+            Router.push('/payment');
         }
-        Router.push('/payment')
+        
     }
     const handleChange = (evt) => {
         switch (evt.target.name) {
@@ -126,6 +149,8 @@ function Shipping() {
         }
     }
     function changeCountry(val) {
+        if (val==='Canada') alert('Currency is being changed to Canadian.')
+        // if (val==='Canada') handleClick('Currency is being changed to Canadian', true);
         selectCountry(val, user, setUser); 
         setCartSubtotals({...cartSubtotals, 
             shipping: shipping(val), 
@@ -155,7 +180,12 @@ function Shipping() {
             <img id='spinner' style={{display: 'none', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}src='/img/spinner.gif' alt='spinner' />
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
-                
+                <Results 
+                    resultInfo={resultInfo} 
+                    loginGuest={loginGuest}
+                    resetResults={resetResults} 
+                    gotoRoute={'/'}
+                />
                 <div><Subtotal type="total"/></div>
                
                <form 
@@ -207,7 +237,7 @@ function Shipping() {
                                             }}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
-                                            onChange={(val)=> changeCountry(val)} 
+                                            onChange={(val)=> changeCountry(val)}
                                             required
                                         />
                                     </div>

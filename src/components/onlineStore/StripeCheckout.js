@@ -127,7 +127,7 @@ export default function StripeCheckout(props) {
                 setStatus('completed');
                 Router.push('/receipt')
             } catch (e) {
-                alert(e.message, 'Error emailing receipt, but order has been placed successfully.Please contact orders@findaharp.com to have a receipt emailed.')
+                alert('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.')
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');

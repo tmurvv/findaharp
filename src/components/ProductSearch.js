@@ -21,7 +21,8 @@ import { CurrencyContext } from '../contexts/CurrencyContext';
 import {
     getFilteredProducts,
     getSearchInfo,
-    triggerLazy
+    triggerLazy,
+    shuffleStorePartners
 } from '../utils/helpers';
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
@@ -44,6 +45,9 @@ function ProductSearch(props) {
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const ref = useRef();
+    // randomize store partners
+    const shuffledProducts = shuffleStorePartners(props.products);
+    // get grid size
 
     const [menus, setMenus] = useState(initialState);
     const [allState, setAllState] = useState({
@@ -148,7 +152,7 @@ function ProductSearch(props) {
             location='All Locations';
         }
         const addDistances = () => {
-            props.products.map(async product => {
+            shuffledProducts.map(async product => {
                 let distance = await getDrivingDistance(props.clientlat, props.clientlong, product.sellerLat, product.sellerLong);
                 product.distance = user.distanceunit==='miles'?(distance*0.000621).toFixed(0):(distance/1000).toFixed(0);
             });
@@ -256,7 +260,7 @@ function ProductSearch(props) {
     useEffect(() => {
         triggerLazy();
     },[]);
-    const filteredProducts = getFilteredProducts(props.products, allState, user, currencyMultiplier);
+    const filteredProducts = getFilteredProducts(shuffledProducts, allState, user, currencyMultiplier);
     const showing = allState.location!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";
     return (
         <>       
@@ -268,7 +272,7 @@ function ProductSearch(props) {
                 
                 <SizeMenu 
                     handleSizeChange={handleSizeSelection} 
-                    products={props.products}
+                    products={shuffledProducts}
                     makesmodels={props.makesmodels}
                     currentselected={allState.size?allState.size:'Harp Size'}
                     handleclick={handleClick}
@@ -277,13 +281,13 @@ function ProductSearch(props) {
                 <MakerMenu 
                     handleMakerChange = {handleMakerSelection}
                     open={!menus.maker} 
-                    products={props.products}
+                    products={shuffledProducts}
                     makesmodels={props.makesmodels}
                     handleclick={handleClick}
                 />
                 <ModelMenu 
                     handleModelChange={handleModelSelection}
-                    products={props.products}
+                    products={shuffledProducts}
                     productMaker={allState.maker}
                     productSize={allState.size}
                     makesmodels={props.makesmodels}
@@ -366,7 +370,7 @@ function ProductSearch(props) {
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
                     <FinishMenu 
                         handleFinishChange = {handleFinishSelection} 
-                        products={props.products}
+                        products={shuffledProducts}
                         makesmodels={props.makesmodels}
                         currentselected={allState.finish?allState.finish:'Harp Finish'}
                         handleclick={handleClick}
@@ -374,7 +378,7 @@ function ProductSearch(props) {
                     />
                     <PriceMenu 
                         handlePriceChange = {handlePriceSelection}
-                        products={props.products}
+                        products={shuffledProducts}
                         // producttype={allState.productType}
                         makesmodels={props.makesmodels}
                         // currentselected={allState.price?allState.price:'Harp Price'}

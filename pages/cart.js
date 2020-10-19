@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useReducer } from 'react';
 import uuid from 'react-uuid';
 import Router, { withRouter } from 'next/router';
 
@@ -13,6 +13,9 @@ import { branding } from '../src/constants/branding';
 import { cssVariables } from '../src/constants/cssVariables';
 import CartCss from '../src/styles/onlineStore/cart.css'; 
 import IndexCss from '../src/styles/index.css'; 
+import { resultInfoReducer } from '../src/reducers/reducers';
+import Results from '../src/components/Results';
+import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import {
     getNumItems,
     getSubTotal
@@ -28,6 +31,27 @@ function Cart(props) {
     const { user, setUser } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+    
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    
+    }
+    function handleClick() {
+        const resultText = document.querySelector('#loadingLoginText');
+        if (getNumItems(cart)===0) {
+            resultText.innerText=`Cart is Empty`;
+            dispatchResultInfo({type: 'OK'});
+        } else {
+            Router.push('/shipping')
+        }
+    }
+    function loginGuest(evt) {
+        resetResults();
+    }
+    
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
     }, []);
@@ -39,6 +63,11 @@ function Cart(props) {
         <>
             <div className='index' style={{width: '100%', backgroundColor: '#fffeee'}}>
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
+                <Results 
+                    resultInfo={resultInfo} 
+                    loginGuest={loginGuest}
+                    resetResults={resetResults} 
+                />
             <div className="cartContainer">  
                 <div id='cart'>
                     <div className='cartBody'>
@@ -57,7 +86,7 @@ function Cart(props) {
                                 >Continue Shopping</button>
                                 <button 
                                     className='submit-btn'
-                                    onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
+                                    onClick={()=>handleClick()}
                                     style={{
                                         marginLeft: '2.5px',
                                         marginRight: '15px', 
@@ -101,7 +130,7 @@ function Cart(props) {
                                 >Continue Shopping</button>
                                 <button 
                                     className='submit-btn'
-                                    onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
+                                    onClick={()=>handleClick()}
                                     style={{
                                         marginLeft: '2.5px',
                                         backgroundColor: '#000', 
@@ -111,17 +140,7 @@ function Cart(props) {
                                     }}
                                 >Continue to Checkout</button>
                             </div>
-                     :''}
-                    
-                    
-                    {/*<button 
-                        className='submit-btn'
-                        onClick={()=>getNumItems(cart)===0?alert('Cart is Empty'):Router.push('/shipping')}
-                        style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
-                    >
-                        Continue to Checkout
-                    </button>*/}
-                   
+                     :''}   
                 </div>            
             </div>
             <CartCss />

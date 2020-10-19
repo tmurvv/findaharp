@@ -18,14 +18,9 @@ function CartItemCss() {
             justify-content: center;
             padding-top: 10px;
         }
-        .product_image img {
-           // display: block;
-            // border: 0; 
-            // padding: 0; 
-            // margin: 0 auto; 
-            // margin-top: 10px; 
+        .product_image img { 
             width: 140px;
-            max-height: 100%;
+            max-height: 300px;
             border-radius: 3px;
             box-shadow: 3px 5px 3px lightgrey;
         }

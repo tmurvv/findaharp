@@ -1,6 +1,6 @@
 // packages
 import React, {useState, useEffect, useLayoutEffect } from 'react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad from 'react-lazyload'; 
 // styles
 import ProductCss from '../styles/Product.css';
 // internal

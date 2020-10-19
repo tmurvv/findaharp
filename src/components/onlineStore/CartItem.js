@@ -19,7 +19,7 @@ function CartItem(props) {
         <>
             <div className='item'>
                 <div className='product_image'>
-                    <img src={item.product_image} />
+                    <img src={item.product_image} alt={item.title}/>
                 </div>   
                 <div className='description'>
                     <p><span style={{fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span> - {item.description}</p>

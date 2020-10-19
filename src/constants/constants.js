@@ -19,7 +19,19 @@ export const RESULTS_INITIAL_STATE = {
     tryAgainMarginLeft: '0',
     resultImg: 'none'
 }
-
+export const RESET_SHIPPING_INFO = {
+    shippingfname: null,
+    shippinglname: null,
+    shippingaddress: null,
+    shippingaddress2: null,
+    shippingcity: null,
+    shippingregion: null,
+    shippingzip_postal: null,
+    shippingcountry: null,
+    shippingemail: null,
+    shippingphone: null,
+    shippingaltphone: null
+}
 export const STOREPARTNER_PLACEHOLDER = {   
     id: "",
     sellerCountry: "",
