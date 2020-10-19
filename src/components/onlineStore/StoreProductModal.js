@@ -149,7 +149,7 @@ function StoreProductModal(props) {
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                             <div style={{width:'fit-content'}}>Ships From: Canada</div>
-                            <img style={{width: '25px', maxHeight: '20pxy'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                            <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                             <div style={{width:'fit-content'}}>To: Anywhere</div>
                         </div>
                         <button 

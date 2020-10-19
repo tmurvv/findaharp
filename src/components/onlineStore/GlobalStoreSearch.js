@@ -52,7 +52,6 @@ function GlobalStoreSearch(props) {
             levelProductList=[...productListCopy];
         }
         finalProductList=[...levelProductList];
-        console.log('level', finalProductList.length)
         // check soloensemble
         if (soloensemble&&soloensemble.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
             levelProductList.map(product=> {
@@ -145,7 +144,8 @@ function GlobalStoreSearch(props) {
     return (
         <>
             <div style={{width: '100%', maxWidth: '650px', margin: 'auto', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', border: '1px solid #ffe58a', backgroundColor: '#fff'}}>
-                <select onChange={()=>handleChange(ensembleSearch,levelSearch,publicationSearch)} style={{flex: '2'}} id='categoryfilter'>
+                <div className='selectContainer'>
+                <select onChange={()=>handleChange(ensembleSearch,levelSearch,publicationSearch)} style={{flex: '2', WebkitAppearance: 'none'}} id='categoryfilter'>
                   <option name='All'>All</option>
                   <option name='Strings'>Strings</option>
                   <option name='Music'>Music</option>
@@ -155,6 +155,9 @@ function GlobalStoreSearch(props) {
                   <option name='CDs'>CDs</option>
                   <option name='Digital Downloads'>Digital Downloads</option>
                 </select>
+                <span>&#711;</span>
+                </div>
+                
                 <input style={{flex: '8'}} type="text" id="searchInput" onChange={()=>handleChange(ensembleSearch,levelSearch,publicationSearch, false)} placeholder="Search" />
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>

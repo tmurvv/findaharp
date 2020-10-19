@@ -224,40 +224,40 @@ export const STORE_PARTNERS = [
         sellerWebsiteText: 'vixenharps.com',
         sellerEmail: 'info@vixenharps.com'
     },
-    {
-        id: 'theharpplace',
-        sellerCountry: "USA",
-        sellerRegion: "Albany, New York area",
-        productTitle: "The Harp Place",
-        productLongDesc: ` 
-        <p><strong>Bring Music to Your Life!</strong><p>
-        <p>A whole new world can open to you when you begin playing harp. The harp is an instrument you can play by yourself, in duets, or with a group.</p>
-        <p>Enrich your life with a new experience! Harp rentals, sales, and lessons in Albany, NY.</p>
-        <p><i>About Owner Claudia Place</i></p>
-        <p>Ms. Place studied at Boston University and Westminster Choir College in Princeton and privately with Marjorie Hartzell and Elizabeth Huntley. She has performed in a variety of sacred and secular venues. An experienced music teacher, she has taught in public and private schools including The Emma Willard School in Troy, NY and churches as well as privately.</p>
-        <p>Ms. Place studied with Alice Parker, composer and arranger for the Robert Shaw Chorale. She was also a church organist and music director for many years. With a real sense of “what works” in the different musical venues, Ms. Place is an arranger of duet, ensemble, and solo harp pieces, filling the many musical needs of the “harp world”.</p>`,
-        productMaker: "The Harp Place",
-        productImageUrl: "/img/storePartners/harpplace_logo.png",
-        sellerWebsite: 'https://theharpplace.com',
-        sellerWebsiteText: 'theharpplace.com',
-        sellerEmail: 'harpgal1@gmail.com',
-        onlinestoreUrl: 'storeentry/theharpplace',
-        onlinestoreShipsTo: 'US and Canada',
-        onlinestoreBlurb: 'Offering digital download music and accessories'
-    },
-    {
-        id: 'underConstruction',
-        sellerCountry: "Canada",
-        sellerRegion: "North America",
-        productTitle: "The Next Harp Store",
-        productLongDesc: "Look here for the next harp store to be added!",
-        productMaker: "under construction",
-        productImageUrl: "/img/harpLogo.png",
-        sellerWebsite: '',
-        sellerWebsiteText: '',
-        sellerEmail: '',
-        onlinestoreUrl: 'onlinestores/underconstruction',
-        onlinestoreShipsTo: "We'll find out soon!",
-        onlinestoreBlurb: "<p><strong>Our Harp 'Mini-Mall'</strong> is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose Login/Profile from the above menu to sign up.<p>"
-    }
+    // {
+    //     id: 'theharpplace',
+    //     sellerCountry: "USA",
+    //     sellerRegion: "Albany, New York area",
+    //     productTitle: "The Harp Place",
+    //     productLongDesc: ` 
+    //     <p><strong>Bring Music to Your Life!</strong><p>
+    //     <p>A whole new world can open to you when you begin playing harp. The harp is an instrument you can play by yourself, in duets, or with a group.</p>
+    //     <p>Enrich your life with a new experience! Harp rentals, sales, and lessons in Albany, NY.</p>
+    //     <p><i>About Owner Claudia Place</i></p>
+    //     <p>Ms. Place studied at Boston University and Westminster Choir College in Princeton and privately with Marjorie Hartzell and Elizabeth Huntley. She has performed in a variety of sacred and secular venues. An experienced music teacher, she has taught in public and private schools including The Emma Willard School in Troy, NY and churches as well as privately.</p>
+    //     <p>Ms. Place studied with Alice Parker, composer and arranger for the Robert Shaw Chorale. She was also a church organist and music director for many years. With a real sense of “what works” in the different musical venues, Ms. Place is an arranger of duet, ensemble, and solo harp pieces, filling the many musical needs of the “harp world”.</p>`,
+    //     productMaker: "The Harp Place",
+    //     productImageUrl: "/img/storePartners/harpplace_logo.png",
+    //     sellerWebsite: 'https://theharpplace.com',
+    //     sellerWebsiteText: 'theharpplace.com',
+    //     sellerEmail: 'harpgal1@gmail.com',
+    //     onlinestoreUrl: 'storeentry/theharpplace',
+    //     onlinestoreShipsTo: 'US and Canada',
+    //     onlinestoreBlurb: 'Offering digital download music and accessories'
+    // },
+    // {
+    //     id: 'underConstruction',
+    //     sellerCountry: "Canada",
+    //     sellerRegion: "North America",
+    //     productTitle: "The Next Harp Store",
+    //     productLongDesc: "Look here for the next harp store to be added!",
+    //     productMaker: "under construction",
+    //     productImageUrl: "/img/harpLogo.png",
+    //     sellerWebsite: '',
+    //     sellerWebsiteText: '',
+    //     sellerEmail: '',
+    //     onlinestoreUrl: 'onlinestores/underconstruction',
+    //     onlinestoreShipsTo: "We'll find out soon!",
+    //     onlinestoreBlurb: "<p><strong>Our Harp 'Mini-Mall'</strong> is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose Login/Profile from the above menu to sign up.<p>"
+    // }
 ];

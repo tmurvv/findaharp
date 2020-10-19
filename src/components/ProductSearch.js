@@ -45,9 +45,16 @@ function ProductSearch(props) {
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const ref = useRef();
-    // randomize store partners
-    const shuffledProducts = shuffleStorePartners(props.products);
-    // get grid size
+
+    // randomize products
+    let shuffledProducts=[...props.products];
+    // remove listings without photos (they go at the bottom of the list)
+    const tempGeneric = shuffledProducts.filter(product=> product.productImageUrl.indexOf('genericHarp')>-1)
+    shuffledProducts = shuffledProducts.filter(product=> product.productImageUrl.indexOf('genericHarp')===-1)
+    // randomize
+    shuffledProducts = shuffleStorePartners(shuffledProducts);
+    // add back in listings without photos
+    tempGeneric.map(product=>shuffledProducts.push(product));
 
     const [menus, setMenus] = useState(initialState);
     const [allState, setAllState] = useState({

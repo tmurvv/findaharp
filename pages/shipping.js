@@ -81,6 +81,12 @@ function Shipping() {
                 setStatus('completed');
                 setUser({...user, RESET_SHIPPING_INFO});
             }
+            window.removeEventListener('beforeunload', function (e) {
+                // Cancel the event
+                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+                // Chrome requires returnValue to be set
+                e.returnValue = '';
+            });
             document.querySelector('#spinner').style.display="none";
         } else {
             Router.push('/payment');
@@ -187,7 +193,6 @@ function Shipping() {
                     gotoRoute={'/'}
                 />
                 <div><Subtotal type="total"/></div>
-               
                <form 
                     method="get" 
                     onSubmit={(e)=>handleSubmit(e)}
@@ -224,22 +229,31 @@ function Shipping() {
                                 <td colSpan='2'>
                                     <div className='countryDrop'>
                                         <label htmlFor="country">Country</label>
+                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                                         <CountryDropdown
-                                            classes="dropDown"
                                             style={{
-                                                minWidth: '100%',
+                                                display: 'block',
                                                 padding: '15px',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 marginBottom: '20px',
                                                 marginTop: '5px',
-                                                backgroundColor: '#fff'
+                                                backgroundColor: '#fff',
+                                                minWidth: '260px',
+                                                WebkitAppearance: 'none'
                                             }}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
-                                            onChange={(val)=> changeCountry(val)}
-                                            required
+                                            onChange={(val)=> changeCountry(val)} 
                                         />
+                                        <span style={{
+                                            position: 'absolute',
+                                            right: '8px',
+                                            top: '20px',
+                                            fontSize: '36px',
+                                            pointerEvents: 'none'
+                                        }}>&#711;</span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td colSpan='2'>
@@ -317,23 +331,34 @@ function Shipping() {
                                 <td colSpan='1'>
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
+                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
-                                                padding: '15px',
-                                                border: '2px solid black',
-                                                borderRadius: '3px',
-                                                minWidth: '100%',
-                                                marginTop: '2.5px',
-                                                backgroundColor: '#fff'
+                                                padding:'15px 0',
+                                                border:'2px solid black',
+                                                borderRadius:'3px',
+                                                marginTop:'2.5px',
+                                                backgroundColor:'#fff',
+                                                WebkitAppearance: 'none',
+                                                width: '100%'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
                                             name='shippingregion'
-                                            defaultOptionLabel='Select State/Province'
+                                            defaultOptionLabel={`Select State/Province__`}
                                             onChange={(val) => {changeRegion(val)}} 
-                                            placeholder='select country, then state/prov/region'
+                                            required
                                         />
+                                        <span style={{
+                                            position: 'absolute',
+                                            right: '4px',
+                                            top: '16px',
+                                            fontSize: '36px',
+                                            pointerEvents: 'none',
+                                            paddingLeft: '25px'
+                                        }}>&#711;</span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td colSpan='1'>
@@ -374,20 +399,31 @@ function Shipping() {
                                 <td colSpan='4'>
                                     <div className='countryDrop'>
                                         <label htmlFor="country">Country</label>
+                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                                         <CountryDropdown
-                                            className="dropDown"
                                             style={{
-                                                padding: '15px 0',
+                                                display: 'block',
+                                                padding: '15px',
                                                 border: '2px solid black',
                                                 borderRadius: '3px',
                                                 marginBottom: '20px',
                                                 marginTop: '5px',
-                                                backgroundColor: '#fff'
+                                                backgroundColor: '#fff',
+                                                minWidth: '260px',
+                                                WebkitAppearance: 'none'
                                             }}
                                             value={user.shippingcountry}
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
                                         />
+                                        <span style={{
+                                            position: 'absolute',
+                                            right: '8px',
+                                            top: '20px',
+                                            fontSize: '18px',
+                                            pointerEvents: 'none'
+                                        }}>&#711;</span>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -465,6 +501,8 @@ function Shipping() {
                                 <td colSpan='2'>
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
+                                        
+                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
@@ -472,15 +510,24 @@ function Shipping() {
                                                 border:'2px solid black',
                                                 borderRadius:'3px',
                                                 marginTop:'2.5px',
-                                                backgroundColor:'#fff'
+                                                backgroundColor:'#fff',
+                                                WebkitAppearance: 'none'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
                                             name='shippingregion'
-                                            defaultOptionLabel='Select State/Province'
+                                            defaultOptionLabel={`Select State/Province__`}
                                             onChange={(val) => {changeRegion(val)}} 
                                             required
                                         />
+                                        <span style={{
+                                            position: 'absolute',
+                                            right: '4px',
+                                            top: '20px',
+                                            fontSize: '36px',
+                                            pointerEvents: 'none'
+                                        }}>&#711;</span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td colSpan='2'>

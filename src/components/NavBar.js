@@ -64,9 +64,9 @@ export default function NavBar(props) {
                     <Link href='/cart' as='/cart'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
                     </Link>
-                    <Link href='/storeentry/findaharp' as='/storeentry/findaharp'>
+                    {/* <Link href='/storeentry/findaharp' as='/storeentry/findaharp'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
-                    </Link>
+                    </Link> */}
                 </div>:''
             }
         </div>

@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react';
 
 // internal
-import { STORE_PARTNERS } from '../src/constants/constants';
-import StoreProduct from '../src/components/onlinestore/StoreProduct';
-import OnlineStorePartner from '../src/components/onlinestore/OnlineStorePartner';
-import PageTitle from '../src/components/PageTitle';
-import ContactUsForm from '../src/components/ContactUsForm';
-import IndexCss from '../src/styles/index.css';
-import StoreEntryCSS from '../src/styles/onlineStore/StoreEntry.css';
+import { STORE_PARTNERS } from '../../constants/constants';
+import StoreProduct from '../../components/onlinestore/StoreProduct';
+import OnlineStorePartner from '../../components/onlinestore/OnlineStorePartner';
+import PageTitle from '../../components/PageTitle';
+import ContactUsForm from '../../components/ContactUsForm';
+import IndexCss from '../../styles/index.css';
+import StoreEntryCSS from '../../styles/onlineStore/StoreEntry.css';
 
 const StoreEntry = (props) => {
     const [ view, setView ] = useState('harps')

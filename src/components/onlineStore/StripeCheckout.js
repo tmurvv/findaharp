@@ -89,7 +89,7 @@ export default function StripeCheckout(props) {
         setError(event.error ? event.error.message : "");
     };
     const handleSubmit = async ev => {
-        const resultText = document.querySelector('#loadingLoginText');
+        
         ev.preventDefault();
         setProcessing(true);
         let payload;
@@ -133,6 +133,12 @@ export default function StripeCheckout(props) {
                 setStatus('completed');
                 Router.push('/receipt')
             }
+            window.removeEventListener('beforeunload', function (e) {
+                // Cancel the event
+                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+                // Chrome requires returnValue to be set
+                e.returnValue = '';
+            });
         }
     };
     function resetResults() {

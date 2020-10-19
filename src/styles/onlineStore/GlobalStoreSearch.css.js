@@ -6,7 +6,17 @@ function GlobalStoreSearchCss() {
         * {
             box-sizing: border-box;
           }
-          
+          .selectContainer {
+            position: relative;
+            display: inline-block;
+          }
+          .selectContainer>span {
+            right: 4px;
+            top: 12px;
+            position: absolute;
+            font-size: 18px;
+            pointer-events: none;
+          }
           #searchInput
           {
             background-image: url('/css/searchicon.png');

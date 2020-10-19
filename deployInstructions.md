@@ -9,6 +9,7 @@
 - check next.config.js for deployment environment
 - check next.config.js for backend environment
 - index.js getinit has to be manually changed for backend environment
+- make sure test items removed from store
 - run tests
 - good idea to commit and push
 - run locally and make sure no doubled ads

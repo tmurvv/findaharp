@@ -13,15 +13,19 @@ function CartItemCss() {
             padding: 10px;
         }
         .product_image {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+            height: 40%;
+            min-height: 40%;
+            width: 70%;
             padding-top: 10px;
+            margin: auto;
         }
         .product_image img { 
-            width: 140px;
-            max-height: 300px;
+            // width: 140px;
+            // max-height: 250px;
             border-radius: 3px;
+            box-shadow: 3px 5px 3px lightgrey;
+            max-width:100%;
+            max-height:100%;
             box-shadow: 3px 5px 3px lightgrey;
         }
         .description { 

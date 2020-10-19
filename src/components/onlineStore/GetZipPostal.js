@@ -80,7 +80,8 @@ function GetPostalZip() {
                 <p>It will help us estimate shipping costs.</p>
             </div>
             <div className='countryDrop'>
-                <label htmlFor="country">Country</label>
+                <label htmlFor="country" style={{display: 'block'}}>Country</label>
+                <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                 <CountryDropdown
                     style={{
                         display: 'block',
@@ -90,17 +91,26 @@ function GetPostalZip() {
                         marginBottom: '20px',
                         marginTop: '5px',
                         backgroundColor: '#fff',
-                        minWidth: '260px'
+                        minWidth: '260px',
+                        WebkitAppearance: 'none'
                     }}
-                    // whitelist={['US', 'CA']}
                     value={user.shippingcountry}
                     name='shippingcountry'
                     onChange={(val)=> handleCountryChange(val)} 
                 />
+                <span style={{
+                    position: 'absolute',
+                    right: '8px',
+                    top: '20px',
+                    fontSize: '18px',
+                    pointerEvents: 'none'
+                }}>&#711;</span>
+                </div>
             </div>
             {user.shippingcountry==='Canada'
             ?<><div className='regionDrop' style={{marginLeft: '0'}}>
                 <label htmlFor="country">Select Province to calculate taxes</label>
+                <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                 <RegionDropdown
                     style={{
                         display: 'block',
@@ -109,7 +119,8 @@ function GetPostalZip() {
                         borderRadius: '3px',
                         marginBottom: '20px',
                         marginTop: '5px',
-                        backgroundColor: '#fff'
+                        backgroundColor: '#fff',
+                        WebkitAppearance: 'none'
                     }}
                     country={user.shippingcountry}
                     value={user.shippingregion}
@@ -117,6 +128,14 @@ function GetPostalZip() {
                     defaultOptionLabel='Select Province to calculate taxes.'
                     onChange={(val) => {changeRegion(val)}} 
                 />
+                <span style={{
+                    position: 'absolute',
+                    right: '4px',
+                    top: '20px',
+                    fontSize: '18px',
+                    pointerEvents: 'none'
+                }}>&#711;</span>
+                </div>
             </div>
             </>
             :''}
