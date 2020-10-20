@@ -98,50 +98,60 @@ Double letter before 'y' means stays checked when resetting for ipad and android
     [] contact findaharp
 
 # store testing
-    [xx] desktop
-    [] phone
+    [ ] desktop
+    [ ] phone
     [] tablet
 
 ## main page
-    [] container layout
-    [] add to cart button
-    [] view cart button
-    [] open modal via image
-    [] open modal via more...
+    [x] container layout
+    [x] add to cart button
+    [x] view cart button
+    [x] open modal via image
+    [x] open modal via more...
     
     ### search
-    [] category
-    [] search input
-    [] ens
-    [] level
-    [] publication type
-    [] combinations
-    [] clear one filter
-    [] clear all filters
+    [x] category
+    [x] search input
+    [x] ens
+    [x] level
+    [x] publication type
+    [x] combinations
+    [x] clear one filter
+    [x] clear all filters
 
     ### modal
 
-    [] add to cart button works
-    [] condition etc, headers appear only for music
-    [] spacing looks good
-    [] close button closes
+    [x] add to cart button works
+    [x] condition etc, headers appear only for music
+    [x] spacing looks good
+    [x] close button closes
 
     ### cart
-    [] only 1 in stock appears for used
-    [] add and sub item works
-    [] remove item works
-    [] select country works
-    [] back to shopping works
-    [] continue to checkout works
+    [x] only 1 in stock appears for used
+    [x] add and sub item works
+    [x] remove item works
+    [x] select country works
+    [x] back to shopping works
+    [x] continue to checkout works
 
     ### shipping
-    [] all fields work
-    [] country field fills in shipping correctly
-    [] region field fills in taxes correctly
-    [] continue to payment button works
-    [] continue to payment button works correctly for international
+    [x] all fields work
+    [x] country field fills in shipping correctly
+    [x] region field fills in taxes correctly
+    [x] continue to payment button works
+    [x] continue to payment button works correctly for international
 
     ### payment
 
-    ### receipt
+    [x] enter us cc
+    [x] enter CAD cc
+    [x] paypal link
+    [x] after Stripe payment goes to correct page
+    [] after paypal link payment goes to correct page
 
+    ### receipt page
+    [x] looks ok
+    [x] back to shopping works
+    [x] back to harps works
+
+    ### receipt email

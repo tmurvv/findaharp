@@ -13,9 +13,12 @@ import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+
+import { leaveSiteListener } from '../../utils/checkoutHelpers'
 import {
     triggerLazy
 } from '../../utils/helpers';
+
 
 const StoreProduct = (props) => {
     const { user } = useContext(UserContext);
@@ -84,12 +87,13 @@ const StoreProduct = (props) => {
         e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
         e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart"); 
-        window.addEventListener('beforeunload', function (e) {
-            // Cancel the event
-            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-            // Chrome requires returnValue to be set
-            e.returnValue = '';
-        }); 
+        // window.addEventListener('beforeunload', (e)=>{
+        //     // Cancel the event
+        //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+        //     // Chrome requires returnValue to be set
+        //     e.returnValue =  '';
+        // }); 
+        window.addEventListener('beforeunload', (e)=> leaveSiteListener(e)); 
     }
     return (
         <div className="storeproduct">

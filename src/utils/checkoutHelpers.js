@@ -86,6 +86,13 @@ export function selectRegion(val, user, setUser) {
     setUser({...user, shippingregion: val});
 }
 
+export function leaveSiteListener(e) {
+    // Cancel the event
+    e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+    // Chrome requires returnValue to be set
+    e.returnValue = '';
+}
+
 export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier) {
     const subTotal = user.currency==="USD"?getSubTotal(cart):getSubTotal(cart)*currencyMultiplier;
     const total = (Number(getTotal(cart, user, currencyMultiplier))).toFixed(2);
@@ -155,7 +162,7 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMult
                 >
                     <div style='display:flex; justify-content: space-between; background-color:#fff; margin: 5px;padding:15px;'>
                         <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Products Subtotal: </div>
-                        <div style="text-align:right;font-size:18px;font-weight:600;">${Number(subTotal).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText}</span></div>
+                        <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(subTotal).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText}</span></div>
                     </div>
                     <div style='display:flex; justify-content: space-between;background-color: #fff; margin: 5px;padding:15px;'>
                         <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</div>

@@ -9,12 +9,17 @@ import StripeCheckout from '../src/components/onlinestore/StripeCheckout';
 import PaypalCheckout from '../src/components/onlinestore/PaypalCheckout';
 import OrderSummary from '../src/components/onlinestore/OrderSummary';
 import { StatusContext } from '../src/contexts/StatusContext';
+import { leaveSiteListener } from '../src/utils/checkoutHelpers';
+
 
 function Payment() {
     const { setStatus } = useContext(StatusContext);
     const [ method, setMethod ]  = useState('stripe');
     
     function changeRadio(e) {
+        if (e.target.value==='paypal') {
+            alert('Paypal requires you to open another webpage. Select "leave" or "ok" when promted to leave site.')
+        }
         if (e.target.checked===true) {setMethod(e.target.value);}
     }
     useEffect(()=>{
@@ -41,7 +46,7 @@ function Payment() {
                             <input type='radio' onClick={(e)=>changeRadio(e)} id='paypal' name='paymentMethod' value='paypal' style={{transform: 'scale(2)', marginRight: '15px'}}/>
                             <label htmlFor='cc' style={{transform: 'translate(0, -5px)'}}>PayPal</label>
                         </div>
-                        <PaypalCheckout method={method}/>
+                        <PaypalCheckout method={method} style={{boxShadow: '3px 5px 3px lightgrey'}}/>
                     </div>
                 </form>
             </div>

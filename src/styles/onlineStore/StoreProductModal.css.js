@@ -21,6 +21,14 @@ function StoreProductModalCSS() {
                 opacity: 1;
                 height: 485px;
             }
+            @media only screen and (max-width: 550px) {
+                .storedetailContainer {
+                    box-shadow: 3px 5px 3px lightgrey;
+                    width: 95%;
+                    height: 100%;
+                    padding: 10px;
+                }
+            }
             .storedetailInfo {
                 display: flex;
                 align-items: flex-start;

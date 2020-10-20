@@ -155,9 +155,8 @@ function GlobalStoreSearch(props) {
                   <option name='CDs'>CDs</option>
                   <option name='Digital Downloads'>Digital Downloads</option>
                 </select>
-                <span>&#711;</span>
+                <span style={{fontSize: '36px'}}>&#711;</span>
                 </div>
-                
                 <input style={{flex: '8'}} type="text" id="searchInput" onChange={()=>handleChange(ensembleSearch,levelSearch,publicationSearch, false)} placeholder="Search" />
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>

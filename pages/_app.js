@@ -28,6 +28,7 @@ import UploadListingResult from '../src/components/UploadListingResult';
 import { parseJwt } from '../src/utils/helpers';
 import { getNumItems } from '../src/utils/storeHelpers'
 
+
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 const cartOpenInit = false;
 const cartItemsInit = [
@@ -85,18 +86,18 @@ function MyApp(props) {
         }   
       };
     
-    useEffect(() => {
-        if (cart&&getNumItems(cart)>0) {
-            window.addEventListener('beforeunload', function (e) { // from MDN
+    // useEffect(() => {
+    //     if (cart&&getNumItems(cart)>0) {
+    //         window.addEventListener('beforeunload', function (e) { // from MDN
                 
-                // Cancel the event
-                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-                // Chrome requires returnValue to be set
-                e.returnValue = '';
+    //             // Cancel the event
+    //             e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+    //             // Chrome requires returnValue to be set
+    //             e.returnValue = '';
                 
-            });
-        }
-    },[]);
+    //         });
+    //     }
+    // },[]);
 
     //get currency multiplier
     useEffect(() => {

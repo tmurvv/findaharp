@@ -23,7 +23,6 @@ function CartItemCss() {
             // width: 140px;
             // max-height: 250px;
             border-radius: 3px;
-            box-shadow: 3px 5px 3px lightgrey;
             max-width:100%;
             max-height:100%;
             box-shadow: 3px 5px 3px lightgrey;

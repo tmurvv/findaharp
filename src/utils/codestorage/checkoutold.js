@@ -228,7 +228,7 @@ function Checkout(props) {
                             </div>
                             <div className="flexSB">
                                 <div className="shipping" style={{color:"black",border: 'none',paddingBottom:'-10px'}}>Shipping</div>
-                                <div style={{textAlign:'right',color: 'black',border: 'none',paddingBottom:'-10px'}}>{isNaN(parseFloat(shipping(user)))?'$--.--':parseFloat(shipping(user)).toFixed(2)}</div>
+                                <div style={{textAlign:'right',color: 'black',border: 'none',paddingBottom:'-10px'}}>{!isNaN(parseFloat(shipping(user)))?'$--.--':parseFloat(shipping(user)).toFixed(2)}</div>
                             </div>
                             <div className="flexSB">
                                 <div style={{color:"black",border: 'none',paddingBottom:'-10px'}}>Taxes</div>

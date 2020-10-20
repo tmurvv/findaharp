@@ -102,14 +102,14 @@ function GetPostalZip() {
                     position: 'absolute',
                     right: '8px',
                     top: '20px',
-                    fontSize: '18px',
+                    fontSize: '36px',
                     pointerEvents: 'none'
                 }}>&#711;</span>
                 </div>
             </div>
             {user.shippingcountry==='Canada'
             ?<><div className='regionDrop' style={{marginLeft: '0'}}>
-                <label htmlFor="country">Select Province to calculate taxes</label>
+                <label htmlFor="country" style={{display: 'block'}}>Select Province to calculate taxes</label>
                 <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                 <RegionDropdown
                     style={{
@@ -132,7 +132,7 @@ function GetPostalZip() {
                     position: 'absolute',
                     right: '4px',
                     top: '20px',
-                    fontSize: '18px',
+                    fontSize: '36px',
                     pointerEvents: 'none'
                 }}>&#711;</span>
                 </div>

@@ -809,7 +809,7 @@ export const FINDAHARP_PRODUCTS = [
             level: 'advanced',
             harptype: 'pedal harp',
             notes: 'Cover slightly worn. Inside like new.',
-            image: "../../../img/store/findaharp/sheetmusic/Theseus.jpg", 
+            image: "../../../img/store/findaharp/sheetmusic/theseus.jpg", 
             description: "Score only. Juno award nominee. Commissioned by Judy Loman of the Toronto Symphony.",
             newused: 'used'
         },

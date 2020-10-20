@@ -498,7 +498,7 @@ function Shipping() {
                                 </td>
                             </tr>
                             <tr>
-                                <td colSpan='2'>
+                                <td colSpan='2' style={{maxWidth: '50%'}}>
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
                                         
@@ -530,7 +530,7 @@ function Shipping() {
                                         </div>
                                     </div>
                                 </td>
-                                <td colSpan='2'>
+                                <td colSpan='2' style={{maxWidth: '50%'}}>
                                     <div>
                                         <label htmlFor="shippingzip_postal">Zip/Postal Code</label>
                                         <input 
