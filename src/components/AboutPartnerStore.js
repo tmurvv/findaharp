@@ -10,7 +10,6 @@ function AboutPartnerStore(props) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="90%";
     }
-    const doesitwork = 'does it work'
     return (
         <>
         <div 
@@ -37,7 +36,7 @@ function AboutPartnerStore(props) {
             <div className='buyerDivider'>
                 <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
             </div>
-            <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerStore.productLongDesc}} />    
+            <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerStore.productLongDesc}} />
             <div className={`grid-item productSmallDisplay-text`}>
                 <p><a href={`${partnerStore.sellerWebsite}`} style={{color: '#6A75AA', fontSize: '18px'}} target="_blank">{partnerStore.sellerWebsiteText}</a></p>
                 <p>{partnerStore.sellerRegion}</p>     

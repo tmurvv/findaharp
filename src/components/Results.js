@@ -1,18 +1,19 @@
 import React from 'react';
 import ResultsCss from '../styles/Results.css';
 
-function Results({ resultInfo, resetResults, loginGuest  }) {
+function Results({ resultInfo, resetResults, loginGuest, zipMsg  }) {
     return (
         <>
             <div id="loadingLogin" style={{display: resultInfo.resultContainer}}>
                 <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
+                <p>{zipMsg?zipMsg:''}</p>
                 <div className='flex-sb'>
                     <button 
                         id='loadingLoginOk'
                         type='button' 
                         className='submit-btn' 
-                        onClick={loginGuest}
+                        onClick={()=>loginGuest()}
                         style={{display: resultInfo.resultOkButton}} 
                     >
                         OK

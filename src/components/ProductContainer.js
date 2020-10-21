@@ -1,10 +1,9 @@
 // packages
 import React, {useReducer, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
-import LazyLoad from 'react-lazyload';
 // styles
 import ProductContainerCss from '../styles/ProductContainer.css';
-// internal
+// internal  
 import ProductModal from './ProductModal';
 import ContactSellerForm from './ContactSellerForm';
 import Product from './Product';

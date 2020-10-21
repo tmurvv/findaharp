@@ -1,3 +1,5 @@
+const withCSS = require('@zeit/next-css')
+module.exports = withCSS({cssModules: false});
 module.exports = {
     env: {
         // next_env: 'development',

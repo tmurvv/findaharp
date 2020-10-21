@@ -1,5 +1,5 @@
 // packages
-import React from 'react';
+import React, {useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -62,6 +62,10 @@ function BuyersGuide(props) {
             }
         }   
     }
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    }, []);
     return (
         <>
         <Head>

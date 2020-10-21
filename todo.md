@@ -4,6 +4,7 @@
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
+- getTotal, subTotal figure out whether to return string or number, be consistent, toFixed returns string
 - figure out option to dangerinnerhtml in store partners
 - separate store partner program info into a component
 - check do we need to pass all open/close functions to Product
@@ -12,6 +13,8 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+- add 'item added to cart' dialog instead of default alert box
+- country/region not styled on ios
 - get NavBar to show Name (doesn't work on cookie check)
 - When update user encounters problem on backend, spinner persists, needs to show error message
 - if no user, userProfile needs to divert to login
@@ -21,6 +24,7 @@
 - cancel button on upload harp listing
 
 ### functionality
+- add option to create account on shipping page
 - rebuild site once a day https://pomb.us/nextjs-static-props/
 - logout button
 - tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present

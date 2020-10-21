@@ -1,0 +1,55 @@
+// packages
+import { useState, useEffect } from 'react';
+
+// internal
+import { STORE_PARTNERS } from '../../constants/constants';
+import StoreProduct from '../../components/onlinestore/StoreProduct';
+import OnlineStorePartner from '../../components/onlinestore/OnlineStorePartner';
+import PageTitle from '../../components/PageTitle';
+import ContactUsForm from '../../components/ContactUsForm';
+import IndexCss from '../../styles/index.css';
+import StoreEntryCSS from '../../styles/onlineStore/StoreEntry.css';
+
+const StoreEntry = (props) => {
+    const [ view, setView ] = useState('harps')
+    const [ contactUsForm, setContactUsForm ] = useState(false);
+    const [ harpName, setHarpName ] = useState(false);
+    
+    function handleClick(e) {
+        console.log(e.target.getAttribute('data-id'))
+        console.log(contactUsForm)
+        setContactUsForm(true);
+        setHarpName(e.target.getAttribute('data-id'))
+    }
+    function reset() {setContactUsForm(false)}
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    },[]);
+    return (
+        <>
+        <div className='index' style={{height: 'fit-content'}}>
+            <PageTitle maintitle="Store Partner MiniMall" subtitle='Music, Strings, and Accessories Available Here' />  
+            <div className='storeEntriesContainer'>
+                <OnlineStorePartner 
+                    key={'findaharp'} 
+                    product={STORE_PARTNERS[3]} 
+                    placeholder={false}
+                />
+                <OnlineStorePartner 
+                    key={'harpsetc'} 
+                    product={STORE_PARTNERS[0]} 
+                    placeholder={false}
+                />
+                <OnlineStorePartner 
+                    key={'underConstruction'} 
+                    product={STORE_PARTNERS[9]} 
+                    placeholder={false}
+                />
+            </div>
+        </div>
+        <StoreEntryCSS />
+        </>
+    )
+}
+export default StoreEntry;

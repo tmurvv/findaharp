@@ -1,4 +1,4 @@
-function AboutPartnerStoresCSS() {
+  function AboutPartnerStoresCSS() {
     return ( 
         <style jsx="true">{`
             h2 {

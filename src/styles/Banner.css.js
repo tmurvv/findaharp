@@ -11,13 +11,13 @@ function BannerCss() {
                 align-items: center;
                 padding: 0 20px;  
             }
-            @media only screen and (max-width: 950px) {
+            @media only screen and (max-width: 1050px) {
                 .mainContainer {
                   height: 120px;
                   padding: 0 75px;
                 }
             }
-            @media only screen and (max-width: 750px) {
+            @media only screen and (max-width: 850px) {
                 .mainContainer {
                   height: 78px;
                   padding: 0 150px 0 100px;

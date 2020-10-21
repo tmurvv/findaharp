@@ -4,7 +4,7 @@ function ContactCSS() {
     return (
         <style jsx="true">{`
             .contactContainer {
-                background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
+                // background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 padding: 30px;
                 padding-top: 70px;
                 height: fit-content;

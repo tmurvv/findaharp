@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 
 //internal
-import { STORE_PARTNERS } from '../src/constants/storePartners';
+import { STORE_PARTNERS } from '../src/constants/constants';
 import PageTitle from '../src/components/PageTitle';
 import AboutPartnerStore from '../src/components/AboutPartnerStore';
 import StorePartnersCSS from '../src/styles/StorePartners.css';
@@ -21,7 +21,10 @@ export default function StorePartners() {
     const size = getWindowSize();
     // add blank placeholders for grid
     const addPlaceHolders=addPlaceholderStorePartners(storePartnersShuffled, size.width);
-    
+    // display cart??
+    useEffect(()=>{
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+    },[]);
     return (
         <>
         <Head>

@@ -5,7 +5,7 @@ function Footer() {
     return (
         <>
             <div className='footer'>
-                <div className='flexSB'>
+                <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
                     <div className="logo">
                         <img src='/img/logo_findaharp.png' alt='gold harp graphic'/>
                         <img src='/img/golden_harp_cropped.png' alt='gold harp graphic'/>

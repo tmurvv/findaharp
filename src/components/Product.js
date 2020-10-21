@@ -1,6 +1,6 @@
 // packages
 import React, {useState, useEffect, useLayoutEffect } from 'react';
-import LazyLoad from 'react-lazyload';
+import LazyLoad from 'react-lazyload'; 
 // styles
 import ProductCss from '../styles/Product.css';
 // internal
@@ -35,7 +35,8 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     // }
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
-        if (evt.target.style.height !== '30%') evt.target.style.height="100%";
+        if (evt.target.style.height !== '30%') evt.target.style.height="auto"; //BREAKING
+        // if (evt.target.style.height !== '30%') evt.target.style.height="100%"; //BREAKING
         if (productdetail.naturalHeight && productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
     
@@ -70,7 +71,10 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                     <img 
                         id={productdetail.id} 
                         src={productdetail.productImageUrl} 
-                        onError={(evt) => {evt.target.src='./img/not_found.png'; evt.target.style.height='30%';}} 
+                        onError={(evt) => {
+                            evt.target.src='./img/not_found.png'; 
+                            evt.target.style.height='30%';
+                        }} 
                         onLoad={(evt) => handleImageLoad(evt)}
                         alt={productdetail.productTitle}
                     />

@@ -22,12 +22,16 @@ function AppCss() {
                 src: url('./fonts/metropolis_ff/Metropolis-ExtraBold.otf') format('opentype');
             }
             body {
+                -webkit-box-sizing:border-box;
+                -moz-box-sizing:border-box;
+                box-sizing:border-box;
                 overflow-x: hidden;
                 margin: 0;
                 margin-block-end: 0 !important;
                 margin-block-start: 0 !important;
                 font-family: avenir;
                 color: #5c5b5b;
+                background-image: linear-gradient(to bottom, #fffedf, #fffedf 250px, #ffffff 450px);
             }
             h2 {
                 margin-block-end:0;
@@ -126,6 +130,10 @@ function AppCss() {
                 width: 90%;
                 height: 7px;
                 margin: auto;
+                background-color: transparent;
+            }
+            .divider img {
+                width: 100%;
             }
             .flex {
                 display: flex;
@@ -137,7 +145,11 @@ function AppCss() {
             }
             .flex-sb {
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
+            }
+            .flexSB {
+                display: flex;
+                justify-content: space-between;
             }
             .relative {
                 position: relative;
@@ -155,6 +167,26 @@ function AppCss() {
                 text-decoration: 'none'; 
                 border: 'none'; 
                 font-size: '14px';
+            }
+            .submit-btn {
+                width: 100%;
+                border-radius: 3px;
+                background-color: #ffe58a;
+                color: #000;
+                border: none;
+                padding: 10px 7px;
+                outline-color: #fbd960;
+                font-family: avenir;
+            }
+            .submit-btn:active {
+                outline-color: #fbd960;
+            }
+            .whiteWallPaper {
+                box-sizing: border-box;
+                width: 100%;
+                height: 100%;
+                background-color: #fffeee;
+                padding-top: 50px;
             }
         `}
         </style>

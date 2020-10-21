@@ -22,7 +22,7 @@ function FooterCss() {
             }
             .flexSB {
                 display: flex;
-                justify-content: center
+                justify-content: space-between;
             }
             .copy {
                 font-size: 12px;
