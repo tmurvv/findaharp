@@ -18,7 +18,7 @@ function Payment() {
     
     function changeRadio(e) {
         if (e.target.value==='paypal') {
-            alert('Paypal requires you to open another webpage. Select "leave" or "ok" when promted to leave site.')
+            alert('Paypal requires you to open another webpage. After clicking the PayPal button, select "leave" or "ok" when promted to leave site.')
         }
         if (e.target.checked===true) {setMethod(e.target.value);}
     }

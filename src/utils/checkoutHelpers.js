@@ -48,8 +48,9 @@ export function shipping(shippingcountry) {
     switch (shippingcountry) {
         case 'Canada':
             return SHIPPING_CALCULATIONS.Canada;
-        case 'United States':
-            return SHIPPING_CALCULATIONS.USA;
+        // included for testing
+        case 'Antarctica':
+            return 0.00;
         case 'select country':
             return 'select country'
         default:

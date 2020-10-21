@@ -1054,7 +1054,7 @@ export const FINDAHARP_PRODUCTS = [
             title: "Test Item", 
             artist: "",
             harptype: "",
-            price: '1.50',
+            price: '.50',
             newprice: '',
             image: "../../../img/factoryFloor.jpg", 
             description: "This item is included for testing the strore functionality. Please choose credit card payment and use the following card: '4242 4242 4242 4242 exp. 04/24 CVC 242 zip 42424",
