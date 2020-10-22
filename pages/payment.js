@@ -15,11 +15,7 @@ import { leaveSiteListener } from '../src/utils/checkoutHelpers';
 function Payment() {
     const { setStatus } = useContext(StatusContext);
     const [ method, setMethod ]  = useState('stripe');
-    
     function changeRadio(e) {
-        if (e.target.value==='paypal') {
-            alert('Paypal requires you to open another webpage. After clicking the PayPal button, select "leave" or "ok" when promted to leave site.')
-        }
         if (e.target.checked===true) {setMethod(e.target.value);}
     }
     useEffect(()=>{

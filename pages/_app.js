@@ -54,7 +54,7 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.32);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.31);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -85,20 +85,6 @@ function MyApp(props) {
           return e.returnValue = 'You have unsaved changes - are you sure you wish to close?';
         }   
       };
-    
-    // useEffect(() => {
-    //     if (cart&&getNumItems(cart)>0) {
-    //         window.addEventListener('beforeunload', function (e) { // from MDN
-                
-    //             // Cancel the event
-    //             e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-    //             // Chrome requires returnValue to be set
-    //             e.returnValue = '';
-                
-    //         });
-    //     }
-    // },[]);
-
     //get currency multiplier
     useEffect(() => {
         // const response = axios.get('https://free.currconv.com/api/v7/convert?q=USD_PHP&compact=ultra&apiKey=f99db690b27b4653acc2');
@@ -134,6 +120,26 @@ function MyApp(props) {
                         console.log('Something went wrong retrieving user with JWT cookie:', e.message)
                     }       
                 })();
+            }
+        }   
+    }, []);
+    // check for cart cookie in browser
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            let localCart;
+            try {
+                localCart = localStorage.getItem("fah-cart");
+            } catch(e) {
+                // if JWT not found, just continue
+            }
+            if (localCart) {
+                try {
+                    let localCartJson = JSON.parse(localCart);
+                    localCartJson = [...localCartJson]
+                    setCart(localCartJson);
+                } catch (e) {
+                    console.log('error parsing local cart') // needs logging
+                }
             }
         }   
     }, []);

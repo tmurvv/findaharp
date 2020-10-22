@@ -14,7 +14,7 @@ import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
 
-import { leaveSiteListener, setCartCookie } from '../../utils/checkoutHelpers'
+import { leaveSiteListener, setlocalCart } from '../../utils/checkoutHelpers'
 import {
     triggerLazy
 } from '../../utils/helpers';
@@ -51,7 +51,7 @@ const StoreProduct = (props) => {
         setOpenModal(true);
         props.handleopendetail(props.productdetail); 
     }
-    function updateCart(e) {
+    async function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
@@ -79,21 +79,15 @@ const StoreProduct = (props) => {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
-            // setCartCookie('cart', cartCopy, 14);
+            const tempCartJson = await JSON.stringify(cartCopy);
+            setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
         }
     }
     function handleAdd(e) {  
         e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
         e.target.addEventListener("animationend", (e)=>updateCart(e))
-        e.target.classList.add("storeflyToCart"); 
-        // window.addEventListener('beforeunload', (e)=>{
-        //     // Cancel the event
-        //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-        //     // Chrome requires returnValue to be set
-        //     e.returnValue =  '';
-        // }); 
-        window.addEventListener('beforeunload', (e)=> leaveSiteListener(e)); 
+        e.target.classList.add("storeflyToCart");
     }
     return (
         <div className="storeproduct">

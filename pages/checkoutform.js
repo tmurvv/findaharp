@@ -15,7 +15,7 @@ import {
 import { getTotal } from "../src/utils/checkoutHelpers";
 import IndexCss from "../src/styles/index.css";
 import CheckoutFormCss from "../src/styles/onlinestore/CheckoutForm.css";
-import { deleteCartCookie } from "../src/utils/checkoutHelpers";
+import { deletelocalCart } from "../src/utils/checkoutHelpers";
 
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);
@@ -90,7 +90,7 @@ export default function CheckoutForm() {
             setError(null);
             setProcessing(false);
             setSucceeded(true);
-            // deleteCartCookie("cart");
+            deletelocalCart("fah-cart");
             setCart([]);
         }
     };

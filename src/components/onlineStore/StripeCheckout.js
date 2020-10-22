@@ -20,7 +20,7 @@ import {
 import { 
     getTotal, 
     generateReceiptEmailHtml, 
-    deleteCartCookie 
+    deletelocalCart 
 } from "../../utils/checkoutHelpers";
 import IndexCss from "../../styles/index.css";
 import CheckoutFormCss from "../../styles/onlinestore/CheckoutForm.css";
@@ -126,25 +126,19 @@ export default function StripeCheckout(props) {
             // email receipt
             try {
                 await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
-                // deleteCartCookie('cart');
+                deletelocalCart('fah-cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
                 Router.push('/receipt')
             } catch (e) {
                 alert('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.')
-                // deleteCartCookie('cart');
+                deletelocalCart('fah-cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
                 Router.push('/receipt')
             }
-            window.removeEventListener('beforeunload', function (e) {
-                // Cancel the event
-                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-                // Chrome requires returnValue to be set
-                e.returnValue = '';
-            });
         }
     };
     function resetResults() {
