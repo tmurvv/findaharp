@@ -79,6 +79,7 @@ const StoreProduct = (props) => {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            setCartCookie('cart', JSON.stringify(cartCopy), 14)
             // setCartCookie('cart', cartCopy, 14);
             setCart(cartCopy);
         }

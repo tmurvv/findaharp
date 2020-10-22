@@ -137,6 +137,46 @@ function MyApp(props) {
             }
         }   
     }, []);
+    // check for cart cookie in browser
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            let cartCookie;
+            try {
+                cartCookie = document.cookie.split('; ').find(row => row.startsWith('cart')).split('=')[1];
+                console.log(cartCookie)
+            } catch(e) {
+                // if JWT not found, just continue
+                console.log('not found');
+            }
+            if (cartCookie) {
+                const thisItem = {
+                    id: "flk3j9gk", 
+                    store: 'test',
+                    // title: e.target.getAttribute('data-item-title'),
+                    // artist_first: e.target.getAttribute('data-item-artist_first'),
+                    // artist_last: e.target.getAttribute('data-item-artist_last'),
+                    // description: e.target.getAttribute('data-item-description'), 
+                    // price: e.target.getAttribute('data-item-price'), 
+                    // condition: e.target.getAttribute('data-item-condition'),
+                    // level: e.target.getAttribute('data-item-level'),
+                    // harptype: e.target.getAttribute('data-item-harptype'),
+                    // newprice: e.target.getAttribute('data-item-newprice'),
+                    // notes: e.target.getAttribute('data-item-notes'),
+                    // newused: e.target.getAttribute('data-item-newused'),
+                    // product_image: e.target.getAttribute('data-item-url'),
+                    // product_quantity: '1'    
+                }
+                console.log('yes');
+                console.log(typeof cartCookie);
+                let tempit = (JSON.parse(cartCookie));
+                tempit = [...tempit]
+                console.log(typeof tempit)
+                console.log(tempit.length)
+                tempit.map((item, idx)=>console.log(idx))
+                setCart(tempit);
+            }
+        }   
+    }, []);
 
     function handleNavOpen() {
         if (navOpen===undefined) {setNavOpen(true); return;};
