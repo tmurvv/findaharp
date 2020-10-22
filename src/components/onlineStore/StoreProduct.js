@@ -14,7 +14,7 @@ import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
 
-import { leaveSiteListener } from '../../utils/checkoutHelpers'
+import { leaveSiteListener, setCartCookie } from '../../utils/checkoutHelpers'
 import {
     triggerLazy
 } from '../../utils/helpers';
@@ -43,8 +43,7 @@ const StoreProduct = (props) => {
         resetResults();
     }
     function handleImageLoad(evt) {
-        if (evt.target.style.height !== '30%') evt.target.style.height="auto"; //BREAKING
-        // if (evt.target.style.height !== '30%') evt.target.style.height="100%"; //BREAKING
+        if (evt.target.style.height !== '30%') evt.target.style.height="auto";
         if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
     function handleOpenModal() {
@@ -80,6 +79,7 @@ const StoreProduct = (props) => {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            // setCartCookie('cart', cartCopy, 14);
             setCart(cartCopy);
         }
     }

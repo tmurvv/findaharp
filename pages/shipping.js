@@ -23,7 +23,8 @@ import {
     selectRegion,
     getTotal, 
     shipping,
-    tax
+    tax,
+    deleteCartCookie
 } from '../src/utils/checkoutHelpers';
 import { 
     getNumItems, getSubTotal
@@ -69,6 +70,7 @@ function Shipping() {
             // email order to Find a Harp for estimate
             try {
                 await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
+                // deleteCartCookie('cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
@@ -76,6 +78,7 @@ function Shipping() {
                 handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.");    
             } catch (e) {
                 handleClick('Error sending email to Find a Harp, please check your connection and try again.')
+                // deleteCartCookie('cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');

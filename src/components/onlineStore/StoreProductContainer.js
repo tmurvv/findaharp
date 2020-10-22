@@ -25,7 +25,6 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
 
     const size = getWindowSize();
     function handleOpenDetail(product) {
-        console.log('inhad', product)
         // dispatch({type:'detail', product});
         setDetailProduct(product);
         // setOpacity(true); 

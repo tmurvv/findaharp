@@ -43,7 +43,7 @@ function OrderSummary() {
                     :<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart))*currencyMultiplier)?(Number(getSubTotal(cart))*currencyMultiplier).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
                 <div className='flex-sb'>
-                    <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping:</p>
+                    <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM CANADA:</span></p>
                     <p style={{textAlign: 'right'}}>${cartSubtotals.shipping===-1?'International':!isNaN(Number(cartSubtotals.shipping))?(Number(cartSubtotals.shipping)).toFixed(2):'0.00'}{String(user.shippingcountry).toUpperCase()==="CANADA"||cartSubtotals.shipping===-1?'*':''}</p>
                 </div>
                 {String(user.shippingcountry).toUpperCase()==="CANADA"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''}

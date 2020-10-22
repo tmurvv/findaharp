@@ -17,8 +17,6 @@ const Store = (props) => {
     const [ harpName, setHarpName ] = useState(false);
     
     function handleClick(e) {
-        console.log(e.target.getAttribute('data-id'))
-        console.log(contactUsForm)
         setContactUsForm(true);
         setHarpName(e.target.getAttribute('data-id'))
     }

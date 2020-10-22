@@ -26,12 +26,9 @@ function GetPostalZip() {
         dispatchResultInfo({type: 'initial'});
     }
     function handleClick(msg) {
-        console.log('here', msg);
         dispatchResultInfo({type: 'OK'});
         const resultText = document.querySelector('#loadingLoginText');
-        console.log(resultText)
         resultText.innerText=msg;
-        console.log(resultText.innerText)
     }
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  

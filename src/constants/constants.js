@@ -48,7 +48,7 @@ export const STOREPARTNER_PLACEHOLDER = {
 
 export const SHIPPING_CALCULATIONS = {
     Canada: 20,
-    USA: 20,
+    // USA: 20,
     default: -1
 }
 export const PRODUCTAD_PLACEHOLDER = {
@@ -224,6 +224,27 @@ export const STORE_PARTNERS = [
         sellerWebsiteText: 'vixenharps.com',
         sellerEmail: 'info@vixenharps.com'
     },
+    {
+        id: uuid(),
+        sellerCountry: "USA",
+        sellerRegion: "Western Colorado",
+        productTitle: "Blevins Harps",
+        productPrice: "",
+        productLongDesc: `
+            <div>
+                <p>Welcome to <span>Blevins Harps</span> where our mission is to build quality instruments, one at a time, for our amazing customers. Because picking out a harp is personal, we endeavour to help each customer select just the right harp.</p>
+                <p class="" style="white-space:pre-wrap;">Blevins Harps began in 1992 when Dwight Blevins left an audio engineering career in radio and TV broadcasting to set up a workshop in Western Colorado. Dwight not only loved the sound, but also the visual artistic form of the harp. This can be seen in every one of Dwight’s designs. He was willing to explore different shapes and wood types to bring out the best possible sound and visual beauty of each harp.&nbsp;&nbsp;&nbsp;</p>
+                <p>Since Blevins Harp's humble beginning, over 3200 harps have been lovingly built and shipped worldwide.</p>
+                <p>Soon after Dwight’s retirement in 2018, we providentially found Dwight and purchased the Blevins brand. Dale and Jamin, a father and son team, previously worked as carpenters for many years and share a passion for woodworking. Laurie studied the harp at the University of Northern Colorado under Kathy Bundock Moore and our fourteen year old daughter also plays the harp. This was a great fit for our family and we so much enjoyed working with Dwight and Cindy in the transition.&nbsp;&nbsp;</p>
+                <p>We especially love the customer centered focus of Blevins Harps. and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p><p class="" style="white-space:pre-wrap;">All The Best, Dale, Laurie and Jamin Wright</p>
+            </div>`,
+        productMaker: "Blevins Harps",
+        productImageUrl: "/img/storePartners/blevins_harps_logo_brightness.png",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'https://blevinsharps.com',
+        sellerWebsiteText: 'blevinsharps.com',
+        sellerEmail: 'blevinsharps@gmail.com'
+    }
     // {
     //     id: 'theharpplace',
     //     sellerCountry: "USA",
@@ -244,20 +265,5 @@ export const STORE_PARTNERS = [
     //     onlinestoreUrl: 'storeentry/theharpplace',
     //     onlinestoreShipsTo: 'US and Canada',
     //     onlinestoreBlurb: 'Offering digital download music and accessories'
-    // },
-    // {
-    //     id: 'underConstruction',
-    //     sellerCountry: "Canada",
-    //     sellerRegion: "North America",
-    //     productTitle: "The Next Harp Store",
-    //     productLongDesc: "Look here for the next harp store to be added!",
-    //     productMaker: "under construction",
-    //     productImageUrl: "/img/harpLogo.png",
-    //     sellerWebsite: '',
-    //     sellerWebsiteText: '',
-    //     sellerEmail: '',
-    //     onlinestoreUrl: 'onlinestores/underconstruction',
-    //     onlinestoreShipsTo: "We'll find out soon!",
-    //     onlinestoreBlurb: "<p><strong>Our Harp 'Mini-Mall'</strong> is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose Login/Profile from the above menu to sign up.<p>"
     // }
 ];

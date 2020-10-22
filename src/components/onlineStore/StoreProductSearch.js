@@ -230,12 +230,10 @@ function StoreProductSearch(props) {
         props.handleClear();
     }
    function clearOneFilter(e) {
-       console.log(e.target.name)
-        let menuClick = e.target.name;
+       let menuClick = e.target.name;
         if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleChange("All Lever/Pedal/Ens", allState.level, allState.publicationtype);}
         if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange(allState.soloensemble, "All Levels", allState.publicationtype);}
         if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleChange(allState.soloensemble, allState.level, "All Publication Types");}
-        console.log('clear',e.target.name)
         menuClick==="soloensemble"?menuClick="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
@@ -247,11 +245,6 @@ function StoreProductSearch(props) {
     useEffect(() => {
         triggerLazy();
     },[]);
-    // console.log('search', FINDAHARP_PRODUCTS.length)
-    // const filteredProducts = getFilteredProducts(props.products, allState, user, currencyMultiplier);
-    const filteredProducts = getFilteredStoreProducts(FINDAHARP_PRODUCTS, allState, user, currencyMultiplier);
-    // const showing = allState.publicationtype!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";
-    const showing = "Not Yet Implemented"
     return (
         <>       
         <div className='storeproductSearchOuter'>

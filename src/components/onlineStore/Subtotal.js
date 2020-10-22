@@ -22,7 +22,6 @@ function Subtotal(props) {
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-    console.log('subtotal', currencyMultiplier)
     useEffect(() => {
         if (getNumItems(cart)>0&&user.shippingcountry) {
             setCartSubtotals({...cartSubtotals, 

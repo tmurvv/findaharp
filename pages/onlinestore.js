@@ -24,15 +24,12 @@ const OnlineStore = () => {
     },[]);
     // sort products
     useEffect(()=>{
-        console.log('abv', filteredProducts)
-        
         setFilteredProducts(filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
-        console.log('bel', filteredProducts)
     },[]);
     return (
         <>
             <div className='index' style={{height: 'fit-content', backgroundColor: '#fffeee', padding: '15px', paddingTop: '70px'}}>
-                <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November.' /> 
+                <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
                 <StoreProductContainer filteredproductscontainer={filteredProducts}/>
             </div>

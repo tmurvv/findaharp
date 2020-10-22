@@ -17,7 +17,11 @@ import {
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
-import { getTotal, generateReceiptEmailHtml } from "../../utils/checkoutHelpers";
+import { 
+    getTotal, 
+    generateReceiptEmailHtml, 
+    deleteCartCookie 
+} from "../../utils/checkoutHelpers";
 import IndexCss from "../../styles/index.css";
 import CheckoutFormCss from "../../styles/onlinestore/CheckoutForm.css";
 import ShippingCss from "../../styles/onlinestore/Shipping.css";
@@ -42,7 +46,7 @@ export default function StripeCheckout(props) {
             try {
                 // Create PaymentIntent as soon as the page loads
                 window
-                .fetch(`https://findaharp-api-testing.herokuapp.com/api/v1/create-stripe-payment-intent`, {
+                .fetch(`https://findaharp-api.herokuapp.com/api/v1/create-stripe-payment-intent`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -122,12 +126,14 @@ export default function StripeCheckout(props) {
             // email receipt
             try {
                 await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
+                // deleteCartCookie('cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
                 Router.push('/receipt')
             } catch (e) {
                 alert('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.')
+                // deleteCartCookie('cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');

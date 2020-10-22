@@ -258,7 +258,6 @@ function LoginSignup(props) {
         }
     }
     async function loginGuest(evt) {
-        evt.preventDefault();  
         if (needVerify) {
             // display loader
             const resultText = document.querySelector('#loadingLoginText');

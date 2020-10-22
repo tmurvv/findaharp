@@ -35,8 +35,7 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     // }
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
-        if (evt.target.style.height !== '30%') evt.target.style.height="auto"; //BREAKING
-        // if (evt.target.style.height !== '30%') evt.target.style.height="100%"; //BREAKING
+        if (evt.target.style.height !== '30%') evt.target.style.height="auto";
         if (productdetail.naturalHeight && productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
     

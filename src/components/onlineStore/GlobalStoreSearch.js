@@ -30,7 +30,6 @@ function GlobalStoreSearch(props) {
     const [ publicationSearch, setPublicationSearch ] = useState();
 
     function handleChange(soloensemble, level, publicationtype, reset) {
-        console.log('top', soloensemble, level, publicationtype, reset)
         // initialize variables
         let productListCopy = [...FINDAHARP_PRODUCTS];
         let levelProductList=[];
@@ -73,14 +72,11 @@ function GlobalStoreSearch(props) {
             soloensembleProductList=[...levelProductList];
         }
         finalProductList=[...soloensembleProductList];
-        console.log('soloens', finalProductList.length)
         // check publication
         if (publicationtype&&publicationtype.toUpperCase()!=="ALL PUBLICATION TYPES") {
-            console.log('inpub', soloensembleProductList.length)
             soloensembleProductList.map(product=> {
                 if (product.subcategories) {
                     product.subcategories.map(subcategory=>{
-                        console.log('imin',subcategory.toUpperCase())
                         if (subcategory.toUpperCase()===publicationtype.toUpperCase()) publicationProductList.push(product);
                     })
                 }
@@ -127,7 +123,6 @@ function GlobalStoreSearch(props) {
     }
     function handleClear(evt) {
         document.querySelector('#categoryfilter').value='All';
-        console.log('her',document.querySelector('#categoryfilter').value)
         document.querySelector('#searchInput').value='';
         
         setEnsembleSearch('All Lever/Pedal/Ens');

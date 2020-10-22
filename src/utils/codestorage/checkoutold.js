@@ -94,7 +94,6 @@ function Checkout(props) {
     //             quantity: Number(cartItem.product_quantity)
     //         }
     //         lineItems.push(item);
-    //         console.log(lineItems)
     //     })   
     // }
     // useEffect(

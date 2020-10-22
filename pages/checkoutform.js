@@ -15,6 +15,7 @@ import {
 import { getTotal } from "../src/utils/checkoutHelpers";
 import IndexCss from "../src/styles/index.css";
 import CheckoutFormCss from "../src/styles/onlinestore/CheckoutForm.css";
+import { deleteCartCookie } from "../src/utils/checkoutHelpers";
 
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);
@@ -31,7 +32,7 @@ export default function CheckoutForm() {
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
         window
-        .fetch(`https://findaharp-api-testing.herokuapp.com/api/v1/create-stripe-payment-intent`, {
+        .fetch(`https://findaharp-api.herokuapp.com/api/v1/create-stripe-payment-intent`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -70,7 +71,6 @@ export default function CheckoutForm() {
         setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     };
-    console.log(succeeded)
     const handleSubmit = async ev => {
         const resultText = document.querySelector('#loadingLoginText');
         ev.preventDefault();
@@ -90,6 +90,7 @@ export default function CheckoutForm() {
             setError(null);
             setProcessing(false);
             setSucceeded(true);
+            // deleteCartCookie("cart");
             setCart([]);
         }
     };

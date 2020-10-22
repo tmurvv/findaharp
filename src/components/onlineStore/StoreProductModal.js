@@ -88,6 +88,7 @@ function StoreProductModal(props) {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            // setCartCookie('cart', cartCopy, 14);
             setCart(cartCopy);
             alert('Item added to cart.')
             handleClick(e,props.product,false);

@@ -3,6 +3,16 @@ import { getSubTotal } from './storeHelpers';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
+
+export function setCartCookie(cookieName, cookieValue, expireDays) {
+    let expireDate = new Date();
+    expireDate=new Date(expireDate.setTime(expireDate.getTime() + (expireDays*24*60*60*1000)));
+    const expires = "expires="+ expireDate.toUTCString();
+    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+}
+export function deleteCartCookie(cookieName) {
+    document.cookie = cookieName + "=''";;
+}
 export function selectCountry(val, user, setUser) {
     if (val==='Canada' && user.currency!=="CAD") {
         // alert('Currency is being changed to Canadian.');
@@ -76,7 +86,6 @@ export function getTotal(cart, user, currencyMultiplier) {
     const addOneInternational = user.shippingcountry&&user.shippingcountry!=='United States'&&user.shippingcountry!=="Canada"?1:0;
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
-    console.log('gettot', subTotal )
     if (user.currency==="CAD") {
         return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
     } else {
@@ -98,8 +107,6 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMult
     const subTotal = user.currency==="USD"?getSubTotal(cart):getSubTotal(cart)*currencyMultiplier;
     const total = (Number(getTotal(cart, user, currencyMultiplier))).toFixed(2);
     const currencyText = user.currency==='USD'?'USD':"CAD";
-    console.log('gettot', subTotal, cartSubtotals.shipping, cartSubtotals.tax, total, currencyText);
-    console.log(cartSubtotals);
     // prepare today's date for formatting
     const months = [
         'January',
