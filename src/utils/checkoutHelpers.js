@@ -4,14 +4,12 @@ import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-countr
 import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
 
-export function setCartCookie(cookieName, cookieValue, expireDays) {
-    let expireDate = new Date();
-    expireDate=new Date(expireDate.setTime(expireDate.getTime() + (expireDays*24*60*60*1000)));
-    const expires = "expires="+ expireDate.toUTCString();
-    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+export function setlocalCart(localName, localValue) {
+    localStorage.getItem(localName);
+    localStorage.setItem(localName, localValue);
 }
-export function deleteCartCookie(cookieName) {
-    document.cookie = cookieName + "=''";;
+export function deletelocalCart(localName) {
+    localStorage.removeItem(localName);
 }
 export function selectCountry(val, user, setUser) {
     if (val==='Canada' && user.currency!=="CAD") {

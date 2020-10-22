@@ -15,6 +15,9 @@ import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/cons
 import {
     incQty
 } from '../../utils/storeHelpers';
+import {
+    setlocalCart
+} from '../../utils/checkoutHelpers';
 
 
 function StoreProductModal(props) {
@@ -60,7 +63,7 @@ function StoreProductModal(props) {
         props.handleCloseDetail(evt, product, openContact);
     }
 
-    function updateCart(e) {
+    async function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
@@ -88,7 +91,8 @@ function StoreProductModal(props) {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
-            // setCartCookie('cart', cartCopy, 14);
+            const tempCartJson = await JSON.stringify(cartCopy);
+            setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
             alert('Item added to cart.')
             handleClick(e,props.product,false);
@@ -97,20 +101,7 @@ function StoreProductModal(props) {
     function handleAdd(e) { 
         e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
         e.target.addEventListener("animationend", (e)=>updateCart(e))
-        e.target.classList.add("storeflyToCart"); 
-
-        window.removeEventListener('beforeunload', function (e) {
-            // Cancel the event
-            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-            // Chrome requires returnValue to be set
-            e.returnValue = '';
-        }); 
-        window.addEventListener('beforeunload', function (e) {
-            // Cancel the event
-            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-            // Chrome requires returnValue to be set
-            e.returnValue = '';
-        }); 
+        e.target.classList.add("storeflyToCart");
     }
     return (
         <>
