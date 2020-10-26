@@ -13,7 +13,6 @@ export function deletelocalCart(localName) {
 }
 export function selectCountry(val, user, setUser) {
     if (val==='Canada' && user.currency!=="CAD") {
-        // alert('Currency is being changed to Canadian.');
         setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: null});
     } else {
         setUser({...user, shippingcountry: val, currency: 'USD', shippingregion: null});

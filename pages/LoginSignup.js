@@ -509,7 +509,7 @@ function LoginSignup(props) {
                                 required={activeWindow.active==='login'}
                                 disabled={activeWindow.active==='signup'}
                             />
-                            {/* <div className="input-r" onClick={()=>alert('remember me under construction')}>
+                            {/* <div className="input-r">
                                 <div className="check-input">
                                     <input type="checkbox" id="remember-me-2" name="rememberme" value="" className="checkme"/>
                                     <label className="rememberme-blue" htmlFor="remember-me-2"></label>

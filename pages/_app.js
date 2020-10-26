@@ -54,7 +54,7 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.31);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.32);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     

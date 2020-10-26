@@ -38,6 +38,7 @@ function Shipping() {
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
+    const [ newRoute, setNewRoute ]  = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {
@@ -45,23 +46,23 @@ function Shipping() {
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
     }
-    function handleClick(msg) {
+    function handleClick(msg, routeChange) {
         const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText=msg;
+        routeChange==="false"?setNewRoute(false):setNewRoute(routeChange);
         dispatchResultInfo({type: 'OK'});
     }
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  
         resetResults();
-        // Router.push('/onlinestore');
+        newRoute&&Router.push(`${newRoute}`);
     }
-    
     async function handleSubmit(e) {
         e.preventDefault();
         // check cart
-        if (getNumItems(cart)===0) return handleClick("Cart is Empty");
+        if (getNumItems(cart)===0) return handleClick("Cart is Empty", "false");
         // check email
-        if (!user.shippingemail) return alert("Contact email required.");
+        if (!user.shippingemail) return handleClick("Contact email required.", "false");
         // for international shipping estimate
         if (cartSubtotals.shipping===-1) {
             document.querySelector('#spinner').style.display="block";
@@ -90,14 +91,14 @@ function Shipping() {
                     shippingemail: '',
                     shippingphone: '',
                     shippingaltphone: ''});
-                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.");
+                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.", "/onlinestore");
             } catch (e) {
-                handleClick('Error sending email to Find a Harp, please check your connection and try again.')
-                deletelocalCart('fah-cart');
-                setCart([]);
-                setCartSubtotals([]);
-                setStatus('completed');
-                setUser({...user, RESET_SHIPPING_INFO});
+                handleClick('Error sending email to Find a Harp, please check your connection and try again.', "false")
+                // deletelocalCart('fah-cart');
+                // setCart([]);
+                // setCartSubtotals([]);
+                // setStatus('completed');
+                // setUser({...user, RESET_SHIPPING_INFO});
             }
             document.querySelector('#spinner').style.display="none";
         } else {
@@ -177,7 +178,7 @@ function Shipping() {
     }
     function changeCountry(val) {
         if (val==='Canada') {
-            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
+            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
             if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
@@ -208,14 +209,22 @@ function Shipping() {
     },[]);
     return (
         <div className='whiteWallPaper'>
-            <img id='spinner' style={{display: 'none', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}src='/img/spinner.gif' alt='spinner' />
+            <img id='spinner' style={{
+                display: 'none', 
+                position: 'fixed', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%,-50%)'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
                 <Results 
                     resultInfo={resultInfo} 
                     loginGuest={loginGuest}
-                    resetResults={resetResults} 
-                    gotoRoute={'/'}
+                    resetResults={resetResults}
                 />
                 <div><Subtotal type="total"/></div>
                 <div style={{padding: '15px'}}>
@@ -653,7 +662,13 @@ function Shipping() {
                         className='submit-btn'
                         type='button'
                         style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
-                        onClick={()=>{if (user.shippingemail) {Router.push('/payment');}else{alert("Email required.");}}}
+                        onClick={()=>{
+                            if (user.shippingemail) {
+                                Router.push('/payment');
+                            } else {
+                                handleClick("Email required.", "false");
+                            }
+                        }}
                     >
                         Continue to Payment
                     </button>
