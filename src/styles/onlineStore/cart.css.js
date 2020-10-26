@@ -30,7 +30,7 @@ function CartCss() {
             }
         }
         .itemsContainer {
-            background-color: #fffeee;
+            background-color: transparent;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -53,7 +53,7 @@ function CartCss() {
             display: flex;
             overflow-y:auto;
             overflow-x:hidden;
-            background-color: #fffeee;
+            background-color: transparent;
         }      
         .subTotal {
             // flex: 2;

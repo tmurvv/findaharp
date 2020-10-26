@@ -42,7 +42,12 @@ export default function PublicationTypeMenu(props) {
                     onClick={handleClose} 
                     key={uuid()}
                     name='Digital Downloads'
-                >Digital Downloads</li>      
+                >Digital Downloads</li>    
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()}
+                    name='Pop'
+                >Pop</li> 
                 <li 
                     onClick={handleClose} 
                     key={uuid()}

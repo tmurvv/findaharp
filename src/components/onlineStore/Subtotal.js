@@ -29,7 +29,7 @@ function Subtotal(props) {
                 taxes: 0
             });
             if (user.shippingcountry==="Canada"&&user.shippingregion) {
-                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingregion)});
+                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingregion,currencyMultiplier)});
             }
         }
     }, []);

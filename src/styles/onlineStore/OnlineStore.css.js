@@ -26,7 +26,7 @@ function OnlineStoreCss() {
                 padding-top: 25px;
                 justify-content: space-around;
                 position: relative;
-                background-color: #fffeee;
+                background-color: transparent;
                 margin-top: -20px;
             }
             @media only screen and (max-width: 550px) {
@@ -36,7 +36,7 @@ function OnlineStoreCss() {
                 
             }
             .onlinestoreproduct-list-header {
-                background-color: '#fffeee';
+                background-color: 'transparent';
                 padding-top: 30px;
             }
             .onlinestoreproduct-list-header h3 {
@@ -45,7 +45,7 @@ function OnlineStoreCss() {
                 text-align: center;
             }
             .onlinestoreproduct {
-                background-color: #fffeee;
+                background-color: transparent;
             }
             .onlinestorelogo>img {
                 height: 100%;

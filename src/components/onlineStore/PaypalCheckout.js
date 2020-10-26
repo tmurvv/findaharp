@@ -4,11 +4,8 @@ import { CartContext } from '../../contexts/CartContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 
-import { getTotal } from "../../utils/checkoutHelpers";
+import { deletelocalCart, getTotal } from "../../utils/checkoutHelpers";
 
-function leaveSiteListener() {
-
-}
 function PaypalCheckout(props) {
     const { cart } = useContext(CartContext);
     const { user } = useContext(UserContext);
@@ -33,7 +30,10 @@ function PaypalCheckout(props) {
                     <input type="hidden" name="currency_code" value="CAD"/>
                     <input type="hidden" name="return" value="https://findaharp.com"/>
                     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"/>
-                    <button type="submit" style={{
+                    <button 
+                        type="submit"
+                        onClick={()=>deletelocalCart('fah-cart')}
+                        style={{
                         width:'fit-content',
                         marginTop:'25px auto',
                         backgroundColor:'#fff',

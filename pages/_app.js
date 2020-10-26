@@ -123,7 +123,7 @@ function MyApp(props) {
             }
         }   
     }, []);
-    // check for cart cookie in browser
+    // check for cart in local storage
     useEffect(() => {
         if (typeof window !== 'undefined') {
             let localCart;

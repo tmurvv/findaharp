@@ -3,6 +3,7 @@ import { useContext, useReducer } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
@@ -14,9 +15,12 @@ import {
     tax
 } from '../../utils/checkoutHelpers';
 
+import { LocalTaxi } from '@material-ui/icons';
+
 function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
+    const { currencyMultiplier } = useContext(CurrencyContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
@@ -34,20 +38,33 @@ function GetPostalZip() {
         // if (evt) evt.preventDefault();  
         resetResults();
     }
+    const handleStorePickup = () => {
+        if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
+            const confirmCurrency = window.confirm("Continue to view currency in Canadian dollars?\nSelect OK for Canadian dollars. Select cancel for US dollars.");
+            setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"CAD":"USD"})
+            setCartSubtotals({...cartSubtotals, shipping: null, taxes: null})
+        } else {
+            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Alberta", currencyMultiplier)})
+            setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
+        }
+    }
     const handleCountryChange = (val) => {
-        if (val==='Canada' && user.currency!=="CAD") {
-            handleClick('Currency is being changed to Canadian.')
+        if (val==='Canada') {
+            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
-            setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+            if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        
         switch(val) {
             case 'Canada':
                 setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
                 break;
             case 'United States':
                 setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.USA, taxes: 0});
+                break;
+            case 'Pickup':
+                setCartSubtotals({...cartSubtotals, shipping: 0});
+                setUser({...user, currency: "CAD"});
                 break;
             default:
                 setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.default, taxes: 0});
@@ -56,7 +73,7 @@ function GetPostalZip() {
     function changeRegion(val) {
         selectRegion(val, user, setUser); 
         if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val)});
+            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val,currencyMultiplier)});
         } else {
             setCartSubtotals({...cartSubtotals, taxes: 0});
         }
@@ -67,41 +84,43 @@ function GetPostalZip() {
                 resultInfo={resultInfo} 
                 loginGuest={loginGuest}
                 resetResults={resetResults} 
-                zipMsg='Currecy is being changed to Canadian.'
+                zipMsg='Currency is being changed to Canadian.'
             />
-            <div style={{display:'flex'}}>
+            <div style={{display:'flex', marginLeft: '-6px'}}>
                 <img style={{height:'33px', marginRight: '4px'}} src='img/store/fastTruck.png' alt='humorous fast truck' />
                 <h2>Where are we shipping to?</h2>
             </div>
-            <div style={{marginBottom: '15px'}}>
-                <p>It will help us estimate shipping costs.</p>
-            </div>
-            <div className='countryDrop'>
-                <label htmlFor="country" style={{display: 'block'}}>Country</label>
-                <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
-                <CountryDropdown
-                    style={{
-                        display: 'block',
-                        padding: '15px',
-                        border: '2px solid black',
-                        borderRadius: '3px',
-                        marginBottom: '20px',
-                        marginTop: '5px',
-                        backgroundColor: '#fff',
-                        minWidth: '260px',
-                        WebkitAppearance: 'none'
-                    }}
-                    value={user.shippingcountry}
-                    name='shippingcountry'
-                    onChange={(val)=> handleCountryChange(val)} 
-                />
-                <span style={{
-                    position: 'absolute',
-                    right: '8px',
-                    top: '20px',
-                    fontSize: '36px',
-                    pointerEvents: 'none'
-                }}>&#711;</span>
+            <div style={user.shippingcountry&&user.shippingcountry==="Pickup"?{display: 'none'}:{display: 'block'}}>
+                <div style={{marginBottom: '15px'}}>
+                    <p>It will help us estimate shipping costs.</p>
+                </div>
+                <div className='countryDrop'>
+                    <label htmlFor="country" style={{display: 'block'}}>Country</label>
+                    <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
+                    <CountryDropdown
+                        style={{
+                            display: 'block',
+                            padding: '15px',
+                            border: '2px solid black',
+                            borderRadius: '3px',
+                            marginBottom: '20px',
+                            marginTop: '5px',
+                            backgroundColor: '#fff',
+                            minWidth: '260px',
+                            WebkitAppearance: 'none'
+                        }}
+                        value={user.shippingcountry}
+                        name='shippingcountry'
+                        onChange={(val)=> handleCountryChange(val)} 
+                    />
+                    <span style={{
+                        position: 'absolute',
+                        right: '8px',
+                        top: '20px',
+                        fontSize: '36px',
+                        pointerEvents: 'none'
+                    }}>&#711;</span>
+                    </div>
                 </div>
             </div>
             {user.shippingcountry==='Canada'
@@ -122,7 +141,7 @@ function GetPostalZip() {
                     country={user.shippingcountry}
                     value={user.shippingregion}
                     name='shippingregion'
-                    defaultOptionLabel='Select Province to calculate taxes.'
+                    defaultOptionLabel='Select Province to calculate taxes'
                     onChange={(val) => {changeRegion(val)}} 
                 />
                 <span style={{
@@ -136,6 +155,19 @@ function GetPostalZip() {
             </div>
             </>
             :''}
+            <div>
+                <input 
+                    type='checkbox'
+                    name='shippingstorepickup'
+                    onChange={handleStorePickup}
+                    style={{marginLeft: '0'}}
+                    checked={user.shippingcountry&&user.shippingcountry==="Pickup"}
+                />
+                <label style={{marginLeft: '5px'}} name='newsletter'>
+                    Pickup at store<br />
+                    <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span>
+                </label>
+            </div>
             <ShippingCss />
         </div>
     )

@@ -9,7 +9,7 @@ function PaymentCss() {
             }
             .paymentshippingContainer {
                 box-sizing: border-box;
-                background-color: #fffeee;
+                background-color: transparent;
                 padding: 15px;
                 font-family: avenir;
                 width: 100%;

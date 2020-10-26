@@ -20,7 +20,7 @@ function ShippingCss() {
             }
             .shippingContainer {
                 box-sizing:border-box;
-                background-color: #fffeee;
+                background-color: transparent;
                 padding-top: 0;
                 font-family: avenir;
                 margin: auto;

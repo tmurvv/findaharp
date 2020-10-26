@@ -59,18 +59,20 @@ export function shipping(shippingcountry) {
         // included for testing
         case 'Antarctica':
             return 0.00;
+        case 'Pickup':
+            return 0.00;
         case 'select country':
             return 'select country'
         default:
             return SHIPPING_CALCULATIONS.default;
     }
 }
-export function tax(cart, shippingregion) {
+export function tax(cart, shippingregion, currencyMultiplier) {
     if (!shippingregion) return 0.00;
     try {
         const tax = new SalesTax(
             getProvCode(shippingregion),
-            getSubTotal(cart),
+            getSubTotal(cart)*currencyMultiplier,
             2
         );
         return tax.sum().toFixed(2);
@@ -85,7 +87,7 @@ export function getTotal(cart, user, currencyMultiplier) {
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
     if (user.currency==="CAD") {
-        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion))).toFixed(2);
+        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion,currencyMultiplier))).toFixed(2);
     } else {
         return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(addOneInternational)).toFixed(2);
     }

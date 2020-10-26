@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'react-uuid';
 
 export default function SoloEnsembleMenu(props) {
     const handleClose = (evt) => {
@@ -46,6 +47,11 @@ export default function SoloEnsembleMenu(props) {
                     // key={uuid()} 
                     name='Harp Ensemble'
                 >Harp Ensemble</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()}
+                    name='Pop'
+                >Pop</li> 
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 

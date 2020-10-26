@@ -28,7 +28,7 @@ const OnlineStore = () => {
     },[]);
     return (
         <>
-            <div className='index' style={{height: 'fit-content', backgroundColor: '#fffeee', padding: '15px', paddingTop: '70px'}}>
+            <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
                 <StoreProductContainer filteredproductscontainer={filteredProducts}/>

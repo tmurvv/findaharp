@@ -29,6 +29,7 @@ import {
 import { 
     getNumItems, getSubTotal
 } from '../src/utils/storeHelpers';
+import { ConfirmationNumber } from '@material-ui/icons';
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);
@@ -52,12 +53,15 @@ function Shipping() {
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  
         resetResults();
-        Router.push('/onlinestore');
+        // Router.push('/onlinestore');
     }
     
     async function handleSubmit(e) {
         e.preventDefault();
+        // check cart
         if (getNumItems(cart)===0) return handleClick("Cart is Empty");
+        // check email
+        if (!user.shippingemail) return alert("Contact email required.");
         // for international shipping estimate
         if (cartSubtotals.shipping===-1) {
             document.querySelector('#spinner').style.display="block";
@@ -70,15 +74,26 @@ function Shipping() {
             // email order to Find a Harp for estimate
             try {
                 await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
-                deletelocalCart('cart');
+                deletelocalCart('fah-cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
-                setUser({...user, RESET_SHIPPING_INFO});
-                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.");    
+                setUser({...user, 
+                    shippingfname: '',
+                    shippinglname: '',
+                    shippingaddress: '',
+                    shippingaddress2: '',
+                    shippingcity: '',
+                    shippingregion: '',
+                    shippingzip_postal: '',
+                    shippingcountry: '',
+                    shippingemail: '',
+                    shippingphone: '',
+                    shippingaltphone: ''});
+                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.");
             } catch (e) {
                 handleClick('Error sending email to Find a Harp, please check your connection and try again.')
-                deletelocalCart('cart');
+                deletelocalCart('fah-cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
@@ -88,7 +103,6 @@ function Shipping() {
         } else {
             Router.push('/payment');
         }
-        
     }
     const handleChange = (evt) => {
         switch (evt.target.name) {
@@ -109,7 +123,7 @@ function Shipping() {
                 setChange(true);
                 break
             case 'shippingaltphone': 
-                setUser({...user, shippingphone: evt.target.value});
+                setUser({...user, shippingaltphone: evt.target.value});
                 setChange(true);
                 break
             case 'shippingaddress': 
@@ -151,10 +165,24 @@ function Shipping() {
             default :
         }
     }
+    const handleStorePickup = () => {
+        if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
+            const confirmCurrency = window.confirm("Continue to view currency in Canadian dollars?\n Select OK for Canadian dollars. Select cancel for US dollars.");
+            setUser({...user, shippingcountry: '', shippingregion: '', currency: confirmCurrency?"CAD":"USD"})
+            setCartSubtotals({...cartSubtotals, shipping: '', taxes: ''})
+        } else {
+            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Alberta", currencyMultiplier)})
+            setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
+        }
+    }
     function changeCountry(val) {
-        if (val==='Canada') alert('Currency is being changed to Canadian.')
-        // if (val==='Canada') handleClick('Currency is being changed to Canadian', true);
-        selectCountry(val, user, setUser); 
+        if (val==='Canada') {
+            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
+            setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
+        } else {
+            if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+        }
+        // selectCountry(val, user, setUser); 
         setCartSubtotals({...cartSubtotals, 
             shipping: shipping(val), 
             taxes: 0
@@ -163,7 +191,7 @@ function Shipping() {
     function changeRegion(val) {
         selectRegion(val, user, setUser); 
         if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val)});
+            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val,currencyMultiplier)});
         } else {
             setCartSubtotals({...cartSubtotals, taxes: 0});
         }
@@ -190,35 +218,55 @@ function Shipping() {
                     gotoRoute={'/'}
                 />
                 <div><Subtotal type="total"/></div>
+                <div style={{padding: '15px'}}>
+                    <h3>Contact Information</h3>
+                    <div className="shippingemail" style={{marginBottom:'0px',}}>
+                        <label style={{display:'block'}} htmlFor="shippingemail">Email</label>
+                        <input 
+                            type="email" 
+                            name="shippingemail" 
+                            value={user.shippingemail} 
+                            onChange={handleChange} 
+                            id="shippingemail" 
+                            required 
+                        />
+                    </div>
+                    <div style={{fontStyle: 'italic', color: '#adadad', marginBottom: '60px'}}>
+                        Shipping updates and order receipt will be sent to this address.
+                    </div>
+                    <h3>Shipping Address</h3>
+                </div>
+                <div style={{display: 'flex', padding: '15px', marginTop:'-15px', marginBottom: '-15px'}}>
+                    <input 
+                        type='checkbox'
+                        name='shippingstorepickup'
+                        onChange={handleStorePickup}
+                        style={{marginLeft: '0', width: 'auto'}}
+                        checked={user.shippingcountry&&user.shippingcountry==='Pickup'}
+                    />
+                    <label style={{marginLeft: '5px'}} name='newsletter'>
+                        Pickup at store<br />
+                        <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span>
+                    </label>
+                </div>
                <form 
                     method="get" 
                     onSubmit={(e)=>handleSubmit(e)}
-                    style={{padding: '15px'}}
+                    style={user.shippingcountry==="Pickup"?{display: 'none',padding: '15px'}:{flex: '12',padding: '15px'}}
                 >
                     <div>
                     <table style={{borderSpacing: '10px', flex:'12'}}>
                         <tr>
                             <td colSpan='4'>
-                            <h3>Contact Information</h3>
-                                <div className="shippingemail" style={{marginBottom:'0px',}}>
-                                    <label style={{display:'block'}} htmlFor="shippingemail">Email</label>
-                                    <input 
-                                        type="email" 
-                                        name="shippingemail" 
-                                        value={user.shippingemail} 
-                                        onChange={handleChange} 
-                                        id="shippingemail" 
-                                        required 
-                                    />
-                                </div>
-                                <div style={{fontStyle: 'italic', color: '#adadad'}}>Shipping updates and order receipt will be sent to this address.</div>
+                            
                             </td>
                         </tr>
                     </table>
                     </div>
                     <div className='shippingContainer'>
                     <div style={{flex: '12'}}>
-                    <h3>Shipping Address</h3>
+                    
+                    
                     {screenWidth>1000
                     ?
                         <table style={{borderSpacing: '10px'}}>
@@ -290,8 +338,8 @@ function Shipping() {
                                     <label htmlFor="shippingaddress">Address</label>
                                     <input 
                                         type="text" 
-                                        name="shippingaddress" v
-                                        alue={user.shippingaddress} 
+                                        name="shippingaddress"
+                                        value={user.shippingaddress} 
                                         onChange={handleChange} 
                                         id="shippingaddress" 
                                         required 
@@ -328,7 +376,7 @@ function Shipping() {
                                 <td colSpan='1'>
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
-                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
+                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block', width: '100%'}}>
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
@@ -338,7 +386,7 @@ function Shipping() {
                                                 marginTop:'2.5px',
                                                 backgroundColor:'#fff',
                                                 WebkitAppearance: 'none',
-                                                width: '100%'
+                                                minWidth: '100%'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
@@ -377,13 +425,25 @@ function Shipping() {
                                 <td>
                                     <div>
                                         <label htmlFor="phone">Phone</label>
-                                        <input type="text" name="shippingphone" value={user.phone} onChange={handleChange} id="phone" />
+                                        <input 
+                                            type="text" 
+                                            name="shippingphone" 
+                                            value={user.shippingphone} 
+                                            onChange={handleChange} 
+                                            id="shippingphone" 
+                                        />
                                     </div> 
                                 </td>
                                 <td>
                                     <div>
                                         <label htmlFor="phone">Alternate Phone</label>
-                                        <input type="text" name="shippingaltphone" value={user.altphone} onChange={handleChange} id="altphone" />
+                                        <input 
+                                            type="text" 
+                                            name="shippingaltphone" 
+                                            value={user.shippingaltphone} 
+                                            onChange={handleChange} 
+                                            id="shippingaltphone" 
+                                        />
                                     </div> 
                                 </td>
                                 <td></td>
@@ -499,7 +559,7 @@ function Shipping() {
                                     <div style={{transform: 'translate(0, -8px)'}}>
                                         <label htmlFor="shippingRegion">State/Province</label>
                                         
-                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
+                                        <div className="selectContainer" style={{position: 'relative', display: 'inline-block', width: '100%'}}>
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
@@ -508,7 +568,8 @@ function Shipping() {
                                                 borderRadius:'3px',
                                                 marginTop:'2.5px',
                                                 backgroundColor:'#fff',
-                                                WebkitAppearance: 'none'
+                                                WebkitAppearance: 'none',
+                                                minWidth: '100%'
                                             }}
                                             country={user.shippingcountry}
                                             value={user.shippingregion}
@@ -546,13 +607,25 @@ function Shipping() {
                                 <td colSpan='2'>
                                     <div>
                                         <label htmlFor="phone">Phone</label>
-                                        <input type="text" name="shippingphone" value={user.phone} onChange={handleChange} id="phone" />
+                                        <input 
+                                            type="text" 
+                                            name="shippingphone"
+                                            value={user.shippingphone} 
+                                            onChange={handleChange} 
+                                            id="shippingphone" 
+                                        />
                                     </div> 
                                 </td>
                                 <td colSpan='2'>
                                     <div>
                                         <label htmlFor="phone">Alternate Phone</label>
-                                        <input type="text" name="shippingaltphone" value={user.altphone} onChange={handleChange} id="altphone" />
+                                        <input 
+                                            type="text" 
+                                            name="shippingaltphone" 
+                                            value={user.shippingaltphone} 
+                                            onChange={handleChange} 
+                                            id="shippingaltphone" 
+                                        />
                                     </div> 
                                 </td>
                             </tr>
@@ -573,6 +646,18 @@ function Shipping() {
                 </div>
                 </div>
                 </form>
+                <div style={user.shippingcountry==="Pickup"?{ flex: 4, backgroundColor: '#fff'}:{display: 'none',padding: '15px'}}>
+                    <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
+                    <OrderSummary />
+                    <button 
+                        className='submit-btn'
+                        type='button'
+                        style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
+                        onClick={()=>{if (user.shippingemail) {Router.push('/payment');}else{alert("Email required.");}}}
+                    >
+                        Continue to Payment
+                    </button>
+                </div>
                 <ShippingCss />
             </div>
         </div>
