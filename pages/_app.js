@@ -41,7 +41,7 @@ function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
         firstname: '', 
-        lastname: '', 
+        lastname: '',
         email: '', 
         distanceunit: 'mi', 
         _id: '',
