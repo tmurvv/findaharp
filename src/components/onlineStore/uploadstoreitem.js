@@ -1,11 +1,10 @@
-import Axios from 'axios';
 import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
 
-import { UserContext } from '../src/contexts/UserContext';
-import PageTitle from '../src/components/PageTitle';
-import IndexCss from '../src/styles/index.css';
+import { UserContext } from '../../contexts/UserContext';
+import PageTitle from '../PageTitle';
+import IndexCss from '../../styles/index.css';
 
 function uploadstoreitem() {
 
@@ -28,7 +27,7 @@ function uploadstoreitem() {
             "newused": "used",
             "newprice": "25.00"
         }
-        axios.post('http://localhost:3000/api/v1/uploadstoreitem', uploadItem, {
+        axios.post('https://findaharp-api-staging.heroku.app/api/v1/uploadstoreitem', uploadItem, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -42,13 +41,13 @@ function uploadstoreitem() {
         console.log('query', Router.query.message)
         if (Router.query&&Router.query.photoSuccess&&Router.query.photoSuccess==='no') {
             alert(`Item image did not upload correctly. Item has been uploaded without image.: ${Router.query.message}`);
-            Router.push('/uploadstoreitem');
+            Router.push('/?upload=yes');
         } else if (Router.query&&Router.query.success&&Router.query.success==='yes') {
             alert('Store item uploaded.');
-            Router.push('/uploadstoreitem');
+            Router.push('/?upload=yes');
         } else if (Router.query&&Router.query.success&&Router.query.success==='no') {
             alert(`Item did not upload correctly: ${Router.query.message}`);
-            Router.push('/uploadstoreitem');
+            Router.push('/?upload=yes');
         }
     },[]);
     const { user } = useContext(UserContext);
@@ -59,7 +58,7 @@ function uploadstoreitem() {
             <br />
             <PageTitle maintitle="Upload Store Item" subtitle='Currently set up for Simply Music' />             
             <div className='formContainer'>
-                <form action="https://findaharp-api-staging.herokuapp.com/api/v1/uploadstoreitem" method="post" encType="multipart/form-data">
+                <form action="https://findaharp-api.herokuapp.com/api/v1/uploadstoreitem" method="post" encType="multipart/form-data">
                 {/* <form action="https://findaharp-api.herokuapp.com/api/v1/uploadstoreitem" method="post" encType="multipart/form-data"> */}
                 {/* <form action="http://localhost:3000/api/v1/uploadstoreitem" method="post" encType="multipart/form-data"> */}
                     <div className='inputGroup'>
@@ -125,21 +124,21 @@ function uploadstoreitem() {
                     <div className='inputGroup' style={{textAlign: 'left', marginLeft: '175px'}}>
                         <h4>Sub-Categories (select all that apply)</h4>
                         <input type="checkbox" id="harpsolo" name="harpsolo" value="harsolo" />
-                        <label for="harpsolo"> Harp Solo</label><br />
+                        <label htmlFor="harpsolo"> Harp Solo</label><br />
                         <input type="checkbox" id="harpensemble" name="harpensemble" value="harpensemble" />
-                        <label for="harpensemble"> Harp Ensemble</label><br />
+                        <label htmlFor="harpensemble"> Harp Ensemble</label><br />
                         <input type="checkbox" id="pop" name="pop" value="pop" />
-                        <label for="pop"> Pop</label><br />
+                        <label htmlFor="pop"> Pop</label><br />
                         <input type="checkbox" id="classical" name="classical" value="classical" />
-                        <label for="classical">Classical</label><br />
+                        <label htmlFor="classical">Classical</label><br />
                         <input type="checkbox" id="fluteharp" name="fluteharp" value="flute/harp" />
-                        <label for="fluteharp">Flute/Harp</label><br />
+                        <label htmlFor="fluteharp">Flute/Harp</label><br />
                         <input type="checkbox" id="violinharp" name="violinharp" value="violin/harp" />
-                        <label for="violinharp">Violin/Harp</label><br />
+                        <label htmlFor="violinharp">Violin/Harp</label><br />
                         <input type="checkbox" id="voiceharp" name="voiceharp" value="voice/harp" />
-                        <label for="voiceharp">Voice/Harp</label><br />
+                        <label htmlFor="voiceharp">Voice/Harp</label><br />
                         <input type="checkbox" id="otherensemble" name="otherensemble" value="otherensemble" />
-                        <label for="otherensemble">Other Ensemble</label><br />
+                        <label htmlFor="otherensemble">Other Ensemble</label><br />
                     </div>
                     <div className='inputGroup'>
                         <label htmlFor="newused">New or Used?: </label>

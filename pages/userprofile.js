@@ -7,6 +7,7 @@ import uuid from 'react-uuid';
 // internal
 import PageTitle from '../src/components/PageTitle';
 import Results from '../src/components/Results';
+import SellerAgreement from '../src/components/SellerAgreement';
 import UserProfileCSS from '../src/styles/UserProfile.css';
 import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import { UserContext } from '../src/contexts/UserContext';
@@ -23,6 +24,7 @@ function UserProfile(props) {
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
+    const [openAgreement, setOpenAgreement] = useState(false);
     const [userEdit, setUserEdit] = useState({
         firstname: '',
         lastname: '',
@@ -144,7 +146,8 @@ function UserProfile(props) {
                 password: userEdit.editpassword,
                 userid: user._id,
                 newsletter: userEdit.newsletter,
-                currency: userEdit.currency?userEdit.currency:user.currency
+                currency: userEdit.currency?userEdit.currency:user.currency,
+                agreementStatus: userEdit.agreementStatus?userEdit.agreementStatus:user.agreementStatus
             };
             try {
                 //update user
@@ -270,6 +273,9 @@ function UserProfile(props) {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
     },[]);
+    if (openAgreement===true) {
+        return <SellerAgreement setOpenAgreement={setOpenAgreement}/>
+    } else { 
     return (
        <>
         <div className='updatePassword-edit-container'>
@@ -281,9 +287,13 @@ function UserProfile(props) {
             />
             <div style={{display: 'flex', justifyContent: 'center'}}>
                 {user&&user.role&&user.role==='seller'
-                    ?<div style={{width: '25%', margin: '0 50px 50px', boxShadow: '3px 3px 5px 0px grey'}}>
-                        <button className='submit-btn updatePassword-edit-title' onClick={()=>Router.push('/uploadlisting')}>Upload harp listing</button>
+                    ?<><div style={{width: '25%', margin: '0 50px 50px', boxShadow: '3px 3px 5px 0px grey'}}>
+                        {/* <button className='submit-btn updatePassword-edit-title' onClick={()=>Router.push('/?upload=yes')}>Upload store item</button> */}
+                        <button className='submit-btn updatePassword-edit-title' onClick={()=>alert('Please contact Tisha before uploading items. tisha@findaharp.com')}>Upload store item</button>
                     </div>
+                    <div style={{width: '25%', margin: '0 50px 50px', boxShadow: '3px 3px 5px 0px grey'}}>
+                        <button className='submit-btn updatePassword-edit-title' onClick={()=>setOpenAgreement(true)}>View/Sign Seller Agreements</button>
+                    </div></>
                     :''
                 }
                 <div style={{width: '25%', margin: '0 50px 50px', boxShadow: '3px 3px 5px 0px grey'}}>
@@ -493,6 +503,7 @@ function UserProfile(props) {
         </div>
         </>
     )
+                }
 }
 
 export default UserProfile;

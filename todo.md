@@ -4,6 +4,7 @@
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
+- record keeping on sellers needs to be improved
 - getTotal, subTotal figure out whether to return string or number, be consistent, toFixed returns string
 - figure out option to dangerinnerhtml in store partners
 - separate store partner program info into a component
@@ -22,6 +23,7 @@
 - logout button
 - make it so we don't have to log in again to upload a second harp listing (cookies?)
 - cancel button on upload harp listing
+- troubleshoot these steps: change password, check old password-should fail, choose try again, check new password, gets 'Network Error?'
 
 ### functionality
 - back to shopping goes to top of screen
@@ -32,6 +34,7 @@
 - tweak filtering so it prioritizes matching exactly all model fields, then goes to aliases and finds first match so last alias can just be maker name in case no model present
 - resend verification email is hacked
 - CRUD operations on upload listings
+
 
 ### AUTHENTICATION
 - add validate email on edit profile
