@@ -9,6 +9,7 @@ import PageTitle from '../../components/PageTitle';
 import Carousel from '../../components/onlineStore/Carousel';
 import Results from '../../components/Results';
 import { resultInfoReducer, activeWindowReducer } from '../../reducers/reducers';
+import { getFilteredProducts } from '../../utils/helpers';
 
 
 // initialize reducer object
@@ -20,7 +21,8 @@ const activeWindowInitialState = {
 function StoreItemHighlight(props) {
     // declare variables
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
-    
+    const [ featureList, setFeatureList ] = useState();
+    var items2 = [];
     function resetSignupForm() {
         
     }
@@ -70,33 +72,56 @@ function StoreItemHighlight(props) {
         // // go to main window
         // Router.push('/');
     }
+    const handleOpenModal = () => {
+        alert('under construction')
+    }
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
     },[]);
-    var items = [
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/PlayTheF.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/cds/QuietAfternoon.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/Pathfinder.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/OnlyTime.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/LittleHarpBook.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/Theseus.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/cds/IfBrahmsWrote.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/CanYouFeel.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/Carols.jpg', style: {width: '100%', height: 'auto'}}),
-        React.createElement('img', {id:'img1', src: '/img/store/findaharp/sheetmusic/Classiques2.jpg', style: {width: '100%', height: 'auto'}}) 
-    ]
+    // display cart??
+    useEffect(()=>{
+        // console.log('here', props.filteredProducts)
+        
+        // props.filteredProducts.splice(0,10).map(item=> {
+        //     const element = React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/RotaSonata.jpg', style: {width: '100%', height: 'auto'}})
+        //     items2.push(element);
+        // })
+        // console.log(items2);
+        // setFeatureList(items2);
+    },[]);
+    
+    const topFeaturedList = [];
+    props.filteredProducts.splice(0,10).map(item=> {
+        const handleClick = (product) => {
+            alert('click', product.id);
+        }
+        const element = React.createElement('img', {product: item, id: `${item.id}`, src: `${item.image}`, onClick: handleClick, style: {width: '100%', height: 'auto'}})
+        topFeaturedList.push(element);
+    });
     return ( 
         <>
-
-        <Carousel items={items} active={0}/>
-        
+            <Carousel products={props.filteredProducts.splice(0,10)} items={topFeaturedList} active={0}/>
         </>
     )
 }
 
 
 export default StoreItemHighlight;
+
+// var items = [
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/PlayTheF.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/PlayTheF.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/cds/QuietAfternoon.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/Pathfinder.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/OnlyTime.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/LittleHarpBook.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/Theseus.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/cds/IfBrahmsWrote.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/CanYouFeel.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/Carols.jpg', style: {width: '100%', height: 'auto'}}),
+//     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/Classiques2.jpg', style: {width: '100%', height: 'auto'}}) 
+// ]
 
 
 // {/* <div className='login-signup-container'>

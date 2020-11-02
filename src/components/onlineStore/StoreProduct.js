@@ -2,6 +2,7 @@ import { useContext, useState, useReducer } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
 import LazyLoad from 'react-lazyload';
+import parseNum from 'parse-num';
 import {
     incQty
 } from '../../utils/storeHelpers';
@@ -68,11 +69,11 @@ const StoreProduct = (props) => {
                 artist_first: e.target.getAttribute('data-item-artist_first'),
                 artist_last: e.target.getAttribute('data-item-artist_last'),
                 description: e.target.getAttribute('data-item-description'), 
-                price: e.target.getAttribute('data-item-price'), 
+                price: parseNum(e.target.getAttribute('data-item-price')), 
                 condition: e.target.getAttribute('data-item-condition'),
                 level: e.target.getAttribute('data-item-level'),
                 harptype: e.target.getAttribute('data-item-harptype'),
-                newprice: e.target.getAttribute('data-item-newprice'),
+                newprice: parseNum(e.target.getAttribute('data-item-newprice')),
                 notes: e.target.getAttribute('data-item-notes'),
                 newused: e.target.getAttribute('data-item-newused'),
                 product_image: e.target.getAttribute('data-item-url'),
@@ -139,8 +140,8 @@ const StoreProduct = (props) => {
                 <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
                 <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
-                <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                :<div className="storeproduct__price">${(Number(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
+                :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                     <div style={{width:'fit-content'}}>Ships From: Canada</div>

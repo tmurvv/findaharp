@@ -3,11 +3,11 @@ import { useEffect, useContext, useState } from 'react';
 
 // internal
 import PaymentCss from '../src/styles/onlinestore/Payment.css';
-import StatusIndicator from '../src/components/onlinestore/StatusIndicator';
+import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
 import Subtotal from '../src/components/onlineStore/Subtotal';
-import StripeCheckout from '../src/components/onlinestore/StripeCheckout';
-import PaypalCheckout from '../src/components/onlinestore/PaypalCheckout';
-import OrderSummary from '../src/components/onlinestore/OrderSummary';
+import StripeCheckout from '../src/components/onlineStore/StripeCheckout';
+import PaypalCheckout from '../src/components/onlineStore/PaypalCheckout';
+import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import { StatusContext } from '../src/contexts/StatusContext';
 import { leaveSiteListener } from '../src/utils/checkoutHelpers';
 

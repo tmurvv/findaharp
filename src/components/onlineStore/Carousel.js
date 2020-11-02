@@ -1,25 +1,38 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-
+import StoreProductModal from './StoreProductModal';
 
 class Carousel extends React.Component {
     
+    // const [ detailProduct, setDetailProduct ] = useState([]);
     constructor(props) {
         super(props)
         this.state = {
             items: this.props.items,
             active: this.props.active,
-            direction: ''
+            direction: '',
+            products: this.props.products,
+            detailProduct: []
         }
-        this.rightClick = this.moveRight.bind(this)
-        this.leftClick = this.moveLeft.bind(this)
+        this.rightClick = this.moveRight.bind(this);
+        this.leftClick = this.moveLeft.bind(this);
+        this.handleCloseDetail = this.handleCloseDetail.bind(this);
     }
-
+    handleCloseDetail() {
+        // dispatch({type: 'initial'})
+        // setOpacity(false);
+        // if (openContact) handleOpenContact(evt, product);
+        this.setState({
+            detailProduct: []
+        })
+    }
     generateItems() {
         var items = []
         var level
         console.log(this.state.active)
         for (var i = this.state.active - 2; i < this.state.active + 3; i++) {
+            // get fah item id here
+
             var index = i
             if (i < 0) {
                 index = this.state.items.length + i
@@ -27,7 +40,14 @@ class Carousel extends React.Component {
                 index = i % this.state.items.length
             }
             level = this.state.active - i
-            items.push(<Item key={index} id={this.state.items[index]} level={level} />)
+            items.push(<Item 
+                            key={index} 
+                            id={this.state.items[index]} 
+                            level={level} 
+                            onClick={()=>{this.state.items[index].handleclick(this.state.products[index]); setState({detailProduct: this.state.products[index]})}}
+                        />
+            )
+            console.log(this.state.products[index])
         }
         return items
     }
@@ -49,6 +69,7 @@ class Carousel extends React.Component {
         })
     }
     
+    
     render() {
         return(
             <>
@@ -61,24 +82,34 @@ class Carousel extends React.Component {
                     <div className="arrow arrow-right" onClick={this.rightClick}>&#10095;</div>
                     {/* <div className="arrow arrow-right" onClick={this.rightClick}><i className="fi-arrow-right"></i></div> */}
                 </div>
-
+                {this.state.detailProduct&&this.state.detailProduct.title?
+                
+                <StoreProductModal 
+                    product={this.state.detailProduct} 
+                    handleCloseDetail={this.handleCloseDetail} 
+                    // handleOpenContact={handleOpenContact} 
+                    // handleCloseContact={handleCloseContact}
+                />
+                :''}
                 <style>{`
                 
 
                 
                 #carousel {
                     height: 200px;
-                    width: 810px;
+                    width: 100%;
                     margin: 70px auto;
-                    display: flex;
-                    justify-items: space-between;
+                    // display: flex;
+                    // justify-content: space-evenly;
                     position: relative;
                 }
 
                 #carousel span {
                     // display: flex;
-                    // justify-items: space-between;
+                    // justify-content: space-evenly;
                     position: relative;
+                    width: 80%;
+                    margin-left: 15%;
                 }
                 
                 .arrow {
@@ -98,7 +129,10 @@ class Carousel extends React.Component {
                 }
                 
                 .arrow-right {
-                    left: 780px;
+                    right: 10%;
+                }
+                .arrow-left {
+                    left: 10%;
                 }
                 
                 .item {

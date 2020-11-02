@@ -21,12 +21,12 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
-import CartButton from '../src/components/onlinestore/CartButton';
+import CartButton from '../src/components/onlineStore/CartButton';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
 import SellerAgreement from '../src/components/selleragreement';
-import UploadStoreItem from '../src/components/onlinestore/uploadstoreitem';
+import UploadStoreItem from '../src/components/onlineStore/uploadstoreitem';
 import { parseJwt } from '../src/utils/helpers';
 import { getNumItems } from '../src/utils/storeHelpers'
 
@@ -57,7 +57,7 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.32);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.33);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     

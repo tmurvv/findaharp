@@ -5,9 +5,9 @@ import Router from 'next/router';
 import axios from 'axios';
 // internal
 import ShippingCss from '../src/styles/onlinestore/Shipping.css';
-import StatusIndicator from '../src/components/onlinestore/StatusIndicator';
-import Subtotal from '../src/components/onlinestore/Subtotal';
-import OrderSummary from '../src/components/onlinestore/OrderSummary';
+import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
+import Subtotal from '../src/components/onlineStore/Subtotal';
+import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import { CartContext } from '../src/contexts/CartContext';

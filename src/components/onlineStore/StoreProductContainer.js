@@ -63,19 +63,14 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                         handleopencontact={handleOpenContact} 
                         handleclosecontact={handleCloseContact}
                         clientlat={clientlat} 
-                        clientlong={clientlong}
+                        clientlong={clientlong} 
                         />
                     )}
                 </div>
                 {detailProduct&&detailProduct.title?
-                
                     <StoreProductModal 
                         product={detailProduct} 
-                        handleCloseDetail={handleCloseDetail} 
-                        handleOpenContact={handleOpenContact} 
-                        handleCloseContact={handleCloseContact}
-                        clientlat={clientlat}
-                        clientlong={clientlong}
+                        handleCloseDetail={handleCloseDetail}
                 />:''
                 }
                 {/* {state.openContact
