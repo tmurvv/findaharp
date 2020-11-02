@@ -34,7 +34,6 @@ function OrderSummary() {
             }
         }
     }, []);
-    console.log(user.shippingcountry)
     return (
         <>
              <div className="orderSummary" style={{padding: '15px', borderBottom: '1px solid #868686'}}>

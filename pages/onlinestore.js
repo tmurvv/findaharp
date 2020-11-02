@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { FINDAHARP_PRODUCTS } from '../src/constants/FindaharpProducts'
 import StoreProduct from '../src/components/onlinestore/StoreProduct';
 import StoreProductContainer from '../src/components/onlinestore/StoreProductContainer';
+import StoreItemHighlight from '../src/components/onlinestore/StoreItemHighlight';
 import PageTitle from '../src/components/PageTitle';
 import IndexCss from '../src/styles/index.css';
 import OnlineStoreCss from '../src/styles/onlinestore/onlinestores/FindaharpOnlineStore.css';
@@ -31,7 +32,8 @@ const OnlineStore = () => {
             <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
-                <StoreProductContainer filteredproductscontainer={filteredProducts}/>
+                <StoreItemHighlight filteredproductscontainer={filteredProducts}/>
+                {/* <StoreProductContainer filteredproductscontainer={filteredProducts}/> */}
             </div>
             <IndexCss />
             <OnlineStoreCss />

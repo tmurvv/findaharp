@@ -10,7 +10,6 @@ function uploadstoreitem() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('submit', e.target)
         const uploadItem  = {
             "category": "music",
             "title": "Little Harp Book",
@@ -27,7 +26,8 @@ function uploadstoreitem() {
             "newused": "used",
             "newprice": "25.00"
         }
-        axios.post('https://findaharp-api-staging.heroku.app/api/v1/uploadstoreitem', uploadItem, {
+        axios.post('https://findaharp-api.heroku.app/api/v1/uploadstoreitem', uploadItem, {
+        // axios.post('http://localhost:3000/api/v1/uploadstoreitem', uploadItem, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -38,7 +38,6 @@ function uploadstoreitem() {
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
     },[]);
     useEffect(()=>{
-        console.log('query', Router.query.message)
         if (Router.query&&Router.query.photoSuccess&&Router.query.photoSuccess==='no') {
             alert(`Item image did not upload correctly. Item has been uploaded without image.: ${Router.query.message}`);
             Router.push('/?upload=yes');

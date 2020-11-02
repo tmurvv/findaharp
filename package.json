@@ -29,6 +29,7 @@
     "openrouteservice-js": "^0.1.9",
     "parse-num": "^1.0.0",
     "react": "^16.13.1",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-country-region-selector": "^3.0.0",
     "react-dom": "^16.13.1",
     "react-lazyload": "^2.6.9",
