@@ -1,3 +1,5 @@
+
+import parseNum from 'parse-num';
 import { useContext } from 'react';
 import CartItemCss from '../../styles/onlineStore/CartItem.css';
 import { CartContext } from '../../contexts/CartContext';
@@ -24,8 +26,8 @@ function CartItem(props) {
                 <div className='description'>
                     <p><span style={{fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span> - {item.description}</p>
                 </div>
-                {user.currency==="USD"?<div className='price'>${Number(item.price).toFixed(2)} each</div>
-                :<div className='price'>${(Number(item.price)*currencyMultiplier).toFixed(2)} each</div>}
+                {user.currency==="USD"?<div className='price'>${parseNum(item.price).toFixed(2)} each</div>
+                :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)} each</div>}
                 <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 
                         onClick={() => deleteItem(cart, setCart, item.id)} 
@@ -52,8 +54,8 @@ function CartItem(props) {
                 </div>
                 <div style={{fontWeight: 'bold'}} className='flex-sb'>
                     <p>Product Total:</p>
-                    {user.currency==="USD"?<p>${(item.price*item.product_quantity).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
-                    :<p>${(item.price*item.product_quantity*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
+                    {user.currency==="USD"?<p>${(parseNum(item.price)*item.product_quantity).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
+                    :<p>${(parseNum(item.price)*item.product_quantity*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
             </div>
             <CartItemCss />

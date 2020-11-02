@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
-// import parseNum from 'parse-num';
+import parseNum from 'parse-num';
 // // internal
 import StoreProductModalCSS from '../../styles/onlineStore/StoreProductModal.css';
 // import { removeDashOE, getGeoDistance } from '../utils/helpers';
@@ -129,15 +129,15 @@ function StoreProductModal(props) {
                             <span>Condition (1-10):</span> {condition}<br/>
                             <span>Notes:</span> 
                             {user&&user.currency==="USD"?    
-                            ` ${newprice?`Find new from: $${Number(newprice).toFixed(2)} / `:''}${notes}`
-                            :` ${newprice?`Find new from: $${Number(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
+                            ` ${newprice?`Find new from: $${parseNum(newprice).toFixed(2)} / `:''}${notes}`
+                            :` ${newprice?`Find new from: $${parseNum(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
                             }  
                         </div>
                     </div>
                     <div>
                         {user&&user.currency==="USD"?    
-                        <div className="storeproduct__price">${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                        :<div className="storeproduct__price">${(Number(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                        <div className="storeproduct__price">${parseNum(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
+                        :<div className="storeproduct__price">${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                             <div style={{width:'fit-content'}}>Ships From: Canada</div>

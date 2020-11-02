@@ -1,3 +1,4 @@
+import parseNum from 'parse-num';
 import { setlocalCart } from "./checkoutHelpers";
 
 export function getNumItems(cart) {
@@ -7,7 +8,7 @@ export function getNumItems(cart) {
 }
 export function getSubTotal(cart) {
     let amt = 0
-    cart.map(item => amt=amt+parseInt(item.product_quantity)*parseFloat(item.price));
+    cart.map(item => amt=amt+parseInt(item.product_quantity)*parseFloat(parseNum(item.price)));
     return amt;
 }
 export async function decQty(cart, setCart, prodId) {
