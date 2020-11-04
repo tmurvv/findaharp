@@ -51,7 +51,8 @@ function SellerAgreement(props) {
                     setCount(1);
                     handleClick();
                 } else {
-                    resetResults()
+                    setCount(0);
+                    resetResults();
                     dispatchResultInfo({type: 'tryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Error signing agreement. Please check your network connection and let Find a Harp know if problem persists.'}`
                 }
