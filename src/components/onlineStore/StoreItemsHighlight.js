@@ -7,6 +7,8 @@ import axios from 'axios';
 import LoginSignupCSS from '../../styles/LoginSignup.css';
 import PageTitle from '../../components/PageTitle';
 import Carousel from '../../components/onlineStore/Carousel';
+
+import StoreProductModal from './StoreProductModal';
 import Results from '../../components/Results';
 import { resultInfoReducer, activeWindowReducer } from '../../reducers/reducers';
 import { getFilteredProducts } from '../../utils/helpers';
@@ -18,29 +20,22 @@ const activeWindowInitialState = {
     loginClasses: 'login-signup l-attop',
     signupClasses: 'login-signup s-atbottom'
 }
-function StoreItemHighlight(props) {
+function StoreItemsHighlight(props) {
     // declare variables
     const [activeWindow, dispatchActiveWindow] = useReducer(activeWindowReducer, activeWindowInitialState);
     const [ featureList, setFeatureList ] = useState();
+    const [ detailProduct, setDetailProduct ] = useState();
     var items2 = [];
-    function resetSignupForm() {
-        
+    function handleCloseDetail() {
+        // dispatch({type: 'initial'})
+        // setOpacity(false);
+        // if (openContact) handleOpenContact(evt, product);
+        setDetailProduct(null);
     }
     function resetResults() {
         // if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
         // document.querySelector('#loadingLoginText').innerText='';
         // dispatchResultInfo({type: 'initial'});
-    }
-    function resetLoginForm() { 
-        
-    }
-    function handleSignupClick(evt) {
-        resetLoginForm();
-        dispatchActiveWindow({type: 'signup'});
-    }
-    function handleLoginClick(evt) {
-        resetSignupForm();
-        dispatchActiveWindow({type: 'login'});
     }
     
     async function loginGuest(evt) {
@@ -72,9 +67,15 @@ function StoreItemHighlight(props) {
         // // go to main window
         // Router.push('/');
     }
-    const handleOpenModal = () => {
-        alert('under construction')
+    const handlePhotoClick = (e) => {
+        console.log('under construction', e.target.id)
+        if(e.target&&e.target.id) {
+            const handleDetail = props.filteredProducts.find(product=>product.id===e.target.id);
+            setDetailProduct(handleDetail)
+        }
+        
     }
+    
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
@@ -92,22 +93,31 @@ function StoreItemHighlight(props) {
     },[]);
     
     const topFeaturedList = [];
-    props.filteredProducts.splice(0,10).map(item=> {
-        const handleClick = (product) => {
-            alert('click', product.id);
-        }
-        const element = React.createElement('img', {product: item, id: `${item.id}`, src: `${item.image}`, onClick: handleClick, style: {width: '100%', height: 'auto'}})
+    props.filteredProducts.map(item=> {
+        const element = React.createElement('img', {
+                                                        id: `${item.id}`, 
+                                                        onClick: handlePhotoClick, 
+                                                        src: `${item.image}`, 
+                                                        style: {width: '100%', height: 'auto'}
+                                                    })
         topFeaturedList.push(element);
     });
     return ( 
         <>
-            <Carousel products={props.filteredProducts.splice(0,10)} items={topFeaturedList} active={0}/>
+            <Carousel products={props.filteredProducts} items={topFeaturedList} active={0}/>
+            {detailProduct?<StoreProductModal 
+                    product={detailProduct} 
+                    handleCloseDetail={handleCloseDetail} 
+                    // handleOpenContact={handleOpenContact} 
+                    // handleCloseContact={handleCloseContact}
+                />
+            :''}
         </>
     )
 }
 
 
-export default StoreItemHighlight;
+export default StoreItemsHighlight;
 
 // var items = [
 //     React.createElement('img', {id:'img1', onClick: {handleOpenModal}, src: '/img/store/findaharp/sheetmusic/PlayTheF.jpg', style: {width: '100%', height: 'auto'}}),

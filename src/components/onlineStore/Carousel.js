@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import StoreProductModal from './StoreProductModal';
 
 class Carousel extends React.Component {
     
@@ -12,24 +11,17 @@ class Carousel extends React.Component {
             active: this.props.active,
             direction: '',
             products: this.props.products,
-            detailProduct: []
+            detailProduct: [],
+            heading: this.props.heading
         }
         this.rightClick = this.moveRight.bind(this);
         this.leftClick = this.moveLeft.bind(this);
-        this.handleCloseDetail = this.handleCloseDetail.bind(this);
     }
-    handleCloseDetail() {
-        // dispatch({type: 'initial'})
-        // setOpacity(false);
-        // if (openContact) handleOpenContact(evt, product);
-        this.setState({
-            detailProduct: []
-        })
-    }
-    generateItems() {
+    
+    generateItems(handlePhotoClick) {
         var items = []
         var level
-        console.log(this.state.active)
+        
         for (var i = this.state.active - 2; i < this.state.active + 3; i++) {
             // get fah item id here
 
@@ -43,15 +35,20 @@ class Carousel extends React.Component {
             items.push(<Item 
                             key={index} 
                             id={this.state.items[index]} 
+                            product={this.state.products[index]}
                             level={level} 
-                            onClick={()=>{this.state.items[index].handleclick(this.state.products[index]); setState({detailProduct: this.state.products[index]})}}
+                            // onClick={()=>{this.state.items[index].handleclick(this.state.products[index]); setState({detailProduct: this.state.products[index]})}}
                         />
             )
-            console.log(this.state.products[index])
         }
         return items
     }
-    
+    handlePhotoClick() {
+        alert('imin')
+        this.setState({
+            detailProduct: e.target.name
+        })
+    }
     moveLeft() {
         var newActive = this.state.active
         newActive--
@@ -72,12 +69,12 @@ class Carousel extends React.Component {
     
     render() {
         return(
-            <>
+            <>    
                 <div id="carousel" className="noselect">
                     <div className="arrow arrow-left" onClick={this.leftClick}>&#10094;</div>
                     <ReactCSSTransitionGroup 
                         transitionName={this.state.direction}>
-                        {this.generateItems()}
+                        {this.generateItems(this.handlePhotoClick)}
                     </ReactCSSTransitionGroup>
                     <div className="arrow arrow-right" onClick={this.rightClick}>&#10095;</div>
                     {/* <div className="arrow arrow-right" onClick={this.rightClick}><i className="fi-arrow-right"></i></div> */}

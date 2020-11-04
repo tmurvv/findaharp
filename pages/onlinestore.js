@@ -9,7 +9,7 @@ import Router from 'next/router';
 import { FINDAHARP_PRODUCTS } from '../src/constants/FindaharpProducts'
 import StoreProduct from '../src/components/onlineStore/StoreProduct';
 import StoreProductContainer from '../src/components/onlineStore/StoreProductContainer';
-import StoreItemHighlight from '../src/components/onlineStore/StoreItemHighlight';
+import StoreItemsHighlight from '../src/components/onlineStore/StoreItemsHighlight';
 import PageTitle from '../src/components/PageTitle';
 import IndexCss from '../src/styles/index.css';
 import OnlineStoreCss from '../src/styles/onlinestore/onlinestores/FindaharpOnlineStore.css';
@@ -19,7 +19,10 @@ import StoreProductContainerCss from '../src/styles/onlinestore/StoreProductCont
 import { UserContext } from '../src/contexts/UserContext';
 
 const OnlineStore = (props) => {
-    const [ filteredProducts, setFilteredProducts ] = useState(FINDAHARP_PRODUCTS);
+    const [ filteredProducts, setFilteredProducts ] = useState(props.filteredProducts);
+    const [ featuredProducts, setFeaturedProducts ] = useState(props.featuredProducts);
+    const [ strings, setStrings ] = useState(props.strings);
+    const [ music, setMusic ] = useState(props.music);
     const { user } = useContext(UserContext);
     // display cart
     useEffect(()=>{
@@ -27,16 +30,23 @@ const OnlineStore = (props) => {
     },[]);
     // sort products
     useEffect(()=>{
-        setFilteredProducts(filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
+        setFilteredProducts(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
     },[]);
     return (
         <>
             <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
-                {/* <StoreItemHighlight filteredProducts={filteredProducts}/> */}
+                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3>
+                <StoreItemsHighlight filteredProducts={featuredProducts}/>
+                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3>
+                <StoreItemsHighlight filteredProducts={strings} heading={'STRINGS'}/>
+                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>MUSIC</h3>
+                    
+                <StoreItemsHighlight filteredProducts={music} heading={'MUSIC'}/> */}
+                
                 {/* <StoreProductContainer filteredproductscontainer={filteredProducts}/> */}
-                <StoreProductContainer filteredproductscontainer={props.filteredProducts}/>
+                {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
             </div>
             <IndexCss />
             <OnlineStoreCss />
@@ -50,17 +60,21 @@ OnlineStore.getInitialProps = async (props) => {
     //LOCAL DATA Populate variables
     // const products = testData;
     // const makesModels = testMakesModels;
-    return {filteredProducts: FINDAHARP_PRODUCTS}
+    // return {filteredProducts: FINDAHARP_PRODUCTS}
     /*******************
      * API DATA
      *******************/
     // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com`); // BREAKING
-    // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
-    // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
-    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);
-    
-    // return {filteredProducts: res.data.storeitems};
+    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`); // BREAKING
+    // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
+    // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);
+    return {
+        filteredProducts: res.data.storeitems, 
+        featuredProducts: res.data.storeitems.filter(product => product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts'), 
+        strings: res.data.storeitems.filter(product => product.title.toUpperCase().startsWith("3RD OCTAVE C")), 
+        music: res.data.storeitems.filter(product => product.category==="music")
+    };
     
 
 
