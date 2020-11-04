@@ -22,8 +22,7 @@ function OrderSummary() {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-    
-    console.log('cart', cart);
+ 
 
     useEffect(() => {
         if (getNumItems(cart)>0&&user.shippingcountry) {

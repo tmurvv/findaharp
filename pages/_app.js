@@ -25,7 +25,7 @@ import CartButton from '../src/components/onlineStore/CartButton';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
-import SellerAgreement from '../src/components/selleragreement';
+import SellerAgreement from '../src/components/SellerAgreement';
 import UploadStoreItem from '../src/components/onlineStore/uploadstoreitem';
 import { parseJwt } from '../src/utils/helpers';
 import { getNumItems } from '../src/utils/storeHelpers'

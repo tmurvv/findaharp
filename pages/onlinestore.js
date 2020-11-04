@@ -19,7 +19,6 @@ import StoreProductContainerCss from '../src/styles/onlinestore/StoreProductCont
 import { UserContext } from '../src/contexts/UserContext';
 
 const OnlineStore = (props) => {
-    console.log(props);
     const [ filteredProducts, setFilteredProducts ] = useState(FINDAHARP_PRODUCTS);
     const { user } = useContext(UserContext);
     // display cart
@@ -51,7 +50,7 @@ OnlineStore.getInitialProps = async (props) => {
     //LOCAL DATA Populate variables
     // const products = testData;
     // const makesModels = testMakesModels;
-
+    return {filteredProducts: FINDAHARP_PRODUCTS}
     /*******************
      * API DATA
      *******************/
@@ -59,8 +58,13 @@ OnlineStore.getInitialProps = async (props) => {
     // const res = await axios.get(`https://findaharp-api.herokuapp.com`); // BREAKING
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
-    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);
+    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);
     
+    // return {filteredProducts: res.data.storeitems};
+    
+
+
+
     // console.log(res.data)
     // API DATA Populate variables
     // const products = res.data.harpData;
@@ -73,6 +77,6 @@ OnlineStore.getInitialProps = async (props) => {
     //     product.productModel.startsWith('zz')?product.productModel=`${product.productModel.substr(2)}`:'';
     // });
     // return { products, makesModels, verifying: false, found: false };
-    return {filteredProducts: res.data.storeitems};
+    
 }
 export default OnlineStore;

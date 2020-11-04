@@ -12,7 +12,6 @@ function SellerAgreement(props) {
     const [ openTerms, setOpenTerms ] = useState(false);
     const { user } = useContext(UserContext);
     const [ error, setError ] = useState(false);
-    const [ count, setCount ] = useState(0);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {
@@ -45,17 +44,10 @@ function SellerAgreement(props) {
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'}`;
                     dispatchResultInfo({type: 'tryAgain'});
-                } else if(e.message==='Network Error'&&count===0) {
-                    dispatchResultInfo({type: 'loadingImage'});y
-                    resultText.innerText=``;
-                    setCount(1);
-                    handleClick();
                 } else {
-                    resetResults()
                     dispatchResultInfo({type: 'tryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Error signing agreement. Please check your network connection and let Find a Harp know if problem persists.'}`
                 }
-
             }
         } else {
             setError(true);
