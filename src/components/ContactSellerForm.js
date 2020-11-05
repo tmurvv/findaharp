@@ -207,7 +207,7 @@ function ContactSellerForm(props) {
                             type='checkbox'
                             name='contactnewsletter'
                             onChange={handleChange}
-                            style={{transform: 'translate(20px, 3px)', zIndex: '3000'}}
+                            style={{transform: 'translate(20px, 3px)', zIndex: '3500'}}
                             checked={userContact.contactnewsletter}
                         />
                         <label style={{marginLeft: '5px'}} name='contactnewsletter'>

@@ -8,6 +8,7 @@ import Router from 'next/router';
 // internal
 import { FINDAHARP_PRODUCTS } from '../src/constants/FindaharpProducts'
 import StoreProduct from '../src/components/onlineStore/StoreProduct';
+import InfiniteProducts from '../src/components/onlineStore/InfiniteProducts';
 import StoreProductContainer from '../src/components/onlineStore/StoreProductContainer';
 import StoreItemsHighlight from '../src/components/onlineStore/StoreItemsHighlight';
 import PageTitle from '../src/components/PageTitle';
@@ -37,8 +38,8 @@ const OnlineStore = (props) => {
             <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
-                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3>
-                <StoreItemsHighlight filteredProducts={featuredProducts}/>
+                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3>
+                <StoreItemsHighlight filteredProducts={featuredProducts}/> */}
                 {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3>
                 <StoreItemsHighlight filteredProducts={strings} heading={'STRINGS'}/>
                 <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>MUSIC</h3>
@@ -46,6 +47,7 @@ const OnlineStore = (props) => {
                 <StoreItemsHighlight filteredProducts={music} heading={'MUSIC'}/> */}
                 
                 {/* <StoreProductContainer filteredproductscontainer={filteredProducts}/> */}
+                <InfiniteProducts />
                 {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
             </div>
             <IndexCss />
