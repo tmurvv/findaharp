@@ -20,7 +20,8 @@ import StoreProductContainerCss from '../src/styles/onlinestore/StoreProductCont
 import { UserContext } from '../src/contexts/UserContext';
 
 const OnlineStore = (props) => {
-    const [ filteredProducts, setFilteredProducts ] = useState(props.filteredProducts);
+    // const [ filteredProducts, setFilteredProducts ] = useState(props.filteredProducts);
+    const [ searchResults, setSearchResults ] = useState();
     const [ featuredProducts, setFeaturedProducts ] = useState(props.featuredProducts);
     const [ strings, setStrings ] = useState(props.strings);
     const [ music, setMusic ] = useState(props.music);
@@ -31,23 +32,34 @@ const OnlineStore = (props) => {
     },[]);
     // sort products
     useEffect(()=>{
-        setFilteredProducts(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
+        // setFilteredProducts(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
+        setSearchResults(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
     },[]);
     return (
         <>
             <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
-                <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
-                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3>
-                <StoreItemsHighlight filteredProducts={featuredProducts}/> */}
-                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3>
-                <StoreItemsHighlight filteredProducts={strings} heading={'STRINGS'}/>
-                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>MUSIC</h3>
-                    
-                <StoreItemsHighlight filteredProducts={music} heading={'MUSIC'}/> */}
+                <GlobalStoreSearch filteredProducts={props.filteredProducts} setSearchResults={setSearchResults}/>
+                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3>
+                {/* <StoreItemsHighlight filteredProducts={featuredProducts}/> */}
+                <br />
+                <br />
+                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3>
+                {/* <StoreItemsHighlight filteredProducts={strings} heading={'STRINGS'}/> */}
+                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>MUSIC</h3> */}
+                {/* <StoreItemsHighlight filteredProducts={music} heading={'MUSIC'}/> */}
+                <br />
+                <br />
+                <hr />
+                <br />
+                <br />
+                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3>
+                {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
+                <br />
+                <h1>{searchResults&&searchResults[2].title} {searchResults&&searchResults.length}</h1>
                 
-                {/* <StoreProductContainer filteredproductscontainer={filteredProducts}/> */}
-                <InfiniteProducts />
+                {searchResults&&searchResults.length>0?<InfiniteProducts searchResults={searchResults}/>:''}
+                
                 {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
             </div>
             <IndexCss />

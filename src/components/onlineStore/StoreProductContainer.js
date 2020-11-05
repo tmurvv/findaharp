@@ -59,11 +59,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                         key={uuid()}
                         productdetail={product}
                         handleopendetail={handleOpenDetail} 
-                        handleclosedetail={handleCloseDetail} 
-                        handleopencontact={handleOpenContact} 
-                        handleclosecontact={handleCloseContact}
-                        clientlat={clientlat} 
-                        clientlong={clientlong} 
+                        handleclosedetail={handleCloseDetail}
                         />
                     )}
                 </div>

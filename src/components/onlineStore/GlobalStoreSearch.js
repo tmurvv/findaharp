@@ -31,7 +31,9 @@ function GlobalStoreSearch(props) {
 
     function handleChange(soloensemble, level, publicationtype, reset) {
         // initialize variables
-        let productListCopy = [...FINDAHARP_PRODUCTS];
+        let productListCopy = [...props.filteredProducts];
+        console.log('globalhandel', productListCopy.length)
+
         let levelProductList=[];
         let soloensembleProductList=[];
         let publicationProductList=[];
@@ -119,7 +121,8 @@ function GlobalStoreSearch(props) {
             searchProductList=[...categoryProductList]
         }
         finalProductList=[...searchProductList];
-        props.setFilteredProducts(finalProductList)
+        props.setSearchResults(finalProductList)
+        console.log('global findl', finalProductList);
     }
     function handleClear(evt) {
         document.querySelector('#categoryfilter').value='All';
