@@ -3,6 +3,7 @@ import { useContext, useReducer } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
+import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
@@ -12,7 +13,8 @@ import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
 import { 
     selectRegion,
-    tax
+    tax,
+    shipping
 } from '../../utils/checkoutHelpers';
 
 import { LocalTaxi } from '@material-ui/icons';
@@ -21,6 +23,7 @@ function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
@@ -44,7 +47,7 @@ function GetPostalZip() {
             setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"CAD":"USD"})
             setCartSubtotals({...cartSubtotals, shipping: null, taxes: null})
         } else {
-            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Alberta", currencyMultiplier)})
+            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier)})
             setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
         }
     }
@@ -55,25 +58,26 @@ function GetPostalZip() {
         } else {
             if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        switch(val) {
-            case 'Canada':
-                setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
-                break;
-            case 'United States':
-                setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.USA, taxes: 0});
-                break;
-            case 'Pickup':
-                setCartSubtotals({...cartSubtotals, shipping: 0});
-                setUser({...user, currency: "CAD"});
-                break;
-            default:
-                setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.default, taxes: 0});
-        }
+        setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom)})
+        // switch(val) {
+        //     case 'Canada':
+        //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
+        //         break;
+        //     case 'United States':
+        //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.USA, taxes: 0});
+        //         break;
+        //     case 'Pickup':
+        //         setCartSubtotals({...cartSubtotals, shipping: 0});
+        //         setUser({...user, currency: "CAD"});
+        //         break;
+        //     default:
+        //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.default, taxes: 0});
+        // }
     }
     function changeRegion(val) {
         selectRegion(val, user, setUser); 
         if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val,currencyMultiplier)});
+            setCartSubtotals({...cartSubtotals, taxes: tax(cart,"Canada",val,currencyMultiplier)});
         } else {
             setCartSubtotals({...cartSubtotals, taxes: 0});
         }

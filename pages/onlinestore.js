@@ -56,11 +56,11 @@ const OnlineStore = (props) => {
                 <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3>
                 {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
                 <br />
-                <h1>{searchResults&&searchResults[2].title} {searchResults&&searchResults.length}</h1>
+                {/* <h1>{searchResults&&searchResults[2].title} {searchResults&&searchResults.length}</h1> */}
                 
-                {searchResults&&searchResults.length>0?<InfiniteProducts searchResults={searchResults}/>:''}
+                {/* {searchResults&&searchResults.length>0?<InfiniteProducts searchResults={searchResults}/>:''} */}
                 
-                {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
+                <StoreProductContainer filteredproductscontainer={props.filteredProducts}/>
             </div>
             <IndexCss />
             <OnlineStoreCss />

@@ -48,7 +48,7 @@ export const STOREPARTNER_PLACEHOLDER = {
 
 export const SHIPPING_CALCULATIONS = {
     Canada: 20,
-    // USA: 20,
+    harpsetc: 12.00,
     default: -1
 }
 export const PRODUCTAD_PLACEHOLDER = {

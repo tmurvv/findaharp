@@ -12,6 +12,7 @@ import 'react-phone-input-2/lib/style.css'
 
 // internal
 import {CartContext} from "../src/contexts/CartContext";
+import {StoresOrderedFromContext} from "../src/contexts/StoresOrderedFromContext";
 import {CartSubtotalsContext} from "../src/contexts/CartSubtotalsContext";
 import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
@@ -30,15 +31,14 @@ import UploadStoreItem from '../src/components/onlineStore/uploadstoreitem';
 import { parseJwt } from '../src/utils/helpers';
 import { getNumItems } from '../src/utils/storeHelpers'
 
-
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 const cartOpenInit = false;
-const cartItemsInit = [
-];
+const cartItemsInit = [];
 const cartSubtotalsInit = {
     shipping: 0,
     taxes: 0
 }
+const storesOrderedFromInit = ['none']
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
@@ -54,6 +54,7 @@ function MyApp(props) {
     }); // firstname, lastname, email, distanceunit
     const [cart, setCart] = useState(cartItemsInit);
     const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
+    const [storesOrderedFrom, setStoresOrderedFrom] = useState(storesOrderedFromInit);
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
@@ -141,6 +142,7 @@ function MyApp(props) {
                     let localCartJson = JSON.parse(localCart);
                     localCartJson = [...localCartJson]
                     setCart(localCartJson);
+                    setStoresOrderedFrom(localCartJson[0].store);
                 } catch (e) {
                     console.log('error parsing local cart') // needs logging
                 }
@@ -166,24 +168,25 @@ function MyApp(props) {
                 </Head>
                 <Banner />
                 <UserContext.Provider value={{user, setUser}}>
+                <StoresOrderedFromContext.Provider value={{storesOrderedFrom, setStoresOrderedFrom}}>
                 <StatusContext.Provider value={{status, setStatus}}>
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                             <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
                                 <>
-                                                <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                                <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
-                                                {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
-                                                <UploadStoreItem />
-                                                <Footer />
-                                            </>
-                                
+                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                    <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
+                                    {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
+                                    <UploadStoreItem />
+                                    <Footer />
+                                </>
                             </CurrencyContext.Provider>
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
                 </StatusContext.Provider>
+                </StoresOrderedFromContext.Provider>
                 </UserContext.Provider>
                 
                 <AppCss />
@@ -243,6 +246,7 @@ function MyApp(props) {
             </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
+            <StoresOrderedFromContext.Provider value={{storesOrderedFrom, setStoresOrderedFrom}}>
             <StatusContext.Provider value={{status, setStatus}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
@@ -273,6 +277,7 @@ function MyApp(props) {
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
             </StatusContext.Provider>
+            </StoresOrderedFromContext.Provider>
             </UserContext.Provider>
             
             <AppCss />

@@ -25,11 +25,11 @@ function Subtotal(props) {
     useEffect(() => {
         if (getNumItems(cart)>0&&user.shippingcountry) {
             setCartSubtotals({...cartSubtotals, 
-                shipping: shipping(user.shippingcountry), 
+                shipping: shipping(user.shippingcountry,cart[0].store), 
                 taxes: 0
             });
             if (user.shippingcountry==="Canada"&&user.shippingregion) {
-                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingregion,currencyMultiplier)});
+                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)});
             }
         }
     }, []);

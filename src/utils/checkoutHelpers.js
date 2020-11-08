@@ -50,8 +50,9 @@ export function getProvCode(prov) {
             return null;
     }
 }
-export function shipping(shippingcountry) {
+export function shipping(shippingcountry, store) {
     if (!shippingcountry) return 0.00;
+    if (store&&store==="harpsetc") return shippingcountry==='United States'?SHIPPING_CALCULATIONS.harpsetc:-1;
     switch (shippingcountry) {
         case 'Canada':
             return SHIPPING_CALCULATIONS.Canada;
@@ -66,18 +67,28 @@ export function shipping(shippingcountry) {
             return SHIPPING_CALCULATIONS.default;
     }
 }
-export function tax(cart, shippingregion, currencyMultiplier) {
+export function tax(cart, shippingcountry, shippingregion, currencyMultiplier) {
     if (!shippingregion) return 0.00;
-    try {
-        const tax = new SalesTax(
-            getProvCode(shippingregion),
-            getSubTotal(cart)*currencyMultiplier,
-            2
-        );
-        return tax.sum().toFixed(2);
-    } catch(e) {
-        return 'select region';
-    }       
+    switch(shippingcountry) {
+        case "Canada": 
+            try {
+                const tax = new SalesTax(
+                    getProvCode(shippingregion),
+                    getSubTotal(cart)*currencyMultiplier,
+                    2
+                );
+                return tax.sum().toFixed(2);
+            } catch(e) {
+                return 'select region';
+            } 
+            break;
+        case "United States":
+            if (shippingregion==='California') return (8.25).toFixed(2);
+            break;
+        default :
+            return 0;
+    }
+          
 }
 export function getTotal(cart, user, currencyMultiplier) {
     const subTotal = getSubTotal(cart);
@@ -86,9 +97,9 @@ export function getTotal(cart, user, currencyMultiplier) {
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
     if (user.currency==="CAD") {
-        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion,currencyMultiplier))).toFixed(2);
+        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry,cart[0].store)) + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier))).toFixed(2);
     } else {
-        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(addOneInternational)).toFixed(2);
+        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry,cart[0].store)) + Number(addOneInternational)).toFixed(2);
     }
 }
 export function selectRegion(val, user, setUser) {

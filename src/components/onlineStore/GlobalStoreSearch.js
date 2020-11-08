@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react';
 
-import StoreProductSearch from '../../components/onlineStore/StoreProductSearch'
+import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
+import InfiniteProducts from '../../components/onlineStore/InfiniteProducts';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
@@ -28,6 +29,7 @@ function GlobalStoreSearch(props) {
     const [ ensembleSearch, setEnsembleSearch ] = useState();
     const [ levelSearch, setLevelSearch ] = useState();
     const [ publicationSearch, setPublicationSearch ] = useState();
+    const [ searchResults, setSearchResults ] = useState();
 
     function handleChange(soloensemble, level, publicationtype, reset) {
         // initialize variables
@@ -122,6 +124,7 @@ function GlobalStoreSearch(props) {
         }
         finalProductList=[...searchProductList];
         props.setSearchResults(finalProductList)
+        setSearchResults(finalProductList);
         console.log('global findl', finalProductList);
     }
     function handleClear(evt) {
@@ -136,6 +139,7 @@ function GlobalStoreSearch(props) {
     useEffect(()=>{
         if(props.filteredProducts&&props.filteredProducts.length===0) {
             document.querySelector('#searchInput').focus();
+            setSearchResults(props.filteredProducts);
         }
     })
     
@@ -159,6 +163,7 @@ function GlobalStoreSearch(props) {
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
             <StoreProductSearch handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
+            {searchResults&&<InfiniteProducts searchResults={searchResults} />}
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />
         </>

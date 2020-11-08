@@ -7,6 +7,7 @@ import {
     incQty
 } from '../../utils/storeHelpers';
 import { UserContext } from '../../contexts/UserContext';
+import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
@@ -24,6 +25,7 @@ import {
 const StoreProduct = (props) => {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
+    const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [ openModal, setOpenModal ] = useState(false);
@@ -35,9 +37,9 @@ const StoreProduct = (props) => {
         dispatchResultInfo({type: 'initial'});
     }
     function handleClick(msg) {
-        dispatchResultInfo({type: 'OK'});
         const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText=msg;
+        dispatchResultInfo({type: 'OK'});
     }
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  
@@ -53,7 +55,15 @@ const StoreProduct = (props) => {
         props.handleopendetail(props.productdetail); 
     }
     async function updateCart(e) {
-        if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
+        // check if second store
+        if (cart.length>0&&cart[0].store !==e.target.getAttribute('data-item-store')) {
+            // const resultText = document.querySelector('#loadingLoginText');
+            // resultText.innerText=`Coming soon !! Ordering from two different stores at the same time. Currently Find a Harp can only handle orders from one store at a time. We are new and working hard to enable you to order from different stores. Please complete or delete your order from ${cart[0].store} to order ${e.target.getAttribute('data-item-title')} from ${e.target.getAttribute('data-item-store')}.`;
+            // dispatchResultInfo({type: 'OK'});
+            
+            return alert(`Coming soon !! Ordering from two different stores at the same time. Currently Find a Harp can only handle orders from one store at a time. We are new and working hard on this. Please complete or delete your order from "${cart[0].store}" to order "${e.target.getAttribute('data-item-title')}" from "${e.target.getAttribute('data-item-store')}".`)
+        }
+        else if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
                 handleClick('Only 1 in stock. Item already in cart.')
@@ -83,6 +93,7 @@ const StoreProduct = (props) => {
             const tempCartJson = await JSON.stringify(cartCopy);
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
+            setStoresOrderedFrom([cartCopy[0].store]);
         }
     }
     function handleAdd(e) {  

@@ -172,7 +172,7 @@ function Shipping() {
             setUser({...user, shippingcountry: '', shippingregion: '', currency: confirmCurrency?"CAD":"USD"})
             setCartSubtotals({...cartSubtotals, shipping: '', taxes: ''})
         } else {
-            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Alberta", currencyMultiplier)})
+            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier)})
             setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
         }
     }
@@ -185,14 +185,14 @@ function Shipping() {
         }
         // selectCountry(val, user, setUser); 
         setCartSubtotals({...cartSubtotals, 
-            shipping: shipping(val), 
+            shipping: shipping(val, cart[0].store), 
             taxes: 0
         });
     }
     function changeRegion(val) {
         selectRegion(val, user, setUser); 
         if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val,currencyMultiplier)});
+            setCartSubtotals({...cartSubtotals, taxes: tax(cart,"Canada",val,currencyMultiplier)});
         } else {
             setCartSubtotals({...cartSubtotals, taxes: 0});
         }

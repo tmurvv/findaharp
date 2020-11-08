@@ -1,9 +1,7 @@
 // code forked from Somto M.Ugeh dev.to
-
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
-import { FINDAHARP_PRODUCTS } from '../../constants/FindaharpProducts';
 import StoreProduct from './StoreProduct';
 
 export default function InfiniteProducts({searchResults}) {
@@ -38,16 +36,15 @@ export default function InfiniteProducts({searchResults}) {
   const fetchData = useCallback(async pageNumber => {
     // const url = `https://picsum.photos/v2/list?page=${pageNumber}&limit=15`;
     // setLoading(true);
-    console.log('fetchData', searchResults&&searchResults.length)
     try {
       // const res = await axios.get(url);
       // const { status, data } = res;
       return searchResults.slice(pageNumber*15, pageNumber*15+15)
-      const addedProducts = searchResults.slice(pageNumber*15, pageNumber*15+15)
-      console.log("addedproducts", addedProducts)
-      setLoading(false);
-      const status=200;
-      return { status, addedProducts };
+      // const addedProducts = searchResults.slice(pageNumber*15, pageNumber*15+15)
+      // console.log("addedproducts", addedProducts)
+      // setLoading(false);
+      // const status=200;
+      // return { status, addedProducts };
       // return { status, data };
     } catch (e) {
       setLoading(false);
@@ -70,9 +67,8 @@ export default function InfiniteProducts({searchResults}) {
     page.current++;
     handleInitial(page.current);
   };
-  // get first chunk of data 
+  // get initial chunk of data 
   useEffect(() => {
-    console.log("useEfftee", searchResults&&searchResults.length)
     handleInitial(page.current);
   }, [handleInitial]);
   // initiate observer position
@@ -84,7 +80,7 @@ export default function InfiniteProducts({searchResults}) {
       currentObserver.observe(currentElement);
     }
 
-    return () => {
+  return () => {
       if (currentElement) {
         currentObserver.unobserve(currentElement);
       }
@@ -93,14 +89,13 @@ export default function InfiniteProducts({searchResults}) {
 
   return (
     <div className="appStyle">
+      {/* {products&&products[2].title} */}
       {products && (
         <div className="imageGrid">
           {products.map((product, index) => (
               <StoreProduct 
                   key={uuid()}
                   productdetail={product}
-                  // handleopendetail={handleOpenDetail} 
-                  // handleclosedetail={handleCloseDetail}
               />
           ))}
         </div>
@@ -108,9 +103,9 @@ export default function InfiniteProducts({searchResults}) {
 
       {loading && <div>Loading ...</div>}
 
-      {/* <div ref={setElement} className="buttonContainer">
+      <div ref={setElement} className="buttonContainer">
         <button className="buttonStyle">Load More</button>
-      </div> */}
+      </div>
       <style>{`
           .imageGrid {
             display: flex;
