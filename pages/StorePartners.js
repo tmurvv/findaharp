@@ -34,7 +34,7 @@ export default function StorePartners() {
         {openStoreOwnerInq?<StorePartnerInfo open={openStoreOwnerInq} close={()=>setOpenStoreOwnerInq(false)}/>:''}
         <div className='storePartnersContainer'>
             <PageTitle 
-                maintitle='Our Store Partners' 
+                maintitle='Our Store and Business Partners' 
                 subtitle='Find a Harp is proud to partner with the following harp sellers' 
             />
             <h3 className={`subTitle`} style={{width: 'fit-content', marginTop: '-45px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA'}}>Click here</button>for more information.</h3>
