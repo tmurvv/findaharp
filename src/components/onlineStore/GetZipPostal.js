@@ -175,8 +175,7 @@ function GetPostalZip() {
                 />
                 <label style={{marginLeft: '5px'}} name='newsletter'>
                     Pickup at store<br />
-                    <span style={{fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</span>  
-                    {/* <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span> */}
+                    {cart.length>0?<span style={{fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</span>:''}
                 </label>
             </div>
             <ShippingCss />

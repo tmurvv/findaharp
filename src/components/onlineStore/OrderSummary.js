@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useReducer } from 'react';
 
 import { StatusContext } from '../../contexts/StatusContext';
 import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
@@ -6,7 +6,9 @@ import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css'
+import { onlineOrderReducer } from '../../reducers/reducers';
+import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css';
+import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import {
     getNumItems,
     getSubTotal
@@ -17,6 +19,11 @@ import {
     tax
 } from '../../utils/checkoutHelpers';
 
+const onlineOrderReducerInitialState = {
+    shipping: 0,
+    taxes: 0
+}
+
 function OrderSummary() {
     const { status } = useContext(StatusContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
@@ -24,11 +31,16 @@ function OrderSummary() {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
- 
-
+    // const [ resultInfo, dispatchResultInfo ] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+    const [ onlineOrder, dispatchOnlineOrder ] = useReducer(onlineOrderReducer, {
+        ...onlineOrderReducerInitialState, 
+    });
+    
     useEffect(() => {
+        
+        // dispatchOnlineOrder({type:'pickup'})
         let initShipping = 0;
-        let initTaxes = 0
+        let initTaxes = 0;
         if (getNumItems(cart)>0&&user.shippingcountry) initShipping = shipping(user.shippingcountry,cart[0].store)
         if (getNumItems(cart)>0&&user.shippingcountry&&user.shippingregion) initTaxes = tax(cart,user.shippingcountry,user.shippingregion, currencyMultiplier)
             
@@ -70,7 +82,7 @@ function OrderSummary() {
                             }
                         </p>
                     </div>
-                    <p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>  
+                    {cart.length>0?<p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>:''} 
                 </div>
                 {String(storesOrderedFrom).toUpperCase()!=="HARPSETC"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''}
                 {String(user.shippingcountry).toUpperCase()==="PICKUP"?<p style={{fontSize: '14px',marginTop:'-10px', maxWidth: '350px'}}>*Pickup at store</p>:''}
