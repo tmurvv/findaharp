@@ -17,7 +17,6 @@ import {
     shipping
 } from '../../utils/checkoutHelpers';
 
-import { LocalTaxi } from '@material-ui/icons';
 
 function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
@@ -43,12 +42,18 @@ function GetPostalZip() {
     }
     const handleStorePickup = () => {
         if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
-            const confirmCurrency = window.confirm("Continue to view currency in Canadian dollars?\nSelect OK for Canadian dollars. Select cancel for US dollars.");
-            setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"CAD":"USD"})
+            const confirmCurrency = window.confirm("View currency in US dollars?\nSelect OK for US dollars. Select cancel for Canadian dollars.");
+            setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"USD":"CAD"})
             setCartSubtotals({...cartSubtotals, shipping: null, taxes: null})
         } else {
-            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier)})
-            setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
+            if (String(storesOrderedFrom).toUpperCase==="FINDAHARP") {
+                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="FINDAHARP"?tax(cart, "Canada", "Alberta", currencyMultiplier):null})
+                setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
+            } else {
+                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="HARPSETC"?tax(cart, "United States", "California", currencyMultiplier):null})
+                setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
+            }
+            
         }
     }
     const handleCountryChange = (val) => {
@@ -58,7 +63,7 @@ function GetPostalZip() {
         } else {
             if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom)})
+        setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom), taxes:null})
         // switch(val) {
         //     case 'Canada':
         //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
@@ -127,7 +132,7 @@ function GetPostalZip() {
                     </div>
                 </div>
             </div>
-            {user.shippingcountry==='Canada'
+            {user.shippingcountry==='Canada'&&String(storesOrderedFrom).toUpperCase()!=="HARPSETC"
             ?<><div className='regionDrop' style={{marginLeft: '0'}}>
                 <label htmlFor="country" style={{display: 'block'}}>Select Province to calculate taxes</label>
                 <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
@@ -144,6 +149,7 @@ function GetPostalZip() {
                     }}
                     country={user.shippingcountry}
                     value={user.shippingregion}
+                    blacklist='["MX", "Venezuela", "Indonesia", "South Africa", "Romania"]'
                     name='shippingregion'
                     defaultOptionLabel='Select Province to calculate taxes'
                     onChange={(val) => {changeRegion(val)}} 
@@ -169,7 +175,8 @@ function GetPostalZip() {
                 />
                 <label style={{marginLeft: '5px'}} name='newsletter'>
                     Pickup at store<br />
-                    <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span>
+                    <span style={{fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</span>  
+                    {/* <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span> */}
                 </label>
             </div>
             <ShippingCss />

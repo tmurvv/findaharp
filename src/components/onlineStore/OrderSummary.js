@@ -27,15 +27,24 @@ function OrderSummary() {
  
 
     useEffect(() => {
-        if (getNumItems(cart)>0&&user.shippingcountry) {
-            setCartSubtotals({...cartSubtotals, 
-                shipping: shipping(user.shippingcountry,cart[0].store), 
-                taxes: 0
-            });
-            if ((user.shippingcountry==="Canada"||user.shippingcountry==="Pickup")&&user.shippingregion) {
-                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)});
-            }
+        let initShipping = 0;
+        let initTaxes = 0
+        if (getNumItems(cart)>0&&user.shippingcountry) initShipping = shipping(user.shippingcountry,cart[0].store)
+        if (getNumItems(cart)>0&&user.shippingcountry&&user.shippingregion) initTaxes = tax(cart,user.shippingcountry,user.shippingregion, currencyMultiplier)
+            
+        if (String(storesOrderedFrom).toUpperCase==="FINDAHARP"&&user.shippingcountry==="Pickup") {
+            initShipping = 0;
+            initTaxes = tax(cart, "Canada", "Alberta", currencyMultiplier);
         }
+
+        if (String(storesOrderedFrom).toUpperCase==="HARPSETC"&&user.shippingcountry==="Pickup") {
+            initShipping = 0;
+            initTaxes = tax(cart,"United States","California",currencyMultiplier);
+        }
+        setCartSubtotals({...cartSubtotals, 
+            shipping: initShipping, 
+            taxes: initTaxes
+        });
     }, []);
     return (
         <>
@@ -45,13 +54,28 @@ function OrderSummary() {
                     {user.currency==='USD'?<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart)))?(Number(getSubTotal(cart)).toFixed(2)):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
                     :<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart))*currencyMultiplier)?(Number(getSubTotal(cart))*currencyMultiplier).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
-                <div className='flex-sb'>
-                    <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>SOLD BY {storesOrderedFrom.toUpperCase()}</span></p>
-                    <p style={{textAlign: 'right'}}>${cartSubtotals.shipping===-1?'International':!isNaN(Number(cartSubtotals.shipping))?(Number(cartSubtotals.shipping)).toFixed(2):'0.00'}{String(user.shippingcountry).toUpperCase()==="CANADA"||String(user.shippingcountry).toUpperCase()==="PICKUP"||cartSubtotals.shipping===-1?'*':''}</p>
+                <div>
+                    <div className='flex-sb'>
+                        <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: </p>
+                        <p style={{textAlign: 'right'}}>
+                            ${cartSubtotals.shipping===-1
+                                ?'International'
+                                :!isNaN(Number(cartSubtotals.shipping))
+                                    ?(Number(cartSubtotals.shipping)).toFixed(2)
+                                    :'0.00'
+                            }
+                            {String(user.shippingcountry).toUpperCase()==="CANADA"||String(user.shippingcountry).toUpperCase()==="PICKUP"||cartSubtotals.shipping===-1
+                                ?'*'
+                                :''
+                            }
+                        </p>
+                    </div>
+                    <p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>  
                 </div>
-                {String(user.shippingcountry).toUpperCase()==="CANADA"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''}
+                {String(storesOrderedFrom).toUpperCase()!=="HARPSETC"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''}
                 {String(user.shippingcountry).toUpperCase()==="PICKUP"?<p style={{fontSize: '14px',marginTop:'-10px', maxWidth: '350px'}}>*Pickup at store</p>:''}
-                {storesOrderedFrom!=='harpsetc'&&cartSubtotals.shipping=="-1"&&String(user.shippingcountry).toUpperCase()!=="PICKUP"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*International orders require a shipping estimate. Your order will be submitted, but your credit card will not be charged until shipping costs are approved by you.</p>:''}
+                {cartSubtotals.shipping=="-1"&&String(user.shippingcountry).toUpperCase()!=="PICKUP"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*International orders require a shipping estimate. Your order will be submitted, but your credit card will not be charged until shipping costs are approved by you.</p>:''}
+                {String(storesOrderedFrom).toUpperCase()==='HARPSETC'&&user.shippingcountry!=="Canada"&&cartSubtotals.shipping=="-1"&&String(user.shippingcountry).toUpperCase()!=="PICKUP"?<p style={{fontSize: '12px', maxWidth: '350px'}}>*International orders from Harps Etc. require a wire transfer. Information on payment will be sent with your shipping estimate.</p>:''}
                 
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Taxes:</p>
