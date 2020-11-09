@@ -27,8 +27,9 @@ export async function incQty(cart, setCart, prodId) {
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
 } 
-export async function deleteItem(cart, setCart, prodId) {
+export async function deleteItem(cart, setCart, prodId, setStoresOrderedFrom) {
     if (!confirm("Are you sure you want to delete this item from your cart?")) return;
+    if (cart.length===1) setStoresOrderedFrom(0);
     let tempCart = [...cart]
     tempCart = tempCart.filter(item => item.id!==prodId);
     const tempCartJson = await JSON.stringify(tempCart);

@@ -41,19 +41,19 @@ function GetPostalZip() {
         resetResults();
     }
     const handleStorePickup = () => {
+        console.log(storesOrderedFrom);
         if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
             const confirmCurrency = window.confirm("View currency in US dollars?\nSelect OK for US dollars. Select cancel for Canadian dollars.");
             setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"USD":"CAD"})
             setCartSubtotals({...cartSubtotals, shipping: null, taxes: null})
         } else {
-            if (String(storesOrderedFrom).toUpperCase==="FINDAHARP") {
-                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="FINDAHARP"?tax(cart, "Canada", "Alberta", currencyMultiplier):null})
+            if (String(storesOrderedFrom).toUpperCase()==="FINDAHARP") {
+                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier)})
                 setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
             } else {
                 setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="HARPSETC"?tax(cart, "United States", "California", currencyMultiplier):null})
-                setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
+                setUser({...user, shippingcountry: "Pickup", shippingregion: null, currency: 'USD'})
             }
-            
         }
     }
     const handleCountryChange = (val) => {

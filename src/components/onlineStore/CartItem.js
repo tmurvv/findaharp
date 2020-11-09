@@ -5,6 +5,7 @@ import CartItemCss from '../../styles/onlineStore/CartItem.css';
 import { CartContext } from '../../contexts/CartContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
+import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 
 import {
     incQty,
@@ -17,6 +18,7 @@ function CartItem(props) {
     const { cart, setCart } = useContext(CartContext);
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     return (
         <>
             <div className='item'>
@@ -30,7 +32,7 @@ function CartItem(props) {
                 :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)} each</div>}
                 <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 
-                        onClick={() => deleteItem(cart, setCart, item.id)} 
+                        onClick={() => deleteItem(cart, setCart, item.id, setStoresOrderedFrom)} 
                         style={{
                             border: 'none',
                             outline: 'none',
