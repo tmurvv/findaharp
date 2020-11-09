@@ -55,7 +55,7 @@ function StoreProductModal(props) {
         resultText.innerText=msg;
     }
     function loginGuest(evt) {
-        // if (evt) evt.preventDefault();  
+        // if (evt) evt.preventDefault();
         resetResults();
     }
     

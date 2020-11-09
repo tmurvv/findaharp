@@ -26,7 +26,7 @@ function SellerAgreement(props) {
             const updatedUser = { 
                 ...user, 
                 agreements: ['agreed'],
-                // agreements: ['agreed', Date.now(), String(TERMS_CONDITIONS), String("<p style={{borderBottom: '1px solid lightgrey', paddingBottom: '20px'}}><input type='checkbox' id='agreeTerms'/> I, a representative of Vavra Harp, agree to the Findaharp.com <span  style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}onClick={()=>setOpenTerms(true)}>Terms and Conditions</span>.</p><h4 style={{textAlign: 'center'}}>Findaharp.com On-line Fee Schedule <br/>for Vavra Harp, harp sales only <br /> Effective October 22, 2020 </h4><p>As a party listing a harp for sale, using the Services of Findaharp.com, if I sell a harp to a buyer introduced to me during the term of this agreement because of exposure on Findaharp.com, I will forthwith pay to Findaharp.com fees in an amount equivalent to 3% of the Gross sale price of the item, subject to a minimum of $25.00USD. </p><p><input type='checkbox' id='agreeSchedule'/> I, a representative of Vavra Harp, agree to the above Findaharp.com fee schedule.</p>")
+                // agreements: ['agreed', Date.now(), String(TERMS_CONDITIONS), String("<p style={{borderBottom: '1px solid lightgrey', paddingBottom: '20px'}}><input type='checkbox' id='agreeTerms'/> I, a representative of Harp and Heart, agree to the Findaharp.com <span  style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}onClick={()=>setOpenTerms(true)}>Terms and Conditions</span>.</p><h4 style={{textAlign: 'center'}}>Findaharp.com On-line Fee Schedule <br/>for Harp and Heart, harp sales only <br /> Effective October 22, 2020 </h4><p>As a party listing a harp for sale, using the Services of Findaharp.com, if I sell a harp to a buyer introduced to me during the term of this agreement because of exposure on Findaharp.com, I will forthwith pay to Findaharp.com fees in an amount equivalent to 3% of the Gross sale price of the item, subject to a minimum of $25.00USD. </p><p><input type='checkbox' id='agreeSchedule'/> I, a representative of Harp and Heart, agree to the above Findaharp.com fee schedule.</p>")
                 // ], 
                 password: `${document.querySelector('#password').value}`
             };
@@ -89,12 +89,12 @@ function SellerAgreement(props) {
             </div>
             <div dangerouslySetInnerHTML={{__html: TERMS_CONDITIONS}} hidden={!openTerms}></div>
             <div onClick={()=>setOpenTerms(false)} hidden={!openTerms} style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}>Close Terms and Conditions</div>
-            <p style={{borderBottom: '1px solid lightgrey', paddingBottom: '20px'}}><input type='checkbox' id='agreeTerms'/> I, a representative of Vavra Harp, agree to the Findaharp.com <span  style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}onClick={()=>setOpenTerms(true)}>Terms and Conditions</span>.</p>
+            <p style={{borderBottom: '1px solid lightgrey', paddingBottom: '20px'}}><input type='checkbox' id='agreeTerms'/> I, a representative of Harp and Heart, agree to the Findaharp.com <span  style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}}onClick={()=>setOpenTerms(true)}>Terms and Conditions</span>.</p>
                 <h4 style={{textAlign: 'center'}}>Findaharp.com On-line Fee Schedule <br/>
-                    for Vavra Harp, harp sales only <br />
+                    for Harp and Heart, harp sales only <br />
                     Effective October 22, 2020 </h4>
-            <p>As a party listing a harp for sale, using the Services of Findaharp.com, if I sell a harp to a buyer introduced to me during the term of this agreement because of exposure on Findaharp.com, I will forthwith pay to Findaharp.com fees in an amount equivalent to 3% of the Gross sale price of the item, subject to a minimum of $25.00USD. </p>
-            <p><input type='checkbox' id='agreeSchedule'/> I, a representative of Vavra Harp, agree to the above Findaharp.com fee schedule.</p>
+            <p>As a party listing a harp for sale, using the Services of Findaharp.com, if I sell a harp to a buyer introduced to me during the term of this agreement because of exposure on Findaharp.com, I will forthwith pay to Findaharp.com fees in an amount equivalent to 5% of the Gross sale price of the item, subject to a minimum of $25.00USD. </p>
+            <p><input type='checkbox' id='agreeSchedule'/> I, a representative of Harp and Heart, agree to the above Findaharp.com fee schedule.</p>
             <div className="input-name input-margin">
                 <h3 style={{textAlign: 'center'}}>Please re-enter Password</h3>
             </div>
