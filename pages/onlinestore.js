@@ -9,6 +9,7 @@ import Router from 'next/router';
 import { FINDAHARP_PRODUCTS } from '../src/constants/FindaharpProducts'
 import StoreProduct from '../src/components/onlineStore/StoreProduct';
 import InfiniteProducts from '../src/components/onlineStore/InfiniteProducts';
+import ProductScroll from '../src/components/onlineStore/ProductScroll';
 import StoreProductContainer from '../src/components/onlineStore/StoreProductContainer';
 import StoreItemsHighlight from '../src/components/onlineStore/StoreItemsHighlight';
 import PageTitle from '../src/components/PageTitle';
@@ -54,13 +55,17 @@ const OnlineStore = (props) => {
                 <br />
                 <br />
                 <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3>
+                
+                {/* <ProductScroll /> */}
+                
+                
                 {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
                 <br />
                 {/* <h1>{searchResults&&searchResults[2].title} {searchResults&&searchResults.length}</h1> */}
                 
                 {/* {searchResults&&searchResults.length>0?<InfiniteProducts searchResults={searchResults}/>:''} */}
                 
-                <StoreProductContainer filteredproductscontainer={props.filteredProducts}/>
+                <ProductScroll filteredproductscontainer={props.filteredProducts}/>
             </div>
             <IndexCss />
             <OnlineStoreCss />
@@ -79,7 +84,7 @@ OnlineStore.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`); // BREAKING
+    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
     const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);

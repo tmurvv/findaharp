@@ -277,23 +277,41 @@ export const STORE_PARTNERS = [
     {
         id: uuid(),
         sellerCountry: "USA",
-        sellerRegion: "Western Colorado",
-        productTitle: "Blevins Harps",
+        sellerRegion: "Philadelphia Area",
+        productTitle: "Harp and Heart",
         productPrice: "",
         productLongDesc: `
             <div>
-                <p>Welcome to <span>Blevins Harps</span> where our mission is to build quality instruments, one at a time, for our amazing customers. Because picking out a harp is personal, we endeavour to help each customer select just the right harp.</p>
-                <p class="" style="white-space:pre-wrap;">Blevins Harps began in 1992 when Dwight Blevins left an audio engineering career in radio and TV broadcasting to set up a workshop in Western Colorado. Dwight not only loved the sound, but also the visual artistic form of the harp. This can be seen in every one of Dwight’s designs. He was willing to explore different shapes and wood types to bring out the best possible sound and visual beauty of each harp.&nbsp;&nbsp;&nbsp;</p>
-                <p>Since Blevins Harp's humble beginning, over 3200 harps have been lovingly built and shipped worldwide.</p>
-                <p>Soon after Dwight’s retirement in 2018, we providentially found Dwight and purchased the Blevins brand. Dale and Jamin, a father and son team, previously worked as carpenters for many years and share a passion for woodworking. Laurie studied the harp at the University of Northern Colorado under Kathy Bundock Moore and our fourteen year old daughter also plays the harp. This was a great fit for our family and we so much enjoyed working with Dwight and Cindy in the transition.&nbsp;&nbsp;</p>
-                <p>We especially love the customer centered focus of Blevins Harps. and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p><p class="" style="white-space:pre-wrap;">All The Best, Dale, Laurie and Jamin Wright</p>
+                <p><span>Harp and Heart</span>, Nancy Beal, owner
+                <br />
+                <br />-Heal your body, mind, and spirit...
+                <br />-Experience deep relaxation...
+                <br />-Strengthen your immune  and nervous systems through the 'relaxation response'...
+                <br />-Deepen your yoga and meditation practice...
+                <br />-Increase your brain's ability to focus and concentrate...
+                <br />-Relieve stress...
+                <br />-Achieve deeper, more refreshing, more rejuvenating sleep...
+                <br />-Increase your mental, emotional, spiritual and artistic creativity...
+                <br />-Enjoy a daily sense of well being and enhanced energy...
+                <br />Holistic healing with Nancy Beal
+                <br />
+                <br /><span>Clients say . . .</span>
+                <br />
+                <br />"Various chakras felt like they were being opened and cleared."
+                <br />
+                <br />"This is a wonderful way to relax and feel the tension being released from my body. I hope to have the opportunity for future classes."
+                <br />
+                <br />"In a world where we never stop to relax, how fundamentally blissful to relax at a very deep level. There were moments of joy, bliss, and oneness with all that is."
+                <br />
+                 <br />"I wanted to thank you so much for the wonderful treatment you gave to me. It felt wonderful to be  spoiled like that on your table. You were so generous with your time, knowledge and your gifts. I  felt relaxed for a long time afterward, which was nice especially since I have been so stressed out lately."
+                
             </div>`,
-        productMaker: "Blevins Harps",
-        productImageUrl: "/img/storePartners/blevins_harps_logo_brightness.png",
+        productMaker: "Harp and Heart",
+        productImageUrl: "/img/storePartners/harpandheart_logo.png",
         productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'https://blevinsharps.com',
-        sellerWebsiteText: 'blevinsharps.com',
-        sellerEmail: 'blevinsharps@gmail.com'
+        sellerWebsite: 'http://harpandheart.com',
+        sellerWebsiteText: 'harpandheart.com',
+        sellerEmail: 'harpandheart@yahoo.com'
     }
     // {
     //     id: 'theharpplace',

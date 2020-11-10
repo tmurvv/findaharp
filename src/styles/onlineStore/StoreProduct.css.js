@@ -66,13 +66,13 @@ function StoreProductCss() {
             }
             .storeproduct__price {
                 margin: 25px 0;
-                width: 100%;
+                width: 265px;
                 text-align: center;
                 font-weight: 600;
             }
             .storeproduct__price-button-container {
                 order: 4;
-                width: 100%;
+                width: 265px;
                 position: absolute;
                 bottom: 0;
                 left: 0px;
