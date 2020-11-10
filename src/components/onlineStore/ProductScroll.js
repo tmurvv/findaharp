@@ -22,12 +22,35 @@ const initialState = {
 const ProductScroll = ({ filteredproductscontainer, allstate }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
+    const [ numInCarousel, setNumInCarousel ] = useState();
 
     const size = getWindowSize();
     function handleOpenDetail(product) {
         // dispatch({type:'detail', product});
         setDetailProduct(product);
         // setOpacity(true); 
+    }
+    function handlePhotoClick() {
+        alert('imin')
+        this.setState({
+            detailProduct: e.target.name
+        })
+    }
+    function moveLeft() {
+        var newActive = this.state.active
+        newActive--
+        this.setState({
+            active: newActive < 0 ? this.state.items.length - 1 : newActive,
+            direction: 'left'
+        })
+    }
+    
+    function moveRight() {
+        var newActive = this.state.active
+        this.setState({
+            active: (newActive + 1) % this.state.items.length,
+            direction: 'right'
+        })
     }
     function handleCloseDetail() {
         // dispatch({type: 'initial'})
@@ -46,6 +69,7 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
     }
     useEffect(() => {
         triggerLazy();
+        setNumInCarousel(getWindowSize()/300);
     },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
@@ -53,10 +77,11 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
         return(
             
             <div data-test='component-ProductContainer' className='storeproductContainer'>
-                <div>
-                    
-                </div>
-                <div className="storegrid-container">
+                
+                <h1>Num: {numInCarousel}</h1>
+                <div id="carousel" className="noselect storegrid-container">
+                    <div className="arrow arrow-left" onClick={moveLeft}>&#10094;</div>
+
                     {addPlaces.map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
@@ -64,6 +89,7 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
                         handleclosedetail={handleCloseDetail}
                         />
                     )}
+                    <div className="arrow arrow-right" onClick={moveRight}>&#10095;</div>
                 </div>
                 {detailProduct&&detailProduct.title?
                     <StoreProductModal 
@@ -95,6 +121,189 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
                 <div style={{height: '300px'}}>
                 </div>
             } */}
+            <style>{`
+                
+
+                
+                #carousel {
+                    height: 200px;
+                    width: 100%;
+                    margin: 70px auto;
+                    // display: flex;
+                    // justify-content: space-evenly;
+                    position: relative;
+                }
+
+                #carousel span {
+                    // display: flex;
+                    // justify-content: space-evenly;
+                    position: relative;
+                    width: 80%;
+                    margin-left: 15%;
+                }
+                
+                .arrow {
+                    position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    background-color: #f9bf1e;
+                    text-align: center;
+                    font-size: 25px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    font-size: 20px;
+                    color: #fffeee;
+                    line-height: 30px;
+                    margin-top: 85px;
+                    z-index: 1000;
+                }
+                
+                .arrow-right {
+                    right: 10%;
+                }
+                .arrow-left {
+                    left: 10%;
+                }
+                
+                .item {
+                    text-align: center;
+                    color: white;
+                    font-size: 40px;
+                    position: absolute;
+                    transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
+                    display: flex;
+                    align-items: center;
+                }
+                
+                .level-2 {
+                    height: 150px;
+                    width: 110px;
+                    line-height: 150px;
+                    background-color: #fff;
+                    left: 650px;
+                    margin-top: 25px;
+                }
+
+                .level-1 {
+                    height: 180px;
+                    width: 130px;
+                    line-height: 180px;
+                    background-color: #fff;
+                    left: 500px;
+                    margin-top: 10px;
+                }
+
+                .level0 {
+                    height: 200px;
+                    width: 150px;
+                    line-height: 200px;
+                    background-color: #fff;
+                    left: 330px;
+                }
+
+                .level1 {
+                    height: 180px;
+                    width: 130px;
+                    line-height: 180px;
+                    background-color: #fff;
+                    margin-top: 10px;
+                    left: 180px;
+                }
+
+                .level2 {
+                    height: 150px;
+                    width: 110px;
+                    line-height: 150px;
+                    background-color: #fff;
+                    margin-top: 25px;
+                    left: 50px;
+                }
+
+                .left-enter {
+                    opacity: 0;
+                    left: 50px - 110px;
+                    height: 150px - 30;
+                    width: 110px - 20;
+                    line-height: 150px - 30;
+                    margin-top: 40px;
+                }
+
+                .left-enter.left-enter-active {
+                    opacity: 1;
+                    left: 50px;
+                    height: 150px;
+                    width: 110px;
+                    line-height: 150px;
+                    margin-top: 25px;
+                    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+                }
+
+                .left-leave {
+                    opacity: 1;
+                    left: 650px;
+                    height: 150px;
+                    width: 110px;
+                    line-height: 150px;
+                    margin-top: 25px;
+                }
+
+                .left-leave.left-leave-active {
+                    left: 650px + 110px + 20;
+                    opacity: 0;
+                    height: 150px - 30;
+                    line-height: 120px;
+                    margin-top: 40px;
+                    width: 110px - 20;
+                    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+                }
+
+                .right-enter {
+                    opacity: 0;
+                    left: 650px + 110px;
+                    height: 150px - 30;
+                    width: 110px - 20;
+                    line-height: 150px - 30;
+                    margin-top: 40px;
+                }
+
+                .right-enter.right-enter-active {
+                    left: 650px;
+                    opacity: 1;
+                    height: 150px;
+                    margin-top: 25px;
+                    line-height: 150px;
+                    width: 110px;
+                    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+                }
+
+                .right-leave {
+                    left: 50px;
+                    height: 150px;
+                    opacity: 1;
+                    margin-top: 25px;
+                    line-height: 150px;
+                    width: 110px;
+                }
+
+                .right-leave.right-leave-active {
+                    left: 50px - 110px;
+                    opacity: 0;
+                    height: 150px - 30;
+                    width: 110px - 20;
+                    line-height: 150px - 30;
+                    margin-top: 40px;
+                    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+                }
+
+                .noselect {
+                    -webkit-user-select: none; 
+                     -khtml-user-select: none; 
+                       -moz-user-select: none; 
+                        -ms-user-select: none;  
+                            user-select: none;
+                }
+                `}
+                </style>
             </>
         );
     }    

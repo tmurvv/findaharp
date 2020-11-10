@@ -56,7 +56,7 @@ class Carousel extends React.Component {
             active: newActive < 0 ? this.state.items.length - 1 : newActive,
             direction: 'left'
         })
-    }
+    } 
     
     moveRight() {
         var newActive = this.state.active

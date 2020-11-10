@@ -56,6 +56,8 @@ const OnlineStore = (props) => {
                 <br />
                 <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3>
                 
+                
+                    
                 {/* <ProductScroll /> */}
                 
                 
