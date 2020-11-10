@@ -13,7 +13,6 @@ import { UserContext } from '../src/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 import { parseJwt } from '../src/utils/helpers';
 
-
 // initialize reducer object
 const activeWindowInitialState = {
     activeWindow: 'login',
