@@ -31,11 +31,11 @@ function StoreProductContainerCss() {
             }
             .storegrid-container {
                 margin: 50px auto;
-                // width: 100%;
+                width: 80%;
                 // max-width: 1010px;
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-between;
+                overflow: hidden;
             }
             @media only screen and (max-width: 550px) {
                 .storegrid-container {

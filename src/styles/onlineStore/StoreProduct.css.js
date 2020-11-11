@@ -10,6 +10,7 @@ function StoreProductCss() {
                 max-height: 650px;
                 position: relative;
                 margin-bottom: 60px;
+                min-width: 265px;
             }
             .storeproduct__title {
                 width: 95%;

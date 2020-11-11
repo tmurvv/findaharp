@@ -1,5 +1,5 @@
 // packages
-import React, {useReducer, useEffect, useState } from 'react';
+import React, {useReducer, useEffect, useState, useRef } from 'react';
 import uuid from 'react-uuid';
 // styles
 import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
@@ -22,7 +22,10 @@ const initialState = {
 const ProductScroll = ({ filteredproductscontainer, allstate }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
-    const [ numInCarousel, setNumInCarousel ] = useState();
+    const [ numInCarousel, setNumInCarousel ] = useState(Math.floor(getWindowSize().width/310));
+    const [windowSize, setWindowSize] = useState();
+    const [ index, setIndex ] = useState(0);
+    const indexStart = useRef(); 
 
     const size = getWindowSize();
     function handleOpenDetail(product) {
@@ -37,20 +40,46 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
         })
     }
     function moveLeft() {
-        var newActive = this.state.active
-        newActive--
-        this.setState({
-            active: newActive < 0 ? this.state.items.length - 1 : newActive,
-            direction: 'left'
-        })
+        if (index<indexStart.current) indexStart.current -= 2;
+        if (index === filteredproductscontainer.length) {
+            setIndex(1);
+            indexStart.current=2;
+        } else if (index===0){
+            setIndex(filteredproductscontainer.length-1)
+            indexStart.current=filteredproductscontainer.length-2;
+        } else {
+            setIndex(indexStart.current);
+            indexStart.current--
+        }
+        setNumInCarousel(Math.floor(size.width/310));
+        // var newActive = this.state.active
+        // newActive--
+        // this.setState({
+        //     active: newActive < 0 ? this.state.items.length - 1 : newActive,
+        //     direction: 'left'
+        // })
     }
     
     function moveRight() {
-        var newActive = this.state.active
-        this.setState({
-            active: (newActive + 1) % this.state.items.length,
-            direction: 'right'
-        })
+        if (index>indexStart.current) indexStart.current += 2;
+        
+        if (index === 0) {
+            setIndex(1);
+            indexStart.current=2;
+        } else if (index===filteredproductscontainer.length-1) {
+            setIndex(0);
+            indexStart.current=0;
+        } else {
+            setIndex(indexStart.current);
+            indexStart.current++
+        }
+        setNumInCarousel(Math.floor(size.width/310));
+        
+        // var newActive = this.state.active
+        // setState({
+        //     active: (newActive + 1) % this.state.items.length,
+        //     direction: 'right'
+        // })
     }
     function handleCloseDetail() {
         // dispatch({type: 'initial'})
@@ -67,21 +96,29 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
         dispatch({type:'initial'})
         setOpacity(false);
     }
+    
     useEffect(() => {
         triggerLazy();
-        setNumInCarousel(getWindowSize()/300);
+    },[]);
+    useEffect(() => {
+        // console.log('eff', getWindowSize())
+        indexStart.current=0;
     },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
-        let addPlaces=filteredproductscontainer.slice(0,15);
+        let addPlaces=filteredproductscontainer.slice(index, index+numInCarousel);
         return(
             
             <div data-test='component-ProductContainer' className='storeproductContainer'>
+                {/* <h1>sz: {size.width}</h1>
+                <h1>nc: {Math.floor(size.width/310)}</h1>
+                <h1>index: {index}</h1>
+                <h1>current: {indexStart.current}</h1> */}
                 
-                <h1>Num: {numInCarousel}</h1>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '90px', color: 'grey'}}>&#10094;</div>
                 <div id="carousel" className="noselect storegrid-container">
-                    <div className="arrow arrow-left" onClick={moveLeft}>&#10094;</div>
-
+                    
                     {addPlaces.map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
@@ -89,7 +126,9 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
                         handleclosedetail={handleCloseDetail}
                         />
                     )}
-                    <div className="arrow arrow-right" onClick={moveRight}>&#10095;</div>
+                    
+                </div>
+                <div className="arrow arrow-right" onClick={moveRight} style={{fontSize: '90px', color: 'grey'}}>&#10095;</div>
                 </div>
                 {detailProduct&&detailProduct.title?
                     <StoreProductModal 
@@ -148,10 +187,9 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
                     height: 30px;
                     background-color: #f9bf1e;
                     text-align: center;
-                    font-size: 25px;
+                    font-size: 150px;
                     border-radius: 50%;
                     cursor: pointer;
-                    font-size: 20px;
                     color: #fffeee;
                     line-height: 30px;
                     margin-top: 85px;
