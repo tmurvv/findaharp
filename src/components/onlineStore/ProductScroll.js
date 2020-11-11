@@ -5,6 +5,7 @@ import uuid from 'react-uuid';
 import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
 // internal
 import StoreProductModal from './StoreProductModal';
+import FeaturedProduct from './FeaturedProduct';
 import StoreProduct from './StoreProduct';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../utils/helpers';
 import { productsReducer } from '../../reducers/reducers';
@@ -19,10 +20,10 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductScroll = ({ filteredproductscontainer, allstate }) => {
+const ProductScroll = ({ filteredproductscontainer, title, allstate }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
-    const [ numInCarousel, setNumInCarousel ] = useState(Math.floor(getWindowSize().width/310));
+    const [ numInCarousel, setNumInCarousel ] = useState(Math.floor(getWindowSize().width/270));
     const [windowSize, setWindowSize] = useState();
     const [ index, setIndex ] = useState(0);
     const indexStart = useRef(); 
@@ -51,7 +52,7 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
             setIndex(indexStart.current);
             indexStart.current--
         }
-        setNumInCarousel(Math.floor(size.width/310));
+        setNumInCarousel(Math.floor(size.width/270));
         // var newActive = this.state.active
         // newActive--
         // this.setState({
@@ -73,7 +74,7 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
             setIndex(indexStart.current);
             indexStart.current++
         }
-        setNumInCarousel(Math.floor(size.width/310));
+        setNumInCarousel(Math.floor(size.width/270));
         
         // var newActive = this.state.active
         // setState({
@@ -111,24 +112,22 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
             
             <div data-test='component-ProductContainer' className='storeproductContainer'>
                 {/* <h1>sz: {size.width}</h1>
-                <h1>nc: {Math.floor(size.width/310)}</h1>
+                <h1>nc: {Math.floor(size.width/270)}</h1>
                 <h1>index: {index}</h1>
                 <h1>current: {indexStart.current}</h1> */}
-                
+                <h3 style={{width: '100%', textAlign: 'left', margin:'auto', marginBottom: '-15px', marginTop: '50px', fontFamily: "Metropolis Extra Bold", textTransform: 'uppercase'}}>{title}</h3>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '90px', color: 'grey'}}>&#10094;</div>
-                <div id="carousel" className="noselect storegrid-container">
-                    
-                    {addPlaces.map(product => <StoreProduct 
-                        key={uuid()}
-                        productdetail={product}
-                        handleopendetail={handleOpenDetail} 
-                        handleclosedetail={handleCloseDetail}
-                        />
-                    )}
-                    
-                </div>
-                <div className="arrow arrow-right" onClick={moveRight} style={{fontSize: '90px', color: 'grey'}}>&#10095;</div>
+                    <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10094;</div>
+                    <div id="carousel" className="noselect storegrid-container">                   
+                        {addPlaces.map(product => <FeaturedProduct 
+                            key={uuid()}
+                            productdetail={product}
+                            handleopendetail={handleOpenDetail} 
+                            handleclosedetail={handleCloseDetail}
+                            />
+                        )}                     
+                    </div>
+                <div className="arrow arrow-right" onClick={moveRight} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10095;</div>
                 </div>
                 {detailProduct&&detailProduct.title?
                     <StoreProductModal 
@@ -161,9 +160,6 @@ const ProductScroll = ({ filteredproductscontainer, allstate }) => {
                 </div>
             } */}
             <style>{`
-                
-
-                
                 #carousel {
                     height: 200px;
                     width: 100%;

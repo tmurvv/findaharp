@@ -38,23 +38,18 @@ const OnlineStore = (props) => {
     },[]);
     return (
         <>
-            <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
+            <div className='index' style={{height: 'fit-content', padding: '40px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={props.filteredProducts} setSearchResults={setSearchResults}/>
-                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3>
+                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3> */}
                 {/* <StoreItemsHighlight filteredProducts={featuredProducts}/> */}
-                <br />
-                <br />
-                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3>
+                
+                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3> */}
                 {/* <StoreItemsHighlight filteredProducts={strings} heading={'STRINGS'}/> */}
                 {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>MUSIC</h3> */}
                 {/* <StoreItemsHighlight filteredProducts={music} heading={'MUSIC'}/> */}
-                <br />
-                <br />
-                <hr />
-                <br />
-                <br />
-                <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3>
+                
+                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3> */}
                 
                 
                     
@@ -67,7 +62,9 @@ const OnlineStore = (props) => {
                 
                 {/* {searchResults&&searchResults.length>0?<InfiniteProducts searchResults={searchResults}/>:''} */}
                 
-                <ProductScroll filteredproductscontainer={props.filteredProducts}/>
+                <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
+                <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
+                <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
             </div>
             <IndexCss />
             <OnlineStoreCss />
@@ -90,9 +87,11 @@ OnlineStore.getInitialProps = async (props) => {
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
     const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);
+    const featuredProducts = res.data.storeitems.filter(product => product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+        
     return {
         filteredProducts: res.data.storeitems, 
-        featuredProducts: res.data.storeitems.filter(product => product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts'), 
+        featuredProducts, 
         strings: res.data.storeitems.filter(product => product.title.toUpperCase().startsWith("3RD OCTAVE C")), 
         music: res.data.storeitems.filter(product => product.category==="music")
     };
