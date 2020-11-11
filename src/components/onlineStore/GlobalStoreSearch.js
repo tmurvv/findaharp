@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react';
 
 import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
+import StoreProductContainer from '../../components/onlineStore/StoreProductContainer';
 import InfiniteProducts from '../../components/onlineStore/InfiniteProducts';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
@@ -32,6 +33,7 @@ function GlobalStoreSearch(props) {
     const [ searchResults, setSearchResults ] = useState();
 
     function handleChange(soloensemble, level, publicationtype, reset) {
+
         // initialize variables
         let productListCopy = [...props.filteredProducts];
         console.log('globalhandel', productListCopy.length)
@@ -89,6 +91,7 @@ function GlobalStoreSearch(props) {
             publicationProductList=[...soloensembleProductList];
         }
         finalProductList=[...publicationProductList];
+        console.log('above cat', finalProductList.length)
         // category
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
@@ -109,6 +112,7 @@ function GlobalStoreSearch(props) {
             categoryProductList = [...publicationProductList]
         }
         finalProductList=[...categoryProductList];
+        console.log('above Search', finalProductList.length)
         //search term
         if (document.querySelector('#searchInput').value) searchTerm = document.querySelector('#searchInput').value;
         if(searchTerm) {
@@ -123,6 +127,7 @@ function GlobalStoreSearch(props) {
             searchProductList=[...categoryProductList]
         }
         finalProductList=[...searchProductList];
+        console.log('below search', finalProductList.length)
         props.setSearchResults(finalProductList)
         setSearchResults(finalProductList);
         console.log('global findl', finalProductList);
@@ -163,7 +168,7 @@ function GlobalStoreSearch(props) {
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
             <StoreProductSearch handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
-            {searchResults&&<InfiniteProducts searchResults={searchResults} />}
+            {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>}
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />
         </>

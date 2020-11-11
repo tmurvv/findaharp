@@ -53,7 +53,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         return(
             
             <div data-test='component-ProductContainer' className='storeproductContainer'>
-                
+                <h3 style={{width: '100%', textAlign: 'left', margin:'auto', marginBottom: '-15px', marginTop: '50px', fontFamily: "Metropolis Extra Bold", textTransform: 'uppercase'}}>Search Results: </h3>
                 <div className="storegrid-container">
                     {addPlaces.map(product => <StoreProduct 
                         key={uuid()}

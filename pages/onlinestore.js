@@ -26,6 +26,7 @@ const OnlineStore = (props) => {
     const [ featuredProducts, setFeaturedProducts ] = useState(props.featuredProducts);
     const [ strings, setStrings ] = useState(props.strings);
     const [ music, setMusic ] = useState(props.music);
+    const [ search, setSearch ] = useState(false);
     const { user } = useContext(UserContext);
     // display cart
     useEffect(()=>{
@@ -41,30 +42,15 @@ const OnlineStore = (props) => {
             <div className='index' style={{height: 'fit-content', padding: '40px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
                 <GlobalStoreSearch filteredProducts={props.filteredProducts} setSearchResults={setSearchResults}/>
-                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>HOLIDAY/GIFTS</h3> */}
-                {/* <StoreItemsHighlight filteredProducts={featuredProducts}/> */}
-                
-                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-65px', marginTop: '50px', fontFamily: "Metropolis Extra Bold"}}>STRINGS</h3> */}
-                {/* <StoreItemsHighlight filteredProducts={strings} heading={'STRINGS'}/> */}
-                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', marginBottom: '-110px', fontFamily: "Metropolis Extra Bold"}}>MUSIC</h3> */}
-                {/* <StoreItemsHighlight filteredProducts={music} heading={'MUSIC'}/> */}
-                
-                {/* <h3 style={{width: '80%', textAlign: 'left', margin:'auto', fontFamily: "Metropolis Extra Bold"}}>SEARCH RESULTS SHOWING: All products</h3> */}
-                
-                
+                {searchResults&&searchResults.title!==''&&searchResults.title!==undefined
+                    ?<h3>Results For: </h3>
                     
-                {/* <ProductScroll /> */}
-                
-                
-                {/* <StoreProductContainer filteredproductscontainer={props.filteredProducts}/> */}
-                <br />
-                {/* <h1>{searchResults&&searchResults[2].title} {searchResults&&searchResults.length}</h1> */}
-                
-                {/* {searchResults&&searchResults.length>0?<InfiniteProducts searchResults={searchResults}/>:''} */}
-                
-                <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
-                <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
-                <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
+                    :<>
+                        <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
+                        <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
+                        <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
+                    </>
+                }
             </div>
             <IndexCss />
             <OnlineStoreCss />
