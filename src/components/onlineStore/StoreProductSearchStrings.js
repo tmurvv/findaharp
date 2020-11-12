@@ -115,7 +115,7 @@ function StoreProductSearchStrings(props) {
             octaves: octaves==='All String Octaves'?'All String Octaves':octaves,
             productType: 'all',
         }
-        props.setEnsembleSearch(octaves);
+        props.setOctavesSearch(octaves);
         props.handleChange(octaves, allState.brands, allState.types);
         setAllState({...allState, 
             octaves: octaves==='All String Octaves'?'All String Octaves':octaves,
@@ -231,7 +231,7 @@ function StoreProductSearchStrings(props) {
     }
    function clearOneFilter(e) {
        let menuClick = e.target.name;
-        if (e.target.name==='octaves') {props.setEnsembleSearch("All String Octaves"); props.handleChange("All String Octaves", allState.brands, allState.types);}
+        if (e.target.name==='octaves') {props.setOctavesSearch("All String Octaves"); props.handleChange("All String Octaves", allState.brands, allState.types);}
         if (e.target.name==='brands') {props.setBrandsSearch("All Brands"); props.handleChange(allState.octaves, "All Brandss", allState.types);}
         if (e.target.name==='types') {props.setTypesSearch("All Types"); props.handleChange(allState.octaves, allState.brands, "All Types");}
         menuClick==="octaves"?menuClick="String Octave":''; // hack change e.target.name to 'String Octaves'

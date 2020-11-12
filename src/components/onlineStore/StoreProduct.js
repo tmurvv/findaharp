@@ -1,4 +1,4 @@
-import { useContext, useState, useReducer } from 'react';
+import { useContext, useState, useReducer, useEffect } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
 import LazyLoad from 'react-lazyload';
@@ -15,6 +15,7 @@ import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 
 import { leaveSiteListener, setlocalCart } from '../../utils/checkoutHelpers'
 import {
@@ -29,6 +30,7 @@ const StoreProduct = (props) => {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [ openModal, setOpenModal ] = useState(false);
+    const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
 
     function resetResults() {
@@ -101,6 +103,11 @@ const StoreProduct = (props) => {
         e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
+    useEffect(() => {
+        const result = Array.from(STORE_PARTNERS).filter(seller => {
+            if (seller.id===props.productdetail.store) setSellerInfo(seller);
+        });
+    });
     return (
         <div className="storeproduct">
             <Results 
@@ -155,9 +162,9 @@ const StoreProduct = (props) => {
                 :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
-                    <div style={{width:'fit-content'}}>Ships From: Canada</div>
+                    <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                     <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                    <div style={{width:'fit-content'}}>To: Anywhere</div>
+                    <div style={{width:'fit-content'}}>To: {sellerInfo&&sellerInfo.shipsTo}</div>
                 </div>
                 <button 
                     disabled={props.productdetail.sold&&String(props.productdetail.sold).toUpperCase()==='SOLD'}

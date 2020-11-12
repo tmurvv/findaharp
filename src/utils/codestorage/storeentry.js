@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 // internal
-import { STORE_PARTNERS } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import StoreProduct from '../../components/onlineStore/StoreProduct';
 import OnlineStorePartner from '../../components/onlineStore/OnlineStorePartner';
 import PageTitle from '../../components/PageTitle';

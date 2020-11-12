@@ -12,6 +12,7 @@ import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import {
     incQty
 } from '../../utils/storeHelpers';
@@ -25,6 +26,7 @@ function StoreProductModal(props) {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const {
         id,
@@ -110,6 +112,11 @@ function StoreProductModal(props) {
         e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
+    useEffect(() => {
+        const result = Array.from(STORE_PARTNERS).filter(seller => {
+            if (seller.id===props.product.store) setSellerInfo(seller);
+        });
+    });
     return (
         <>
         <div className='storedetailContainer'>
@@ -147,9 +154,9 @@ function StoreProductModal(props) {
                         :<div className="storeproduct__price">${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
-                            <div style={{width:'fit-content'}}>Ships From: Canada</div>
+                            <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                             <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                            <div style={{width:'fit-content'}}>To: Anywhere</div>
+                            <div style={{width:'fit-content'}}>To: {sellerInfo&&sellerInfo.shipsTo}</div>
                         </div>
                         <button 
                             className='submit-btn'
