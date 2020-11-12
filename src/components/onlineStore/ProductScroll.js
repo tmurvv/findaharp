@@ -2,7 +2,7 @@
 import React, {useReducer, useEffect, useState, useRef } from 'react';
 import uuid from 'react-uuid';
 // styles
-import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
+import FeaturedProductContainerCss from '../../styles/onlinestore/FeaturedProductContainer.css';
 // internal
 import StoreProductModal from './StoreProductModal';
 import FeaturedProduct from './FeaturedProduct';
@@ -110,7 +110,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate }) => {
         let addPlaces=filteredproductscontainer.slice(index, index+numInCarousel);
         return(
             
-            <div data-test='component-ProductContainer' className='storeproductContainer'>
+            <div data-test='component-ProductContainer' className='featuredproductContainer'>
                 {/* <h1>sz: {size.width}</h1>
                 <h1>nc: {Math.floor(size.width/270)}</h1>
                 <h1>index: {index}</h1>
@@ -118,7 +118,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate }) => {
                 <h3 style={{width: '100%', textAlign: 'left', margin:'auto', marginBottom: '-15px', marginTop: '50px', fontFamily: "Metropolis Extra Bold", textTransform: 'uppercase'}}>{title}</h3>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10094;</div>
-                    <div id="carousel" className="noselect storegrid-container">                   
+                    <div id="carousel" className="noselect featuredgrid-container">                   
                         {addPlaces.map(product => <FeaturedProduct 
                             key={uuid()}
                             productdetail={product}
@@ -140,7 +140,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate }) => {
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     
                 />} */}
-                <StoreProductContainerCss />           
+                <FeaturedProductContainerCss />           
             </div>
         );
     } else {
@@ -150,10 +150,10 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate }) => {
                 ? */}
                 <>
                     <h3 style={{textAlign: 'center', marginBlockEnd: 0, width: '60%', margin: 'auto'}}>Not Found.<br />Strings, Accessories, Gifts and a much wider selection of Music coming in November.</h3>
-                    <div data-test='component-ProductContainer' className='storenotFoundContainer'>
+                    <div data-test='component-ProductContainer' className='featurednotFoundContainer'>
                         <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
                     </div>
-                    <StoreProductContainerCss />
+                    <FeaturedProductContainerCss />
                 </>
                 {/* :
                 <div style={{height: '300px'}}>

@@ -1,6 +1,7 @@
 import { useEffect, useState} from 'react';
 
 import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
+import StoreProductSearchStrings from '../../components/onlineStore/StoreProductSearchStrings';
 import StoreProductContainer from '../../components/onlineStore/StoreProductContainer';
 import InfiniteProducts from '../../components/onlineStore/InfiniteProducts';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -24,12 +25,16 @@ import {
     findNested
 } from '../../utils/searchProductsHelpers';
 import { PublicTwoTone } from '@material-ui/icons';
+import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
 
 
 function GlobalStoreSearch(props) {
     const [ ensembleSearch, setEnsembleSearch ] = useState();
     const [ levelSearch, setLevelSearch ] = useState();
     const [ publicationSearch, setPublicationSearch ] = useState();
+    const [ octavesSearch, setOctavesSearch ] = useState();
+    const [ brandsSearch, setBrandsSearch ] = useState();
+    const [ typesSearch, setTypesSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
 
     function handleChange(soloensemble, level, publicationtype, reset) {
@@ -42,6 +47,9 @@ function GlobalStoreSearch(props) {
         let soloensembleProductList=[];
         let publicationProductList=[];
         let categoryProductList=[];
+        let octavesProductList=[];
+        let brandsProductList=[];
+        let TypesProductList=[];
         let searchProductList=[];
         let finalProductList=[];
         let categoryFilter;
@@ -139,6 +147,9 @@ function GlobalStoreSearch(props) {
         setEnsembleSearch('All Lever/Pedal/Ens');
         setLevelSearch('All Levels');
         setPublicationSearch('All Publication Types');
+        setOctavesSearch('All String Octaves');
+        setBrandsSearch('All String Brands');
+        setTypesSearch('All String Types');
         handleChange('All Lever/Pedal/Ens', 'All Levels', 'All Publication Types', true)
     }
     useEffect(()=>{
@@ -168,9 +179,11 @@ function GlobalStoreSearch(props) {
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
             <StoreProductSearch handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
+            <StoreProductSearchStrings handleClear={handleClear} handleChange={handleChange} setOctavesSearch={setOctavesSearch} setBrandsSearch={setBrandsSearch} setTypesSearch={setTypesSearch}/>
             {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>}
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />
+            <StoreProductContainerCss />
         </>
     )
 }

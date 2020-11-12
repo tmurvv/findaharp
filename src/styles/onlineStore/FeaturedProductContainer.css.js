@@ -1,48 +1,48 @@
 import React from 'react';
 
-function StoreProductContainerCss() {
+function FeaturedProductContainerCss() {
     return (
         <style jsx="true">{`
-            .storenotFoundContainer {
+            .featurednotFoundContainer {
                 display: flex;
                 justify-content: center;
                 margin: 45px auto 25px;
                 position: relative;
                 z-index: 0;
             } 
-            .storenotFoundContainer img {
+            .featurednotFoundContainer img {
                 height: 225px;
             }          
-            .storeproductContainer {
+            .featuredproductContainer {
                 // margin: auto;
                 // position: relative;
                 // width: 100%;
                 // max-width: 1010px;
             }
             @media only screen and (max-width: 1475px) {
-                // .storeproductContainer {
+                // .featuredproductContainer {
                 //     max-width: unset;
                 // }
             }
             @media only screen and (max-width: 550px) {
-                // .storeproductContainer {
+                // .featuredproductContainer {
                 //     width: 80%;
                 // }
             }
-            .storegrid-container {
+            .featuredgrid-container {
                 margin: 50px auto;
                 width: 80%;
                 // max-width: 1010px;
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: space-between;
+                overflow: hidden;
             }
             @media only screen and (max-width: 550px) {
-                .storegrid-container {
+                .featuredgrid-container {
                     margin: 0 20px;
                 }
             }
-            // .storeproductSmallDisplay {
+            // .featuredproductSmallDisplay {
             //     display: flex;
             //     flex-direction: column;
             //     margin-bottom: 35px;
@@ -51,34 +51,34 @@ function StoreProductContainerCss() {
             //     height: 350px;
             //     width: 19%;
             // }
-            // .storeproductSmallDisplay:nth-child(5n) {
+            // .featuredproductSmallDisplay:nth-child(5n) {
             //     margin-right: 0;
             // }
             // @media only screen and (max-width: 1200px) {
-            //     .storeproductSmallDisplay {
+            //     .featuredproductSmallDisplay {
             //         width: 24%;
             //     }
             // }
             // @media only screen and (max-width: 950px) {
-            //     .storeproductSmallDisplay {
+            //     .featuredproductSmallDisplay {
             //         width: 33%;
             //     }
             // }
             // @media only screen and (max-width: 700px) {
-            //     .storeproductSmallDisplay {
+            //     .featuredproductSmallDisplay {
             //       width: 30vw;
             //     }
             // }
             // @media only screen and (max-width: 550px) {
-            //     .storeproductSmallDisplay {
+            //     .featuredproductSmallDisplay {
             //         width: 80vw;
             //         /*grid-template-columns: 39.5vw 39.5vw; */  
             //     }
             // }
-            // .storeproductSmallDisplay span {
+            // .featuredproductSmallDisplay span {
             //     cursor: pointer;
             // }
-            // .storeproductSmallDisplay-img {
+            // .featuredproductSmallDisplay-img {
             //     flex:7;
             //     overflow: hidden;
             //     display: flex;
@@ -86,7 +86,7 @@ function StoreProductContainerCss() {
             //     align-items: center;
             //     min-height: 269px;
             // }
-            // .storeproductSmallDisplay-img img{
+            // .featuredproductSmallDisplay-img img{
             //     height: 267px;
             //     width: auto;
             //     max-width:100%;
@@ -94,7 +94,7 @@ function StoreProductContainerCss() {
             //     object-fit: cover;
             //     overflow: hidden;
             // }
-            // .storeproductSmallDisplay-text {
+            // .featuredproductSmallDisplay-text {
             //     flex: 2;
             //     display: flex;
             //     flex-direction: column;
@@ -102,16 +102,16 @@ function StoreProductContainerCss() {
             //     align-items: center;
             //     padding-top: 5px;
             // }
-            // .storeproductSmallDisplay-text p {
+            // .featuredproductSmallDisplay-text p {
             //     margin-block-start: 0;
             //     margin-block-end: 0;
             // }
-            // .storeproductSmallDisplay-text p a {
+            // .featuredproductSmallDisplay-text p a {
             //     text-decoration: none;
             //     cursor: pointer;
             //     color: #333333;
             // }
-            // .storepriceText {
+            // .featuredpriceText {
             //     font-size: 12px;
             //     font-style: italic;
             // }
@@ -120,4 +120,4 @@ function StoreProductContainerCss() {
     )
 } 
 
-export default StoreProductContainerCss;
+export default FeaturedProductContainerCss;
