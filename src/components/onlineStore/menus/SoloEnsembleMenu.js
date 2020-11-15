@@ -22,8 +22,8 @@ export default function SoloEnsembleMenu(props) {
                 name='Lever/Pedal/Ens Menu'
                 className='plainTextSelectLine2'
             >
-                <li 
-                    onClick={handleClose} 
+                <li
+                    onClick={handleClose}
                     // key={uuid()} 
                     name='All Lever/Pedal/Ens'       
                 >All Lever/Pedal/Ens</li>

@@ -27,6 +27,7 @@ import {
 import {
     getFilteredStoreProducts,
 } from '../../utils/searchProductsHelpers';
+import { PublicTwoTone } from '@material-ui/icons';
 
 const initialState = {
     category: false,
@@ -111,13 +112,12 @@ function StoreProductSearch(props) {
         setMenus(initialState);
     }
     function handleSoloEnsembleSelection(soloensemble) {
-        props.setTypeOfSearch("music");
         const newState = {...allState, 
             soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
             productType: 'all',
         }
         props.setEnsembleSearch(soloensemble);
-        props.handleMusicChange(soloensemble, allState.level, allState.publicationtype);
+        props.handleChange("music", 'soloensemble', soloensemble, allState.level, allState.publicationtype);
         setAllState({...allState, 
             soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
             productType: 'all',
@@ -136,7 +136,8 @@ function StoreProductSearch(props) {
         });
         setMenus(initialState);
         props.setLevelSearch(level);
-        props.handleMusicChange(allState.soloensemble, level, allState.publicationtype);
+        console.log('handle level', level);
+        props.handleChange("music", 'level', allState.soloensemble, level, allState.publicationtype);
     }
     async function handlePublicationTypeSelection(publicationtype) {
         props.setTypeOfSearch("music");
@@ -145,7 +146,7 @@ function StoreProductSearch(props) {
             productType: 'all',
         }
         props.setPublicationSearch(publicationtype);
-        props.handleMusicChange(allState.soloensemble, allState.level, publicationtype);
+        props.handleChange('music', 'publicationtype', allState.soloensemble, allState.level, publicationtype);
         setAllState({...allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
@@ -234,16 +235,16 @@ function StoreProductSearch(props) {
     }
    function clearOneFilter(e) {
        let menuClick = e.target.name;
-        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleMusicChange("All Lever/Pedal/Ens", allState.level, allState.publicationtype);}
-        if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleMusicChange(allState.soloensemble, "All Levels", allState.publicationtype);}
-        if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleMusicChange(allState.soloensemble, allState.level, "All Publication Types");}
+        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleChange();}
+        if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange();}
+        if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleChange();}
         menuClick==="soloensemble"?menuClick="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
         
-        //props.handleMusicChange(allState.soloensemble, allState.level, allState.publicationtype);
+        //(allState.soloensemble, allState.level, allState.publicationtype);
     }
     useEffect(() => {
         triggerLazy();
