@@ -34,6 +34,7 @@ function GlobalStoreSearch(props) {
         level: ''
     });
     const [ typeOfSearch, setTypeOfSearch ] = useState();
+    const [ clearMenus, setClearMenus ] = useState(false);
     const [ ensembleSearch, setEnsembleSearch ] = useState();
     const [ levelSearch, setLevelSearch ] = useState();
     const [ publicationSearch, setPublicationSearch ] = useState();
@@ -44,17 +45,18 @@ function GlobalStoreSearch(props) {
 
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
+        setClearMenus(false);
         console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
-        let stepResult;
         let finalProductList=[];
         let categoryProductList=[];
         let categoryFilter;
+
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
             if (categoryFilter.toUpperCase()==="STRINGS") type='strings';
+            if (categoryFilter.toUpperCase()==="MUSIC") type='music';
         } else {
-            categoryFilter = "All";
             type='';
         }
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
@@ -62,6 +64,11 @@ function GlobalStoreSearch(props) {
             document.querySelector('#categoryfilter').value='Music';
             type = 'music'
         } 
+        if (menu==='octaves'||menu==='brands'||menu==='types') {
+            categoryFilter = "Strings";
+            document.querySelector('#categoryfilter').value='Strings';
+            type = 'strings'
+        }
         
         setAllState({...allState, category: categoryFilter});
 
@@ -71,6 +78,7 @@ function GlobalStoreSearch(props) {
         //     setAllState({...allState, category: "All"});
         //     return productListCopy;
         // }
+        console.log('cat top', categoryFilter)
         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
             productListCopy.map(product=>{
                 if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
@@ -89,6 +97,7 @@ function GlobalStoreSearch(props) {
         console.log('type',type)
         console.log('after cat filter',categoryProductList.length)
         if (type==='music') {
+            console.log('imin music')
             // initialize variables
             let productListCopy = [...props.filteredProducts];
             let levelProductList=[];
@@ -104,17 +113,16 @@ function GlobalStoreSearch(props) {
             if (value2&&value2.toUpperCase()!=='ALL LEVELS') {
                 
                 categoryProductList.map(product=> {
-                    console.log(String(product.level).toUpperCase())
+                    // console.log(String(product.level).toUpperCase())
                     // console.log(product.level)
                     if (String(product.level).toUpperCase()===value2.toUpperCase()) levelProductList.push(product);
                 })
             } else {
                 levelProductList=[...categoryProductList];
-                console.log('level', levelProductList.length)
             }
 
             console.log('level', levelProductList.length)
-            // finalProductList=[...levelProductList];
+            finalProductList=[...levelProductList];
 
             // check soloensemble
             if (value1&&value1.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
@@ -138,7 +146,7 @@ function GlobalStoreSearch(props) {
             } else {
                 soloensembleProductList=[...levelProductList];
             }
-            console.log('level', levelProductList.length)
+            console.log('soloens', soloensembleProductList.length)
             finalProductList=[...soloensembleProductList];
         
             // check publication
@@ -154,6 +162,68 @@ function GlobalStoreSearch(props) {
                 publicationProductList=[...soloensembleProductList];
             }
             finalProductList=[...publicationProductList];
+            
+            console.log('pub', publicationProductList.length)
+        } else if (type==='strings') {
+            console.log('imin strings')
+            // initialize variables
+            let productListCopy = [...props.filteredProducts];
+            let octavesProductList=[];
+            let brandsProductList=[];
+            let typesProductList=[];
+            let searchProductList=[];
+            let searchTerm;
+            
+            // add clear searches button
+            // if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";} // BREAKING
+            console.log('octavestop',value1&&value1.toUpperCase())
+            // check octaves
+            if (value1&&value1.toUpperCase()!=='ALL STRING OCTAVES'&&value1.toUpperCase()!=="ALL OCTAVES"&&value1!==undefined) {
+                
+                categoryProductList.map(product=> {
+                    // console.log(String(product.level).toUpperCase())
+                    // console.log(product.level)
+                    if (String(product.title).toUpperCase().includes(value1.toUpperCase())) octavesProductList.push(product);
+                })
+            } else {
+                octavesProductList=[...categoryProductList];
+                console.log('octaves', octavesProductList.length)
+            }
+
+            console.log('octaves', octavesProductList.length)
+            finalProductList=[...octavesProductList];
+            
+            // check brands
+            if (value2&&value2!==undefined&&value2.toUpperCase()!=='ALL BRANDS') {
+                console.log('in not all brands')
+                octavesProductList.map(product=> {
+                    // console.log(String(product.level).toUpperCase())
+                    // console.log(product.level)
+                    if (String(product.title).toUpperCase().includes(value2.toUpperCase())) brandsProductList.push(product);
+                })
+            } else {
+                brandsProductList=[...octavesProductList];
+                console.log('brands', brandsProductList.length)
+            }
+
+            console.log('brands', brandsProductList.length)
+            finalProductList=[...brandsProductList];
+
+            // check string types
+            if (value3&&value3.toUpperCase()!=="ALL TYPES") {
+                brandsProductList.map(product=> {
+                    if (product.title.toUpperCase().includes(value3.toUpperCase())) {
+                        typesProductList.push(product);
+                    } else if (product.subcategories) {
+                        product.subcategories.map(subcategory=>{
+                            if (subcategory.toUpperCase()===value3.toUpperCase()) typesProductList.push(product);
+                        });
+                    }
+                }); 
+            } else {
+                typesProductList=[...brandsProductList];
+            }
+            finalProductList=[...typesProductList];
         } else {
             finalProductList=[...categoryProductList]
         }
@@ -163,121 +233,15 @@ function GlobalStoreSearch(props) {
         setSearchResults(finalProductList)
     }
     
-    
-    function handleStringsChange(soloensemble, level, publicationtype, reset) {
-        console.log('imin', 'handleStringCHange')
-        // // initialize variables
-        // let productListCopy = [...props.filteredProducts];
-        // console.log('globalhandel', productListCopy.length)
-
-        // let levelProductList=[];
-        // let soloensembleProductList=[];
-        // let publicationProductList=[];
-        // let categoryProductList=[];
-        // let octavesProductList=[];
-        // let brandsProductList=[];
-        // let TypesProductList=[];
-        // let searchProductList=[];
-        // let finalProductList=[];
-        // let categoryFilter;
-        // let searchTerm;
-        // // add clear searches button
-        // if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";}
-        // // check level
-        // if (level&&level.toUpperCase()!=='ALL LEVELS') {
-        //     productListCopy.map(product=> {
-        //         if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
-        //     })
-        // } else {
-        //     levelProductList=[...productListCopy];
-        // }
-        // finalProductList=[...levelProductList];
-        // // check soloensemble
-        // if (soloensemble&&soloensemble.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
-        //     levelProductList.map(product=> {
-        //         if (String(soloensemble).toUpperCase()==="LEVER HARP") {
-        //             if (product.harptype) {
-        //                 if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
-        //             }
-        //         } else if (String(soloensemble).toUpperCase()==="PEDAL HARP") {
-        //             if (product.harptype) {
-        //                 if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
-        //             }
-        //         } else if (product.subcategories) {
-        //             product.subcategories.map(subcategory=>{
-        //                 if (subcategory.toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
-        //             })
-        //         }
-        //     });
-        // } else {
-        //     soloensembleProductList=[...levelProductList];
-        // }
-        // finalProductList=[...soloensembleProductList];
-        // // check publication
-        // if (publicationtype&&publicationtype.toUpperCase()!=="ALL PUBLICATION TYPES") {
-        //     soloensembleProductList.map(product=> {
-        //         if (product.subcategories) {
-        //             product.subcategories.map(subcategory=>{
-        //                 if (subcategory.toUpperCase()===publicationtype.toUpperCase()) publicationProductList.push(product);
-        //             })
-        //         }
-        //     }); 
-        // }else {
-        //     publicationProductList=[...soloensembleProductList];
-        // }
-        // finalProductList=[...publicationProductList];
-        // console.log('above cat', finalProductList.length)
-        // // category
-        // if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
-        //     categoryFilter = document.querySelector('#categoryfilter').value;
-        // }
-        // if (reset) categoryFilter="All";
-        // if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
-        //     publicationProductList.map(product=>{
-        //         if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
-        //             categoryProductList.push(product);
-        //         } 
-        //         if (product.subcategories) {
-        //             product.subcategories.map(subcategory=>{
-        //                 if (subcategory.toUpperCase()===categoryFilter.toUpperCase()) categoryProductList.push(product);
-        //             })
-        //         }
-        //     });
-        // } else {
-        //     categoryProductList = [...publicationProductList]
-        // }
-        // finalProductList=[...categoryProductList];
-        // console.log('above Search', finalProductList.length)
-        // //search term
-        // if (document.querySelector('#searchInput').value) searchTerm = document.querySelector('#searchInput').value;
-        // if(searchTerm) {
-        //     categoryProductList.map(product=> {
-        //         const keyList = Object.keys(product);
-        //         keyList.every(key=>{
-        //             if (findNested(product, key, searchTerm)) {searchProductList.push(product); return false;}
-        //             return true;
-        //         })
-        //     });
-        // } else {
-        //     searchProductList=[...categoryProductList]
-        // }
-        // finalProductList=[...searchProductList];
-        // console.log('below search', finalProductList.length)
-        // props.setSearchResults(finalProductList)
-        // setSearchResults(finalProductList);
-        // console.log('global findl', finalProductList);
-    }
-    function handleClear(evt) {
+    function handleClear() {
         document.querySelector('#categoryfilter').value='All';
         document.querySelector('#searchInput').value='';
-        
         setEnsembleSearch('All Lever/Pedal/Ens');
         setLevelSearch('All Levels');
         setPublicationSearch('All Publication Types');
         setOctavesSearch('All String Octaves');
         setBrandsSearch('All String Brands');
         setTypesSearch('All String Types');
-        filterByMusicSearches('All Lever/Pedal/Ens', 'All Levels', 'All Publication Types', true)
     }
     useEffect(()=>{
         if(props.filteredProducts&&props.filteredProducts.length===0) {
@@ -305,8 +269,8 @@ function GlobalStoreSearch(props) {
                 <input style={{flex: '8'}} type="text" id="searchInput" onChange={typeOfSearch==="Strings"?alert('string search'):()=>filterByMusicSearches(ensembleSearch,levelSearch,publicationSearch, false)} placeholder="Search" />
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
-            <StoreProductSearch setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
-            <StoreProductSearchStrings setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleStringsChange={handleStringsChange} setOctavesSearch={setOctavesSearch} setBrandsSearch={setBrandsSearch} setTypesSearch={setTypesSearch}/>
+            <StoreProductSearch clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
+            <StoreProductSearchStrings clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setOctavesSearch={setOctavesSearch} setBrandsSearch={setBrandsSearch} setTypesSearch={setTypesSearch}/>
             {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>}
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />

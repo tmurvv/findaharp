@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 
 export default function BrandsMenu(props) {
     const handleClose = (evt) => {
-        if (evt.target.value === 'All Brandss') return;
+        if (evt.target.value === 'All Brands') return;
         props.handleBrandsChange(evt.target.getAttribute('name')); 
     };
       
@@ -36,23 +36,23 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
-                    name='Bow Brand Pedal Gut'
-                >Bow Brand Pedal Gut</li>      
+                    name='Bow Brand Pedal Natural Gut'
+                >Bow Brand Pedal Natural Gut</li>      
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Lever Gut'
-                >Bow Brand Lever Gut</li>
+                    name='Bow Brand Lever Natural Gut'
+                >Bow Brand Lever Natural Gut</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Concedo Gut'
-                >Bow Brand Concedo Gut</li>
+                    name='Concedo Gut'
+                >Concedo Gut</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Burgundy Gut'
-                >Bow Brand Burgundy Gut</li>
+                    name='Burgundy Gut'
+                >Burgundy Gut</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -61,13 +61,13 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Pedal Bass Wire (silver-plated)'
-                >Bow Brand Pedal Bass Wire (silver-plated)</li>
+                    name='Pedal Bass Wire'
+                >Pedal Bass Wire (silver-plated)</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Pedal Bass Wire (tarnish-resistant)'
-                >Bow Brand Pedal Bass Wire (tarnish-resistant)</li>
+                    name='Pedal Bass Wire (tarnish-resistant)'
+                >Pedal Bass Wire (tarnish-resistant)</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -76,8 +76,8 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Professional Lever Wire'
-                >Bow Brand Professional Lever Wire</li>
+                    name='Professional Lever Bass Wire'
+                >Professional Lever Bass Wire</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 

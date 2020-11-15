@@ -64,62 +64,18 @@ function StoreProductSearchStrings(props) {
     //         types: false
     //     });
     // });
-    function handleArtistSelection(artist) {
-        const newState = {...allState, 
-            artist,
-            title: "All Titles"
-        }       
-        setAllState({...allState, 
-            artist,
-            title: "All Titles",
-            searchInfo: getSearchInfo(newState)
-        });
-        setMenus(initialState);
-    }
-    function handleTitleSelection(title) {
-        // shortcut when user clicks on line between title listings
-        if (title==='[object Object]') return;
-        //catches when user selects all titles from artist
-        const newStateAllTitles = {...allState, 
-            title: "All Titles"
-        } 
-        if (title.toUpperCase() === 'ALL TITLES') {
-            setAllState({...allState, 
-                title: "All Titles",
-                searchInfo: getSearchInfo(newStateAllTitles)
-            });
-            setMenus(initialState);
-            return;
-        }
-        const newState = {...allState, 
-            title
-        }
-        setAllState({...allState, 
-            title,
-            searchInfo: getSearchInfo(newState)
-        });
-        setMenus(initialState);
-    }
-    function handleCategorySelection(category) {
-        const newState = {...allState, 
-            category
-        }
-        setAllState({...allState, 
-            category,
-            searchInfo: getSearchInfo(newState)
-        });
-        setMenus(initialState);
-    }
+    
     function handleOctavesSelection(octaves) {
+        console.log('handleOct', octaves, allState)
         props.setTypeOfSearch("strings");
         const newState = {...allState, 
             octaves: octaves==='All String Octaves'?'All String Octaves':octaves,
             productType: 'all',
         }
         props.setOctavesSearch(octaves);
-        props.handleStringsChange(octaves, allState.brands, allState.types);
+        props.handleChange('strings', 'octaves', octaves, allState.brands, allState.types);
         setAllState({...allState, 
-            octaves: octaves==='All String Octaves'?'All String Octaves':octaves,
+            octaves,
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
@@ -136,7 +92,7 @@ function StoreProductSearchStrings(props) {
         });
         setMenus(initialState);
         props.setBrandsSearch(brands);
-        props.handleStringsChange(allState.octaves, brands, allState.types);
+        props.handleChange('strings', 'brands', allState.octaves, brands, allState.types);
     }
     async function handleTypesSelection(types) {
         props.setTypeOfSearch("strings");
@@ -145,7 +101,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all',
         }
         props.setTypesSearch(types);
-        props.handleStringsChange(allState.octaves, allState.brands, types);
+        props.handleChange('strings', 'types', allState.octaves, allState.brands, types);
         setAllState({...allState, 
             types: types==='All Types'?'All Types':types,
             productType: 'all',
@@ -234,9 +190,9 @@ function StoreProductSearchStrings(props) {
     }
    function clearOneFilter(e) {
        let menuClick = e.target.name;
-        if (e.target.name==='octaves') {props.setOctavesSearch("All String Octaves"); props.handleStringsChange("All String Octaves", allState.brands, allState.types);}
-        if (e.target.name==='brands') {props.setBrandsSearch("All Brands"); props.handleStringsChange(allState.octaves, "All Brandss", allState.types);}
-        if (e.target.name==='types') {props.setTypesSearch("All Types"); props.handleStringsChange(allState.octaves, allState.brands, "All Types");}
+        if (e.target.name==='octaves') {props.setOctavesSearch("All String Octaves"); props.handleChange("","","All String Octaves", allState.brands, allState.types);}
+        if (e.target.name==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("","",allState.octaves, "All Brands", allState.types);}
+        if (e.target.name==='types') {props.setTypesSearch("All Types"); props.handleChange("","",allState.octaves, allState.brands, "All Types");}
         menuClick==="octaves"?menuClick="String Octave":''; // hack change e.target.name to 'String Octaves'
         menuClick==="brands"?menuClick="Brand":''; // hack change e.target.name to 'String Octaves'
         menuClick==="types"?menuClick="Type":''; // hack change e.target.name to 'String Octaves'
@@ -244,7 +200,7 @@ function StoreProductSearchStrings(props) {
         const newSearchInfo = getSearchInfo(newState);
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
         
-        //props.handleStringsChange(allState.octaves, allState.brands, allState.types);
+        //props.handleChange(allState.octaves, allState.brands, allState.types);
     }
     useEffect(() => {
         triggerLazy();
@@ -264,6 +220,7 @@ function StoreProductSearchStrings(props) {
                         // currentselected={allState.octaves?allState.octaves:'Harp Octaves'}
                         handleclick={handleClick}
                         open={menus.octaves}
+                        clearMenu={props.clearMenus}
                     />
                     <BrandsMenu 
                         id="brandsmenu"
@@ -313,7 +270,7 @@ function StoreProductSearchStrings(props) {
                             onClick={()=>handleClick({target: {name: 'brands'}})}
                         >
                             {allState.brands}
-                            {allState.brands!=="All Brandss"
+                            {allState.brands!=="All Brands"
                                 ?<img 
                                     name='brands'
                                     onClick={

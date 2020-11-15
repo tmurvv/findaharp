@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import uuid from 'react-uuid';
 
 export default function OctavesMenu(props) {
@@ -6,7 +6,7 @@ export default function OctavesMenu(props) {
         if (evt.target.value === 'All String Octaves') return;
         props.handleOctavesChange(evt.target.getAttribute('name')); 
     };
-
+ 
     return (
         <div className='relative'>
             <button 
@@ -55,7 +55,7 @@ export default function OctavesMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Individual Wires'
+                    name='Wire'
                 >Individual Wires</li>
                 <li 
                     onClick={handleClose} 

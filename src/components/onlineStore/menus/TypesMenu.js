@@ -41,43 +41,48 @@ export default function TypesMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
-                    name='Gut Strings'
+                    name='Gut'
                 >Gut Strings</li>    
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
-                    name='Nylon Strings'
+                    name='Nylon'
                 >Nylon Strings</li> 
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
-                    name='Wire Strings'
+                    name='Wire'
                 >Wire Strings</li>      
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Strings for Pedal Harp'
+                    name='Pedal'
                 >Strings for Pedal Harp</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Strings for Lever Harps'
+                    name='Lever'
                 >Strings for Lever Harps</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Dusty Strings Harp Strings'
+                    name='Dusty Strings'
                 >Dusty Strings Harp Strings</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Wound Harp Strings'
+                    name='Wound'
                 >Wound Harp Strings</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bronze and Copper Rolls for Wire Harps'
-                >String Rolls for Wire Harps</li>
+                    name='Bronze'
+                >Bronze Rolls for Wire Harps</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Copper'
+                >Copper Rolls for Wire Harps</li>
             </ul>     
         </div>
     );
