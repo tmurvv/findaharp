@@ -235,9 +235,9 @@ function StoreProductSearch(props) {
     }
    function clearOneFilter(e) {
        let menuClick = e.target.name;
-        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleChange();}
-        if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange();}
-        if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publications"); props.handleChange();}
+        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleChange("music","soloensemble","All Lever/Pedal/Ens",allState.level, allState.publicationtype);}
+        if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange("music", "level", allState.soloensemble, "All Levels", allState.publicationtype);}
+        if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publication Types"); props.handleChange("music", "level", allState.soloensemble, allState.level, "All Publication Types");}
         menuClick==="soloensemble"?menuClick="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
