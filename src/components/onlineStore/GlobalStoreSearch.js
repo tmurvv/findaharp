@@ -48,9 +48,12 @@ function GlobalStoreSearch(props) {
         setClearMenus(false);
         console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
+        let preSearchProductList=[]
         let finalProductList=[];
         let categoryProductList=[];
+        let searchProductList=[];
         let categoryFilter;
+        let searchTerm;
 
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
@@ -227,6 +230,22 @@ function GlobalStoreSearch(props) {
         } else {
             finalProductList=[...categoryProductList]
         }
+        preSearchProductList = [...finalProductList]
+        // search term
+        if (document.querySelector('#searchInput').value) searchTerm = document.querySelector('#searchInput').value;
+        if(searchTerm) {
+            console.log('allstate', allState)
+            preSearchProductList.map(product=> {
+                const keyList = Object.keys(product);
+                keyList.every(key=>{
+                    if (findNested(product, key, searchTerm)) {searchProductList.push(product); return false;}
+                    return true;
+                })
+            });
+        } else {
+            searchProductList=[...preSearchProductList]
+        }
+        finalProductList=[...searchProductList];
         console.log('final', finalProductList.length)
         // setAllState({...allState, category: categoryFilter});
         console.log('final length', finalProductList.length);
@@ -266,7 +285,7 @@ function GlobalStoreSearch(props) {
                 </select>
                 <span style={{fontSize: '36px'}}>&#711;</span>
                 </div>
-                <input style={{flex: '8'}} type="text" id="searchInput" onChange={typeOfSearch==="Strings"?alert('string search'):()=>filterByMusicSearches(ensembleSearch,levelSearch,publicationSearch, false)} placeholder="Search" />
+                <input style={{flex: '8'}} type="text" id="searchInput" onChange={handleChange} placeholder="Search" />
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
             <StoreProductSearch clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
