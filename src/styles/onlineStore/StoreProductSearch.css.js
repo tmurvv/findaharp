@@ -34,7 +34,8 @@ function ProductSearchCss() {
                 justify-content: space-evenly;
                 text-align: center;
                 display: grid;
-                grid-template-columns: 33.3% 33.3% 33.3%;               
+                grid-template-columns: 33.3% 33.3% 33.3%;
+                color: white;            
             }
             @media only screen and (max-width: 550px) {
                 .storesearchLine1 {

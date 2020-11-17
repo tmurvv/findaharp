@@ -16,7 +16,6 @@ export default function LevelMenu(props) {
                 onClick={(e)=>{
                     props.handleclick(e); 
                 }}
-                style={{color: '#000000'}}
             >
                 Level
             </button>               

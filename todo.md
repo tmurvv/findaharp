@@ -24,6 +24,7 @@
 - make it so we don't have to log in again to upload a second harp listing (cookies?)
 - cancel button on upload harp listing
 - troubleshoot these steps: change password, check old password-should fail, choose try again, check new password, gets 'Network Error?'
+- clear all button in store search
 
 ### functionality
 - back to shopping goes to top of screen

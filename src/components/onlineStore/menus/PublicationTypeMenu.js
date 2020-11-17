@@ -22,7 +22,6 @@ export default function PublicationTypeMenu(props) {
                 onClick={(e)=>{
                     props.handleclick(e); 
                 }}
-                style={{color: '#000000'}}
             >
                 Publication Type
             </button>               

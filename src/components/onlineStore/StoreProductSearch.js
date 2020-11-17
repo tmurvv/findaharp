@@ -253,9 +253,9 @@ function StoreProductSearch(props) {
         <>       
         <div className='storeproductSearchOuter'>
             <h3 className='storesearchTitle'>Searching for MUSIC? Refine your search here.</h3>
-            <div className='storemobileSearchLine2'>
-                <div ref={ref} className='storesearchLine2'>
-                    <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
+            <div className='storemobileSearchLine1'>
+                <div ref={ref} className='storesearchLine1'>
+                    <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
                     <SoloEnsembleMenu 
                         id="soloensemblemenu"
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 

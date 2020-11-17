@@ -13,7 +13,6 @@ export default function SoloEnsembleMenu(props) {
                 className="menuButton" 
                 name='Lever/Pedal/Ens' 
                 onClick={(e)=>{props.handleclick(e);}}
-                style={{color: '#000000'}}
             >Lever/Pedal/Ens</button>
             <ul
                 id="soloensemble-select"
