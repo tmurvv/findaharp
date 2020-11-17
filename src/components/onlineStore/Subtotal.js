@@ -25,7 +25,7 @@ function Subtotal(props) {
     useEffect(() => {
         if (getNumItems(cart)>0&&user.shippingcountry) {
             setCartSubtotals({...cartSubtotals, 
-                shipping: shipping(user.shippingcountry,cart[0].store), 
+                shipping: shipping(user.shippingcountry,cart[0].store, cart), 
                 taxes: 0
             });
             if (user.shippingcountry==="Canada"&&user.shippingregion) {

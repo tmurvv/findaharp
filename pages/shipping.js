@@ -185,7 +185,7 @@ function Shipping() {
         }
         // selectCountry(val, user, setUser); 
         setCartSubtotals({...cartSubtotals, 
-            shipping: shipping(val, cart[0].store), 
+            shipping: shipping(val, cart[0].store, cart), 
             taxes: 0
         });
     }

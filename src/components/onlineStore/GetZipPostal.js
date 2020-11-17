@@ -63,7 +63,7 @@ function GetPostalZip() {
         } else {
             if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom), taxes:null})
+        setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom, cart), taxes:null})
         // switch(val) {
         //     case 'Canada':
         //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});

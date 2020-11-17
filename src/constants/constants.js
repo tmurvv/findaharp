@@ -1,4 +1,3 @@
-import { Help } from '@material-ui/icons';
 import uuid from 'uuid';
 
 export const SOLO_ENSEMBLE = [
@@ -48,7 +47,6 @@ export const STOREPARTNER_PLACEHOLDER = {
 
 export const SHIPPING_CALCULATIONS = {
     Canada: 20,
-    harpsetc: 12.00,
     default: -1
 }
 export const PRODUCTAD_PLACEHOLDER = {

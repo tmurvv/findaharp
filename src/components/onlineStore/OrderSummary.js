@@ -41,7 +41,7 @@ function OrderSummary() {
         // dispatchOnlineOrder({type:'pickup'})
         let initShipping = 0;
         let initTaxes = 0;
-        if (getNumItems(cart)>0&&user.shippingcountry) initShipping = shipping(user.shippingcountry,cart[0].store)
+        if (getNumItems(cart)>0&&user.shippingcountry) initShipping = shipping(user.shippingcountry,cart[0].store, cart)
         if (getNumItems(cart)>0&&user.shippingcountry&&user.shippingregion) initTaxes = tax(cart,user.shippingcountry,user.shippingregion, currencyMultiplier)
             
         if (String(storesOrderedFrom).toUpperCase==="FINDAHARP"&&user.shippingcountry==="Pickup") {

@@ -50,9 +50,20 @@ export function getProvCode(prov) {
             return null;
     }
 }
-export function shipping(shippingcountry, store) {
+function harpsetc_shipping(cart) {
+    const subtotal=getSubTotal(cart);
+    if (subtotal<10) return 6;
+    if (subtotal>=10&&subtotal<35) return 9.95;
+    if (subtotal>=35&&subtotal<50) return 11.50;
+    if (subtotal>=50&&subtotal<100) return 13.25;
+    if (subtotal>=100&&subtotal<250) return 15.25;
+    if (subtotal>=250&&subtotal<400) return 24.25;
+    if (subtotal>400) return 29.95;
+}
+export function shipping(shippingcountry, store, cart) {
+    console.log('shipingtop', cart.length)
     if (!shippingcountry) return 0.00;
-    if (store&&store==="harpsetc") return shippingcountry==='United States'?SHIPPING_CALCULATIONS.harpsetc:-1;
+    if (store&&store==="harpsetc") return shippingcountry==='United States'?harpsetc_shipping(cart):-1;
     switch (shippingcountry) {
         case 'Canada':
             return SHIPPING_CALCULATIONS.Canada;
@@ -97,9 +108,9 @@ export function getTotal(cart, user, currencyMultiplier) {
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
     if (user.currency==="CAD") {
-        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry,cart[0].store)) + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier))).toFixed(2);
+        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry,cart[0].store, cart)) + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier))).toFixed(2);
     } else {
-        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry,cart[0].store)) + Number(addOneInternational)).toFixed(2);
+        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry,cart[0].store, cart)) + Number(addOneInternational)).toFixed(2);
     }
 }
 export function selectRegion(val, user, setUser) {
