@@ -35,7 +35,7 @@ function StoreProductContainerCss() {
                 // max-width: 1010px;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: space-between;
+                justify-content: space-around;
             }
             @media only screen and (max-width: 550px) {
                 .storegrid-container {

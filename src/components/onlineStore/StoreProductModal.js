@@ -52,9 +52,9 @@ function StoreProductModal(props) {
         dispatchResultInfo({type: 'initial'});
     }
     function handleResults(msg) {
-        dispatchResultInfo({type: 'OK'});
         const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText=msg;
+        dispatchResultInfo({type: 'OK'});
     }
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();
@@ -66,6 +66,7 @@ function StoreProductModal(props) {
     }
 
     async function updateCart(e) {
+        console.log('imin updatecart')
         if (cart.length>0&&cart[0].store !==e.target.getAttribute('data-item-store')) {
             // const resultText = document.querySelector('#loadingLoginText');
             // resultText.innerText=`Coming soon !! Ordering from two different stores at the same time. Currently Find a Harp can only handle orders from one store at a time. We are new and working hard to enable you to order from different stores. Please complete or delete your order from ${cart[0].store} to order ${e.target.getAttribute('data-item-title')} from ${e.target.getAttribute('data-item-store')}.`;
@@ -75,10 +76,13 @@ function StoreProductModal(props) {
         }
         else if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
+            console.log('target item', targetItem.newused)
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
-                handleResults('Only 1 in stock. Item already in cart.');
+                alert('Only 1 in stock. Item already in cart.');
+                
             } else {
                 incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+                alert('Item added to cart.');
             }   
         } else {
             const cartCopy = [...cart];
@@ -101,15 +105,19 @@ function StoreProductModal(props) {
             }
             cartCopy.push(thisItem);
             const tempCartJson = await JSON.stringify(cartCopy);
+            alert('Item added to cart.');
+            console.log('item added');
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
-            alert('Item added to cart.')
             handleClick(e,props.product,false);
+            
         }
     }
     function handleAdd(e) { 
-        e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
-        e.target.addEventListener("animationend", (e)=>updateCart(e))
+        console.log('imin handleadd')
+        updateCart(e);
+        // e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
+        // e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
     useEffect(() => {

@@ -16,7 +16,7 @@ function CartButton() {
                 className='cartButton' 
                 onClick={()=>Router.push('/cart')} 
             >
-                <p>{getNumItems(cart)}</p>
+                <p>{getNumItems(cart)<10?`0${getNumItems(cart)}`:getNumItems(cart)}</p>
                 <img 
                     src='../../../img/shoppingCart.png'
                     alt='shopping cart'

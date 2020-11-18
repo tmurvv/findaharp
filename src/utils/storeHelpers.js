@@ -1,5 +1,7 @@
+import { SettingsBackupRestoreSharp } from '@material-ui/icons';
 import parseNum from 'parse-num';
-import { setlocalCart } from "./checkoutHelpers";
+import { CartSubtotalsContext } from '../contexts/cartSubtotalsContext';
+import { setlocalCart, tax, shipping } from "./checkoutHelpers";
 
 export function getNumItems(cart) {
     let amt = 0
@@ -11,13 +13,14 @@ export function getSubTotal(cart) {
     cart.map(item => amt=amt+parseInt(item.product_quantity)*parseFloat(parseNum(item.price)));
     return amt;
 }
-export async function decQty(cart, setCart, prodId) {
+export async function decQty(cart, setCart, prodId, cartSubtotals, setCartSubtotals) {
     let tempCart = [...cart]
     const idx = tempCart.findIndex(item => item.id===prodId || item.id===prodId);
     tempCart[idx].product_quantity = (tempCart[idx].product_quantity>0)?parseInt(tempCart[idx].product_quantity)-1:0;
     const tempCartJson = await JSON.stringify(tempCart);
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
+    setCartSubtotals({...CartSubtotals, taxes: tax(cart), shipping:shipping(cart)})
 }
 export async function incQty(cart, setCart, prodId) {
     let tempCart = [...cart]

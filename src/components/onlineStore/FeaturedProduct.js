@@ -44,7 +44,7 @@ const FeaturedProduct = (props) => {
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  
         resetResults();
-    }
+    } 
     function handleImageLoad(evt) {
         if (evt.target.style.height !== '30%') evt.target.style.height="auto";
         if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;

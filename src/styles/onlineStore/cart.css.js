@@ -104,9 +104,7 @@ function CartCss() {
             background-color: #E74C3C;
             color: #fff;
         }
-        
-        
-        
+            
         input[type=checkbox] {
             margin-right: 5px;
         }
@@ -128,8 +126,8 @@ function CartCss() {
             margin-block-start: 0;
             margin-block-end: 0;
             font-weight: 600;
-            font-size: 24px;
-            transform: translate(35px, -5px);
+            font-size: 20px;
+            transform: translate(39px, 0px);
         }
         /*********************************************/
         

@@ -3,6 +3,7 @@ import parseNum from 'parse-num';
 import { useContext } from 'react';
 import CartItemCss from '../../styles/onlineStore/CartItem.css';
 import { CartContext } from '../../contexts/CartContext';
+import { cartSubtotalsContext } from '../../contexts/cartSubtotalsContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
@@ -16,6 +17,7 @@ import {
 function CartItem(props) {
     const { item } = props;
     const { cart, setCart } = useContext(CartContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartContext);
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
@@ -47,7 +49,7 @@ function CartItem(props) {
                     
                     <div className='quantity_button'>
                         {item.newused==='new'
-                        ?<><div className='add' onClick={() => decQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
+                        ?<><div className='add' onClick={() => decQty(cart, setCart, item.id, cartSubtotals, setCartSubtotals)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
                         <div className='how_many'>{item.product_quantity}</div>
                         <div className='sub' onClick={() => incQty(cart, setCart, item.id)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div></>
                         :<p style={{fontSize:'14px', color:'#556f82', marginLeft:'7px'}}>Only 1 in stock</p>}
