@@ -2,6 +2,8 @@ import { useState, useContext, useEffect, useReducer } from 'react';
 import uuid from 'react-uuid';
 import Router, { withRouter } from 'next/router';
 
+
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import { UserContext } from '../../contexts/UserContext';
@@ -21,7 +23,7 @@ import {
     getSubTotal,
     getStores
 } from '../../utils/storeHelpers';
-import { getTotal } from '../../utils/checkoutHelpers';
+import { shipping } from '../../utils/checkoutHelpers';
 import GetZipPostal from '../../components/onlineStore/GetZipPostal';
 import PageTitle from '../../components/PageTitle';
 import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
@@ -35,14 +37,14 @@ function SubCart(props) {
     const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const [screenWidth, setScreenWidth] = useState();
     const [update, setUpdate] = useState(false);
+    const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
-    console.log(getStores(cart));
+    console.log('seller', sellerInfo);
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
-    
     }
     function handleClick() {
         const resultText = document.querySelector('#loadingLoginText');
@@ -65,6 +67,11 @@ function SubCart(props) {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
     }, []);
+    useEffect(() => {
+        Array.from(STORE_PARTNERS).filter(seller => {
+            if (seller.id===props.store) setSellerInfo(seller);
+        });
+    });
     return (
         <>
             <div className='index' style={{width: '100%', border: '1px solid lightgrey'}}>
@@ -76,7 +83,7 @@ function SubCart(props) {
                 <div className="cartContainer">  
                     <div id='cart'>
                         <div className='cartBody'>
-                            <h3>Items Shipped from {props.store}</h3>
+                            <h3>Items Shipped from {String(sellerInfo&&sellerInfo.productTitle)}</h3>
                         </div>
                         <div className='flex-sb'>
                             <div className='itemsContainer' style={{flex: '2'}}>
@@ -93,11 +100,13 @@ function SubCart(props) {
                                 </div>
                             </div>
                             <div style={{flex: '1'}}>
-                                <h5>Choose a delivery option:</h5>
-                                {/* <h1>Here: {cartSubtotals.shipping}</h1>
-                                <h3>here: {storesOrderedFrom&&storesOrderedFrom[0].store}</h3> */}
-                                <input type="radio" name='shippingoption' value='USPS' checked/>
-                                <label htmlFor="USPS">&nbsp;&nbsp;{cartSubtotals.shipping>0?`${cartSubtotals.shipping.toFixed(2)} USPS`:'Enter shipping country.'}</label>
+                                {user.shippingcountry
+                                ?<><h5>Choose a delivery option:</h5>
+                                <input type="radio" name={`${props.store}-shippingoption`} value={`${props.store}-shippingoption`} checked/>
+                                {Number(shipping(user.shippingcountry, props.store, props.subCart)[0])===-1
+                                    ?`* International Shipping requires a shipping estimate. This item shipping from ${sellerInfo.sellerCountry}.`
+                                    :<label htmlFor={`${props.store}-shippingoption`}>&nbsp;&nbsp;{`$${shipping(user.shippingcountry, props.store, props.subCart)[0].toFixed(2)} ${shipping(user.shippingcountry, props.store, props.subCart)[1]}`} </label>}
+                                </>:''}
                             </div>
                         </div>
                     </div>           

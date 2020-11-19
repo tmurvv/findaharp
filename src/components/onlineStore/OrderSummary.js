@@ -70,8 +70,8 @@ function OrderSummary() {
                 <div>
                     <div className='flex-sb'>
                         <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: </p>
-                        <p style={{textAlign: 'right'}}>
-                            ${cartSubtotals.shipping===-1
+                        <p style={{textAlign: 'right'}}> NYI
+                            {/* ${cartSubtotals.shipping===-1
                                 ?'International'
                                 :!isNaN(Number(cartSubtotals.shipping))
                                     ?(Number(cartSubtotals.shipping)).toFixed(2)
@@ -80,7 +80,7 @@ function OrderSummary() {
                             {String(user.shippingcountry).toUpperCase()==="CANADA"||String(user.shippingcountry).toUpperCase()==="PICKUP"||cartSubtotals.shipping===-1
                                 ?'*'
                                 :''
-                            }
+                            } */}
                         </p>
                     </div>
                     {/* {cart.length>0?<p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>:''}  */}

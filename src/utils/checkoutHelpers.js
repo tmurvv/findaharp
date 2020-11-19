@@ -50,32 +50,32 @@ export function getProvCode(prov) {
             return null;
     }
 }
-function harpsetc_shipping(cart) {
-    const subtotal=getSubTotal(cart);
-    if (subtotal<10) return 6;
-    if (subtotal>=10&&subtotal<35) return 9.95;
-    if (subtotal>=35&&subtotal<50) return 11.50;
-    if (subtotal>=50&&subtotal<100) return 13.25;
-    if (subtotal>=100&&subtotal<250) return 15.25;
-    if (subtotal>=250&&subtotal<400) return 24.25;
-    if (subtotal>400) return 29.95;
+function harpsetc_shipping(cart, shippingcountry) {
+    if (!shippingcountry||!cart||cart.length===0) return [ 0.00, 'USPS' ];
+    if (shippingcountry==="United States") {
+        const subtotal=getSubTotal(cart);
+        console.log('sub', subtotal)
+        if (subtotal<10) return [ 6, 'USPS' ];
+        if (subtotal>=10&&subtotal<35) return [ 9.95, 'USPS' ];
+        if (subtotal>=35&&subtotal<50) return [ 11.50, 'USPS' ];
+        if (subtotal>=50&&subtotal<100) return [ 13.25, 'USPS' ];
+        if (subtotal>=100&&subtotal<250) return [ 15.25, 'USPS' ];
+        if (subtotal>=250&&subtotal<400) return [ 24.25, 'USPS' ];
+        if (subtotal>400) return [ 29.95, 'USPS' ];
+    } else {
+        return [-1,''];
+    } 
+}
+function findaharp_shipping(cart, shippingcountry) {
+    if (shippingcountry==="Canada") return [ 20.00, "*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping." ];
+    return [ -1, ' ' ];
 }
 export function shipping(shippingcountry, store, cart) {
+    console.log('shipping vars', shippingcountry, store, cart[0])
     if (!shippingcountry) return 0.00;
-    if (store&&store==="harpsetc") return shippingcountry==='United States'?harpsetc_shipping(cart):-1;
-    switch (shippingcountry) {
-        case 'Canada':
-            return SHIPPING_CALCULATIONS.Canada;
-        // included for testing
-        case 'Antarctica':
-            return 0.00;
-        case 'Pickup':
-            return 0.00;
-        case 'select country':
-            return 'select country'
-        default:
-            return SHIPPING_CALCULATIONS.default;
-    }
+    if (shippingcountry==='Antarctica') return 0.00;
+    if (store&&store==="harpsetc") return harpsetc_shipping(cart, shippingcountry);
+    if (store&&store==="findaharp") return findaharp_shipping(cart, shippingcountry);
 }
 export function tax(cart, shippingcountry, shippingregion, currencyMultiplier) {
     if (!shippingregion) return 0.00;
