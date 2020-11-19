@@ -95,7 +95,7 @@ const StoreProduct = (props) => {
             const tempCartJson = await JSON.stringify(cartCopy);
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
-            setStoresOrderedFrom([cartCopy[0].store]);
+            setStoresOrderedFrom(cartCopy[0].store);
         }
     }
     function handleAdd(e) {  

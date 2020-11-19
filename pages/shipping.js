@@ -193,6 +193,8 @@ function Shipping() {
         selectRegion(val, user, setUser); 
         if (user.shippingcountry==="Canada") {
             setCartSubtotals({...cartSubtotals, taxes: tax(cart,"Canada",val,currencyMultiplier)});
+        } else if (val==="California") {
+            setCartSubtotals({...cartSubtotals, taxes: tax(cart,"United States",val,currencyMultiplier)});
         } else {
             setCartSubtotals({...cartSubtotals, taxes: 0});
         }

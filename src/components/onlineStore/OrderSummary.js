@@ -43,13 +43,14 @@ function OrderSummary() {
         let initTaxes = 0;
         if (getNumItems(cart)>0&&user.shippingcountry) initShipping = shipping(user.shippingcountry,cart[0].store, cart)
         if (getNumItems(cart)>0&&user.shippingcountry&&user.shippingregion) initTaxes = tax(cart,user.shippingcountry,user.shippingregion, currencyMultiplier)
-            
-        if (String(storesOrderedFrom).toUpperCase==="FINDAHARP"&&user.shippingcountry==="Pickup") {
+        if (getNumItems(cart)>0) console.log('ord sum', cart[0])
+
+        if (String(storesOrderedFrom).toUpperCase()==="FINDAHARP"&&user.shippingcountry==="Pickup") {
             initShipping = 0;
             initTaxes = tax(cart, "Canada", "Alberta", currencyMultiplier);
         }
 
-        if (String(storesOrderedFrom).toUpperCase==="HARPSETC"&&user.shippingcountry==="Pickup") {
+        if (String(storesOrderedFrom).toUpperCase()==="HARPSETC"&&user.shippingcountry==="Pickup") {
             initShipping = 0;
             initTaxes = tax(cart,"United States","California",currencyMultiplier);
         }

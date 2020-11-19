@@ -31,6 +31,7 @@ function Cart(props) {
     const { user, setUser } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
+    const [update, setUpdate] = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {
@@ -108,7 +109,7 @@ function Cart(props) {
                                 <li className='noItem' key={uuid()}>No Items in Cart</li>
                             :cart.map(item => 
                                 <li key={uuid()}>
-                                    <CartItem item={item}/>
+                                    <CartItem item={item} setUpdate={setUpdate}/>
                                 </li>
                             )}
                         </ul>

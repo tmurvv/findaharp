@@ -61,7 +61,6 @@ function harpsetc_shipping(cart) {
     if (subtotal>400) return 29.95;
 }
 export function shipping(shippingcountry, store, cart) {
-    console.log('shipingtop', cart.length)
     if (!shippingcountry) return 0.00;
     if (store&&store==="harpsetc") return shippingcountry==='United States'?harpsetc_shipping(cart):-1;
     switch (shippingcountry) {

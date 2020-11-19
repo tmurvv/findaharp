@@ -9,6 +9,7 @@ import StoreProductModalCSS from '../../styles/onlineStore/StoreProductModal.css
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
+import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
@@ -26,6 +27,7 @@ function StoreProductModal(props) {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const {
@@ -110,6 +112,7 @@ function StoreProductModal(props) {
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
             handleClick(e,props.product,false);
+            setStoresOrderedFrom(cartCopy[0].store);
             
         }
     }
