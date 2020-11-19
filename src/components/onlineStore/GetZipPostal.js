@@ -165,7 +165,7 @@ function GetPostalZip() {
             </div>
             </>
             :''}
-            <div>
+            {/* <div>
                 <input 
                     type='checkbox'
                     name='shippingstorepickup'
@@ -177,7 +177,7 @@ function GetPostalZip() {
                     Pickup at store<br />
                     {cart.length>0?<span style={{fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</span>:''}
                 </label>
-            </div>
+            </div> */}
             <ShippingCss />
         </div>
     )

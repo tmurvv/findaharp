@@ -2,42 +2,42 @@ import { useState, useContext, useEffect, useReducer } from 'react';
 import uuid from 'react-uuid';
 import Router, { withRouter } from 'next/router';
 
-import { CartContext } from '../src/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
-import { UserContext } from '../src/contexts/UserContext';
-import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import CartItem from '../src/components/onlineStore/CartItem';
-import OrderSummary from '../src/components/onlineStore/OrderSummary';
-import Subtotal from '../src/components/onlineStore/Subtotal';
-import { branding } from '../src/constants/branding';
-import { cssVariables } from '../src/constants/cssVariables';
-import CartCss from '../src/styles/onlineStore/cart.css'; 
-import IndexCss from '../src/styles/index.css'; 
-import { resultInfoReducer } from '../src/reducers/reducers';
-import Results from '../src/components/Results';
-import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
+import { CartContext } from '../../contexts/CartContext';
+import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
+import { UserContext } from '../../contexts/UserContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
+import CartItem from '../../components/onlineStore/CartItem';
+import OrderSummary from '../../components/onlineStore/OrderSummary';
+import Subtotal from '../../components/onlineStore/Subtotal';
+import { branding } from '../../constants/branding';
+import { cssVariables } from '../../constants/cssVariables';
+import CartCss from '../../styles/onlineStore/cart.css'; 
+import IndexCss from '../../styles/index.css'; 
+import { resultInfoReducer } from '../../reducers/reducers';
+import Results from '../../components/Results';
+import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import {
     getNumItems,
-    getStores,
-    getSubTotal
-} from '../src/utils/storeHelpers';
-import { getTotal } from '../src/utils/checkoutHelpers';
-import GetZipPostal from '../src/components/onlineStore/GetZipPostal';
-import PageTitle from '../src/components/PageTitle';
-import SubCart from '../src/components/onlineStore/SubCart';
-import { StoresOrderedFromContext } from '../src/contexts/StoresOrderedFromContext';
+    getSubTotal,
+    getStores
+} from '../../utils/storeHelpers';
+import { getTotal } from '../../utils/checkoutHelpers';
+import GetZipPostal from '../../components/onlineStore/GetZipPostal';
+import PageTitle from '../../components/PageTitle';
+import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 
 
-function Cart(props) {
+function SubCart(props) {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user, setUser } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const [screenWidth, setScreenWidth] = useState();
-    const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const [update, setUpdate] = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
+    console.log(getStores(cart));
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
         document.querySelector('#loadingLoginText').innerText='';
@@ -59,6 +59,7 @@ function Cart(props) {
     
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
+        
     }, []);
     // display cart??
     useEffect(()=>{
@@ -66,98 +67,49 @@ function Cart(props) {
     }, []);
     return (
         <>
-            <div className='index' style={{width: '100%'}}>
-                <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
+            <div className='index' style={{width: '100%', border: '1px solid lightgrey'}}>
                 <Results 
                     resultInfo={resultInfo} 
                     loginGuest={loginGuest}
                     resetResults={resetResults} 
                 />
-            <div className="cartContainer">  
-                <div id='cart'>
-                    {getStores(cart).map(store => {
-                        const subCart = cart.filter(cartItem=>cartItem.store===store)
-                        return <SubCart store={store} subCart={subCart} />
-                    })}
-                    {/* <div className='cartBody'>
-                        {screenWidth<=715
-                        ?<div className='subTotal'>
-                            <Subtotal type="subtotal"/>
-                            <div style={{display: 'flex'}}>
-                                <button className='submit-btn' style={{
-                                    marginRight: '2.5px', 
-                                    marginLeft: '15px', 
-                                    fontSize:'15px',
-                                    padding:'15px'
-                                    }} 
-                                    onClick={()=>Router.push('onlinestore')}
-                                >Continue Shopping</button>
-                                <button 
-                                    className='submit-btn'
-                                    onClick={()=>handleClick()}
-                                    style={{
-                                        marginLeft: '2.5px',
-                                        marginRight: '15px', 
-                                        backgroundColor: '#000', 
-                                        color: '#fff', 
-                                        fontSize:'15px', 
-                                        padding:'15px'
-                                    }}
-                                >Continue to Checkout</button>
+                <div className="cartContainer">  
+                    <div id='cart'>
+                        <div className='cartBody'>
+                            <h3>Items Shipped from {props.store}</h3>
+                        </div>
+                        <div className='flex-sb'>
+                            <div className='itemsContainer' style={{flex: '2'}}>
+                                <div className='items'>                       
+                                    <ul>
+                                        {props.subCart.length===0?
+                                            <li className='noItem' key={uuid()}>No Items in Cart</li>
+                                        :props.subCart.map(item => 
+                                            <li key={uuid()}>
+                                                <CartItem item={item} setUpdate={setUpdate}/>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div style={{flex: '1'}}>
+                                <h5>Choose a delivery option:</h5>
+                                {/* <h1>Here: {cartSubtotals.shipping}</h1>
+                                <h3>here: {storesOrderedFrom&&storesOrderedFrom[0].store}</h3> */}
+                                <input type="radio" name='shippingoption' value='USPS' checked/>
+                                <label htmlFor="USPS">&nbsp;&nbsp;{cartSubtotals.shipping>0?`${cartSubtotals.shipping.toFixed(2)} USPS`:'Enter shipping country.'}</label>
                             </div>
                         </div>
-                        :''}
-                    </div> */}
-                    {/* <div className='itemsContainer'>
-                    <div className='items'>                       
-                        <ul>
-                            {cart.length===0?
-                                <li className='noItem' key={uuid()}>No Items in Cart</li>
-                            :cart.map(item => 
-                                <li key={uuid()}>
-                                    <CartItem item={item} setUpdate={setUpdate}/>
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-                    </div> */}
+                    </div>           
                 </div>
-                <div>
-                    <GetZipPostal />
-                    <OrderSummary />
-                    {screenWidth>=715
-                    ?
-                    <div style={{display: 'flex'}}>
-                                <button className='submit-btn' style={{
-                                    marginRight: '2.5px',
-                                    fontSize:'14px', 
-                                    padding:'15px'
-                                    }} 
-                                    onClick={()=>Router.push('onlinestore')}
-                                >Continue Shopping</button>
-                                <button 
-                                    className='submit-btn'
-                                    onClick={()=>handleClick()}
-                                    style={{
-                                        marginLeft: '2.5px',
-                                        backgroundColor: '#000', 
-                                        color: '#fff', 
-                                        fontSize:'14px',
-                                        outlineColor: '#fff'
-                                    }}
-                                >Continue to Checkout</button>
-                            </div>
-                     :''}   
-                </div>            
-            </div>
-            <CartCss />
-            <IndexCss />
+                <CartCss />
+                <IndexCss />
             </div>
         </>
     )       
 }
 
-export default Cart;
+export default SubCart;
 
 {/* <div className='item mobileItem'>
                                         <div className='itemLine1'>

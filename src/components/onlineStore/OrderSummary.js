@@ -83,7 +83,7 @@ function OrderSummary() {
                             }
                         </p>
                     </div>
-                    {cart.length>0?<p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>:''} 
+                    {/* {cart.length>0?<p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>:''}  */}
                 </div>
                 {String(storesOrderedFrom).toUpperCase()!=="HARPSETC"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''}
                 {String(user.shippingcountry).toUpperCase()==="PICKUP"?<p style={{fontSize: '14px',marginTop:'-10px', maxWidth: '350px'}}>*Pickup at store</p>:''}

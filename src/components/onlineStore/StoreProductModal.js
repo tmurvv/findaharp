@@ -27,7 +27,7 @@ function StoreProductModal(props) {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const { setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
+    const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const {
@@ -68,15 +68,14 @@ function StoreProductModal(props) {
     }
 
     async function updateCart(e) {
-        console.log('imin updatecart')
-        if (cart.length>0&&cart[0].store !==e.target.getAttribute('data-item-store')) {
-            // const resultText = document.querySelector('#loadingLoginText');
-            // resultText.innerText=`Coming soon !! Ordering from two different stores at the same time. Currently Find a Harp can only handle orders from one store at a time. We are new and working hard to enable you to order from different stores. Please complete or delete your order from ${cart[0].store} to order ${e.target.getAttribute('data-item-title')} from ${e.target.getAttribute('data-item-store')}.`;
-            // dispatchResultInfo({type: 'OK'});
+        // if (cart.length>0&&cart[0].store !==e.target.getAttribute('data-item-store')) {
+        //     // const resultText = document.querySelector('#loadingLoginText');
+        //     // resultText.innerText=`Coming soon !! Ordering from two different stores at the same time. Currently Find a Harp can only handle orders from one store at a time. We are new and working hard to enable you to order from different stores. Please complete or delete your order from ${cart[0].store} to order ${e.target.getAttribute('data-item-title')} from ${e.target.getAttribute('data-item-store')}.`;
+        //     // dispatchResultInfo({type: 'OK'});
             
-            return alert(`This item is from a different store than what is currently in your cart. We are working hard to enable ordering from two different stores at the same time, but currently we can only handle orders from one store at a time. Please click on the cart icon and complete or delete your order from "${cart[0].store}" before ordering "${e.target.getAttribute('data-item-title')}" from "${e.target.getAttribute('data-item-store')}".`)
-        }
-        else if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
+        //     return alert(`This item is from a different store than what is currently in your cart. We are working hard to enable ordering from two different stores at the same time, but currently we can only handle orders from one store at a time. Please click on the cart icon and complete or delete your order from "${cart[0].store}" before ordering "${e.target.getAttribute('data-item-title')}" from "${e.target.getAttribute('data-item-store')}".`)
+        // }
+        if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             console.log('target item', targetItem.newused)
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
@@ -106,13 +105,14 @@ function StoreProductModal(props) {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
             const tempCartJson = await JSON.stringify(cartCopy);
             alert('Item added to cart.');
             console.log('item added');
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
             handleClick(e,props.product,false);
-            setStoresOrderedFrom(cartCopy[0].store);
+            setStoresOrderedFrom([...storesOrderedFrom, thisItem.store]);
             
         }
     }

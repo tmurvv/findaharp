@@ -34,7 +34,7 @@ function CartItem(props) {
                 :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)} each</div>}
                 <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
                     <button 
-                        onClick={() => deleteItem(cart, setCart, item.id, setStoresOrderedFrom, cartSubtotals, setCartSubtotals, user)} 
+                        onClick={() => deleteItem(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user)} 
                         style={{
                             border: 'none',
                             outline: 'none',

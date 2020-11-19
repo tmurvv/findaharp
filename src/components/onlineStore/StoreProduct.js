@@ -92,10 +92,11 @@ const StoreProduct = (props) => {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
             const tempCartJson = await JSON.stringify(cartCopy);
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
-            setStoresOrderedFrom(cartCopy[0].store);
+            setStoresOrderedFrom([...storesOrderedFrom, thisItem.store]);
         }
     }
     function handleAdd(e) {  
