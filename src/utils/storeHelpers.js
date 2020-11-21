@@ -29,7 +29,7 @@ export async function decQty(cart, setCart, prodId, cartSubtotals, setCartSubtot
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
     if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: 0, taxes: 0});
-    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, tempCart[0].store, tempCart)})
+    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, tempCart[0].store, tempCart), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
 }
 export async function incQty(cart, setCart, prodId, cartSubtotals, setCartSubtotals, user) {
     let tempCart = [...cart]
@@ -38,7 +38,7 @@ export async function incQty(cart, setCart, prodId, cartSubtotals, setCartSubtot
     const tempCartJson = await JSON.stringify(tempCart);
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
-    setCartSubtotals({...cartSubtotals, shipping: shipping(user.shippingcountry, tempCart[0].store, tempCart)})//BREAKING
+    setCartSubtotals({...cartSubtotals, shipping: shipping(user.shippingcountry, tempCart[0].store, tempCart), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})//BREAKING
 } 
 export async function deleteItem(cart, setCart, prodId, cartSubtotals, setCartSubtotals, user) {
     if (!confirm("Are you sure you want to delete this item from your cart?")) return;
@@ -49,5 +49,5 @@ export async function deleteItem(cart, setCart, prodId, cartSubtotals, setCartSu
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
     if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: 0, taxes: 0});
-    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, cart[0].store, tempCart)})
+    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, cart[0].store, tempCart), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
 }

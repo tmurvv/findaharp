@@ -6,7 +6,6 @@ import { CartContext } from '../../contexts/CartContext';
 import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import { ShippingArrayContext } from '../../contexts/ShippingArrayContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
 import { resultInfoReducer } from '../../reducers/reducers';
@@ -22,7 +21,6 @@ import {getStores} from '../../utils/storeHelpers';
 function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
-    // const { setShippingArray } = useContext(ShippingArrayContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
@@ -47,13 +45,13 @@ function GetPostalZip() {
         if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
             const confirmCurrency = window.confirm("View currency in US dollars?\nSelect OK for US dollars. Select cancel for Canadian dollars.");
             setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"USD":"CAD"})
-            setCartSubtotals({...cartSubtotals, shipping: null, taxes: null})
+            setCartSubtotals({...cartSubtotals, shipping: null, taxes: null, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
         } else {
             if (String(storesOrderedFrom).toUpperCase()==="FINDAHARP") {
-                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier)})
+                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
                 setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
             } else {
-                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="HARPSETC"?tax(cart, "United States", "California", currencyMultiplier):null})
+                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="HARPSETC"?tax(cart, "United States", "California", currencyMultiplier):null, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
                 setUser({...user, shippingcountry: "Pickup", shippingregion: null, currency: 'USD'})
             }
         }
@@ -61,7 +59,6 @@ function GetPostalZip() {
     const handleCountryChange = (val) => {
         let tempShip = 0;
         let subCart = [];
-        let tempShippingArray = [];
         if (val==='Canada') {
             if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
@@ -81,11 +78,9 @@ function GetPostalZip() {
             console.log('params', user.shippingcountry, store, subCart.length)
             console.log('subship', Number(Number(shipping(user.shippingcountry, store, subCart)[0])));
             tempShip = Number(tempShip) + Number(Number(shipping(user.shippingcountry, store, subCart)[0]));
-            tempShippingArray.push([store, Number(Number(shipping(user.shippingcountry, store, subCart)[0]))])
         });
         console.log('tempship', tempShip)
-        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0 });
-        setShippingArray(tempShippingArray);
+        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]] });
 
 
         // if (val==='Canada') {

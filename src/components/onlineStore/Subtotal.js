@@ -26,10 +26,11 @@ function Subtotal(props) {
         if (getNumItems(cart)>0&&user.shippingcountry) {
             setCartSubtotals({...cartSubtotals, 
                 shipping: shipping(user.shippingcountry,cart[0].store, cart), 
-                taxes: 0
+                taxes: 0,
+                shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]
             });
             if (user.shippingcountry==="Canada"&&user.shippingregion) {
-                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)});
+                setCartSubtotals({...cartSubtotals, taxes: tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier), shippingarray:'imin'});
             }
         }
     }, []);

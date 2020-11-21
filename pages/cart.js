@@ -6,7 +6,6 @@ import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { UserContext } from '../src/contexts/UserContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import { ShippingArrayContext } from '../src/contexts/ShippingArrayContext';
 import CartItem from '../src/components/onlineStore/CartItem';
 import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import Subtotal from '../src/components/onlineStore/Subtotal';
@@ -33,11 +32,9 @@ function Cart(props) {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user, setUser } = useContext(UserContext);
-    // const { shippingArray, setShippingArray } = useContext(ShippingArrayContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
     const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
-    // const [shippingArray, setShippingArray] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {
@@ -61,6 +58,7 @@ function Cart(props) {
     
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
+        console.log('cartuse', cartSubtotals)
     }, []);
     // display cart??
     useEffect(()=>{
@@ -77,6 +75,7 @@ function Cart(props) {
                 />
             <div className="cartContainer">  
                 <div id='cart'>
+                    <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1>
                     {getStores(cart).map(store => {
                         const subCart = cart.filter(cartItem=>cartItem.store===store)
                         return <SubCart store={store} subCart={subCart} />

@@ -170,9 +170,9 @@ function Shipping() {
         if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
             const confirmCurrency = window.confirm("Continue to view currency in Canadian dollars?\n Select OK for Canadian dollars. Select cancel for US dollars.");
             setUser({...user, shippingcountry: '', shippingregion: '', currency: confirmCurrency?"CAD":"USD"})
-            setCartSubtotals({...cartSubtotals, shipping: '', taxes: ''})
+            setCartSubtotals({...cartSubtotals, shipping: '', taxes: '', shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
         } else {
-            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier)})
+            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
             setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
         }
     }
@@ -200,7 +200,7 @@ function Shipping() {
             tempShip = Number(tempShip) + Number(Number(shipping(user.shippingcountry, store, subCart)[0]));
         });
         console.log('tempship', tempShip)
-        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0 });
+        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: ('imin') });
 
 
 
@@ -228,7 +228,7 @@ function Shipping() {
             });
             tempTax = Number(tempTax) + Number(Number(tax(subCart,user.shippingcountry,val, store, currencyMultiplier)));
         });
-        setCartSubtotals({...cartSubtotals, taxes: tempTax });
+        setCartSubtotals({...cartSubtotals, taxes: tempTax, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]] });
     }
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';

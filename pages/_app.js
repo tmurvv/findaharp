@@ -18,7 +18,6 @@ import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import {StatusContext} from "../src/contexts/StatusContext";
-import {ShippingArrayContext} from "../src/contexts/ShippingArrayContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -37,7 +36,8 @@ const cartOpenInit = false;
 const cartItemsInit = [];
 const cartSubtotalsInit = {
     shipping: 0,
-    taxes: 0
+    taxes: 0,
+    shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]
 }
 const storesOrderedFromInit = ['none']
 function MyApp(props) {
@@ -54,13 +54,13 @@ function MyApp(props) {
         agreementStatus: ''
     }); // firstname, lastname, email, distanceunit
     const [cart, setCart] = useState(cartItemsInit);
+    const [shipping, setShipping] = useState('working');
     const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
     const [storesOrderedFrom, setStoresOrderedFrom] = useState(storesOrderedFromInit);
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.33);
-    const [shippingArray, setShippingArray] = useState(0);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -145,7 +145,7 @@ function MyApp(props) {
                     localCartJson = [...localCartJson]
                     localCartJson.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
                     setCart(localCartJson);
-                    if (localCartJson.length>0) setStoresOrderedFrom([localCartJson[0].store]);//BREAKING needs to loop through cart and set stores
+                    if (localCartJson.length>0) setCartSubtotals({shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]});//BREAKING needs to loop through cart and set stores
                 } catch (e) {
                     console.log('error parsing local cart') // needs logging
                 }
@@ -173,7 +173,6 @@ function MyApp(props) {
                 <UserContext.Provider value={{user, setUser}}>
                 <StoresOrderedFromContext.Provider value={{storesOrderedFrom, setStoresOrderedFrom}}>
                 <StatusContext.Provider value={{status, setStatus}}>
-                <ShippingArrayContext.Provider value={{shippingArray, setShippingArray}}>
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -189,7 +188,6 @@ function MyApp(props) {
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
-                </ShippingArrayContext.Provider>
                 </StatusContext.Provider>
                 </StoresOrderedFromContext.Provider>
                 </UserContext.Provider>
@@ -210,7 +208,6 @@ function MyApp(props) {
                 <Banner />
                 <UserContext.Provider value={{user, setUser}}>
                 <StatusContext.Provider value={{status, setStatus}}>
-                <ShippingArrayContext.Provider value={{shippingArray, setshippingArray}}>
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -227,7 +224,6 @@ function MyApp(props) {
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
-                </ShippingArrayContext.Provider>
                 </StatusContext.Provider>
                 </UserContext.Provider>
                 

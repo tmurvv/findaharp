@@ -6,7 +6,6 @@ import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import { ShippingArrayContext } from '../../contexts/ShippingArrayContext';
 import { onlineOrderReducer } from '../../reducers/reducers';
 import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
@@ -30,8 +29,6 @@ function OrderSummary(props) {
     const { status } = useContext(StatusContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
-    // const { shippingArray } = useContext(ShippingArrayContext);
-    const shippingArray = ['findaharp', 3.00 ]
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
@@ -58,7 +55,8 @@ function OrderSummary(props) {
         }
         setCartSubtotals({...cartSubtotals, 
             shipping: initShipping, 
-            taxes: initTaxes
+            taxes: initTaxes,
+            shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]
         });
     }, []);
     return (
@@ -70,9 +68,9 @@ function OrderSummary(props) {
                     :<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart))*currencyMultiplier)?(Number(getSubTotal(cart))*currencyMultiplier).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
                 <div>
-                    {shippingArray&&shippingArray.map(shippingItem => 
+                    {cartSubtotals.shippingarray&&cartSubtotals.shippingarray.map(shippingItem => 
                         <div className='flex-sb'>
-                        <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM {shippingItem[0]}</span></p>
+                        <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM {shippingItem[0].toUpperCase()}</span></p>
                         <p style={{textAlign: 'right'}}>
                             ${shippingItem[1]===-1
                                 ?'International'
