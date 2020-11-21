@@ -27,7 +27,7 @@ import {
     deletelocalCart
 } from '../src/utils/checkoutHelpers';
 import { 
-    getNumItems, getSubTotal
+    getNumItems, getSubTotal, getStores
 } from '../src/utils/storeHelpers';
 import { ConfirmationNumber } from '@material-ui/icons';
 
@@ -177,27 +177,58 @@ function Shipping() {
         }
     }
     function changeCountry(val) {
+        let tempShip = 0;
+        let subCart = [];
         if (val==='Canada') {
             if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
-            if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+            setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        // selectCountry(val, user, setUser); 
-        setCartSubtotals({...cartSubtotals, 
-            shipping: shipping(val, cart[0].store, cart), 
-            taxes: 0
+        getStores(cart).map(store => {
+            subCart = [];
+            console.log('store')
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    console.log('YES')
+                    subCart.push(cartItem);
+                }
+                console.log('sub', subCart.length)
+            });
+            console.log('params', user.shippingcountry, store, subCart.length)
+            console.log('subship', Number(Number(shipping(user.shippingcountry, store, subCart)[0])));
+            tempShip = Number(tempShip) + Number(Number(shipping(user.shippingcountry, store, subCart)[0]));
         });
+        console.log('tempship', tempShip)
+        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0 });
+
+
+
+
+
+        
+        // // selectCountry(val, user, setUser); 
+        // setCartSubtotals({...cartSubtotals, 
+        //     shipping: shipping(val, cart[0].store, cart), 
+        //     taxes: 0
+        // });
     }
     function changeRegion(val) {
-        selectRegion(val, user, setUser); 
-        if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,"Canada",val,currencyMultiplier)});
-        } else if (val==="California") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,"United States",val,currencyMultiplier)});
-        } else {
-            setCartSubtotals({...cartSubtotals, taxes: 0});
-        }
+        selectRegion(val, user, setUser);
+        let tempTax = 0;
+        let subCart = [];
+        getStores(cart).map(store => {
+            subCart = [];
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    console.log('YES')
+                    subCart.push(cartItem);
+                }
+                console.log('sub', subCart.length)
+            });
+            tempTax = Number(tempTax) + Number(Number(tax(subCart,user.shippingcountry,val, store, currencyMultiplier)));
+        });
+        setCartSubtotals({...cartSubtotals, taxes: tempTax });
     }
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';

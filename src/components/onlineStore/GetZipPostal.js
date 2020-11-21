@@ -6,6 +6,7 @@ import { CartContext } from '../../contexts/CartContext';
 import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
+import { ShippingArrayContext } from '../../contexts/ShippingArrayContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
 import { resultInfoReducer } from '../../reducers/reducers';
@@ -16,11 +17,12 @@ import {
     tax,
     shipping
 } from '../../utils/checkoutHelpers';
-
+import {getStores} from '../../utils/storeHelpers';
 
 function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
+    // const { setShippingArray } = useContext(ShippingArrayContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
@@ -57,13 +59,42 @@ function GetPostalZip() {
         }
     }
     const handleCountryChange = (val) => {
+        let tempShip = 0;
+        let subCart = [];
+        let tempShippingArray = [];
         if (val==='Canada') {
-            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
+            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
-            if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+            setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom, cart), taxes:null})
+        getStores(cart).map(store => {
+            subCart = [];
+            console.log('store')
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    console.log('YES')
+                    subCart.push(cartItem);
+                }
+                console.log('sub', subCart.length)
+            });
+            console.log('params', user.shippingcountry, store, subCart.length)
+            console.log('subship', Number(Number(shipping(user.shippingcountry, store, subCart)[0])));
+            tempShip = Number(tempShip) + Number(Number(shipping(user.shippingcountry, store, subCart)[0]));
+            tempShippingArray.push([store, Number(Number(shipping(user.shippingcountry, store, subCart)[0]))])
+        });
+        console.log('tempship', tempShip)
+        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0 });
+        setShippingArray(tempShippingArray);
+
+
+        // if (val==='Canada') {
+        //     if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
+        //     setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
+        // } else {
+        //     if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+        // }
+        // setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom, cart), taxes:null})
         // switch(val) {
         //     case 'Canada':
         //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});

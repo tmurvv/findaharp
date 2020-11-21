@@ -6,6 +6,7 @@ import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { UserContext } from '../src/contexts/UserContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
+import { ShippingArrayContext } from '../src/contexts/ShippingArrayContext';
 import CartItem from '../src/components/onlineStore/CartItem';
 import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import Subtotal from '../src/components/onlineStore/Subtotal';
@@ -32,10 +33,11 @@ function Cart(props) {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user, setUser } = useContext(UserContext);
+    // const { shippingArray, setShippingArray } = useContext(ShippingArrayContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
     const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
-    const [update, setUpdate] = useState(false);
+    // const [shippingArray, setShippingArray] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {
@@ -123,8 +125,8 @@ function Cart(props) {
                     </div> */}
                 </div>
                 <div>
-                    <GetZipPostal />
-                    <OrderSummary />
+                    <GetZipPostal/>
+                    <OrderSummary/>
                     {screenWidth>=715
                     ?
                     <div style={{display: 'flex'}}>

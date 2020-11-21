@@ -18,6 +18,7 @@ import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import {StatusContext} from "../src/contexts/StatusContext";
+import {ShippingArrayContext} from "../src/contexts/ShippingArrayContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -59,6 +60,7 @@ function MyApp(props) {
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.33);
+    const [shippingArray, setShippingArray] = useState(0);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -171,6 +173,7 @@ function MyApp(props) {
                 <UserContext.Provider value={{user, setUser}}>
                 <StoresOrderedFromContext.Provider value={{storesOrderedFrom, setStoresOrderedFrom}}>
                 <StatusContext.Provider value={{status, setStatus}}>
+                <ShippingArrayContext.Provider value={{shippingArray, setShippingArray}}>
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -186,6 +189,7 @@ function MyApp(props) {
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
+                </ShippingArrayContext.Provider>
                 </StatusContext.Provider>
                 </StoresOrderedFromContext.Provider>
                 </UserContext.Provider>
@@ -206,6 +210,7 @@ function MyApp(props) {
                 <Banner />
                 <UserContext.Provider value={{user, setUser}}>
                 <StatusContext.Provider value={{status, setStatus}}>
+                <ShippingArrayContext.Provider value={{shippingArray, setshippingArray}}>
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -222,6 +227,7 @@ function MyApp(props) {
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
+                </ShippingArrayContext.Provider>
                 </StatusContext.Provider>
                 </UserContext.Provider>
                 
