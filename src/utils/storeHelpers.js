@@ -1,6 +1,6 @@
 import { SettingsBackupRestoreSharp } from '@material-ui/icons';
 import parseNum from 'parse-num';
-import { setlocalCart, tax, shipping } from "./checkoutHelpers";
+import { setlocalCart, tax, shipping, getShippingArray } from "./checkoutHelpers";
 
 export function getStores(cart) {
     const stores = new Set();
@@ -28,9 +28,9 @@ export async function decQty(cart, setCart, prodId, cartSubtotals, setCartSubtot
     const tempCartJson = await JSON.stringify(tempCart);
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
-    if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: 0, taxes: 0});
+    if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: 0, taxes: 0, shippingArray: []});
     // maybe add a check shipping array function here in case item deleted and nothing else from this store
-    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, tempCart[0].store, tempCart)})
+    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, tempCart[0].store, tempCart), shippingArray: getShippingArray(user.shippingcountry, cart)})
 }
 export async function incQty(cart, setCart, prodId, cartSubtotals, setCartSubtotals, user) {
     let tempCart = [...cart]
@@ -49,7 +49,7 @@ export async function deleteItem(cart, setCart, prodId, cartSubtotals, setCartSu
     const tempCartJson = await JSON.stringify(tempCart);
     setlocalCart('fah-cart', tempCartJson);
     setCart(tempCart);
-    if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: [], taxes: 0});
+    if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: [], taxes: 0, shippingArray: []});
     // maybe add a check shipping array function here in case item deleted and nothing else from this store
-    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, cart[0].store, tempCart)})
+    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, cart[0].store, tempCart), shippingArray: getShippingArray(user.shippingcountry, cart)})
 }

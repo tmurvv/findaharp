@@ -55,7 +55,7 @@ function OrderSummary(props) {
                     :<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart))*currencyMultiplier)?(Number(getSubTotal(cart))*currencyMultiplier).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
                 <div>
-                    {cartSubtotals.shippingarray&&cartSubtotals.shippingarray.map(shippingItem => 
+                    {cartSubtotals.shippingarray&&cartSubtotals.shippingarray.length>0?cartSubtotals.shippingarray.map(shippingItem => 
                         <div className='flex-sb'>
                         <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM {shippingItem[0].toUpperCase()}</span></p>
                         <p style={{textAlign: 'right'}}>
@@ -67,7 +67,12 @@ function OrderSummary(props) {
                             }
                         </p>
                     </div>
-                    )}
+                    ):<div className='flex-sb'>
+                        <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping:</p>
+                        <p style={{textAlign: 'right'}}>
+                            $0.00
+                        </p>
+                    </div>}
                     
                     {/* {cart.length>0?<p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>:''}  */}
                 </div>
