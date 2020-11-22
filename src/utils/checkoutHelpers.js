@@ -1,5 +1,5 @@
 import uuid from 'react-uuid';
-import { getSubTotal } from './storeHelpers';
+import { getSubTotal, getStores } from './storeHelpers';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
@@ -74,8 +74,8 @@ function harpsetc_shipping(cart, shippingcountry) {
     } 
 }
 function findaharp_shipping(cart, shippingcountry) {
-    if (shippingcountry==="Canada") return [ 20.00, "*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping." ];
-    if (shippingcountry==="United States") return [ 30.00, "*International Shipping" ];
+    if (shippingcountry==="Canada") return [ 8.00, "*If your order does not qualify for Canada Post letter rate, you will be contacted to approve additional shipping charges." ];
+    if (shippingcountry==="United States") return [ 20.00, "*International Shipping" ];
     return [ -1, '' ];
 }
 export function shipping(shippingcountry, store, cart) {
@@ -83,6 +83,21 @@ export function shipping(shippingcountry, store, cart) {
     if (shippingcountry==='Antarctica') return 0.00;
     if (store&&store==="harpsetc") return harpsetc_shipping(cart, shippingcountry);
     if (store&&store==="findaharp") return findaharp_shipping(cart, shippingcountry);
+}
+export function getShippingArray(shippingcountry, cart) {
+    let subCart = [];
+    let tempShipArray = [];
+    getStores(cart).map(store => {
+        subCart = [];
+        cart.map(cartItem=>{
+            if (String(cartItem.store)===store) {
+                subCart.push(cartItem);
+            }
+        });
+        tempShipArray.push([ store, Number(shipping(shippingcountry, store, subCart)[0]) ]);
+    });
+    return tempShipArray;
+    // setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: tempShipArray });
 }
 export function tax(cart, shippingcountry, shippingregion, store, currencyMultiplier) {
     if (!shippingregion) return 0.00;
@@ -103,7 +118,6 @@ export function tax(cart, shippingcountry, shippingregion, store, currencyMultip
                 return 0;
             }
         case "United States":
-            console.log('getsub', getSubTotal(cart)*.0825);
             if (store==='harpsetc'&&shippingregion==='California') {
                 return getSubTotal(cart)*.0825;
             } else {
@@ -116,15 +130,22 @@ export function tax(cart, shippingcountry, shippingregion, store, currencyMultip
           
 }
 export function getTotal(cart, user, currencyMultiplier) {
+    console.log('params', cart[0], user, currencyMultiplier)
     const subTotal = getSubTotal(cart);
-    // if international order, shipping is marked -1, this adds it back in to total
-    const addOneInternational = user.shippingcountry&&user.shippingcountry!=='United States'&&user.shippingcountry!=="Canada"?1:0;
+    const shippingArray = getShippingArray(user.shippingcountry, cart);
+    let shippingTotal = 0;
+    shippingArray.length>0?shippingArray.map(arrayItem => {shippingTotal += arrayItem[1];console.log('inside', shippingTotal)}):0;
+    if (shippingTotal<0) shippingTotal=0;
+    console.log('shipingtot', shippingTotal)
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
+    console.log('bott params', user.currency, subTotal, currencyMultiplier)
     if (user.currency==="CAD") {
-        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry,cart[0].store, cart)) + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier))).toFixed(2);
+        console.log(Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));
+        return (Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));
     } else {
-        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry,cart[0].store, cart)) + Number(addOneInternational)).toFixed(2);
+        console.log(Number(subTotal) + shippingTotal);
+        return (Number(subTotal) + shippingTotal);
     }
 }
 export function selectRegion(val, user, setUser) {

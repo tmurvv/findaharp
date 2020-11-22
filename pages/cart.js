@@ -75,7 +75,7 @@ function Cart(props) {
                 />
             <div className="cartContainer">  
                 <div id='cart'>
-                    <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1>
+                    {/* <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1> */}
                     {getStores(cart).map(store => {
                         const subCart = cart.filter(cartItem=>cartItem.store===store)
                         return <SubCart store={store} subCart={subCart} />

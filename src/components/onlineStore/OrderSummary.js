@@ -11,14 +11,15 @@ import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import {
     getNumItems,
-    getSubTotal
+    getSubTotal,
+    getStores
 } from '../../utils/storeHelpers';
 import {
+    getShippingArray,
     getTotal,
     shipping,
     tax
 } from '../../utils/checkoutHelpers';
-import { propTypes } from 'react-addons-css-transition-group';
 
 const onlineOrderReducerInitialState = {
     shipping: 0,
@@ -37,26 +38,12 @@ function OrderSummary(props) {
         ...onlineOrderReducerInitialState, 
     });
     useEffect(() => {
-        
         // dispatchOnlineOrder({type:'pickup'})
-        let initShipping = 0;
         let initTaxes = 0;
-        if (getNumItems(cart)>0&&user.shippingcountry) initShipping = shipping(user.shippingcountry,cart[0].store, cart);
         if (getNumItems(cart)>0&&user.shippingcountry&&user.shippingregion) initTaxes = tax(cart,user.shippingcountry,user.shippingregion, currencyMultiplier);
-
-        if (String(storesOrderedFrom).toUpperCase()==="FINDAHARP"&&user.shippingcountry==="Pickup") {
-            initShipping = 0;
-            initTaxes = tax(cart, "Canada", "Alberta", currencyMultiplier);
-        }
-
-        if (String(storesOrderedFrom).toUpperCase()==="HARPSETC"&&user.shippingcountry==="Pickup") {
-            initShipping = 0;
-            initTaxes = tax(cart,"United States","California",currencyMultiplier);
-        }
-        setCartSubtotals({...cartSubtotals, 
-            shipping: initShipping, 
+        setCartSubtotals({...cartSubtotals,
             taxes: initTaxes,
-            shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]
+            shippingarray: user.shippingcountry?getShippingArray(user.shippingcountry, cart):[]
         });
     }, []);
     return (

@@ -37,7 +37,7 @@ const cartItemsInit = [];
 const cartSubtotalsInit = {
     shipping: 0,
     taxes: 0,
-    shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]
+    shippingarray: []
 }
 const storesOrderedFromInit = ['none']
 function MyApp(props) {
@@ -145,7 +145,7 @@ function MyApp(props) {
                     localCartJson = [...localCartJson]
                     localCartJson.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
                     setCart(localCartJson);
-                    if (localCartJson.length>0) setCartSubtotals({shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]});//BREAKING needs to loop through cart and set stores
+                    if (localCartJson.length>0) setCartSubtotals({shippingarray: []});//BREAKING needs to loop through cart and set stores
                 } catch (e) {
                     console.log('error parsing local cart') // needs logging
                 }

@@ -24,7 +24,8 @@ import {
     getTotal, 
     shipping,
     tax,
-    deletelocalCart
+    deletelocalCart,
+    getShippingArray
 } from '../src/utils/checkoutHelpers';
 import { 
     getNumItems, getSubTotal, getStores
@@ -166,47 +167,16 @@ function Shipping() {
             default :
         }
     }
-    const handleStorePickup = () => {
-        if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
-            const confirmCurrency = window.confirm("Continue to view currency in Canadian dollars?\n Select OK for Canadian dollars. Select cancel for US dollars.");
-            setUser({...user, shippingcountry: '', shippingregion: '', currency: confirmCurrency?"CAD":"USD"})
-            setCartSubtotals({...cartSubtotals, shipping: '', taxes: '', shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
-        } else {
-            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
-            setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
-        }
-    }
     function changeCountry(val) {
-        let tempShip = 0;
-        let subCart = [];
         if (val==='Canada') {
             if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
             setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        getStores(cart).map(store => {
-            subCart = [];
-            console.log('store')
-            cart.map(cartItem=>{
-                if (String(cartItem.store)===store) {
-                    console.log('YES')
-                    subCart.push(cartItem);
-                }
-                console.log('sub', subCart.length)
-            });
-            console.log('params', user.shippingcountry, store, subCart.length)
-            console.log('subship', Number(Number(shipping(user.shippingcountry, store, subCart)[0])));
-            tempShip = Number(tempShip) + Number(Number(shipping(user.shippingcountry, store, subCart)[0]));
-        });
-        console.log('tempship', tempShip)
-        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: ('imin') });
+        setCartSubtotals({...cartSubtotals, shipping, taxes: 0, shippingarray: getShippingArray(val, cart) });
 
 
-
-
-
-        
         // // selectCountry(val, user, setUser); 
         // setCartSubtotals({...cartSubtotals, 
         //     shipping: shipping(val, cart[0].store, cart), 
@@ -224,11 +194,11 @@ function Shipping() {
                     console.log('YES')
                     subCart.push(cartItem);
                 }
-                console.log('sub', subCart.length)
+                // console.log('sub', subCart.length)
             });
             tempTax = Number(tempTax) + Number(Number(tax(subCart,user.shippingcountry,val, store, currencyMultiplier)));
         });
-        setCartSubtotals({...cartSubtotals, taxes: tempTax, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]] });
+        setCartSubtotals({...cartSubtotals, taxes: tempTax });
     }
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
@@ -278,7 +248,7 @@ function Shipping() {
                     </div>
                     <h3>Shipping Address</h3>
                 </div>
-                <div style={{display: 'flex', padding: '15px', marginTop:'-15px', marginBottom: '-15px'}}>
+                {/* <div style={{display: 'flex', padding: '15px', marginTop:'-15px', marginBottom: '-15px'}}>
                     <input 
                         type='checkbox'
                         name='shippingstorepickup'
@@ -290,7 +260,7 @@ function Shipping() {
                         Pickup at store<br />
                         <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span>
                     </label>
-                </div>
+                </div> */}
                <form 
                     method="get" 
                     onSubmit={(e)=>handleSubmit(e)}

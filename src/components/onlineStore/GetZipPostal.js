@@ -14,7 +14,8 @@ import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/cons
 import { 
     selectRegion,
     tax,
-    shipping
+    shipping,
+    getShippingArray
 } from '../../utils/checkoutHelpers';
 import {getStores} from '../../utils/storeHelpers';
 
@@ -40,47 +41,16 @@ function GetPostalZip() {
         // if (evt) evt.preventDefault();  
         resetResults();
     }
-    const handleStorePickup = () => {
-        console.log(storesOrderedFrom);
-        if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
-            const confirmCurrency = window.confirm("View currency in US dollars?\nSelect OK for US dollars. Select cancel for Canadian dollars.");
-            setUser({...user, shippingcountry: null, shippingregion: null, currency: confirmCurrency?"USD":"CAD"})
-            setCartSubtotals({...cartSubtotals, shipping: null, taxes: null, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
-        } else {
-            if (String(storesOrderedFrom).toUpperCase()==="FINDAHARP") {
-                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Canada", "Alberta", currencyMultiplier), shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
-                setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
-            } else {
-                setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: String(storesOrderedFrom).toUpperCase()==="HARPSETC"?tax(cart, "United States", "California", currencyMultiplier):null, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]]})
-                setUser({...user, shippingcountry: "Pickup", shippingregion: null, currency: 'USD'})
-            }
-        }
-    }
     const handleCountryChange = (val) => {
-        let tempShip = 0;
-        let subCart = [];
+        
         if (val==='Canada') {
             if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
             setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        getStores(cart).map(store => {
-            subCart = [];
-            console.log('store')
-            cart.map(cartItem=>{
-                if (String(cartItem.store)===store) {
-                    console.log('YES')
-                    subCart.push(cartItem);
-                }
-                console.log('sub', subCart.length)
-            });
-            console.log('params', user.shippingcountry, store, subCart.length)
-            console.log('subship', Number(Number(shipping(user.shippingcountry, store, subCart)[0])));
-            tempShip = Number(tempShip) + Number(Number(shipping(user.shippingcountry, store, subCart)[0]));
-        });
-        console.log('tempship', tempShip)
-        setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: [['simplymusic', 3.33], ['harptoheart', 7.77]] });
+        
+        setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(val,cart) });
 
 
         // if (val==='Canada') {
