@@ -13,9 +13,10 @@ function CartItemCss() {
             padding: 10px;
         }
         .product_image {
-            height: 40%;
-            min-height: 40%;
-            width: 70%;
+            // height: 40%;
+            // min-height: 40%;
+            // width: 70%;
+            max-width: 70px;
             padding-top: 10px;
             margin: auto;
         }
