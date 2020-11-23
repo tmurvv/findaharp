@@ -23,17 +23,17 @@ function CartItem(props) {
     const { setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     return (
         <>
-            <div className='item' style={{display: 'flex'}}>
-                <div className='product_image'>
+            <div className='subCart_item'>
+                <div className='subCart_item-image'>
                     <img src={item.product_image} alt={item.title}/>
                 </div>
-                <div style={{display: 'block'}}>
+                <div className='subCart_item-text'>
                     <div className='description'>
                         <p><span style={{fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span></p>
                     </div>
                     {user.currency==="USD"?<div className='price'>${parseNum(item.price).toFixed(2)} each</div>
                     :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)} each</div>}
-                    <div style={{borderBottom:"1px solid lightgrey"}} className='product_quantity'>
+                    <div className='product_quantity'>
                         <button 
                             onClick={() => deleteItem(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user)} 
                             style={{

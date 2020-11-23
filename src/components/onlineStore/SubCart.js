@@ -73,20 +73,23 @@ function SubCart(props) {
     });
     return (
         <>
-            <div className='index' style={{width: '100%', border: '1px solid lightgrey'}}>
+            <div className='subCart'>
+            {/* <div className='index' style={{width: '100%', border: '1px solid lightgrey'}}> */}
                 <Results 
                     resultInfo={resultInfo} 
                     loginGuest={loginGuest}
                     resetResults={resetResults} 
                 />
-                <div className="cartContainer">  
-                    <div id='cart'>
+                <div className="subCartContainer">  
+                    <div>
+                    {/* <div id='cart'> */}
                         <div className='cartBody'>
-                            <h3>Items Shipped from {String(sellerInfo&&sellerInfo.productTitle)}</h3>
+                            <h3>Items Shipped from {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
                         </div>
                         <div className='flex-sb'>
-                            <div className='itemsContainer' style={{flex: '2'}}>
-                                <div className='items'>                       
+                            <div className='itemsContainer' style={{flex: '3'}}>
+                                <div>                       
+                                {/* <div className='items'>*/}
                                     <ul>
                                         {props.subCart.length===0?
                                             <li className='noItem' key={uuid()}>No Items in Cart</li>
@@ -98,7 +101,7 @@ function SubCart(props) {
                                     </ul>
                                 </div>
                             </div>
-                            <div style={{flex: '1'}}>
+                            <div style={{flex: '2'}}>
                                 {user.shippingcountry
                                 ?<><h5>Choose a delivery option:</h5>
                                 <input type="radio" name={`${props.store}-shippingoption`} value={`${props.store}-shippingoption`} checked/>

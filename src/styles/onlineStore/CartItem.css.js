@@ -3,37 +3,44 @@ import React from "react";
 function CartItemCss() {
     return (
         <style jsx="true">{`
-        .item { 
-            width: 660px; 
-            height: 100px;
-            margin: 10px auto;
-            text-align: left;
+        .subCart_item { 
+            // width: 660px; 
+            // height: 100px;
+            margin: 15px;
+            // text-align: left;
             display: flex;
             border-radius: 3px;
-            padding: 10px;
+            // padding: 10px;
+            margin-bottom: 40px;
         }
-        .product_image {
+        .subCart_item-image {
             // height: 40%;
             // min-height: 40%;
-            // width: 70%;
-            max-width: 70px;
-            padding-top: 10px;
-            margin: auto;
+            width: 20%;
+            // max-width: 70px;
+            // padding-top: 10px;
+            // margin: auto;
+            flex: 2;
+            margin-right: 10px;
         }
-        .product_image img { 
+        .subCart_item-image img { 
+            width: 100%;
             // width: 140px;
             // max-height: 250px;
-            border-radius: 3px;
-            max-width:100%;
-            max-height:100%;
-            box-shadow: 3px 5px 3px lightgrey;
+            // border-radius: 3px;
+            // max-width:100%;
+            // max-height:100%;
+            // box-shadow: 3px 5px 3px lightgrey;
         }
-        .description { 
-            margin-top: 15px;
+        .subCart_item-text { 
+            flex: 8;
+            width: 80%;
+            // margin-top: 15px;
+            // margin-left: 10px;
+            // margin-bottom: 10px;
+            // max-height: 100px;
+            // overflow-y: auto;
             margin-left: 10px;
-            margin-bottom: 10px;
-            max-height: 100px;
-            overflow-y: auto;
         }
         
         .description p {
