@@ -54,7 +54,7 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.31);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.30);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -130,7 +130,7 @@ function MyApp(props) {
             try {
                 localCart = localStorage.getItem("fah-cart");
             } catch(e) {
-                // if JWT not found, just continue
+                // if localStorage not found, just continue
             }
             if (localCart) {
                 try {
