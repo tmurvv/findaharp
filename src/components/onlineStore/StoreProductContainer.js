@@ -118,8 +118,8 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         let addPlaces=filteredproductscontainer;
         return(
             <>
-            <div className="App">
-      <h1>Github Repos</h1>
+            <div className="storeproductContainer">
+      {/* <h1>Github Repos</h1>
       <input
         onChange={evt => {
           if (evt.target.value) {
@@ -130,9 +130,9 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
             debounceSearch(evt.target.value);
           }
         }}
-      />
+      /> */}
       <InfiniteScrollLoading
-        element="ul"
+        element="div"
         pageStart={1}
         hasMore={hasMore && !isLoading}
         loadMore={loadMore}
@@ -176,8 +176,9 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     
                 />}
-                <StoreProductContainerCss />           
+                          
             </div> */}
+            <StoreProductContainerCss /> 
             </>
         );
     } else {

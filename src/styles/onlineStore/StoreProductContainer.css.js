@@ -12,8 +12,14 @@ function StoreProductContainerCss() {
             } 
             .storenotFoundContainer img {
                 height: 225px;
-            }          
+            } 
             .storeproductContainer {
+                padding-top: 50px;
+            }         
+            .storeproductContainer>div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
                 // margin: auto;
                 // position: relative;
                 // width: 100%;
