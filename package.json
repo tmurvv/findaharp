@@ -32,6 +32,8 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-country-region-selector": "^3.0.0",
     "react-dom": "^16.13.1",
+    "react-infinite-scroll-hook": "^3.0.0",
+    "react-infinite-scroll-loading": "^0.2.0",
     "react-lazyload": "^2.6.9",
     "react-phone-input-2": "^2.13.7",
     "sales-tax-cad": "^1.0.0",
