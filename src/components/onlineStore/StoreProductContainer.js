@@ -1,5 +1,5 @@
 // packages
-import React, {useReducer, useEffect, useState, useCallback } from 'react';
+import React, {useReducer, useEffect, useState, useCallback, useRef } from 'react';
 import ReactDOM from "react-dom";
 import uuid from 'react-uuid';
 import InfiniteScrollLoading from "react-infinite-scroll-loading";
@@ -26,13 +26,15 @@ const initialState = {
     overflowY: 'auto'
 }
 const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat, clientlong }) => {
-    const [state, dispatch] = useReducer(productsReducer, initialState);
+  const repoArray = [...filteredproductscontainer];  
+  const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [searchVal, setSearchVal] = useState("");
     const [repoList, setRepoList] = useState([]);
     const [hasMore, setHasMore] = useState(false);
     const [resetPage, setResetPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const idx = useRef(0)
 
     const size = getWindowSize();
     function handleOpenDetail(product) {
@@ -56,6 +58,17 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         setOpacity(false);
     }
 
+    const getStarted = () => {
+      console.log('here', repoList.length, repoArray.length, idx.current)
+      setRepoList([...repoList, ...repoArray.slice(idx.current,idx.current+3)]);
+      setHasMore(true);
+      setIsLoading(false);
+      if (repoArray.slice(idx.current,idx.current+3).length < 3) {
+        setHasMore(false);
+      } else {
+        idx.current = idx.current + 3;
+      }
+    }
     const debounceSearch = useCallback(
         debounce(val => {
           axios
@@ -78,22 +91,27 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
     
       const loadMore = page => {
         setIsLoading(true);
-    
-        axios
-          .get(`${GITHUB_API}/search/repositories`, {
-            params: { page, q: searchVal }
-          })
-          .then(res => {
-            setRepoList([...repoList, ...res.data.items]);
+        console.log('hereMore', repoList.length, repoArray.length, idx.current)
+        // axios
+        //   .get(`${GITHUB_API}/search/repositories`, {
+        //     params: { page, q: searchVal }
+        //   })
+        //   .then(res => {
+            setRepoList([...repoList, ...repoArray.slice(idx.current,idx.current+3)]);
             setHasMore(true);
             setIsLoading(false);
-            if (res.data.items.length < 30) setHasMore(false);
-          });
+            if (repoArray.slice(idx.current,idx.current+3).length < 3) {
+              setHasMore(false);  
+            } else {
+              idx.current = idx.current + 3;
+            }
+          // });
       };
     
 
     useEffect(() => {
         triggerLazy();
+        getStarted();
     },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
@@ -121,11 +139,13 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         resetPage={resetPage}
       >
         {!!repoList.length &&
-          repoList.map(repo => (
-            <li key={String(repo.id)}>
-              {repo.name} - {repo.html_url}
-            </li>
-          ))}
+          repoList.map(product => <StoreProduct 
+            key={uuid()}
+            productdetail={product}
+            handleopendetail={handleOpenDetail} 
+            handleclosedetail={handleCloseDetail}
+            />
+        )}
         {isLoading && <div>Loading...</div>}
       </InfiniteScrollLoading>
     </div>
@@ -133,7 +153,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                 
                 
                 
-            <div data-test='component-ProductContainer' className='storeproductContainer'>
+            {/* <div data-test='component-ProductContainer' className='storeproductContainer'>
                 <h3 style={{width: '100%', textAlign: 'left', margin:'auto', marginBottom: '-15px', marginTop: '50px', fontFamily: "Metropolis Extra Bold", textTransform: 'uppercase'}}>Search Results: </h3>
                 
                 <div className="storegrid-container">
@@ -151,13 +171,13 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                         handleCloseDetail={handleCloseDetail}
                 />:''
                 }
-                {/* {state.openContact
+                {state.openContact
                     &&<ContactSellerForm 
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     
-                />} */}
+                />}
                 <StoreProductContainerCss />           
-            </div>
+            </div> */}
             </>
         );
     } else {

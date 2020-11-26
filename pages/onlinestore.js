@@ -46,9 +46,9 @@ const OnlineStore = (props) => {
                     ?<h3>Results For: </h3>
                     
                     :<>
-                        <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
+                        {/* <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
                         <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
-                        <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
+                        <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/> */}
                     </>
                 }
             </div>
