@@ -41,16 +41,13 @@ const OnlineStore = (props) => {
         <>
             <div className='index' style={{height: 'fit-content', padding: '40px', paddingTop: '70px'}}>
                 <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
-                <GlobalStoreSearch filteredProducts={props.filteredProducts} setSearchResults={setSearchResults}/>
-                {searchResults&&searchResults.title!==''&&searchResults.title!==undefined
-                    ?<h3>Results For: </h3>
-                    
-                    :<>
-                        {/* <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
-                        <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
-                        <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/> */}
-                    </>
-                }
+                <GlobalStoreSearch 
+                    filteredProducts={props.filteredProducts} 
+                    featuredProducts={props.featuredProducts} 
+                    music={props.music} 
+                    strings={props.strings} 
+                    setSearchResults={setSearchResults}
+                />     
             </div>
             <IndexCss />
             <OnlineStoreCss />

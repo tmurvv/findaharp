@@ -119,18 +119,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         return(
             <>
             <div className="storeproductContainer">
-      {/* <h1>Github Repos</h1>
-      <input
-        onChange={evt => {
-          if (evt.target.value) {
-            setResetPage(true);
-            setRepoList([]);
-            setIsLoading(true);
-            setSearchVal(evt.target.value);
-            debounceSearch(evt.target.value);
-          }
-        }}
-      /> */}
+      
       <InfiniteScrollLoading
         element="div"
         pageStart={1}

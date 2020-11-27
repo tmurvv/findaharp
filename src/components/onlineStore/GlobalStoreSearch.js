@@ -1,7 +1,11 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useRef } from 'react';
+import InfiniteScrollLoading from "react-infinite-scroll-loading";
+import uuid from 'react-uuid';
 
+import StoreProduct from '../../components/onlineStore/StoreProduct';
 import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
 import StoreProductSearchStrings from '../../components/onlineStore/StoreProductSearchStrings';
+import ProductScroll from '../../components/onlineStore/ProductScroll';
 import StoreProductContainer from '../../components/onlineStore/StoreProductContainer';
 import InfiniteProducts from '../../components/onlineStore/InfiniteProducts';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -43,9 +47,18 @@ function GlobalStoreSearch(props) {
     const [ typesSearch, setTypesSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
 
+    
+    const [ detailProduct, setDetailProduct ] = useState([]);
+    const repoArray = [...props.filteredProducts];  
+    const [hasMore, setHasMore] = useState(false);
+    const [resetPage, setResetPage] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [idx, setIdx] = useState(0);
+
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
         setClearMenus(false);
+        setIdx(0);
         console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
         let preSearchProductList=[]
@@ -262,10 +275,51 @@ function GlobalStoreSearch(props) {
         setBrandsSearch('All String Brands');
         setTypesSearch('All String Types');
     }
+    function handleOpenDetail(product) {
+        // dispatch({type:'detail', product});
+        setDetailProduct(product);
+        // setOpacity(true); 
+    }
+    function handleCloseDetail() {
+        // dispatch({type: 'initial'})
+        // setOpacity(false);
+        // if (openContact) handleOpenContact(evt, product);
+        setDetailProduct([]);
+    }
+    const loadMore = page => {
+        // alert('loadMore')
+        setIsLoading(true);
+        console.log('hereMore', repoArray.length, idx)
+        // axios
+        //   .get(`${GITHUB_API}/search/repositories`, {
+        //     params: { page, q: searchVal }
+        //   })
+        //   .then(res => {
+            // setRepoList([...repoList, ...repoArray.slice(idx,idx+30)]);
+            setHasMore(true);
+            setIsLoading(false);
+            if (idx+30 > searchResults.length) {
+              setHasMore(false);  
+            } else {
+              setIdx(idx+30);
+            }
+          // });
+      };
+
     useEffect(()=>{
         if(props.filteredProducts&&props.filteredProducts.length===0) {
             document.querySelector('#searchInput').focus();
             setSearchResults(props.filteredProducts);
+        }
+        // alert('useEffect')
+        if (searchResults) {
+            console.log('here', repoArray.length, idx)
+            // setRepoList([...repoList, ...repoArray.slice(idx,idx+30)]);
+            setHasMore(true);
+            setIsLoading(false);
+            if (props.filteredProducts.slice(0,idx+30).length > props.filteredProducts.length) {
+              setHasMore(false);
+            }
         }
     })
     
@@ -290,7 +344,35 @@ function GlobalStoreSearch(props) {
             </div>
             <StoreProductSearch clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
             <StoreProductSearchStrings clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setOctavesSearch={setOctavesSearch} setBrandsSearch={setBrandsSearch} setTypesSearch={setTypesSearch}/>
-            {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>}
+            {/* {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>} */}
+            {searchResults&&searchResults.length>0
+            ?<div className="storeproductContainer">
+                <h3>Showing: NYI</h3>
+                <InfiniteScrollLoading
+                    element="div"
+                    pageStart={1}
+                    hasMore={hasMore && !isLoading}
+                    loadMore={loadMore}
+                    resetPage={resetPage}
+                >
+                    {searchResults&&!!searchResults.length &&
+                    (searchResults.slice(0,idx+30)).map(product => <StoreProduct 
+                        key={uuid()}
+                        productdetail={product}
+                        handleopendetail={handleOpenDetail} 
+                        handleclosedetail={handleCloseDetail}
+                        />
+                    )}
+                    {isLoading && <div>Loading...</div>}
+                </InfiniteScrollLoading>
+            </div>
+            :<>
+                <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
+                <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
+                <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
+            </>
+            
+            }
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />
             <StoreProductContainerCss />
