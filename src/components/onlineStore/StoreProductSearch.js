@@ -122,11 +122,10 @@ function StoreProductSearch(props) {
             soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
             productType: 'all',
         }
-        props.setEnsembleSearch(soloensemble);
         
         props.handleChange("music", 'soloensemble', soloensemble, props.allState&&props.allState.level, props.allState&&props.allState.publicationtype);
         props.setAllState({...props.allState, 
-            soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
+            soloensemble,
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
@@ -142,9 +141,8 @@ function StoreProductSearch(props) {
             searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
-        props.setLevelSearch(level);
         console.log('handle level', level);
-        props.handleChange("music", 'level', props.allState?props.allState.soloensemble:'', level, props.allState?props.allState.publicationtype:'');
+        // props.handleChange("music", 'level', props.allState?props.allState.soloensemble:'', level, props.allState?props.allState.publicationtype:'');
     }
     async function handlePublicationTypeSelection(publicationtype) {
         props.setTypeOfSearch("music");
@@ -152,7 +150,6 @@ function StoreProductSearch(props) {
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
         }
-        props.setPublicationSearch(publicationtype);
         props.handleChange('music', 'publicationtype', props.allState?props.allState.soloensemble:'', props.allState?props.allState.level:'', publicationtype);
         props.setAllState({...props.allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
@@ -242,9 +239,9 @@ function StoreProductSearch(props) {
     }
    function clearOneFilter(e) {
        let menuClick = e.target.name;
-        if (e.target.name==='soloensemble') {props.setEnsembleSearch("All Lever/Pedal/Ens"); props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
-        if (e.target.name==='level') {props.setLevelSearch("All Levels"); props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
-        if (e.target.name==='publicationtype') {props.setPublicationSearch("All Publication Types"); props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', props.allState?props.allState.level:'', "All Publication Types");}
+        if (e.target.name==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
+        if (e.target.name==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
+        if (e.target.name==='publicationtype') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', props.allState?props.allState.level:'', "All Publication Types");}
         menuClick==="soloensemble"?menuClick="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
@@ -259,6 +256,7 @@ function StoreProductSearch(props) {
     return (
         <>       
         <div className='storeproductSearchOuter'>
+        <h1>here: {props.allState&&props.allState.level}</h1>
             <h3 className='storesearchTitle'>Searching for MUSIC? Refine your search here.</h3>
             <div className='storemobileSearchLine1'>
                 <div ref={ref} className='storesearchLine1'>
@@ -267,30 +265,29 @@ function StoreProductSearch(props) {
                         id="soloensemblemenu"
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
-                        makestitles={props.makestitles}
-                        // currentselected={props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
+                        // producttype={props.allState&&props.allState.productType}
+                        currentselected={props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
                         handleclick={handleClick}
                         open={menus.soloensemble}
                     />
+                    
                     <LevelMenu 
                         id="levelmenu"
                         handleLevelChange = {handleLevelSelection}
                         products={props.products}
-                        // producttype={props.allState&&props.allState.productType}
-                        makestitles={props.makestitles}
-                        // currentselected={props.allState&&props.allState.level?props.allState.level:'Harp Level'}
+                        currentselected={props.allState&&props.allState.level?props.allState.level:'All Levels'}
                         open={menus.level}
                         handleclick={handleClick}
                     />
                     <PublicationTypeMenu 
                         id='publicationtypemenu'
                         handlePublicationTypeChange = {handlePublicationTypeSelection}
-                        currentselected={props.allState?props.allState.publicationtype:'Harp All Publication Types'}
+                        currentselected={props.allState?props.allState.publicationtype:'All Publication Types'}
                         open={menus.publicationtype}
                         handleclick={handleClick}
                     /> 
                 </div>
-                <div className="storesearchLine2Sub">
+                <div className="storesearchLine1Sub">
                         <div 
                             id="selectedSoloEnsemble" 
                             className={`storesearch-grid-item`} 

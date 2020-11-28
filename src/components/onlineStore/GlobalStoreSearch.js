@@ -26,7 +26,8 @@ import {
     tax
 } from '../../utils/checkoutHelpers';
 import { 
-    findNested
+    findNested,
+    getStoreSearchInfo
 } from '../../utils/searchProductsHelpers';
 import { PublicTwoTone } from '@material-ui/icons';
 import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
@@ -39,21 +40,16 @@ const initialStateText = {
     soloensemble: 'All Lever/Pedal/Ens',
     level: 'All Levels',
     publicationtype: 'All Publication Types',
+    octaves: 'All Octaves',
+    brands: 'All Brands',
+    types: 'All Types',
     searchInfo: 'All Harps'
 }
 
 function GlobalStoreSearch(props) {
-    const [ allState, setAllState ] = useState({
-        category: '',
-        soloensemble: 'All Lever/Pedal/Ens',
-        level: 'All Levels',
-        publicationtype: 'All Publication Types',
-    });
+    const [ allState, setAllState ] = useState(initialStateText);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
     const [ clearMenus, setClearMenus ] = useState(false);
-    const [ ensembleSearch, setEnsembleSearch ] = useState();
-    const [ levelSearch, setLevelSearch ] = useState();
-    const [ publicationSearch, setPublicationSearch ] = useState();
     const [ octavesSearch, setOctavesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
     const [ typesSearch, setTypesSearch ] = useState();
@@ -69,6 +65,10 @@ function GlobalStoreSearch(props) {
 
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
+        // update menu text
+        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
+        if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
+
         setClearMenus(false);
         setIdx(0);
         console.log('intop',type, menu, value1, value2, value3)
@@ -281,9 +281,6 @@ function GlobalStoreSearch(props) {
         document.querySelector('#categoryfilter').value='All';
         document.querySelector('#searchInput').value='';
         document.querySelector('#clearSearch').style.display='none';
-        setEnsembleSearch('All Lever/Pedal/Ens');
-        setLevelSearch('All Levels');
-        setPublicationSearch('All Publication Types');
         setOctavesSearch('All String Octaves');
         setBrandsSearch('All String Brands');
         setTypesSearch('All String Types');
@@ -361,13 +358,9 @@ function GlobalStoreSearch(props) {
                 clearMenus={clearMenus} 
                 setTypeOfSearch={setTypeOfSearch} 
                 handleClear={handleClear} 
-                handleChange={handleChange} 
-                ensembleSearch={ensembleSearch}
+                handleChange={handleChange}
                 allState={allState}
-                setAllState={setAllState}
-                setEnsembleSearch={setEnsembleSearch} 
-                setLevelSearch={setLevelSearch} 
-                setPublicationSearch={setPublicationSearch}
+                setAllState={setAllState} 
             />
             <StoreProductSearchStrings 
                 clearMenus={clearMenus} 
@@ -381,12 +374,14 @@ function GlobalStoreSearch(props) {
             {/* {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>} */}
             {searchResults&&searchResults.length>0
             ?<div className="storeproductContainer">
-                <div className='storeselected clearAll' id='clearSearch' style={{display:'block'}}>
-                    <h3>Showing: NYI</h3>
+                <div>
+                <div className='storeselected clearAll' id='clearSearch' style={{display:'flex'}}>
+                    <h3>Showing: {getStoreSearchInfo(allState)}</h3>
                     <div onClick={handleClear} className='clearAll clearSearch'>
                         <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                        <p>Clear All Search</p> 
+                        <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
                     </div>
+                </div>
                 </div>
                 
                 <InfiniteScrollLoading
@@ -457,7 +452,6 @@ export default GlobalStoreSearch;
 
 // function GlobalStoreSearch(props) {
 //     const [ typeOfSearch, setTypeOfSearch ] = useState();
-//     const [ ensembleSearch, setEnsembleSearch ] = useState();
 //     const [ levelSearch, setLevelSearch ] = useState();
 //     const [ publicationSearch, setPublicationSearch ] = useState();
 //     const [ octavesSearch, setOctavesSearch ] = useState();
