@@ -199,32 +199,32 @@ function StoreProductSearchStringsCss() {
                 border: 1 solid grey;
                 z-index: 1000;
             }
-            .storeselected {
-                width: fit-content;
-                height: fit-content;
-                margin: 20px auto;
-                display: flex;
-                justify-content: center;
-            }
-            .storeselected p {
-                font-size: 14px;
-            }
-            .clearSearch {
-                cursor: pointer;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-left: 7px;
-            }
-            .clearSearch img {
-                z-index: 1000;
-                width: 15px;
-                padding-bottom: 2px;
-            }
-            .clearSearch p {
-                font-size: 14px;
-                margin-left: 3px;
-            }
+            // .storeselected {
+            //     width: fit-content;
+            //     height: fit-content;
+            //     margin: 20px auto;
+            //     display: flex;
+            //     justify-content: center;
+            // }
+            // .storeselected p {
+            //     font-size: 14px;
+            // }
+            // .clearSearch {
+            //     cursor: pointer;
+            //     display: flex;
+            //     justify-content: center;
+            //     align-items: center;
+            //     margin-left: 7px;
+            // }
+            // .clearSearch img {
+            //     z-index: 1000;
+            //     width: 15px;
+            //     padding-bottom: 2px;
+            // }
+            // .clearSearch p {
+            //     font-size: 14px;
+            //     margin-left: 3px;
+            // }
             /*@media only screen and (max-width: 750px) {
                 .clearSearch {
                     top: 35px;

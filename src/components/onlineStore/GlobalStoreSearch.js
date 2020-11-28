@@ -31,11 +31,23 @@ import {
 import { PublicTwoTone } from '@material-ui/icons';
 import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
 
+const initialStateText = {
+    selectionType: '',
+    artist: 'All Artists',
+    title: 'All Titles',
+    category: 'All Categories',
+    soloensemble: 'All Lever/Pedal/Ens',
+    level: 'All Levels',
+    publicationtype: 'All Publication Types',
+    searchInfo: 'All Harps'
+}
 
 function GlobalStoreSearch(props) {
     const [ allState, setAllState ] = useState({
         category: '',
-        level: ''
+        soloensemble: 'All Lever/Pedal/Ens',
+        level: 'All Levels',
+        publicationtype: 'All Publication Types',
     });
     const [ typeOfSearch, setTypeOfSearch ] = useState();
     const [ clearMenus, setClearMenus ] = useState(false);
@@ -46,8 +58,8 @@ function GlobalStoreSearch(props) {
     const [ brandsSearch, setBrandsSearch ] = useState();
     const [ typesSearch, setTypesSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
+    const [ resetSearch, setResetSearch ] = useState();
 
-    
     const [ detailProduct, setDetailProduct ] = useState([]);
     const repoArray = [...props.filteredProducts];  
     const [hasMore, setHasMore] = useState(false);
@@ -89,11 +101,11 @@ function GlobalStoreSearch(props) {
         setAllState({...allState, category: categoryFilter});
 
 
-        // if (reset) {
-        //     categoryFilter="All";
-        //     setAllState({...allState, category: "All"});
-        //     return productListCopy;
-        // }
+        if (resetSearch) {
+            categoryFilter="All";
+            setAllState({...allState, category: "All"});
+            return productListCopy;
+        }
         console.log('cat top', categoryFilter)
         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
             productListCopy.map(product=>{
@@ -123,7 +135,7 @@ function GlobalStoreSearch(props) {
             let searchTerm;
             
             // add clear searches button
-            // if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";} // BREAKING
+            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";} // BREAKING
             
             // check level
             if (value2&&value2.toUpperCase()!=='ALL LEVELS') {
@@ -191,7 +203,7 @@ function GlobalStoreSearch(props) {
             let searchTerm;
             
             // add clear searches button
-            // if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";} // BREAKING
+            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";} // BREAKING
             console.log('octavestop',value1&&value1.toUpperCase())
             // check octaves
             if (value1&&value1.toUpperCase()!=='ALL STRING OCTAVES'&&value1.toUpperCase()!=="ALL OCTAVES"&&value1!==undefined) {
@@ -268,12 +280,15 @@ function GlobalStoreSearch(props) {
     function handleClear() {
         document.querySelector('#categoryfilter').value='All';
         document.querySelector('#searchInput').value='';
+        document.querySelector('#clearSearch').style.display='none';
         setEnsembleSearch('All Lever/Pedal/Ens');
         setLevelSearch('All Levels');
         setPublicationSearch('All Publication Types');
         setOctavesSearch('All String Octaves');
         setBrandsSearch('All String Brands');
         setTypesSearch('All String Types');
+        setAllState(initialStateText);
+        setSearchResults(props.filteredProducts);
     }
     function handleOpenDetail(product) {
         // dispatch({type:'detail', product});
@@ -342,12 +357,38 @@ function GlobalStoreSearch(props) {
                 <input style={{flex: '8'}} type="text" id="searchInput" onChange={handleChange} placeholder="Search" />
                 <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
             </div>
-            <StoreProductSearch clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setEnsembleSearch={setEnsembleSearch} setLevelSearch={setLevelSearch} setPublicationSearch={setPublicationSearch}/>
-            <StoreProductSearchStrings clearMenus={clearMenus} setTypeOfSearch={setTypeOfSearch} handleClear={handleClear} handleChange={handleChange} setOctavesSearch={setOctavesSearch} setBrandsSearch={setBrandsSearch} setTypesSearch={setTypesSearch}/>
+            <StoreProductSearch 
+                clearMenus={clearMenus} 
+                setTypeOfSearch={setTypeOfSearch} 
+                handleClear={handleClear} 
+                handleChange={handleChange} 
+                ensembleSearch={ensembleSearch}
+                allState={allState}
+                setAllState={setAllState}
+                setEnsembleSearch={setEnsembleSearch} 
+                setLevelSearch={setLevelSearch} 
+                setPublicationSearch={setPublicationSearch}
+            />
+            <StoreProductSearchStrings 
+                clearMenus={clearMenus} 
+                setTypeOfSearch={setTypeOfSearch} 
+                handleClear={handleClear} 
+                handleChange={handleChange} 
+                setOctavesSearch={setOctavesSearch} 
+                setBrandsSearch={setBrandsSearch} 
+                setTypesSearch={setTypesSearch}
+            />
             {/* {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>} */}
             {searchResults&&searchResults.length>0
             ?<div className="storeproductContainer">
-                <h3>Showing: NYI</h3>
+                <div className='storeselected clearAll' id='clearSearch' style={{display:'block'}}>
+                    <h3>Showing: NYI</h3>
+                    <div onClick={handleClear} className='clearAll clearSearch'>
+                        <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+                        <p>Clear All Search</p> 
+                    </div>
+                </div>
+                
                 <InfiniteScrollLoading
                     element="div"
                     pageStart={1}
@@ -424,7 +465,7 @@ export default GlobalStoreSearch;
 //     const [ typesSearch, setTypesSearch ] = useState();
 //     const [ searchResults, setSearchResults ] = useState();
 
-//     function filterByMusicSearches(soloensemble, level, publicationtype, reset) {
+//     function filterByMusicSearches(soloensemble, level, publicationtype, resetSearch) {
 //         // initialize variables
 //         let productListCopy = [...props.filteredProducts];
 //         let levelProductList=[];
@@ -436,7 +477,7 @@ export default GlobalStoreSearch;
 //         let categoryFilter;
 //         let searchTerm;
 //         // add clear searches button
-//         if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";}
+//         if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";}
 //         // check level
 //         if (level&&level.toUpperCase()!=='ALL LEVELS') {
 //             productListCopy.map(product=> {
@@ -485,7 +526,7 @@ export default GlobalStoreSearch;
 //         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
 //             categoryFilter = document.querySelector('#categoryfilter').value;
 //         }
-//         if (reset) categoryFilter="All";
+//         if (resetSearch) categoryFilter="All";
 //         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
 //             publicationProductList.map(product=>{
 //                 if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
@@ -521,7 +562,7 @@ export default GlobalStoreSearch;
 //         setSearchResults(finalProductList);
 //         console.log('global findl', finalProductList);
 //     }
-//     function handleStringsChange(soloensemble, level, publicationtype, reset) {
+//     function handleStringsChange(soloensemble, level, publicationtype, resetSearch) {
 
 //         // initialize variables
 //         let productListCopy = [...props.filteredProducts];
@@ -539,7 +580,7 @@ export default GlobalStoreSearch;
 //         let categoryFilter;
 //         let searchTerm;
 //         // add clear searches button
-//         if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=reset?"none":"flex";}
+//         if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";}
 //         // check level
 //         if (level&&level.toUpperCase()!=='ALL LEVELS') {
 //             productListCopy.map(product=> {
@@ -588,7 +629,7 @@ export default GlobalStoreSearch;
 //         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
 //             categoryFilter = document.querySelector('#categoryfilter').value;
 //         }
-//         if (reset) categoryFilter="All";
+//         if (resetSearch) categoryFilter="All";
 //         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
 //             publicationProductList.map(product=>{
 //                 if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {

@@ -364,7 +364,7 @@ export function getSizeFromModel(makesModels, model) {
 export const getSearchInfo = (allState) => {
     // shortcut if no filters selected
     if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
-    document.querySelector('.clearAll').style.display='none';
+    if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
     // prepare comparison array to eliminate not-selected filters
     const initArr = ['All Sizes', 'All Makers', 'All Models', 'All Finishes', 'All Prices', 'All Locations']
     // prepare array of only filter selections from state
@@ -373,7 +373,7 @@ export const getSearchInfo = (allState) => {
     let searchInfo='';
     menuArr.map(menuItem => {
         if(!initArr.includes(menuItem)) searchInfo += `${menuItem} | `
-        document.querySelector('.clearAll').style.display='flex';
+        if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
     });
     
     return searchInfo;

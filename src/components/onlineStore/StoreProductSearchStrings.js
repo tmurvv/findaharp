@@ -183,9 +183,9 @@ function StoreProductSearchStrings(props) {
         }
     }
     function handleClear() {
-        setMenus(initialState);
-        setAllState(initialStateText);
-        document.querySelector('#clearSearch').style.display='none';
+        // setMenus(initialState);
+        // setAllState(initialStateText);
+        // document.querySelector('#clearSearch').style.display='none';
         props.handleClear();
     }
    function clearOneFilter(e) {
@@ -308,15 +308,6 @@ function StoreProductSearchStrings(props) {
                                 :''
                             }
                         </div>
-                </div>
-            </div>
-            <div className='storeselected' id='clearSearch' style={{display:'none'}}>
-                {/* <p>
-                    {showing}
-                </p> */}
-                <div onClick={handleClear} className='clearAll clearSearch'>
-                    <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                    <p>Clear All Search</p> 
                 </div>
             </div>
             <StoreProductSearchCss />             

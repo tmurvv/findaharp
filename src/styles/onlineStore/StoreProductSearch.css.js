@@ -203,7 +203,7 @@ function ProductSearchCss() {
             .storeselected {
                 width: fit-content;
                 height: fit-content;
-                margin: 20px auto;
+                margin: -20px auto 0;
                 display: flex;
                 justify-content: center;
             }
