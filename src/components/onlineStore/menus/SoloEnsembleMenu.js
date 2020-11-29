@@ -19,7 +19,7 @@ export default function SoloEnsembleMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Lever/Pedal/Ens Menu'
-                className='plainTextSelectLine2'
+                className='plainTextSelectLine1'
             >
                 <li
                     onClick={handleClose}

@@ -3,7 +3,7 @@ import uuid from 'react-uuid';
 
 export default function OctavesMenu(props) {
     const handleClose = (evt) => {
-        if (evt.target.value === 'All String Octaves') return;
+        if (evt.target.value === 'All Octaves') return;
         props.handleOctavesChange(evt.target.getAttribute('name')); 
     };
  
@@ -11,7 +11,7 @@ export default function OctavesMenu(props) {
         <div className='relative'>
             <button 
                 className="menuButton" 
-                name='String Octaves' 
+                name='octaves' 
                 onClick={(e)=>{props.handleclick(e);}}
                 style={{color: '#000000'}}
             >Octaves</button>
@@ -19,7 +19,7 @@ export default function OctavesMenu(props) {
                 id="Octaves-select"
                 onClose={handleClose}
                 hidden={!props.open}
-                name='String Octaves Menu'
+                name='Octaves Menu'
                 className='plainTextSelectLine2'
             >
                 <li 

@@ -24,7 +24,7 @@ export default function LevelMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Level Menu'
-                className='plainTextSelectLine2'
+                className='plainTextSelectLine1'
             >
                 <li 
                     onClick={handleClose} 

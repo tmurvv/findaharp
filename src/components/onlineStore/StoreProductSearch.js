@@ -256,7 +256,6 @@ function StoreProductSearch(props) {
     return (
         <>       
         <div className='storeproductSearchOuter'>
-        <h1>here: {props.allState&&props.allState.level}</h1>
             <h3 className='storesearchTitle'>Searching for MUSIC? Refine your search here.</h3>
             <div className='storemobileSearchLine1'>
                 <div ref={ref} className='storesearchLine1'>
@@ -269,8 +268,7 @@ function StoreProductSearch(props) {
                         currentselected={props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
                         handleclick={handleClick}
                         open={menus.soloensemble}
-                    />
-                    
+                    />            
                     <LevelMenu 
                         id="levelmenu"
                         handleLevelChange = {handleLevelSelection}

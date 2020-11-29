@@ -9,6 +9,7 @@ import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import { onlineOrderReducer } from '../../reducers/reducers';
 import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import {
     getNumItems,
     getSubTotal,
@@ -32,6 +33,7 @@ function OrderSummary(props) {
     const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
+    // const [ storePartner, setStorePartner ] = useState();
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     // const [ resultInfo, dispatchResultInfo ] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [ onlineOrder, dispatchOnlineOrder ] = useReducer(onlineOrderReducer, {
@@ -45,6 +47,7 @@ function OrderSummary(props) {
             taxes: initTaxes,
             shippingarray: user.shippingcountry?getShippingArray(user.shippingcountry, cart):[]
         });
+    
     }, []);
     return (
         <>
@@ -57,7 +60,7 @@ function OrderSummary(props) {
                 <div>
                     {cartSubtotals.shippingarray&&cartSubtotals.shippingarray.length>0?cartSubtotals.shippingarray.map(shippingItem => 
                         <div className='flex-sb'>
-                        <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM {shippingItem[0].toUpperCase()}</span></p>
+                        <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM {(STORE_PARTNERS.filter(partner => partner.id===shippingItem[0])[0].productTitle).toUpperCase()}</span></p>
                         <p style={{textAlign: 'right'}}>
                             ${shippingItem[1]===-1
                                 ?'International'

@@ -65,10 +65,6 @@ function GlobalStoreSearch(props) {
 
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
-        // update menu text
-        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
-
         setClearMenus(false);
         setIdx(0);
         console.log('intop',type, menu, value1, value2, value3)
@@ -80,6 +76,7 @@ function GlobalStoreSearch(props) {
         let categoryFilter;
         let searchTerm;
 
+        console.log('alls', allState)
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
             if (categoryFilter.toUpperCase()==="STRINGS") type='strings';
@@ -90,7 +87,7 @@ function GlobalStoreSearch(props) {
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
             categoryFilter = "Music";
             document.querySelector('#categoryfilter').value='Music';
-            type = 'music'
+            type = 'music';
         } 
         if (menu==='octaves'||menu==='brands'||menu==='types') {
             categoryFilter = "Strings";
@@ -125,6 +122,9 @@ function GlobalStoreSearch(props) {
         console.log('type',type)
         console.log('after cat filter',categoryProductList.length)
         if (type==='music') {
+            if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
+            if (!value2||value2===undefined) value2="All Levels";
+            if (!value3||value3===undefined) value3="All Publication Types";
             console.log('imin music')
             // initialize variables
             let productListCopy = [...props.filteredProducts];
@@ -193,6 +193,9 @@ function GlobalStoreSearch(props) {
             
             console.log('pub', publicationProductList.length)
         } else if (type==='strings') {
+            if (!value1||value1===undefined) value1="All Octaves";
+            if (!value2||value2===undefined) value2="All Brands";
+            if (!value3||value3===undefined) value3="All Types";
             console.log('imin strings')
             // initialize variables
             let productListCopy = [...props.filteredProducts];
@@ -206,11 +209,11 @@ function GlobalStoreSearch(props) {
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";} // BREAKING
             console.log('octavestop',value1&&value1.toUpperCase())
             // check octaves
-            if (value1&&value1.toUpperCase()!=='ALL STRING OCTAVES'&&value1.toUpperCase()!=="ALL OCTAVES"&&value1!==undefined) {
+            if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
                 
                 categoryProductList.map(product=> {
-                    // console.log(String(product.level).toUpperCase())
-                    // console.log(product.level)
+                    console.log(String(product.title).toUpperCase())
+                    console.log(value1.toUpperCase())
                     if (String(product.title).toUpperCase().includes(value1.toUpperCase())) octavesProductList.push(product);
                 })
             } else {
@@ -274,6 +277,9 @@ function GlobalStoreSearch(props) {
         console.log('final', finalProductList.length)
         // setAllState({...allState, category: categoryFilter});
         console.log('final length', finalProductList.length);
+        // update menu text
+        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
+        if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
         setSearchResults(finalProductList)
     }
     
@@ -281,7 +287,7 @@ function GlobalStoreSearch(props) {
         document.querySelector('#categoryfilter').value='All';
         document.querySelector('#searchInput').value='';
         document.querySelector('#clearSearch').style.display='none';
-        setOctavesSearch('All String Octaves');
+        setOctavesSearch('All Octaves');
         setBrandsSearch('All String Brands');
         setTypesSearch('All String Types');
         setAllState(initialStateText);
@@ -362,11 +368,13 @@ function GlobalStoreSearch(props) {
                 allState={allState}
                 setAllState={setAllState} 
             />
-            <StoreProductSearchStrings 
+            <StoreProductSearchStrings              
                 clearMenus={clearMenus} 
                 setTypeOfSearch={setTypeOfSearch} 
                 handleClear={handleClear} 
                 handleChange={handleChange} 
+                allState={allState}
+                setAllState={setAllState} 
                 setOctavesSearch={setOctavesSearch} 
                 setBrandsSearch={setBrandsSearch} 
                 setTypesSearch={setTypesSearch}
@@ -403,6 +411,11 @@ function GlobalStoreSearch(props) {
                 </InfiniteScrollLoading>
             </div>
             :<>
+                
+                <div className='clearAll'>
+                    <h3>No searches requested or item not found</h3>                   
+                </div>
+                
                 <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
                 <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
                 <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
@@ -666,7 +679,7 @@ export default GlobalStoreSearch;
 //         setEnsembleSearch('All Lever/Pedal/Ens');
 //         setLevelSearch('All Levels');
 //         setPublicationSearch('All Publication Types');
-//         setOctavesSearch('All String Octaves');
+//         setOctavesSearch('All Octaves');
 //         setBrandsSearch('All String Brands');
 //         setTypesSearch('All String Types');
 //         filterByMusicSearches('All Lever/Pedal/Ens', 'All Levels', 'All Publication Types', true)

@@ -30,7 +30,7 @@ export default function PublicationTypeMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='PublicationType Menu'
-                className='plainTextSelectLine2'
+                className='plainTextSelectLine1'
             >
                 <li 
                     onClick={handleClose} 

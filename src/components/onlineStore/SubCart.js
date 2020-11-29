@@ -84,7 +84,7 @@ function SubCart(props) {
                     <div>
                     {/* <div id='cart'> */}
                         <div className='cartBody'>
-                            <h3>Items Shipped from {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
+                            <h3>Items Sold By {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
                         </div>
                         <div className='flex-sb'>
                             <div className='itemsContainer' style={{flex: '3'}}>
@@ -104,10 +104,10 @@ function SubCart(props) {
                             <div style={{flex: '2'}}>
                                 {user.shippingcountry
                                 ?<><h5>Choose a delivery option:</h5>
-                                <input type="radio" name={`${props.store}-shippingoption`} value={`${props.store}-shippingoption`} checked/>
+                                <input type="radio" name={`${props.store}-shippingoption}`} value={`${props.store}-shippingoption}`} checked/>
                                 {Number(shipping(user.shippingcountry, props.store, props.subCart)[0])===-1
                                     ?`* International Shipping requires a shipping estimate. This item shipping from ${sellerInfo&&sellerInfo.sellerCountry}.`
-                                    :<label htmlFor={`${props.store}-shippingoption`}>&nbsp;&nbsp;{`$${shipping(user.shippingcountry, props.store, props.subCart)[0].toFixed(2)} ${shipping(user.shippingcountry, props.store, props.subCart)[1]}`} </label>}
+                                    :<label htmlFor={`${props.store}-shippingoption`}>&nbsp;&nbsp;{`$${shipping(user.shippingcountry, props.store, props.subCart)[0].toFixed(2)}`}<br/>{`${shipping(user.shippingcountry, props.store, props.subCart)[1]}`} </label>}
                                 </>:''}
                             </div>
                         </div>
