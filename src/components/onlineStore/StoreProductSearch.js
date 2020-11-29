@@ -127,7 +127,7 @@ function StoreProductSearch(props) {
         props.setAllState({...props.allState, 
             soloensemble,
             productType: 'all',
-            searchInfo: getSearchInfo(newState)
+            searchInfo: getSearchInfo(newState, 'music')
         });
         setMenus(initialState);
     }
@@ -138,11 +138,11 @@ function StoreProductSearch(props) {
         }
         props.setAllState({...props.allState, 
             level,
-            searchInfo: getSearchInfo(newState)
+            searchInfo: getSearchInfo(newState, 'music')
         });
         setMenus(initialState);
         console.log('handle level', level);
-        // props.handleChange("music", 'level', props.allState?props.allState.soloensemble:'', level, props.allState?props.allState.publicationtype:'');
+        props.handleChange("music", 'level', props.allState?props.allState.soloensemble:'', level, props.allState?props.allState.publicationtype:'');
     }
     async function handlePublicationTypeSelection(publicationtype) {
         props.setTypeOfSearch("music");
@@ -154,7 +154,7 @@ function StoreProductSearch(props) {
         props.setAllState({...props.allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
-            searchInfo: getSearchInfo(newState)
+            searchInfo: getSearchInfo(newState, 'music')
         });
         setMenus(initialState);
     }

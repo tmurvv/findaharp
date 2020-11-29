@@ -54,7 +54,8 @@ function GlobalStoreSearch(props) {
     const [ brandsSearch, setBrandsSearch ] = useState();
     const [ typesSearch, setTypesSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
-    const [ resetSearch, setResetSearch ] = useState();
+    const [ resetSearch, setResetSearch ] = useState(true);
+    const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
 
     const [ detailProduct, setDetailProduct ] = useState([]);
     const repoArray = [...props.filteredProducts];  
@@ -66,6 +67,7 @@ function GlobalStoreSearch(props) {
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
         setClearMenus(false);
+        setResetSearch(false);
         setIdx(0);
         console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
@@ -135,7 +137,7 @@ function GlobalStoreSearch(props) {
             let searchTerm;
             
             // add clear searches button
-            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";} // BREAKING
+            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             
             // check level
             if (value2&&value2.toUpperCase()!=='ALL LEVELS') {
@@ -206,7 +208,7 @@ function GlobalStoreSearch(props) {
             let searchTerm;
             
             // add clear searches button
-            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display=resetSearch?"none":"flex";} // BREAKING
+            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"} // BREAKING
             console.log('octavestop',value1&&value1.toUpperCase())
             // check octaves
             if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
@@ -280,18 +282,19 @@ function GlobalStoreSearch(props) {
         // update menu text
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
         if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
+        finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
+        setTypeOfSearch(type);
         setSearchResults(finalProductList)
     }
     
     function handleClear() {
         document.querySelector('#categoryfilter').value='All';
         document.querySelector('#searchInput').value='';
-        document.querySelector('#clearSearch').style.display='none';
-        setOctavesSearch('All Octaves');
-        setBrandsSearch('All String Brands');
-        setTypesSearch('All String Types');
+        // document.querySelector('#clearSearch').style.display='none';
         setAllState(initialStateText);
         setSearchResults(props.filteredProducts);
+        setResetSearch(true);
+        setSearchResultsText('entry');
     }
     function handleOpenDetail(product) {
         // dispatch({type:'detail', product});
@@ -380,11 +383,14 @@ function GlobalStoreSearch(props) {
                 setTypesSearch={setTypesSearch}
             />
             {/* {searchResults&&<StoreProductContainer filteredproductscontainer={searchResults}/>} */}
-            {searchResults&&searchResults.length>0
-            ?<div className="storeproductContainer">
+            {searchResults&&searchResults.length>0&&
+            // {1===1&&
+            <>
+            <div className="storeproductContainer">
                 <div>
                 <div className='storeselected clearAll' id='clearSearch' style={{display:'flex'}}>
-                    <h3>Showing: {getStoreSearchInfo(allState)}</h3>
+                    <h3>{getStoreSearchInfo(allState,typeOfSearch)}</h3>
+                    {/* <h3>hear{getStoreSearchInfo(allState,typeOfSearch)!==''?getStoreSearchInfo(allState,typeOfSearch):"All Items"}</h3> */}
                     <div onClick={handleClear} className='clearAll clearSearch'>
                         <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
                         <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
@@ -399,8 +405,7 @@ function GlobalStoreSearch(props) {
                     loadMore={loadMore}
                     resetPage={resetPage}
                 >
-                    {searchResults&&!!searchResults.length &&
-                    (searchResults.slice(0,idx+30)).map(product => <StoreProduct 
+                    {(searchResults.slice(0,idx+30)).map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
                         handleopendetail={handleOpenDetail} 
@@ -410,17 +415,25 @@ function GlobalStoreSearch(props) {
                     {isLoading && <div>Loading...</div>}
                 </InfiniteScrollLoading>
             </div>
-            :<>
-                
-                <div className='clearAll'>
-                    <h3>No searches requested or item not found</h3>                   
+            </>
+            }
+            {searchResultsText==='notfound'&&
+                <div>
+                <div className='storeselected clearAll' id='clearSearch' style={{display:'flex', paddingTop: '40px'}}>
+                    <h3>No items match your search.</h3>
+                    <div onClick={handleClear} className='clearAll clearSearch'>
+                        <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+                        <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
+                    </div>
                 </div>
-                
+                </div>
+            }
+            {searchResultsText==='entry'&&
+            <>
                 <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
                 <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
                 <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
             </>
-            
             }
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />

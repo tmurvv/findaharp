@@ -130,21 +130,25 @@ export function getFilteredStoreProducts(allProducts, allState, user, rate) {
     // }
     return filteredProducts;
 }
-export const getStoreSearchInfo = (allState) => {
-    console.log('serchinfo', allState)
+export const getStoreSearchInfo = (allState, type) => {
+    console.log('serchinfo', allState, type)
     // shortcut if no filters selected
     // if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
-    if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
-    // prepare comparison array to eliminate not-selected filters
-    const initArr = ['All Lever/Pedal/Ens', 'All Levels', 'All Publication Types', 'All Octaves', 'All Brands', 'All Types']
-    // prepare array of only filter selections from state
-    const menuArr = [allState.soloensemble, allState.level, allState.publicationtype, allState.octaves, allState.brands, allState.types];
+    // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
     // append searchInfo string with only selected filter information
     let searchInfo='';
-    menuArr.map(menuItem => {
-        if(!initArr.includes(menuItem)) searchInfo += `${menuItem} | `
-        if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
-    });
-    
-    return searchInfo;
+    if (type==='music') {
+        [allState.soloensemble, allState.level, allState.publicationtype].map(menuItem => {
+            if(!['All Lever/Pedal/Ens', 'All Levels', 'All Publication Types'].includes(menuItem)) searchInfo += `${menuItem} | `
+            if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
+        });
+        return `Showing Music: ${searchInfo}`;
+    }   
+    if (type==='strings') {
+        [allState.octaves, allState.brands, allState.types].map(menuItem => {
+            if(!['All Octaves', 'All Brands', 'All Types'].includes(menuItem)) searchInfo += `${menuItem} | `
+            if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
+        });
+    }   
+    return `Showing Strings: ${searchInfo}`;
 }
