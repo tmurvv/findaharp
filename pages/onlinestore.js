@@ -29,7 +29,7 @@ const OnlineStore = () => {
     return (
         <>
             <div className='index' style={{height: 'fit-content', padding: '15px', paddingTop: '70px'}}>
-                <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
+                <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in January' /> 
                 <GlobalStoreSearch filteredProducts={filteredProducts} setFilteredProducts={setFilteredProducts}/>
                 <StoreProductContainer filteredproductscontainer={filteredProducts}/>
             </div>
