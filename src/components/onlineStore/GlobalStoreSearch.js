@@ -3,6 +3,7 @@ import InfiniteScrollLoading from "react-infinite-scroll-loading";
 import uuid from 'react-uuid';
 
 import StoreProduct from '../../components/onlineStore/StoreProduct';
+import StoreProductModal from '../../components/onlineStore/StoreProductModal';
 import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
 import StoreProductSearchStrings from '../../components/onlineStore/StoreProductSearchStrings';
 import ProductScroll from '../../components/onlineStore/ProductScroll';
@@ -56,8 +57,9 @@ function GlobalStoreSearch(props) {
     const [ searchResults, setSearchResults ] = useState();
     const [ resetSearch, setResetSearch ] = useState(true);
     const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
-
+    const [ openStoreDetail, setopenStoreDetail ] = useState(false);
     const [ detailProduct, setDetailProduct ] = useState([]);
+    
     const repoArray = [...props.filteredProducts];  
     const [hasMore, setHasMore] = useState(false);
     const [resetPage, setResetPage] = useState(false);
@@ -70,7 +72,7 @@ function GlobalStoreSearch(props) {
         setResetSearch(false);
         setIdx(0);
         setHasMore(true);
-        console.log('intop',type, menu, value1, value2, value3)
+        // console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
         let preSearchProductList=[]
         let finalProductList=[];
@@ -87,7 +89,6 @@ function GlobalStoreSearch(props) {
             type='';
         }
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
-            console.log('here')
             categoryFilter = "Music";
             document.querySelector('#categoryfilter').value='Music';
             type = 'music';
@@ -97,7 +98,7 @@ function GlobalStoreSearch(props) {
             document.querySelector('#categoryfilter').value='Strings';
             type = 'strings'
         }
-        console.log('type', type)
+
         setAllState({...allState, category: categoryFilter});
 
         // if (resetSearch) {
@@ -119,10 +120,8 @@ function GlobalStoreSearch(props) {
         } else {
             categoryProductList = [...productListCopy]
         }
-        console.log('abovemusic', type)
         // finalProductList=[...categoryProductList]
         if (type==='music') {
-            console.log('inmusic')
             if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
             if (!value2||value2===undefined) value2="All Levels";
             if (!value3||value3===undefined) value3="All Publication Types";
@@ -271,7 +270,10 @@ function GlobalStoreSearch(props) {
         setResetSearch(true);
         setSearchResultsText('entry');
     }
-    function handleOpenDetail(product) {
+    function handleopenStoreDetail(product) {
+        alert('imin')
+        console.log(product)
+        setopenStoreDetail(true);
         // dispatch({type:'detail', product});
         setDetailProduct(product);
         // setOpacity(true); 
@@ -286,7 +288,6 @@ function GlobalStoreSearch(props) {
 
         // alert('loadMore')
         setIsLoading(true);
-        console.log('hereMore', repoArray.length, hasMore, idx)
         // axios
         //   .get(`${GITHUB_API}/search/repositories`, {
         //     params: { page, q: searchVal }
@@ -383,12 +384,17 @@ function GlobalStoreSearch(props) {
                     {(searchResults.slice(0,idx+30)).map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
-                        handleopendetail={handleOpenDetail} 
+                        handleopenstoredetail={handleopenStoreDetail} 
                         handleclosedetail={handleCloseDetail}
                         />
                     )}
                     {isLoading && <div>Loading...</div>}
                 </InfiniteScrollLoading>
+                {openStoreDetail
+                    &&<StoreProductModal 
+                        product={detailProduct} 
+                        handleCloseDetail={handleCloseDetail} 
+                />}
             </div>
             </>
             }

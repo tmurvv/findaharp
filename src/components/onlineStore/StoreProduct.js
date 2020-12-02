@@ -29,7 +29,7 @@ const StoreProduct = (props) => {
     const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const [ openModal, setOpenModal ] = useState(false);
+    const [ openStoreModal, setOpenStoreModal ] = useState(false);
     const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
 
@@ -51,11 +51,11 @@ const StoreProduct = (props) => {
         if (evt.target.style.height !== '30%') evt.target.style.height="auto";
         if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
-    function handleOpenModal() {
-        alert('imin')
+    function handleOpenStoreModal() {
+        console.log(props.productdetail);
         // if (!props.productdetail||!props.productdetail.productTitle) return;
-        setOpenModal(true);
-        props.handleopendetail(props.productdetail); 
+        setOpenStoreModal(true);
+        props.handleopenstoredetail(props.productdetail); 
     }
     async function updateCart(e) {
         // check if second store
@@ -122,7 +122,7 @@ const StoreProduct = (props) => {
                 <img 
                     src={props.productdetail.image} 
                     alt={props.productdetail.title}
-                    onClick={()=>handleOpenModal()} 
+                    onClick={()=>handleOpenStoreModal()} 
                 />
             </div> */}
             <div className={`storeproduct__imgcontainer`}>
@@ -140,7 +140,7 @@ const StoreProduct = (props) => {
                         }} 
                         onLoad={(evt) => handleImageLoad(evt)}
                         alt={props.productdetail.title}
-                        onClick={()=>handleOpenModal()}
+                        onClick={()=>handleOpenStoreModal()}
                     />
                 </LazyLoad>
             </div>
@@ -154,10 +154,10 @@ const StoreProduct = (props) => {
                 <div><span>Level:</span> {props.productdetail.level}</div>
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
                 {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
-                <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div>
+                <div onClick={()=>handleOpenStoreModal()} style={{fontStyle:'italic', cursor: 'pointer'}}>more...</div>
             </div>
             :<>
-                <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
+                <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenStoreModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
                 <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
                 <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
