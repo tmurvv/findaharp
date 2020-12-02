@@ -87,7 +87,7 @@ function GlobalStoreSearch(props) {
             type='';
         }
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
-            
+            console.log('here')
             categoryFilter = "Music";
             document.querySelector('#categoryfilter').value='Music';
             type = 'music';
@@ -97,14 +97,14 @@ function GlobalStoreSearch(props) {
             document.querySelector('#categoryfilter').value='Strings';
             type = 'strings'
         }
-        
+        console.log('type', type)
         setAllState({...allState, category: categoryFilter});
 
-        if (resetSearch) {
-            categoryFilter="All";
-            setAllState({...allState, category: "All"});
-            return productListCopy;
-        }
+        // if (resetSearch) {
+        //     categoryFilter="All";
+        //     setAllState({...allState, category: "All"});
+        //     return productListCopy;
+        // }
         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
             productListCopy.map(product=>{
                 if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
@@ -119,8 +119,10 @@ function GlobalStoreSearch(props) {
         } else {
             categoryProductList = [...productListCopy]
         }
+        console.log('abovemusic', type)
         // finalProductList=[...categoryProductList]
         if (type==='music') {
+            console.log('inmusic')
             if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
             if (!value2||value2===undefined) value2="All Levels";
             if (!value3||value3===undefined) value3="All Publication Types";

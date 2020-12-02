@@ -52,6 +52,7 @@ const StoreProduct = (props) => {
         if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
     function handleOpenModal() {
+        alert('imin')
         // if (!props.productdetail||!props.productdetail.productTitle) return;
         setOpenModal(true);
         props.handleopendetail(props.productdetail); 

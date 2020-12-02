@@ -7,6 +7,7 @@ function StoreProductCss() {
                 margin: 10px;
                 text-align: center;
                 width: 265px;
+                height: 535px;
                 max-height: 650px;
                 position: relative;
                 margin-bottom: 60px;
@@ -21,7 +22,6 @@ function StoreProductCss() {
                 flex-direction: column;
                 justify-content: flex-start;
                 text-align: left;
-                margin-bottom: 50px;
             }
             .storeproductDetails div {
                 font-family: 'Metropolitan Extra Bold';
@@ -52,7 +52,8 @@ function StoreProductCss() {
                 overflow-y: auto;
             }
             .storeproduct__imgcontainer {
-                height: 50%;
+                height: 267px;
+                // height: 50%;
                 min-height: 50%;
             }
             .storeproduct__imgcontainer img {
