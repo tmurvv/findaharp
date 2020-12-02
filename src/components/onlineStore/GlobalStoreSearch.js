@@ -283,6 +283,7 @@ function GlobalStoreSearch(props) {
         // setOpacity(false);
         // if (openContact) handleOpenContact(evt, product);
         setDetailProduct([]);
+        setopenStoreDetail(false);
     }
     const loadMore = page => {
 
