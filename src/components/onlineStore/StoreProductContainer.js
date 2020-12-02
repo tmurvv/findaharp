@@ -90,8 +90,10 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
       );
     
       const loadMore = page => {
-        setIsLoading(true);
         console.log('hereMore', repoList.length, repoArray.length, idx.current)
+        if (repoList.length===repoArray.length) return;
+        setIsLoading(true);
+        
         // axios
         //   .get(`${GITHUB_API}/search/repositories`, {
         //     params: { page, q: searchVal }
@@ -120,24 +122,24 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
             <>
             <div className="storeproductContainer">
       
-      <InfiniteScrollLoading
-        element="div"
-        pageStart={1}
-        hasMore={hasMore && !isLoading}
-        loadMore={loadMore}
-        resetPage={resetPage}
-      >
-        {!!repoList.length &&
-          repoList.map(product => <StoreProduct 
-            key={uuid()}
-            productdetail={product}
-            handleopendetail={handleOpenDetail} 
-            handleclosedetail={handleCloseDetail}
-            />
-        )}
-        {isLoading && <div>Loading...</div>}
-      </InfiniteScrollLoading>
-    </div>
+              <InfiniteScrollLoading
+                element="div"
+                pageStart={1}
+                hasMore={hasMore && !isLoading}
+                loadMore={loadMore}
+                resetPage={resetPage}
+              >
+                {!!repoList.length &&
+                  repoList.map(product => <StoreProduct 
+                    key={uuid()}
+                    productdetail={product}
+                    handleopendetail={handleOpenDetail} 
+                    handleclosedetail={handleCloseDetail}
+                    />
+                )}
+                {isLoading && <div>Loading...</div>}
+              </InfiniteScrollLoading>
+            </div>
                 
                 
                 

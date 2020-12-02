@@ -69,6 +69,7 @@ function GlobalStoreSearch(props) {
         setClearMenus(false);
         setResetSearch(false);
         setIdx(0);
+        setHasMore(true);
         console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
         let preSearchProductList=[]
@@ -78,15 +79,15 @@ function GlobalStoreSearch(props) {
         let categoryFilter;
         let searchTerm;
 
-        console.log('alls', allState)
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
             if (categoryFilter.toUpperCase()==="STRINGS") type='strings';
             if (categoryFilter.toUpperCase()==="MUSIC") type='music';
-        } else {
+        } else if (type==='category') {
             type='';
         }
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
+            
             categoryFilter = "Music";
             document.querySelector('#categoryfilter').value='Music';
             type = 'music';
@@ -99,13 +100,11 @@ function GlobalStoreSearch(props) {
         
         setAllState({...allState, category: categoryFilter});
 
-
         if (resetSearch) {
             categoryFilter="All";
             setAllState({...allState, category: "All"});
             return productListCopy;
         }
-        console.log('cat top', categoryFilter)
         if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
             productListCopy.map(product=>{
                 if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
@@ -121,13 +120,10 @@ function GlobalStoreSearch(props) {
             categoryProductList = [...productListCopy]
         }
         // finalProductList=[...categoryProductList]
-        console.log('type',type)
-        console.log('after cat filter',categoryProductList.length)
         if (type==='music') {
             if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
             if (!value2||value2===undefined) value2="All Levels";
             if (!value3||value3===undefined) value3="All Publication Types";
-            console.log('imin music')
             // initialize variables
             let productListCopy = [...props.filteredProducts];
             let levelProductList=[];
@@ -143,23 +139,18 @@ function GlobalStoreSearch(props) {
             if (value2&&value2.toUpperCase()!=='ALL LEVELS') {
                 
                 categoryProductList.map(product=> {
-                    // console.log(String(product.level).toUpperCase())
-                    // console.log(product.level)
                     if (String(product.level).toUpperCase()===value2.toUpperCase()) levelProductList.push(product);
                 })
             } else {
                 levelProductList=[...categoryProductList];
             }
 
-            console.log('level', levelProductList.length)
             finalProductList=[...levelProductList];
 
             // check soloensemble
             if (value1&&value1.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
                 levelProductList.map(product=> {
-                    // console.log('in soloens', levelProductList.length)
                     if (value1.toUpperCase()==="LEVER HARP") {
-                        console.log(String(product.harptype).toUpperCase(),value1.toUpperCase())
                         if (product.harptype) {
                             if (String(product.harptype).toUpperCase()===value1.toUpperCase()) soloensembleProductList.push(product);
                         }
@@ -176,7 +167,6 @@ function GlobalStoreSearch(props) {
             } else {
                 soloensembleProductList=[...levelProductList];
             }
-            console.log('soloens', soloensembleProductList.length)
             finalProductList=[...soloensembleProductList];
         
             // check publication
@@ -193,12 +183,10 @@ function GlobalStoreSearch(props) {
             }
             finalProductList=[...publicationProductList];
             
-            console.log('pub', publicationProductList.length)
         } else if (type==='strings') {
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2="All Brands";
             if (!value3||value3===undefined) value3="All Types";
-            console.log('imin strings')
             // initialize variables
             let productListCopy = [...props.filteredProducts];
             let octavesProductList=[];
@@ -209,37 +197,26 @@ function GlobalStoreSearch(props) {
             
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"} // BREAKING
-            console.log('octavestop',value1&&value1.toUpperCase())
             // check octaves
             if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
                 
                 categoryProductList.map(product=> {
-                    console.log(String(product.title).toUpperCase())
-                    console.log(value1.toUpperCase())
                     if (String(product.title).toUpperCase().includes(value1.toUpperCase())) octavesProductList.push(product);
                 })
             } else {
                 octavesProductList=[...categoryProductList];
-                console.log('octaves', octavesProductList.length)
             }
-
-            console.log('octaves', octavesProductList.length)
             finalProductList=[...octavesProductList];
             
             // check brands
             if (value2&&value2!==undefined&&value2.toUpperCase()!=='ALL BRANDS') {
-                console.log('in not all brands')
                 octavesProductList.map(product=> {
-                    // console.log(String(product.level).toUpperCase())
-                    // console.log(product.level)
                     if (String(product.title).toUpperCase().includes(value2.toUpperCase())) brandsProductList.push(product);
                 })
             } else {
                 brandsProductList=[...octavesProductList];
-                console.log('brands', brandsProductList.length)
             }
 
-            console.log('brands', brandsProductList.length)
             finalProductList=[...brandsProductList];
 
             // check string types
@@ -264,7 +241,6 @@ function GlobalStoreSearch(props) {
         // search term
         if (document.querySelector('#searchInput').value) searchTerm = document.querySelector('#searchInput').value;
         if(searchTerm) {
-            console.log('allstate', allState)
             preSearchProductList.map(product=> {
                 const keyList = Object.keys(product);
                 keyList.every(key=>{
@@ -276,9 +252,6 @@ function GlobalStoreSearch(props) {
             searchProductList=[...preSearchProductList]
         }
         finalProductList=[...searchProductList];
-        console.log('final', finalProductList.length)
-        // setAllState({...allState, category: categoryFilter});
-        console.log('final length', finalProductList.length);
         // update menu text
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
         if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
@@ -308,9 +281,10 @@ function GlobalStoreSearch(props) {
         setDetailProduct([]);
     }
     const loadMore = page => {
+
         // alert('loadMore')
         setIsLoading(true);
-        console.log('hereMore', repoArray.length, idx)
+        console.log('hereMore', repoArray.length, hasMore, idx)
         // axios
         //   .get(`${GITHUB_API}/search/repositories`, {
         //     params: { page, q: searchVal }
@@ -334,7 +308,6 @@ function GlobalStoreSearch(props) {
         }
         // alert('useEffect')
         if (searchResults) {
-            console.log('here', repoArray.length, idx)
             // setRepoList([...repoList, ...repoArray.slice(idx,idx+30)]);
             setHasMore(true);
             setIsLoading(false);
@@ -348,7 +321,7 @@ function GlobalStoreSearch(props) {
         <>
             <div style={{width: '100%', maxWidth: '650px', margin: 'auto', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', border: '1px solid #ffe58a', backgroundColor: '#fff'}}>
                 <div className='selectContainer'>
-                <select onChange={()=>handleChange()} style={{flex: '2', WebkitAppearance: 'none'}} id='categoryfilter'>
+                <select onChange={()=>handleChange('category')} style={{flex: '2', WebkitAppearance: 'none'}} id='categoryfilter'>
                   <option name='All'>All</option>
                   <option name='Strings'>Strings</option>
                   <option name='Music'>Music</option>
