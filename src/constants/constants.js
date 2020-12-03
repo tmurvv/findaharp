@@ -283,6 +283,24 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'http://harpandheart.com',
         sellerWebsiteText: 'harpandheart.com',
         sellerEmail: 'harpandheart@yahoo.com'
+    },
+    {
+        id: uuid(),
+        sellerCountry: "USA",
+        sellerRegion: "San Diego Area",
+        productTitle: "Chiara Arpa",
+        productPrice: "",
+        productLongDesc: `<p><span>Chiara Arpa</span> Owner Chiara Capobianco was born in Milano (Italy) in 1980; she is a Music Graduate in Harp (10 year course) at Conservatorio “G. Verdi” of Milano (Italy). University graduate in Musicology (3 year course) at Scuola di Paleografia e Filologia Musicale di Cremona (Università degli Studi di Pavia-Italy). She started playing with many different Orchestras (Opera and Symphonic) touring all over Europe since she was fifteen years old.</p>
+        <p>She has performed at many concerts and events with both classic and Irish harp as solo harpist, alongside other musicians. She studied different types of music, which have given her a varied repertoire ranging from classical, medieval, renaissance, Irish, popular and contemporary music.</p>
+        <p>In 2003 she moved to London UK where she performed in several renowned venues. Since September 2004 she has been playing on the prestigious Cunard ships Queen Mary 2, Queen Elizabeth 2 and Queen Victoria travelling all over the world visiting all the continents.</p>
+        <p>At the moment she is  enjoyng a free-lance career as solo harpist that takes her to perform all over the globe. She has lived and performed in Europe, Middle East, Asia, South America, & around the world (on luxury cruise ships).</p>
+        <p>She is now based in the USA.</p>`,
+        productMaker: "Chiara Arpa",
+        productImageUrl: "/img/storePartners/chiara_arpa_logo.jpg",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'http://chiaracapobianco.com',
+        sellerWebsiteText: 'chiaracapobianco.com',
+        sellerEmail: 'chiara_arpa@yahoo.it'
     }
     // {
     //     id: 'theharpplace',
