@@ -154,7 +154,23 @@ const StoreProduct = (props) => {
                 <div><span>Level:</span> {props.productdetail.level}</div>
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
                 {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
-                <div onClick={()=>handleOpenStoreModal()} style={{fontStyle:'italic', cursor: 'pointer'}}>more...</div>
+                <button 
+                    onClick={()=>handleOpenStoreModal()} 
+                    classNames="btn blueFontButton" 
+                    style={{
+                        color: '#6A75AA', 
+                        fontStyle:'italic', 
+                        cursor: 'pointer',
+                        backgroundColor: 'white',
+                        outline: 'none',
+                        textDecoration: 'none',
+                        border: 'none',
+                        fontSize: '14px',
+                        textAlign:'left',
+                        verticalAlign: 'text-top',
+                        letterSpacing: '2px'
+                    }}
+                >more...</button>
             </div>
             :<>
                 <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenStoreModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}

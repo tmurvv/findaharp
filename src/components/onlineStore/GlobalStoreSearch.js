@@ -65,7 +65,7 @@ function GlobalStoreSearch(props) {
     const [resetPage, setResetPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [idx, setIdx] = useState(0);
-
+ 
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
         setClearMenus(false);
@@ -271,7 +271,6 @@ function GlobalStoreSearch(props) {
         setSearchResultsText('entry');
     }
     function handleopenStoreDetail(product) {
-        alert('imin')
         console.log(product)
         setopenStoreDetail(true);
         // dispatch({type:'detail', product});

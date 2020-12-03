@@ -80,6 +80,14 @@ function StoreProductCss() {
                 left: 0px;
                 margin-top: 20px;
             }
+            .blueFontButton {
+                background-color: 'white';
+                outline: 'none';
+                color:'#6A75AA';
+                text-decoration: 'none'; 
+                border: 'none'; 
+                font-size: '14px';
+            }
             .storeflyToCart {
                 position: relative;
                 animation-name: storeflyToCart;

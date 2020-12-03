@@ -81,7 +81,6 @@ function StoreProductSearchStrings(props) {
         setMenus(initialState);
     }
     function handleBrandsSelection(brands) {
-        alert(brands)
         props.setTypeOfSearch("strings");
         const newState = {...props.allState, 
             brands

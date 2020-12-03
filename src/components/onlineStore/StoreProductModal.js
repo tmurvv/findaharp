@@ -34,7 +34,6 @@ function StoreProductModal(props) {
         id,
         store,
         category, 
-        subcategories, 
         title, 
         artist_first,
         artist_last,
@@ -68,13 +67,6 @@ function StoreProductModal(props) {
     }
 
     async function updateCart(e) {
-        // if (cart.length>0&&cart[0].store !==e.target.getAttribute('data-item-store')) {
-        //     // const resultText = document.querySelector('#loadingLoginText');
-        //     // resultText.innerText=`Coming soon !! Ordering from two different stores at the same time. Currently Find a Harp can only handle orders from one store at a time. We are new and working hard to enable you to order from different stores. Please complete or delete your order from ${cart[0].store} to order ${e.target.getAttribute('data-item-title')} from ${e.target.getAttribute('data-item-store')}.`;
-        //     // dispatchResultInfo({type: 'OK'});
-            
-        //     return alert(`This item is from a different store than what is currently in your cart. We are working hard to enable ordering from two different stores at the same time, but currently we can only handle orders from one store at a time. Please click on the cart icon and complete or delete your order from "${cart[0].store}" before ordering "${e.target.getAttribute('data-item-title')}" from "${e.target.getAttribute('data-item-store')}".`)
-        // }
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             console.log('target item', targetItem.newused)
@@ -130,7 +122,7 @@ function StoreProductModal(props) {
     });
     return (
         <>
-        <div className='storedetailContainer'>
+        <div className='storedetailContainer' style={{display: 'block'}}>
             <Results 
                 resultInfo={resultInfo} 
                 loginGuest={loginGuest}

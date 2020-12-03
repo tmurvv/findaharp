@@ -15,7 +15,7 @@ import { productsReducer } from '../../reducers/reducers';
 import {
     triggerLazy
 } from '../../utils/helpers';
-
+ 
 const GITHUB_API = "https://api.github.com";
 
 const initialState = {
