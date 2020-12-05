@@ -70,10 +70,13 @@ OnlineStore.getInitialProps = async (props) => {
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
     const res = await axios.get(`http://localhost:3000/api/v1/storeitems`);
+    const filteredProducts = res.data.storeitems;
     const featuredProducts = res.data.storeitems.filter(product => product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
-        
+    // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
+    
+    filteredProducts.sort((a,b) => (a.subcategory > b.subcategory) ? 1 : ((b.subcategory < a.subcategory) ? -1 : 0)  || (a.subsubcategory > b.subsubcategory) ? 1 : ((b.subsubcategory > a.subsubcategory) ? -1 : 0)  || a.order - b.order);   
     return {
-        filteredProducts: res.data.storeitems, 
+        filteredProducts, 
         featuredProducts, 
         strings: res.data.storeitems.filter(product => product.title.toUpperCase().startsWith("3RD OCTAVE C")), 
         music: res.data.storeitems.filter(product => product.category==="music")

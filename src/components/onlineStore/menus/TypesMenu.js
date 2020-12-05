@@ -20,7 +20,8 @@ export default function TypesMenu(props) {
                 className="menuButton" 
                 name='types' 
                 onClick={(e)=>{
-                    props.handleclick(e); 
+                    alert('String "Types" menu under construction. Check back soon!')
+                    // props.handleclick(e); 
                 }}
                 style={{color: '#000000'}}
             >

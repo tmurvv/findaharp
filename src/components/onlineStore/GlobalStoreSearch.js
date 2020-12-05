@@ -271,7 +271,6 @@ function GlobalStoreSearch(props) {
         setSearchResultsText('entry');
     }
     function handleopenStoreDetail(product) {
-        console.log(product)
         setopenStoreDetail(true);
         // dispatch({type:'detail', product});
         setDetailProduct(product);

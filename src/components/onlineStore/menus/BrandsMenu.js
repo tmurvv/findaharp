@@ -36,6 +36,11 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
+                    name='COMPLETE SET'
+                >COMPLETE SET</li>      
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()}
                     name='Bow Brand Pedal Natural Gut'
                 >Bow Brand Pedal Natural Gut</li>      
                 <li 
@@ -61,13 +66,13 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Pedal Bass Wire'
-                >Pedal Bass Wire (silver-plated)</li>
+                    name='Silver-Plated Pedal Bass Wire'
+                >Silver-Plated Pedal Bass Wire</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Pedal Bass Wire (tarnish-resistant)'
-                >Pedal Bass Wire (tarnish-resistant)</li>
+                    name='Pedal Bass Wire (Tarnish-Resistant)'
+                >Pedal Bass Wire (Tarnish-Resistant)</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -83,6 +88,56 @@ export default function BrandsMenu(props) {
                     key={uuid()} 
                     name='Bow Brand Lever Nylon'
                 >Bow Brand Lever Nylon</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Artist Nylon'
+                >Artist Nylon</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Bronze Wire'
+                >Bronze Wire Monofilament</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Dusty Strings'
+                >Dusty Strings</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='KF Composite'
+                >Saverez KF Composite</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Nylon Monofilament'
+                >Nylon Monofilament</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Silkgut'
+                >Silkgut</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Triplett'
+                >Triplett</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Rees'
+                >Rees</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Stoney End'
+                >Stoney End</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Delta'
+                >Delta</li>
             </ul>     
         </div>
     );

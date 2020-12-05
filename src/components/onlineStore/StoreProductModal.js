@@ -136,7 +136,7 @@ function StoreProductModal(props) {
             <div style={{fontSize: '14px', fontStyle: 'italic', marginBottom: '15px'}}>{artist_first||artist_last?artist_first+'   '+artist_last:"_"}</div>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='storedetailInfo' style={{marginTop: '15px'}}>
-                <div className={`storedetailImg`}><img src= {image} alt={title} /></div>
+                <div className={`storedetailImg`}><img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full.png'} alt={title} /></div>
                 <div className={`storedetailText`}>
                     <div>
                         <p>{description}</p> <br/>
