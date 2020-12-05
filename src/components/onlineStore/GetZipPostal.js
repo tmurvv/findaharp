@@ -1,4 +1,4 @@
-import { useContext, useReducer } from 'react';
+import { useContext, useReducer, useEffect } from 'react';
 
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
@@ -14,10 +14,9 @@ import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/cons
 import { 
     selectRegion,
     tax,
-    shipping,
     getShippingArray
 } from '../../utils/checkoutHelpers';
-import {getStores} from '../../utils/storeHelpers';
+import {getStores, getNumItems} from '../../utils/storeHelpers';
 
 function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
@@ -41,48 +40,54 @@ function GetPostalZip() {
         // if (evt) evt.preventDefault();  
         resetResults();
     }
-    const handleCountryChange = (val) => {
-        
+    const handleCountryChange = (val) => { 
         if (val==='Canada') {
             if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
             setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        
         setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(val,cart) });
-
-
-        // if (val==='Canada') {
-        //     if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
-        //     setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
-        // } else {
-        //     if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
-        // }
-        // setCartSubtotals({...cartSubtotals, shipping: shipping(val, storesOrderedFrom, cart), taxes:null})
-        // switch(val) {
-        //     case 'Canada':
-        //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.Canada});
-        //         break;
-        //     case 'United States':
-        //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.USA, taxes: 0});
-        //         break;
-        //     case 'Pickup':
-        //         setCartSubtotals({...cartSubtotals, shipping: 0});
-        //         setUser({...user, currency: "CAD"});
-        //         break;
-        //     default:
-        //         setCartSubtotals({...cartSubtotals, shipping: SHIPPING_CALCULATIONS.default, taxes: 0});
-        // }
     }
-    function changeRegion(val) {
-        selectRegion(val, user, setUser); 
-        if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,"Canada",val,currencyMultiplier)});
-        } else {
-            setCartSubtotals({...cartSubtotals, taxes: 0});
-        }
+    function changeRegion(val) { 
+        let tempTax = 0;
+        let subCart = [];
+        selectRegion(val, user, setUser);
+        getStores(cart).map(store => {
+            subCart = [];
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    subCart.push(cartItem);
+                }
+            });
+            tempTax = Number(tempTax) + Number(Number(tax(subCart,user.shippingcountry,val, store, currencyMultiplier)));
+        });
+        setCartSubtotals({...cartSubtotals, taxes: tempTax });
     }
+    useEffect(() => {
+        console.log('user', user, getNumItems(cart))
+        let initTaxes = 0;
+        let subCart = [];
+        // nothing in cart or no shipping country, set shipping and taxes to nil
+        if (getNumItems(cart)===0 || !user.shippingcountry) return setCartSubtotals({...cartSubtotals, taxes: 0, shipping: 0, shippingArray:[]})
+        // no shipping region, calculate shipping, set taxes to nil
+        if (!user.shippingregion) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(user.shippingcountry, cart)})
+        // calculate taxes
+        getStores(cart).map(store => {
+            subCart = [];
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    subCart.push(cartItem);
+                }
+            });
+            initTaxes = Number(initTaxes) + Number(Number(tax(subCart,user.shippingcountry,user.shippingregion, store, currencyMultiplier)));
+        });
+        // set both shipping and taxes
+        return setCartSubtotals({...cartSubtotals,
+            taxes: initTaxes,
+            shippingarray: getShippingArray(user.shippingcountry, cart)
+        });
+    }, []);
     return (
         <div style={{padding: '15px', borderBottom: '1px solid #868686'}}>
             <Results 
@@ -128,9 +133,9 @@ function GetPostalZip() {
                     </div>
                 </div>
             </div>
-            {user.shippingcountry==='Canada'&&String(storesOrderedFrom).toUpperCase()!=="HARPSETC"
+            {user.shippingcountry==='Canada'||user.shippingcountry==="United States"&&String(storesOrderedFrom).toUpperCase()!=="HARPSETC"
             ?<><div className='regionDrop' style={{marginLeft: '0'}}>
-                <label htmlFor="country" style={{display: 'block'}}>Select Province to calculate taxes</label>
+                <label htmlFor="country" style={{display: 'block'}}>Select {user.shippingcountry==="Canada"?'Province':'State'} to calculate taxes</label>
                 <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>
                 <RegionDropdown
                     style={{
@@ -161,19 +166,7 @@ function GetPostalZip() {
             </div>
             </>
             :''}
-            {/* <div>
-                <input 
-                    type='checkbox'
-                    name='shippingstorepickup'
-                    onChange={handleStorePickup}
-                    style={{marginLeft: '0'}}
-                    checked={user.shippingcountry&&user.shippingcountry==="Pickup"}
-                />
-                <label style={{marginLeft: '5px'}} name='newsletter'>
-                    Pickup at store<br />
-                    {cart.length>0?<span style={{fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</span>:''}
-                </label>
-            </div> */}
+            
             <ShippingCss />
         </div>
     )

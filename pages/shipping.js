@@ -392,7 +392,7 @@ function Shipping() {
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
-                                                padding:'15px 0',
+                                                padding:'15px 5px',
                                                 border:'2px solid black',
                                                 borderRadius:'3px',
                                                 marginTop:'2.5px',

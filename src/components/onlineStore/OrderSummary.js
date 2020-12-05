@@ -40,18 +40,32 @@ function OrderSummary(props) {
         ...onlineOrderReducerInitialState, 
     });
     useEffect(() => {
-        // dispatchOnlineOrder({type:'pickup'})
+        console.log('user', user, getNumItems(cart))
         let initTaxes = 0;
-        if (getNumItems(cart)>0&&user.shippingcountry&&user.shippingregion) initTaxes = tax(cart,user.shippingcountry,user.shippingregion, currencyMultiplier);
-        setCartSubtotals({...cartSubtotals,
-            taxes: initTaxes,
-            shippingarray: user.shippingcountry?getShippingArray(user.shippingcountry, cart):[]
+        let subCart = [];
+        // nothing in cart or no shipping country, set shipping and taxes to nil
+        if (getNumItems(cart)===0 || !user.shippingcountry) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingArray:[]})
+        // no shipping region, calculate shipping, set taxes to nil
+        if (!user.shippingregion) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(user.shippingcountry, cart)})
+        // calculate taxes
+        getStores(cart).map(store => {
+            subCart = [];
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    subCart.push(cartItem);
+                }
+            });
+            initTaxes = Number(initTaxes) + Number(Number(tax(subCart,user.shippingcountry,user.shippingregion, store, currencyMultiplier)));
         });
-    
+        // set both shipping and taxes
+        return setCartSubtotals({...cartSubtotals,
+            taxes: initTaxes,
+            shippingarray: getShippingArray(user.shippingcountry, cart)
+        });
     }, []);
     return (
         <>
-             <div className="orderSummary" style={{padding: '15px', borderBottom: '1px solid #868686'}}>
+            <div className="orderSummary" style={{padding: '15px', borderBottom: '1px solid #868686'}}>
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Products Subtotal:</p>
                     {user.currency==='USD'?<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart)))?(Number(getSubTotal(cart)).toFixed(2)):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
@@ -90,9 +104,21 @@ function OrderSummary(props) {
                 </div>
             </div>
             <div className='flex-sb' style={{padding: '15px'}}>
-                    <h4 style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Total:</h4>
-                    {user.currency==="USD"?<p style={{textAlign: 'right'}}>${!isNaN(Number(getTotal(cart, user)))?Number(getTotal(cart, user)).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></p>
-                    :<p style={{textAlign: 'right'}}>${!isNaN(Number(getTotal(cart, user, currencyMultiplier)))?Number(getTotal(cart, user, currencyMultiplier)).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
+                <h4 
+                    style={{
+                        textAlign: 'left', 
+                        fontFamily: 'Metropolis Extra Bold', 
+                        fontWeight: 'bold'
+                    }}>Total:
+                </h4>
+                {user.currency==="USD"
+                ?<p style={{textAlign: 'right'}}>
+                    ${!isNaN(Number(getTotal(cart, user)))?Number(getTotal(cart, user)).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span>
+                </p>
+                :<p style={{textAlign: 'right'}}>
+                    ${!isNaN(Number(getTotal(cart, user, currencyMultiplier)))?Number(getTotal(cart, user, currencyMultiplier)).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span>
+                </p>
+                }
             </div>
             <OrderSummaryCss />
         </>

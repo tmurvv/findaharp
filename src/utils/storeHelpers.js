@@ -30,7 +30,7 @@ export async function decQty(cart, setCart, prodId, cartSubtotals, setCartSubtot
     setCart(tempCart);
     if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: 0, taxes: 0, shippingArray: []});
     // maybe add a check shipping array function here in case item deleted and nothing else from this store
-    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, tempCart[0].store, tempCart), shippingArray: getShippingArray(user.shippingcountry, cart)})
+    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion, 'findaharp', user.currency==='CAD'?1.33:1), shipping:shipping(user.shippingcountry, tempCart[0].store, tempCart), shippingArray: getShippingArray(user.shippingcountry, cart)}) //BREAKING findaharp
 }
 export async function incQty(cart, setCart, prodId, cartSubtotals, setCartSubtotals, user) {
     let tempCart = [...cart]
@@ -51,5 +51,5 @@ export async function deleteItem(cart, setCart, prodId, cartSubtotals, setCartSu
     setCart(tempCart);
     if (tempCart.length===0) return setCartSubtotals({...cartSubtotals, shipping: [], taxes: 0, shippingArray: []});
     // maybe add a check shipping array function here in case item deleted and nothing else from this store
-    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion), shipping:shipping(user.shippingcountry, cart[0].store, tempCart), shippingArray: getShippingArray(user.shippingcountry, cart)})
+    setCartSubtotals({...cartSubtotals, taxes: tax(tempCart, user.shippingcountry, user.shippingregion, 'findaharp', user.currency==='CAD'?1.33:1), shipping:shipping(user.shippingcountry, cart[0].store, tempCart), shippingArray: getShippingArray(user.shippingcountry, cart)}) //BREAKING findharp
 }
