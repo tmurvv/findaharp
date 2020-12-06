@@ -1,8 +1,12 @@
 import uuid from 'react-uuid';
-import { getSubTotal, getStores } from './storeHelpers';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
+import { 
+    getSubTotal, 
+    getStores, 
+    getNumItems 
+} from './storeHelpers';
 
 export function setlocalCart(localName, localValue) {
     localStorage.getItem(localName);
@@ -152,13 +156,36 @@ export function getTotal(cart, user, currencyMultiplier) {
 export function selectRegion(val, user, setUser) {
     setUser({...user, shippingregion: val});
 }
-
-export function leaveSiteListener(e) {
-    // Cancel the event
-    e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-    // Chrome requires returnValue to be set
-    e.returnValue = '';
+export function updateShippingTaxes(user, cart, cartSubtotals, setCartSubtotals, currencyMultiplier) {
+    let initTaxes = 0;
+    let subCart = [];
+    // nothing in cart or no shipping country, set shipping and taxes to nil
+    if (getNumItems(cart)===0 || !user.shippingcountry) return setCartSubtotals({...cartSubtotals, taxes: 0, shipping: 0, shippingArray:[]})
+    // no shipping region, calculate shipping, set taxes to nil
+    if (!user.shippingregion) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(user.shippingcountry, cart)})
+    // calculate taxes
+    getStores(cart).map(store => {
+        subCart = [];
+        cart.map(cartItem=>{
+            if (String(cartItem.store)===store) {
+                subCart.push(cartItem);
+            }
+        });
+        initTaxes = Number(initTaxes) + Number(Number(tax(subCart,user.shippingcountry,user.shippingregion, store, currencyMultiplier)));
+    });
+    // set both shipping and taxes
+    return setCartSubtotals({...cartSubtotals,
+        taxes: initTaxes,
+        shippingarray: getShippingArray(user.shippingcountry, cart)
+    });
 }
+
+// export function leaveSiteListener(e) {
+//     // Cancel the event
+//     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+//     // Chrome requires returnValue to be set
+//     e.returnValue = '';
+// }
 
 export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier) {
     const subTotal = user.currency==="USD"?getSubTotal(cart):getSubTotal(cart)*currencyMultiplier;

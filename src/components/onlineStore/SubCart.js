@@ -26,7 +26,6 @@ import {
 import { shipping } from '../../utils/checkoutHelpers';
 import GetZipPostal from '../../components/onlineStore/GetZipPostal';
 import PageTitle from '../../components/PageTitle';
-import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 
 
 function SubCart(props) {
@@ -34,7 +33,6 @@ function SubCart(props) {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user, setUser } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const [screenWidth, setScreenWidth] = useState();
     const [update, setUpdate] = useState(false);
     const [ sellerInfo, setSellerInfo ] = useState();

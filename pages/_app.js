@@ -12,7 +12,6 @@ import 'react-phone-input-2/lib/style.css'
 
 // internal
 import {CartContext} from "../src/contexts/CartContext";
-import {StoresOrderedFromContext} from "../src/contexts/StoresOrderedFromContext";
 import {CartSubtotalsContext} from "../src/contexts/CartSubtotalsContext";
 import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
@@ -39,7 +38,7 @@ const cartSubtotalsInit = {
     taxes: 0,
     shippingarray: []
 }
-const storesOrderedFromInit = ['none']
+
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
@@ -56,7 +55,6 @@ function MyApp(props) {
     const [cart, setCart] = useState(cartItemsInit);
     const [shipping, setShipping] = useState('working');
     const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
-    const [storesOrderedFrom, setStoresOrderedFrom] = useState(storesOrderedFromInit);
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
     const [currency, setCurrency] = useState('USD');
@@ -171,7 +169,6 @@ function MyApp(props) {
                 </Head>
                 <Banner />
                 <UserContext.Provider value={{user, setUser}}>
-                <StoresOrderedFromContext.Provider value={{storesOrderedFrom, setStoresOrderedFrom}}>
                 <StatusContext.Provider value={{status, setStatus}}>
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
@@ -189,7 +186,6 @@ function MyApp(props) {
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
                 </StatusContext.Provider>
-                </StoresOrderedFromContext.Provider>
                 </UserContext.Provider>
                 
                 <AppCss />
@@ -249,7 +245,6 @@ function MyApp(props) {
             </Head>
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
-            <StoresOrderedFromContext.Provider value={{storesOrderedFrom, setStoresOrderedFrom}}>
             <StatusContext.Provider value={{status, setStatus}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
@@ -280,7 +275,6 @@ function MyApp(props) {
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
             </StatusContext.Provider>
-            </StoresOrderedFromContext.Provider>
             </UserContext.Provider>
             
             <AppCss />

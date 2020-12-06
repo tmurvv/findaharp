@@ -1,7 +1,6 @@
 import { useContext, useEffect, useReducer } from 'react';
 
 import { StatusContext } from '../../contexts/StatusContext';
-import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
@@ -30,7 +29,6 @@ const onlineOrderReducerInitialState = {
 function OrderSummary(props) {
     const { status } = useContext(StatusContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     // const [ storePartner, setStorePartner ] = useState();
@@ -64,7 +62,7 @@ function OrderSummary(props) {
         });
     }, []);
     return (
-        <>
+        <>  
             <div className="orderSummary" style={{padding: '15px', borderBottom: '1px solid #868686'}}>
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Products Subtotal:</p>
@@ -72,7 +70,7 @@ function OrderSummary(props) {
                     :<p style={{textAlign: 'right'}}>${!isNaN(Number(getSubTotal(cart))*currencyMultiplier)?(Number(getSubTotal(cart))*currencyMultiplier).toFixed(2):'0.00'}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></p>}
                 </div>
                 <div>
-                    {cartSubtotals.shippingarray&&cartSubtotals.shippingarray.length>0?cartSubtotals.shippingarray.map(shippingItem => 
+                    {getNumItems(cart)>0&&cartSubtotals.shippingarray&&cartSubtotals.shippingarray.length>0?cartSubtotals.shippingarray.map(shippingItem => 
                         <div className='flex-sb'>
                         <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping: <span style={{fontSize: '10px', fontStyle: 'italic'}}>FROM {(STORE_PARTNERS.filter(partner => partner.id===shippingItem[0])[0].productTitle).toUpperCase()}</span></p>
                         <p style={{textAlign: 'right'}}>
@@ -87,16 +85,15 @@ function OrderSummary(props) {
                     ):<div className='flex-sb'>
                         <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Shipping:</p>
                         <p style={{textAlign: 'right'}}>
-                            $0.00
+                             $0.00
                         </p>
                     </div>}
                     
                     {/* {cart.length>0?<p style={{fontSize: '10px', fontStyle: 'italic', marginTop: '-15px', marginBottom: '25px'}}>SOLD BY {String(storesOrderedFrom).toUpperCase()} {String(storesOrderedFrom).toUpperCase()==="HARPSETC"?'(USA)':'(Canada)'}</p>:''}  */}
                 </div>
                 {/* {String(storesOrderedFrom).toUpperCase()!=="HARPSETC"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*If your order qualifies for Canada Post letter rate, your credit card will be refunded $12.00 at time of shipping. <a style={{fontSize: '12px', borderBottom: '1px solid #6A75AA', color: '#6A75AA'}} href='https://www.canadapost.ca/tools/pg/manual/PGletterml-e.asp#1392028' target='_blank'>requirements</a></p>:''} */}
-                {String(user.shippingcountry).toUpperCase()==="PICKUP"?<p style={{fontSize: '14px',marginTop:'-10px', maxWidth: '350px'}}>*Pickup at store</p>:''}
-                {cartSubtotals.shipping=="-1"&&String(user.shippingcountry).toUpperCase()!=="PICKUP"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*International orders require a shipping estimate. Your order will be submitted, but your credit card will not be charged until shipping costs are approved by you.</p>:''}
-                {String(storesOrderedFrom).toUpperCase()==='HARPSETC'&&user.shippingcountry!=="Canada"&&cartSubtotals.shipping=="-1"&&String(user.shippingcountry).toUpperCase()!=="PICKUP"?<p style={{fontSize: '12px', maxWidth: '350px'}}>*International orders from Harps Etc. require a wire transfer. Information on payment will be sent with your shipping estimate.</p>:''}
+                {/* {cartSubtotals.shipping=="-1"?<p style={{fontSize: '12px',marginTop:'-10px', maxWidth: '350px'}}>*International orders require a shipping estimate. Your order will be submitted, but your credit card will not be charged until shipping costs are approved by you.</p>:''} */}
+                {/* {String(storesOrderedFrom).toUpperCase()==='HARPSETC'&&user.shippingcountry!=="Canada"&&cartSubtotals.shipping=="-1"?<p style={{fontSize: '12px', maxWidth: '350px'}}>*International orders from Harps Etc. require a wire transfer. Information on payment will be sent with your shipping estimate.</p>:''} */}
                 
                 <div className='flex-sb'>
                     <p style={{textAlign: 'left', fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold'}}>Taxes:</p>

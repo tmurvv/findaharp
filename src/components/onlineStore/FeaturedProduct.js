@@ -7,7 +7,6 @@ import {
     incQty
 } from '../../utils/storeHelpers';
 import { UserContext } from '../../contexts/UserContext';
-import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
@@ -25,7 +24,6 @@ import {
 const FeaturedProduct = (props) => {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
-    const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [ openModal, setOpenModal ] = useState(false);
@@ -94,7 +92,6 @@ const FeaturedProduct = (props) => {
             const tempCartJson = await JSON.stringify(cartCopy);
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
-            setStoresOrderedFrom([...storesOrderedFrom, thisItem.store]);
         }
     }
     function handleAdd(e) {  

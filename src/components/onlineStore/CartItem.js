@@ -6,7 +6,6 @@ import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
-import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 
 import {
     incQty,
@@ -20,7 +19,6 @@ function CartItem(props) {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const { setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     return (
         <>
             <div className='subCart_item'>
@@ -35,7 +33,7 @@ function CartItem(props) {
                     :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)} each</div>}
                     <div className='product_quantity'>
                         <button 
-                            onClick={() => deleteItem(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user)} 
+                            onClick={() => deleteItem(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user, currencyMultiplier)} 
                             style={{
                                 border: 'none',
                                 outline: 'none',
@@ -50,9 +48,9 @@ function CartItem(props) {
                         
                         <div className='quantity_button'>
                             {item.newused==='new'
-                            ?<><div className='add' onClick={() => decQty(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
+                            ?<><div className='add' onClick={() => decQty(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user, currencyMultiplier)} data-item-name={item.description}><img src='img/circleMinus.png' alt='decrease quantity' /></div>
                             <div className='how_many'>{item.product_quantity}</div>
-                            <div className='sub' onClick={() => incQty(cart, setCart, item.id, cartSubtotals, setCartSubtotals,user)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div></>
+                            <div className='sub' onClick={() => incQty(cart, setCart, item.id, cartSubtotals, setCartSubtotals,user, currencyMultiplier)} data-item-name={item.description}><img src='img/circlePlus.png' alt='increase quantity' /></div></>
                             :<p style={{fontSize:'14px', color:'#556f82', marginLeft:'7px'}}>Only 1 in stock</p>}
                         </div>
                     </div>

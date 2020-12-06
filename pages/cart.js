@@ -25,7 +25,6 @@ import { getTotal } from '../src/utils/checkoutHelpers';
 import GetZipPostal from '../src/components/onlineStore/GetZipPostal';
 import PageTitle from '../src/components/PageTitle';
 import SubCart from '../src/components/onlineStore/SubCart';
-import { StoresOrderedFromContext } from '../src/contexts/StoresOrderedFromContext';
 
 
 function Cart(props) {
@@ -34,7 +33,6 @@ function Cart(props) {
     const { user, setUser } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [screenWidth, setScreenWidth] = useState();
-    const { storesOrderedFrom, setStoresOrderedFrom } = useContext(StoresOrderedFromContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {

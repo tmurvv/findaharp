@@ -3,7 +3,6 @@ import { useContext, useReducer, useEffect } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
-import { StoresOrderedFromContext } from '../../contexts/StoresOrderedFromContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import ShippingCss from '../../styles/onlinestore/Shipping.css';
@@ -22,7 +21,6 @@ function GetPostalZip() {
     const { user, setUser } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const { storesOrderedFrom } = useContext(StoresOrderedFromContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
@@ -100,7 +98,7 @@ function GetPostalZip() {
                 <img style={{height:'33px', marginRight: '4px'}} src='img/store/fastTruck.png' alt='humorous fast truck' />
                 <h2>Where are we shipping to?</h2>
             </div>
-            <div style={user.shippingcountry&&user.shippingcountry==="Pickup"?{display: 'none'}:{display: 'block'}}>
+            <div>
                 <div style={{marginBottom: '15px'}}>
                     <p>It will help us estimate shipping costs.</p>
                 </div>
@@ -133,7 +131,7 @@ function GetPostalZip() {
                     </div>
                 </div>
             </div>
-            {user.shippingcountry==='Canada'||user.shippingcountry==="United States"&&String(storesOrderedFrom).toUpperCase()!=="HARPSETC"
+            {user.shippingcountry==='Canada'||user.shippingcountry==="United States"
             ?<><div className='regionDrop' style={{marginLeft: '0'}}>
                 <label htmlFor="country" style={{display: 'block'}}>Select {user.shippingcountry==="Canada"?'Province':'State'} to calculate taxes</label>
                 <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>

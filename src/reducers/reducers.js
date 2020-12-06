@@ -36,18 +36,18 @@ export const productsReducer = (state, action) => {
 export const onlineOrderReducer = (state, action) => {
     console.log(state)
     switch (action.type.toUpperCase()) {
-        case 'PICKUP':
-            console.log('pickup')
-            if (String(storesOrderedFrom).toUpperCase==="FINDAHARP"&&user.shippingcountry==="Pickup") {
-                initShipping = 0;
-                initTaxes = tax(cart, "Canada", "Alberta", currencyMultiplier);
-            }
+        // case 'PICKUP':
+        //     console.log('pickup')
+        //     if (String(storesOrderedFrom).toUpperCase==="FINDAHARP"&&user.shippingcountry==="Pickup") {
+        //         initShipping = 0;
+        //         initTaxes = tax(cart, "Canada", "Alberta", currencyMultiplier);
+        //     }
     
-            if (String(storesOrderedFrom).toUpperCase==="HARPSETC"&&user.shippingcountry==="Pickup") {
-                initShipping = 0;
-                initTaxes = tax(cart,"United States","California",currencyMultiplier);
-            }
-            return { answer:'Pickup'};
+        //     if (String(storesOrderedFrom).toUpperCase==="HARPSETC"&&user.shippingcountry==="Pickup") {
+        //         initShipping = 0;
+        //         initTaxes = tax(cart,"United States","California",currencyMultiplier);
+        //     }
+        //     return { answer:'Pickup'};
         case 'Canada':
             return { answer:'Canada'};
         case 'United States':
