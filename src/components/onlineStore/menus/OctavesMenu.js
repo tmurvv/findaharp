@@ -20,7 +20,7 @@ export default function OctavesMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Octaves Menu'
-                className='plainTextSelectLine2'
+                className='storePlainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 

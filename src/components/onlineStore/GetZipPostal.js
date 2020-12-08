@@ -13,7 +13,8 @@ import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/cons
 import { 
     selectRegion,
     tax,
-    getShippingArray
+    getShippingArray,
+    updateShippingTaxes
 } from '../../utils/checkoutHelpers';
 import {getStores, getNumItems} from '../../utils/storeHelpers';
 
@@ -63,28 +64,7 @@ function GetPostalZip() {
         setCartSubtotals({...cartSubtotals, taxes: tempTax });
     }
     useEffect(() => {
-        console.log('user', user, getNumItems(cart))
-        let initTaxes = 0;
-        let subCart = [];
-        // nothing in cart or no shipping country, set shipping and taxes to nil
-        if (getNumItems(cart)===0 || !user.shippingcountry) return setCartSubtotals({...cartSubtotals, taxes: 0, shipping: 0, shippingArray:[]})
-        // no shipping region, calculate shipping, set taxes to nil
-        if (!user.shippingregion) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(user.shippingcountry, cart)})
-        // calculate taxes
-        getStores(cart).map(store => {
-            subCart = [];
-            cart.map(cartItem=>{
-                if (String(cartItem.store)===store) {
-                    subCart.push(cartItem);
-                }
-            });
-            initTaxes = Number(initTaxes) + Number(Number(tax(subCart,user.shippingcountry,user.shippingregion, store, currencyMultiplier)));
-        });
-        // set both shipping and taxes
-        return setCartSubtotals({...cartSubtotals,
-            taxes: initTaxes,
-            shippingarray: getShippingArray(user.shippingcountry, cart)
-        });
+        updateShippingTaxes(user,cart,cartSubtotals,setCartSubtotals,currencyMultiplier);
     }, []);
     return (
         <div style={{padding: '15px', borderBottom: '1px solid #868686'}}>

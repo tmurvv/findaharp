@@ -26,7 +26,7 @@ export default function BrandsMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Brands Menu'
-                className='plainTextSelectLine2'
+                className='storePlainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 

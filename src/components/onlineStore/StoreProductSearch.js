@@ -234,7 +234,7 @@ function StoreProductSearch(props) {
     function handleClear() {
         // setMenus(initialState);
         // setAllState(initialStateText);
-        // document.querySelector('#clearSearch').style.display='none';
+        document.querySelector('#clearSearch').style.display='none';
         // props.handleClear();
     }
    function clearOneFilter(e) {
@@ -290,7 +290,7 @@ function StoreProductSearch(props) {
                             id="selectedSoloEnsemble" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.soloensemble}
-                            onClick={()=>handleClick({target: {name: 'soloensemble'}})}
+                            onClick={()=>handleClick({target: {name: 'Lever/Pedal/Ens'}})}
                         >
                             {props.allState&&props.allState.soloensemble}
                             {props.allState&&props.allState.soloensemble!=="All Lever/Pedal/Ens"

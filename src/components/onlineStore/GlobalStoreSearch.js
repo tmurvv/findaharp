@@ -44,7 +44,7 @@ const initialStateText = {
     octaves: 'All Octaves',
     brands: 'All Brands',
     types: 'All Types',
-    searchInfo: 'All Harps'
+    searchInfo: ''
 }
 
 function GlobalStoreSearch(props) {
@@ -264,11 +264,11 @@ function GlobalStoreSearch(props) {
     function handleClear() {
         document.querySelector('#categoryfilter').value='All';
         document.querySelector('#searchInput').value='';
-        // document.querySelector('#clearSearch').style.display='none';
         setAllState(initialStateText);
         setSearchResults(props.filteredProducts);
         setResetSearch(true);
         setSearchResultsText('entry');
+        if (document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display='none';
     }
     function handleopenStoreDetail(product) {
         setopenStoreDetail(true);
@@ -321,22 +321,29 @@ function GlobalStoreSearch(props) {
     
     return (
         <>
-            <div style={{width: '100%', maxWidth: '650px', margin: 'auto', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', border: '1px solid #ffe58a', backgroundColor: '#fff'}}>
-                <div className='selectContainer'>
-                <select onChange={()=>handleChange('category')} style={{flex: '2', WebkitAppearance: 'none'}} id='categoryfilter'>
-                  <option name='All'>All</option>
-                  <option name='Strings'>Strings</option>
-                  <option name='Music'>Music</option>
-                  <option name='Accessories'>Accessories</option>
-                  <option name='Books'>Books</option>
-                  <option name='Gifts'>Gifts</option>
-                  <option name='CDs'>CDs</option>
-                  <option name='Digital Downloads'>Digital Downloads</option>
-                </select>
-                <span style={{fontSize: '36px'}}>&#711;</span>
+            <div className='storeSearchLine' >
+            <h3 className='searchHelperText'>Search by category</h3>
+                <div className='selectContainer'>    
+                    <select onChange={()=>handleChange('category')} id='categoryfilter'>
+                        <option name='All'>All</option>
+                        <option name='Strings'>Strings</option>
+                        <option name='Music'>Music</option>
+                        <option name='Accessories'>Accessories</option>
+                        <option name='Books'>Books</option>
+                        <option name='Gifts'>Gifts</option>
+                        <option name='CDs'>CDs</option>
+                        <option name='Digital Downloads'>Digital Downloads</option>
+                    </select>
+                    {/* <span style={{fontSize: '36px'}}>&#711;</span> */}
                 </div>
-                <input style={{flex: '8'}} type="text" id="searchInput" onChange={handleChange} placeholder="Search" />
-                <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
+                <h3 className='searchHelperText'>and / or search term</h3>
+            
+                <div className="searchTextImg">
+                    <input type="text" id="searchInput" onChange={handleChange} placeholder="Search" />
+                    <div style={{flex: '2'}}>
+                        <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
+                    </div>
+                </div>
             </div>
             <StoreProductSearch 
                 clearMenus={clearMenus} 
@@ -363,7 +370,7 @@ function GlobalStoreSearch(props) {
             <>
             <div className="storeproductContainer">
                 <div>
-                <div className='storeselected clearAll' id='clearSearch' style={{display:'flex'}}>
+                <div className='storeselected clearAll' id='clearSearch' style={{display:'none'}}>
                     <h3>{getStoreSearchInfo(allState,typeOfSearch)}</h3>
                     {/* <h3>hear{getStoreSearchInfo(allState,typeOfSearch)!==''?getStoreSearchInfo(allState,typeOfSearch):"All Items"}</h3> */}
                     <div onClick={handleClear} className='clearAll clearSearch'>
@@ -412,7 +419,7 @@ function GlobalStoreSearch(props) {
             <>
                 <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
                 <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
-                <ProductScroll filteredproductscontainer={props.strings} title="Browse String Brands"/>
+                <ProductScroll handleStringsChange={handleChange} filteredproductscontainer={props.strings} title="Browse String Brands"/>
             </>
             }
             <StoreProductSearchCss />

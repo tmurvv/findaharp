@@ -184,7 +184,7 @@ function StoreProductSearchStrings(props) {
     function handleClear() {
         // setMenus(initialState);
         // props.setAllState(initialStateText);
-        // document.querySelector('#clearSearch').style.display='none';
+        document.querySelector('#clearSearch').style.display='none';
         props.handleClear();
     }
    function clearOneFilter(e) {

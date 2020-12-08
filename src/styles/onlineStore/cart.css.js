@@ -127,12 +127,22 @@ function CartCss() {
             height: 45px;
             width: unset;
         }
+        
         .cartButton p {
             margin-block-start: 0;
             margin-block-end: 0;
             font-weight: 600;
             font-size: 20px;
             transform: translate(39px, 0px);
+        }
+        @media only screen and (max-width: 550px) {
+            .cartButton img {
+                height: 30px;
+            }
+            .cartButton p {
+                font-size: 14px;
+                transform: translate(27px, 0px);
+            }
         }
         /*********************************************/
         

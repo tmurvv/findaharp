@@ -1,24 +1,19 @@
 import { useContext, useEffect, useReducer } from 'react';
 
-import { StatusContext } from '../../contexts/StatusContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import { onlineOrderReducer } from '../../reducers/reducers';
 import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import {
     getNumItems,
-    getSubTotal,
-    getStores
+    getSubTotal
 } from '../../utils/storeHelpers';
 import {
-    getShippingArray,
     getTotal,
-    shipping,
-    tax
+    updateShippingTaxes
 } from '../../utils/checkoutHelpers';
 
 const onlineOrderReducerInitialState = {
@@ -27,39 +22,13 @@ const onlineOrderReducerInitialState = {
 }
 
 function OrderSummary(props) {
-    const { status } = useContext(StatusContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { user } = useContext(UserContext);
-    const { cart, setCart } = useContext(CartContext);
-    // const [ storePartner, setStorePartner ] = useState();
+    const { cart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
-    // const [ resultInfo, dispatchResultInfo ] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
-    const [ onlineOrder, dispatchOnlineOrder ] = useReducer(onlineOrderReducer, {
-        ...onlineOrderReducerInitialState, 
-    });
+    
     useEffect(() => {
-        console.log('user', user, getNumItems(cart))
-        let initTaxes = 0;
-        let subCart = [];
-        // nothing in cart or no shipping country, set shipping and taxes to nil
-        if (getNumItems(cart)===0 || !user.shippingcountry) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingArray:[]})
-        // no shipping region, calculate shipping, set taxes to nil
-        if (!user.shippingregion) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(user.shippingcountry, cart)})
-        // calculate taxes
-        getStores(cart).map(store => {
-            subCart = [];
-            cart.map(cartItem=>{
-                if (String(cartItem.store)===store) {
-                    subCart.push(cartItem);
-                }
-            });
-            initTaxes = Number(initTaxes) + Number(Number(tax(subCart,user.shippingcountry,user.shippingregion, store, currencyMultiplier)));
-        });
-        // set both shipping and taxes
-        return setCartSubtotals({...cartSubtotals,
-            taxes: initTaxes,
-            shippingarray: getShippingArray(user.shippingcountry, cart)
-        });
+        updateShippingTaxes(user, cart, cartSubtotals, setCartSubtotals,currencyMultiplier);
     }, []);
     return (
         <>  

@@ -122,7 +122,64 @@ function AppCss() {
                 }
                 .plainTextSelectLine2 {
                     /*margin-block-start: -.5em;*/
+                    width: 385%;
+                    position: absolute;
+                }
+            } 
+
+            .storePlainTextSelectLine1 {
+                margin-block-end: 0;
+                margin-block-start: 0;
+                color: #fafbfc;
+                background-color: #000000;
+                font-size: 14px;
+                position: absolute;
+                cursor: pointer;
+                z-index: 2000;
+                list-style: none;
+                margin-top: -2px;
+                padding-inline-start: 0;
+                width: 75%;
+                transform: translateX(16.5%);
+                padding: 9px;
+            }
+            @media only screen and (max-width: 550px) {
+                .storePlainTextSelectLine1 {
                     width: 190%;
+                }
+            }
+            .storePlainTextSelectLine1 p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+            .storePlainTextSelectLine2 {
+                margin-block-start: -.2em;
+                color: #333333;
+                font-size: 14px;
+                padding: 6px 0;
+                position: absolute;
+                cursor: pointer;
+                background-color: #fcd961;
+                list-style: none;
+                z-index: 2000;
+                padding-inline-start: 0;
+                width: 160%;
+                transform: translateX(16.5%);
+                text-align: center;
+            }
+            .storePlainTextSelectLine2 p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+            @media only screen and (max-width: 550px) {
+                .storePlainTextSelectLine1 {
+                    /*margin-block-start: -.5em;*/
+                    width: 190%;
+                    position: absolute;
+                }
+                .storePlainTextSelectLine2 {
+                    /*margin-block-start: -.5em;*/
+                    width: 385%;
                     position: absolute;
                 }
             }  

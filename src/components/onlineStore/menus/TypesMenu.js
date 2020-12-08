@@ -32,7 +32,7 @@ export default function TypesMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Types Menu'
-                className='plainTextSelectLine2'
+                className='storePlainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 

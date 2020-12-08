@@ -139,14 +139,14 @@ export const getStoreSearchInfo = (allState, type) => {
     if (type==='music') {
         [allState.soloensemble, allState.level, allState.publicationtype].map(menuItem => {
             if(!['All Lever/Pedal/Ens', 'All Levels', 'All Publication Types'].includes(menuItem)) searchInfo += `${menuItem} | `
-            if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
+            // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
         return `Showing Music: ${searchInfo}`;
     }   
     if (type==='strings') {
         [allState.octaves, allState.brands, allState.types].map(menuItem => {
             if(!['All Octaves', 'All Brands', 'All Types'].includes(menuItem)) searchInfo += `${menuItem} | `
-            if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
+            // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
     }   
     return `Showing Strings: ${searchInfo}`;

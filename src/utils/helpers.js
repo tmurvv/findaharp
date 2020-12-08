@@ -32,7 +32,6 @@ export function removeDashOE(sellerName) {
  */
 export function getWindowSize() { 
     const isClient = typeof window === 'object'; 
-
     function getSize() {
       return {
         width: isClient ? window.innerWidth : undefined,

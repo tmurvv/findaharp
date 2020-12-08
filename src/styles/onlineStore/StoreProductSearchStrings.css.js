@@ -199,6 +199,32 @@ function StoreProductSearchStringsCss() {
                 border: 1 solid grey;
                 z-index: 1000;
             }
+            .plainTextSelectLine2 {
+                margin-block-start: -.2em;
+                color: #333333;
+                font-size: 14px;
+                padding: 6px 0;
+                position: absolute;
+                cursor: pointer;
+                background-color: #fcd961;
+                list-style: none;
+                z-index: 2000;
+                padding-inline-start: 0;
+                width: 160%;
+                transform: translateX(16.5%);
+                text-align: center;
+            }
+            .plainTextSelectLine2 p {
+                margin-block-start: 0;
+                margin-block-end: 0;
+            }
+            @media only screen and (max-width: 550px) {
+                .plainTextSelectLine2 {
+                    /*margin-block-start: -.5em;*/
+                    width: 385%;
+                    position: absolute;
+                }
+            } 
             // .storeselected {
             //     width: fit-content;
             //     height: fit-content;

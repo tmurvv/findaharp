@@ -13,11 +13,11 @@ import ProductScroll from '../src/components/onlineStore/ProductScroll';
 import StoreProductContainer from '../src/components/onlineStore/StoreProductContainer';
 import StoreItemsHighlight from '../src/components/onlineStore/StoreItemsHighlight';
 import PageTitle from '../src/components/PageTitle';
-import IndexCss from '../src/styles/index.css';
-import OnlineStoreCss from '../src/styles/onlinestore/onlinestores/FindaharpOnlineStore.css';
+import StoreIndexCss from '../src/styles/onlineStore/StoreIndex.css';
+import OnlineStoreCss from '../src/styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
 import StoreProductSearch from '../src/components/onlineStore/StoreProductSearch';
 import GlobalStoreSearch from '../src/components/onlineStore/GlobalStoreSearch';
-import StoreProductContainerCss from '../src/styles/onlinestore/StoreProductContainer.css';
+import StoreProductContainerCss from '../src/styles/onlineStore/StoreProductContainer.css';
 import { UserContext } from '../src/contexts/UserContext';
 
 const OnlineStore = (props) => {
@@ -39,8 +39,8 @@ const OnlineStore = (props) => {
     },[]);
     return (
         <>
-            <div className='index' style={{height: 'fit-content', padding: '40px', paddingTop: '70px'}}>
-                <PageTitle maintitle="Online Store" subtitle='Thousands more items coming in November' /> 
+            <div className='storeIndex'>
+                <PageTitle maintitle="Online Store" subtitle='Thousands more music titles coming soon' /> 
                 <GlobalStoreSearch 
                     filteredProducts={props.filteredProducts} 
                     featuredProducts={props.featuredProducts} 
@@ -49,7 +49,7 @@ const OnlineStore = (props) => {
                     setSearchResults={setSearchResults}
                 />     
             </div>
-            <IndexCss />
+            <StoreIndexCss />
             <OnlineStoreCss />
         </>
     )
