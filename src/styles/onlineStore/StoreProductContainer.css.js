@@ -15,7 +15,12 @@ function StoreProductContainerCss() {
             } 
             .storeproductContainer {
                 padding-top: 50px;
-            }         
+            }   
+            @media only screen and (max-width: 750px) {
+                .storeproductContainer {
+                    padding-top:0;
+                } 
+            }      
             .storeproductContainer>div {
                 display: flex;
                 flex-wrap: wrap;

@@ -32,7 +32,7 @@ function FeaturedProductCss() {
                 .featuredproduct {
                     display: flex;
                     flex-direction: column;
-                    border-bottom: 1px solid lightgrey;
+                    border-bottom: none;
                     margin-bottom: 40px;
                     width: 100%;
                 }

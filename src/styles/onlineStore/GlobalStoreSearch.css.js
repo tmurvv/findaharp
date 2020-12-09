@@ -14,18 +14,20 @@ function GlobalStoreSearchCss() {
             justify-content: flex-start;
             align-items: flex-start;
             // border: 1px solid #ffe58a;
-            background-color: tranparent;
+            background-color: transparent;
           }
-          @media only screen and (max-width: 550px) {
+          @media only screen and (max-width: 750px) {
             .storeSearchLine {
               flex-direction: column;
             }
           }
+
           .selectContainer {
             position: relative;
             display: inline-block;
             -webkit-appearance: none;
           }
+          
           .selectContainer>span {
             right: 4px;
             top: 12px;
@@ -33,7 +35,7 @@ function GlobalStoreSearchCss() {
             font-size: 18px;
             pointer-events: none;
           }
-          @media only screen and (max-width: 550px) {
+          @media only screen and (max-width: 750px) {
             .selectContainer {
               width: 100%;
             }
@@ -65,7 +67,7 @@ function GlobalStoreSearchCss() {
             margin-bottom: 0px;
             max-width: 650px;
           }
-          @media only screen and (max-width: 550px) {
+          @media only screen and (max-width: 750px) {
             #searchInput {
               flex: unset;
             }
@@ -74,10 +76,10 @@ function GlobalStoreSearchCss() {
           select {
             font-size: 16px;
             padding: 12px 20px;
-            // border: none;
             margin-bottom: 15px;
             border: 1px solid #ffe58a;
             width: 100%;
+            background-color: #fff;
           }
 
           select:active,
@@ -95,7 +97,7 @@ function GlobalStoreSearchCss() {
             flex: 8;
             display: flex;
           }
-          @media only screen and (max-width: 550px) {
+          @media only screen and (max-width: 750px) {
             .searchTextImg {
               width: 100%;
             }
@@ -111,7 +113,7 @@ function GlobalStoreSearchCss() {
             font-weight: 500;
             font-size:14px;
           }
-          @media only screen and (max-width: 550px) {
+          @media only screen and (max-width: 750px) {
               .searchHelperText {
                   display: block;
               }
@@ -126,6 +128,19 @@ function GlobalStoreSearchCss() {
             font-weight: 500;
             font-size:14px;
         }
+        .searchInfoWrapper {
+            display: flex;
+        }
+        @media only screen and (max-width: 750px) {
+            .searchInfoWrapper {
+                display: block;
+            }
+            .searchInfoWrapper h3 {
+                font-size: 14px;
+                margin-block-end: 0;
+            }
+        }
+        
           #myUL {
             list-style-type: none;
             padding: 0;

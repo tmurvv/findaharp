@@ -291,6 +291,7 @@ function StoreProductSearch(props) {
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.soloensemble}
                             onClick={()=>handleClick({target: {name: 'Lever/Pedal/Ens'}})}
+                            style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.soloensemble}
                             {props.allState&&props.allState.soloensemble!=="All Lever/Pedal/Ens"
@@ -313,6 +314,7 @@ function StoreProductSearch(props) {
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.level}
                             onClick={()=>handleClick({target: {name: 'level'}})}
+                            style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.level}
                             {props.allState&&props.allState.level!=="All Levels"
@@ -336,6 +338,7 @@ function StoreProductSearch(props) {
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.publicationtype}
                             onClick={()=>handleClick({target: {name: 'publicationtype'}})}
+                            style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.publicationtype}
                             {props.allState&&props.allState.publicationtype!=="All Publication Types"

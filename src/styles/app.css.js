@@ -139,13 +139,13 @@ function AppCss() {
                 list-style: none;
                 margin-top: -2px;
                 padding-inline-start: 0;
-                width: 75%;
+                width: 85%;
                 transform: translateX(16.5%);
                 padding: 9px;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storePlainTextSelectLine1 {
-                    width: 190%;
+                    width: 385%;
                 }
             }
             .storePlainTextSelectLine1 p {
@@ -163,7 +163,7 @@ function AppCss() {
                 list-style: none;
                 z-index: 2000;
                 padding-inline-start: 0;
-                width: 160%;
+                width: 85%;
                 transform: translateX(16.5%);
                 text-align: center;
             }
@@ -171,7 +171,7 @@ function AppCss() {
                 margin-block-start: 0;
                 margin-block-end: 0;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storePlainTextSelectLine1 {
                     /*margin-block-start: -.5em;*/
                     width: 190%;

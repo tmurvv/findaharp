@@ -142,7 +142,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
                     <h1>current: {indexStart.current} / </h1>
                     <h1>length: {filteredproductscontainer.length}</h1>
                 </div> */}
-                <h3 style={{width: '100%', textAlign: 'left', margin:'auto', marginBottom: '-15px', marginTop: '50px', fontFamily: "Metropolis Extra Bold", textTransform: 'uppercase'}}>{title}</h3>
+                <h3>{title}</h3>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10094;</div>
                     <div id="carousel" className="noselect featuredgrid-container">                   

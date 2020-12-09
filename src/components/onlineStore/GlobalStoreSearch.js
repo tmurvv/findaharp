@@ -370,12 +370,14 @@ function GlobalStoreSearch(props) {
             <>
             <div className="storeproductContainer">
                 <div>
-                <div className='storeselected clearAll' id='clearSearch' style={{display:'none'}}>
-                    <h3>{getStoreSearchInfo(allState,typeOfSearch)}</h3>
-                    {/* <h3>hear{getStoreSearchInfo(allState,typeOfSearch)!==''?getStoreSearchInfo(allState,typeOfSearch):"All Items"}</h3> */}
-                    <div onClick={handleClear} className='clearAll clearSearch'>
-                        <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
-                        <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
+                <div className='searchInfo clearAll' id='clearSearch' style={{display:'none'}}>
+                    <div className='searchInfoWrapper'>
+                        <h3>{getStoreSearchInfo(allState,typeOfSearch)}</h3>
+                        {/* <h3>hear{getStoreSearchInfo(allState,typeOfSearch)!==''?getStoreSearchInfo(allState,typeOfSearch):"All Items"}</h3> */}
+                        <div onClick={handleClear} className='clearAll clearSearch'>
+                            <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
+                            <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
+                        </div>
                     </div>
                 </div>
                 </div>

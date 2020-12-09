@@ -245,6 +245,7 @@ function StoreProductSearchStrings(props) {
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.octaves}
                             onClick={()=>handleClick({target: {name: 'octaves'}})}
+                            style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.octaves}
                             {props.allState&&props.allState.octaves!=="All Octaves"
@@ -267,6 +268,7 @@ function StoreProductSearchStrings(props) {
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.brands}
                             onClick={()=>handleClick({target: {name: 'brands'}})}
+                            style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.brands}
                             {props.allState&&props.allState.brands!=="All Brands"
@@ -289,7 +291,9 @@ function StoreProductSearchStrings(props) {
                             id="selectedAll Types" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.types}
-                            onClick={()=>handleClick({target: {name: 'types'}})}
+                            onClick={()=>alert('String "Types" menu under construction. Check back soon!')}
+                            // onClick={()=>handleClick({target: {name: 'types'}})}
+                            style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.types}
                             {props.allState&&props.allState.types!=="All Types"

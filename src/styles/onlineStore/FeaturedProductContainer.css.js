@@ -13,11 +13,14 @@ function FeaturedProductContainerCss() {
             .featurednotFoundContainer img {
                 height: 225px;
             }          
-            .featuredproductContainer {
-                // margin: auto;
-                // position: relative;
-                // width: 100%;
-                // max-width: 1010px;
+            .featuredproductContainer h3 {
+                width: 100%; 
+                text-align: left; 
+                margin: auto; 
+                margin-bottom: -15px; 
+                margin-top: 50px; 
+                font-family: Metropolis Extra Bold; 
+                text-transform: uppercase;
             }
             @media only screen and (max-width: 1475px) {
                 // .featuredproductContainer {
@@ -25,9 +28,9 @@ function FeaturedProductContainerCss() {
                 // }
             }
             @media only screen and (max-width: 550px) {
-                // .featuredproductContainer {
-                //     width: 80%;
-                // }
+                .featuredproductContainer h3 {
+                    text-align: center;
+                }
             }
             .featuredgrid-container {
                 margin: 50px auto;
