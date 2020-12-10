@@ -47,7 +47,7 @@ export const STOREPARTNER_PLACEHOLDER = {
 }
 
 export const SHIPPING_CALCULATIONS = {
-    Canada: 20,
+    Canada: 8,
     // USA: 20,
     default: -1
 }
