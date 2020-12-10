@@ -83,7 +83,7 @@ function SubCart(props) {
                     <div>
                     {/* <div id='cart'> */}
                         <div className='cartBody'>
-                            <h3>Items Sold Blah By {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
+                            <h3>Items Sold By {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
                         </div>
                         <div className='itemsContainerWrapper'>
                             <div className='itemsContainer' style={{flex: '3'}}>

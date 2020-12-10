@@ -9,14 +9,27 @@ function CartItemCss() {
             border-radius: 3px;
             margin-bottom: 40px;
         }
+        @media only screen and (max-width: 950px) {
+            .subCart_item {
+                flex-direction: column;
+                // margin: 15px;
+                // display: flex;
+                // border-radius: 3px;
+                // margin-bottom: 40px;
+            }
+        }
         .subCart_item-image {
             width: 100%;
             flex: 4;
             margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            padding-bottom: 25px;
         }
         .subCart_item-image img { 
             width: 100%;
             min-width: 75px;
+            max-width: 200px;
         }
         .subCart_item-text { 
             flex: 8;
@@ -28,7 +41,18 @@ function CartItemCss() {
             // overflow-y: auto;
             margin-left: 10px;
         }
-        
+        @media only screen and (max-width: 950px) {
+            .subCart_item-text { 
+                // flex: 8;
+                // width: 80%;
+                // margin-top: 15px;
+                // margin-left: 10px;
+                // margin-bottom: 10px;
+                // max-height: 100px;
+                // overflow-y: auto;
+                margin-left: 0px;
+            }
+        }
         .description p {
             font-size: 14px;
         }
@@ -89,6 +113,11 @@ function CartItemCss() {
             font-family: 'Metropolis Extra Bold';
             margin-bottom: 25px;
             margin-left: 8px;
+        }
+        @media only screen and (max-width: 950px) {
+            .price {
+                margin-left: 0px;
+            }
         }
         `}
     </style>

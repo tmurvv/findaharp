@@ -12,7 +12,7 @@ function subCartCss() {
             padding: 30px;
             border: 1px solid lightgrey;
         }
-        @media only screen and (max-width: 715px) {
+        @media only screen and (max-width: 950px) {
             .cartContainer {
                 flex-direction: column;
             }
@@ -41,7 +41,7 @@ function subCartCss() {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px 10px;
+            padding: 20px 10px 0;
             max-width: 650px;
         }
         .itemsContainer h4 {

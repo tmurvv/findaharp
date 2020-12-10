@@ -130,7 +130,7 @@ function GetPostalZip() {
                     value={user.shippingregion}
                     blacklist='["MX", "Venezuela", "Indonesia", "South Africa", "Romania"]'
                     name='shippingregion'
-                    defaultOptionLabel='Select Province to calculate taxes'
+                    defaultOptionLabel={`Select ${user.shippingcountry==='United States'?'state':'province'} to calculate taxes`}
                     onChange={(val) => {changeRegion(val)}} 
                 />
                 <span style={{
