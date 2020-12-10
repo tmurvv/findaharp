@@ -23,7 +23,11 @@ function CartItem(props) {
         <>
             <div className='subCart_item'>
                 <div className='subCart_item-image'>
-                    <img src={item.product_image} alt={item.title}/>
+                    {/* <img src={item.product_image} alt={item.title}/> */}
+                    {item&&item.product_image
+                        ?<img src={item.product_image} alt={item.title}/>
+                        :<img src='/img/golden_harp_full.png' />
+                    }
                 </div>
                 <div className='subCart_item-text'>
                     <div className='description'>

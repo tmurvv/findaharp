@@ -14,6 +14,7 @@ import Subtotal from '../../components/onlineStore/Subtotal';
 import { branding } from '../../constants/branding';
 import { cssVariables } from '../../constants/cssVariables';
 import CartCss from '../../styles/onlineStore/cart.css'; 
+import subCartCss from '../../styles/onlineStore/subCart.css';
 import IndexCss from '../../styles/index.css'; 
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../../components/Results';
@@ -82,9 +83,9 @@ function SubCart(props) {
                     <div>
                     {/* <div id='cart'> */}
                         <div className='cartBody'>
-                            <h3>Items Sold By {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
+                            <h3>Items Sold Blah By {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
                         </div>
-                        <div className='flex-sb'>
+                        <div className='itemsContainerWrapper'>
                             <div className='itemsContainer' style={{flex: '3'}}>
                                 <div>                       
                                 {/* <div className='items'>*/}
@@ -104,7 +105,7 @@ function SubCart(props) {
                                 ?<><h5>Choose a delivery option:</h5>
                                 <input type="radio" name={`${props.store}-shippingoption}`} value={`${props.store}-shippingoption}`} checked/>
                                 {Number(shipping(user.shippingcountry, props.store, props.subCart)[0])===-1
-                                    ?`* International Shipping requires a shipping estimate. This item shipping from ${sellerInfo&&sellerInfo.sellerCountry}.`
+                                    ?`* International Shipping requires a shipping estimate. This item is shipped from ${sellerInfo&&sellerInfo.sellerCountry}.`
                                     :<label htmlFor={`${props.store}-shippingoption`}>&nbsp;&nbsp;{`$${shipping(user.shippingcountry, props.store, props.subCart)[0].toFixed(2)}`}<br/>{`${shipping(user.shippingcountry, props.store, props.subCart)[1]}`} </label>}
                                 </>:''}
                             </div>
@@ -113,6 +114,7 @@ function SubCart(props) {
                 </div>
                 <CartCss />
                 <IndexCss />
+                <subCartCss />
             </div>
         </>
     )       

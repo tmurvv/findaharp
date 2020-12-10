@@ -1,6 +1,6 @@
 import React from "react"; 
 import { cssVariables } from '../../constants/cssVariables';
-function CartCss() {
+function subCartCss() {
     return (
         <style jsx="true">{`
         .subCartContainer {
@@ -30,6 +30,11 @@ function CartCss() {
                 // border: 0;
                 // box-shadow: 0;
             }
+        }
+        .itemsContainerWrapper {
+            background-color: cyan;
+            display: flex;
+            justify-content: space-between;
         }
         .itemsContainer {
             background-color: transparent;
@@ -211,4 +216,4 @@ function CartCss() {
     )
 }
 
-export default CartCss;
+export default subCartCss;

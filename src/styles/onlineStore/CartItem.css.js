@@ -3,34 +3,20 @@ import React from "react";
 function CartItemCss() {
     return (
         <style jsx="true">{`
-        .subCart_item { 
-            // width: 660px; 
-            // height: 100px;
+        .subCart_item {
             margin: 15px;
-            // text-align: left;
             display: flex;
             border-radius: 3px;
-            // padding: 10px;
             margin-bottom: 40px;
         }
         .subCart_item-image {
-            // height: 40%;
-            // min-height: 40%;
-            width: 20%;
-            // max-width: 70px;
-            // padding-top: 10px;
-            // margin: auto;
-            flex: 2;
+            width: 100%;
+            flex: 4;
             margin-right: 10px;
         }
         .subCart_item-image img { 
             width: 100%;
-            // width: 140px;
-            // max-height: 250px;
-            // border-radius: 3px;
-            // max-width:100%;
-            // max-height:100%;
-            // box-shadow: 3px 5px 3px lightgrey;
+            min-width: 75px;
         }
         .subCart_item-text { 
             flex: 8;

@@ -74,7 +74,8 @@ function StoreProductCss() {
             }
             .storeproduct__price-button-container {
                 order: 4;
-                width: 265px;
+                width: 100%;
+                // width: 265px;
                 position: absolute;
                 bottom: 0;
                 left: 0px;
