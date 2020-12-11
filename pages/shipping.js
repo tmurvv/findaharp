@@ -229,10 +229,10 @@ function Shipping() {
                     loginGuest={loginGuest}
                     resetResults={resetResults}
                 />
-                <div><Subtotal type="total"/></div>
+                <div><Subtotal type="subtotal"/></div>
                 <div style={{padding: '15px'}}>
                     <h3>Contact Information</h3>
-                    <div className="shippingemail" style={{marginBottom:'0px',}}>
+                    <div className="shippingemail" style={{marginBottom:'0px'}}>
                         <label style={{display:'block'}} htmlFor="shippingemail">Email</label>
                         <input 
                             type="email" 
@@ -645,7 +645,7 @@ function Shipping() {
                     
                 } 
                 </div>
-                <div style={{ flex: 4, backgroundColor: '#fff'}}>
+                <div className="shippingOrderSummary">
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
                     <OrderSummary />
                     <button 

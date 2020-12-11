@@ -60,6 +60,16 @@ function ShippingCss() {
                 padding: 15px;
                 margin-bottom: 10px;
             }
+            .shippingOrderSummary {
+                flex: 4;
+                background-color: #fff; 
+                transform: translate(0,-330px);
+            }
+            @media only screen and (max-width:1000px){
+                .shippingOrderSummary {
+                    transform: unset;
+                }
+            }
             .customerName {
                 // display: flex;
                 // justify-content: space-between;

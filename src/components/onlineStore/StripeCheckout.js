@@ -58,7 +58,7 @@ export default function StripeCheckout(props) {
         newRoute&&Router.push(`${newRoute}`);
     }
     useEffect(() => {
-        if (getTotal(cart, user)&&getTotal(cart,user,currencyMultiplier)>0) {
+        if (getTotal(cart, user,currencyMultiplier)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
                 // Create PaymentIntent as soon as the page loads
                 window
@@ -80,6 +80,7 @@ export default function StripeCheckout(props) {
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
+            console.log('stripe', cart, user,currencyMultiplier)
             handleClick('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase."', 'cart');
             // Router.push('/cart');
         }

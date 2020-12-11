@@ -83,8 +83,8 @@ function findaharp_shipping(cart, shippingcountry) {
     return [ -1, '' ];
 }
 export function shipping(shippingcountry, store, cart) {
-    if (!shippingcountry) return 0.00;
-    if (shippingcountry==='Antarctica') return 0.00;
+    if (!shippingcountry) return [0,'shipping country not found'];
+    if (shippingcountry==='Antarctica') return [0,'easter egg'];
     if (store&&store==="harpsetc") return harpsetc_shipping(cart, shippingcountry);
     if (store&&store==="findaharp") return findaharp_shipping(cart, shippingcountry);
 }
@@ -135,7 +135,7 @@ export function tax(cart, shippingcountry, shippingregion, store, currencyMultip
           
 }
 export function getTotal(cart, user, currencyMultiplier) {
-    // console.log('params', cart[0], user, currencyMultiplier)
+    console.log('params', cart[0], user, currencyMultiplier)
     const subTotal = getSubTotal(cart);
     const shippingArray = getShippingArray(user.shippingcountry, cart);
     let shippingTotal = 0;

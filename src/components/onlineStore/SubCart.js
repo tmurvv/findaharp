@@ -104,6 +104,7 @@ function SubCart(props) {
                                 {user.shippingcountry
                                 ?<><h5>Choose a delivery option:</h5>
                                 <input type="radio" name={`${props.store}-shippingoption}`} value={`${props.store}-shippingoption}`} checked/>
+                                
                                 {Number(shipping(user.shippingcountry, props.store, props.subCart)[0])===-1
                                     ?`* International Shipping requires a shipping estimate. This item is shipped from ${sellerInfo&&sellerInfo.sellerCountry}.`
                                     :<label htmlFor={`${props.store}-shippingoption`}>&nbsp;&nbsp;{`$${shipping(user.shippingcountry, props.store, props.subCart)[0].toFixed(2)}`}<br/>{`${shipping(user.shippingcountry, props.store, props.subCart)[1]}`} </label>}

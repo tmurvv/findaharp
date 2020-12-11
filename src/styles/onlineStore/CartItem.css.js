@@ -27,7 +27,7 @@ function CartItemCss() {
             padding-bottom: 25px;
         }
         .subCart_item-image img { 
-            width: 100%;
+            width: auto;
             min-width: 75px;
             max-width: 200px;
         }

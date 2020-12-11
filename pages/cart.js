@@ -124,8 +124,8 @@ function Cart(props) {
                 <div>
                     <GetZipPostal/>
                     <OrderSummary/>
-                    {screenWidth>=715
-                    ?
+                    {/* {screenWidth<=715
+                    ? */}
                     <div style={{display: 'flex'}}>
                                 <button className='submit-btn' style={{
                                     marginRight: '2.5px',
@@ -146,7 +146,7 @@ function Cart(props) {
                                     }}
                                 >Continue to Checkout</button>
                             </div>
-                     :''}   
+                     {/* :''}    */}
                 </div>            
             </div>
             <CartCss />
