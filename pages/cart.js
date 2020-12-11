@@ -25,6 +25,7 @@ import { getTotal } from '../src/utils/checkoutHelpers';
 import GetZipPostal from '../src/components/onlineStore/GetZipPostal';
 import PageTitle from '../src/components/PageTitle';
 import SubCart from '../src/components/onlineStore/SubCart';
+import { Translate } from '@material-ui/icons';
 
 
 function Cart(props) {
@@ -73,6 +74,7 @@ function Cart(props) {
                 />
             <div className="cartContainer">  
                 <div id='cart'>
+                    {cart.length===0?<h3 style={{paddingLeft: '15px'}}>No Items in Cart</h3>:''}
                     {/* <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1> */}
                     {getStores(cart).map(store => {
                         const subCart = cart.filter(cartItem=>cartItem.store===store)

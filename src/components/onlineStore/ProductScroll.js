@@ -32,7 +32,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
     const size = getWindowSize();
 
     function handleOpenDetail(product) {
-        console.log(product.title)
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND PEDAL NATURAL GUT')) return handleStringsChange("strings", "brands", "All Octaves", "Bow Brand Pedal Natural Gut", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER NATURAL GUT')) return handleStringsChange("strings", "brands", "All Octaves", "Bow Brand Lever Natural Gut", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('CONCEDO GUT')) return handleStringsChange("strings", "brands", "All Octaves", "Concedo Gut", "All Types");
@@ -54,13 +53,12 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('STONEY END')) return handleStringsChange("strings", "brands", "All Octaves", "Stoney End", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('DELTA')) return handleStringsChange("strings", "brands", "All Octaves", "Delta", "All Types");
         console.log('prod', product)
-        if (String(product.category).toLowerCase() === "strings") 
+        // if (String(product.category).toLowerCase() === "strings") 
         // dispatch({type:'detail', product});
         setDetailProduct(product);
         // setOpacity(true); 
     }
     function handlePhotoClick() {
-        alert('imin')
         this.setState({
             detailProduct: e.target.name
         })
@@ -78,12 +76,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
             indexStart.current--
         }
         setNumInCarousel(Math.floor(size.width/270));
-        // var newActive = this.state.active
-        // newActive--
-        // this.setState({
-        //     active: newActive < 0 ? this.state.items.length - 1 : newActive,
-        //     direction: 'left'
-        // })
     }
     
     function moveRight() {
@@ -100,12 +92,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
             indexStart.current++
         }
         setNumInCarousel(Math.floor(size.width/270));
-        
-        // var newActive = this.state.active
-        // setState({
-        //     active: (newActive + 1) % this.state.items.length,
-        //     direction: 'right'
-        // })
     }
     function handleCloseDetail() {
         // dispatch({type: 'initial'})
@@ -122,26 +108,13 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         indexStart.current=0;
     },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
-        // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
-        let addPlaces=filteredproductscontainer.slice(index, index+(Math.floor(size.width/270)));
-        // console.log(index, Math.floor(size.width/270)-(index+1)%Math.floor(size.width/270))
-        // console.log(filteredproductscontainer.length-index)
-        let extraPlaces=filteredproductscontainer.slice(0,filteredproductscontainer.length-index+1);
-        if (index+(Math.floor(size.width/270))>filteredproductscontainer.length) addPlaces=[...addPlaces, ...extraPlaces];
-        // addPlaces=index+(Math.floor(size.width/270))>filteredproductscontainer.length?[...filteredproductscontainer, filteredproductscontainer.slice(0, length-index )]:[...filteredproductscontainer];
-
-        // if (index+(Math.floor(size.width/270))>filteredproductscontainer.length) alert(extraPlaces.length, addPlaces.length);
-        // filteredproductscontainer=[...filteredproductscontainer, filteredproductscontainer[0]]
-    
+        let addPlaces = [...filteredproductscontainer];
+        let extraPlaces=filteredproductscontainer.slice(0,(Math.floor(size.width/270)));
+        if (index+(Math.floor(size.width/270))>filteredproductscontainer.length) addPlaces=[...filteredproductscontainer, ...extraPlaces];
+        addPlaces=addPlaces.slice(index, index+(Math.floor(size.width/270)));
+        console.log('indside', detailProduct&&detailProduct)
         return(
             <div data-test='component-ProductContainer' className='featuredproductContainer'>
-                {/* <div style={{display: 'flex'}}>
-                    <h1>sz: {size.width} / </h1>
-                    <h1>nc: {Math.floor(size.width/270)} / </h1>
-                    <h1>index: {index} / </h1>
-                    <h1>current: {indexStart.current} / </h1>
-                    <h1>length: {filteredproductscontainer.length}</h1>
-                </div> */}
                 <h3>{title}</h3>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10094;</div>
@@ -157,10 +130,12 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
                 <div className="arrow arrow-right" onClick={moveRight} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10095;</div>
                 </div>
                 {detailProduct&&detailProduct.title?
+                    <>
+                    <h1>HERE</h1>
                     <StoreProductModal 
                         product={detailProduct} 
                         handleCloseDetail={handleCloseDetail}
-                />:''
+                /></>:''
                 }
                 {/* {state.openContact
                     &&<ContactSellerForm 

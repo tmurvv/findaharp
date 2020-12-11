@@ -27,6 +27,7 @@
 - clear all button in store search
 
 ### functionality
+- back-button from PayPal page loses cart
 - back to shopping goes to top of screen
 - store cart saving in db instead of cookie, from stackoverflow No large sites would dare store a user's cart in a session or cookie - that data is just to valuable. Use a database table to store this information and then link it to the user's session. 
 - add option to create account on shipping page
