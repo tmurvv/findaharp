@@ -14,6 +14,9 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+- loading... on infinite scroll not working
+- add search term to breadcrumbs
+- clear all next to breadcrumbs should go back to carousels
 - add 'item added to cart' dialog instead of default alert box
 - country/region not styled on ios
 - get NavBar to show Name (doesn't work on cookie check)
@@ -37,6 +40,7 @@
 - resend verification email is hacked
 - CRUD operations on upload listings
 - network error bug on selleragreements agreeing
+- if shipping is zero, receipt says NaN
 
 
 ### AUTHENTICATION

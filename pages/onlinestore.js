@@ -49,6 +49,7 @@ const OnlineStore = (props) => {
                     setSearchResults={setSearchResults}
                 />     
             </div>
+            
             <StoreIndexCss />
             <OnlineStoreCss />
         </>

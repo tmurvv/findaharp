@@ -112,12 +112,7 @@ function CartItemCss() {
             font-size: 16px;
             font-family: 'Metropolis Extra Bold';
             margin-bottom: 25px;
-            margin-left: 8px;
-        }
-        @media only screen and (max-width: 950px) {
-            .price {
-                margin-left: 0px;
-            }
+            margin-left: -2px;
         }
         `}
     </style>

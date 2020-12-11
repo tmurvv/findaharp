@@ -10,6 +10,9 @@ function CartCss() {
             margin: auto;
             margin-bottom: 50px;
         }
+        .cart-container:nth-child(2) {
+            flex:1;
+        }
         @media only screen and (max-width: 715px) {
             .cartContainer {
                 flex-direction: column;
@@ -18,6 +21,7 @@ function CartCss() {
         #cart {
             margin-top: -15px;
             height: fit-content;
+            flex: 3;
         }
         #cart h1 {
             margin: -15px auto 20px;

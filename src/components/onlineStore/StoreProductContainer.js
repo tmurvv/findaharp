@@ -137,7 +137,7 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
                     handleclosedetail={handleCloseDetail}
                     />
                 )}
-                {isLoading && <div>Loading...</div>}
+                
               </InfiniteScrollLoading>
             </div>
                 

@@ -65,7 +65,7 @@ function Shipping() {
         // check email
         if (!user.shippingemail) return handleClick("Contact email required.", "false");
         // for international shipping estimate
-        if (cartSubtotals.shipping===-1) {
+        if (user.shippingcountry!=='Canada'&&user.shippingcountry!=='United States'&&user.shippingcountry!=='Antarctica') {
             document.querySelector('#spinner').style.display="block";
             // prepare communication object
             const receipt = {
@@ -248,19 +248,6 @@ function Shipping() {
                     </div>
                     <h3>Shipping Address</h3>
                 </div>
-                {/* <div style={{display: 'flex', padding: '15px', marginTop:'-15px', marginBottom: '-15px'}}>
-                    <input 
-                        type='checkbox'
-                        name='shippingstorepickup'
-                        onChange={handleStorePickup}
-                        style={{marginLeft: '0', width: 'auto'}}
-                        checked={user.shippingcountry&&user.shippingcountry==='Pickup'}
-                    />
-                    <label style={{marginLeft: '5px'}} name='newsletter'>
-                        Pickup at store<br />
-                        <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span>
-                    </label>
-                </div> */}
                <form 
                     method="get" 
                     onSubmit={(e)=>handleSubmit(e)}

@@ -141,7 +141,7 @@ const StoreProduct = (props) => {
             ?<div className="storeproductDetails">
                 <div><span>Level:</span> {props.productdetail.level}</div>
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
-                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
+                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:''}
                 <button 
                     onClick={()=>handleOpenStoreModal()} 
                     classNames="btn blueFontButton" 
