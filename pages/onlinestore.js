@@ -40,7 +40,7 @@ const OnlineStore = (props) => {
     return (
         <>
             <div className='storeIndex'>
-                <PageTitle maintitle="Online Store" subtitle='Thousands more music titles coming soon' /> 
+                <PageTitle maintitle="Online Store" subtitle='Hundreds more music titles coming soon' /> 
                 <GlobalStoreSearch 
                     filteredProducts={props.filteredProducts} 
                     featuredProducts={props.featuredProducts} 
@@ -82,9 +82,6 @@ OnlineStore.getInitialProps = async (props) => {
         music: res.data.storeitems.filter(product => product.category==="music")
     };
     
-
-
-
     // console.log(res.data)
     // API DATA Populate variables
     // const products = res.data.harpData;

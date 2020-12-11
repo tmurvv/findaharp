@@ -141,6 +141,7 @@ export const getStoreSearchInfo = (allState, type) => {
             if(!['All Lever/Pedal/Ens', 'All Levels', 'All Publication Types'].includes(menuItem)) searchInfo += `${menuItem} | `
             // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
+        if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
         return `Showing Music: ${searchInfo}`;
     }   
     if (type==='strings') {
@@ -149,6 +150,7 @@ export const getStoreSearchInfo = (allState, type) => {
             // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
     }
-    if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2)
+    console.log(searchInfo, '-end')
+    if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
     return `Showing Strings: ${searchInfo}`;
 }
