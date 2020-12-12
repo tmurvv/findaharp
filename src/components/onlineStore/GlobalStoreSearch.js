@@ -200,7 +200,6 @@ function GlobalStoreSearch(props) {
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"} // BREAKING
             // check octaves
             if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
-                
                 categoryProductList.map(product=> {
                     if (String(product.title).toUpperCase().includes(value1.toUpperCase())) octavesProductList.push(product);
                 })

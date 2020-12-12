@@ -135,7 +135,6 @@ export function tax(cart, shippingcountry, shippingregion, store, currencyMultip
           
 }
 export function getTotal(cart, user, currencyMultiplier) {
-    console.log('params', cart[0], user, currencyMultiplier)
     const subTotal = getSubTotal(cart);
     const shippingArray = getShippingArray(user.shippingcountry, cart);
     let shippingTotal = 0;
@@ -144,7 +143,6 @@ export function getTotal(cart, user, currencyMultiplier) {
     // console.log('shipingtot', shippingTotal)
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
-    console.log('bott params', user.currency, subTotal, currencyMultiplier)
     if (user.currency==="CAD") {
         // console.log(Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));
         return (Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));

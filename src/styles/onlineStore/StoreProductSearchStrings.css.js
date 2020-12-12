@@ -5,6 +5,7 @@ function StoreProductSearchStringsCss() {
         <style jsx="true">{`
             .storesearchTitle {
                 width: 65%;
+                min-width: 300px;
                 margin: 25px auto 5px;
                 text-align: center;
                 font-size: 12px;
@@ -13,6 +14,11 @@ function StoreProductSearchStringsCss() {
                 font-weight: 500;
                 font-size:14px;
             }
+            @media only screen and (max-width: 550px) {
+                .storesearchTitle {
+                    width: 100%;
+                }
+            } 
             h3 {
                 width: 100%;
                 text-align: center;

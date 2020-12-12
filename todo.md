@@ -15,10 +15,12 @@
 
 ### UI/UX
 - loading... on infinite scroll not working
+- goto top button for scroll
 - add search term to breadcrumbs
 - clear all next to breadcrumbs should go back to carousels
 - add 'item added to cart' dialog instead of default alert box
 - country/region not styled on ios
+- the more you scroll, the slower it is
 - get NavBar to show Name (doesn't work on cookie check)
 - When update user encounters problem on backend, spinner persists, needs to show error message
 - if no user, userProfile needs to divert to login

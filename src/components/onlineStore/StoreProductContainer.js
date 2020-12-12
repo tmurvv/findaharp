@@ -26,7 +26,7 @@ const initialState = {
     overflowY: 'auto'
 }
 const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat, clientlong }) => {
-  const repoArray = [...filteredproductscontainer];  
+  const repoArray = Symbol.iterator in Object(filteredproductscontainer)?[...filteredproductscontainer]:[];  
   const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [searchVal, setSearchVal] = useState("");

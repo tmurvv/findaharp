@@ -142,7 +142,7 @@ function StoreProductSearch(props) {
         });
         setMenus(initialState);
         console.log('handle level', level);
-        props.handleChange("music", 'level', props.allState?props.allState.soloensemble:'', level, props.allState?props.allState.publicationtype:'');
+        props.handleChange("music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
     }
     async function handlePublicationTypeSelection(publicationtype) {
         props.setTypeOfSearch("music");
@@ -150,7 +150,7 @@ function StoreProductSearch(props) {
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
         }
-        props.handleChange('music', 'publicationtype', props.allState?props.allState.soloensemble:'', props.allState?props.allState.level:'', publicationtype);
+        props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', publicationtype);
         props.setAllState({...props.allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
@@ -265,7 +265,7 @@ function StoreProductSearch(props) {
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
                         // producttype={props.allState&&props.allState.productType}
-                        currentselected={props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
+                        currentselected={props.allState&&props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
                         handleclick={handleClick}
                         open={menus.soloensemble}
                     />            

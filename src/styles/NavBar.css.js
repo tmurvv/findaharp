@@ -67,6 +67,13 @@ function NavBarCss() {
                 top: 0;
                 left: 0;
             }
+            @media only screen and (max-width: 550px) {
+                .closeIcon img {
+                    height: 18px;
+                    top: 5px;
+                    left: 5px;
+                }
+            }
       `}</style>
     )
 }

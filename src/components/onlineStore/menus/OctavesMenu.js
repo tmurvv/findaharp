@@ -86,7 +86,8 @@ export default function OctavesMenu(props) {
                     onClick={handleClose} 
                     // key={uuid()} 
                     name='Wire Sets'
-                >Wire Sets</li>         
+                    disabled
+                >Wire Sets <span style={{fontSize: '14px', fontStyle: 'italic',color:'#333'}}>(coming soon)</span></li>         
             </ul>
         </div>
     );
