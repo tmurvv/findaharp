@@ -44,10 +44,8 @@ export const STOREPARTNER_PLACEHOLDER = {
     sellerWebsite: '',
     sellerEmail: ''   
 }
-
 export const SHIPPING_CALCULATIONS = {
-    Canada: 8,
-    // USA: 20,
+    Canada: 20,
     default: -1
 }
 export const PRODUCTAD_PLACEHOLDER = {
