@@ -32,7 +32,7 @@ function PaypalCheckout(props) {
                     <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"/>
                     <button 
                         type="submit"
-                        onClick={()=>deletelocalCart('fah-cart')}
+                        onClick={()=>{deletelocalCart('fah-cart'); alert('Please note that if you do not complete payment on the PayPal page, your cart will not be saved.')}}
                         style={{
                         width:'fit-content',
                         marginTop:'25px auto',

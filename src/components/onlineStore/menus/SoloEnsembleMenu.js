@@ -13,17 +13,16 @@ export default function SoloEnsembleMenu(props) {
                 className="menuButton" 
                 name='Lever/Pedal/Ens' 
                 onClick={(e)=>{props.handleclick(e);}}
-                style={{color: '#000000'}}
             >Lever/Pedal/Ens</button>
             <ul
                 id="soloensemble-select"
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Lever/Pedal/Ens Menu'
-                className='plainTextSelectLine2'
+                className='storePlainTextSelectLine1'
             >
-                <li 
-                    onClick={handleClose} 
+                <li
+                    onClick={handleClose}
                     // key={uuid()} 
                     name='All Lever/Pedal/Ens'       
                 >All Lever/Pedal/Ens</li>

@@ -1,7 +1,8 @@
-import { useContext, useState, useReducer } from 'react';
+import { useContext, useState, useReducer, useEffect } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
 import LazyLoad from 'react-lazyload';
+import parseNum from 'parse-num';
 import {
     incQty
 } from '../../utils/storeHelpers';
@@ -13,6 +14,7 @@ import StoreProductCss from '../../styles/onlinestore/StoreProduct.css';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 
 import { leaveSiteListener, setlocalCart } from '../../utils/checkoutHelpers'
 import {
@@ -25,7 +27,8 @@ const StoreProduct = (props) => {
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const [ openModal, setOpenModal ] = useState(false);
+    const [ openStoreModal, setOpenStoreModal ] = useState(false);
+    const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
 
     function resetResults() {
@@ -34,9 +37,9 @@ const StoreProduct = (props) => {
         dispatchResultInfo({type: 'initial'});
     }
     function handleClick(msg) {
-        dispatchResultInfo({type: 'OK'});
         const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText=msg;
+        dispatchResultInfo({type: 'OK'});
     }
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  
@@ -46,10 +49,10 @@ const StoreProduct = (props) => {
         if (evt.target.style.height !== '30%') evt.target.style.height="auto";
         if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
-    function handleOpenModal() {
+    function handleOpenStoreModal() {
         // if (!props.productdetail||!props.productdetail.productTitle) return;
-        setOpenModal(true);
-        props.handleopendetail(props.productdetail); 
+        setOpenStoreModal(true);
+        props.handleopenstoredetail(props.productdetail); 
     }
     async function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
@@ -68,17 +71,18 @@ const StoreProduct = (props) => {
                 artist_first: e.target.getAttribute('data-item-artist_first'),
                 artist_last: e.target.getAttribute('data-item-artist_last'),
                 description: e.target.getAttribute('data-item-description'), 
-                price: e.target.getAttribute('data-item-price'), 
+                price: parseNum(e.target.getAttribute('data-item-price')), 
                 condition: e.target.getAttribute('data-item-condition'),
                 level: e.target.getAttribute('data-item-level'),
                 harptype: e.target.getAttribute('data-item-harptype'),
-                newprice: e.target.getAttribute('data-item-newprice'),
+                newprice: parseNum(e.target.getAttribute('data-item-newprice')),
                 notes: e.target.getAttribute('data-item-notes'),
                 newused: e.target.getAttribute('data-item-newused'),
                 product_image: e.target.getAttribute('data-item-url'),
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
             const tempCartJson = await JSON.stringify(cartCopy);
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
@@ -89,6 +93,11 @@ const StoreProduct = (props) => {
         e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
+    useEffect(() => {
+        const result = Array.from(STORE_PARTNERS).filter(seller => {
+            if (seller.id===props.productdetail.store) setSellerInfo(seller);
+        });
+    });
     return (
         <div className="storeproduct">
             <Results 
@@ -101,7 +110,7 @@ const StoreProduct = (props) => {
                 <img 
                     src={props.productdetail.image} 
                     alt={props.productdetail.title}
-                    onClick={()=>handleOpenModal()} 
+                    onClick={()=>handleOpenStoreModal()} 
                 />
             </div> */}
             <div className={`storeproduct__imgcontainer`}>
@@ -112,14 +121,14 @@ const StoreProduct = (props) => {
                 >
                     <img 
                         id={props.productdetail.id} 
-                        src={props.productdetail.image} 
+                        src={props.productdetail.image&&props.productdetail.image!==undefined&&props.productdetail.image!==''?props.productdetail.image:'/img/golden_harp_full.png'} 
                         onError={(evt) => {
                             evt.target.src='./img/not_found.png'; 
-                            evt.target.style.height='30%';
+                            // evt.target.style.height='30%';
                         }} 
                         onLoad={(evt) => handleImageLoad(evt)}
                         alt={props.productdetail.title}
-                        onClick={()=>handleOpenModal()}
+                        onClick={()=>handleOpenStoreModal()}
                     />
                 </LazyLoad>
             </div>
@@ -132,20 +141,36 @@ const StoreProduct = (props) => {
             ?<div className="storeproductDetails">
                 <div><span>Level:</span> {props.productdetail.level}</div>
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
-                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:<div><span>New Item</span></div>}
-                <div onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer'}}>more...</div>
+                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:''}
+                <button 
+                    onClick={()=>handleOpenStoreModal()} 
+                    classNames="btn blueFontButton" 
+                    style={{
+                        color: '#6A75AA', 
+                        fontStyle:'italic', 
+                        cursor: 'pointer',
+                        backgroundColor: 'white',
+                        outline: 'none',
+                        textDecoration: 'none',
+                        border: 'none',
+                        fontSize: '14px',
+                        textAlign:'left',
+                        verticalAlign: 'text-top',
+                        letterSpacing: '2px'
+                    }}
+                >more...</button>
             </div>
             :<>
-                <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
+                <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenStoreModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
                 <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
-                <div className="storeproduct__price">${Number(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                :<div className="storeproduct__price">${(Number(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
+                :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
-                    <div style={{width:'fit-content'}}>Ships From: Canada</div>
+                    <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                     <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                    <div style={{width:'fit-content'}}>To: Anywhere</div>
+                    <div style={{width:'fit-content'}}>To: {sellerInfo&&sellerInfo.shipsTo}</div>
                 </div>
                 <button 
                     disabled={props.productdetail.sold&&String(props.productdetail.sold).toUpperCase()==='SOLD'}

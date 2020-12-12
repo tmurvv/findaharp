@@ -20,14 +20,18 @@ function PartnerProspects() {
 				</div>
 				<div class="tbl-content">
 						<table cellpadding="0" cellspacing="0" border="0">
-						<tbody>
+							<tbody>
 								<tr>
-									<td>Harp Connection</td>
-									<td>Cameron & Karen</td>
-									<td>cameron.warner.jones@<br></br>gmail.com</td>
-									<td>888-287-4277</td>
-									<td>May 20, 2020</td>
-									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value="July 8th, sent launch update. June 28th, 2020 - said they do not want to dilute their brand, awaiting response"/></td>
+									<td>West Coast Harps</td>
+									<td>Alison Vardy</td>
+									<td>alison@westcoastharps.com</td>
+									<td>250-722-2912</td>
+									<td>May 28th, 2020</td>
+								</tr>
+								<tr>
+									<td>July 7, 2020</td>
+									<td>January 7, 2020</td>
+									<td colspan='2'><textarea rows='4' value="May 29th, said yes for trial, a little worried about nuisance calls."/></td>
 								</tr>
 								<tr>
 									<td>Harps Etc</td> 
@@ -35,7 +39,103 @@ function PartnerProspects() {
 									<td>info@harpsetc.com<br></br>jessica.siegel.harp@gmail.com</td>
 									<td>925-937-4277<br></br>925-286-4977</td>
 									<td>May 28, 2020</td>
-								<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value="May 29th, said yes. I said I would keep her posted." /></td>
+								</tr>
+								<tr>
+									<td>July 7, 2020</td>
+									<td>January 7, 2020</td>
+									<td colspan='2'><textarea rows='4' value="May 29th, said yes. I said I would keep her posted." /></td>
+								</tr>
+								<tr>
+									<td>Michigan Harp Center</td>
+									<td>Kelly Yousoufian</td>
+									<td>michiganharpcenter@gmail.com</td>
+									<td>248-288-4277</td>
+									<td>May 29th, 2020</td>
+								</tr>
+								<tr>
+									<td>July 7, 2020</td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value="June 24, said yes!! June 24, spoke with her by phone and she will get back to me"/></td>
+								</tr>
+								<tr>
+									<td>4harpmusic.com</td>
+									<td>Margaret Atkinson</td>
+									<td>contact form only</td>
+									<td>(214) 282-5354</td>
+									<td>June 15, 2020</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value='June 29th, spoke by phone, sent her an email with deets. June 15th via contact form, Dallas area'/></td>
+								</tr>
+								<tr>
+									<td>Vavra Harps</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>July 21, 2020</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value='July 24, signed up!! Sent a contact message about the Markwood Stand.'/></td>
+								</tr>
+								<tr>
+									<td>Vixen Harps</td>
+									<td>info@vixenharps.com</td>
+									<td></td>
+									<td></td>
+									<td>August 16th, 2020</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value='Ottawa'/></td>
+								</tr>
+								<tr>
+									<td>Blevins Harps</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value='Signed up Oct 15th, trail ends December 15th.'/></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value=''/></td>
+								</tr>
+								<tr>
+									<td>Harp Angel</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value=''/></td>
+								</tr>
+								<tr>
+									<td>Harp and Heart</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td colspan='2'><textarea rows='4' value=''/></td>
+								</tr>
+								<tr>
+									<td>Harp Connection</td>
+									<td>Cameron & Karen</td>
+									<td>cameron.warner.jones@<br></br>gmail.com</td>
+									<td>888-287-4277</td>
+									<td>May 20, 2020</td>
+									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value="July 8th, sent launch update. June 28th, 2020 - said they do not want to dilute their brand, awaiting response"/></td>
 								</tr>
 								<tr>
 									<td>Vanderbilt Music Co</td>
@@ -52,14 +152,6 @@ function PartnerProspects() {
 									<td>626.791.6262</td>
 									<td>May 29th, 2020</td>
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='June 12 Left message /// sent contact on pacificharps.com. not sure if it went through. no confirmation modal'/></td>
-								</tr>
-								<tr>
-									<td>West Coast Harps</td>
-									<td>Alison Vardy</td>
-									<td>alison@westcoastharps.com</td>
-									<td>250-722-2912</td>
-									<td>May 28th, 2020</td>
-									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value="May 29th, said yes for trial, a little worried about nuisance calls."/></td>
 								</tr>
 								<tr>
 									<td>Phoenix Harp Center</td>
@@ -100,14 +192,6 @@ function PartnerProspects() {
 									<td>804-378-3761</td>
 									<td>May 28th, 2020</td>
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='June 25th said it would not work for their business. June 24th, followed up. June 9th, Talked about program. He will think and get back.'/></td>
-								</tr>
-								<tr>
-									<td>Michigan Harp Center</td>
-									<td>Kelly Yousoufian</td>
-									<td>michiganharpcenter@gmail.com</td>
-									<td>248-288-4277</td>
-									<td>May 29th, 2020</td>
-									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value="June 24, said yes!! June 24, spoke with her by phone and she will get back to me"/></td>
 								</tr>
 								<tr>
 									<td>Emerald Harp</td>
@@ -214,14 +298,6 @@ function PartnerProspects() {
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='July 8,2020 sent email to see if they sell harps at all. No mention of selling, but lots of harps'/></td>
 								</tr>
 								<tr>
-									<td>4harpmusic.com</td>
-									<td>Margaret Atkinson</td>
-									<td>contact form only</td>
-									<td>(214) 282-5354</td>
-									<td>June 15, 2020</td>
-									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='June 29th, spoke by phone, sent her an email with deets. June 15th via contact form, Dallas area'/></td>
-								</tr>
-								<tr>
 									<td>Harps International</td>
 									<td>peterreis@harps-international.com</td>
 									<td></td>
@@ -229,14 +305,7 @@ function PartnerProspects() {
 									<td>July 17, 2020</td>
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='emailed July 17, 2020'/></td>
 								</tr>
-								<tr>
-									<td>Vavra Harps</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td>July 21, 2020</td>
-									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='July 24, signed up!! Sent a contact message about the Markwood Stand.'/></td>
-								</tr>
+								
 								<tr>
 									<td>Marini Made Harps</td> 
 									<td>susan@marinimadeharps.com</td>
@@ -252,14 +321,6 @@ function PartnerProspects() {
 									<td></td>
 									<td>August 11th, 2020</td>
 									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='sent email August 11th. does not have harps on website. needs endpoint'/></td>
-								</tr>
-								<tr>
-									<td>Vixen Harps</td>
-									<td>info@vixenharps.com</td>
-									<td></td>
-									<td></td>
-									<td>August 16th, 2020</td>
-									<td><textarea style={{width: '100%', overflowY: 'scroll'}} rows='6' value='Ottawa'/></td>
 								</tr>
 								<tr>
 									<td>Fleur de Lyre</td>

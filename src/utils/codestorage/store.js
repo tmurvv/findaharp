@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 
 // internal
-import { STORE_PARTNERS } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import StoreProduct from '../../StoreProduct';
-import OnlineStorePartner from '../../components/onlinestore/OnlineStorePartner';
+import OnlineStorePartner from '../../components/onlineStore/OnlineStorePartner';
 import PageTitle from '../../components/PageTitle';
 import ContactUsForm from '../../components/ContactUsForm';
 import IndexCss from '../../styles/index.css';

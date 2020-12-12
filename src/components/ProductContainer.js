@@ -55,7 +55,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
                         clientlong={clientlong}
                         />
                     )}
-                </div>
+                </div> 
                 {state.openDetail
                     &&<ProductModal 
                         product={state.productSelect} 

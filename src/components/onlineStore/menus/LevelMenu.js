@@ -16,7 +16,6 @@ export default function LevelMenu(props) {
                 onClick={(e)=>{
                     props.handleclick(e); 
                 }}
-                style={{color: '#000000'}}
             >
                 Level
             </button>               
@@ -25,7 +24,7 @@ export default function LevelMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Level Menu'
-                className='plainTextSelectLine2'
+                className='storePlainTextSelectLine1'
             >
                 <li 
                     onClick={handleClose} 

@@ -32,6 +32,7 @@ export default function StripeCheckout(props) {
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { user, setUser } = useContext(UserContext);
     const { setStatus } = useContext(StatusContext);
+    const [ newRoute, setNewRoute ]  = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
@@ -40,9 +41,24 @@ export default function StripeCheckout(props) {
     const [clientSecret, setClientSecret] = useState('');
     const stripe = useStripe();
     const elements = useElements();
-
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
+    function handleClick(msg, routeChange) {
+        const resultText = document.querySelector('#loadingLoginText');
+        resultText.innerText=msg;
+        routeChange==="false"?setNewRoute(false):setNewRoute(routeChange);
+        dispatchResultInfo({type: 'OK'});
+    }
+    function loginGuest(evt) {
+        // if (evt) evt.preventDefault();  
+        resetResults();
+        newRoute&&Router.push(`${newRoute}`);
+    }
     useEffect(() => {
-        if (getTotal(cart, user)&&getTotal(cart,user,currencyMultiplier)>0) {
+        if (getTotal(cart, user,currencyMultiplier)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
                 // Create PaymentIntent as soon as the page loads
                 window
@@ -64,8 +80,8 @@ export default function StripeCheckout(props) {
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
-            alert('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase."');
-            Router.push('/cart');
+            handleClick('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase. \n\nYou may have reached this message by pressing your browser back-button on the PayPal page before paying. If so, you have not been charged for your order, but your cart was lost. We are working to resolve this issue."', 'cart');
+            // Router.push('/cart');
         }
     }, []);
     const cardStyle = {
@@ -107,10 +123,10 @@ export default function StripeCheckout(props) {
                 }
                 });
         } catch (e) {
-            alert('Problem connecting with payment provider. Please check your connection and try again.')
-            return Router.push('/cart');
+            handleClick('Problem connecting with payment provider. Please check your connection and try again.', 'cart')
         }
         if (payload&&payload.error) {
+            resetResults();
             setError(`Payment failed ${payload.error.message}`);
             setProcessing(false);
         } else {
@@ -132,12 +148,11 @@ export default function StripeCheckout(props) {
                 setStatus('completed');
                 Router.push('/receipt')
             } catch (e) {
-                alert('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.')
                 deletelocalCart('fah-cart');
                 setCart([]);
                 setCartSubtotals([]);
                 setStatus('completed');
-                Router.push('/receipt')
+                handleClick('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.', '/receipt')
             }
         }
     };
@@ -156,6 +171,11 @@ export default function StripeCheckout(props) {
     if (props.method==='stripe') {
         return (
             <>
+                <Results 
+                    resultInfo={resultInfo} 
+                    loginGuest={loginGuest}
+                    resetResults={resetResults}
+                />
                 <form id="payment-form" onSubmit={handleSubmit} style={{margin: 'auto', paddingBottom: '20px', borderBottom: '1px solid lightgrey'}}>
                     <p>We accept the following cards:</p>
                     <img style={{width: '125px', marginBottom: '-15px'}} src='img/creditcardgroup-small.jpg' alt='credit card logos, mastercard, visa, discover, AmEx' />

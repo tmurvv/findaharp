@@ -130,3 +130,26 @@ export function getFilteredStoreProducts(allProducts, allState, user, rate) {
     // }
     return filteredProducts;
 }
+export const getStoreSearchInfo = (allState, type) => {
+    // shortcut if no filters selected
+    // if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
+    // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
+    // append searchInfo string with only selected filter information
+    let searchInfo='';
+    if (type==='music') {
+        [allState.soloensemble, allState.level, allState.publicationtype].map(menuItem => {
+            if(!['All Lever/Pedal/Ens', 'All Levels', 'All Publication Types'].includes(menuItem)) searchInfo += `${menuItem} | `
+            // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
+        });
+        if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
+        return `Showing Music: ${searchInfo}`;
+    }   
+    if (type==='strings') {
+        [allState.octaves, allState.brands, allState.types].map(menuItem => {
+            if(!['All Octaves', 'All Brands', 'All Types'].includes(menuItem)) searchInfo += `${menuItem} | `
+            // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
+        });
+    }
+    if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
+    return `Showing Strings: ${searchInfo}`;
+}

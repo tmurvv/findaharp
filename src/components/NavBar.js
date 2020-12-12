@@ -43,6 +43,9 @@ export default function NavBar(props) {
                     <Link href='/storepartners' as='/storepartners'>
                         <a onClick={props.handleNavOpen}>Our Store Partners</a>
                     </Link>
+                    {/* <Link href="#">
+                        <a>Online Store (disabled)</a>
+                    </Link> */}
                     <Link href='/onlinestore' as='/onlinestore'>
                         <a onClick={props.handleNavOpen}>Online Store</a>
                     </Link>        

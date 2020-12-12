@@ -5,8 +5,8 @@ import Router from 'next/router';
 
 // internal
 import { FINDAHARP_PRODUCTS } from '../src/constants/FindaharpProducts'
-import StoreProduct from '../src/components/onlinestore/StoreProduct';
-import StoreProductContainer from '../src/components/onlinestore/StoreProductContainer';
+import StoreProduct from '../src/components/onlineStore/StoreProduct';
+import StoreProductContainer from '../src/components/onlineStore/StoreProductContainer';
 import PageTitle from '../src/components/PageTitle';
 import IndexCss from '../src/styles/index.css';
 import FindaharpOnlineStoreCss from '../src/styles/onlinestore/onlinestores/FindaharpOnlineStore.css';

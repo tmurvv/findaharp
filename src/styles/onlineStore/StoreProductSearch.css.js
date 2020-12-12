@@ -4,7 +4,7 @@ function ProductSearchCss() {
     return (
         <style jsx="true">{`
             .storesearchTitle {
-                width: 60%;
+                width: 65%;
                 margin: 25px auto 5px;
                 text-align: center;
                 font-size: 12px;
@@ -21,12 +21,12 @@ function ProductSearchCss() {
             }
             .storeproductSearchOuter {
                 max-width: 1010px;
-                width: 70%;
+                width: 100%;
                 margin: auto;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storeproductSearchOuter {
-                    width: 100%;
+                    width: 70%
                 }
             } 
             .storesearchLine1 {
@@ -34,20 +34,21 @@ function ProductSearchCss() {
                 justify-content: space-evenly;
                 text-align: center;
                 display: grid;
-                grid-template-columns: 33.3% 33.3% 33.3%;               
+                grid-template-columns: 33.3% 33.3% 33.3%;
+                color: white;            
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storesearchLine1 {
                     background-color: #000000;
                 }
             }
             .storesearchLine1 img {
-                width: 70%;
+                width: 90%;
                 position: absolute;
                 height: 60px;
                 max-width: 1010px;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storesearchLine1 img {
                     display: none;
                 }
@@ -64,7 +65,7 @@ function ProductSearchCss() {
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storemobileSearchLine1 {
                     display: flex;
                     justify-content: space-evenly;
@@ -102,7 +103,7 @@ function ProductSearchCss() {
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storesearchLine2 {
                     height: 120px;
                     border: 1px solid #FCD961;
@@ -110,12 +111,12 @@ function ProductSearchCss() {
                 }
             }
             .storesearchLine2 img {
-                width: 63.3%;
+                width: 80%;
                 position: absolute;
                 height: 60px;
                 max-width: 909px;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storesearchLine2 img {
                     display: none;
                 }
@@ -134,7 +135,7 @@ function ProductSearchCss() {
                 display: grid;
                 grid-template-columns: 33.3% 33.3% 33.3%;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storemobileSearchLine2 {
                     display: flex;
                     justify-content: space-evenly;
@@ -178,7 +179,7 @@ function ProductSearchCss() {
                 justify-content: center;
                 z-index: 5;
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .storesearch-grid-item {
                     font-size: 16px;
                 }
@@ -202,7 +203,7 @@ function ProductSearchCss() {
             .storeselected {
                 width: fit-content;
                 height: fit-content;
-                margin: 20px auto;
+                margin: -20px auto 0;
                 display: flex;
                 justify-content: center;
             }
@@ -237,7 +238,7 @@ function ProductSearchCss() {
                     padding-bottom: 2px;
                 }  
             }
-            @media only screen and (max-width: 550px) {
+            @media only screen and (max-width: 750px) {
                 .clearSearch {
                     top: 125px;
                     right: 0;

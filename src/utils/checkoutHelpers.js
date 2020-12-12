@@ -1,8 +1,12 @@
 import uuid from 'react-uuid';
-import { getSubTotal } from './storeHelpers';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
+import { 
+    getSubTotal, 
+    getStores, 
+    getNumItems 
+} from './storeHelpers';
 
 export function setlocalCart(localName, localValue) {
     localStorage.getItem(localName);
@@ -13,7 +17,6 @@ export function deletelocalCart(localName) {
 }
 export function selectCountry(val, user, setUser) {
     if (val==='Canada' && user.currency!=="CAD") {
-        // alert('Currency is being changed to Canadian.');
         setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: null});
     } else {
         setUser({...user, shippingcountry: val, currency: 'USD', shippingregion: null});
@@ -51,57 +54,131 @@ export function getProvCode(prov) {
             return null;
     }
 }
-export function shipping(shippingcountry) {
-    if (!shippingcountry) return 0.00;
-    switch (shippingcountry) {
-        case 'Canada':
-            return SHIPPING_CALCULATIONS.Canada;
-        // included for testing
-        case 'Antarctica':
-            return 0.00;
-        case 'Pickup':
-            return 0.00;
-        case 'select country':
-            return 'select country'
-        default:
-            return SHIPPING_CALCULATIONS.default;
-    }
+function harpsetc_shipping(cart, shippingcountry) {
+    if (!shippingcountry||!cart||cart.length===0) return [ 0.00, '' ];
+    const subtotal=getSubTotal(cart);
+    if (shippingcountry==="United States") {
+        if (subtotal<10) return [ 6, 'USPS' ];
+        if (subtotal>=10&&subtotal<35) return [ 9.95, 'USPS' ];
+        if (subtotal>=35&&subtotal<50) return [ 11.50, 'USPS' ];
+        if (subtotal>=50&&subtotal<100) return [ 13.25, 'USPS' ];
+        if (subtotal>=100&&subtotal<250) return [ 15.25, 'USPS' ];
+        if (subtotal>=250&&subtotal<400) return [ 24.25, 'USPS' ];
+        if (subtotal>400) return [ 29.95, 'USPS' ];
+    } else if (shippingcountry === 'Canada') {
+        if (subtotal<10) return [ 19, '*International Shipping' ];
+        if (subtotal>=10&&subtotal<35) return [ 22.95, '*International Shipping' ];
+        if (subtotal>=35&&subtotal<50) return [ 24.50, '*International Shipping' ];
+        if (subtotal>=50&&subtotal<100) return [ 26.25, '*International Shipping' ];
+        if (subtotal>=100&&subtotal<250) return [ 28.25, '*International Shipping' ];
+        if (subtotal>=250&&subtotal<400) return [ 37.25, '*International Shipping' ];
+        if (subtotal>400) return [ 42.95, '*International Shipping' ];
+    } else {
+        return [-1,''];
+    } 
 }
-export function tax(cart, shippingregion, currencyMultiplier) {
-    if (!shippingregion) return 0.00;
-    try {
-        const tax = new SalesTax(
-            getProvCode(shippingregion),
-            getSubTotal(cart)*currencyMultiplier,
-            2
-        );
-        return tax.sum().toFixed(2);
-    } catch(e) {
-        return 'select region';
-    }       
+function findaharp_shipping(cart, shippingcountry) {
+    if (shippingcountry==="Canada") return [ 8.00, "*If your order does not qualify for Canada Post letter rate, you will be contacted to approve additional shipping charges." ];
+    if (shippingcountry==="United States") return [ 20.00, "*International Shipping" ];
+    return [ -1, '' ];
+}
+export function shipping(shippingcountry, store, cart) {
+    if (!shippingcountry) return [0,'shipping country not found'];
+    if (shippingcountry==='Antarctica') return [0,'easter egg'];
+    if (store&&store==="harpsetc") return harpsetc_shipping(cart, shippingcountry);
+    if (store&&store==="findaharp") return findaharp_shipping(cart, shippingcountry);
+}
+export function getShippingArray(shippingcountry, cart) {
+    let subCart = [];
+    let tempShipArray = [];
+    getStores(cart).map(store => {
+        subCart = [];
+        cart.map(cartItem=>{
+            if (String(cartItem.store)===store) {
+                subCart.push(cartItem);
+            }
+        });
+        tempShipArray.push([ store, Number(shipping(shippingcountry, store, subCart)[0]) ]);
+    });
+    return tempShipArray;
+    // setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: tempShipArray });
+}
+export function tax(cart, shippingcountry, shippingregion, store, currencyMultiplier) {
+    switch(shippingcountry) {
+        case "Canada": 
+            if (store==='findaharp') {
+                try {
+                    const tax = new SalesTax(
+                        getProvCode(shippingregion),
+                        getSubTotal(cart)*currencyMultiplier,
+                        2
+                    );
+                    return tax.sum().toFixed(2);
+                } catch(e) {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        case "United States":
+            if (store==='harpsetc'&&shippingregion==='California') {
+                return getSubTotal(cart)*.0825;
+            } else {
+                return 0;
+            }
+            break;
+        default :
+            return 0;
+    }
+          
 }
 export function getTotal(cart, user, currencyMultiplier) {
     const subTotal = getSubTotal(cart);
-    // if international order, shipping is marked -1, this adds it back in to total
-    const addOneInternational = user.shippingcountry&&user.shippingcountry!=='United States'&&user.shippingcountry!=="Canada"?1:0;
+    const shippingArray = getShippingArray(user.shippingcountry, cart);
+    let shippingTotal = 0;
+    shippingArray.length>0?shippingArray.map(arrayItem => {shippingTotal += arrayItem[1];}):0;
+    if (shippingTotal<0) shippingTotal=0;
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
     if (user.currency==="CAD") {
-        return (Number(subTotal)*currencyMultiplier + Number(shipping(user.shippingcountry)) + Number(tax(cart,user.shippingregion,currencyMultiplier))).toFixed(2);
+        return (Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));
     } else {
-        return (Number(getSubTotal(cart)) + Number(shipping(user.shippingcountry)) + Number(addOneInternational)).toFixed(2);
+        return (Number(subTotal) + shippingTotal);
     }
 }
 export function selectRegion(val, user, setUser) {
     setUser({...user, shippingregion: val});
 }
-
-export function leaveSiteListener(e) {
-    // Cancel the event
-    e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-    // Chrome requires returnValue to be set
-    e.returnValue = '';
+export function updateShippingTaxes(user, cart, cartSubtotals, setCartSubtotals, currencyMultiplier) {
+    let initTaxes = 0;
+    let subCart = [];
+    // nothing in cart or no shipping country, set shipping and taxes to nil
+    if (getNumItems(cart)===0 || !user.shippingcountry) return setCartSubtotals({...cartSubtotals, taxes: 0, shipping: 0, shippingArray:[]})
+    // no shipping region, calculate shipping, set taxes to nil
+    if (!user.shippingregion) return setCartSubtotals({...cartSubtotals, taxes: 0, shippingarray: getShippingArray(user.shippingcountry, cart)})
+    // calculate taxes
+    getStores(cart).map(store => {
+        subCart = [];
+        cart.map(cartItem=>{
+            if (String(cartItem.store)===store) {
+                subCart.push(cartItem);
+            }
+        });
+        initTaxes = Number(initTaxes) + Number(Number(tax(subCart,user.shippingcountry,user.shippingregion, store, currencyMultiplier)));
+    });
+    // set both shipping and taxes
+    return setCartSubtotals({...cartSubtotals,
+        taxes: initTaxes,
+        shippingarray: getShippingArray(user.shippingcountry, cart)
+    });
 }
+
+// export function leaveSiteListener(e) {
+//     // Cancel the event
+//     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+//     // Chrome requires returnValue to be set
+//     e.returnValue = '';
+// }
 
 export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier) {
     const subTotal = user.currency==="USD"?getSubTotal(cart):getSubTotal(cart)*currencyMultiplier;

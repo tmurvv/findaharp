@@ -12,8 +12,19 @@ function StoreProductContainerCss() {
             } 
             .storenotFoundContainer img {
                 height: 225px;
-            }          
+            } 
             .storeproductContainer {
+                padding-top: 50px;
+            }   
+            @media only screen and (max-width: 750px) {
+                .storeproductContainer {
+                    padding-top:0;
+                } 
+            }      
+            .storeproductContainer>div {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
                 // margin: auto;
                 // position: relative;
                 // width: 100%;
@@ -31,11 +42,11 @@ function StoreProductContainerCss() {
             }
             .storegrid-container {
                 margin: 50px auto;
-                // width: 100%;
+                width: 80%;
                 // max-width: 1010px;
                 display: flex;
                 flex-wrap: wrap;
-                justify-content: center;
+                justify-content: space-around;
             }
             @media only screen and (max-width: 550px) {
                 .storegrid-container {

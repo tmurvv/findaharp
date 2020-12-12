@@ -1,4 +1,3 @@
-import { Help } from '@material-ui/icons';
 import uuid from 'uuid';
 
 export const SOLO_ENSEMBLE = [
@@ -68,6 +67,56 @@ export const PRODUCTAD_PLACEHOLDER = {
         sellerName: "",
         sellerRegion: ""
 }
+
+export const TERMS_CONDITIONS = [` 	                                              
+    <p style="width: 100%; text-align: center">(in this agreement Findaharp.com means “Find Stuff Ltd. Operating as Findaharp.com”)</p>
+    <p>Our services include the use of our website including the listing for sale, selling and purchasing of certain items as approved by us (collectively the “Services”). To access and use our Services, you are required to register with us and set up an account with your email address and a password (your “Account”). The email address you provide will be your email address, and you are solely responsible for maintaining the confidentiality of your password. You are solely responsible for all activities that occur under your Account. Therefore, you should protect your password and make your password difficult for others to guess. </p>
+    <p>You agree not to do any of the following: </p>
+    <ul style='margin-left: 40px'>
+        <li>violate any laws; </li>
+        <li>be false or misleading; </li>
+        <li>infringe any third-party right; </li>
+        <li>distribute viruses or any other technologies that may harm Findaharp.com or the interests or property of Findaharp.com; </li>
+        <li>impose an unreasonable load on our infrastructure or interfere with the proper working of Findaharp.com; </li>
+        <li>copy, modify, or distribute any other person's content; </li>
+        <li>harvest or otherwise collect information about others, including email addresses, without their consent.</li>
+    </ul>
+
+    <p>
+        We may limit or terminate our Services, remove hosted content and take technical and legal steps to keep users off Findaharp.com if we think that they are creating problems or acting inconsistently with the letter or spirit of our policies. However, whether we decide to take any of these steps, remove hosted content or keep a user off Findaharp.com or not, we do not accept 
+        any liability for monitoring Findaharp.com or for unauthorized or unlawful content on Findaharp.com or use of Findaharp.com by users.
+    </p>
+    <p>
+        The use of our Services is not free. We charge fees for our Services. We may change them from time to time. We will notify you of changes to our fees. We may choose to temporarily change our fees for promotional events or new clients. Our fees are non-refundable, and you are responsible for paying them when they are due. If fees are not remitted, we may terminate your ability to use our Services.
+    </p>
+    <p>
+        If, as a party listing an item for sale using our Services, you sell the item to a buyer introduced to you because of exposure on Findaharp.com, you will pay to us the Findaharp.com fee. In the 180 days after this agreement ends, if you sell the item to a buyer introduced to you during the term of this agreement because of exposure on Findaharp.com,  you will pay to us the Findaharp.com fee. 
+    </p>
+    <p>
+        Taxes associated with our Services will be collected when applicable. You agree to provide accurate address information necessary for Findaharp.com to comply with its obligations under applicable law. To the extent that such information is not provided, Findaharp.com will in its discretion determine and collect appropriate taxes. 
+    </p>
+    <p>
+        You are solely responsible to collect and remit any applicable taxes resulting from the sale of your items listed on Findaharp.com.
+    </p>            
+    <p>
+        The Services contain items from us, you, and other users. You agree not to copy, modify, resell or distribute the Services, our copyrights or trademarks. When you post content, you are granting us a non-exclusive, worldwide, perpetual, irrevocable, royalty-free, sub-licensable right to exercise the copyright, publicity, and database rights to that content. We reserve the right to remove any content at our sole discretion. 
+    </p>
+    <p>
+        The Services are provided “as is” and “as available”. You agree not to hold us responsible for things other users post or do. You agree not to hold us responsible for the payment processing of other service providers. As most of the items on the Services comes from other users, we do not guarantee the accuracy, completeness, efficacy or timeliness of any postings or user communications or the quality, safety, or legality of what is offered. We also cannot guarantee continuous or secure access to our Services. Notification functionality in our Services may not occur in real time. Such functionality is subject to delays beyond our control, including without limitation, delays or latency due to your physical location or your wireless data service provider’s network. Accordingly, to the extent legally permitted we expressly disclaim all warranties, representations and conditions, express or implied, including those of quality, merchantability, merchantable quality, durability, fitness for a particular purpose and those arising by statute. We are not liable for any loss, whether of money (including profit), goodwill, or reputation, or any special, indirect, or consequential damages arising out of your use of Findaharp.com even if you advise us or we could reasonably foresee the possibility of any such damage occurring. Some jurisdictions do not allow the disclaimer of warranties or exclusion of damages, so such disclaimers and exclusions may not apply to you. 
+    </p>
+    <p>
+        Despite the previous paragraph, if we are found to be liable, our liability to you or any third party (whether in contract, tort, negligence, strict liability in tort, by statute or otherwise) is limited to the greater of (a) the total fees you pay to us in the 12 months prior to the action giving rise to liability, and (b) 25 Canadian Dollars. 
+    </p>
+    <p>
+        You will indemnify and hold harmless Findaharp.com and its affiliates and our and their respective officers, directors, agents and employees (each an “Indemnified Party”), from any claim made by any third party, together with any amounts payable to the third party whether in settlement or as may otherwise be awarded, and reasonable legal costs incurred by any of the Indemnified Parties, arising from or relating to your use of the Services, any alleged violation by you of the applicable terms, and any alleged violation by you of any applicable law or regulation. We reserve the right, at our own expense, to assume the exclusive defense and control of any matter subject to indemnification by you, but doing so will not excuse your indemnity obligations. 
+    </p>
+    <p>
+        By using the Services, you agree to the collection, transfer, storage and use of your personal information by Findaharp.com (the "data controller") on our servers. 
+    </p>
+    <p>
+        These terms constitute the entire agreement between us and you, superseding any prior agreements. The specific fees charged by us, for the Services, shall be described in a separate agreement or schedule, subject to the terms herein described. This agreement is governed by the laws of the Province of Alberta and the federal laws of Canada applicable therein. We both submit to the jurisdiction of the courts of the Province of Alberta. If we don't enforce any particular provision, we are not waiving our right to do so later. If a court strikes down any of these terms, the remaining terms will survive. We may automatically assign this agreement in our sole discretion. 
+    </p>
+`]
 
 export const STORE_PARTNERS = [
     {
@@ -227,19 +276,37 @@ export const STORE_PARTNERS = [
     {
         id: uuid(),
         sellerCountry: "USA",
-        sellerRegion: "Western Colorado",
-        productTitle: "Blevins Harps",
+        sellerRegion: "Philadelphia Area",
+        productTitle: "Harp and Heart",
         productPrice: "",
         productLongDesc: `
             <div>
-                <p>Welcome to <span>Blevins Harps</span> where our mission is to build quality instruments, one at a time, for our amazing customers. Because picking out a harp is personal, we endeavour to help each customer select just the right harp.</p>
-                <p class="" style="white-space:pre-wrap;">Blevins Harps began in 1992 when Dwight Blevins left an audio engineering career in radio and TV broadcasting to set up a workshop in Western Colorado. Dwight not only loved the sound, but also the visual artistic form of the harp. This can be seen in every one of Dwight’s designs. He was willing to explore different shapes and wood types to bring out the best possible sound and visual beauty of each harp.&nbsp;&nbsp;&nbsp;</p>
-                <p>Since Blevins Harp's humble beginning, over 3200 harps have been lovingly built and shipped worldwide.</p>
-                <p>Soon after Dwight’s retirement in 2018, we providentially found Dwight and purchased the Blevins brand. Dale and Jamin, a father and son team, previously worked as carpenters for many years and share a passion for woodworking. Laurie studied the harp at the University of Northern Colorado under Kathy Bundock Moore and our fourteen year old daughter also plays the harp. This was a great fit for our family and we so much enjoyed working with Dwight and Cindy in the transition.&nbsp;&nbsp;</p>
-                <p>We especially love the customer centered focus of Blevins Harps. and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p><p class="" style="white-space:pre-wrap;">All The Best, Dale, Laurie and Jamin Wright</p>
+                <p><span>Harp and Heart</span>, Nancy Beal, owner
+                <br />
+                <br />-Heal your body, mind, and spirit...
+                <br />-Experience deep relaxation...
+                <br />-Strengthen your immune  and nervous systems through the 'relaxation response'...
+                <br />-Deepen your yoga and meditation practice...
+                <br />-Increase your brain's ability to focus and concentrate...
+                <br />-Relieve stress...
+                <br />-Achieve deeper, more refreshing, more rejuvenating sleep...
+                <br />-Increase your mental, emotional, spiritual and artistic creativity...
+                <br />-Enjoy a daily sense of well being and enhanced energy...
+                <br />Holistic healing with Nancy Beal
+                <br />
+                <br /><span>Clients say . . .</span>
+                <br />
+                <br />"Various chakras felt like they were being opened and cleared."
+                <br />
+                <br />"This is a wonderful way to relax and feel the tension being released from my body. I hope to have the opportunity for future classes."
+                <br />
+                <br />"In a world where we never stop to relax, how fundamentally blissful to relax at a very deep level. There were moments of joy, bliss, and oneness with all that is."
+                <br />
+                 <br />"I wanted to thank you so much for the wonderful treatment you gave to me. It felt wonderful to be  spoiled like that on your table. You were so generous with your time, knowledge and your gifts. I  felt relaxed for a long time afterward, which was nice especially since I have been so stressed out lately."
+                
             </div>`,
-        productMaker: "Blevins Harps",
-        productImageUrl: "/img/storePartners/blevins_harps_logo_brightness.png",
+        productMaker: "Harp and Heart",
+        productImageUrl: "/img/storePartners/harpandheart_logo.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'https://blevinsharps.com',
         sellerWebsiteText: 'blevinsharps.com',

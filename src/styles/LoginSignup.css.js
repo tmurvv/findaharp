@@ -153,7 +153,7 @@ function LoginSignupCSS() {
             }
             @media only screen and (max-width: 550px) {
                 #login {
-                    transform: translate(0%, -184%);
+                    transform: translate(0%, -215%);
                 }
                 #signup {
                     transform: translateX(-10%);

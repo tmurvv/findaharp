@@ -21,35 +21,39 @@ import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
 import Footer from '../src/components/Footer';
-import CartButton from '../src/components/onlinestore/CartButton';
+import CartButton from '../src/components/onlineStore/CartButton';
 import ActivateEmail from '../src/components/ActivateEmail';
 import ResetPassword from '../src/components/ResetPassword';
 import UploadListingResult from '../src/components/UploadListingResult';
+import SellerAgreement from '../src/components/SellerAgreement';
+import UploadStoreItem from '../src/components/onlineStore/uploadstoreitem';
 import { parseJwt } from '../src/utils/helpers';
 import { getNumItems } from '../src/utils/storeHelpers'
 
-
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 const cartOpenInit = false;
-const cartItemsInit = [
-];
+const cartItemsInit = [];
 const cartSubtotalsInit = {
     shipping: 0,
-    taxes: 0
+    taxes: 0,
+    shippingarray: []
 }
+
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
         firstname: '', 
-        lastname: '', 
+        lastname: '',
         email: '', 
         distanceunit: 'mi', 
         _id: '',
         newsletter: '',
         currency: 'USD',
-        role: 'not set'
+        role: 'not set',
+        agreementStatus: ''
     }); // firstname, lastname, email, distanceunit
     const [cart, setCart] = useState(cartItemsInit);
+    const [shipping, setShipping] = useState('working');
     const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
@@ -114,7 +118,8 @@ function MyApp(props) {
                             _id: returnedUser._id,
                             newsletter: returnedUser.newsletter,
                             currency: returnedUser.currency,
-                            role: returnedUser.role
+                            role: returnedUser.role,
+                            agreementStatus: returnUser.agreementStatus
                         });
                     } catch (e) {
                         console.log('Something went wrong retrieving user with JWT cookie:', e.message)
@@ -136,7 +141,9 @@ function MyApp(props) {
                 try {
                     let localCartJson = JSON.parse(localCart);
                     localCartJson = [...localCartJson]
+                    localCartJson.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
                     setCart(localCartJson);
+                    if (localCartJson.length>0) setCartSubtotals({shippingarray: []});//BREAKING needs to loop through cart and set stores
                 } catch (e) {
                     console.log('error parsing local cart') // needs logging
                 }
@@ -148,6 +155,86 @@ function MyApp(props) {
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
+    useEffect(()=>{
+        // if (props.router&&props.router.query&&props.router.query.upload&&props.router.query.upload==='yes') Router.push('/uploadstoreitem');
+    },[]);
+    if (props.router.query.upload==='yes') {
+        return( 
+            <>  
+                <Head>
+                    <title>Find a Harp Pre-owned, Used</title>
+                    <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                    <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
+                    <script src="https://js.stripe.com/v3/" />
+                </Head>
+                <Banner />
+                <UserContext.Provider value={{user, setUser}}>
+                <StatusContext.Provider value={{status, setStatus}}>
+                    <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
+                        <CartContext.Provider value={{cart, setCart}}>
+                        <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
+                            <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                <>
+                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                    <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
+                                    {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
+                                    <UploadStoreItem />
+                                    <Footer />
+                                </>
+                            </CurrencyContext.Provider>
+                        </CartSubtotalsContext.Provider>
+                        </CartContext.Provider>
+                    </CartOpenContext.Provider>
+                </StatusContext.Provider>
+                </UserContext.Provider>
+                
+                <AppCss />
+            </>
+        )
+    }
+    if (props.router.query.agreement==='yes') {
+        return( 
+            <>  
+                <Head>
+                    <title>Find a Harp Pre-owned, Used</title>
+                    <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                    <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
+                    <script src="https://js.stripe.com/v3/" />
+                </Head>
+                <Banner />
+                <UserContext.Provider value={{user, setUser}}>
+                <StatusContext.Provider value={{status, setStatus}}>
+                    <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
+                        <CartContext.Provider value={{cart, setCart}}>
+                        <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
+                            <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                <>
+                                                <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                                <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
+                                                {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
+                                                <SellerAgreement />
+                                                <Footer />
+                                            </>
+                                
+                            </CurrencyContext.Provider>
+                        </CartSubtotalsContext.Provider>
+                        </CartContext.Provider>
+                    </CartOpenContext.Provider>
+                </StatusContext.Provider>
+                </UserContext.Provider>
+                
+                <AppCss />
+            </>
+        )
+    }
+
+
+
+
+
+
+
+
     return( 
         <>  
             <Head>
@@ -163,7 +250,11 @@ function MyApp(props) {
                     <CartContext.Provider value={{cart, setCart}}>
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                         <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
-                            {props.router.query.reset
+                            {props.router.query.upload
+                                ?<UploadStoreItem />
+                                :props.router.query.agreement
+                                ?<SellerAgreement />
+                                :props.router.query.reset
                                 ?<ResetPassword />
                                 :props.router.query.activateemail
                                     ?<ActivateEmail found={true}/>
@@ -190,7 +281,7 @@ function MyApp(props) {
         </>
     )
 }
-export async function getServerSideProps(context) {
+export function getServerSideProps(context) {
     return {
       props: {query: context.query}, // will be passed to the page component as props
     }

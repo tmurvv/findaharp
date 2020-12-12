@@ -3,38 +3,95 @@ import React from "react";
 function CartItemCss() {
     return (
         <style jsx="true">{`
-        .item { 
-            width: 660px; 
-            height: 100px;
-            margin: 10px auto;
-            text-align: left;
+        .subCart_item {
+            margin: 15px;
             display: flex;
             border-radius: 3px;
-            padding: 10px;
+            margin-bottom: 40px;
+
+            // width: 660px; 
+            // height: 100px;
+            // margin: 10px auto;
+            // text-align: left;
+            // display: flex;
+            // border-radius: 3px;
+            // padding: 10px;
         }
-        .product_image {
-            height: 40%;
-            min-height: 40%;
+        @media only screen and (max-width: 1000px) {
+            .subCart_item {
+                flex-direction: column;
+                margin: 0;
+                // margin: 15px;
+                // display: flex;
+                // border-radius: 3px;
+                // margin-bottom: 40px;
+            }
+        }
+        .subCart_item-image {
+            // width: 100%;
+            // flex: 4;
+            // margin-right: 10px;
+            // display: flex;
+            // justify-content: center;
+            // padding-bottom: 25px;
+
+            // height: 40%;
+            // min-height: 100px;
+            // min-width: 100px;
+            // width: 70%;
+            // padding-top: 10px;
+            // margin: auto;
+            // margin-right: 25px;
+            max-height: 200px;
+            flex: 3;
+            
+            display: flex;
+            justify-content: center;
+            width: 30%;
+            padding-top: 18px;
+        }
+        @media only screen and (max-width: 1000px) {
+            .subCart_item-image {
+                width: 100%;
+                margin: auto;
+            }
+        }
+        .subCart_item-image img { 
+            // width: auto;
+            // min-width: 75px;
+            // max-width: 200px;
+
+            // border-radius: 3px;
+            // max-width:100%;
+            // height:200px;
+            max-width: 150px;
+            max-height: 150px;
+            // box-shadow: 3px 5px 3px lightgrey;
+        }
+        .subCart_item-text { 
+            flex: 7;
             width: 70%;
-            padding-top: 10px;
-            margin: auto;
+            // margin-top: 15px;
+            // margin-left: 10px;
+            // margin-bottom: 10px;
+            // max-height: 100px;
+            // overflow-y: auto;
+            margin-left: 15px;
         }
-        .product_image img { 
-            // width: 140px;
-            // max-height: 250px;
-            border-radius: 3px;
-            max-width:100%;
-            max-height:100%;
-            box-shadow: 3px 5px 3px lightgrey;
+        @media only screen and (max-width: 1000px) {
+            .subCart_item-text { 
+                // flex: 8;
+                // width: 80%;
+                // margin-top: 15px;
+                // margin-left: 10px;
+                // margin-bottom: 10px;
+                // max-height: 100px;
+                // overflow-y: auto;
+                margin-left: 0px;
+                width: 100%;
+                text-align: center;
+            }
         }
-        .description { 
-            margin-top: 15px;
-            margin-left: 10px;
-            margin-bottom: 10px;
-            max-height: 100px;
-            overflow-y: auto;
-        }
-        
         .description p {
             font-size: 14px;
         }
@@ -94,7 +151,7 @@ function CartItemCss() {
             font-size: 16px;
             font-family: 'Metropolis Extra Bold';
             margin-bottom: 25px;
-            margin-left: 8px;
+            margin-left: -2px;
         }
         `}
     </style>

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import uuid from 'uuid';
-// import parseNum from 'parse-num';
+import parseNum from 'parse-num';
 // // internal
 import StoreProductModalCSS from '../../styles/onlineStore/StoreProductModal.css';
 // import { removeDashOE, getGeoDistance } from '../utils/helpers';
@@ -12,6 +12,7 @@ import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import {
     incQty
 } from '../../utils/storeHelpers';
@@ -25,12 +26,12 @@ function StoreProductModal(props) {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const [ sellerInfo, setSellerInfo ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const {
         id,
         store,
         category, 
-        subcategories, 
         title, 
         artist_first,
         artist_last,
@@ -50,12 +51,12 @@ function StoreProductModal(props) {
         dispatchResultInfo({type: 'initial'});
     }
     function handleResults(msg) {
-        dispatchResultInfo({type: 'OK'});
         const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText=msg;
+        dispatchResultInfo({type: 'OK'});
     }
     function loginGuest(evt) {
-        // if (evt) evt.preventDefault();  
+        // if (evt) evt.preventDefault();
         resetResults();
     }
     
@@ -67,9 +68,11 @@ function StoreProductModal(props) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
-                handleResults('Only 1 in stock. Item already in cart.');
+                alert('Only 1 in stock. Item already in cart.');
+                
             } else {
                 incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+                alert('Item added to cart.');
             }   
         } else {
             const cartCopy = [...cart];
@@ -91,21 +94,29 @@ function StoreProductModal(props) {
                 product_quantity: '1'    
             }
             cartCopy.push(thisItem);
+            cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
             const tempCartJson = await JSON.stringify(cartCopy);
+            alert('Item added to cart.');
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
-            alert('Item added to cart.')
             handleClick(e,props.product,false);
+            
         }
     }
-    function handleAdd(e) { 
-        e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
-        e.target.addEventListener("animationend", (e)=>updateCart(e))
+    function handleAdd(e) {
+        updateCart(e);
+        // e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
+        // e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
+    useEffect(() => {
+        const result = Array.from(STORE_PARTNERS).filter(seller => {
+            if (seller.id===props.product.store) setSellerInfo(seller);
+        });
+    });
     return (
         <>
-        <div className='storedetailContainer'>
+        <div className='storedetailContainer' style={{display: 'block'}}>
             <Results 
                 resultInfo={resultInfo} 
                 loginGuest={loginGuest}
@@ -119,7 +130,7 @@ function StoreProductModal(props) {
             <div style={{fontSize: '14px', fontStyle: 'italic', marginBottom: '15px'}}>{artist_first||artist_last?artist_first+'   '+artist_last:"_"}</div>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='storedetailInfo' style={{marginTop: '15px'}}>
-                <div className={`storedetailImg`}><img src= {image} alt={title} /></div>
+                <div className={`storedetailImg`}><img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full.png'} alt={title} /></div>
                 <div className={`storedetailText`}>
                     <div>
                         <p>{description}</p> <br/>
@@ -129,20 +140,20 @@ function StoreProductModal(props) {
                             <span>Condition (1-10):</span> {condition}<br/>
                             <span>Notes:</span> 
                             {user&&user.currency==="USD"?    
-                            ` ${newprice?`Find new from: $${Number(newprice).toFixed(2)} / `:''}${notes}`
-                            :` ${newprice?`Find new from: $${Number(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
+                            ` ${newprice?`Find new from: $${parseNum(newprice).toFixed(2)} / `:''}${notes}`
+                            :` ${newprice?`Find new from: $${parseNum(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
                             }  
                         </div>
                     </div>
                     <div>
                         {user&&user.currency==="USD"?    
-                        <div className="storeproduct__price">${Number(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                        :<div className="storeproduct__price">${(Number(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                        <div className="storeproduct__price">${parseNum(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
+                        :<div className="storeproduct__price">${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
-                            <div style={{width:'fit-content'}}>Ships From: Canada</div>
+                            <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                             <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                            <div style={{width:'fit-content'}}>To: Anywhere</div>
+                            <div style={{width:'fit-content'}}>To: {sellerInfo&&sellerInfo.shipsTo}</div>
                         </div>
                         <button 
                             className='submit-btn'

@@ -22,7 +22,6 @@ export default function PublicationTypeMenu(props) {
                 onClick={(e)=>{
                     props.handleclick(e); 
                 }}
-                style={{color: '#000000'}}
             >
                 Publication Type
             </button>               
@@ -31,7 +30,7 @@ export default function PublicationTypeMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='PublicationType Menu'
-                className='plainTextSelectLine2'
+                className='storePlainTextSelectLine1'
             >
                 <li 
                     onClick={handleClose} 

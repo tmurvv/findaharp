@@ -10,6 +10,9 @@ function CartCss() {
             margin: auto;
             margin-bottom: 50px;
         }
+        .cart-container:nth-child(2) {
+            flex:1;
+        }
         @media only screen and (max-width: 715px) {
             .cartContainer {
                 flex-direction: column;
@@ -18,6 +21,7 @@ function CartCss() {
         #cart {
             margin-top: -15px;
             height: fit-content;
+            flex: 3;
         }
         #cart h1 {
             margin: -15px auto 20px;
@@ -29,12 +33,35 @@ function CartCss() {
                 // box-shadow: 0;
             }
         }
+        @media only screen and (max-width: 700px) {
+            .cartBody>h3 {
+                text-align: center;
+            }
+        }
+        .subCart {
+            border: 1px solid lightgrey;
+            padding: 20px;
+            margin: 15px;
+        }
+        @media only screen and (max-width: 1000px) {
+            .subCart {
+                padding: 20px;
+            }
+        }
+        .itemsContainerWrapper {
+            display: flex;
+        }
+        @media only screen and (max-width: 1000px) {
+            .itemsContainerWrapper {
+                display: block;
+            }
+        }
         .itemsContainer {
             background-color: transparent;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px 10px;
+            padding: 0;
             max-width: 650px;
         }
         .itemsContainer h4 {
@@ -104,9 +131,7 @@ function CartCss() {
             background-color: #E74C3C;
             color: #fff;
         }
-        
-        
-        
+            
         input[type=checkbox] {
             margin-right: 5px;
         }
@@ -124,12 +149,22 @@ function CartCss() {
             height: 45px;
             width: unset;
         }
+        
         .cartButton p {
             margin-block-start: 0;
             margin-block-end: 0;
             font-weight: 600;
-            font-size: 24px;
-            transform: translate(35px, -5px);
+            font-size: 20px;
+           transform: translate(39px, 0px);
+        }
+        @media only screen and (max-width: 550px) {
+            .cartButton img {
+                height: 30px;
+            }
+            .cartButton p {
+                font-size: 14px;
+                transform: translate(27px, 0px);
+            }
         }
         /*********************************************/
         

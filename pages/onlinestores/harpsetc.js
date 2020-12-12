@@ -5,7 +5,7 @@ import Router from 'next/router';
 
 // internal
 import { FINDAHARP_PRODUCTS } from '../../src/constants/FindaharpProducts'
-import StoreProduct from '../../src/components/onlinestore/StoreProduct';
+import StoreProduct from '../../src/components/onlineStore/StoreProduct';
 import PageTitle from '../../src/components/PageTitle';
 import IndexCss from '../../src/styles/index.css';
 import HarpsEtcOnlineStoreCss from '../../src/styles/onlinestore/onlinestores/HarpsEtcOnlineStore.css';

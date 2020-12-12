@@ -6,9 +6,9 @@ import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { UserContext } from '../src/contexts/UserContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import CartItem from '../src/components/onlinestore/CartItem';
-import OrderSummary from '../src/components/onlinestore/OrderSummary';
-import Subtotal from '../src/components/onlinestore/Subtotal';
+import CartItem from '../src/components/onlineStore/CartItem';
+import OrderSummary from '../src/components/onlineStore/OrderSummary';
+import Subtotal from '../src/components/onlineStore/Subtotal';
 import { branding } from '../src/constants/branding';
 import { cssVariables } from '../src/constants/cssVariables';
 import CartCss from '../src/styles/onlineStore/cart.css'; 
@@ -18,11 +18,14 @@ import Results from '../src/components/Results';
 import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import {
     getNumItems,
+    getStores,
     getSubTotal
 } from '../src/utils/storeHelpers';
 import { getTotal } from '../src/utils/checkoutHelpers';
-import GetZipPostal from '../src/components/onlinestore/GetZipPostal';
+import GetZipPostal from '../src/components/onlineStore/GetZipPostal';
 import PageTitle from '../src/components/PageTitle';
+import SubCart from '../src/components/onlineStore/SubCart';
+import { Translate } from '@material-ui/icons';
 
 
 function Cart(props) {
@@ -70,8 +73,13 @@ function Cart(props) {
                 />
             <div className="cartContainer">  
                 <div id='cart'>
-                    <div className='cartBody'>
-                        {/* <h1>Your Cart</h1> */}
+                    {cart.length===0?<h3 style={{paddingLeft: '15px'}}>No Items in Cart</h3>:''}
+                    {/* <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1> */}
+                    {getStores(cart).map(store => {
+                        const subCart = cart.filter(cartItem=>cartItem.store===store)
+                        return <SubCart store={store} subCart={subCart} />
+                    })}
+                    {/* <div className='cartBody'>
                         {screenWidth<=715
                         ?<div className='subTotal'>
                             <Subtotal type="subtotal"/>
@@ -99,27 +107,26 @@ function Cart(props) {
                             </div>
                         </div>
                         :''}
-                    </div>
-                    <div className='itemsContainer'>
-                        {/* <h4>Shipping and Tax <br/> calculated at checkout. </h4> */}
+                    </div> */}
+                    {/* <div className='itemsContainer'>
                     <div className='items'>                       
                         <ul>
                             {cart.length===0?
                                 <li className='noItem' key={uuid()}>No Items in Cart</li>
                             :cart.map(item => 
                                 <li key={uuid()}>
-                                    <CartItem item={item}/>
+                                    <CartItem item={item} setUpdate={setUpdate}/>
                                 </li>
                             )}
                         </ul>
                     </div>
-                    </div>
+                    </div> */}
                 </div>
                 <div>
-                    <GetZipPostal />
-                    <OrderSummary />
-                    {screenWidth>=715
-                    ?
+                    <GetZipPostal/>
+                    <OrderSummary/>
+                    {/* {screenWidth<=715
+                    ? */}
                     <div style={{display: 'flex'}}>
                                 <button className='submit-btn' style={{
                                     marginRight: '2.5px',
@@ -140,7 +147,7 @@ function Cart(props) {
                                     }}
                                 >Continue to Checkout</button>
                             </div>
-                     :''}   
+                     {/* :''}    */}
                 </div>            
             </div>
             <CartCss />

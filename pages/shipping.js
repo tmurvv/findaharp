@@ -5,9 +5,9 @@ import Router from 'next/router';
 import axios from 'axios';
 // internal
 import ShippingCss from '../src/styles/onlinestore/Shipping.css';
-import StatusIndicator from '../src/components/onlinestore/StatusIndicator';
-import Subtotal from '../src/components/onlinestore/Subtotal';
-import OrderSummary from '../src/components/onlinestore/OrderSummary';
+import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
+import Subtotal from '../src/components/onlineStore/Subtotal';
+import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import PageTitle from '../src/components/PageTitle';
 import { UserContext } from '../src/contexts/UserContext';
 import { CartContext } from '../src/contexts/CartContext';
@@ -24,10 +24,11 @@ import {
     getTotal, 
     shipping,
     tax,
-    deletelocalCart
+    deletelocalCart,
+    getShippingArray
 } from '../src/utils/checkoutHelpers';
 import { 
-    getNumItems, getSubTotal
+    getNumItems, getSubTotal, getStores
 } from '../src/utils/storeHelpers';
 import { ConfirmationNumber } from '@material-ui/icons';
 
@@ -38,6 +39,7 @@ function Shipping() {
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { setStatus } = useContext(StatusContext);
     const [ change, setChange ]  = useState(false);
+    const [ newRoute, setNewRoute ]  = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
     function resetResults() {
@@ -45,25 +47,25 @@ function Shipping() {
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
     }
-    function handleClick(msg) {
+    function handleClick(msg, routeChange) {
         const resultText = document.querySelector('#loadingLoginText');
         resultText.innerText=msg;
+        routeChange==="false"?setNewRoute(false):setNewRoute(routeChange);
         dispatchResultInfo({type: 'OK'});
     }
     function loginGuest(evt) {
         // if (evt) evt.preventDefault();  
         resetResults();
-        // Router.push('/onlinestore');
+        newRoute&&Router.push(`${newRoute}`);
     }
-    
     async function handleSubmit(e) {
         e.preventDefault();
         // check cart
-        if (getNumItems(cart)===0) return handleClick("Cart is Empty");
+        if (getNumItems(cart)===0) return handleClick("Cart is Empty", "false");
         // check email
-        if (!user.shippingemail) return alert("Contact email required.");
+        if (!user.shippingemail) return handleClick("Contact email required.", "false");
         // for international shipping estimate
-        if (cartSubtotals.shipping===-1) {
+        if (user.shippingcountry!=='Canada'&&user.shippingcountry!=='United States'&&user.shippingcountry!=='Antarctica') {
             document.querySelector('#spinner').style.display="block";
             // prepare communication object
             const receipt = {
@@ -90,14 +92,14 @@ function Shipping() {
                     shippingemail: '',
                     shippingphone: '',
                     shippingaltphone: ''});
-                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.");
+                handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.", "/onlinestore");
             } catch (e) {
-                handleClick('Error sending email to Find a Harp, please check your connection and try again.')
-                deletelocalCart('fah-cart');
-                setCart([]);
-                setCartSubtotals([]);
-                setStatus('completed');
-                setUser({...user, RESET_SHIPPING_INFO});
+                handleClick('Error sending email to Find a Harp, please check your connection and try again.', "false")
+                // deletelocalCart('fah-cart');
+                // setCart([]);
+                // setCartSubtotals([]);
+                // setStatus('completed');
+                // setUser({...user, RESET_SHIPPING_INFO});
             }
             document.querySelector('#spinner').style.display="none";
         } else {
@@ -165,36 +167,36 @@ function Shipping() {
             default :
         }
     }
-    const handleStorePickup = () => {
-        if (String(user.shippingcountry).toUpperCase()==='PICKUP') {
-            const confirmCurrency = window.confirm("Continue to view currency in Canadian dollars?\n Select OK for Canadian dollars. Select cancel for US dollars.");
-            setUser({...user, shippingcountry: '', shippingregion: '', currency: confirmCurrency?"CAD":"USD"})
-            setCartSubtotals({...cartSubtotals, shipping: '', taxes: ''})
-        } else {
-            setCartSubtotals({...cartSubtotals, shipping: 0.00, taxes: tax(cart, "Alberta", currencyMultiplier)})
-            setUser({...user, shippingcountry: "Pickup", shippingregion: "Alberta", currency: "CAD"})
-        }
-    }
     function changeCountry(val) {
         if (val==='Canada') {
-            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.')
+            if (user.currency!=="CAD") handleClick('Currency is being changed to Canadian.', "false")
             setUser({...user, shippingcountry: val, currency: 'CAD', shippingregion: ''});
         } else {
-            if (val!=="Pickup") setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
+            setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
-        // selectCountry(val, user, setUser); 
-        setCartSubtotals({...cartSubtotals, 
-            shipping: shipping(val), 
-            taxes: 0
-        });
+        setCartSubtotals({...cartSubtotals, shipping, taxes: 0, shippingarray: getShippingArray(val, cart) });
+
+
+        // // selectCountry(val, user, setUser); 
+        // setCartSubtotals({...cartSubtotals, 
+        //     shipping: shipping(val, cart[0].store, cart), 
+        //     taxes: 0
+        // });
     }
     function changeRegion(val) {
-        selectRegion(val, user, setUser); 
-        if (user.shippingcountry==="Canada") {
-            setCartSubtotals({...cartSubtotals, taxes: tax(cart,val,currencyMultiplier)});
-        } else {
-            setCartSubtotals({...cartSubtotals, taxes: 0});
-        }
+        selectRegion(val, user, setUser);
+        let tempTax = 0;
+        let subCart = [];
+        getStores(cart).map(store => {
+            subCart = [];
+            cart.map(cartItem=>{
+                if (String(cartItem.store)===store) {
+                    subCart.push(cartItem);
+                }
+            });
+            tempTax = Number(tempTax) + Number(Number(tax(subCart,user.shippingcountry,val, store, currencyMultiplier)));
+        });
+        setCartSubtotals({...cartSubtotals, taxes: tempTax });
     }
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
@@ -208,19 +210,27 @@ function Shipping() {
     },[]);
     return (
         <div className='whiteWallPaper'>
-            <img id='spinner' style={{display: 'none', position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}src='/img/spinner.gif' alt='spinner' />
+            <img id='spinner' style={{
+                display: 'none', 
+                position: 'fixed', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%,-50%)'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
                 <Results 
                     resultInfo={resultInfo} 
                     loginGuest={loginGuest}
-                    resetResults={resetResults} 
-                    gotoRoute={'/'}
+                    resetResults={resetResults}
                 />
-                <div><Subtotal type="total"/></div>
+                <div><Subtotal type="subtotal"/></div>
                 <div style={{padding: '15px'}}>
                     <h3>Contact Information</h3>
-                    <div className="shippingemail" style={{marginBottom:'0px',}}>
+                    <div className="shippingemail" style={{marginBottom:'0px'}}>
                         <label style={{display:'block'}} htmlFor="shippingemail">Email</label>
                         <input 
                             type="email" 
@@ -235,19 +245,6 @@ function Shipping() {
                         Shipping updates and order receipt will be sent to this address.
                     </div>
                     <h3>Shipping Address</h3>
-                </div>
-                <div style={{display: 'flex', padding: '15px', marginTop:'-15px', marginBottom: '-15px'}}>
-                    <input 
-                        type='checkbox'
-                        name='shippingstorepickup'
-                        onChange={handleStorePickup}
-                        style={{marginLeft: '0', width: 'auto'}}
-                        checked={user.shippingcountry&&user.shippingcountry==='Pickup'}
-                    />
-                    <label style={{marginLeft: '5px'}} name='newsletter'>
-                        Pickup at store<br />
-                        <span style={{ fontFamily: 'Metropolis Extra Bold', fontWeight: 'bold', fontSize: '10px', fontStyle: 'italic'}}>LOCATION: CALGARY, CANADA</span>
-                    </label>
                 </div>
                <form 
                     method="get" 
@@ -380,7 +377,7 @@ function Shipping() {
                                         <RegionDropdown
                                             className="dropDown"
                                             style={{
-                                                padding:'15px 0',
+                                                padding:'15px 5px',
                                                 border:'2px solid black',
                                                 borderRadius:'3px',
                                                 marginTop:'2.5px',
@@ -633,7 +630,7 @@ function Shipping() {
                     
                 } 
                 </div>
-                <div style={{ flex: 4, backgroundColor: '#fff'}}>
+                <div className="shippingOrderSummary">
                     <h3 style={{padding: '15px', borderBottom: '1px solid #868686'}}>Order Summary</h3>
                     <OrderSummary />
                     <button 
@@ -653,7 +650,13 @@ function Shipping() {
                         className='submit-btn'
                         type='button'
                         style={{fontSize:'15px', fontWeight:'600', padding:'15px'}}
-                        onClick={()=>{if (user.shippingemail) {Router.push('/payment');}else{alert("Email required.");}}}
+                        onClick={()=>{
+                            if (user.shippingemail) {
+                                Router.push('/payment');
+                            } else {
+                                handleClick("Email required.", "false");
+                            }
+                        }}
                     >
                         Continue to Payment
                     </button>
