@@ -57,7 +57,6 @@ function Cart(props) {
     
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
-        console.log('cartuse', cartSubtotals)
     }, []);
     // display cart??
     useEffect(()=>{

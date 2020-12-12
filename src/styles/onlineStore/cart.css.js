@@ -33,15 +33,25 @@ function CartCss() {
                 // box-shadow: 0;
             }
         }
+        @media only screen and (max-width: 700px) {
+            .cartBody>h3 {
+                text-align: center;
+            }
+        }
         .subCart {
             border: 1px solid lightgrey;
-            padding: 30px;
+            padding: 20px;
             margin: 15px;
+        }
+        @media only screen and (max-width: 1000px) {
+            .subCart {
+                padding: 20px;
+            }
         }
         .itemsContainerWrapper {
             display: flex;
         }
-        @media only screen and (max-width: 950px) {
+        @media only screen and (max-width: 1000px) {
             .itemsContainerWrapper {
                 display: block;
             }
@@ -51,7 +61,7 @@ function CartCss() {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px 10px 0;
+            padding: 0;
             max-width: 650px;
         }
         .itemsContainer h4 {

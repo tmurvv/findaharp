@@ -98,7 +98,7 @@ function PartnerProspects() {
 									<td></td>
 									<td></td>
 									<td></td>
-									<td></td>
+									<td colspan='2'><textarea rows='4' value='Signed up Oct 15th, trail ends December 15th.'/></td>
 								</tr>
 								<tr>
 									<td></td>

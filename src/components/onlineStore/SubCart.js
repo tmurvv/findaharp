@@ -80,25 +80,25 @@ function SubCart(props) {
                     resetResults={resetResults} 
                 />
                 <div className="subCartContainer">  
-                    <div>
+                    {/* <div> */}
                     {/* <div id='cart'> */}
                         <div className='cartBody'>
                             <h3>Items Sold By {String(sellerInfo&&sellerInfo.productTitle)}, {String(sellerInfo&&sellerInfo.sellerCountry)}</h3>
                         </div>
                         <div className='itemsContainerWrapper'>
                             <div className='itemsContainer' style={{flex: '3'}}>
-                                <div>                       
+                                {/* <div>                        */}
                                 {/* <div className='items'>*/}
-                                    <ul>
+                                    {/* <ul> */}
                                         {props.subCart.length===0?
-                                            <li className='noItem' key={uuid()}>No Items in Cart</li>
+                                            <p className='noItem' key={uuid()}>No Items in Cart</p>
                                         :props.subCart.map(item => 
-                                            <li key={uuid()}>
+                                            <div key={uuid()}>
                                                 <CartItem item={item} setUpdate={setUpdate}/>
-                                            </li>
+                                            </div>
                                         )}
-                                    </ul>
-                                </div>
+                                    {/* </ul> */}
+                                {/* </div> */}
                             </div>
                             <div style={{flex: '2'}}>
                                 {user.shippingcountry
@@ -111,7 +111,7 @@ function SubCart(props) {
                                 </>:<h4>Select Country for Delivery Options</h4>}
                             </div>
                         </div>
-                    </div>           
+                    {/* </div>            */}
                 </div>
                 <CartCss />
                 <IndexCss />

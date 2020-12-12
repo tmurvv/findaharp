@@ -59,7 +59,6 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
     }
 
     const getStarted = () => {
-      console.log('here', repoList.length, repoArray.length, idx.current)
       setRepoList([...repoList, ...repoArray.slice(idx.current,idx.current+3)]);
       setHasMore(true);
       setIsLoading(false);
@@ -90,7 +89,6 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
       );
     
       const loadMore = page => {
-        console.log('hereMore', repoList.length, repoArray.length, idx.current)
         if (repoList.length===repoArray.length) return;
         setIsLoading(true);
         

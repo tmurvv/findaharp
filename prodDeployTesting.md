@@ -98,66 +98,66 @@ Double letter before 'y' means stays checked when resetting for ipad and android
     [] contact findaharp
 
 # store testing
-    [ ] desktop
-    [ ] phone
+    [xx] desktop
+    [] phone
     [] tablet
 
 ## main page
-    [x] check links in main menu (a double check)
-    [x] container layout
-    [x] view cart button
-    [x] carousel movement
-    [x] open modal via image
-    [x] string click on goes to strings
+    [] check links in main menu (a double check)
+    [] container layout
+    [] view cart button
+    [] carousel movement
+    [] open modal via image
+    [] string click on goes to strings
     
     ### search
-    [x] category
-    [x] search input
-    [x] ens
-    [x] level
-    [x] publication type
-    [x] combinations
-    [x] clear one filter
-    [x] clear all filters
+    [] category
+    [] search input
+    [] ens
+    [] level
+    [] publication type
+    [] combinations
+    [] clear one filter
+    [] clear all filters
 
     ###search results
-    [x] breadcrumbs
-    [x] add to cart button
-    [x] open modal via image
-    [x] open modal via more...
+    [] breadcrumbs
+    [] add to cart button
+    [] open modal via image
+    [] open modal via more...
 
     ### modal
-    [x] add to cart button works
-    [x] condition etc, headers appear only for music
-    [x] spacing looks good
-    [x] close button closes
+    [] add to cart button works
+    [] condition etc, headers appear only for music
+    [] spacing looks good
+    [] close button closes
 
     ### cart
-    [x] only 1 in stock appears for used
-    [x] add and sub item works
-    [x] remove item works
-    [x] country field fills in shipping correctly
-    [x] country field changes currency properly
-    [x] region field fills in taxes correctly
-    [x] back to shopping works
-    [x] continue to checkout works
+    [] only 1 in stock appears for used
+    [] add and sub item works
+    [] remove item works
+    [] country field fills in shipping correctly
+    [] country field changes currency properly
+    [] region field fills in taxes correctly
+    [] back to shopping works
+    [] continue to checkout works
 
     ### shipping
-    [x] all fields work
-    [x] back to cart works
-    [x] continue to payment button works
-    [x] continue to payment button works correctly for international
+    [] all fields work
+    [] back to cart works
+    [] continue to payment button works
+    [] continue to payment button works correctly for international
 
     ### payment
-    [x] enter us cc
-    [x] enter CAD cc
-    [x] paypal link
+    [] enter us cc
+    [] enter CAD cc
+    [] paypal link
     [] after Stripe payment goes to correct page
     [] after paypal link payment goes to correct page
 
     ### receipt page
-    [x] looks ok
-    [x] back to shopping works
-    [x] back to harps works
+    [] looks ok
+    [] back to shopping works
+    [] back to harps works
 
     ### receipt email

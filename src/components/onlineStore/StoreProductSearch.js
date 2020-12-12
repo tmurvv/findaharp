@@ -141,7 +141,6 @@ function StoreProductSearch(props) {
             searchInfo: getSearchInfo(newState, 'music')
         });
         setMenus(initialState);
-        console.log('handle level', level);
         props.handleChange("music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
     }
     async function handlePublicationTypeSelection(publicationtype) {

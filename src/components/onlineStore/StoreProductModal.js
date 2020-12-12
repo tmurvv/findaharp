@@ -67,7 +67,6 @@ function StoreProductModal(props) {
     async function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
-            console.log('target item', targetItem.newused)
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
                 alert('Only 1 in stock. Item already in cart.');
                 
@@ -98,15 +97,13 @@ function StoreProductModal(props) {
             cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
             const tempCartJson = await JSON.stringify(cartCopy);
             alert('Item added to cart.');
-            console.log('item added');
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
             handleClick(e,props.product,false);
             
         }
     }
-    function handleAdd(e) { 
-        console.log('imin handleadd')
+    function handleAdd(e) {
         updateCart(e);
         // e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
         // e.target.addEventListener("animationend", (e)=>updateCart(e))

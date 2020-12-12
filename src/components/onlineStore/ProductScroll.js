@@ -52,7 +52,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('REES')) return handleStringsChange("strings", "brands", "All Octaves", "Rees", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('STONEY END')) return handleStringsChange("strings", "brands", "All Octaves", "Stoney End", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('DELTA')) return handleStringsChange("strings", "brands", "All Octaves", "Delta", "All Types");
-        console.log('prod', product)
         // if (String(product.category).toLowerCase() === "strings") 
         // dispatch({type:'detail', product});
         setDetailProduct(product);
@@ -104,7 +103,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         triggerLazy();
     },[]);
     useEffect(() => {
-        // console.log('eff', getWindowSize())
         indexStart.current=0;
     },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
@@ -112,7 +110,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         let extraPlaces=filteredproductscontainer.slice(0,(Math.floor(size.width/270)));
         if (index+(Math.floor(size.width/270))>filteredproductscontainer.length) addPlaces=[...filteredproductscontainer, ...extraPlaces];
         addPlaces=addPlaces.slice(index, index+(Math.floor(size.width/270)));
-        console.log('indside', detailProduct&&detailProduct)
         return(
             <div data-test='component-ProductContainer' className='featuredproductContainer'>
                 <h3>{title}</h3>

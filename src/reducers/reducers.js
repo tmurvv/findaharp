@@ -34,7 +34,6 @@ export const productsReducer = (state, action) => {
         }
 }
 export const onlineOrderReducer = (state, action) => {
-    console.log(state)
     switch (action.type.toUpperCase()) {
         // case 'PICKUP':
         //     console.log('pickup')

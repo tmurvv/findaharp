@@ -104,8 +104,6 @@ export function getShippingArray(shippingcountry, cart) {
     // setCartSubtotals({...cartSubtotals, shipping: tempShip, taxes: 0, shippingarray: tempShipArray });
 }
 export function tax(cart, shippingcountry, shippingregion, store, currencyMultiplier) {
-    console.log('in tax', cart, shippingcountry, shippingregion, store, currencyMultiplier)
-    if (!shippingregion) return 0.00;
     switch(shippingcountry) {
         case "Canada": 
             if (store==='findaharp') {
@@ -138,16 +136,13 @@ export function getTotal(cart, user, currencyMultiplier) {
     const subTotal = getSubTotal(cart);
     const shippingArray = getShippingArray(user.shippingcountry, cart);
     let shippingTotal = 0;
-    shippingArray.length>0?shippingArray.map(arrayItem => {shippingTotal += arrayItem[1];console.log('inside', shippingTotal)}):0;
+    shippingArray.length>0?shippingArray.map(arrayItem => {shippingTotal += arrayItem[1];}):0;
     if (shippingTotal<0) shippingTotal=0;
-    // console.log('shipingtot', shippingTotal)
     if (!subTotal || subTotal===0) return 0.00;
     if (!user.currency) return subTotal;
     if (user.currency==="CAD") {
-        // console.log(Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));
         return (Number(subTotal)*currencyMultiplier + shippingTotal + Number(tax(cart,user.shippingcountry,user.shippingregion,currencyMultiplier)));
     } else {
-        // console.log(Number(subTotal) + shippingTotal);
         return (Number(subTotal) + shippingTotal);
     }
 }

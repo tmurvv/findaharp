@@ -150,7 +150,6 @@ export const getStoreSearchInfo = (allState, type) => {
             // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
     }
-    console.log(searchInfo, '-end')
     if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
     return `Showing Strings: ${searchInfo}`;
 }

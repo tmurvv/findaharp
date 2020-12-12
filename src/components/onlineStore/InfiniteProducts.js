@@ -56,8 +56,6 @@ export default function InfiniteProducts({searchResults}) {
   const handleInitial = useCallback(
     async page => {
       const data = await fetchData(page);
-      // const { status, data } = newProducts;
-      console.log(data);
       setProducts(products => [...products, ...data]);
     },
     [fetchData]

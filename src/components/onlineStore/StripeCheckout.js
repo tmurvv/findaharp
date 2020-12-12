@@ -80,7 +80,6 @@ export default function StripeCheckout(props) {
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
-            console.log('stripe', cart, user,currencyMultiplier)
             handleClick('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase. \n\nYou may have reached this message by pressing your browser back-button on the PayPal page before paying. If so, you have not been charged for your order, but your cart was lost. We are working to resolve this issue."', 'cart');
             // Router.push('/cart');
         }

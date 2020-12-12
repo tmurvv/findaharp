@@ -72,7 +72,6 @@ function GlobalStoreSearch(props) {
         setResetSearch(false);
         setIdx(0);
         setHasMore(true);
-        console.log('intop',type, menu, value1, value2, value3)
         let productListCopy=[...props.filteredProducts];
         let preSearchProductList=[]
         let finalProductList=[];
@@ -197,7 +196,7 @@ function GlobalStoreSearch(props) {
             let searchTerm;
             
             // add clear searches button
-            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"} // BREAKING
+            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
             if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
                 categoryProductList.map(product=> {

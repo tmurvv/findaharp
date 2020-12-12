@@ -191,10 +191,8 @@ function Shipping() {
             subCart = [];
             cart.map(cartItem=>{
                 if (String(cartItem.store)===store) {
-                    console.log('YES')
                     subCart.push(cartItem);
                 }
-                // console.log('sub', subCart.length)
             });
             tempTax = Number(tempTax) + Number(Number(tax(subCart,user.shippingcountry,val, store, currencyMultiplier)));
         });
