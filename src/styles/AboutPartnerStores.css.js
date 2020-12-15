@@ -202,11 +202,6 @@
             .longDesc {
                 
             }
-            @media only screen and (max-width: 550px) {
-                .longDesc {
-                    text-align: center;
-                }         
-            }
             .marginTop {
                 margin-top: 10px;
             }

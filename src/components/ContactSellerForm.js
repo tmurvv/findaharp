@@ -143,7 +143,27 @@ function ContactSellerForm(props) {
                     </span></p><p>{removeDashOE(product.sellerName)}</p>
                 </div>
                 
-                <form className='detailText'>     
+                <form className='detailText'> 
+                <div className='inputGroup'>
+                        <h2 name='contactmaker' style={{width: '100%', textAlign: 'center'}}>Inquiry for {userContact.contactmaker}, {userContact.contactmodel} </h2>
+                        <input
+                            id={uuid()}
+                            name='contactmaker'
+                            value={userContact.contactmaker}
+                            disabled
+                            hidden
+                        />
+                    </div>         
+                    <div className='inputGroup'>
+                        <label className="label" name='contactmodel'></label>
+                        <input
+                            id={uuid()}
+                            name='contactmodel'
+                            value={userContact.contactmodel}
+                            disabled
+                            hidden
+                        />
+                    </div>    
                     <div className='inputGroup'>
                         <label className="label" className="label" name='firstname'>First Name </label>
                         <input
@@ -171,24 +191,6 @@ function ContactSellerForm(props) {
                             value={userContact.contactemail}
                             onChange={handleChange}
                             required
-                        />
-                    </div>         
-                    <div className='inputGroup'>
-                        <label className="label" name='contactmaker'>Maker </label>
-                        <input
-                            id={uuid()}
-                            name='contactmaker'
-                            value={userContact.contactmaker}
-                            onChange={handleChange}
-                        />
-                    </div>         
-                    <div className='inputGroup'>
-                        <label className="label" name='contactmodel'>Model </label>
-                        <input
-                            id={uuid()}
-                            name='contactmodel'
-                            value={userContact.contactmodel}
-                            onChange={handleChange}
                         />
                     </div>         
                     <div className='inputGroup'>

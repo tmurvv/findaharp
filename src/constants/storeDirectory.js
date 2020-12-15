@@ -194,6 +194,62 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'http://harpandheart.com',
         sellerWebsiteText: 'harpandheart.com',
         sellerEmail: 'harpandheart@yahoo.com'
+    },
+    {
+        id: 'chiaraarpa',
+        sellerCountry: "USA",
+        sellerRegion: "San Diego Area",
+        productTitle: "Chiara Arpa",
+        productPrice: "",
+        productLongDesc: `
+            <div>
+                <p><span>Chiara Arpa</span> Owner Chiara Capobianco was born in Milano (Italy) in 1980; she is a Music Graduate in Harp (10 year course) at Conservatorio “G. Verdi” of Milano (Italy). University graduate in Musicology (3 year course) at Scuola di Paleografia e Filologia Musicale di Cremona (Università degli Studi di Pavia-Italy). She started playing with many different Orchestras (Opera and Symphonic) touring all over Europe since she was fifteen years old.</p>
+                <br />
+                <p>She has performed at many concerts and events with both classic and Irish harp as solo harpist, alongside other musicians. She studied different types of music, which have given her a varied repertoire ranging from classical, medieval, renaissance, Irish, popular and contemporary music.</p>
+                <br />
+                <p>In 2003 she moved to London UK where she performed in several renowned venues. Since September 2004 she has been playing on the prestigious Cunard ships Queen Mary 2, Queen Elizabeth 2 and Queen Victoria travelling all over the world visiting all the continents.</p>
+                <br />
+                <p>At the moment she is enjoyng a free-lance career as solo harpist that takes her to perform all over the globe. She has lived and performed in Europe, Middle East, Asia, South America, & around the world (on luxury cruise ships).</p>
+                <br />
+                <p>She is now based in the USA.</p>
+            </div>
+        `,
+        productMaker: "Chiara Arpa",
+        productImageUrl: "/img/storePartners/chiara_arpa_logo.jpg",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'https://chiaracapobianco.com',
+        sellerWebsiteText: 'chiaracapobianco.com',
+        sellerEmail: 'chiara_arpa@yahoo.it'
+    },
+    {
+        id: 'blevinsharps',
+        sellerCountry: "USA",
+        sellerRegion: "Western Colorado",
+        productTitle: "Blevins Harps",
+        productPrice: "",
+        productLongDesc: `
+            <div>
+                <p>Welcome to <span>Blevins Harps</span> where our mission is to build quality instruments, one at a time, for our amazing customers. Because picking out a harp is personal, we endeavour to help each customer select just the right harp.</p>
+                <br />
+                <p>Blevins Harps began in 1992 when Dwight Blevins left an audio engineering career in radio and TV broadcasting to set up a workshop in Western Colorado. Dwight not only loved the sound, but also the visual artistic form of the harp. This can be seen in every one of Dwight’s designs. He was willing to explore different shapes and wood types to bring out the best possible sound and visual beauty of each harp.   </p>
+                <br />
+                <p>Since Blevins Harp's humble beginning, over 3200 harps have been lovingly built and shipped worldwide.</p>
+                <br />
+                <p>Soon after Dwight’s retirement in 2018, we providentially found Dwight and purchased the Blevins brand. Dale and Jamin, a father and son team, previously worked as carpenters for many years and share a passion for woodworking. Laurie studied the harp at the University of Northern Colorado under Kathy Bundock Moore and our fourteen year old daughter also plays the harp. This was a great fit for our family and we so much enjoyed working with Dwight and Cindy in the transition.  </p>
+                <br />
+                <p>We especially love the customer centered focus of Blevins Harps. and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p>
+                <br />
+                <p>All The Best, Dale, Laurie and Jamin Wright</p>
+                <br />
+                
+            </div>
+        `,
+        productMaker: "Chiara Arpa",
+        productImageUrl: "/img/storePartners/blevins_harps_logo_brightness.png",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'https://blevinsharps.com',
+        sellerWebsiteText: 'blevinsharps.com',
+        sellerEmail: 'blevinsharps@gmail.com'
     }
     // {
     //     id: 'theharpplace',
