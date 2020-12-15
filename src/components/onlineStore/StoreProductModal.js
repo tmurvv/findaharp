@@ -133,22 +133,24 @@ function StoreProductModal(props) {
                 <div className={`storedetailImg`}><img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full.png'} alt={title} /></div>
                 <div className={`storedetailText`}>
                     <div>
-                        <p>{description}</p> <br/>
+                    <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: description}} />
+                        <br/>
                         <div style={category==='music'?{display: 'block'}:{display: 'none'}}>
-                            <span>Level:</span> {level}<br/>
+                            <span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}<br/>
+                            <span>Level:</span> {level?level:'unknown'}<br/>
                             <span>Harp Type:</span> {harptype}<br/>
-                            <span>Condition (1-10):</span> {condition}<br/>
-                            <span>Notes:</span> 
-                            {user&&user.currency==="USD"?    
+                            {newused&&newused==='used'?<span>Condition (1-10):</span>:''} {condition}<br/>
+                            {newused&&newused==='used'?<span>Notes:</span>:''} {notes&&notes}
+                            {/* {newused&&newused==='used'&&user&&user.currency==="USD"?    
                             ` ${newprice?`Find new from: $${parseNum(newprice).toFixed(2)} / `:''}${notes}`
                             :` ${newprice?`Find new from: $${parseNum(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
-                            }  
+                            }   */}
                         </div>
                     </div>
                     <div>
                         {user&&user.currency==="USD"?    
-                        <div className="storeproduct__price">${parseNum(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                        :<div className="storeproduct__price">${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                        <div className="storeproduct__price">${parseNum(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD ({newused})</span></div>
+                        :<div className="storeproduct__price">${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD ({newused})</span></div>
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                             <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>

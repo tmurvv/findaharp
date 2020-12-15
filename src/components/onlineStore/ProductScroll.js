@@ -148,7 +148,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
             {/* {allstate.location!=='ltActivate'
                 ? */}
                 <>
-                    <h3 style={{textAlign: 'center', marginBlockEnd: 0, width: '60%', margin: 'auto'}}>Not Found.<br />Strings, Accessories, Gifts and a much wider selection of Music coming in November.</h3>
+                    <h3 style={{textAlign: 'center', marginBlockEnd: 0, width: '60%', margin: 'auto'}}>Not Found.<br />Please 'clear all' searches to see other items.</h3>
                     <div data-test='component-ProductContainer' className='featurednotFoundContainer'>
                         <img src='./img/not_found.png' alt='not found, humourous harp with broken strings'/>
                     </div>

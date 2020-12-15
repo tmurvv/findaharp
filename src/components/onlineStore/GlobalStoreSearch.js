@@ -418,8 +418,8 @@ function GlobalStoreSearch(props) {
             {searchResultsText==='entry'&&
             <>
                 <ProductScroll filteredproductscontainer={props.featuredProducts} title="Holiday Features and gifts"/>
-                <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
                 <ProductScroll handleStringsChange={handleChange} filteredproductscontainer={props.strings} title="Browse String Brands"/>
+                <ProductScroll filteredproductscontainer={props.music} title="Browse Music Titles"/>
             </>
             }
             <StoreProductSearchCss />

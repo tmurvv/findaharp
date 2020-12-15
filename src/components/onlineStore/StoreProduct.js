@@ -133,15 +133,16 @@ const StoreProduct = (props) => {
                 </LazyLoad>
             </div>
             <div className="storeproduct__title" >
-                <div style={{fontSize: '18px'}}>{props.productdetail.title}</div>
-                <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:"_"}</div>
+                <div style={{fontSize: '16px'}}>{props.productdetail.title}</div>
+                <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:""}</div>
             </div>
             {/* <p className="storeproduct__description">{props.productdetail.description}</p> */}
             {props.productdetail.category==='music'
             ?<div className="storeproductDetails">
-                <div><span>Level:</span> {props.productdetail.level}</div>
+                <div><span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}</div>
+                {props.productdetail.level?<div><span>Level:</span> {props.productdetail.level}</div>:''}
                 <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
-                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition} (used)</div>:''}
+                {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition}</div>:''}
                 <button 
                     onClick={()=>handleOpenStoreModal()} 
                     classNames="btn blueFontButton" 
@@ -149,23 +150,36 @@ const StoreProduct = (props) => {
                         color: '#6A75AA', 
                         fontStyle:'italic', 
                         cursor: 'pointer',
-                        backgroundColor: 'white',
+                        backgroundColor: 'transparent',
                         outline: 'none',
                         textDecoration: 'none',
                         border: 'none',
                         fontSize: '14px',
                         textAlign:'left',
                         verticalAlign: 'text-top',
-                        letterSpacing: '2px'
+                        letterSpacing: '2px',
+                        zIndex: '2000'
                     }}
                 >more...</button>
             </div>
-            :<>
-                <div style={{textAlign: 'left', minHeight: '200px'}}>New Item - {String(props.productdetail.description).substr(0,70)} <span onClick={()=>handleOpenStoreModal()} style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue"}}>more...</span></div></>}
-                <div className="storeproduct__price-button-container">
+            :<>  
+                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '4000'}}>
+                    <div 
+                        style={{fontSize: '14px', height: 'fit-content', maxHeight: '77px', overflow: 'hidden'}} 
+                        className='longDesc productSmallDisplay-LongDesc' 
+                        dangerouslySetInnerHTML={{__html: props.productdetail.description}} 
+                    />
+                    <span 
+                        onClick={()=>handleOpenStoreModal()} 
+                            style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '4000'}}
+                    >more...</span>
+                </div>
+            </>
+            }
+            <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
-                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>{props.productdetail.newused.toUpperCase()}</span></div>
+                :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>({props.productdetail.newused.toUpperCase()})</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                     <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>

@@ -121,8 +121,8 @@ const FeaturedProduct = (props) => {
                 </div>
                     <div className="featuredproduct__price-button-container">
                     {user&&user.currency==="USD"?    
-                        <div className="featuredproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span></div>
-                        :<div className="featuredproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span></div>
+                        <div className="featuredproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic', marginLeft: '0'}}>USD</span> ({props.productdetail.newused})</div>
+                        :<div className="featuredproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic', marginLeft: '0'}}>CAD</span> ({props.productdetail.newused})</div>
                     }               
                 </div>        
             <FeaturedProductCss />

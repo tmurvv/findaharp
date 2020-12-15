@@ -131,6 +131,7 @@ export function getFilteredStoreProducts(allProducts, allState, user, rate) {
     return filteredProducts;
 }
 export const getStoreSearchInfo = (allState, type) => {
+    console.log('breadcrumbs', allState)
     // shortcut if no filters selected
     // if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
     // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
@@ -142,7 +143,7 @@ export const getStoreSearchInfo = (allState, type) => {
             // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
         if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
-        return `Showing Music: ${searchInfo}`;
+        return `Showing ${allState.category}: ${searchInfo}`;
     }   
     if (type==='strings') {
         [allState.octaves, allState.brands, allState.types].map(menuItem => {
@@ -151,5 +152,5 @@ export const getStoreSearchInfo = (allState, type) => {
         });
     }
     if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
-    return `Showing Strings: ${searchInfo}`;
+    return `Showing ${allState.category}: ${searchInfo}`;
 }

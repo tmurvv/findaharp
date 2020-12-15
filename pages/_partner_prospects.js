@@ -87,6 +87,7 @@ function PartnerProspects() {
 									<td></td>
 									<td></td>
 									<td>August 16th, 2020</td>
+									<td>Trial over January 1st</td>
 								</tr>
 								<tr>
 									<td></td>

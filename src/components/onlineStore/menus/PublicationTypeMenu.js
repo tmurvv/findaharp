@@ -65,13 +65,13 @@ export default function PublicationTypeMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Instructional Books'
-                >Instructional Books</li>
+                    name='Books'
+                >Books</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Scores'
-                >Score</li>
+                    name='Instructional Books'
+                >Instructional Books</li>
             </ul>     
         </div>
     );
