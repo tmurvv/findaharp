@@ -135,8 +135,8 @@ function StoreProductModal(props) {
                     <div>
                     <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: description}} />
                         <br/>
+                        
                         <div style={category==='music'?{display: 'block'}:{display: 'none'}}>
-                            <span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}<br/>
                             <span>Level:</span> {level?level:'unknown'}<br/>
                             <span>Harp Type:</span> {harptype}<br/>
                             {newused&&newused==='used'?<span>Condition (1-10):</span>:''} {condition}<br/>
@@ -146,11 +146,12 @@ function StoreProductModal(props) {
                             :` ${newprice?`Find new from: $${parseNum(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
                             }   */}
                         </div>
+                        <span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}<br/>
                     </div>
                     <div>
                         {user&&user.currency==="USD"?    
-                        <div className="storeproduct__price">${parseNum(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD ({newused})</span></div>
-                        :<div className="storeproduct__price">${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD ({newused})</span></div>
+                        <div className="storeproduct__price" style={{textAlign: 'center'}}>${parseNum(price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD ({newused})</span></div>
+                        :<div className="storeproduct__price" style={{textAlign: 'center'}}>${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD ({newused})</span></div>
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
                             <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>

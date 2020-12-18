@@ -157,45 +157,6 @@ export const STORE_PARTNERS = [
         sellerEmail: 'info@vixenharps.com'
     },
     {
-        id: 'harpandheart',
-        sellerCountry: "USA",
-        sellerRegion: "Philadelphia Area",
-        productTitle: "Harp and Heart",
-        productPrice: "",
-        productLongDesc: `
-            <div>
-                <p><span>Harp and Heart</span>, Nancy Beal, owner
-                <br />
-                <br />-Heal your body, mind, and spirit...
-                <br />-Experience deep relaxation...
-                <br />-Strengthen your immune  and nervous systems through the 'relaxation response'...
-                <br />-Deepen your yoga and meditation practice...
-                <br />-Increase your brain's ability to focus and concentrate...
-                <br />-Relieve stress...
-                <br />-Achieve deeper, more refreshing, more rejuvenating sleep...
-                <br />-Increase your mental, emotional, spiritual and artistic creativity...
-                <br />-Enjoy a daily sense of well being and enhanced energy...
-                <br />Holistic healing with Nancy Beal
-                <br />
-                <br /><span>Clients say . . .</span>
-                <br />
-                <br />"Various chakras felt like they were being opened and cleared."
-                <br />
-                <br />"This is a wonderful way to relax and feel the tension being released from my body. I hope to have the opportunity for future classes."
-                <br />
-                <br />"In a world where we never stop to relax, how fundamentally blissful to relax at a very deep level. There were moments of joy, bliss, and oneness with all that is."
-                <br />
-                 <br />"I wanted to thank you so much for the wonderful treatment you gave to me. It felt wonderful to be  spoiled like that on your table. You were so generous with your time, knowledge and your gifts. I  felt relaxed for a long time afterward, which was nice especially since I have been so stressed out lately."
-            </div>
-        `,
-        productMaker: "Harp and Heart",
-        productImageUrl: "/img/storePartners/harpandheart_logo.png",
-        productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'http://harpandheart.com',
-        sellerWebsiteText: 'harpandheart.com',
-        sellerEmail: 'harpandheart@yahoo.com'
-    },
-    {
         id: 'chiaraarpa',
         sellerCountry: "USA",
         sellerRegion: "San Diego Area",
