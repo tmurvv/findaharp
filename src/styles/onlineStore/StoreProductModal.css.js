@@ -11,7 +11,7 @@ function StoreProductModalCSS() {
                 top: 50vh;
                 left: 50vw;
                 transform: translate(-50%, -50%);
-                z-index: 3000;
+                z-index: 7000;
                 max-height: calc(100vh - 100px);
                 max-width: 850px;
                 overflow-y: auto;
@@ -137,9 +137,10 @@ function StoreProductModalCSS() {
                 font-size: 14px;
             }
             .storelongDesc {
-                max-height: 212px;
+                max-height: 120px;
                 text-align: left;
                 overflow-y: auto;
+                margin-bottom:15px;
             }
             .storeblueFontButton {
                 background-color: 'white';

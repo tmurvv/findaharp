@@ -29,6 +29,11 @@ export default function OctavesMenu(props) {
                 >All Octaves</li>
                 <li 
                     onClick={handleClose} 
+                    key={uuid()}
+                    name='Set'
+                >Set</li>
+                <li 
+                    onClick={handleClose} 
                     // key={uuid()}
                     name='1st Octave'
                 >1st Octave</li>      
@@ -85,9 +90,9 @@ export default function OctavesMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Wire Sets'
+                    name='Wire Set'
                     disabled
-                >Wire Sets <span style={{fontSize: '14px', fontStyle: 'italic',color:'#333'}}>(coming soon)</span></li>         
+                >Wire Set</li>         
             </ul>
         </div>
     );

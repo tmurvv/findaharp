@@ -69,7 +69,7 @@ function StoreProductSearchStrings(props) {
         props.setTypeOfSearch("strings");
         const newState = {...props.allState, 
             octaves: octaves,
-            productType: 'all',
+            productType: 'all'
         }
         props.setOctavesSearch(octaves);
         props.handleChange('strings', 'octaves', octaves, props.allState.brands, props.allState.types);
@@ -83,29 +83,31 @@ function StoreProductSearchStrings(props) {
     function handleBrandsSelection(brands) {
         props.setTypeOfSearch("strings");
         const newState = {...props.allState, 
-            brands
+            brands,
+            productType: 'all',
         }
+        props.setBrandsSearch(brands);
+        props.handleChange('strings', 'brands', props.allState.octaves, brands, props.allState.types);
         props.setAllState({...props.allState, 
             brands,
+            productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
-        setMenus(initialState);
-        props.handleChange('strings', 'brands', props.allState.octaves, brands, props.allState.types);
-        props.setBrandsSearch(brands);
+        setMenus(initialState);      
     }
-    async function handleTypesSelection(types) {
+    function handleTypesSelection(types) {
         props.setTypeOfSearch("strings");
         const newState = {...props.allState, 
             types,
-            productType: 'all',
+            productType: 'all'
         }
         props.setTypesSearch(types);
+        props.handleChange('strings', 'types', props.allState.octaves, props.allState.brands, types);
         props.setAllState({...props.allState, 
             types,
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
-        // props.handleChange('strings', 'types', props.allState.octaves, props.allState.brands, types);
         setMenus(initialState);
     }
     function handleClick(e) {
@@ -291,8 +293,8 @@ function StoreProductSearchStrings(props) {
                             id="selectedAll Types" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.types}
-                            onClick={()=>alert('String "Types" menu under construction. Check back soon!')}
-                            // onClick={()=>handleClick({target: {name: 'types'}})}
+                            // onClick={()=>alert('String "Types" menu under construction. Check back soon!')}
+                            onClick={()=>handleClick({target: {name: 'types'}})}
                             style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.types}

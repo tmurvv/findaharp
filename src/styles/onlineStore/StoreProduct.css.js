@@ -67,7 +67,7 @@ function StoreProductCss() {
                 box-shadow: 3px 5px 3px lightgrey;
             }
             .storeproduct__price {
-                margin: 25px 0 10px;
+                margin: 0 0 10px;
                 width: 100%;
                 text-align: center;
                 font-weight: 600;

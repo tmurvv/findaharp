@@ -4,7 +4,6 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 export default function TypesMenu(props) {
-    
     const handleClose = (evt) => {
         if (evt.target.value === 'All Types') return;
         props.handleTypesChange(evt.target.getAttribute('name')); 
@@ -20,8 +19,8 @@ export default function TypesMenu(props) {
                 className="menuButton" 
                 name='types' 
                 onClick={(e)=>{
-                    alert('String "Types" menu under construction. Check back soon!')
-                    // props.handleclick(e); 
+                    // alert('String "Types" menu under construction. Check back soon!')
+                    props.handleclick(e); 
                 }}
                 style={{color: '#000000'}}
             >
@@ -42,6 +41,16 @@ export default function TypesMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
+                    name='New'
+                >New Only</li>    
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()}
+                    name='Used'
+                >Used Only</li>    
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()}
                     name='Gut'
                 >Gut Strings</li>    
                 <li 
@@ -53,7 +62,17 @@ export default function TypesMenu(props) {
                     onClick={handleClose} 
                     key={uuid()}
                     name='Wire'
-                >Wire Strings</li>      
+                >Wire Strings</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Bronze Wire Monofilament'
+                >Bronze Wire Monofilament</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Nylon Wire Monofilament'
+                >Nylon Wire Monofilament</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -64,26 +83,6 @@ export default function TypesMenu(props) {
                     key={uuid()} 
                     name='Lever'
                 >Strings for Lever Harps</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Dusty Strings'
-                >Dusty Strings Harp Strings</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Wound'
-                >Wound Harp Strings</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Bronze'
-                >Bronze Rolls for Wire Harps</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Copper'
-                >Copper Rolls for Wire Harps</li>
             </ul>     
         </div>
     );

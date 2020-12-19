@@ -32,12 +32,7 @@ export default function BrandsMenu(props) {
                     onClick={handleClose} 
                     key={uuid()} 
                     name='All Brands'
-                >All Brands</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='COMPLETE SET'
-                >COMPLETE SET</li>      
+                >All Brands</li>      
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
@@ -93,11 +88,6 @@ export default function BrandsMenu(props) {
                     key={uuid()} 
                     name='Artist Nylon'
                 >Artist Nylon</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Bronze Wire'
-                >Bronze Wire Monofilament</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 

@@ -133,14 +133,15 @@ function StoreProductModal(props) {
                 <div className={`storedetailImg`}><img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full.png'} alt={title} /></div>
                 <div className={`storedetailText`}>
                     <div>
-                    <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: description}} />
-                        <br/>
-                        
+                    <div className='storelongDesc' dangerouslySetInnerHTML={{__html: description}} />
+                    {/* <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: description}} /> */}
                         <div style={category==='music'?{display: 'block'}:{display: 'none'}}>
-                            <span>Level:</span> {level?level:'unknown'}<br/>
-                            <span>Harp Type:</span> {harptype}<br/>
-                            {newused&&newused==='used'?<span>Condition (1-10):</span>:''} {condition}<br/>
-                            {newused&&newused==='used'?<span>Notes:</span>:''} {notes&&notes}
+                            {level&&level!==''?<span>Level: </span>:''}{level&&level!==''?level:''}{level&&level!==''?<br />:''}
+                            {harptype&&harptype!==''?<span>Harp Type: </span>:''}{harptype&&harptype!==''?harptype:''}{harptype&&harptype!==''?<br />:''}
+                            {condition&&condition!==''?<span>Condition: </span>:''}{condition&&condition!==''?condition:''}{condition&&condition!==''?<br />:''}
+                            {notes&&notes!==''?<span>Harp Type: </span>:''}{notes&&notes!==''?notes:''}{notes&&notes!==''?<br />:''}
+                            {/* {newused&&newused==='used'?<span>Condition (1-10):</span>:''} {condition}<br/> */}
+                            {/* {newused&&newused==='used'?<span>Notes:</span>:''} {notes&&notes} */}
                             {/* {newused&&newused==='used'&&user&&user.currency==="USD"?    
                             ` ${newprice?`Find new from: $${parseNum(newprice).toFixed(2)} / `:''}${notes}`
                             :` ${newprice?`Find new from: $${parseNum(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`

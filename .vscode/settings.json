@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Solarized Light",
+    "workbench.colorTheme": "Gruvbox Light (Soft)",
     "workbench.colorCustomizations" : {
         "terminal.ansiBrightWhite": "#aaa38d" 
     }

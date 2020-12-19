@@ -68,6 +68,7 @@ function GlobalStoreSearch(props) {
  
     // filter by category
     function handleChange(type, menu, value1, value2, value3) {
+        console.log('params', type, menu, value1, value2, value3)
         setClearMenus(false);
         setResetSearch(false);
         setIdx(0);
@@ -82,6 +83,10 @@ function GlobalStoreSearch(props) {
 
         if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
             categoryFilter = document.querySelector('#categoryfilter').value;
+            if (categoryFilter.toUpperCase()==="DIGITAL DOWNLOADS") {
+                // document.querySelector('#categoryfilter').value= 'All';
+                alert("Digital Downloads under construction. Expected by February 2021."); // NOT YET IMPLEMENTED
+            }
             if (categoryFilter.toUpperCase()==="STRINGS") type='strings';
             if (categoryFilter.toUpperCase()==="MUSIC") type='music';
         } else if (type==='category') {
@@ -201,6 +206,7 @@ function GlobalStoreSearch(props) {
             if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
                 categoryProductList.map(product=> {
                     if (String(product.title).toUpperCase().includes(value1.toUpperCase())) octavesProductList.push(product);
+                    product.subcategories.map(cat=>cat.toUpperCase()===value1.toUpperCase()&&octavesProductList.push(product));
                 })
             } else {
                 octavesProductList=[...categoryProductList];
@@ -219,9 +225,14 @@ function GlobalStoreSearch(props) {
             finalProductList=[...brandsProductList];
 
             // check string types
-            if (value3&&value3.toUpperCase()!=="ALL TYPES") {
+            if (value3&&value3!==undefined&&value3.toUpperCase()!=="ALL TYPES") {
                 brandsProductList.map(product=> {
-                    if (product.title.toUpperCase().includes(value3.toUpperCase())) {
+                    if (value3.toUpperCase()==='NEW' || value3.toUpperCase()==='USED') {
+                        console.log('here', value3.toUpperCase(), product.newused.toUpperCase())
+                        if (product.newused.toUpperCase()==='NEW'&&value3.toUpperCase()==='NEW') typesProductList.push(product); 
+                        if (product.newused.toUpperCase()==='USED'&&value3.toUpperCase()==='USED') typesProductList.push(product); 
+                    }
+                    else if (String(product.title).toUpperCase().includes(value3.toUpperCase())) {
                         typesProductList.push(product);
                     } else if (product.subcategories) {
                         product.subcategories.map(subcategory=>{
@@ -251,9 +262,9 @@ function GlobalStoreSearch(props) {
             searchProductList=[...preSearchProductList]
         }
         finalProductList=[...searchProductList];
-        // update menu text
-        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
+        // update menu text -- not for search term
+        // if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
+        // if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
         finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
         setTypeOfSearch(type);
 

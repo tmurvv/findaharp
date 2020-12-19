@@ -131,7 +131,6 @@ export function getFilteredStoreProducts(allProducts, allState, user, rate) {
     return filteredProducts;
 }
 export const getStoreSearchInfo = (allState, type) => {
-    console.log('breadcrumbs', allState)
     // shortcut if no filters selected
     // if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
     // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
