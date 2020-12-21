@@ -121,7 +121,7 @@ const StoreProduct = (props) => {
                 >
                     <img 
                         id={props.productdetail.id} 
-                        src={props.productdetail.image&&props.productdetail.image!==undefined&&props.productdetail.image!==''?props.productdetail.image:'/img/golden_harp_full.png'} 
+                        src={props.productdetail.image&&props.productdetail.image!==undefined&&props.productdetail.image!==''?props.productdetail.image:'/img/golden_harp_full_grey_not_found.png'} 
                         onError={(evt) => {
                             evt.target.src='./img/not_found.png'; 
                             // evt.target.style.height='30%';

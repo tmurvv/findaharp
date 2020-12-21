@@ -1,7 +1,9 @@
 import uuid from 'react-uuid';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import SalesTax from 'sales-tax-cad';
+import parseNum from 'parse-num';
 import { SHIPPING_CALCULATIONS } from '../constants/constants';
+import { STORE_PARTNERS } from '../constants/storeDirectory';
 import { 
     getSubTotal, 
     getStores, 
@@ -204,14 +206,45 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMult
     const monthName = months[today.getMonth()];
     const todayYear = today.getFullYear();
     // create html for cart items
+    
     let itemHtml = '';
-    cart.map(item => itemHtml = itemHtml + `
+    cart.map(item => {itemHtml = itemHtml + `
                 <tr>
                     <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">${item.product_quantity}</td>
                     <td colSpan="8" style="padding: 5px 7px; border: 1px solid #868686">${item.title}</td>
-                    <td style="text-align: center; padding: 5px 7px; border: 1px solid #868686">$${(item.price*item.product_quantity*(user.currency==='USD'?1:currencyMultiplier)).toFixed(2)}</td>
+                    <td style="text-align: right; padding: 5px 7px; border: 1px solid #868686">$${(parseNum(item.price)*item.product_quantity*(user.currency==='USD'?1:currencyMultiplier)).toFixed(2)}</td>
                 </tr>
-   `);
+   `});
+   let shipping = '';
+   if (getNumItems(cart)>0&&cartSubtotals.shippingarray&&cartSubtotals.shippingarray.length>0) {
+            cartSubtotals.shippingarray.map(shippingItem => {
+                shipping=shipping + `
+                    <div style='display:flex; justify-content: space-between;background-color: #fff; margin: 5px;padding:15px;'>    
+                        <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">
+                            Shipping: <span style="font-size:12px;font-style:italic;">FROM ${(STORE_PARTNERS.filter(partner => partner.id===shippingItem[0])[0].productTitle).toUpperCase()}</span>
+                        </div>
+                        <div style="float:right;text-align:right;font-size:18px;font-weight:600;">
+                            $${shippingItem[1]===-1
+                                ?'International'
+                                :!isNaN(Number(shippingItem[1]))
+                                    ?(Number(shippingItem[1])).toFixed(2)
+                                    :'0.00'
+                            }
+                        </div>
+                    </div>
+                `
+            });
+    } else {
+        shipping = `
+            <div style='display:flex; justify-content: space-between;background-color: #fff; margin: 5px;padding:15px;'>    
+                <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</div>
+                <div style="text-align:right;font-size:18px;font-weight:600;">
+                    $0.00
+                </div>
+            </div>
+        `
+    }
+    
    // return html for entire order
     return `
         <html>
@@ -249,18 +282,17 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMult
                         <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Products Subtotal: </div>
                         <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(subTotal).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText}</span></div>
                     </div>
-                    <div style='display:flex; justify-content: space-between;background-color: #fff; margin: 5px;padding:15px;'>
-                        <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</div>
-                        <div style="text-align:right; font-size:18px;font-weight:600;">$${Number(cartSubtotals.shipping).toFixed(2)}</div>
+                    <div>
+                        ${shipping}
                     </div>
                     <div style='display:flex; justify-content: space-between; background-color: #fff; margin: 5px;padding:15px;'>
                         <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold;">Taxes:</div>
-                        <div style="text-align:right; font-size: 18px; font-weight: 600;">$${Number(cartSubtotals.taxes).toFixed(2)}</div>
+                        <div style="text-align:right; font-size: 18px; font-weight: 600;">$${isNaN(parseNum(cartSubtotals.taxes))?'0.00':parseNum(cartSubtotals.taxes).toFixed(2)}</div>
                     </div>
                 </div>
                 <div style="padding:15px; display:flex; justify-content: space-between; background-color: #fff; border-bottom: 1px solid #868686;">
                     <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Total:</div>
-                    <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(total).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText}</span></div>
+                    <div style="text-align:right;font-size:18px;font-weight:600;">$${Number(total).toFixed(2)}<span style="font-size:12px;font-style:italic;">${currencyText} </span></div>
                 </div>
                 <div style="
                     width: 100%;
@@ -276,6 +308,11 @@ export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMult
         </body>
     </html>`
 }
+
+// from Dec 21, 2021
+{/* <div style="text-align:left;font-family:Metropolis Extra Bold;font-weight:bold">Shipping:</div>
+                        <div style="text-align:right; font-size:18px;font-weight:600;">$${Number(cartSubtotals.shipping).toFixed(2)}</div> */}
+
 
 // <html>
 //         <body style="color:#083a08; font-family: Lato, Arial, Helvetica, sans-serif; line-height:1.8em;">

@@ -73,16 +73,6 @@ export default function TypesMenu(props) {
                     key={uuid()} 
                     name='Nylon Wire Monofilament'
                 >Nylon Wire Monofilament</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Pedal'
-                >Strings for Pedal Harp</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Lever'
-                >Strings for Lever Harps</li>
             </ul>     
         </div>
     );

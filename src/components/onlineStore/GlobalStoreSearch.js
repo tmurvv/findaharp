@@ -42,6 +42,7 @@ const initialStateText = {
     level: 'All Levels',
     publicationtype: 'All Publication Types',
     octaves: 'All Octaves',
+    notes: 'All Notes',
     brands: 'All Brands',
     types: 'All Types',
     searchInfo: ''
@@ -52,6 +53,7 @@ function GlobalStoreSearch(props) {
     const [ typeOfSearch, setTypeOfSearch ] = useState();
     const [ clearMenus, setClearMenus ] = useState(false);
     const [ octavesSearch, setOctavesSearch ] = useState();
+    const [ notesSearch, setNotesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
     const [ typesSearch, setTypesSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
@@ -67,7 +69,7 @@ function GlobalStoreSearch(props) {
     const [idx, setIdx] = useState(0);
  
     // filter by category
-    function handleChange(type, menu, value1, value2, value3) {
+    function handleChange(type, menu, value1, value2, value3, value4) {
         console.log('params', type, menu, value1, value2, value3)
         setClearMenus(false);
         setResetSearch(false);
@@ -97,7 +99,7 @@ function GlobalStoreSearch(props) {
             document.querySelector('#categoryfilter').value='Music';
             type = 'music';
         } 
-        if (menu==='octaves'||menu==='brands'||menu==='types') {
+        if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='types') {
             categoryFilter = "Strings";
             document.querySelector('#categoryfilter').value='Strings';
             type = 'strings'
@@ -190,11 +192,13 @@ function GlobalStoreSearch(props) {
             
         } else if (type==='strings') {
             if (!value1||value1===undefined) value1="All Octaves";
-            if (!value2||value2===undefined) value2="All Brands";
-            if (!value3||value3===undefined) value3="All Types";
+            if (!value2||value2===undefined) value2="All Notes";
+            if (!value3||value3===undefined) value3="All Brands";
+            if (!value4||value4===undefined) value4="All Types";
             // initialize variables
             let productListCopy = [...props.filteredProducts];
             let octavesProductList=[];
+            let notesProductList=[];
             let brandsProductList=[];
             let typesProductList=[];
             let searchProductList=[];
@@ -212,31 +216,53 @@ function GlobalStoreSearch(props) {
                 octavesProductList=[...categoryProductList];
             }
             finalProductList=[...octavesProductList];
-            
-            // check brands
-            if (value2&&value2!==undefined&&value2.toUpperCase()!=='ALL BRANDS') {
+            console.log('octaves', octavesProductList.length)
+            // check notes
+            if (value2&&value2.toUpperCase()!=='ALL NOTES'&&value2!==undefined) {
                 octavesProductList.map(product=> {
-                    if (String(product.title).toUpperCase().includes(value2.toUpperCase())) brandsProductList.push(product);
+                    console.log('in notes', String(product.title), value2, product.order)
+                    // Note Yet Implement (search for notes by number)
+                    if (value2==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
+                    if (value2==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
+                    if (value2==='C'&&Number.isInteger((product.order+4)/7)) notesProductList.push(product);
+                    if (value2==='B'&&Number.isInteger((product.order+3)/7)) notesProductList.push(product);
+                    if (value2==='A'&&Number.isInteger((product.order+2)/7)) notesProductList.push(product);
+                    if (value2==='G'&&Number.isInteger((product.order+1)/7)) notesProductList.push(product);
+                    if (value2==='F'&&Number.isInteger((product.order+0)/7)) notesProductList.push(product);
+                    product.subcategories.map(cat=>cat.toUpperCase()===value2.toUpperCase()&&notesProductList.push(product));
                 })
             } else {
-                brandsProductList=[...octavesProductList];
+                notesProductList=[...octavesProductList];
+            }
+            finalProductList=[...notesProductList];
+            console.log('notes', notesProductList.length)
+
+            // check brands
+            if (value3&&value3!==undefined&&value3.toUpperCase()!=='ALL BRANDS') {
+                console.log('inif', value3)
+                notesProductList.map(product=> {
+                    if (String(product.title).toUpperCase().includes(value3.toUpperCase())) brandsProductList.push(product);
+                })
+            } else {
+                console.log('inelse')
+                brandsProductList=[...notesProductList];
             }
 
             finalProductList=[...brandsProductList];
-
+            console.log('brands', brandsProductList.length)
             // check string types
-            if (value3&&value3!==undefined&&value3.toUpperCase()!=="ALL TYPES") {
+            if (value4&&value4!==undefined&&value4.toUpperCase()!=="ALL TYPES") {
                 brandsProductList.map(product=> {
-                    if (value3.toUpperCase()==='NEW' || value3.toUpperCase()==='USED') {
-                        console.log('here', value3.toUpperCase(), product.newused.toUpperCase())
-                        if (product.newused.toUpperCase()==='NEW'&&value3.toUpperCase()==='NEW') typesProductList.push(product); 
-                        if (product.newused.toUpperCase()==='USED'&&value3.toUpperCase()==='USED') typesProductList.push(product); 
+                    if (value4.toUpperCase()==='NEW' || value4.toUpperCase()==='USED') {
+                        console.log('here', value4.toUpperCase(), product.newused.toUpperCase())
+                        if (product.newused.toUpperCase()==='NEW'&&value4.toUpperCase()==='NEW') typesProductList.push(product); 
+                        if (product.newused.toUpperCase()==='USED'&&value4.toUpperCase()==='USED') typesProductList.push(product); 
                     }
-                    else if (String(product.title).toUpperCase().includes(value3.toUpperCase())) {
+                    else if (String(product.title).toUpperCase().includes(value4.toUpperCase())) {
                         typesProductList.push(product);
                     } else if (product.subcategories) {
                         product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===value3.toUpperCase()) typesProductList.push(product);
+                            if (subcategory.toUpperCase()===value4.toUpperCase()) typesProductList.push(product);
                         });
                     }
                 }); 
@@ -371,6 +397,7 @@ function GlobalStoreSearch(props) {
                 allState={allState}
                 setAllState={setAllState} 
                 setOctavesSearch={setOctavesSearch} 
+                setNotesSearch={setNotesSearch} 
                 setBrandsSearch={setBrandsSearch} 
                 setTypesSearch={setTypesSearch}
             />

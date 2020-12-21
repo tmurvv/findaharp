@@ -32,8 +32,8 @@ function CartItem(props) {
                 <div className='description'>
                     <p><span style={{fontSize: '18px', fontWeight: "600"}}>{item.title}{item.artist?',':''} {item.artist}</span></p>
                 </div>
-                {user.currency==="USD"?<div className='price'>${parseNum(item.price).toFixed(2)} each</div>
-                :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)} each</div>}
+                {user.currency==="USD"?<div className='price'>${parseNum(item.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}> {item.newused==='used'?'USED':'EACH'}</span></div>
+                :<div className='price'>${(parseNum(item.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}> {item.newused==='used'?'USED':'EACH'}</span></div>}
                 <div className='product_quantity'>
                     <button 
                         onClick={() => deleteItem(cart, setCart, item.id, cartSubtotals, setCartSubtotals, user, currencyMultiplier)} 

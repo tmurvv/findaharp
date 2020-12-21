@@ -106,7 +106,7 @@ function StoreProductSearchStringsCss() {
                 justify-content: space-evenly;
                 text-align: center;
                 display: grid;
-                grid-template-columns: 33.3% 33.3% 33.3%;
+                grid-template-columns: 25% 25% 25% 25%;
             }
             @media only screen and (max-width: 750px) {
                 .storesearchLine2 {
@@ -138,7 +138,7 @@ function StoreProductSearchStringsCss() {
                 padding-top: 9px;
                 text-align: center;
                 display: grid;
-                grid-template-columns: 33.3% 33.3% 33.3%;
+                grid-template-columns: 25% 25% 25% 25%;
             }
             @media only screen and (max-width: 750px) {
                 .storemobileSearchLine2 {

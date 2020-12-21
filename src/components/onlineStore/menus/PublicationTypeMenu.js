@@ -38,10 +38,11 @@ export default function PublicationTypeMenu(props) {
                     name='All Publication Types'
                 >All Publication Types</li>
                 <li 
-                    onClick={handleClose} 
+                    onClick={()=>alert('Digital Downloads under construction. Expected February 2021.')} 
+                    // onClick={handleClose} NOT YET IMPLEMENTED
                     key={uuid()}
                     name='Digital Downloads'
-                >Digital Downloads</li>    
+                >Digital Downloads</li>   
                 <li 
                     onClick={handleClose} 
                     key={uuid()}

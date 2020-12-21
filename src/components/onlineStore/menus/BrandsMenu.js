@@ -91,11 +91,6 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Dusty Strings'
-                >Dusty Strings</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
                     name='KF Composite'
                 >Saverez KF Composite</li>
                 <li 
@@ -111,8 +106,13 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Triplett'
-                >Triplett</li>
+                    name='Delta'
+                >Delta</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Dusty Strings'
+                >Dusty Strings</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -126,8 +126,8 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Delta'
-                >Delta</li>
+                    name='Triplett'
+                >Triplett</li>               
             </ul>     
         </div>
     );

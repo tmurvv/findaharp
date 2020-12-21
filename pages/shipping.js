@@ -3,6 +3,7 @@ import { useEffect, useContext, useState, useReducer } from 'react';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Router from 'next/router';
 import axios from 'axios';
+import parseNum from 'parse-num';
 // internal
 import ShippingCss from '../src/styles/onlinestore/Shipping.css';
 import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
@@ -42,6 +43,30 @@ function Shipping() {
     const [ newRoute, setNewRoute ]  = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
+    async function testReceipt() {
+        // prepare communication object
+        const receipt = {
+            email: user.shippingemail,
+            html: generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)
+        }
+        // email receipt
+        try {
+            await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
+            // deletelocalCart('fah-cart');
+            // setCart([]);
+            // setCartSubtotals([]);
+            // setStatus('completed');
+            // Router.push('/receipt')
+        } catch (e) {
+            // deletelocalCart('fah-cart');
+            // setCart([]);
+            // setCartSubtotals([]);
+            // setStatus('completed');
+            handleClick('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.', '/receipt')
+        }
+    }
+
+
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
         document.querySelector('#loadingLoginText').innerText='';
@@ -222,6 +247,7 @@ function Shipping() {
             />
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
+                {/* <button onClick={testReceipt}>test receipt</button> FOR TESTING */}
                 <Results 
                     resultInfo={resultInfo} 
                     loginGuest={loginGuest}
