@@ -134,14 +134,16 @@ function StoreProductSearch(props) {
     function handleLevelSelection(level) {
         props.setTypeOfSearch("music");
         const newState = {...props.allState, 
-            level
+            level: level==='All Levels'?'All Levels':level,
+            productType: 'all'
         }
+        props.handleChange("music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
         props.setAllState({...props.allState, 
             level,
+            productType: 'all',
             searchInfo: getSearchInfo(newState, 'music')
         });
         setMenus(initialState);
-        props.handleChange("music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
     }
     async function handlePublicationTypeSelection(publicationtype) {
         props.setTypeOfSearch("music");
