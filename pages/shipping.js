@@ -5,7 +5,7 @@ import Router from 'next/router';
 import axios from 'axios';
 import parseNum from 'parse-num';
 // internal
-import ShippingCss from '../src/styles/onlinestore/Shipping.css';
+import ShippingCss from '../src/styles/onlineStore/Shipping.css';
 import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
 import Subtotal from '../src/components/onlineStore/Subtotal';
 import OrderSummary from '../src/components/onlineStore/OrderSummary';

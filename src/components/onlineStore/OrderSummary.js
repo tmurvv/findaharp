@@ -4,7 +4,7 @@ import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import OrderSummaryCss from '../../styles/onlinestore/OrderSummary.css';
+import OrderSummaryCss from '../../styles/onlineStore/OrderSummary.css';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import {

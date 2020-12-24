@@ -8,7 +8,7 @@ import useOutsideClick from "../../hooks/hooks";
 import axios from 'axios';
 
 // internal
-import StoreProductSearchCss from '../../styles/onlinestore/StoreProductSearch.css';
+import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
 import StoreProductContainer from './StoreProductContainer';
 import ArtistMenu from './menus/ArtistMenu';
 import TitleMenu from './menus/TitleMenu';

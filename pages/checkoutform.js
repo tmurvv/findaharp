@@ -14,7 +14,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { getTotal } from "../src/utils/checkoutHelpers";
 import IndexCss from "../src/styles/index.css";
-import CheckoutFormCss from "../src/styles/onlinestore/CheckoutForm.css";
+import CheckoutFormCss from "../src/styles/onlineStore/CheckoutForm.css";
 import { deletelocalCart } from "../src/utils/checkoutHelpers";
 
 export default function CheckoutForm() {

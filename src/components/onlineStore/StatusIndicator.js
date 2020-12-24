@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { StatusContext } from '../../contexts/StatusContext';
-import StatusIndicatorCss from '../../styles/onlinestore/StatusIndicator.css'
+import StatusIndicatorCss from '../../styles/onlineStore/StatusIndicator.css'
 
 function StatusIndicator() {
     const { status } = useContext(StatusContext);

@@ -8,29 +8,28 @@ import { FINDAHARP_PRODUCTS } from '../../src/constants/FindaharpProducts'
 import StoreProduct from '../../src/components/onlineStore/StoreProduct';
 import PageTitle from '../../src/components/PageTitle';
 import IndexCss from '../../src/styles/index.css';
-import HarpsEtcOnlineStoreCss from '../../src/styles/onlinestore/onlinestores/HarpsEtcOnlineStore.css';
+import HarpsEtcOnlineStoreCss from '../../src/styles/onlineStore/onlinestores/HarpsEtcOnlineStore.css';
 
-const UnderConstruction = () => {
+const HarpsEtc = () => {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
     },[]);
     return (
         <>
-            <div className='index' style={{height: 'fit-content', padding: '15px'}}>
-                <PageTitle maintitle="The Next Harp Store" subtitle='This Space Under Construction' /> 
+            <div className='index' style={{height:'fit-content',padding:'15px'}}>
+                <PageTitle maintitle="HarpsEtc Online Store" subtitle='music, strings, accessories and more' /> 
             
                 <div className='store' style={{width: '50%', paddingBottom: '50px', margin: 'auto', textAlign: 'center'}}>
-                    <h3>Coming Soon!</h3>
-                    Our Harp 'Mini-Mall' is brand new. More stores coming soon! Sign up for our newsletter to be notified when new stores move in. Choose Login/Profile from the above menu to sign up.
+                    <h3>Moving in Late October, 2020</h3>
+                    HarpsEtc offers a wide selection of music, strings, accessories and workshops along with service that exceeds your expectations.
                 </div>
                 <button onClick={()=>Router.push('/storeentry')}
                     className='submit-btn'
                     style={{
                         margin: 'auto',
                         marginBottom: '50px',
-                    }}>Back to MiniMall
-                </button>
+                    }}>Back to MiniMall</button>
             </div>
             <IndexCss />
             <HarpsEtcOnlineStoreCss />
@@ -38,4 +37,4 @@ const UnderConstruction = () => {
     )
 }
 
-export default UnderConstruction;
+export default HarpsEtc;

@@ -13,8 +13,8 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import GlobalStoreSearchCss from '../../styles/onlinestore/GlobalStoreSearch.css';
-import StoreProductSearchCss from '../../styles/onlinestore/StoreProductSearch.css';
+import GlobalStoreSearchCss from '../../styles/onlineStore/GlobalStoreSearch.css';
+import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
 import { FINDAHARP_PRODUCTS } from '../../constants/FindaharpProducts'
 import {
@@ -31,7 +31,7 @@ import {
     getStoreSearchInfo
 } from '../../utils/searchProductsHelpers';
 import { PublicTwoTone } from '@material-ui/icons';
-import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
+import StoreProductContainerCss from '../../styles/onlineStore/StoreProductContainer.css';
 
 const initialStateText = {
     selectionType: '',
@@ -70,7 +70,6 @@ function GlobalStoreSearch(props) {
  
     // filter by category
     function handleChange(type, menu, value1, value2, value3, value4) {
-        console.log('allState', allState)
         // update menu text -- not for search term
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
         if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, types: value4 });
@@ -78,7 +77,6 @@ function GlobalStoreSearch(props) {
         let category = document.querySelector('#category').value;
         let searchTerm = document.querySelector('#searchTerm').value;
         let newused = document.querySelector('#newused').value;
-        console.log('params', type, menu, value1, value2, value3, value4)
         setClearMenus(false);
         setResetSearch(false);
         setIdx(0);
@@ -158,8 +156,12 @@ function GlobalStoreSearch(props) {
             // check level
             if (level&&level.toUpperCase()!=='ALL LEVELS') {  
                 newusedProductList.map(product=> {
-                    if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
-                })
+                    if (String(product.level).toUpperCase().startsWith('BEGIN')===level.toUpperCase().startsWith("BEGIN")) {
+                        levelProductList.push(product);
+                    } else {
+                        if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
+                    }    
+                });
             } else {
                 levelProductList=[...newusedProductList];
             }
@@ -187,7 +189,6 @@ function GlobalStoreSearch(props) {
                 soloensembleProductList=[...levelProductList];
             }
             finalProductList=[...soloensembleProductList];
-            console.log('soloens', soloensembleProductList.length)
             // check publication
             if (publicationType&&publicationType.toUpperCase()!=="ALL PUBLICATION TYPES") {
             soloensembleProductList.map(product=> {
@@ -201,7 +202,6 @@ function GlobalStoreSearch(props) {
                 publicationProductList=[...soloensembleProductList];
             }
             finalProductList=[...publicationProductList];
-            console.log('pubs', publicationProductList.length)
             
         } else if (category.toUpperCase()==='STRINGS') {
             if (!value1||value1===undefined) value1="All Octaves";
@@ -253,7 +253,6 @@ function GlobalStoreSearch(props) {
                 notesProductList=[...octavesProductList];
             }
             finalProductList=[...notesProductList];
-            console.log('notes', notesProductList.length)
 
             // check brands
             if (brand&&brand!==undefined&&brand.toUpperCase()!=='ALL BRANDS') {
@@ -265,7 +264,6 @@ function GlobalStoreSearch(props) {
             }
 
             finalProductList=[...brandsProductList];
-            console.log('brands', brandsProductList.length)
             // check string types
             if (type&&type!==undefined&&type.toUpperCase()!=="ALL TYPES") {
                 brandsProductList.map(product=> {

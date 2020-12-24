@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import LazyLoad from 'react-lazyload';
 import Router from 'next/router';
 
-import OnlineStorePartnerCSS from '../../styles/onlinestore/OnlineStorePartner.css';
+import OnlineStorePartnerCSS from '../../styles/onlineStore/OnlineStorePartner.css';
 
 function OnlineStorePartner(props) {
     let partnerStore = props.product;

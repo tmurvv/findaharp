@@ -6,7 +6,7 @@ import InfiniteScrollLoading from "react-infinite-scroll-loading";
 import debounce from "lodash.debounce";
 import axios from "axios";
 // styles
-import StoreProductContainerCss from '../../styles/onlinestore/StoreProductContainer.css';
+import StoreProductContainerCss from '../../styles/onlineStore/StoreProductContainer.css';
 // internal
 import StoreProductModal from './StoreProductModal';
 import StoreProduct from './StoreProduct';

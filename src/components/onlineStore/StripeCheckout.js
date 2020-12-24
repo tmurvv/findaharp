@@ -23,8 +23,8 @@ import {
     deletelocalCart 
 } from "../../utils/checkoutHelpers";
 import IndexCss from "../../styles/index.css";
-import CheckoutFormCss from "../../styles/onlinestore/CheckoutForm.css";
-import ShippingCss from "../../styles/onlinestore/Shipping.css";
+import CheckoutFormCss from "../../styles/onlineStore/CheckoutForm.css";
+import ShippingCss from "../../styles/onlineStore/Shipping.css";
 
 export default function StripeCheckout(props) {
     const { cart, setCart } = useContext(CartContext);

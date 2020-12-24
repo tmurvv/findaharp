@@ -2,7 +2,7 @@
 import { useEffect, useContext, useState } from 'react';
 
 // internal
-import PaymentCss from '../src/styles/onlinestore/Payment.css';
+import PaymentCss from '../src/styles/onlineStore/Payment.css';
 import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
 import Subtotal from '../src/components/onlineStore/Subtotal';
 import StripeCheckout from '../src/components/onlineStore/StripeCheckout';

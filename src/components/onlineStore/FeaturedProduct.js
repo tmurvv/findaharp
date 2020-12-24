@@ -10,7 +10,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import FeaturedProductCss from '../../styles/onlinestore/FeaturedProduct.css';
+import FeaturedProductCss from '../../styles/onlineStore/FeaturedProduct.css';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';

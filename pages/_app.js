@@ -143,7 +143,6 @@ function MyApp(props) {
                     localCartJson = [...localCartJson]
                     localCartJson.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
                     setCart(localCartJson);
-                    // if (localCartJson.length>0) setCartSubtotals({shippingarray: []});//BREAKING needs to loop through cart and set stores
                 } catch (e) {
                     console.log('error parsing local cart') // needs logging
                 }

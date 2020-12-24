@@ -4,9 +4,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 // internal
-import PageTitle from '../src/components/PageTitle';
-import BuyersGuideCSS from '../src/styles/BuyersGuide.css';
-import PedalLeverTut from '../src/components/PedalLeverTut';
+import PageTitle from '../../components/PageTitle';
+import BuyersGuideCSS from '../../styles/BuyersGuide.css';
+import PedalLeverTut from '../../components/PedalLeverTut';
 
 function BuyersGuide(props) {
     function handleSurveySubmit() {

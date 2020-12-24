@@ -5,7 +5,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
-import ShippingCss from '../../styles/onlinestore/Shipping.css';
+import ShippingCss from '../../styles/onlineStore/Shipping.css';
 import { SHIPPING_CALCULATIONS } from '../../constants/constants';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';

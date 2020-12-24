@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import Router from 'next/router';
 
 import { CartContext } from '../../contexts/CartContext';
-import CartCss from '../../styles/onlinestore/cart.css';
+import CartCss from '../../styles/onlineStore/cart.css';
 import {
     getNumItems
 } from '../../utils/storeHelpers';
