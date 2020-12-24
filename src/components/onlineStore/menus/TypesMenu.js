@@ -37,17 +37,7 @@ export default function TypesMenu(props) {
                     onClick={handleClose} 
                     key={uuid()} 
                     name='All Types'
-                >All Types</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='New'
-                >New Only</li>    
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='Used'
-                >Used Only</li>    
+                >All Types</li>    
                 <li 
                     onClick={handleClose} 
                     key={uuid()}

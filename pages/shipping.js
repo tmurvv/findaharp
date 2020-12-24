@@ -96,7 +96,7 @@ function Shipping() {
             const receipt = {
                 email: user.shippingemail,
                 shipping: cartSubtotals.shipping,
-                html: generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)
+                html: `<h3>A shipping estimate is on it's way!</h3><p>The following order has been sent to findaharp.com to request a shipping estimate. Your credit card has not been charged.</p>${generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)}`
             }
             // email order to Find a Harp for estimate
             try {

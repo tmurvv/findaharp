@@ -8,7 +8,7 @@ function GlobalStoreSearchCss() {
           }
           .storeSearchLine {
             width: 100%;
-            max-width: 650px; 
+            max-width: 800px; 
             margin: auto; 
             display: flex;
             justify-content: flex-start;

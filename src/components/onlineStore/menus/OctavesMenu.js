@@ -6,7 +6,6 @@ export default function OctavesMenu(props) {
         if (evt.target.value === 'All Octaves') return;
         props.handleOctavesChange(evt.target.getAttribute('name')); 
     };
- 
     return (
         <div className='relative'>
             <button 
@@ -60,8 +59,18 @@ export default function OctavesMenu(props) {
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 
-                    name='Wire'
-                >Individual Wires</li>
+                    name='5th Octave Wires'
+                >5th Octave Wires</li>
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='6th Octave Wires'
+                >6th Octave Wires</li>
+                <li 
+                    onClick={handleClose} 
+                    // key={uuid()} 
+                    name='7th Octave Wires'
+                >7th Octave Wires</li>
                 <li 
                     onClick={handleClose} 
                     // key={uuid()} 

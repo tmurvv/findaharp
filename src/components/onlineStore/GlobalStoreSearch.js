@@ -70,7 +70,15 @@ function GlobalStoreSearch(props) {
  
     // filter by category
     function handleChange(type, menu, value1, value2, value3, value4) {
-        console.log('params', type, menu, value1, value2, value3)
+        console.log('allState', allState)
+        // update menu text -- not for search term
+        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
+        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, types: value4 });
+        // get search items
+        let category = document.querySelector('#category').value;
+        let searchTerm = document.querySelector('#searchTerm').value;
+        let newused = document.querySelector('#newused').value;
+        console.log('params', type, menu, value1, value2, value3, value4)
         setClearMenus(false);
         setResetSearch(false);
         setIdx(0);
@@ -79,95 +87,99 @@ function GlobalStoreSearch(props) {
         let preSearchProductList=[]
         let finalProductList=[];
         let categoryProductList=[];
+        let newusedProductList=[];
         let searchProductList=[];
-        let categoryFilter;
-        let searchTerm;
 
-        if (document.querySelector('#categoryfilter')&&document.querySelector('#categoryfilter').value.toUpperCase()!=='ALL') {
-            categoryFilter = document.querySelector('#categoryfilter').value;
-            if (categoryFilter.toUpperCase()==="DIGITAL DOWNLOADS") {
-                // document.querySelector('#categoryfilter').value= 'All';
-                alert("Digital Downloads under construction. Expected by February 2021."); // NOT YET IMPLEMENTED
+        if (category&&category.toUpperCase()!=='ALL') {
+            if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
+                // document.querySelector('#category').value= 'All';
+                return alert("Digital Downloads under construction. Expected by February 2021."); // NOT YET IMPLEMENTED
             }
-            if (categoryFilter.toUpperCase()==="STRINGS") type='strings';
-            if (categoryFilter.toUpperCase()==="MUSIC") type='music';
-        } else if (type==='category') {
-            type='';
-        }
+            if (category.toUpperCase()==="STRINGS") type='strings';
+            if (category.toUpperCase()==="MUSIC") type='music';
+        } 
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
-            categoryFilter = "Music";
-            document.querySelector('#categoryfilter').value='Music';
+            category = "Music";
+            document.querySelector('#category').value='Music';
             type = 'music';
         } 
         if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='types') {
-            categoryFilter = "Strings";
-            document.querySelector('#categoryfilter').value='Strings';
+            category = "Strings";
+            document.querySelector('#category').value='Strings';
             type = 'strings'
         }
-
-        setAllState({...allState, category: categoryFilter});
+        setAllState({...allState, category: category});
 
         // if (resetSearch) {
-        //     categoryFilter="All";
+        //     category="All";
         //     setAllState({...allState, category: "All"});
         //     return productListCopy;
         // }
-        if(categoryFilter&&categoryFilter.toUpperCase()!=="ALL") {
+        if(category&&category.toUpperCase()!=="ALL") {
             productListCopy.map(product=>{
-                if (String(product.category).toUpperCase()===categoryFilter.toUpperCase()) {
+                if (String(product.category).toUpperCase()===category.toUpperCase()) {
                     categoryProductList.push(product);
                 } 
                 if (product.subcategories) {
                     product.subcategories.map(subcategory=>{
-                        if (subcategory.toUpperCase()===categoryFilter.toUpperCase()) categoryProductList.push(product);
+                        if (subcategory.toUpperCase()===category.toUpperCase()) categoryProductList.push(product);
                     })
                 }
             });
         } else {
             categoryProductList = [...productListCopy]
         }
+        // newused
+        if(newused!=='New/Used') {
+            categoryProductList.map(product=>{
+                if (newused.toUpperCase().startsWith(String(product.newused).toUpperCase())) {
+                    newusedProductList.push(product);
+                }
+            });
+        } else {
+            newusedProductList = [...categoryProductList]
+        }
         // finalProductList=[...categoryProductList]
-        if (type==='music') {
+        if (category.toUpperCase()==='MUSIC') {
             if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
             if (!value2||value2===undefined) value2="All Levels";
             if (!value3||value3===undefined) value3="All Publication Types";
+            const soloensemble = menu==='soloensemble'?value1:allState.soloensemble;
+            const level = menu==='level'?value2:allState.level;
+            const publicationType = menu==='publicationtype'?value3:allState.publicationtype;
             // initialize variables
-            let productListCopy = [...props.filteredProducts];
             let levelProductList=[];
             let soloensembleProductList=[];
             let publicationProductList=[];
-            let searchProductList=[];
-            let searchTerm;
             
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             
             // check level
-            if (value2&&value2.toUpperCase()!=='ALL LEVELS') {
-                
-                categoryProductList.map(product=> {
-                    if (String(product.level).toUpperCase()===value2.toUpperCase()) levelProductList.push(product);
+            if (level&&level.toUpperCase()!=='ALL LEVELS') {  
+                newusedProductList.map(product=> {
+                    if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
                 })
             } else {
-                levelProductList=[...categoryProductList];
+                levelProductList=[...newusedProductList];
             }
 
             finalProductList=[...levelProductList];
 
             // check soloensemble
-            if (value1&&value1.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
+            if (soloensemble&&soloensemble.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
                 levelProductList.map(product=> {
-                    if (value1.toUpperCase()==="LEVER HARP") {
+                    if (soloensemble.toUpperCase()==="LEVER HARP") {
                         if (product.harptype) {
-                            if (String(product.harptype).toUpperCase()===value1.toUpperCase()) soloensembleProductList.push(product);
+                            if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
                         }
-                    } else if (String(value1).toUpperCase()==="PEDAL HARP") {
+                    } else if (String(soloensemble).toUpperCase()==="PEDAL HARP") {
                         if (product.harptype) {
-                            if (String(product.harptype).toUpperCase()===value1.toUpperCase()) soloensembleProductList.push(product);
+                            if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
                         }
                     } else if (product.subcategories) {
                         product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===value1.toUpperCase()) soloensembleProductList.push(product);
+                            if (subcategory.toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
                         })
                     }
                 });
@@ -175,13 +187,13 @@ function GlobalStoreSearch(props) {
                 soloensembleProductList=[...levelProductList];
             }
             finalProductList=[...soloensembleProductList];
-        
+            console.log('soloens', soloensembleProductList.length)
             // check publication
-            if (value3&&value3.toUpperCase()!=="ALL PUBLICATION TYPES") {
+            if (publicationType&&publicationType.toUpperCase()!=="ALL PUBLICATION TYPES") {
             soloensembleProductList.map(product=> {
                 if (product.subcategories) {
                     product.subcategories.map(subcategory=>{
-                        if (subcategory.toUpperCase()===value3.toUpperCase()) publicationProductList.push(product);
+                        if (subcategory.toUpperCase()===publicationType.toUpperCase()) publicationProductList.push(product);
                     })
                 }
             }); 
@@ -189,47 +201,53 @@ function GlobalStoreSearch(props) {
                 publicationProductList=[...soloensembleProductList];
             }
             finalProductList=[...publicationProductList];
+            console.log('pubs', publicationProductList.length)
             
-        } else if (type==='strings') {
+        } else if (category.toUpperCase()==='STRINGS') {
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2="All Notes";
             if (!value3||value3===undefined) value3="All Brands";
             if (!value4||value4===undefined) value4="All Types";
+            const octave = menu==='octaves'?value1:allState.octaves;
+            const note = menu==='notes'?value2:allState.notes;
+            const brand = menu==='brands'?value3:allState.brands;
+            const type = menu==='types'?value4:allState.types;
             // initialize variables
-            let productListCopy = [...props.filteredProducts];
             let octavesProductList=[];
             let notesProductList=[];
             let brandsProductList=[];
             let typesProductList=[];
-            let searchProductList=[];
-            let searchTerm;
-            
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
-            if (value1&&value1.toUpperCase()!=='ALL OCTAVES'&&value1!==undefined) {
-                categoryProductList.map(product=> {
-                    if (String(product.title).toUpperCase().includes(value1.toUpperCase())) octavesProductList.push(product);
-                    product.subcategories.map(cat=>cat.toUpperCase()===value1.toUpperCase()&&octavesProductList.push(product));
+            if (octave&&octave.toUpperCase()!=='ALL OCTAVES'&&octave!==undefined) {
+                newusedProductList.map(product=> {
+                    if (String(product.title).toUpperCase().includes(octave.toUpperCase())) octavesProductList.push(product);
+                    product.subcategories.map(cat=> {
+                        cat.toUpperCase()===octave.toUpperCase()&&octavesProductList.push(product);
+                        if(cat.toUpperCase()==='WIRE') {
+                            if(product.title.toUpperCase().includes('5TH OCTAVE')&&octave.toUpperCase().includes('5TH OCTAVE')) octavesProductList.push(product);
+                            if(product.title.toUpperCase().includes('6TH OCTAVE')&&octave.toUpperCase().includes('6TH OCTAVE')) octavesProductList.push(product);
+                            if(product.title.toUpperCase().includes('7TH OCTAVE')&&octave.toUpperCase().includes('7TH OCTAVE')) octavesProductList.push(product);
+                        }
+                    });
                 })
             } else {
-                octavesProductList=[...categoryProductList];
+                octavesProductList=[...newusedProductList];
             }
             finalProductList=[...octavesProductList];
-            console.log('octaves', octavesProductList.length)
             // check notes
-            if (value2&&value2.toUpperCase()!=='ALL NOTES'&&value2!==undefined) {
+            if (note&&note.toUpperCase()!=='ALL NOTES'&&note!==undefined) {
                 octavesProductList.map(product=> {
-                    console.log('in notes', String(product.title), value2, product.order)
                     // Note Yet Implement (search for notes by number)
-                    if (value2==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
-                    if (value2==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
-                    if (value2==='C'&&Number.isInteger((product.order+4)/7)) notesProductList.push(product);
-                    if (value2==='B'&&Number.isInteger((product.order+3)/7)) notesProductList.push(product);
-                    if (value2==='A'&&Number.isInteger((product.order+2)/7)) notesProductList.push(product);
-                    if (value2==='G'&&Number.isInteger((product.order+1)/7)) notesProductList.push(product);
-                    if (value2==='F'&&Number.isInteger((product.order+0)/7)) notesProductList.push(product);
-                    product.subcategories.map(cat=>cat.toUpperCase()===value2.toUpperCase()&&notesProductList.push(product));
+                    if (note==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
+                    if (note==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
+                    if (note==='C'&&Number.isInteger((product.order+4)/7)) notesProductList.push(product);
+                    if (note==='B'&&Number.isInteger((product.order+3)/7)) notesProductList.push(product);
+                    if (note==='A'&&Number.isInteger((product.order+2)/7)) notesProductList.push(product);
+                    if (note==='G'&&Number.isInteger((product.order+1)/7)) notesProductList.push(product);
+                    if (note==='F'&&Number.isInteger((product.order+0)/7)) notesProductList.push(product);
+                    product.subcategories.map(cat=>cat.toUpperCase()===note.toUpperCase()&&notesProductList.push(product));
                 })
             } else {
                 notesProductList=[...octavesProductList];
@@ -238,31 +256,28 @@ function GlobalStoreSearch(props) {
             console.log('notes', notesProductList.length)
 
             // check brands
-            if (value3&&value3!==undefined&&value3.toUpperCase()!=='ALL BRANDS') {
-                console.log('inif', value3)
+            if (brand&&brand!==undefined&&brand.toUpperCase()!=='ALL BRANDS') {
                 notesProductList.map(product=> {
-                    if (String(product.title).toUpperCase().includes(value3.toUpperCase())) brandsProductList.push(product);
+                    if (String(product.title).toUpperCase().includes(brand.toUpperCase())) brandsProductList.push(product);
                 })
             } else {
-                console.log('inelse')
                 brandsProductList=[...notesProductList];
             }
 
             finalProductList=[...brandsProductList];
             console.log('brands', brandsProductList.length)
             // check string types
-            if (value4&&value4!==undefined&&value4.toUpperCase()!=="ALL TYPES") {
+            if (type&&type!==undefined&&type.toUpperCase()!=="ALL TYPES") {
                 brandsProductList.map(product=> {
-                    if (value4.toUpperCase()==='NEW' || value4.toUpperCase()==='USED') {
-                        console.log('here', value4.toUpperCase(), product.newused.toUpperCase())
-                        if (product.newused.toUpperCase()==='NEW'&&value4.toUpperCase()==='NEW') typesProductList.push(product); 
-                        if (product.newused.toUpperCase()==='USED'&&value4.toUpperCase()==='USED') typesProductList.push(product); 
+                    if (type.toUpperCase()==='NEW' || type.toUpperCase()==='USED') {
+                        if (product.newused.toUpperCase()==='NEW'&&type.toUpperCase()==='NEW') typesProductList.push(product); 
+                        if (product.newused.toUpperCase()==='USED'&&type.toUpperCase()==='USED') typesProductList.push(product); 
                     }
-                    else if (String(product.title).toUpperCase().includes(value4.toUpperCase())) {
+                    else if (String(product.title).toUpperCase().includes(type.toUpperCase())) {
                         typesProductList.push(product);
                     } else if (product.subcategories) {
                         product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===value4.toUpperCase()) typesProductList.push(product);
+                            if (subcategory.toUpperCase()===type.toUpperCase()) typesProductList.push(product);
                         });
                     }
                 }); 
@@ -271,11 +286,11 @@ function GlobalStoreSearch(props) {
             }
             finalProductList=[...typesProductList];
         } else {
-            finalProductList=[...categoryProductList]
+            finalProductList=[...newusedProductList]
         }
         preSearchProductList = [...finalProductList]
         // search term
-        if (document.querySelector('#searchInput').value) searchTerm = document.querySelector('#searchInput').value;
+        if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
             preSearchProductList.map(product=> {
                 const keyList = Object.keys(product);
@@ -288,9 +303,7 @@ function GlobalStoreSearch(props) {
             searchProductList=[...preSearchProductList]
         }
         finalProductList=[...searchProductList];
-        // update menu text -- not for search term
-        // if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        // if (type==='strings') setAllState({...allState, octaves: value1, brands: value2, types: value3 });
+        
         finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
         setTypeOfSearch(type);
 
@@ -298,8 +311,8 @@ function GlobalStoreSearch(props) {
     }
     
     function handleClear() {
-        document.querySelector('#categoryfilter').value='All';
-        document.querySelector('#searchInput').value='';
+        document.querySelector('#category').value='All';
+        document.querySelector('#searchTerm').value='';
         setAllState(initialStateText);
         setSearchResults(props.filteredProducts);
         setResetSearch(true);
@@ -360,7 +373,7 @@ function GlobalStoreSearch(props) {
             <div className='storeSearchLine' >
             <h3 className='searchHelperText'>Search by category</h3>
                 <div className='selectContainer'>    
-                    <select onChange={()=>handleChange('category')} id='categoryfilter'>
+                    <select onChange={()=>handleChange('','category')} id='category'>
                         <option name='All'>All</option>
                         <option name='Strings'>Strings</option>
                         <option name='Music'>Music</option>
@@ -372,13 +385,23 @@ function GlobalStoreSearch(props) {
                     </select>
                     {/* <span style={{fontSize: '36px'}}>&#711;</span> */}
                 </div>
+                
                 <h3 className='searchHelperText'>and / or search term</h3>
             
                 <div className="searchTextImg">
-                    <input type="text" id="searchInput" onChange={handleChange} placeholder="Search" />
+                    <input type="text" id="searchTerm" style={{width: '100%'}} onChange={handleChange} placeholder="Search" />
+                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '12px', padding: '13.4px 7px'}}>
+                        <option value='New/Used' name='All newused'>New/Used</option>
+                        <option value='New' name='New'>New Only</option>
+                        <option value='Used' name='Used'>Used Only</option>
+                    </select>
                     <div style={{flex: '2'}}>
                         <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
                     </div>
+                </div>
+                <div className='selectContainer'>    
+                    
+                    {/* <span style={{fontSize: '36px'}}>&#711;</span> */}
                 </div>
             </div>
             <StoreProductSearch 
