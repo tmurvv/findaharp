@@ -19,17 +19,17 @@ export const RESULTS_INITIAL_STATE = {
     resultImg: 'none'
 }
 export const RESET_SHIPPING_INFO = {
-    shippingfname: null,
-    shippinglname: null,
-    shippingaddress: null,
-    shippingaddress2: null,
-    shippingcity: null,
-    shippingregion: null,
-    shippingzip_postal: null,
-    shippingcountry: null,
-    shippingemail: null,
-    shippingphone: null,
-    shippingaltphone: null
+    shippingfname: '',
+    shippinglname: '',
+    shippingaddress: '',
+    shippingaddress2: '',
+    shippingcity: '',
+    shippingregion: '',
+    shippingzip_postal: '',
+    shippingcountry: '',
+    shippingemail: '',
+    shippingphone: '',
+    shippingaltphone: ''
 }
 export const STOREPARTNER_PLACEHOLDER = {   
     id: "",

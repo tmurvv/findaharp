@@ -1,14 +1,16 @@
+// packages
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import Router from 'next/router';
 import axios from 'axios';
-import uuid from 'react-uuid';
 
+// contexts
 import { CartContext } from '../../contexts/CartContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { UserContext } from '../../contexts/UserContext';
 import { StatusContext } from '../../contexts/StatusContext';
 
+// internal
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import { resultInfoReducer } from '../../reducers/reducers';
@@ -27,20 +29,23 @@ import CheckoutFormCss from "../../styles/onlineStore/CheckoutForm.css";
 import ShippingCss from "../../styles/onlineStore/Shipping.css";
 
 export default function StripeCheckout(props) {
+    // context variables
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const { setStatus } = useContext(StatusContext);
+    // state variables
     const [ newRoute, setNewRoute ]  = useState(false);
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState('');
     const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState('');
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const stripe = useStripe();
     const elements = useElements();
+
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
         document.querySelector('#loadingLoginText').innerText='';
@@ -52,12 +57,12 @@ export default function StripeCheckout(props) {
         routeChange==="false"?setNewRoute(false):setNewRoute(routeChange);
         dispatchResultInfo({type: 'OK'});
     }
-    function loginGuest(evt) {
-        // if (evt) evt.preventDefault();  
+    function loginGuest(evt) { 
         resetResults();
         newRoute&&Router.push(`${newRoute}`);
     }
     useEffect(() => {
+        // check for balance owed
         if (getTotal(cart, user,currencyMultiplier)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
                 // Create PaymentIntent as soon as the page loads
@@ -67,7 +72,6 @@ export default function StripeCheckout(props) {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    // body: JSON.stringify({items: [{ id: "xl-tshirt" }]}) // Format for listing all stripe items
                     body: JSON.stringify({"total": getTotal(cart, user, currencyMultiplier)*100})
                 }) 
                 .then(res => {
@@ -81,9 +85,9 @@ export default function StripeCheckout(props) {
             }
         } else {
             handleClick('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase. \n\nYou may have reached this message by pressing your browser back-button on the PayPal page before paying. If so, you have not been charged for your order, but your cart was lost. We are working to resolve this issue."', 'cart');
-            // Router.push('/cart');
         }
     }, []);
+    // from Stripe code
     const cardStyle = {
         style: {
         base: {
@@ -113,6 +117,7 @@ export default function StripeCheckout(props) {
         ev.preventDefault();
         setProcessing(true);
         let payload;
+        // contact Stripe
         try {
             payload = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
@@ -130,10 +135,15 @@ export default function StripeCheckout(props) {
             setError(`Payment failed ${payload.error.message}`);
             setProcessing(false);
         } else {
+            // reset Stripe vars
             setError(null);
             setProcessing(false);
             setSucceeded(true);
-            
+            // reset cart
+            deletelocalCart('fah-cart');
+            setCart([]);
+            setCartSubtotals([]);
+            setStatus('completed');
             // prepare communication object
             const receipt = {
                 email: user.shippingemail,
@@ -142,29 +152,13 @@ export default function StripeCheckout(props) {
             // email receipt
             try {
                 await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
-                deletelocalCart('fah-cart');
-                setCart([]);
-                setCartSubtotals([]);
-                setStatus('completed');
                 Router.push('/receipt')
-            } catch (e) {
-                deletelocalCart('fah-cart');
-                setCart([]);
-                setCartSubtotals([]);
-                setStatus('completed');
+            } catch (e) {               
                 handleClick('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.', '/receipt')
             }
         }
     };
-    function resetResults() {
-        dispatchResultInfo({type: 'initial'});
-    }
-    function response() {
-        if (succeeded) return Router.push('/');
-        resultText.innerText=`Something went wrong on payment. Return to home page?`;
-        dispatchResultInfo({type: 'tryAgain'});
-    }
-    // display cart??
+    // check to display cart
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
     },[]);
@@ -204,13 +198,7 @@ export default function StripeCheckout(props) {
                     )}
                     {/* Show a success message upon completion */}
                     <p className={succeeded ? "result-message" : "result-message hidden"}>
-                        Payment succeeded... loading...
-                        {/* <a
-                        href={`https://dashboard.stripe.com/test/payments`}
-                        >
-                        {" "}
-                        Stripe dashboard.
-                        </a> Refresh the page to pay again. */}
+                        Payment succeeded... loading page...
                     </p>
                 </form>
                 <IndexCss />
@@ -220,88 +208,5 @@ export default function StripeCheckout(props) {
         );
     } else {
         return('')
-    }
-    
-    
+    }   
 }
-
-
-{/* <h3>Billing Address</h3>
-                    <div>{user.shippingfname} {user.shippinglname}</div>
-                    <div>{user.shippingaddress1}</div>
-                    <div>{user.shippingaddress2}</div>
-                    <div>{user.shippingcity}, {user.shipping} {user.shippingzip_postal}</div>
-                    <div>{user.shippingcountry}</div>
-                    <button type='button' onClick={()=>document.querySelector('#changeBilling').style.display='block'} style={{
-                        backgroundColor: '#fff',
-                        outline: 'none',
-                        border: '1px dashed #868686',
-                        padding: '20px 10px',
-                        width: '100%',
-                        fontSize: '14px',
-                        borderRadius: '3px',
-                        marginBottom: '25px'
-                    }}>Change Billing Address</button>
-                    <div id='changeBilling' style={{display: 'none'}}>   
-                    <div className="padright">
-                            <label htmlFor="fname">First Name</label>
-                            <input type="text" name="fname" value={user.fname} onChange={handleChange} id="fname" required />
-                        </div>
-                        <div>
-                            <label htmlFor="lname">Last Name</label>
-                            <input type="text" name="lname" value={user.lname} onChange={handleChange} id="lname" required />
-                        </div>
-                        <br />
-                        <label htmlFor="address">Address</label>
-                        <input type="text" name="address" value={user.address} onChange={handleChange} id="address" required />
-                        <label htmlFor="address2">Address 2</label>
-                        <input type="text" name="address2" value={user.address2} onChange={handleChange} id="address2" placeholder="Optional" />
-                        <br />
-                        <label htmlFor="city">Town / City</label>
-                        <input type="text" name="city" value={user.city} onChange={handleChange} id="city" required />
-                        
-                            <div className='countryDrop'>
-                            <label htmlFor="country">Country</label>
-                                <CountryDropdown
-                                    style={{
-                                        width: '98%',
-                                        padding: '15px',
-                                        border: '2px solid black',
-                                        borderRadius: '3px',
-                                        marginBottom: '20px',
-                                        marginTop: '5px',
-                                        backgroundColor: '#fff'
-                                    }}
-                    whitelist={['US', 'CA']}
-                                    value={user.country}
-                                    name='country'
-                                    onChange={(val) => selectCountry(val, user, setUser)} 
-                                />
-                            </div>
-                            <div className='flex-sb'>
-                            <div className='zipPostal'>
-                                <label htmlFor="zip_postal">Zip/Postal Code</label>
-                                <input type="text" name="zip_postal" value={user.zip_postal} onChange={handleChange} id="zip_postal" placeholder="Postcode / Zip" required />
-                            </div>
-                            <div className='regionDrop'>
-                                <label htmlFor="country">State/Province</label>
-                                <RegionDropdown
-                                    style={{
-                                        width: '98%',
-                                        padding: '15px',
-                                        border: '2px solid black',
-                                        borderRadius: '3px',
-                                        marginBottom: '20px',
-                                        marginTop: '5px',
-                                        backgroundColor: '#fff'
-                                    }}
-                                    country={user.country}
-                                    value={user.state_prov}
-                                    name='state_prov'
-                                    defaultOptionLabel='Select Region'
-                                    onChange={(val) => selectRegion(val, user, setUser)} 
-                                    placeholder='select country, then state/prov/region'
-                                />
-                            </div>
-                        </div>
-                    </div>  */}

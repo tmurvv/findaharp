@@ -1,37 +1,34 @@
 // packages
 import { useEffect, useContext, useState, useReducer } from 'react';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Router from 'next/router';
 import axios from 'axios';
-import parseNum from 'parse-num';
-// internal
-import ShippingCss from '../src/styles/onlineStore/Shipping.css';
-import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
-import Subtotal from '../src/components/onlineStore/Subtotal';
-import OrderSummary from '../src/components/onlineStore/OrderSummary';
-import PageTitle from '../src/components/PageTitle';
+// contexts
 import { UserContext } from '../src/contexts/UserContext';
 import { CartContext } from '../src/contexts/CartContext';
 import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
 import { CurrencyContext } from '../src/contexts/CurrencyContext';
 import { StatusContext } from '../src/contexts/StatusContext';
-import { resultInfoReducer } from '../src/reducers/reducers';
+// components
+import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
+import Subtotal from '../src/components/onlineStore/Subtotal';
+import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import Results from '../src/components/Results';
+// other internal
+import ShippingCss from '../src/styles/onlineStore/Shipping.css';
+import { resultInfoReducer } from '../src/reducers/reducers';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../src/constants/constants';
 import {
     generateReceiptEmailHtml, 
-    selectCountry,
-    selectRegion,
-    getTotal, 
+    selectRegion, 
     shipping,
     tax,
     deletelocalCart,
     getShippingArray
 } from '../src/utils/checkoutHelpers';
 import { 
-    getNumItems, getSubTotal, getStores
+    getNumItems, getStores
 } from '../src/utils/storeHelpers';
-import { ConfirmationNumber } from '@material-ui/icons';
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);
@@ -39,33 +36,9 @@ function Shipping() {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { setStatus } = useContext(StatusContext);
-    const [ change, setChange ]  = useState(false);
     const [ newRoute, setNewRoute ]  = useState(false);
+    const [screenWidth, setScreenWidth] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
-    
-    async function testReceipt() {
-        // prepare communication object
-        const receipt = {
-            email: user.shippingemail,
-            html: generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)
-        }
-        // email receipt
-        try {
-            await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
-            // deletelocalCart('fah-cart');
-            // setCart([]);
-            // setCartSubtotals([]);
-            // setStatus('completed');
-            // Router.push('/receipt')
-        } catch (e) {
-            // deletelocalCart('fah-cart');
-            // setCart([]);
-            // setCartSubtotals([]);
-            // setStatus('completed');
-            handleClick('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.', '/receipt')
-        }
-    }
-
 
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
@@ -78,8 +51,7 @@ function Shipping() {
         routeChange==="false"?setNewRoute(false):setNewRoute(routeChange);
         dispatchResultInfo({type: 'OK'});
     }
-    function loginGuest(evt) {
-        // if (evt) evt.preventDefault();  
+    function loginGuest(evt) { 
         resetResults();
         newRoute&&Router.push(`${newRoute}`);
     }
@@ -106,25 +78,10 @@ function Shipping() {
                 setCartSubtotals([]);
                 setStatus('completed');
                 setUser({...user, 
-                    shippingfname: '',
-                    shippinglname: '',
-                    shippingaddress: '',
-                    shippingaddress2: '',
-                    shippingcity: '',
-                    shippingregion: '',
-                    shippingzip_postal: '',
-                    shippingcountry: '',
-                    shippingemail: '',
-                    shippingphone: '',
-                    shippingaltphone: ''});
+                    RESET_SHIPPING_INFO});
                 handleClick("International orders require approval of shipping costs. Your order has been sent to Find a Harp, but your credit card has not been charged. You will receive an order total including shipping by email within 24 hours.", "/onlinestore");
             } catch (e) {
                 handleClick('Error sending email to Find a Harp, please check your connection and try again.', "false")
-                // deletelocalCart('fah-cart');
-                // setCart([]);
-                // setCartSubtotals([]);
-                // setStatus('completed');
-                // setUser({...user, RESET_SHIPPING_INFO});
             }
             document.querySelector('#spinner').style.display="none";
         } else {
@@ -134,60 +91,46 @@ function Shipping() {
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'shippingfname': 
-                setUser({...user, shippingfname: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingfname: evt.target.value});''
                 break
             case 'shippinglname': 
-                setUser({...user, shippinglname: evt.target.value});
-                setChange(true);
+                setUser({...user, shippinglname: evt.target.value});''
                 break
             case 'shippingemail': 
-                setUser({...user, shippingemail: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingemail: evt.target.value});''
                 break
             case 'shippingphone': 
-                setUser({...user, shippingphone: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingphone: evt.target.value});''
                 break
             case 'shippingaltphone': 
-                setUser({...user, shippingaltphone: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingaltphone: evt.target.value});''
                 break
             case 'shippingaddress': 
-                setUser({...user, shippingaddress: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingaddress: evt.target.value});''
                 break
             case 'shippingaddress2': 
-                setUser({...user, shippingaddress2: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingaddress2: evt.target.value});''
                 break
             case 'shippingcity': 
-                setUser({...user, shippingcity: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingcity: evt.target.value});''
                 break 
             case 'shippingzip_postal': 
-                setUser({...user, shippingzip_postal: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingzip_postal: evt.target.value});''
                 break
             case 'shippingcountry': 
-                setUser({...user, shippingcountry: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingcountry: evt.target.value});''
                 break
             case 'shippingregion': 
-                setUser({...user, shippingregion: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingregion: evt.target.value});''
                 break
             case 'notes': 
-                setUser({...user, shippingnotes: evt.target.value});
-                setChange(true);
+                setUser({...user, shippingnotes: evt.target.value});''
                 break
             case 'shippingDifferent': 
-                setUser({...user, shippingDifferent: !user.shippingDifferent});
-                setChange(true);
+                setUser({...user, shippingDifferent: !user.shippingDifferent});''
                 break
             case 'paymentType': 
-                setUser({...user, paymentType: evt.target.value});
-                setChange(true);
+                setUser({...user, paymentType: evt.target.value});''
                 break
             default :
         }
@@ -200,13 +143,6 @@ function Shipping() {
             setUser({...user, shippingcountry: val, currency: 'USD', shippingregion:''});
         }
         setCartSubtotals({...cartSubtotals, shipping, taxes: 0, shippingarray: getShippingArray(val, cart) });
-
-
-        // // selectCountry(val, user, setUser); 
-        // setCartSubtotals({...cartSubtotals, 
-        //     shipping: shipping(val, cart[0].store, cart), 
-        //     taxes: 0
-        // });
     }
     function changeRegion(val) {
         selectRegion(val, user, setUser);
@@ -226,13 +162,26 @@ function Shipping() {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
     },[]);
-    const [screenWidth, setScreenWidth] = useState();
     useEffect(()=> {
         setScreenWidth(window.innerWidth);
     },[]);
     useEffect(()=>{
         setStatus('shipping');
     },[]);
+    // this function to test the generate receipt function without actually purchasing
+    async function testReceipt() {
+        // prepare communication object
+        const receipt = {
+            email: user.shippingemail,
+            html: generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier)
+        }
+        // email receipt
+        try {
+            await axios.post(`${process.env.backend}/api/v1/sendreceipt`, receipt);
+        } catch (e) {
+            handleClick('Error emailing receipt, but order has been placed successfully. Please contact orders@findaharp.com to have a receipt emailed.', '/receipt')
+        }
+    }
     return (
         <div className='whiteWallPaper'>
             <img id='spinner' style={{
@@ -281,15 +230,12 @@ function Shipping() {
                     <table style={{borderSpacing: '10px', flex:'12'}}>
                         <tr>
                             <td colSpan='4'>
-                            
                             </td>
                         </tr>
                     </table>
                     </div>
                     <div className='shippingContainer'>
                     <div style={{flex: '12'}}>
-                    
-                    
                     {screenWidth>1000
                     ?
                         <table style={{borderSpacing: '10px'}}>
@@ -325,7 +271,6 @@ function Shipping() {
                                     </div>
                                 </td>
                                 <td colSpan='2'>
-
                                 </td>
                             </tr>
                             <tr>
@@ -380,7 +325,6 @@ function Shipping() {
                                         placeholder="Optional" 
                                     />
                                 </td>
-                                
                             </tr>
                             <tr>
                                 <td colSpan='2'>

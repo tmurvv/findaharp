@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckoutStatusCss from '../../styles/Footer.css';
+import CheckoutStatusCss from '../../../styles/Footer.css';
 
 function CheckoutStatus() {
     return (

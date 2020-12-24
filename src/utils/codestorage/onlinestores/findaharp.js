@@ -4,13 +4,13 @@ import uuid from 'react-uuid';
 import Router from 'next/router';
 
 // internal
-import { FINDAHARP_PRODUCTS } from '../../constants/FindaharpProducts'
-import StoreProduct from '../../components/onlineStore/StoreProduct';
-import StoreProductContainer from '../../components/onlineStore/StoreProductContainer';
-import PageTitle from '../../components/PageTitle';
-import IndexCss from '../../styles/index.css';
-import FindaharpOnlineStoreCss from '../../styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
-import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
+import { FINDAHARP_PRODUCTS } from '../../../constants/FindaharpProducts'
+import StoreProduct from '../../../components/onlineStore/StoreProduct';
+import StoreProductContainer from '../../../components/onlineStore/StoreProductContainer';
+import PageTitle from '../../../components/PageTitle';
+import IndexCss from '../../../styles/index.css';
+import FindaharpOnlineStoreCss from '../../../styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
+import StoreProductSearch from '../../../components/onlineStore/StoreProductSearch';
 
 const Findaharp = () => {
     // display cart??

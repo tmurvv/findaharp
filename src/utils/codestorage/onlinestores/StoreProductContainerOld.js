@@ -2,15 +2,15 @@
 import React, {useReducer, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 // styles
-import StoreProductContainerCss from '../../styles/onlineStore/StoreProductContainer.css';
+import StoreProductContainerCss from '../../../styles/onlineStore/StoreProductContainer.css';
 // internal
 import StoreProductModal from './StoreProductModal';
 import StoreProduct from './StoreProduct';
-import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../utils/helpers';
-import { productsReducer } from '../../reducers/reducers';
+import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../helpers';
+import { productsReducer } from '../../../reducers/reducers';
 import {
     triggerLazy
-} from '../../utils/helpers';
+} from '../../helpers';
 
 const initialState = {
     openDetail: false,

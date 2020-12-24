@@ -2,7 +2,7 @@
 import uuid from 'react-uuid';
 
 // internal
-import { itemsSortByDisabled } from '../../../utils/helpers';
+import { itemsSortByDisabled } from '../../helpers';
 
 export default function ArtistMenu(props) {
     // const currentArtists = props.products.map(product => product.productArtist);
