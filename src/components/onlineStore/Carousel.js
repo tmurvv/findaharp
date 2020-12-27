@@ -12,7 +12,8 @@ class Carousel extends React.Component {
             direction: '',
             products: this.props.products,
             detailProduct: [],
-            heading: this.props.heading
+            heading: this.props.heading,
+            handleResults: this.props.handleResults
         }
         this.rightClick = this.moveRight.bind(this);
         this.leftClick = this.moveLeft.bind(this);
@@ -83,9 +84,7 @@ class Carousel extends React.Component {
                 
                 <StoreProductModal 
                     product={this.state.detailProduct} 
-                    handleCloseDetail={this.handleCloseDetail} 
-                    // handleOpenContact={handleOpenContact} 
-                    // handleCloseContact={handleCloseContact}
+                    handleCloseDetail={this.handleCloseDetail}
                 />
                 :''}
                 <style>{`

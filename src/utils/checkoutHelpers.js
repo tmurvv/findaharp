@@ -175,13 +175,6 @@ export function updateShippingTaxes(user, cart, cartSubtotals, setCartSubtotals,
     });
 }
 
-// export function leaveSiteListener(e) {
-//     // Cancel the event
-//     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-//     // Chrome requires returnValue to be set
-//     e.returnValue = '';
-// }
-
 export function generateReceiptEmailHtml(cart, cartSubtotals, user, currencyMultiplier) {
     const subTotal = user.currency==="USD"?getSubTotal(cart):getSubTotal(cart)*currencyMultiplier;
     const total = (Number(getTotal(cart, user, currencyMultiplier))).toFixed(2);

@@ -1,56 +1,33 @@
-import { useContext, useState, useReducer, useEffect } from 'react';
+// packages
+import { useContext, useState, useEffect } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
 import LazyLoad from 'react-lazyload';
 import parseNum from 'parse-num';
-import {
-    incQty
-} from '../../utils/storeHelpers';
+// contexts
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
+// other internal
 import StoreProductCss from '../../styles/onlineStore/StoreProduct.css';
-import { resultInfoReducer } from '../../reducers/reducers';
-import Results from '../Results';
-import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
 import { STORE_PARTNERS } from '../../constants/storeDirectory';
-
-import { leaveSiteListener, setlocalCart } from '../../utils/checkoutHelpers'
-import {
-    triggerLazy
-} from '../../utils/helpers';
-
+import { setlocalCart } from '../../utils/checkoutHelpers';
+import { incQty } from '../../utils/storeHelpers';
 
 const StoreProduct = (props) => {
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
-    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [ openStoreModal, setOpenStoreModal ] = useState(false);
     const [ sellerInfo, setSellerInfo ] = useState();
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
 
-    function resetResults() {
-        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
-        document.querySelector('#loadingLoginText').innerText='';
-        dispatchResultInfo({type: 'initial'});
-    }
-    function handleClick(msg) {
-        const resultText = document.querySelector('#loadingLoginText');
-        resultText.innerText=msg;
-        dispatchResultInfo({type: 'OK'});
-    }
-    function loginGuest(evt) {
-        // if (evt) evt.preventDefault();  
-        resetResults();
-    }
     function handleImageLoad(evt) {
         if (evt.target.style.height !== '30%') evt.target.style.height="auto";
         if (props.productdetail.naturalHeight && props.productdetail.naturalHeight > 0) evt.target.style.height=`auto`;
     }
     function handleOpenStoreModal() {
-        // if (!props.productdetail||!props.productdetail.productTitle) return;
         setOpenStoreModal(true);
         props.handleopenstoredetail(props.productdetail); 
     }
@@ -58,9 +35,11 @@ const StoreProduct = (props) => {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
-                handleClick('Only 1 in stock. Item already in cart.')
+                alert('instoreproductif')
+                console.log(props)
+                props.handleResults('Only 1 in stock. Item already in cart.')
             } else {
-                incQty(cart, setCart, e.target.getAttribute('data-item-title'));
+                incQty(cart, setCart, e.target.getAttribute('data-item-title'), cartSubtotals, setCartSubtotals, user, currencyMultiplier);
             }   
         } else {
             const cartCopy = [...cart];
@@ -94,25 +73,12 @@ const StoreProduct = (props) => {
         e.target.classList.add("storeflyToCart");
     }
     useEffect(() => {
-        const result = Array.from(STORE_PARTNERS).filter(seller => {
+        Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.productdetail.store) setSellerInfo(seller);
         });
     });
     return (
         <div className="storeproduct">
-            <Results 
-                resultInfo={resultInfo} 
-                loginGuest={loginGuest}
-                resetResults={resetResults} 
-                zipMsg='Only 1 in stock. Item already in cart.'
-            />
-            {/* <div className="storeproduct__imgcontainer">
-                <img 
-                    src={props.productdetail.image} 
-                    alt={props.productdetail.title}
-                    onClick={()=>handleOpenStoreModal()} 
-                />
-            </div> */}
             <div className={`storeproduct__imgcontainer`}>
                 <LazyLoad
                     once={true}
@@ -136,7 +102,6 @@ const StoreProduct = (props) => {
                 <div style={{fontSize: '16px'}}>{props.productdetail.title}</div>
                 <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:""}</div>
             </div>
-            {/* <p className="storeproduct__description">{props.productdetail.description}</p> */}
             {props.productdetail.category==='music'
             ?<div className="storeproductDetails">
                 <div><span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}</div>

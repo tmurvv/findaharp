@@ -21,7 +21,7 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStringsChange }) => {
+const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStringsChange, handleResults }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [ numInCarousel, setNumInCarousel ] = useState(Math.floor(getWindowSize().width/270));
@@ -121,6 +121,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
                             productdetail={product}
                             handleopendetail={handleOpenDetail} 
                             handleclosedetail={handleCloseDetail}
+                            handleResults={handleResults}
                             />
                         )}                     
                     </div>
@@ -132,6 +133,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
                     <StoreProductModal 
                         product={detailProduct} 
                         handleCloseDetail={handleCloseDetail}
+                        handleResults={handleResults}
                 /></>:''
                 }
                 {/* {state.openContact

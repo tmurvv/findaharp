@@ -1,33 +1,24 @@
-import React, { useState, useContext, useEffect, useReducer } from 'react';
-import axios from 'axios';
+// packages
+import React, { useState, useContext, useEffect } from 'react';
 import uuid from 'uuid';
 import parseNum from 'parse-num';
-// // internal
-import StoreProductModalCSS from '../../styles/onlineStore/StoreProductModal.css';
-// import { removeDashOE, getGeoDistance } from '../utils/helpers';
-// import { UserContext } from '../contexts/UserContext';
+// contexts
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
-import { resultInfoReducer } from '../../reducers/reducers';
-import Results from '../Results';
-import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
+// other internal
+import StoreProductModalCSS from '../../styles/onlineStore/StoreProductModal.css';
 import { STORE_PARTNERS } from '../../constants/storeDirectory';
-import {
-    incQty
-} from '../../utils/storeHelpers';
-import {
-    setlocalCart
-} from '../../utils/checkoutHelpers';
-
+import { incQty } from '../../utils/storeHelpers';
+import { setlocalCart } from '../../utils/checkoutHelpers';
 
 function StoreProductModal(props) {
-    // const { user } = useContext(UserContext);
     const { user } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [ sellerInfo, setSellerInfo ] = useState();
-    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const {
         id,
         store,
@@ -45,34 +36,17 @@ function StoreProductModal(props) {
         description,
         newused
     } = props.product;
-    function resetResults() {
-        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
-        document.querySelector('#loadingLoginText').innerText='';
-        dispatchResultInfo({type: 'initial'});
-    }
-    function handleResults(msg) {
-        const resultText = document.querySelector('#loadingLoginText');
-        resultText.innerText=msg;
-        dispatchResultInfo({type: 'OK'});
-    }
-    function loginGuest(evt) {
-        // if (evt) evt.preventDefault();
-        resetResults();
-    }
-    
     function handleClick(evt, product, openContact) {
         props.handleCloseDetail(evt, product, openContact);
     }
-
     async function updateCart(e) {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
-                alert('Only 1 in stock. Item already in cart.');
-                
+                props.handleResults('Only 1 in stock. Item already in cart.'); 
             } else {
-                incQty(cart, setCart, e.target.getAttribute('data-item-title'));
-                alert('Item added to cart.');
+                incQty(cart, setCart, e.target.getAttribute('data-item-title'), cartSubtotals, setCartSubtotals, user, currencyMultiplier);
+                props.handleResults('Item added to cart.');
             }   
         } else {
             const cartCopy = [...cart];
@@ -96,33 +70,24 @@ function StoreProductModal(props) {
             cartCopy.push(thisItem);
             cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
             const tempCartJson = await JSON.stringify(cartCopy);
-            alert('Item added to cart.');
+            props.handleResults('Item added to cart.');
             setlocalCart('fah-cart', tempCartJson);
             setCart(cartCopy);
-            handleClick(e,props.product,false);
-            
+            // handleClick(e,props.product,false);
         }
     }
     function handleAdd(e) {
         updateCart(e);
-        // e.target.addEventListener("webkitAnimationend", (e)=>updateCart(e));
-        // e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
     useEffect(() => {
-        const result = Array.from(STORE_PARTNERS).filter(seller => {
+        Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.product.store) setSellerInfo(seller);
         });
     });
     return (
         <>
         <div className='storedetailContainer' style={{display: 'block'}}>
-            <Results 
-                resultInfo={resultInfo} 
-                loginGuest={loginGuest}
-                resetResults={resetResults} 
-                zipMsg='Only 1 in stock. Item already in cart.'
-            />
             <div onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div> 
@@ -134,18 +99,12 @@ function StoreProductModal(props) {
                 <div className={`storedetailText`}>
                     <div>
                     <div className='storelongDesc' dangerouslySetInnerHTML={{__html: description}} />
-                    {/* <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: description}} /> */}
                         <div style={category==='music'?{display: 'block'}:{display: 'none'}}>
                             {level&&level!==''?<span>Level: </span>:''}{level&&level!==''?level:''}{level&&level!==''?<br />:''}
                             {harptype&&harptype!==''?<span>Harp Type: </span>:''}{harptype&&harptype!==''?harptype:''}{harptype&&harptype!==''?<br />:''}
                             {condition&&condition!==''?<span>Condition: </span>:''}{condition&&condition!==''?condition:''}{condition&&condition!==''?<br />:''}
                             {notes&&notes!==''?<span>Harp Type: </span>:''}{notes&&notes!==''?notes:''}{notes&&notes!==''?<br />:''}
-                            {/* {newused&&newused==='used'?<span>Condition (1-10):</span>:''} {condition}<br/> */}
-                            {/* {newused&&newused==='used'?<span>Notes:</span>:''} {notes&&notes} */}
-                            {/* {newused&&newused==='used'&&user&&user.currency==="USD"?    
-                            ` ${newprice?`Find new from: $${parseNum(newprice).toFixed(2)} / `:''}${notes}`
-                            :` ${newprice?`Find new from: $${parseNum(newprice*currencyMultiplier).toFixed(2)} / `:''}${notes}`
-                            }   */}
+
                         </div>
                         <span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}<br/>
                     </div>

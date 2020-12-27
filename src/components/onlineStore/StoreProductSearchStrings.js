@@ -1,33 +1,13 @@
 // packages
-import React, { 
-    useState, 
-    useContext, 
-    useEffect, 
-    useRef } from 'react';
-import useOutsideClick from "../../hooks/hooks";
-import axios from 'axios';
-
-// internal
-import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
-import StoreProductContainer from './StoreProductContainer';
-import ArtistMenu from './menus/ArtistMenu';
-import TitleMenu from './menus/TitleMenu';
-import MainCategoryMenu from './menus/MainCategoryMenu';
+import React, { useState, useEffect } from 'react';
+// components
 import OctavesMenu from './menus/OctavesMenu';
 import NotesMenu from './menus/NotesMenu';
 import BrandsMenu from './menus/BrandsMenu';
 import TypesMenu from './menus/TypesMenu';
-import { UserContext } from '../../contexts/UserContext';
-import { CurrencyContext } from '../../contexts/CurrencyContext';
-import { FINDAHARP_PRODUCTS } from '../../constants/FindaharpProducts'
-import {
-    getFilteredProducts,
-    getSearchInfo,
-    triggerLazy
-} from '../../utils/helpers';
-import {
-    getFilteredStoreProducts,
-} from '../../utils/searchProductsHelpers';
+// other internal
+import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
+import { getSearchInfo, triggerLazy } from '../../utils/helpers';
 
 const initialState = {
     category: false,
@@ -38,35 +18,8 @@ const initialState = {
     brands: false, 
     types: false
 }
-const initialStateText = {
-    selectionType: '',
-    artist: 'All Artists',
-    title: 'All Titles',
-    category: 'All Categories',
-    octaves: 'All Octaves',
-    notes: 'All Notes',
-    brands: 'All Brands',
-    types: 'All Types',
-    searchInfo: 'All Harps'
-}
-
 function StoreProductSearchStrings(props) {
-    const { user } = useContext(UserContext);
-    const { currencyMultiplier } = useContext(CurrencyContext);
-    const ref = useRef();
-
     const [menus, setMenus] = useState(initialState);
-    
-    // useOutsideClick(ref, () => {
-    //     setMenus({
-    //         category: false,
-    //         artist: false,
-    //         title: false,
-    //         octaves: false,
-    //         brands: false,
-    //         types: false
-    //     });
-    // });
     
     function handleOctavesSelection(octaves) {
         props.setTypeOfSearch("strings");
@@ -219,12 +172,6 @@ function StoreProductSearchStrings(props) {
                 });
         }
     }
-    function handleClear() {
-        // setMenus(initialState);
-        // props.setAllState(initialStateText);
-        document.querySelector('#clearSearch').style.display='none';
-        props.handleClear();
-    }
    function clearOneFilter(e) {
        let menuClick = e.target.name;
         if (e.target.name==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("","","All Octaves", props.allState.notes, props.allState.brands, props.allState.types);}
@@ -249,7 +196,7 @@ function StoreProductSearchStrings(props) {
         <div className='storeproductSearchOuter'>
             <h3 className='storesearchTitle'>Searching for STRINGS? Refine your search here.<br /><img src='img/store/fastTruck.png' alt='fast truck' style={{width: '23px', transform: 'translate(-6px, 5px)'}}/><span style={{fontStyle: 'normal', fontWeight: 'bold'}}>Fast and Easy</span> string order form coming soon!!</h3>
             <div className='storemobileSearchLine2'>
-                <div ref={ref} className='storesearchLine2'>
+                <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
                     <OctavesMenu 
                         id="octavesmenu"
@@ -275,7 +222,6 @@ function StoreProductSearchStrings(props) {
                         id="brandsmenu"
                         handleBrandsChange = {handleBrandsSelection}
                         products={props.products}
-                        // producttype={allState.productType}
                         makestitles={props.makestitles}
                         currentselected={props.allState.brands?props.allState.brands:'All Brands'}
                         open={menus.brands}
@@ -364,7 +310,6 @@ function StoreProductSearchStrings(props) {
                             id="selectedAll Types" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.types}
-                            // onClick={()=>alert('String "Types" menu under construction. Check back soon!')}
                             onClick={()=>handleClick({target: {name: 'types'}})}
                             style={{cursor: 'pointer'}}
                         >

@@ -271,7 +271,7 @@ function UserProfile(props) {
     }
     // display cart??
     useEffect(()=>{
-        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     if (openAgreement===true) {
         return <SellerAgreement setOpenAgreement={setOpenAgreement}/>

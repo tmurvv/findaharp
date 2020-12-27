@@ -137,20 +137,26 @@ function CartCss() {
         }
         .cartButton {
             // float: right;
-            cursor: pointer;
-            margin: 10px;
-            display: flex;
+            // cursor: pointer;
+            // margin: 10px;
+            display: block;
             position: fixed;
             top: 220px;
             right: 10px;
             z-index: 5000;
         }
-        .cartButton img {
+        .cartButtonCart {
+            cursor: pointer;
+            margin: 10px;
+            display: flex;
+            
+        }
+        .cartButtonCart img {
             height: 45px;
             width: unset;
         }
         
-        .cartButton p {
+        .cartButtonCart p {
             margin-block-start: 0;
             margin-block-end: 0;
             font-weight: 600;
@@ -158,10 +164,10 @@ function CartCss() {
            transform: translate(39px, 0px);
         }
         @media only screen and (max-width: 550px) {
-            .cartButton img {
+            .cartButtonCart img {
                 height: 30px;
             }
-            .cartButton p {
+            .cartButtonCart p {
                 font-size: 14px;
                 transform: translate(27px, 0px);
             }
@@ -233,14 +239,6 @@ function CartCss() {
         .itemLine1 {
             display: flex;
         }
-        // .submit-btn {
-        //     width: 100%;
-        //     border-radius: 3px;
-        //     background-color: #ffe58a;
-        //     color: #000;
-        //     border: none;
-        // }
-        
         `}
         </style>
     )

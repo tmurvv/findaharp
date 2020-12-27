@@ -160,7 +160,7 @@ function Shipping() {
         setCartSubtotals({...cartSubtotals, taxes: tempTax });
     }
     useEffect(()=>{
-        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     useEffect(()=> {
         setScreenWidth(window.innerWidth);

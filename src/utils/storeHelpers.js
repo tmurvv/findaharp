@@ -1,4 +1,3 @@
-import { SettingsBackupRestoreSharp } from '@material-ui/icons';
 import parseNum from 'parse-num';
 import { setlocalCart, tax, shipping, getShippingArray, updateShippingTaxes } from "./checkoutHelpers";
 
@@ -48,10 +47,8 @@ export async function deleteItem(cart, setCart, prodId, cartSubtotals, setCartSu
     // prepare replacement cart by removing deleted item
     let tempCart = [...cart]
     tempCart = tempCart.filter(item => item.id!==prodId);
-    
     // update shipping & taxes
     updateShippingTaxes(user, tempCart, cartSubtotals, setCartSubtotals, currencyMultiplier)
-
     //update local cart
     const tempCartJson = await JSON.stringify(tempCart);
     setlocalCart('fah-cart', tempCartJson);

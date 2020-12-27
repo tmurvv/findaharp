@@ -4,14 +4,14 @@ import Router from 'next/router';
 import axios from 'axios';
 
 // internal
-import LoginSignupCSS from '../../styles/LoginSignup.css';
-import PageTitle from '../../components/PageTitle';
-import Carousel from '../../components/onlineStore/Carousel';
+import LoginSignupCSS from '../../../styles/LoginSignup.css';
+import PageTitle from '../../../components/PageTitle';
+import Carousel from '../../../components/onlineStore/Carousel';
 
-import StoreProductModal from './StoreProductModal';
-import Results from '../../components/Results';
-import { resultInfoReducer, activeWindowReducer } from '../../reducers/reducers';
-import { getFilteredProducts } from '../../utils/helpers';
+import StoreProductModal from '../../../components/onlineStore/StoreProductModal';
+import Results from '../../../components/Results';
+import { resultInfoReducer, activeWindowReducer } from '../../../reducers/reducers';
+import { getFilteredProducts } from '../../helpers';
 
 
 // initialize reducer object

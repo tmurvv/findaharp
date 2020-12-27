@@ -1,36 +1,18 @@
 // packages
-import { useEffect, useState, useContext } from 'react';
-import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import uuid from 'react-uuid';
-import Router from 'next/router';
 
 // internal
-import { FINDAHARP_PRODUCTS } from '../src/constants/FindaharpProducts'
-import StoreProduct from '../src/components/onlineStore/StoreProduct';
-import InfiniteProducts from '../src/components/onlineStore/InfiniteProducts';
-import ProductScroll from '../src/components/onlineStore/ProductScroll';
-import StoreProductContainer from '../src/components/onlineStore/StoreProductContainer';
-import StoreItemsHighlight from '../src/components/onlineStore/StoreItemsHighlight';
 import PageTitle from '../src/components/PageTitle';
+import GlobalStoreSearch from '../src/components/onlineStore/GlobalStoreSearch';
 import StoreIndexCss from '../src/styles/onlineStore/StoreIndex.css';
 import OnlineStoreCss from '../src/styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
-import StoreProductSearch from '../src/components/onlineStore/StoreProductSearch';
-import GlobalStoreSearch from '../src/components/onlineStore/GlobalStoreSearch';
-import StoreProductContainerCss from '../src/styles/onlineStore/StoreProductContainer.css';
-import { UserContext } from '../src/contexts/UserContext';
 
 const OnlineStore = (props) => {
-    // const [ filteredProducts, setFilteredProducts ] = useState(props.filteredProducts);
     const [ searchResults, setSearchResults ] = useState();
-    const [ featuredProducts, setFeaturedProducts ] = useState(props.featuredProducts);
-    const [ strings, setStrings ] = useState(props.strings);
-    const [ music, setMusic ] = useState(props.music);
-    const [ search, setSearch ] = useState(false);
-    const { user } = useContext(UserContext);
     // display cart
     useEffect(()=>{
-        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='flex';
+        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     // sort products
     useEffect(()=>{
@@ -82,19 +64,5 @@ OnlineStore.getInitialProps = async (props) => {
         strings: res.data.storeitems.filter(product => product.title.toUpperCase().startsWith("3RD OCTAVE C")),
         music: res.data.storeitems.filter(product => product.category==="music")
     };
-    
-    // console.log(res.data)
-    // API DATA Populate variables
-    // const products = res.data.harpData;
-    // const makesModels = res.data.harpMakesModels;
-    // products.map(product => {
-    //     product.productImageUrl.indexOf('genericHarp.png')>-1?product.productModel=`zz${product.productModel}`:'';
-    // });
-    // products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
-    // products.map(product => {
-    //     product.productModel.startsWith('zz')?product.productModel=`${product.productModel.substr(2)}`:'';
-    // });
-    // return { products, makesModels, verifying: false, found: false };
-    
 }
 export default OnlineStore;

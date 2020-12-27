@@ -1,20 +1,17 @@
 // packages
-import React, {useReducer, useEffect, useState, useCallback, useRef } from 'react';
-import ReactDOM from "react-dom";
+import React, { useReducer, useEffect, useState, useCallback, useRef } from 'react';
 import uuid from 'react-uuid';
 import InfiniteScrollLoading from "react-infinite-scroll-loading";
 import debounce from "lodash.debounce";
 import axios from "axios";
-// styles
+// Components
+import StoreProduct from '../../components/onlineStore/StoreProduct';
+import StoreResults from '../../components/onlineStore/StoreResults';
+// other internal
 import StoreProductContainerCss from '../../styles/onlineStore/StoreProductContainer.css';
-// internal
-import StoreProductModal from './StoreProductModal';
-import StoreProduct from './StoreProduct';
-import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../utils/helpers';
+import { setOpacity } from '../helpers';
 import { productsReducer } from '../../reducers/reducers';
-import {
-    triggerLazy
-} from '../../utils/helpers';
+import { triggerLazy } from '../helpers';
  
 const GITHUB_API = "https://api.github.com";
 
@@ -29,14 +26,13 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
   const repoArray = Symbol.iterator in Object(filteredproductscontainer)?[...filteredproductscontainer]:[];  
   const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
-    const [searchVal, setSearchVal] = useState("");
     const [repoList, setRepoList] = useState([]);
     const [hasMore, setHasMore] = useState(false);
     const [resetPage, setResetPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const idx = useRef(0)
 
-    const size = getWindowSize();
+    
     function handleOpenDetail(product) {
         // dispatch({type:'detail', product});
         setDetailProduct(product);
@@ -107,8 +103,6 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
             }
           // });
       };
-    
-
     useEffect(() => {
         triggerLazy();
         getStarted();
@@ -119,22 +113,23 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
         return(
             <>
             <div className="storeproductContainer">
-      
-              <InfiniteScrollLoading
-                element="div"
-                pageStart={1}
-                hasMore={hasMore && !isLoading}
-                loadMore={loadMore}
-                resetPage={resetPage}
-              >
-                {!!repoList.length &&
-                  repoList.map(product => <StoreProduct 
-                    key={uuid()}
-                    productdetail={product}
-                    handleopendetail={handleOpenDetail} 
-                    handleclosedetail={handleCloseDetail}
-                    />
-                )}
+                
+                <InfiniteScrollLoading
+                    element="div"
+                    pageStart={1}
+                    hasMore={hasMore && !isLoading}
+                    loadMore={loadMore}
+                    resetPage={resetPage}
+                >
+                  {!!repoList.length &&
+                      repoList.map(product => <StoreProduct 
+                        key={uuid()}
+                        productdetail={product}
+                        handleopendetail={handleOpenDetail} 
+                        handleclosedetail={handleCloseDetail}
+                        handleClick={handleClick}
+                        />
+                  )}
                 
               </InfiniteScrollLoading>
             </div>

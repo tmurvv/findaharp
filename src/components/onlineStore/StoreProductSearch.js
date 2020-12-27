@@ -1,33 +1,18 @@
 // packages
-import React, { 
-    useState, 
-    useContext, 
-    useEffect, 
-    useRef } from 'react';
-import useOutsideClick from "../../hooks/hooks";
-import axios from 'axios';
-
-// internal
+import React, { useState, useEffect } from 'react';
+// context
+import { UserContext } from '../../contexts/UserContext';
+import { CurrencyContext } from '../../contexts/CurrencyContext';
+// components
 import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
-import StoreProductContainer from './StoreProductContainer';
-import ArtistMenu from './menus/ArtistMenu';
-import TitleMenu from './menus/TitleMenu';
-import MainCategoryMenu from './menus/MainCategoryMenu';
 import SoloEnsembleMenu from './menus/SoloEnsembleMenu';
 import LevelMenu from './menus/LevelMenu';
 import PublicationTypeMenu from './menus/PublicationTypeMenu';
-import { UserContext } from '../../contexts/UserContext';
-import { CurrencyContext } from '../../contexts/CurrencyContext';
-import { FINDAHARP_PRODUCTS } from '../../constants/FindaharpProducts'
+// other internal
 import {
-    getFilteredProducts,
     getSearchInfo,
     triggerLazy
 } from '../../utils/helpers';
-import {
-    getFilteredStoreProducts,
-} from '../../utils/searchProductsHelpers';
-import { PublicTwoTone } from '@material-ui/icons';
 
 const initialState = {
     category: false,
@@ -37,86 +22,9 @@ const initialState = {
     level: false, 
     publicationtype: false
 }
-const initialStateText = {
-    selectionType: '',
-    artist: 'All Artists',
-    title: 'All Titles',
-    category: 'All Categories',
-    soloensemble: 'All Lever/Pedal/Ens',
-    level: 'All Levels',
-    publicationtype: 'All Publication Types',
-    searchInfo: 'All Harps'
-}
-
 function StoreProductSearch(props) {
-    const { user } = useContext(UserContext);
-    const { currencyMultiplier } = useContext(CurrencyContext);
-    const ref = useRef();
-
     const [menus, setMenus] = useState(initialState);
-    // const [props.allState, setAllState] = useState(initialStateText); 
-    // const [props.allState, setAllState] = useState({
-    //     soloensemble: props.ensembleSearch,
-    //     level: 'All Levels',
-    //     publicationtype: 'All Publication Types',
-    // }); 
-
-    // useOutsideClick(ref, () => {
-    //     setMenus({
-    //         category: false,
-    //         artist: false,
-    //         title: false,
-    //         soloensemble: false,
-    //         level: false,
-    //         publicationtype: false
-    //     });
-    // });
-    // function handleArtistSelection(artist) {
-    //     const newState = {...props.allState, 
-    //         artist,
-    //         title: "All Titles"
-    //     }       
-    //     setAllState({...props.allState, 
-    //         artist,
-    //         title: "All Titles",
-    //         searchInfo: getSearchInfo(newState)
-    //     });
-    //     setMenus(initialState);
-    // }
-    // function handleTitleSelection(title) {
-    //     // shortcut when user clicks on line between title listings
-    //     if (title==='[object Object]') return;
-    //     //catches when user selects all titles from artist
-    //     const newStateAllTitles = {...props.allState, 
-    //         title: "All Titles"
-    //     } 
-    //     if (title.toUpperCase() === 'ALL TITLES') {
-    //         setAllState({...props.allState, 
-    //             title: "All Titles",
-    //             searchInfo: getSearchInfo(newStateAllTitles)
-    //         });
-    //         setMenus(initialState);
-    //         return;
-    //     }
-    //     const newState = {...props.allState, 
-    //         title
-    //     }
-    //     setAllState({...props.allState, 
-    //         title,
-    //         searchInfo: getSearchInfo(newState)
-    //     });
-    //     setMenus(initialState);
-    // }
-    function handleCategorySelection(category) {
-        const newState = {...props.allState, 
-            category
-        }
-        props.setAllState({...props.allState, 
-            category,
-            searchInfo: getSearchInfo(newState)
-        });
-        setMenus(initialState);
-    }
+    
     function handleSoloEnsembleSelection(soloensemble) {
         const newState = {...props.allState, 
             soloensemble: soloensemble==='All Lever/Pedal/Ens'?'All Lever/Pedal/Ens':soloensemble,
@@ -232,13 +140,7 @@ function StoreProductSearch(props) {
                 });
         }
     }
-    function handleClear() {
-        // setMenus(initialState);
-        // setAllState(initialStateText);
-        document.querySelector('#clearSearch').style.display='none';
-        // props.handleClear();
-    }
-   function clearOneFilter(e) {
+    function clearOneFilter(e) {
        let menuClick = e.target.name;
         if (e.target.name==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
         if (e.target.name==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
@@ -248,8 +150,6 @@ function StoreProductSearch(props) {
         const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
         props.setAllState({...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
-        
-        //(props.allState.soloensemble, props.allState.level, props.allState.publicationtype);
     }
     useEffect(() => {
         triggerLazy();
@@ -259,7 +159,7 @@ function StoreProductSearch(props) {
         <div className='storeproductSearchOuter'>
             <h3 className='storesearchTitle'>Searching for MUSIC? Refine your search here.</h3>
             <div className='storemobileSearchLine1'>
-                <div ref={ref} className='storesearchLine1'>
+                <div className='storesearchLine1'>
                     <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
                     <SoloEnsembleMenu 
                         id="soloensemblemenu"

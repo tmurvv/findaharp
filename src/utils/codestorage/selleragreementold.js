@@ -2,10 +2,10 @@ import { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { Router } from 'next/router';
 
-import { UserContext } from '../contexts/UserContext';
-import { resultInfoReducer } from '../reducers/reducers';
-import Results from './Results';
-import { RESULTS_INITIAL_STATE, TERMS_CONDITIONS } from '../constants/constants';
+import { UserContext } from '../../contexts/UserContext';
+import { resultInfoReducer } from '../../reducers/reducers';
+import Results from '../../components/Results';
+import { RESULTS_INITIAL_STATE, TERMS_CONDITIONS } from '../../constants/constants';
 
 
 function SellerAgreement(props) {

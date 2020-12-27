@@ -15,7 +15,7 @@ import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
 
-import { leaveSiteListener, setlocalCart } from '../../utils/checkoutHelpers'
+import { setlocalCart } from '../../utils/checkoutHelpers'
 import {
     triggerLazy
 } from '../../utils/helpers';

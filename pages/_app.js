@@ -175,8 +175,7 @@ function MyApp(props) {
                             <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
                                 <>
                                     <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                    <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
-                                    {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
+                                    <CartButton />
                                     <UploadStoreItem />
                                     <Footer />
                                 </>
@@ -209,8 +208,7 @@ function MyApp(props) {
                             <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
                                 <>
                                                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                                <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
-                                                {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
+                                                <CartButton />
                                                 <SellerAgreement />
                                                 <Footer />
                                             </>
@@ -261,8 +259,7 @@ function MyApp(props) {
                                         ?<UploadListingResult success={true}/>
                                         :<>
                                             <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                            <CartButton onClick={()=>Router.push('/cart')} style={{zIndex: 8000}} />
-                                            {/* <Cart cartopen={cartOpen} style={{zIndex: 8000}}/> */}
+                                            <CartButton />
                                             <Elements stripe={promise}>
                                                 <Component {...pageProps} />
                                             </Elements>

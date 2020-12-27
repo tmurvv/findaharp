@@ -4,6 +4,7 @@ function ResultsCss() {
     return (
         <style jsx="true">{`
         #loadingLogin,
+        #SP-loadingLogin,
         #loadingVerifyLogin {
             display: none;
             color: #6A75AA;

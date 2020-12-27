@@ -9,8 +9,6 @@ import StripeCheckout from '../src/components/onlineStore/StripeCheckout';
 import PaypalCheckout from '../src/components/onlineStore/PaypalCheckout';
 import OrderSummary from '../src/components/onlineStore/OrderSummary';
 import { StatusContext } from '../src/contexts/StatusContext';
-import { leaveSiteListener } from '../src/utils/checkoutHelpers';
-
 
 function Payment() {
     const { setStatus } = useContext(StatusContext);

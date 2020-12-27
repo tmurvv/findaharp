@@ -18,6 +18,20 @@ export const RESULTS_INITIAL_STATE = {
     tryAgainMarginLeft: '0',
     resultImg: 'none'
 }
+export const STORE_INITIAL_STATE = {
+    selectionType: '',
+    artist: 'All Artists',
+    title: 'All Titles',
+    category: 'All Categories',
+    soloensemble: 'All Lever/Pedal/Ens',
+    level: 'All Levels',
+    publicationtype: 'All Publication Types',
+    octaves: 'All Octaves',
+    notes: 'All Notes',
+    brands: 'All Brands',
+    types: 'All Types',
+    searchInfo: ''
+}
 export const RESET_SHIPPING_INFO = {
     shippingfname: '',
     shippinglname: '',
