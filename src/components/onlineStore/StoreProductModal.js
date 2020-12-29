@@ -103,7 +103,7 @@ function StoreProductModal(props) {
                             {level&&level!==''?<span>Level: </span>:''}{level&&level!==''?level:''}{level&&level!==''?<br />:''}
                             {harptype&&harptype!==''?<span>Harp Type: </span>:''}{harptype&&harptype!==''?harptype:''}{harptype&&harptype!==''?<br />:''}
                             {condition&&condition!==''?<span>Condition: </span>:''}{condition&&condition!==''?condition:''}{condition&&condition!==''?<br />:''}
-                            {notes&&notes!==''?<span>Harp Type: </span>:''}{notes&&notes!==''?notes:''}{notes&&notes!==''?<br />:''}
+                            {notes&&notes!==''?<span>Notes: </span>:''}{notes&&notes!==''?notes:''}{notes&&notes!==''?<br />:''}
 
                         </div>
                         <span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}<br/>

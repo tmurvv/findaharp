@@ -63,8 +63,8 @@ Index.getInitialProps = async (props) => {
          * API DATA
          *******************/
         // API
-        // const res = await axios.get(`https://findaharp-api.herokuapp.com`);
-        const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
+        const res = await axios.get(`https://findaharp-api.herokuapp.com`);
+        // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
         // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
         // const res = await axios.get(`http://localhost:3000`); // BREAKING
         // API DATA Populate variables

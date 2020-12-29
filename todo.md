@@ -12,7 +12,8 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
-- store is wiggly on iPad
+- for modal take out border and do opacity thing
+- select boxes on ios are ugly
 - loading... on infinite scroll not working
 - add search term to breadcrumbs
 - clear all next to breadcrumbs should go back to carousels
