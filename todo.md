@@ -12,8 +12,8 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+- store is wiggly on iPad
 - loading... on infinite scroll not working
-- goto top button for scroll
 - add search term to breadcrumbs
 - clear all next to breadcrumbs should go back to carousels
 - add 'item added to cart' dialog instead of default alert box
