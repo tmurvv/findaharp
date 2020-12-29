@@ -7,6 +7,7 @@ import StoreProduct from '../../components/onlineStore/StoreProduct';
 import StoreProductModal from '../../components/onlineStore/StoreProductModal';
 import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
 import StoreProductSearchStrings from '../../components/onlineStore/StoreProductSearchStrings';
+import SearchBar from '../../components/onlineStore/SearchBar';
 import ProductScroll from '../../components/onlineStore/ProductScroll';
 import StoreResults from './StoreResults';
 // other internal
@@ -330,6 +331,7 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
+            <SearchBar />
             <div className='storeSearchLine' >
             <h3 className='searchHelperText'>Search by category</h3>
                 <div className='selectContainer'>    

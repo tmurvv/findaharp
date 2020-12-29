@@ -129,7 +129,6 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
                 </div>
                 {detailProduct&&detailProduct.title?
                     <>
-                    <h1>HERE</h1>
                     <StoreProductModal 
                         product={detailProduct} 
                         handleCloseDetail={handleCloseDetail}
