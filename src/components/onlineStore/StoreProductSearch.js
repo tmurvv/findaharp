@@ -141,15 +141,15 @@ function StoreProductSearch(props) {
         }
     }
     function clearOneFilter(e) {
-       let menuClick = e.target.name;
-        if (e.target.name==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
-        if (e.target.name==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
-        if (e.target.name==='publicationtype') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', props.allState?props.allState.level:'', "All Publication Types");}
-        menuClick==="soloensemble"?menuClick="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
-        menuClick==="publicationtype"?menuClick="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
-        const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
+        const menuClick = e.target.name;
+        if (menuClick==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='publicationtype') {props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
+        e.target.name==="soloensemble"?e.target.name="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
+        e.target.name==="publicationtype"?e.target.name="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
+        const newState = {...props.allState, [menuClick]: `All ${e.target.name.charAt(0).toUpperCase()}${e.target.name.slice(1)}s`}
         const newSearchInfo = getSearchInfo(newState);
-        props.setAllState({...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
+        props.setAllState({...newState, searchInfo: newSearchInfo});
     }
     useEffect(() => {
         triggerLazy();

@@ -50,6 +50,7 @@ function GlobalStoreSearch(props) {
     }
 
     function handleChange(type, menu, value1, value2, value3, value4) {
+        console.log('iminhandelcahage', type, menu, value1, value2, value3, value4)
         // update menu text -- not for search term
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
         if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, types: value4 });

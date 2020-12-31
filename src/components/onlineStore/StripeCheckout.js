@@ -63,16 +63,20 @@ export default function StripeCheckout(props) {
     }
     useEffect(() => {
         // check for balance owed
+        console.log('curr', currencyMultiplier)
+        console.log('ship', user.shippingcountry)
+        console.log('usercurr', user.currency)
         if (getTotal(cart, user,currencyMultiplier)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
                 // Create PaymentIntent as soon as the page loads
+                // .fetch(`https://findaharp-api.herokuapp.com/api/v1/create-stripe-payment-intent`, { //BREAKING               
                 window
-                .fetch(`https://findaharp-api.herokuapp.com/api/v1/create-stripe-payment-intent`, {
+                .fetch(`https://findaharp-api-staging.herokuapp.com/api/v1/create-stripe-payment-intent`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({"total": getTotal(cart, user, currencyMultiplier)*100})
+                    body: JSON.stringify({"total": parseInt(getTotal(cart, user, currencyMultiplier)*100), currency: user.currency.toLowerCase()})
                 }) 
                 .then(res => {
                     return res.json();
@@ -81,10 +85,11 @@ export default function StripeCheckout(props) {
                     setClientSecret(data.clientSecret);
                 });
             } catch (e) {
+                alert('error', e.message)
                 console.log('error fetch stripe payment intent', e.message)
             }
         } else {
-            handleClick('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase. \n\nYou may have reached this message by pressing your browser back-button on the PayPal page before paying. If so, you have not been charged for your order, but your cart was lost. We are working to resolve this issue."', 'cart');
+            handleClick('Total owed is $0.00. Please note that items priced $0.00 are "free with purchase." \n\nYou may have reached this message by pressing your browser back-button on the PayPal page before paying. If so, you have not been charged for your order, but your cart was lost. We are working to resolve this issue.', 'cart');
         }
     }, []);
     // from Stripe code

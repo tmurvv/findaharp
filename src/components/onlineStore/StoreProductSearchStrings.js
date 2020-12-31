@@ -173,20 +173,14 @@ function StoreProductSearchStrings(props) {
         }
     }
    function clearOneFilter(e) {
-       let menuClick = e.target.name;
-        if (e.target.name==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("","","All Octaves", props.allState.notes, props.allState.brands, props.allState.types);}
-        if (e.target.name==='notes') {props.setNotesSearch("All Notes"); props.handleChange("","",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.types);}
-        if (e.target.name==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("","",props.allState.octaves, props.allState.notes, "All Brands", props.allState.types);}
-        if (e.target.name==='types') {props.setTypesSearch("All Types"); props.handleChange("","",props.allState.octaves, props.allState.notes, props.allState.brands, "All Types");}
-        menuClick==="octaves"?menuClick="Octave":''; // hack change e.target.name to 'Octaves'
-        menuClick==="notes"?menuClick="Note":''; // hack change e.target.name to 'Notes'
-        menuClick==="brands"?menuClick="Brand":''; // hack change e.target.name to 'Brands'
-        menuClick==="types"?menuClick="Type":''; // hack change e.target.name to 'Types'
-        const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
+        let menuClick = e.target.name;
+        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.types);}
+        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange("strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.types);}
+        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.types);}
+        if (menuClick==='types') {props.setTypesSearch("All Types"); props.handleChange("strings","types",props.allState.octaves, props.allState.notes, props.allState.brands, "All Types");}
+        const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
-        props.setAllState({...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
-        
-        //props.handleChange(allState.octaves, allState.brands, allState.types);
+        props.setAllState({...newState, searchInfo: newSearchInfo});
     }
     useEffect(() => {
         triggerLazy();

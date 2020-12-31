@@ -22,7 +22,7 @@ const OnlineStore = (props) => {
     return (
         <>
             <div className='storeIndex'>
-                <PageTitle maintitle="Online Store" subtitle='Hundreds more music titles coming soon' /> 
+                <PageTitle maintitle="Online Store" subtitle='Featuring products sold by our store partners' /> 
                 <GlobalStoreSearch 
                     filteredProducts={props.filteredProducts} 
                     featuredProducts={props.featuredProducts} 
@@ -52,7 +52,7 @@ OnlineStore.getInitialProps = async (props) => {
     const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKING
+    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     const filteredProducts = res.data.storeitems;
     const featuredProducts = res.data.storeitems.filter(product => product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 

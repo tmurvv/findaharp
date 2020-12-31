@@ -38,7 +38,7 @@ export default function CheckoutForm() {
                 "Content-Type": "application/json"
             },
             // body: JSON.stringify({items: [{ id: "xl-tshirt" }]}) // Format for listing all stripe items
-            body: JSON.stringify({"total": getTotal(cart, user, currencyMultiplier)*100})
+            body: JSON.stringify({"total": getTotal(cart, user, currencyMultiplier)*100, currency: Number(currencyMultiplier)===1?"usd": "cad"})
         })
         .then(res => {
             return res.json();
@@ -113,6 +113,7 @@ export default function CheckoutForm() {
                 loginGuest={response}
                 resetResults={resetResults} 
             />
+            <h1>{currencyMultiplier}</h1>
             <form id="payment-form" onSubmit={handleSubmit} style={{margin: 'auto', marginTop: '50px'}}>
                 <h2>Credit Card Payment</h2>
                 <h4 style={{fontStyle:'italic', color: 'lightgrey', fontWeight: '300', marginTop: '0'}}>Powered by Stripe</h4>
@@ -148,13 +149,13 @@ export default function CheckoutForm() {
                 </p>
                 <img style={{width: 'auto', marginTop: '30px', marginBottom: '-15px'}} src='img/creditcardgroup.jpg' alt='credit card logos, mastercard, visa, discover, AmEx' />
             </form>
-            <form id="payment-form" style={{margin: 'auto', marginTop: '50px'}}>
+            {/* <form id="payment-form" style={{margin: 'auto', marginTop: '50px'}}>
                 <h2>Paypal Payment</h2>
                 <h3 style={{margin: '25px 0'}}>Total: {getTotal(cart, user, currencyMultiplier)}</h3>
                 <p>Paypal payment under construction</p>
                 <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
                 <script>paypal.Buttons().render('body');</script>
-            </form>
+            </form> */}
             <IndexCss />
             <CheckoutFormCss />
             
