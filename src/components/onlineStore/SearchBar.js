@@ -1,9 +1,9 @@
+
 import React, { useState } from 'react'
 import { useLunr } from 'react-lunr'
 import { Formik, Form, Field } from 'formik'
 
 import lunr from "lunr";
-import { ContactsOutlined } from '@material-ui/icons';
 
 var documents = [{
     "name": "Lunr",
@@ -26,18 +26,26 @@ var documents = [{
 
  
 const SearchBar = () => {
-//   const [query, setQuery] = useState(null)
-//   const results = useLunr(query, index, store)
+  const [query, setQuery] = useState(null);
+  const [results, setResults] = useState([{ref: 'here'}, {ref: 'here again'}])
  
+const handleChange = (evt) => {
+  setQuery(evt.target.value);
+}
 function searchIt() {
-    const results = idx.search('Java deliver');
-    console.log(results)
-    console.log(results[0].ref);
+  console.log(idx.search(query))
+    setResults(idx.search(query));
 }
   return (
     <>
-        <input />
+        <input onChange={handleChange}/>
         <button onClick={()=>searchIt()}>Submit</button>
+        <h3>Results:</h3>
+        <ul>
+          {results.map(result => (
+            <li key={result.ref}>{result.ref}</li>
+          ))}
+        </ul>
     </>
   )
 }

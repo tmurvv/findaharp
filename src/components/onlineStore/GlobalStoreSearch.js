@@ -19,6 +19,7 @@ import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../constants/cons
 import { findNested, getStoreSearchInfo } from '../../utils/searchProductsHelpers';
 
 function GlobalStoreSearch(props) {
+    console.log('globlaprops', props.filteredProducts.length)
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [ allState, setAllState ] = useState(STORE_INITIAL_STATE);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
@@ -309,11 +310,14 @@ function GlobalStoreSearch(props) {
       };
 
     useEffect(()=>{
+        console.log('inuse')
         if(props.filteredProducts&&props.filteredProducts.length===0) {
+            console.log('inif')
             document.querySelector('#searchInput').focus();
             setSearchResults(props.filteredProducts);
         }
         if (searchResults) {
+            console.log('inifsearch')
             setHasMore(true);
             setIsLoading(false);
             if (props.filteredProducts.slice(0,idx+30).length > props.filteredProducts.length) {
@@ -331,7 +335,7 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            <SearchBar />
+            <SearchBar myText={props&&props.filteredProducts}/>
             <div className='storeSearchLine' >
             <h3 className='searchHelperText'>Search by category</h3>
                 <div className='selectContainer'>    
