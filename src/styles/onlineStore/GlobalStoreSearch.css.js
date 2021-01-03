@@ -38,6 +38,7 @@ function GlobalStoreSearchCss() {
           @media only screen and (max-width: 750px) {
             .selectContainer {
               width: 100%;
+              display: flex;
             }
             select {
               width: 100%;
@@ -61,9 +62,6 @@ function GlobalStoreSearchCss() {
             font-size: 16px;
             padding: 12px 20px;
             border: 1px solid #ffe58a;
-            // border-bottom: none;
-            // border-left: 1px solid #ffe58a;
-            // border-right: 1px solid #ffe58a;
             margin-bottom: 0px;
             max-width: 650px;
           }
@@ -76,7 +74,6 @@ function GlobalStoreSearchCss() {
           select {
             font-size: 16px;
             padding: 12px 20px;
-            margin-bottom: 15px;
             border: 1px solid #ffe58a;
             width: 100%;
             background-color: #fff;
@@ -94,18 +91,38 @@ function GlobalStoreSearchCss() {
             outline-color: #ffe499;
           }
           .searchTextImg {
-            flex: 8;
             display: flex;
+            width: 100%;
           }
-          @media only screen and (max-width: 750px) {
-            .searchTextImg {
+          .searchTextImg form{
+            display: flex;
+            width: 100%;
+          }
+          .searchTextImg input{
               width: 100%;
-            }
+              border: 1px solid #ffe499;
+              flex: 8;
+              padding: 13px 7px;
+              font-size: 16px;
+          }
+          #searchMagnify {
+            height: 46px;
+            width: 46px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            outline: none;
+          }
+          #searchMagnify>img {
+            padding: 5px;
+            background-color: rgb(249, 191, 30);
+            height: 46px;
+            width: 46px;
           }
           .searchHelperText {
             display: none;
             width: 60%;
-            margin: 0px auto 5px;
+            margin: 15px auto 5px;
             text-align: center;
             font-size: 12px;
             font-style: italic;
@@ -128,6 +145,11 @@ function GlobalStoreSearchCss() {
             font-weight: 500;
             font-size:14px;
         }
+        @media only screen and (max-width: 750px) {
+          .storesearchTitle {
+              width: 100%;
+          }
+        }
         .searchInfoWrapper {
             display: flex;
         }
@@ -137,7 +159,6 @@ function GlobalStoreSearchCss() {
             }
             .searchInfoWrapper h3 {
                 font-size: 14px;
-                margin-block-end: 0;
             }
         }
         

@@ -1,3 +1,5 @@
+import lunr from "lunr";
+
 /**
  * Searches for the occurance of text with the value of any key/value pair in an object
  * @function findNested
@@ -152,4 +154,37 @@ export const getStoreSearchInfo = (allState, type) => {
     }
     if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
     return `Showing ${allState.category}: ${searchInfo}`;
+}
+
+export function searchBar(filteredProducts, query) {
+    const returnArray = [];
+    // create index on filteredProducts for search engine
+    var idx = lunr(function () {
+        this.ref('title');
+        this.field('title')
+        this.field('descriptiontext')
+        this.field('description')
+        this.field('artist_last');
+        this.field('artist_first');
+        this.field('subcategory');
+        this.field('subsubcategory');
+        this.field('category')
+        filteredProducts.forEach(function (doc) { 
+            // clean up data for search engine
+            doc.artist_first=String(doc.artist_first).replace(/\//g,'-') 
+            doc.artist_last=String(doc.artist_last).replace(/\//g,'-') 
+            doc.title=String(doc.title).replace(/\//g,'-')
+            doc.descriptiontext=String(doc.descriptiontext).replace(/\//g,'-')          
+            this.add(doc)
+        }, this)
+    });
+       
+    // clean up query and search
+    const results = idx.search(String(query).replace(/\//g,'-'));
+    // map found item ids to items list
+    filteredProducts.map(product=>{
+        results.map(result=> result.ref===product.title&&returnArray.push({...product, score: result.score}));
+    });
+    // sort and return
+    return returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0));
 }

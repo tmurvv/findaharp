@@ -34,6 +34,7 @@ function StoreProductModal(props) {
         notes,
         image, 
         description,
+        descriptiontext,
         newused
     } = props.product;
     function handleClick(evt, product, openContact) {
@@ -99,12 +100,13 @@ function StoreProductModal(props) {
                 <div className={`storedetailText`}>
                     <div>
                     <div className='storelongDesc' dangerouslySetInnerHTML={{__html: description}} />
+                        <div>{description?'':descriptiontext}</div>
+                        <br/>
                         <div style={category==='music'?{display: 'block'}:{display: 'none'}}>
                             {level&&level!==''?<span>Level: </span>:''}{level&&level!==''?level:''}{level&&level!==''?<br />:''}
                             {harptype&&harptype!==''?<span>Harp Type: </span>:''}{harptype&&harptype!==''?harptype:''}{harptype&&harptype!==''?<br />:''}
                             {condition&&condition!==''?<span>Condition: </span>:''}{condition&&condition!==''?condition:''}{condition&&condition!==''?<br />:''}
                             {notes&&notes!==''?<span>Harp Type: </span>:''}{notes&&notes!==''?notes:''}{notes&&notes!==''?<br />:''}
-
                         </div>
                         <span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}<br/>
                     </div>

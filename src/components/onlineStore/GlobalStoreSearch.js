@@ -16,10 +16,10 @@ import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.c
 import StoreProductContainerCss from '../../styles/onlineStore/StoreProductContainer.css';
 import { resultInfoReducer } from '../../reducers/reducers';
 import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../constants/constants';
-import { findNested, getStoreSearchInfo } from '../../utils/searchProductsHelpers';
+import { findNested, getStoreSearchInfo, searchBar } from '../../utils/searchProductsHelpers';
 
 function GlobalStoreSearch(props) {
-    console.log('globlaprops', props.filteredProducts.length)
+    // console.log('globlaprops', props.filteredProducts.length)
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [ allState, setAllState ] = useState(STORE_INITIAL_STATE);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
@@ -36,6 +36,7 @@ function GlobalStoreSearch(props) {
     const [resetPage, setResetPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [idx, setIdx] = useState(0);
+    const [screenWidth, setScreenWidth] = useState();
  
     function resetResults() {
         document.querySelector('#loadingLoginText').innerText='';
@@ -266,13 +267,15 @@ function GlobalStoreSearch(props) {
         // search term
         if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
-            preSearchProductList.map(product=> {
-                const keyList = Object.keys(product);
-                keyList.every(key=>{
-                    if (findNested(product, key, searchTerm)) {searchProductList.push(product); return false;}
-                    return true;
-                })
-            });
+            // preSearchProductList.map(product=> {
+            //     const keyList = Object.keys(product);
+            //     keyList.every(key=>{
+            //         if (findNested(product, key, searchTerm)) {searchProductList.push(product); return false;}
+            //         return true;
+            //     })
+            // });
+            // searchProductList = [...searchProductList, ...searchBar(props.filteredProducts, searchTerm)];
+            searchProductList = searchBar(preSearchProductList, searchTerm)
         } else {
             searchProductList=[...preSearchProductList]
         }
@@ -308,22 +311,24 @@ function GlobalStoreSearch(props) {
             setIdx(idx+30);
         }
       };
-
+    function searchText(searchProductList) {
+        searchProductList = searchBar(searchProductList, searchTerm);
+    }
     useEffect(()=>{
-        console.log('inuse')
-        if(props.filteredProducts&&props.filteredProducts.length===0) {
-            console.log('inif')
-            document.querySelector('#searchInput').focus();
-            setSearchResults(props.filteredProducts);
-        }
-        if (searchResults) {
-            console.log('inifsearch')
-            setHasMore(true);
-            setIsLoading(false);
-            if (props.filteredProducts.slice(0,idx+30).length > props.filteredProducts.length) {
-              setHasMore(false);
-            }
-        }
+            setScreenWidth(window.innerWidth);
+        // if(props.filteredProducts&&props.filteredProducts.length===0) {
+        //     console.log('inif')
+        //     document.querySelector('#searchInput').focus();
+        //     setSearchResults(props.filteredProducts);
+        // }
+        // if (searchResults) {
+        //     console.log('inifsearch')
+        //     setHasMore(true);
+        //     setIsLoading(false);
+        //     if (props.filteredProducts.slice(0,idx+30).length > props.filteredProducts.length) {
+        //       setHasMore(false);
+        //     }
+        // }
     })
     
     return (
@@ -335,9 +340,12 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            <SearchBar myText={props&&props.filteredProducts}/>
+            {/* <button onClick={()=>searchText()}>Search Text</button> */}
             <div className='storeSearchLine' >
-            <h3 className='searchHelperText'>Search by category</h3>
+                {screenWidth>750
+                ?
+                <>
+                <h3 className='searchHelperText'>Search by category</h3>
                 <div className='selectContainer'>    
                     <select onChange={()=>handleChange('','category')} id='category'>
                         <option name='All'>All</option>
@@ -352,16 +360,51 @@ function GlobalStoreSearch(props) {
                 </div>
                 <h3 className='searchHelperText'>and / or search term</h3>
                 <div className="searchTextImg">
-                    <input type="text" id="searchTerm" style={{width: '100%', border: '1px solid #ffe499'}} onChange={handleChange} placeholder="Search" />
-                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '12px', padding: '13.4px 7px'}}>
+                    <form style={{display: 'flex'}}>
+                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
+                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
+                            <img src='/img/searchicon.png' alt='search icon' />
+                        </button>
+                    </form> 
+                </div>
+                <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
+                    <option value='New/Used' name='All newused'>New/Used</option>
+                    <option value='New' name='New'>New Only</option>
+                    <option value='Used' name='Used'>Used Only</option>
+                </select>
+                </>
+                :
+                <>
+                <h3 className='searchHelperText'>Search by category</h3>
+                <div className='selectContainer'>    
+                    <select onChange={()=>handleChange('','category')} id='category'>
+                        <option name='All'>All</option>
+                        <option name='Strings'>Strings</option>
+                        <option name='Music'>Music</option>
+                        <option name='Accessories'>Accessories</option>
+                        <option name='Books'>Books</option>
+                        <option name='Gifts'>Gifts</option>
+                        <option name='CDs'>CDs</option>
+                        <option name='Digital Downloads'>Digital Downloads</option>
+                    </select>
+                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px'}}>
                         <option value='New/Used' name='All newused'>New/Used</option>
                         <option value='New' name='New'>New Only</option>
                         <option value='Used' name='Used'>Used Only</option>
                     </select>
-                    <div style={{flex: '2'}}>
-                        <img style={{padding: '5px', backgroundColor: '#f9bf1e', height: '43px'}} src='/img/searchicon.png' alt='search icon' />
-                    </div>
                 </div>
+                
+                <h3 className='searchHelperText'>and / or search term</h3>
+                <div className="searchTextImg">
+                    <form style={{display: 'flex'}}>
+                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
+                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
+                            <img src='/img/searchicon.png' alt='search icon' />
+                        </button>
+                    </form> 
+                </div>
+                </>
+                }
             </div>
             <StoreProductSearch 
                 clearMenus={clearMenus} 
