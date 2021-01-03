@@ -100,17 +100,17 @@ const StoreProduct = (props) => {
             </div>
             <div className="storeproduct__title" >
                 <div style={{fontSize: '16px'}}>{props.productdetail.title}</div>
-                <div style={{fontSize: '14px', fontStyle: 'italic'}}>{props.productdetail.artist_first||props.productdetail.artist_last?props.productdetail.artist_first+'   '+props.productdetail.artist_last:""}</div>
+                <div style={{fontSize: '14px', fontStyle: 'italic'}}>{(props.productdetail.artist_first&&String(props.productdetail.artist_first)!=='undefined')||(props.productdetail.artist_last&&String(props.productdetail.artist_last)!=='undefined')?props.productdetail.artist_first+'   '+props.productdetail.artist_last:""}</div>
             </div>
+            <div className="storeproductDetails"><div><span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}</div></div>
             {props.productdetail.category==='music'
-            ?<div className="storeproductDetails">
-                <div><span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}</div>
+            ?<div className="storeproductDetails">               
                 {props.productdetail.level?<div><span>Level:</span> {props.productdetail.level}</div>:''}
-                <div><span>Harp Type:</span> {props.productdetail.harptype}</div>
+                {props.productdetail.harptype?<div><span>Harp Type:</span> {props.productdetail.harptype}</div>:''}
                 {props.productdetail.newused==='used'?<div><span>Condition (1-10):</span> {props.productdetail.condition}</div>:''}
                 <button 
                     onClick={()=>handleOpenStoreModal()} 
-                    classNames="btn blueFontButton" 
+                    classnames="btn blueFontButton" 
                     style={{
                         color: '#6A75AA', 
                         fontStyle:'italic', 
@@ -134,6 +134,7 @@ const StoreProduct = (props) => {
                         className='longDesc productSmallDisplay-LongDesc' 
                         dangerouslySetInnerHTML={{__html: props.productdetail.description}} 
                     />
+                    <div>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
                     <button className='btn blueFont' 
                         onClick={()=>handleOpenStoreModal()} 
                             style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '4000',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}
