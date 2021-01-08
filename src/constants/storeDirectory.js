@@ -12,12 +12,12 @@ export const STORE_PARTNERS = [
             <p><span>Harps Etc.</span> carries most major harp lines including: Lyon &amp; Healy, Salvi, Dusty Strings, Triplett, Music Maker, William Rees, Sharpsicle, Stoney End and others.&nbsp; We have numerous new and used pedal, lever and lap harps in our showroom.&nbsp; We also have the ability to order any other harp for you.&nbsp; In addition to harps, we keep harp cases, strings, sheet music and countless harp accessories available for purchase at our store and online.</p>
             <p>Harps Etc. Inc. was inspired by our love of the harp, teaching and working with the public.&nbsp; By combining a storefront location with an online store, the mission at Harps Etc. Inc. is to create greater awareness, access and appreciation of the harp around the world.&nbsp;</p>
             <p>We pledge to:</p>
-            <ul>
-                <li>Provide customer service beyond your expectations</li>
-                <li>Offer excellent musical education programs, workshops and performance opportunities</li>
-                <li>Help you keep your harp in great condition with our Harp Doctor hints, workshops and by bringing harp technicians to you</li>
-                <li>Bring the world closer together through music</li>
-                <li>Offer a wide variety of pedal and lever harps, music, strings, CDs, accessories and musical gift items</li>
+            <ul style="margin-left: 0">
+                <li>&bullet;&nbsp;&nbsp;Provide customer service beyond your expectations</li>
+                <li>&bullet;&nbsp;&nbsp;Offer excellent musical education programs, workshops and performance opportunities</li>
+                <li>&bullet;&nbsp;&nbsp;Help you keep your harp in great condition with our Harp Doctor hints, workshops and by bringing harp technicians to you</li>
+                <li>&bullet;&nbsp;&nbsp;Bring the world closer together through music</li>
+                <li>&bullet;&nbsp;&nbsp;Offer a wide variety of pedal and lever harps, music, strings, CDs, accessories and musical gift items</li>
             </ul>
             <p>Harps Etc. Inc. is staffed by professional harpists with over 75 years of combined experience and knowledge. &nbsp;</p>
             <p>We are located in the San Francisco East Bay in beautiful Walnut Creek.&nbsp; Walnut Creek is known as the shopping mecca of the East Bay and is the gateway to the Diablo Valley, Livermore and Napa Valley wine country, Lake Tahoe and Reno.&nbsp; Come visit our store when you are in the area.&nbsp; We’re a 40-minute ride from downtown San Francisco by car or by BART. Harps Etc. Inc. is just a few blocks away from the Walnut Creek BART station and the Ygnacio Valley Rd. exit on Interstate 680.</p>
@@ -165,13 +165,9 @@ export const STORE_PARTNERS = [
         productLongDesc: `
             <div>
                 <p><span>Chiara Arpa</span> Owner Chiara Capobianco was born in Milano (Italy) in 1980; she is a Music Graduate in Harp (10 year course) at Conservatorio “G. Verdi” of Milano (Italy). University graduate in Musicology (3 year course) at Scuola di Paleografia e Filologia Musicale di Cremona (Università degli Studi di Pavia-Italy). She started playing with many different Orchestras (Opera and Symphonic) touring all over Europe since she was fifteen years old.</p>
-                <br />
                 <p>She has performed at many concerts and events with both classic and Irish harp as solo harpist, alongside other musicians. She studied different types of music, which have given her a varied repertoire ranging from classical, medieval, renaissance, Irish, popular and contemporary music.</p>
-                <br />
                 <p>In 2003 she moved to London UK where she performed in several renowned venues. Since September 2004 she has been playing on the prestigious Cunard ships Queen Mary 2, Queen Elizabeth 2 and Queen Victoria travelling all over the world visiting all the continents.</p>
-                <br />
                 <p>At the moment she is enjoyng a free-lance career as solo harpist that takes her to perform all over the globe. She has lived and performed in Europe, Middle East, Asia, South America, & around the world (on luxury cruise ships).</p>
-                <br />
                 <p>She is now based in the USA.</p>
             </div>
         `,
@@ -191,26 +187,56 @@ export const STORE_PARTNERS = [
         productLongDesc: `
             <div>
                 <p>Welcome to <span>Blevins Harps</span> where our mission is to build quality instruments, one at a time, for our amazing customers. Because picking out a harp is personal, we endeavour to help each customer select just the right harp.</p>
-                <br />
                 <p>Blevins Harps began in 1992 when Dwight Blevins left an audio engineering career in radio and TV broadcasting to set up a workshop in Western Colorado. Dwight not only loved the sound, but also the visual artistic form of the harp. This can be seen in every one of Dwight’s designs. He was willing to explore different shapes and wood types to bring out the best possible sound and visual beauty of each harp.   </p>
-                <br />
                 <p>Since Blevins Harp's humble beginning, over 3200 harps have been lovingly built and shipped worldwide.</p>
-                <br />
                 <p>Soon after Dwight’s retirement in 2018, we providentially found Dwight and purchased the Blevins brand. Dale and Jamin, a father and son team, previously worked as carpenters for many years and share a passion for woodworking. Laurie studied the harp at the University of Northern Colorado under Kathy Bundock Moore and our fourteen year old daughter also plays the harp. This was a great fit for our family and we so much enjoyed working with Dwight and Cindy in the transition.  </p>
-                <br />
-                <p>We especially love the customer centered focus of Blevins Harps. and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p>
-                <br />
+                <p>We especially love the customer centered focus of Blevins Harps and consider it an honor to carry on the legacy of building harps with the same beauty, quality, and superior sound.</p>
                 <p>All The Best, Dale, Laurie and Jamin Wright</p>
-                <br />
-                
+                <br />  
             </div>
         `,
-        productMaker: "Chiara Arpa",
+        productMaker: "Blevins Harps",
         productImageUrl: "/img/storePartners/blevins_harps_logo_brightness.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'https://blevinsharps.com',
         sellerWebsiteText: 'blevinsharps.com',
         sellerEmail: 'blevinsharps@gmail.com'
+    },
+    {
+        id: 'strummedstrings',
+        sellerCountry: "USA",
+        sellerRegion: "Logan, Utah",
+        shipsTo: "US and Canada",
+        productTitle: "Strummed Strings",
+        productPrice: "",
+        productLongDesc: `
+            <div id="WRchTxt1-959" class="_1Z_nJ" data-testid="richTextElement"><div class="font_5" style="padding: 15px; line-height:1.4em;text-align:center;font-size:16px">Offering a wide repertoire of harp experience and skills for every event.&nbsp;</div></div><div id="WRchTxt3-p3m" class="_1Z_nJ" data-testid="richTextElement">
+                <ul style="margin-left: 0px;">
+                    <li>
+                        <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;In-person and Skype Lessons</div>
+                    </li>
+                    <li>
+                        <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;Event Musician&nbsp;- Weddings, Parties, Fundraisers</div>
+                    </li>
+                    <li>
+                        <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;Musical Performance Accompanist&nbsp;</div>
+                    </li>
+                    <li>
+                        <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;Custom Harp Recitals</div>
+                    </li>
+                    <li>
+                        <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;Harp Information Sessions - Come play with the harp!</div>
+                    </li>
+                </ul>
+            </div>
+            <div>About <span>Strummed Strings</span> owner/harpist Julie Norman: <blockquote>After rebelliously rejecting the piano for the harp at the age of six, over a decade later I’m still at it. I’ve played everything from Debussy to Disney plus original Christmas chamber music with my family. I’m classically trained with a love of jazz harp and composing. I recently graduated Westminster College in Salt Lake city, studying Music and Mathematical Economics. I'm currently attending Utah State University for my MS in economics.</blockquote></div>
+        `,
+        productMaker: "Strummed Strings",
+        productImageUrl: "/img/storePartners/strummed_strings_logo.png",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'https://jnormanharpist.wixsite.com/strummedstringsharp',
+        sellerWebsiteText: 'strummedstringsharp website',
+        sellerEmail: 'julie@normanfamily.org'
     }
     // {
     //     id: 'theharpplace',

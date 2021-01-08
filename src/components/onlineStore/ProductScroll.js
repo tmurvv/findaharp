@@ -32,6 +32,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
     const size = getWindowSize();
 
     function handleOpenDetail(product) {
+        console.log('detail', product)
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND PEDAL NATURAL GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Pedal Natural Gut", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER NATURAL GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Natural Gut", "All Types");
         if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('CONCEDO GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Concedo Gut", "All Types");

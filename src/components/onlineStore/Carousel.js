@@ -71,7 +71,7 @@ class Carousel extends React.Component {
     render() {
         return(
             <>    
-                <div id="carousel" className="noselect">
+                <div id="carousel" className="noselect" style={{height: '275px'}}>
                     <div className="arrow arrow-left" onClick={this.leftClick}>&#10094;</div>
                     <ReactCSSTransitionGroup 
                         transitionName={this.state.direction}>

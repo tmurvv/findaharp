@@ -1,4 +1,4 @@
-import { useContext, useState, useReducer } from 'react';
+import { useContext, useState, useReducer, useEffect } from 'react';
 import {withRouter} from 'next/router';
 import uuid from 'react-uuid';
 import LazyLoad from 'react-lazyload';
@@ -13,7 +13,8 @@ import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 import FeaturedProductCss from '../../styles/onlineStore/FeaturedProduct.css';
 import { resultInfoReducer } from '../../reducers/reducers';
 import Results from '../Results';
-import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../../constants/constants';
+import { RESULTS_INITIAL_STATE } from '../../constants/constants';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
 
 import { setlocalCart } from '../../utils/checkoutHelpers'
 import {
@@ -28,6 +29,7 @@ const FeaturedProduct = (props) => {
     const { currencyMultiplier } = useContext(CurrencyContext);
     const [ openModal, setOpenModal ] = useState(false);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+    const [ sellerInfo, setSellerInfo ] = useState();
 
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
@@ -91,6 +93,11 @@ const FeaturedProduct = (props) => {
         e.target.addEventListener("animationend", (e)=>updateCart(e))
         e.target.classList.add("storeflyToCart");
     }
+    useEffect(() => {
+        Array.from(STORE_PARTNERS).filter(seller => {
+            if (seller.id===props.productdetail.store) setSellerInfo(seller);
+        });
+    });
     return (
         <div className="featuredproduct" style={{height: 'auto'}}>
             <Results 
@@ -119,12 +126,18 @@ const FeaturedProduct = (props) => {
                     />
                 </LazyLoad>
                 </div>
-                    <div className="featuredproduct__price-button-container">
+                <div className="featuredproduct__price-button-container">
                     {user&&user.currency==="USD"?    
                         <div className="featuredproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic', marginLeft: '0'}}>USD</span> ({props.productdetail.newused})</div>
                         :<div className="featuredproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic', marginLeft: '0'}}>CAD</span> ({props.productdetail.newused})</div>
-                    }               
-                </div>        
+                    }
+                    <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px', marginTop: '-24px'}}>
+                        <div style={{width:'fit-content' }}>From: {sellerInfo&&sellerInfo.sellerCountry}</div>
+                        <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                        <div style={{width:'fit-content'}}>{sellerInfo&&sellerInfo.shipsTo}</div>
+                    </div>              
+                </div> 
+                       
             <FeaturedProductCss />
         </div>
     )

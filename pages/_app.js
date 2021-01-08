@@ -17,6 +17,7 @@ import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import {StatusContext} from "../src/contexts/StatusContext";
+import {StringOrderContext} from "../src/contexts/StringOrderContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -38,6 +39,26 @@ const cartSubtotalsInit = {
     taxes: 0,
     shippingarray: []
 }
+const STRING_ORDER_INIT = 
+    [{
+        E: [0, 'Artist Nylon'],
+        D: [0, 'Artist Nylon'],
+        C: [0, 'Artist Nylon'],
+        B: [0, 'Artist Nylon'],
+        A: [0, 'Artist Nylon'],
+        G: [0, 'Artist Nylon'],
+        F: [0, 'Artist Nylon'],
+    },
+    {
+        E: [0, 'Artist Nylon'],
+        D: [0, 'Artist Nylon'],
+        C: [0, 'Artist Nylon'],
+        B: [0, 'Artist Nylon'],
+        A: [0, 'Artist Nylon'],
+        G: [0, 'Artist Nylon'],
+        F: [0, 'Artist Nylon'],
+    } 
+]  
 
 function MyApp(props) {
     const { Component, pageProps } = props;
@@ -57,6 +78,7 @@ function MyApp(props) {
     const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
     const [cartOpen, setCartOpen] = useState(cartOpenInit);
     const [status, setStatus] = useState('idle');
+    const [stringOrder, setStringOrder] = useState(STRING_ORDER_INIT);
     const [currency, setCurrency] = useState('USD');
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.30);
     const [windowWidth, setWindowWidth] = useState(0);
@@ -207,12 +229,11 @@ function MyApp(props) {
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                             <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
                                 <>
-                                                <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                                <CartButton />
-                                                <SellerAgreement />
-                                                <Footer />
-                                            </>
-                                
+                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                    <CartButton />
+                                    <SellerAgreement />
+                                    <Footer />
+                                </>
                             </CurrencyContext.Provider>
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
@@ -225,13 +246,6 @@ function MyApp(props) {
         )
     }
 
-
-
-
-
-
-
-
     return( 
         <>  
             <Head>
@@ -243,6 +257,7 @@ function MyApp(props) {
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
             <StatusContext.Provider value={{status, setStatus}}>
+            <StringOrderContext.Provider value={{stringOrder, setStringOrder}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -270,6 +285,7 @@ function MyApp(props) {
                     </CartSubtotalsContext.Provider>
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
+            </StringOrderContext.Provider>
             </StatusContext.Provider>
             </UserContext.Provider>
             

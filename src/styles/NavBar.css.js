@@ -41,7 +41,7 @@ function NavBarCss() {
                 font-size: 16px;
                 text-decoration: none;
                 color: #000000;
-                opacity: .8;
+                opacity: 1;
                 flex: 2;
                 text-align: center;
             }

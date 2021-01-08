@@ -39,6 +39,7 @@ function FeaturedProductContainerCss() {
                 display: flex;
                 justify-content: space-between;
                 overflow: hidden;
+                height: 275px;
             }
             @media only screen and (max-width: 550px) {
                 .featuredgrid-container {

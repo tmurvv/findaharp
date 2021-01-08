@@ -116,9 +116,9 @@ function StoreProductModal(props) {
                         :<div className="storeproduct__price" style={{textAlign: 'center'}}>${(parseNum(price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD ({newused})</span></div>
                         }
                         <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
-                            <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>
+                            <div style={{width:'fit-content'}}>From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                             <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                            <div style={{width:'fit-content'}}>To: {sellerInfo&&sellerInfo.shipsTo}</div>
+                            <div style={{width:'fit-content'}}>{sellerInfo&&sellerInfo.shipsTo}</div>
                         </div>
                         <button 
                             className='submit-btn'

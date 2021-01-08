@@ -130,7 +130,7 @@ const StoreProduct = (props) => {
             :<>  
                 <div style={{textAlign: 'left', minHeight: '200px', zIndex: '3000'}}>
                     <div 
-                        style={{fontSize: '14px', height: 'fit-content', maxHeight: '77px', overflow: 'hidden'}} 
+                        style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} 
                         className='longDesc productSmallDisplay-LongDesc' 
                         dangerouslySetInnerHTML={{__html: props.productdetail.description}} 
                     />
@@ -148,9 +148,9 @@ const StoreProduct = (props) => {
                 :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>({props.productdetail.newused.toUpperCase()})</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>
-                    <div style={{width:'fit-content'}}>Ships From: {sellerInfo&&sellerInfo.sellerCountry}</div>
+                    <div style={{width:'fit-content'}}>From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                     <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                    <div style={{width:'fit-content'}}>To: {sellerInfo&&sellerInfo.shipsTo}</div>
+                    <div style={{width:'fit-content'}}>{sellerInfo&&sellerInfo.shipsTo}</div>
                 </div>
                 <button 
                     disabled={props.productdetail.sold&&String(props.productdetail.sold).toUpperCase()==='SOLD'}

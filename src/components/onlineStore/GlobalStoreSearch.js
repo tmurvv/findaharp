@@ -19,7 +19,7 @@ import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../constants/cons
 import { findNested, getStoreSearchInfo, searchBar } from '../../utils/searchProductsHelpers';
 
 function GlobalStoreSearch(props) {
-    // console.log('globlaprops', props.filteredProducts.length)
+    // console.log('globlaprops', props.usedProducts.length)
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [ allState, setAllState ] = useState(STORE_INITIAL_STATE);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
@@ -132,9 +132,9 @@ function GlobalStoreSearch(props) {
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             
             // check level
-            if (level&&level.toUpperCase()!=='ALL LEVELS') {  
+            if (level&&level.toUpperCase()!=='ALL LEVELS') { 
                 newusedProductList.map(product=> {
-                    if (String(product.level).toUpperCase().startsWith('BEGIN')===level.toUpperCase().startsWith("BEGIN")) {
+                    if (String(product.level).toUpperCase().startsWith('BEGIN')&&level.toUpperCase().startsWith("BEGIN")) {
                         levelProductList.push(product);
                     } else {
                         if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
@@ -268,14 +268,6 @@ function GlobalStoreSearch(props) {
         // search term
         if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
-            // preSearchProductList.map(product=> {
-            //     const keyList = Object.keys(product);
-            //     keyList.every(key=>{
-            //         if (findNested(product, key, searchTerm)) {searchProductList.push(product); return false;}
-            //         return true;
-            //     })
-            // });
-            // searchProductList = [...searchProductList, ...searchBar(props.filteredProducts, searchTerm)];
             searchProductList = searchBar(preSearchProductList, searchTerm)
         } else {
             searchProductList=[...preSearchProductList]
@@ -312,24 +304,9 @@ function GlobalStoreSearch(props) {
             setIdx(idx+30);
         }
       };
-    function searchText(searchProductList) {
-        searchProductList = searchBar(searchProductList, searchTerm);
-    }
+    
     useEffect(()=>{
             setScreenWidth(window.innerWidth);
-        // if(props.filteredProducts&&props.filteredProducts.length===0) {
-        //     console.log('inif')
-        //     document.querySelector('#searchInput').focus();
-        //     setSearchResults(props.filteredProducts);
-        // }
-        // if (searchResults) {
-        //     console.log('inifsearch')
-        //     setHasMore(true);
-        //     setIsLoading(false);
-        //     if (props.filteredProducts.slice(0,idx+30).length > props.filteredProducts.length) {
-        //       setHasMore(false);
-        //     }
-        // }
     })
     
     return (
@@ -478,8 +455,8 @@ function GlobalStoreSearch(props) {
             }
             {searchResultsText==='entry'&&
             <>
-                <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Holiday Features and gifts"/>
-                <ProductScroll handleStringsChange={handleChange} handleResults={handleResults} filteredproductscontainer={props.strings} title="Browse String Brands"/>
+                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
+                <ProductScroll filteredproductscontainer={props.usedProducts} handleResults={handleResults} title="Browse Used / Prepurchased Items"/>
                 <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
             </>
             }
