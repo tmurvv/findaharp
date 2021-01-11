@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import SelectStringCss from '../../styles/stringForm/SelectString.css';
+import parseNum from 'parse-num';
 import { StringFormContext } from '../../contexts/StringFormContext';
+import { STRING_NUMBER } from '../../constants/constants';
 
-function SelectString({strings, getPrice, octave, note}) {
+function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [ stringBrand, setStringBrand ] = useState();
 
@@ -13,12 +15,16 @@ function SelectString({strings, getPrice, octave, note}) {
         // create new object
         // const newObject = [...stringForm];
         // get string id (temporarily title)
-        console.log(stringForm[0]["G"])
-        console.log(octave)
+        // console.log(stringForm[0]["G"])
+        // console.log(octave)
         if (stringForm[clickOctave].octave===0) {
+            alert('iminif')
+            console.log(clickOctave, clickNote, e.target.name)
             const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = e.target.name];
+            console.log(newObject);
             setStringForm(newObject);
         } else if (stringForm[clickOctave].octave===1){
+            alert('iminelseif')
             let newObject;
             if (clickOctave===0) newObject =  [...stringForm,
                 stringForm[clickOctave]["G"].id = e.target.name,
@@ -38,14 +44,28 @@ function SelectString({strings, getPrice, octave, note}) {
                 stringForm[clickOctave]["D"].id = e.target.name,
                 stringForm[clickOctave]["C"].id = e.target.name,
             ];
+            // console.log(newObject[0])
+            // console.log(stringForm[0]["G"].id)
+            // console.log(stringForm[clickOctave]["G"].id)
+            // console.log(stringForm[2]["G"].id)
+            // console.log(newObject[clickOctave]["G"].id)
             setStringForm(newObject);
+            // setOctaveBrand(e.target.name);
         }
         
         setStringBrand(e.target.name);
         // console.log(newObject)
         // find price in strings object
-        const stringObject = strings.find(string=>string.id===e.target.name);
-        console.log(stringObject);
+        console.log(stringForm[clickOctave].octave)
+
+        const stringObject = strings.map(string=>
+            {
+                // console.log(string.order, "|", STRING_NUMBER[note], "|", string.title)
+                if (string.order===STRING_NUMBER[note]&&string.title.includes(e.target.name)&&stringForm[clickOctave].octave===1) {console.log(string.title); console.log(parseNum(string.price).toFixed(2)); setOctaveBrand([string.title, parseNum(string.price).toFixed(2)])}
+            });
+        
+        // setOctaveBrand(stringObject.title, parseNum(stringObject.price).toFixed(2))
+        // console.log(stringObject);
 
         // console.log(newObject);
            
@@ -58,7 +78,7 @@ function SelectString({strings, getPrice, octave, note}) {
             <div className="menu-wrapper menu-gold">
                     <ul className="menu">
                         <li>
-                            <button type="button" style={note&&{width: '285%'}}>{stringBrand?stringBrand:'String Type'}{!note&&`  >>`}</button>
+                            <button type="button" style={note&&{width: '285%'}}>{stringBrand?stringBrand:octaveBrand&&octaveBrand[0]?octaveBrand[0]:'String Type'}{!note&&`  >>`}</button>
                             <ul>
                                 {!note&&<li>
                                     <button type="button" style={note&&{width: '285%'}} href=""><i className="fab fa-connectdevelop"></i> Not Sure</button>
@@ -91,7 +111,7 @@ function SelectString({strings, getPrice, octave, note}) {
                                     <button type="button" style={note&&{width: '285%'}} href=""><i className="fab fa-connectdevelop"></i> Wires</button>
                                     <ul className='menuLevel2' style={note&&{width: '285%', left: '-325%'}}>
                                         <li><button type="button" onClick={(e)=>handleClick(e)} name='Silver-Plated Pedal Bass Wire' style={{width: '275px'}}>Silver-Plated Pedal Bass Wire</button></li>
-                                        <li><button type="button" onClick={(e)=>handleClick(e)} name='Pedal Bass Wire (Tarnish-Resistant)' style={{width: '275px'}}>Pedal Bass Wire (Tarnish-Resistant)</button></li>
+                                        <li><button type="button" onClick={(e)=>handleClick(e)} name='Tarnish' style={{width: '275px'}}>Pedal Bass Wire (Tarnish-Resistant)</button></li>
                                         <li><button type="button" onClick={(e)=>handleClick(e)} name='Bow Brand Lever Bass Wire' style={{width: '275px'}}>Bow Brand Lever Bass Wire</button></li>
                                         <li><button type="button" onClick={(e)=>handleClick(e)} name='Professional Lever Bass Wire' style={{width: '275px'}}>Professional Lever Bass Wire</button></li>
                                     </ul>

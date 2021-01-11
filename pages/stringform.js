@@ -58,7 +58,7 @@ StringForm.getInitialProps = async (props) => {
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
 
     return {
-        strings: res.data.storeitems.filter(product => product.category==="strings")
+        strings: res.data.storeitems.filter(product => product.category==="strings"&&product.newused!=='used')
     };
 }
 

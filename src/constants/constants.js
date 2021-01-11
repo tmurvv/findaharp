@@ -81,7 +81,7 @@ export const PRODUCTAD_PLACEHOLDER = {
 }
 export const STRING_NUMBER = {
     "0G": -.5,
-    "0F": 0,
+    "0F": -.3,
     "1E": 1,
     "1D": 2,
     "1C": 3,

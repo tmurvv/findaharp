@@ -5,11 +5,11 @@ import OctaveCss from '../../styles/stringForm/Octave.css';
 
 const CARDINALS = ['zero', '1st','2nd', '3rd', '4th', '5th', '6th', '7th']
 function Octave({strings, octave, applyToOctaves, setApplyToOctaves}) {
-    const [ octaveBrand, setOctaveBrand] = useState("String Type");
+    const [ octaveBrand, setOctaveBrand] = useState(["String Type", "0.00"]);
     
     return (
         <>
-            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center', paddingTop: '40px'}}>{CARDINALS[octave]} Octave {octave==='0'&&' (pedal harp only)'}</p>
+            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center', paddingTop: '40px'}}>{CARDINALS[octave]} Octave {octave==='0'&&' (pedal harp only)'}{octaveBrand[0]}</p>
             {/* <div style={{display: 'flex'}}>
                 <SelectString octave={octave}/>
             </div> */}

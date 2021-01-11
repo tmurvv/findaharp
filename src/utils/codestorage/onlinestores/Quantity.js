@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import NoteCss from '../../styles/stringForm/Note.css';
-import { StringFormContext } from '../../contexts/StringFormContext';
-import SelectString from '../../components/stringForm/SelectString';
+import NoteCss from '../../../styles/stringForm/Note.css';
+import { StringFormContext } from '../../../contexts/StringFormContext';
+import SelectString from '../../../components/stringForm/SelectString';
 
 function Quantity(props) {
     const [ value, setValue ] = useState(1);

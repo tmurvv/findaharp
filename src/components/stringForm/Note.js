@@ -4,7 +4,7 @@ import NoteCss from '../../styles/stringForm/Note.css';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { STRING_NUMBER } from '../../constants/constants';
 import SelectString from '../../components/stringForm/SelectString';
-import Quantity from '../../components/stringForm/Quantity';
+import Quantity from '../../utils/codestorage/onlinestores/Quantity';
 
 function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -24,7 +24,8 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
         console.log(e.target.name)
         const stringObject = strings.find(string=>string.order===STRING_NUMBER[note]&&string.title.includes(e.target.name));
         console.log(strings[75])
-        setNoteObject(stringObject);
+        // setNoteObject(stringObject);
+        // setOctaveBrand(stringObject.title, parseNum(stringObject.price).toFixed(2))
         console.log(stringId);
     }
     return (
@@ -42,9 +43,8 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                             <input 
                                 type='checkbox'
                                 onClick={()=>{
-                                    let copy2Array=[...applyToOctaves]; 
-                                    let copyArray=[...applyToOctaves];
-                                    setApplyToOctaves([...copyArray.slice(0,octave),applyToOctaves[octave]===0?1:0,...copy2Array.slice(parseInt(octave)+1)])
+                                    const newObject = [...stringForm, stringForm[octave].octave=stringForm[octave].octave===0?1:0]
+                                    setStringForm(newObject)
                                 }} 
                                 defaultChecked={applyToOctaves[octave]===0?'':`true`}
                             />
@@ -58,9 +58,9 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                 // :<><input data-id={`${octave}${note}`} className="item4" placeholder='0' />
                 :<><div><input className='qty-input' type='number' value={qty} onChange={(e)=>handleChange(e)} note={`${note}`}/></div>
                 <div className="note" id='note'>{note}</div>
-                <div className="stringtype"><SelectString getPrice={getPrice} strings={strings} localBrand={applyToOctaves?octaveBrand:localBrand} note={note}/></div>
-                <div className="item6">{noteObject?noteObject.price:"0.00"}</div>
-                <div className="item7">${noteObject&&qty>0?(parseNum(noteObject.price)*qty).toFixed(2):"0.00"}</div>
+                <div className="stringtype"><SelectString octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} getPrice={getPrice} strings={strings} localBrand={applyToOctaves?octaveBrand:localBrand} note={note}/></div>
+                <div className="item6">{octaveBrand&&octaveBrand[1]?octaveBrand[1]:'0.00'}</div>
+                <div className="item7">${octaveBrand&&octaveBrand[1]&&qty>0?(parseNum(octaveBrand[1])*qty).toFixed(2):"0.00"}</div>
                 
                 </>
                 }
