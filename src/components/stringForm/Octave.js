@@ -4,31 +4,31 @@ import SelectString from '../../components/stringForm/SelectString';
 import OctaveCss from '../../styles/stringForm/Octave.css';
 
 const CARDINALS = ['zero', '1st','2nd', '3rd', '4th', '5th', '6th', '7th']
-function Octave({octave}) {
-    const [ stringBrand, setStringBrand] = useState("String Type");
-
+function Octave({strings, octave, applyToOctaves, setApplyToOctaves}) {
+    const [ octaveBrand, setOctaveBrand] = useState("String Type");
+    
     return (
         <>
             <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center', paddingTop: '40px'}}>{CARDINALS[octave]} Octave {octave==='0'&&' (pedal harp only)'}</p>
             {/* <div style={{display: 'flex'}}>
                 <SelectString octave={octave}/>
             </div> */}
-            <Note note={`Header`} />
+            <Note note={`Header`} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
             {octave==='0'
             ?<div>
-                <Note note={`0G`} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
-                <Note note={`0F`} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
+                <Note note={`${octave}G`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
+                <Note note={`${octave}F`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
             </div>
             :<>
-                <Note note={`${octave}E`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
-                <Note note={`${octave}D`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
-                <Note note={`${octave}C`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
+                <Note note={`${octave}E`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
+                <Note note={`${octave}D`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
+                <Note note={`${octave}C`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
                 {octave!=='7'
                 &&<>
-                    <Note note={`${octave}B`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
-                    <Note note={`${octave}A`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
-                    <Note note={`${octave}G`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
-                    <Note note={`${octave}F`} octave={octave} defaultStringBrand={stringBrand} setStringBrand={setStringBrand}/>
+                    <Note note={`${octave}B`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
+                    <Note note={`${octave}A`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
+                    <Note note={`${octave}G`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
+                    <Note note={`${octave}F`} strings={strings} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
                 </>} 
             </>}
             <OctaveCss />

@@ -2,6 +2,11 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import Router from 'next/router';
 import axios from 'axios';
+import {
+    CardElement,
+    useStripe,
+    useElements
+} from "@stripe/react-stripe-js";
 
 // contexts
 import { CartContext } from '../../contexts/CartContext';
@@ -14,21 +19,19 @@ import { StatusContext } from '../../contexts/StatusContext';
 import Results from '../Results';
 import { RESULTS_INITIAL_STATE } from '../../constants/constants';
 import { resultInfoReducer } from '../../reducers/reducers';
-import {
-    CardElement,
-    useStripe,
-    useElements
-} from "@stripe/react-stripe-js";
 import { 
     getTotal, 
-    generateReceiptEmailHtml, 
-    deletelocalCart 
+    deletelocalCart,
+    generateReceiptEmailHtml,
 } from "../../utils/checkoutHelpers";
 import IndexCss from "../../styles/index.css";
 import CheckoutFormCss from "../../styles/onlineStore/CheckoutForm.css";
 import ShippingCss from "../../styles/onlineStore/Shipping.css";
 
 export default function StripeCheckout(props) {
+    // package variables
+    const stripe = useStripe();
+    const elements = useElements();
     // context variables
     const { cart, setCart } = useContext(CartContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
@@ -43,8 +46,6 @@ export default function StripeCheckout(props) {
     const [disabled, setDisabled] = useState(true);
     const [clientSecret, setClientSecret] = useState('');
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
-    const stripe = useStripe();
-    const elements = useElements();
 
     function resetResults() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
@@ -69,9 +70,9 @@ export default function StripeCheckout(props) {
         if (getTotal(cart, user,currencyMultiplier)&&getTotal(cart,user,currencyMultiplier)>0) {
             try {
                 // Create PaymentIntent as soon as the page loads
-                // .fetch(`https://findaharp-api.herokuapp.com/api/v1/create-stripe-payment-intent`, { //BREAKING               
                 window
-                .fetch(`https://findaharp-api-staging.herokuapp.com/api/v1/create-stripe-payment-intent`, {
+                // .fetch(`https://findaharp-api-staging.herokuapp.com/api/v1/create-stripe-payment-intent`, {
+                    .fetch(`https://findaharp-api.herokuapp.com/api/v1/create-stripe-payment-intent`, { 
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

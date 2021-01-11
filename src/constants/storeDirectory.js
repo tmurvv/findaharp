@@ -50,25 +50,6 @@ export const STORE_PARTNERS = [
         sellerEmail: 'michiganharpcenter@gmail.com'
     },
     {
-        id: 'westcoastharps',
-        sellerCountry: "Canada",
-        sellerRegion: "Nanaimo, BC, Canada",
-        productTitle: "West Coast Harps",
-        productPrice: "$2,900",
-        productLongDesc: `
-            <p><span>West Coast Harps</span> Welcome! Come Visit Our Studio & Have Your New Harp Shipped Home. If you are travelling, Vancouver Island is a great tourist destination for Canadians and there are many good reasons to pay us a visit if you are interested in starting with the harp or are thinking of upgrading. We most certainly enjoy meeting our past customers and assorted stray harpists just passing through.</p>
-            <p>We are an online business with our separate WCH Studio in a private residence so an appointment is necessary as harp lessons may be in progress. Short notice is fine if you are already in our area. </p>
-            <p>We are located within a few kilometres of two major ferries to the British Columbia mainland and close to the TransCanada highway. You can visit from Vancouver and return the same day.  View our street map. BC Ferries will deliver you as a car or foot passenger from West Vancouver or Tsawwassen to Nanaimo or Duke Point and then it's a short drive to the rural community of Cedar where our Studio is located.</p>
-            <p>Subscribe to our free Harp Notes Newsletter - emailed to you 2 - 4 X per year</p>
-        `,
-        productMaker: "West Coast Harps",
-        productImageUrl: "/img/storePartners/westCoastHarps.jpg",
-        productImageBestColor: "#d6c3ab",
-        sellerWebsite: 'https://westcoastharps.com',
-        sellerWebsiteText: 'westcoastharps.com',
-        sellerEmail: 'alison@westcoastharps.com'
-    },
-    {
         id: 'findaharp',
         sellerCountry: "Canada",
         sellerRegion: "Calgary, AB, Canada",
@@ -237,6 +218,27 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://jnormanharpist.wixsite.com/strummedstringsharp',
         sellerWebsiteText: 'strummedstringsharp website',
         sellerEmail: 'julie@normanfamily.org'
+    },
+    {
+        id: 'novaharps',
+        sellerCountry: "Canada",
+        sellerRegion: "Halifax, NS, Canada",
+        shipsTo: "Canada",
+        productTitle: "nova harps",
+        productPrice: "",
+        productLongDesc: `
+        <p><span>nova harps</span> is the only full-service Authorized Lyon & Healy and Salvi harp dealership in Canada, offering sales of new and used harps, lever harp rentals, string sales and service.</p>
+        <p>Proprietor Karen Rokos is a professional harpist, teacher and Canada’s only Certified Harp Technician for Lyon & Healy and Salvi Harps.</p>
+        <p>As an authorized dealer for Bow Brand strings, nova harps has a large inventory of harp strings available for sale. We ship all across Canada to serve the harp community.</p>
+        <p><a href="https://karenrokosharp.com">karenrokosharp.com</a></p>
+        <p>Halifax, Nova Scotia</p>
+        `,
+        productMaker: "nova harps",
+        productImageUrl: "/img/storePartners/nova_harps_logo.png",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'https://karenrokosharp.com',
+        sellerWebsiteText: 'karenrokosharp.com',
+        sellerEmail: 'karen@harpmail.com'
     }
     // {
     //     id: 'theharpplace',
@@ -258,5 +260,24 @@ export const STORE_PARTNERS = [
     //     onlinestoreUrl: 'storeentry/theharpplace',
     //     onlinestoreShipsTo: 'US and Canada',
     //     onlinestoreBlurb: 'Offering digital download music and accessories'
+    // },
+    // {
+    //     id: 'westcoastharps',
+    //     sellerCountry: "Canada",
+    //     sellerRegion: "Nanaimo, BC, Canada",
+    //     productTitle: "West Coast Harps",
+    //     productPrice: "$2,900",
+    //     productLongDesc: `
+    //         <p><span>West Coast Harps</span> Welcome! Come Visit Our Studio & Have Your New Harp Shipped Home. If you are travelling, Vancouver Island is a great tourist destination for Canadians and there are many good reasons to pay us a visit if you are interested in starting with the harp or are thinking of upgrading. We most certainly enjoy meeting our past customers and assorted stray harpists just passing through.</p>
+    //         <p>We are an online business with our separate WCH Studio in a private residence so an appointment is necessary as harp lessons may be in progress. Short notice is fine if you are already in our area. </p>
+    //         <p>We are located within a few kilometres of two major ferries to the British Columbia mainland and close to the TransCanada highway. You can visit from Vancouver and return the same day.  View our street map. BC Ferries will deliver you as a car or foot passenger from West Vancouver or Tsawwassen to Nanaimo or Duke Point and then it's a short drive to the rural community of Cedar where our Studio is located.</p>
+    //         <p>Subscribe to our free Harp Notes Newsletter - emailed to you 2 - 4 X per year</p>
+    //     `,
+    //     productMaker: "West Coast Harps",
+    //     productImageUrl: "/img/storePartners/westCoastHarps.jpg",
+    //     productImageBestColor: "#d6c3ab",
+    //     sellerWebsite: 'https://westcoastharps.com',
+    //     sellerWebsiteText: 'westcoastharps.com',
+    //     sellerEmail: 'alison@westcoastharps.com'
     // }
 ];

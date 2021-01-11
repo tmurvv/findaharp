@@ -1,17 +1,56 @@
 import React, { useContext, useEffect, useState } from 'react';
 import SelectStringCss from '../../styles/stringForm/SelectString.css';
-import { StringOrderContext } from '../../contexts/StringOrderContext';
+import { StringFormContext } from '../../contexts/StringFormContext';
 
-function SelectString({octave, note, applyToOctave, defaultStringBrand, setStringBrand}) {
-    const { stringOrder, setStringOrder } = useContext(StringOrderContext);
-    const [ locaStringBrand, setLocalStringBrand ] = useState();
+function SelectString({strings, getPrice, octave, note}) {
+    const { stringForm, setStringForm } = useContext(StringFormContext);
+    const [ stringBrand, setStringBrand ] = useState();
 
     function handleClick(e) {
-        console.log(e.target.name)
-        setStringBrand(e.target.name);
-        if (applyToOctave) { 
 
+        const clickOctave = parseInt(note.substr(0,1));
+        const clickNote = note.substr(1);
+        // create new object
+        // const newObject = [...stringForm];
+        // get string id (temporarily title)
+        console.log(stringForm[0]["G"])
+        console.log(octave)
+        if (stringForm[clickOctave].octave===0) {
+            const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = e.target.name];
+            setStringForm(newObject);
+        } else if (stringForm[clickOctave].octave===1){
+            let newObject;
+            if (clickOctave===0) newObject =  [...stringForm,
+                stringForm[clickOctave]["G"].id = e.target.name,
+                stringForm[clickOctave]["F"].id = e.target.name
+            ];
+            if (clickOctave>0&&clickOctave<7) newObject = [...stringForm,
+                stringForm[clickOctave]["E"].id = e.target.name,
+                stringForm[clickOctave]["D"].id = e.target.name,
+                stringForm[clickOctave]["C"].id = e.target.name,
+                stringForm[clickOctave]["B"].id = e.target.name,
+                stringForm[clickOctave]["A"].id = e.target.name,
+                stringForm[clickOctave]["G"].id = e.target.name,
+                stringForm[clickOctave]["F"].id = e.target.name
+            ];;
+            if (clickOctave===7) newObject = [...stringForm,
+                stringForm[clickOctave]["E"].id = e.target.name,
+                stringForm[clickOctave]["D"].id = e.target.name,
+                stringForm[clickOctave]["C"].id = e.target.name,
+            ];
+            setStringForm(newObject);
         }
+        
+        setStringBrand(e.target.name);
+        // console.log(newObject)
+        // find price in strings object
+        const stringObject = strings.find(string=>string.id===e.target.name);
+        console.log(stringObject);
+
+        // console.log(newObject);
+           
+        // update form
+        // setStringBrand(e.target.name);
     }
     // useEffect(()=>setStringBrand(defaultStringBrand))
     return (
@@ -19,13 +58,13 @@ function SelectString({octave, note, applyToOctave, defaultStringBrand, setStrin
             <div className="menu-wrapper menu-gold">
                     <ul className="menu">
                         <li>
-                            <button type="button" style={note&&{width: '285%'}}>{defaultStringBrand?defaultStringBrand:'String Type'}{!note&&`  >>`}</button>
+                            <button type="button" style={note&&{width: '285%'}}>{stringBrand?stringBrand:'String Type'}{!note&&`  >>`}</button>
                             <ul>
                                 {!note&&<li>
                                     <button type="button" style={note&&{width: '285%'}} href=""><i className="fab fa-connectdevelop"></i> Not Sure</button>
                                     <ul className='menuLevel2' style={note&&{width: '285%', left: '-325%'}}>
-                                        <li><button type="button" onClick={()=>alert('Under Construction. Expected March 2021')} style={{width: '275px'}}>View string charts by harp make and model <br />--OR--</button></li>
                                         <li><button type="button" href="mailto: tisha@findaharp.com" style={{width: '275px'}}>Send us an email for advice on string types and brands</button></li>
+                                        <li><button type="button" onClick={()=>alert('Under Construction. Expected March 2021')} style={{width: '275px'}}>View string charts by harp make and model</button></li>
                                     </ul>
                                 </li>}
                                 <li>
@@ -42,7 +81,7 @@ function SelectString({octave, note, applyToOctave, defaultStringBrand, setStrin
                                 <li>
                                     <button type="button" style={note&&{width: '285%'}} href=""><i className="fab fa-connectdevelop"></i> Nylon</button>
                                     <ul className='menuLevel2' style={note&&{left: '-250%'}}>
-                                        <li style={{width: '500px'}}><button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Bow Brand Pedal Nylon' style={{width: '275px'}}>Bow Brand Pedal Nylon</button></li>
+                                        <li><button type="button" onClick={(e)=>handleClick(e)} name='Bow Brand Pedal Nylon' style={{width: '275px'}}>Bow Brand Pedal Nylon</button></li>
                                         <li><button type="button" onClick={(e)=>handleClick(e)} name='Bow Brand Lever Nylon' style={{width: '275px'}}>Bow Brand Lever Nylon</button></li>
                                         <li><button type="button" onClick={(e)=>handleClick(e)} name='Artist Nylon' style={{width: '275px'}}>Artist Nylon</button></li>
                                         <li><button type="button" onClick={(e)=>handleClick(e)} name='Nylon Monofilament' style={{width: '275px'}}>Nylon Monofilament</button></li>

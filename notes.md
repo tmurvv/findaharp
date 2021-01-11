@@ -1,3 +1,9 @@
+WATCH LIST
+
+MHC - Daphne 40
+ETC - Salzedo
+
+
 - STAGING -- onestop-staging.take2tech.ca
 - PRODUCTION -- findaharp.com
 

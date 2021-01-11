@@ -17,7 +17,7 @@ import {CartOpenContext} from "../src/contexts/CartOpenContext";
 import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import {StatusContext} from "../src/contexts/StatusContext";
-import {StringOrderContext} from "../src/contexts/StringOrderContext";
+import {StringFormContext} from "../src/contexts/StringFormContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -29,36 +29,15 @@ import UploadListingResult from '../src/components/UploadListingResult';
 import SellerAgreement from '../src/components/SellerAgreement';
 import UploadStoreItem from '../src/components/onlineStore/uploadstoreitem';
 import { parseJwt } from '../src/utils/helpers';
-import { getNumItems } from '../src/utils/storeHelpers'
+import {
+    CART_OPEN_INIT,
+    CART_ITEMS_INIT,
+    CART_SUBTOTALS_INIT,
+    STRING_FORM_INIT
+} from '../src/constants/inits.js'
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
-const cartOpenInit = false;
-const cartItemsInit = [];
-const cartSubtotalsInit = {
-    shipping: 0,
-    taxes: 0,
-    shippingarray: []
-}
-const STRING_ORDER_INIT = 
-    [{
-        E: [0, 'Artist Nylon'],
-        D: [0, 'Artist Nylon'],
-        C: [0, 'Artist Nylon'],
-        B: [0, 'Artist Nylon'],
-        A: [0, 'Artist Nylon'],
-        G: [0, 'Artist Nylon'],
-        F: [0, 'Artist Nylon'],
-    },
-    {
-        E: [0, 'Artist Nylon'],
-        D: [0, 'Artist Nylon'],
-        C: [0, 'Artist Nylon'],
-        B: [0, 'Artist Nylon'],
-        A: [0, 'Artist Nylon'],
-        G: [0, 'Artist Nylon'],
-        F: [0, 'Artist Nylon'],
-    } 
-]  
+
 
 function MyApp(props) {
     const { Component, pageProps } = props;
@@ -73,14 +52,12 @@ function MyApp(props) {
         role: 'not set',
         agreementStatus: ''
     }); // firstname, lastname, email, distanceunit
-    const [cart, setCart] = useState(cartItemsInit);
-    const [shipping, setShipping] = useState('working');
-    const [cartSubtotals, setCartSubtotals] = useState(cartSubtotalsInit);
-    const [cartOpen, setCartOpen] = useState(cartOpenInit);
+    const [cart, setCart] = useState(CART_ITEMS_INIT);
+    const [cartSubtotals, setCartSubtotals] = useState(CART_SUBTOTALS_INIT);
+    const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
-    const [stringOrder, setStringOrder] = useState(STRING_ORDER_INIT);
-    const [currency, setCurrency] = useState('USD');
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.30);
+    const [stringForm, setStringForm] = useState(STRING_FORM_INIT);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -104,13 +81,6 @@ function MyApp(props) {
         window.addEventListener('resize', handleResize);
         return () => { window.removeEventListener('resize', handleResize) }
     }, []);
-    
-    const handleWindowClose = (e) => {
-        if (isDirty) {
-          e.preventDefault();
-          return e.returnValue = 'You have unsaved changes - are you sure you wish to close?';
-        }   
-      };
     //get currency multiplier
     useEffect(() => {
         // const response = axios.get('https://free.currconv.com/api/v7/convert?q=USD_PHP&compact=ultra&apiKey=f99db690b27b4653acc2');
@@ -257,7 +227,7 @@ function MyApp(props) {
             <Banner />
             <UserContext.Provider value={{user, setUser}}>
             <StatusContext.Provider value={{status, setStatus}}>
-            <StringOrderContext.Provider value={{stringOrder, setStringOrder}}>
+            <StringFormContext.Provider value={{stringForm, setStringForm}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -285,7 +255,7 @@ function MyApp(props) {
                     </CartSubtotalsContext.Provider>
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
-            </StringOrderContext.Provider>
+            </StringFormContext.Provider>
             </StatusContext.Provider>
             </UserContext.Provider>
             
