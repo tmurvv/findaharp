@@ -58,7 +58,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                 // :<><input data-id={`${octave}${note}`} className="item4" placeholder='0' />
                 :<><div><input className='qty-input' type='number' value={qty} onChange={(e)=>handleChange(e)} note={`${note}`}/></div>
                 <div className="note" id='note'>{note}</div>
-                <div className="stringtype"><SelectString octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} getPrice={getPrice} strings={strings} localBrand={applyToOctaves?octaveBrand:localBrand} note={note}/></div>
+                <div className="stringtype" id={`stringType${note}`}>{octaveBrand&&octaveBrand[0]&&octaveBrand[0]!=='String Type'?<><button onClick={()=>setOctaveBrand(['String Type', "0.00"])}>change</button>{octaveBrand[0]}</>:<SelectString octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} getPrice={getPrice} strings={strings} localBrand={applyToOctaves?octaveBrand:localBrand} note={note}/>}</div>
                 <div className="item6">{octaveBrand&&octaveBrand[1]?octaveBrand[1]:'0.00'}</div>
                 <div className="item7">${octaveBrand&&octaveBrand[1]&&qty>0?(parseNum(octaveBrand[1])*qty).toFixed(2):"0.00"}</div>
                 

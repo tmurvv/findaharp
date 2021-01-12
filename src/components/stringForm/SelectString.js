@@ -23,6 +23,7 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
             const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = e.target.name];
             console.log(newObject);
             setStringForm(newObject);
+            document.querySelector(`stringType${note}`).innerText='e.target.name';
         } else if (stringForm[clickOctave].octave===1){
             alert('iminelseif')
             let newObject;
@@ -72,11 +73,59 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         // update form
         // setStringBrand(e.target.name);
     }
+    function handleSelect(e) {
+        console.log(e.target.value)
+        document.querySelector(`#${e.target.value}`).style.display='block';
+    }
     // useEffect(()=>setStringBrand(defaultStringBrand))
     return (
         <>
             <div className="menu-wrapper menu-gold">
-                    <ul className="menu">
+                <div style={{display: 'flex'}}>            
+                    <select onChange={(e)=>{handleSelect(e)}} style={{width: 'fit-content'}}>
+                        <option value={`stringType${note}`}>String Type</option>
+                        <option value={`notSureMenu${note}`}>Not Sure</option>
+                        <option value={`gutMenu${note}`}>Gut</option>
+                        <option value={`nylonMenu${note}`}>Nylon</option>
+                        <option value={`wireMenu${note}`}>Wires</option>
+                        <option value={`syntheticMenu${note}`}>Synthetic</option>
+                    </select>
+                    <select id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option>Not</option>
+                        <option>Sure</option>
+                    </select>
+                    <select id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option>Select Brand</option>
+                        <option>Bow Brand Pedal Natural Gut</option>
+                        <option>Bow Brand Lever Natural Gut</option>
+                        <option>Concedo Gut</option>
+                        <option>Burgundy Gut</option>
+                        <option>Silkgut</option>
+                        <option>Saverez KF Composite (synthetic)</option>
+                    </select>
+                    <select id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option>Select Brand</option>
+                        <option>Bow Brand Pedal Nylon</option>
+                        <option>Bow Brand Lever Nylon</option>
+                        <option>Artist Nylon</option>
+                        <option>Nylon Monofilament</option>
+                    </select>
+                    <select id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option>Select Brand</option>
+                        <option>Silver-Plated Pedal Bass Wire</option>
+                        <option>Pedal Bass Wire (Tarnish-Resistant)</option>
+                        <option>Bow Brand Lever Bass Wire</option>
+                        <option>Professional Lever Bass Wire</option>
+                    </select>
+                    <select id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option>Select Brand</option>
+                        <option>Saverez KF Composite (synthetic)</option>
+                    </select>
+                </div>
+
+
+
+                    {/* <ul className="menu">
                         <li>
                             <button type="button" style={note&&{width: '285%'}}>{stringBrand?stringBrand:octaveBrand&&octaveBrand[0]?octaveBrand[0]:'String Type'}{!note&&`  >>`}</button>
                             <ul>
@@ -125,51 +174,8 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                             </ul>
                         </li>
                     </ul>
-                </div>
-
-
-
-            {/* <div className="dropdown">           
-                <button type="button" className="dropbtn">String Type<span style={{fontSize: '12px', color: '#6b6756'}}>&nbsp;&nbsp;&#9654;</span></button>
-                <div className="dropdown-content">
-                    <div className="dropdown">
-                        <button type="button" className="dropbtn">Gut<span style={{fontSize: '12px', color: '#6b6756'}}>&nbsp;&nbsp;&#9654;</span></button>
-                        <div className="dropdown-content">
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Bow Brand Pedal Natural Gut'>Bow Brand Pedal Natural Gut</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Bow Brand Lever Natural Gut'>Bow Brand Lever Natural Gut</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Concedo Gut'>Concedo Gut</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Burgundy Gut'>Burgundy Gut</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='SilkGut'>Silkgut</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Saverez KF Composite (synthetic)'>Saverez KF Composite (synthetic)</button>
-                        </div>
-                    </div>
-                    <div className="dropdown"> 
-                        <button type="button" className="dropbtn">Nylon<span style={{fontSize: '12px', color: '#6b6756'}}>&nbsp;&nbsp;&#9654;</span></button>
-                        <div className="dropdown-content">
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Bow Brand Pedal Nylon'>Bow Brand Pedal Nylon</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Bow Brand Lever Nylon'>Bow Brand Lever Nylon</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Artist Nylon'>Artist Nylon</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Nylon Monofilament'>Nylon Monofilament</button>
-                        </div>
-                    </div>
-                    <div className="dropdown"> 
-                        <button type="button" className="dropbtn">Wires<span style={{fontSize: '12px', color: '#6b6756'}}>&nbsp;&nbsp;&#9654;</span></button>
-                        <div className="dropdown-content">
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Silver-Plated Pedal Bass Wire'>Silver-Plated Pedal Bass Wire</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Pedal Bass Wire (Tarnish-Resistant)'>Pedal Bass Wire (Tarnish-Resistant)</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Bow Brand Lever Bass Wire'>Bow Brand Lever Bass Wire</button>
-                            <button type="button" onClick={(e)=>setStringBrand(e.target.name)} name='Professional Lever Bass Wire'>Professional Lever Bass Wire</button>
-                        </div>
-                    </div>
-                    <div className="dropdown"> 
-                        <button type="button" className="dropbtn">Not Sure<span style={{fontSize: '12px', color: '#6b6756'}}>&nbsp;&nbsp;&#9654;</span></button>
-                        <div className="dropdown-content">
-                            <button type="button" onClick={()=>alert('Under Construction. Expected March 2021')}>String suggestions by harp make and model</button>
-                            <button type="button" href="mailto: tisha@findaharp.com">Send us an email for advice on string types and brands</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+                </div> */}
+            </div>
             <SelectStringCss />
         </>
     )
