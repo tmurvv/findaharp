@@ -79,6 +79,30 @@ export const PRODUCTAD_PLACEHOLDER = {
         sellerName: "",
         sellerRegion: ""
 }
+export const STRING_BRANDS = {
+    gut: [
+        'Bow Brand Pedal Natural Gut',
+        'Bow Brand Lever Natural Gut',
+        'Concedo Gut',
+        'Burgundy Gut',
+        'Silkgut'
+    ],
+    nylon: [
+            'Bow Brand Pedal Nylon',
+            'Bow Brand Lever Nylon',
+            'Artist Nylon',
+            'Nylon Monofilament'
+    ],
+    wires: [
+        'Silver-Plated Pedal Bass Wire',
+        'Pedal Bass Wire (Tarnish-Resistant)',
+        'Bow Brand Lever Bass Wire',
+        'Professional Lever Bass Wire'
+    ],
+    synthetic: [
+            'Saverez KF Composite (synthetic)'
+    ]                       
+}
 export const STRING_NUMBER = {
     "0G": -.5,
     "0F": -.3,

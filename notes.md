@@ -2,6 +2,7 @@ WATCH LIST
 
 MHC - Daphne 40
 ETC - Salzedo
+ETC - Rees, Aberdeen
 
 
 - STAGING -- onestop-staging.take2tech.ca

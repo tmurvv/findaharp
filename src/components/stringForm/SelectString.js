@@ -2,14 +2,25 @@ import React, { useContext, useEffect, useState } from 'react';
 import SelectStringCss from '../../styles/stringForm/SelectString.css';
 import parseNum from 'parse-num';
 import { StringFormContext } from '../../contexts/StringFormContext';
-import { STRING_NUMBER } from '../../constants/constants';
+import { STRING_NUMBER, STRING_BRANDS } from '../../constants/constants';
 
 function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [ stringBrand, setStringBrand ] = useState();
 
     function handleClick(e) {
-
+        const selection = String(e.target.name);
+        let clickBrand;
+        function getStringBrand(selection) {
+            Object.keys(STRING_BRANDS).map(type=>{
+                STRING_BRANDS[type].map(brand=>{
+                    console.log('selection', selection);
+                    console.log(selection.toUpperCase(),brand.toUpperCase())
+                    if (selection.toUpperCase().includes(brand.toUpperCase())) console.log('found it!!!!!!!!!!!!', brand)
+                });
+            });
+        }
+        getStringBrand(selection);
         const clickOctave = parseInt(note.substr(0,1));
         const clickNote = note.substr(1);
         // create new object
@@ -19,9 +30,9 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         // console.log(octave)
         if (stringForm[clickOctave].octave===0) {
             alert('iminif')
-            console.log(clickOctave, clickNote, e.target.name)
+            // console.log(clickOctave, clickNote, e.target.name)
             const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = e.target.name];
-            console.log(newObject);
+            // console.log(newObject);
             setStringForm(newObject);
             document.querySelector(`stringType${note}`).innerText='e.target.name';
         } else if (stringForm[clickOctave].octave===1){
@@ -57,7 +68,7 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         setStringBrand(e.target.name);
         // console.log(newObject)
         // find price in strings object
-        console.log(stringForm[clickOctave].octave)
+        // console.log(stringForm[clickOctave].octave)
 
         const stringObject = strings.map(string=>
             {
@@ -74,7 +85,10 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         // setStringBrand(e.target.name);
     }
     function handleSelect(e) {
-        console.log(e.target.value)
+        // console.log(e.target.value)
+        // console.log('hee', document.querySelectorAll('.clear'))
+        Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
+        
         document.querySelector(`#${e.target.value}`).style.display='block';
     }
     // useEffect(()=>setStringBrand(defaultStringBrand))
@@ -90,11 +104,11 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                         <option value={`wireMenu${note}`}>Wires</option>
                         <option value={`syntheticMenu${note}`}>Synthetic</option>
                     </select>
-                    <select id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option>Not</option>
-                        <option>Sure</option>
+                    <select className={`clear${note}`} id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option value='email'>Send us an email for advice on string types and brands</option>
+                        <option onClick={()=>alert('Under Construction. Expected March 2021')}>View string charts by harp make and model</option>
                     </select>
-                    <select id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option>Select Brand</option>
                         <option>Bow Brand Pedal Natural Gut</option>
                         <option>Bow Brand Lever Natural Gut</option>
@@ -103,21 +117,21 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                         <option>Silkgut</option>
                         <option>Saverez KF Composite (synthetic)</option>
                     </select>
-                    <select id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option>Select Brand</option>
                         <option>Bow Brand Pedal Nylon</option>
                         <option>Bow Brand Lever Nylon</option>
                         <option>Artist Nylon</option>
                         <option>Nylon Monofilament</option>
                     </select>
-                    <select id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option>Select Brand</option>
                         <option>Silver-Plated Pedal Bass Wire</option>
                         <option>Pedal Bass Wire (Tarnish-Resistant)</option>
                         <option>Bow Brand Lever Bass Wire</option>
                         <option>Professional Lever Bass Wire</option>
                     </select>
-                    <select id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option>Select Brand</option>
                         <option>Saverez KF Composite (synthetic)</option>
                     </select>
