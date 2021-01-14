@@ -8,19 +8,26 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [ stringBrand, setStringBrand ] = useState();
 
-    function handleClick(e) {
-        const selection = String(e.target.name);
+    function handleClick(menu) {
+        console.log(menu.target.id)
+        const stringType = document.querySelector(`#gutMenu${note}`).value;
+        // console.log('value', document.querySelector(`gutMenu${note}`)).value;
+        // console.log(`gutMenu${note}`)
+        // console.log('value', document.querySelector(`#gutMenu${note}`).value);
+        // const selection = String(stringType);
+        // alert(String(stringType))
+        console.log('menu', menu)
         let clickBrand;
         function getStringBrand(selection) {
             Object.keys(STRING_BRANDS).map(type=>{
                 STRING_BRANDS[type].map(brand=>{
-                    console.log('selection', selection);
-                    console.log(selection.toUpperCase(),brand.toUpperCase())
+                    // console.log('selection', selection);
+                    // console.log(selection.toUpperCase(),brand.toUpperCase())
                     if (selection.toUpperCase().includes(brand.toUpperCase())) console.log('found it!!!!!!!!!!!!', brand)
                 });
             });
         }
-        getStringBrand(selection);
+        // getStringBrand(selection);
         const clickOctave = parseInt(note.substr(0,1));
         const clickNote = note.substr(1);
         // create new object
@@ -29,32 +36,32 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         // console.log(stringForm[0]["G"])
         // console.log(octave)
         if (stringForm[clickOctave].octave===0) {
-            alert('iminif')
-            // console.log(clickOctave, clickNote, e.target.name)
-            const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = e.target.name];
+            // alert('iminif')
+            // console.log(clickOctave, clickNote, stringType)
+            const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = stringType];
             // console.log(newObject);
             setStringForm(newObject);
-            document.querySelector(`stringType${note}`).innerText='e.target.name';
+            document.querySelector(`stringType${note}`).innerText='stringType';
         } else if (stringForm[clickOctave].octave===1){
-            alert('iminelseif')
+            // alert('iminelseif')
             let newObject;
             if (clickOctave===0) newObject =  [...stringForm,
-                stringForm[clickOctave]["G"].id = e.target.name,
-                stringForm[clickOctave]["F"].id = e.target.name
+                stringForm[clickOctave]["G"].id = stringType,
+                stringForm[clickOctave]["F"].id = stringType
             ];
             if (clickOctave>0&&clickOctave<7) newObject = [...stringForm,
-                stringForm[clickOctave]["E"].id = e.target.name,
-                stringForm[clickOctave]["D"].id = e.target.name,
-                stringForm[clickOctave]["C"].id = e.target.name,
-                stringForm[clickOctave]["B"].id = e.target.name,
-                stringForm[clickOctave]["A"].id = e.target.name,
-                stringForm[clickOctave]["G"].id = e.target.name,
-                stringForm[clickOctave]["F"].id = e.target.name
+                stringForm[clickOctave]["E"].id = stringType,
+                stringForm[clickOctave]["D"].id = stringType,
+                stringForm[clickOctave]["C"].id = stringType,
+                stringForm[clickOctave]["B"].id = stringType,
+                stringForm[clickOctave]["A"].id = stringType,
+                stringForm[clickOctave]["G"].id = stringType,
+                stringForm[clickOctave]["F"].id = stringType
             ];;
             if (clickOctave===7) newObject = [...stringForm,
-                stringForm[clickOctave]["E"].id = e.target.name,
-                stringForm[clickOctave]["D"].id = e.target.name,
-                stringForm[clickOctave]["C"].id = e.target.name,
+                stringForm[clickOctave]["E"].id = stringType,
+                stringForm[clickOctave]["D"].id = stringType,
+                stringForm[clickOctave]["C"].id = stringType,
             ];
             // console.log(newObject[0])
             // console.log(stringForm[0]["G"].id)
@@ -62,10 +69,11 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
             // console.log(stringForm[2]["G"].id)
             // console.log(newObject[clickOctave]["G"].id)
             setStringForm(newObject);
-            // setOctaveBrand(e.target.name);
+            setOctaveBrand([stringType, octaveBrand[1]]);
         }
         
-        setStringBrand(e.target.name);
+        setStringBrand(stringType);
+        setOctaveBrand([stringType, octaveBrand[1]]);
         // console.log(newObject)
         // find price in strings object
         // console.log(stringForm[clickOctave].octave)
@@ -73,7 +81,7 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         const stringObject = strings.map(string=>
             {
                 // console.log(string.order, "|", STRING_NUMBER[note], "|", string.title)
-                if (string.order===STRING_NUMBER[note]&&string.title.includes(e.target.name)&&stringForm[clickOctave].octave===1) {console.log(string.title); console.log(parseNum(string.price).toFixed(2)); setOctaveBrand([string.title, parseNum(string.price).toFixed(2)])}
+                if (string.order===STRING_NUMBER[note]&&string.title.includes(stringType)&&stringForm[clickOctave].octave===1) {console.log(string.title); console.log(parseNum(string.price).toFixed(2)); setOctaveBrand([stringType, parseNum(string.price).toFixed(2)])}
             });
         
         // setOctaveBrand(stringObject.title, parseNum(stringObject.price).toFixed(2))
@@ -108,21 +116,20 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                         <option value='email'>Send us an email for advice on string types and brands</option>
                         <option onClick={()=>alert('Under Construction. Expected March 2021')}>View string charts by harp make and model</option>
                     </select>
-                    <select className={`clear${note}`} id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option>Select Brand</option>
-                        <option>Bow Brand Pedal Natural Gut</option>
-                        <option>Bow Brand Lever Natural Gut</option>
-                        <option>Concedo Gut</option>
-                        <option>Burgundy Gut</option>
-                        <option>Silkgut</option>
-                        <option>Saverez KF Composite (synthetic)</option>
+                    <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Bow Brand Pedal Natural Gut`}>Bow Brand Pedal Natural Gut</option>
+                        <option value={`Bow Brand Lever Natural Gut`}>Bow Brand Lever Natural Gut</option>
+                        <option value={`Concedo Gut`}>Concedo Gut</option>
+                        <option value={`Burgundy Gut`}>Burgundy Gut</option>
+                        <option value={`Silkgut`}>Silkgut</option>
                     </select>
-                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option>Select Brand</option>
-                        <option>Bow Brand Pedal Nylon</option>
-                        <option>Bow Brand Lever Nylon</option>
-                        <option>Artist Nylon</option>
-                        <option>Nylon Monofilament</option>
+                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={()=>handleClick(this)} style={{display: 'none'}}>
+                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Bow Brand Pedal Nylon`}>Bow Brand Pedal Nylon</option>
+                        <option value={`Bow Brand Lever Nylon`}>Bow Brand Lever Nylon</option>
+                        <option value={`Artist Nylon`}>Artist Nylon</option>
+                        <option value={`Nylon Monofilament`}>Nylon Monofilament</option>
                     </select>
                     <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option>Select Brand</option>
