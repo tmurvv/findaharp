@@ -45,7 +45,6 @@ class Carousel extends React.Component {
         return items
     }
     handlePhotoClick() {
-        alert('imin')
         this.setState({
             detailProduct: e.target.name
         })

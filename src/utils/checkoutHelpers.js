@@ -84,11 +84,45 @@ function findaharp_shipping(cart, shippingcountry) {
     if (shippingcountry==="United States") return [ 20.00, "*International Shipping" ];
     return [ -1, '' ];
 }
+function strummedstrings_shipping(cart, shippingcountry) {
+    if (shippingcountry==="Canada") return [ 20.00, ""];
+    if (shippingcountry==="United States") return [ 12.00, "" ];
+    return [ -1, '' ];
+}
+function fahglsat_shipping(cart, shippingcountry) {
+    if (shippingcountry==="Canada") return [ 20.00, "*If your order qualifies for Canada Post letter rate, your credit card will be refunded $10.00." ];
+    if (shippingcountry==="United States") return [ 20.00, "*International Shipping" ];
+    return [ -1, '' ];
+}
+function mhc_shipping(cart, shippingcountry) {
+    if (!shippingcountry||!cart||cart.length===0) return [ 0.00, '' ];
+    const subtotal=getSubTotal(cart);
+    if (shippingcountry==="United States") {
+        if (subtotal<15) return [ 7.50, 'USPS' ];
+        if (subtotal>=15&&subtotal<30) return [ 10.00, 'USPS' ];
+        if (subtotal>=30&&subtotal<50) return [ 13.00, 'USPS' ];
+        if (subtotal>=50&&subtotal<100) return [ 15.00, 'USPS' ];
+        if (subtotal>=100&&subtotal<250) return [ 17.50, 'USPS' ];
+        if (subtotal>=250) return [ 25.00, 'USPS' ];
+    } else if (shippingcountry === 'Canada') {
+        if (subtotal<15) return [ 19.95, '*International Shipping' ];
+        if (subtotal>=15&&subtotal<30) return [ 25.00, '*International Shipping' ];
+        if (subtotal>=30&&subtotal<50) return [ 29.95, '*International Shipping' ];
+        if (subtotal>=50&&subtotal<100) return [ 39.95, '*International Shipping' ];
+        if (subtotal>=100&&subtotal<250) return [ 44.95, '*International Shipping' ];
+        if (subtotal>=250) return [ 49.95, '*International Shipping' ];
+    } else {
+        return [-1,''];
+    }
+}
 export function shipping(shippingcountry, store, cart) {
     if (!shippingcountry) return [0,'shipping country not found'];
     if (shippingcountry==='Antarctica') return [0,'easter egg'];
     if (store&&store==="harpsetc") return harpsetc_shipping(cart, shippingcountry);
     if (store&&store==="findaharp") return findaharp_shipping(cart, shippingcountry);
+    if (store&&store==="michiganharpcenter") return mhc_shipping(cart, shippingcountry);
+    if (store&&store==="FAH-GLSat") return fahglsat_shipping(cart, shippingcountry);
+    if (store&&store==="strummedstrings") return strummedstrings_shipping(cart, shippingcountry);
 }
 export function getShippingArray(shippingcountry, cart) {
     let subCart = [];
@@ -108,17 +142,18 @@ export function getShippingArray(shippingcountry, cart) {
 export function tax(cart, shippingcountry, shippingregion, store, currencyMultiplier) {
     switch(shippingcountry) {
         case "Canada": 
-            if (store==='findaharp') {
-                try {
-                    const tax = new SalesTax(
-                        getProvCode(shippingregion),
-                        getSubTotal(cart)*currencyMultiplier,
-                        2
-                    );
-                    return tax.sum().toFixed(2);
-                } catch(e) {
-                    return 0;
-                }
+            if (store==='findaharp') { // not until I make 30000
+                return 0;
+                // try {
+                //     const tax = new SalesTax(
+                //         getProvCode(shippingregion),
+                //         getSubTotal(cart)*currencyMultiplier,
+                //         2
+                //     );
+                //     return tax.sum().toFixed(2);
+                // } catch(e) {
+                //     return 0;
+                // }
             } else {
                 return 0;
             }

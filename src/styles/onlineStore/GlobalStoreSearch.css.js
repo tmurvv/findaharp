@@ -30,27 +30,27 @@ function GlobalStoreSearchCss() {
           
           .selectContainer>span {
             right: 4px;
-            top: 12px;
+            top: 8px;
             position: absolute;
             font-size: 18px;
             pointer-events: none;
           }
           @media only screen and (max-width: 750px) {
             .selectContainer {
-              width: 100%;
-              display: flex;
+              // width: 100%;
+              // display: flex;
             }
-            select {
-              width: 100%;
-            }
-            .selectContainer>span {
-              display: none;
-              // right: 4px;
-              // top: 12px;
-              // position: absolute;
-              // font-size: 18px;
-              // pointer-events: none;
-            }
+            // select {
+            //   width: 100%;
+            // }
+            // .selectContainer>span {
+            //   display: none;
+            //   // right: 4px;
+            //   // top: 12px;
+            //   // position: absolute;
+            //   // font-size: 18px;
+            //   // pointer-events: none;
+            // }
           }
           #searchInput
           {
@@ -77,6 +77,7 @@ function GlobalStoreSearchCss() {
             border: 1px solid #ffe58a;
             width: 100%;
             background-color: #fff;
+            -webkit-appearance: none;
           }
 
           select:active,

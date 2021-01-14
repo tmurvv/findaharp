@@ -93,7 +93,7 @@ function StoreProductModal(props) {
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div> 
             <div style={{fontSize: '24px'}}>{title}</div>
-            <div style={{fontSize: '14px', fontStyle: 'italic', marginBottom: '15px'}}>{artist_first||artist_last?artist_first+'   '+artist_last:"_"}</div>
+            <div style={{fontSize: '14px', fontStyle: 'italic', marginBottom: '15px'}}>{artist_first&&String(artist_first)!=='undefined'||artist_last&&String(artist_last)!=='undefined'?artist_first+'   '+artist_last:"_"}</div>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='storedetailInfo' style={{marginTop: '15px'}}>
                 <div className={`storedetailImg`}><img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full_grey_not_found.png'} alt={title} /></div>

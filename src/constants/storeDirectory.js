@@ -197,6 +197,9 @@ export const STORE_PARTNERS = [
                         <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;In-person and Skype Lessons</div>
                     </li>
                     <li>
+                        <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;Harp Rentals</div>
+                    </li>
+                    <li>
                         <div class="font_7" style="font-size:16px; margin-left:0px;">&bullet;&nbsp;&nbsp;Event Musician&nbsp;- Weddings, Parties, Fundraisers</div>
                     </li>
                     <li>
@@ -239,6 +242,23 @@ export const STORE_PARTNERS = [
         sellerWebsite: 'https://karenrokosharp.com',
         sellerWebsiteText: 'karenrokosharp.com',
         sellerEmail: 'karen@harpmail.com'
+    },
+    {
+        id: 'FAH-GLSat',
+        sellerCountry: "Canada",
+        sellerRegion: "BC, Canada",
+        shipsTo: "Canada",
+        productTitle: "FAH-GLSat",
+        productPrice: "",
+        productLongDesc: `
+        `,
+        productMaker: "",
+        productImageUrl: "",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: '',
+        sellerWebsiteText: '',
+        sellerEmail: 'tisha@findaharp.com',
+        doNotList: 1
     }
     // {
     //     id: 'theharpplace',

@@ -35,8 +35,6 @@ const StoreProduct = (props) => {
         if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
             const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
             if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
-                alert('instoreproductif')
-                console.log(props)
                 props.handleResults('Only 1 in stock. Item already in cart.')
             } else {
                 incQty(cart, setCart, e.target.getAttribute('data-item-title'), cartSubtotals, setCartSubtotals, user, currencyMultiplier);
@@ -134,7 +132,7 @@ const StoreProduct = (props) => {
                         className='longDesc productSmallDisplay-LongDesc' 
                         dangerouslySetInnerHTML={{__html: props.productdetail.description}} 
                     />
-                    <div>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
+                    <div style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} className='longDesc productSmallDisplay-LongDesc'>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
                     <button className='btn blueFont' 
                         onClick={()=>handleOpenStoreModal()} 
                             style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '4000',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}

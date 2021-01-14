@@ -101,6 +101,7 @@ function SubCart(props) {
                                 {/* </div> */}
                             </div>
                             <div style={{flex: '2'}}>
+                                {}
                                 {user.shippingcountry
                                 ?<><h5>Choose a delivery option:</h5>
                                 <input type="radio" name={`${props.store}-shippingoption}`} value={`${props.store}-shippingoption}`} checked/>

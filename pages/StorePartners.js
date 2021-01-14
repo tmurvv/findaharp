@@ -40,11 +40,12 @@ export default function StorePartners() {
             <h3 className={`subTitle`} style={{width: 'fit-content', marginTop: '-45px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA'}}>Click here</button>for more information.</h3>
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container">
-                    {addPlaceHolders.map(partner=> 
+                    {addPlaceHolders.map(partner=>!partner.doNotList&&
                         <AboutPartnerStore 
                             key={partner.id} 
                             product={partner} 
                             placeholder={!partner.productTitle}
+                            
                         />)
                     }
                 </div>
