@@ -15,8 +15,9 @@ function NoteCss() {
                 background-color: rgba(255, 255, 255);
                 text-align: center;
                 padding: 5px 12px;
-                font-size: 26px;
+                font-size: 20px;
                 border: 1px solid;
+                align-items: center;
             }
             .qty-input {
                 max-width: 50px;

@@ -9,41 +9,20 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
     const [ stringBrand, setStringBrand ] = useState();
 
     function handleClick(menu) {
+        Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
+        
         console.log(menu.target.id)
-        const stringType = document.querySelector(`#gutMenu${note}`).value;
-        // console.log('value', document.querySelector(`gutMenu${note}`)).value;
-        // console.log(`gutMenu${note}`)
-        // console.log('value', document.querySelector(`#gutMenu${note}`).value);
-        // const selection = String(stringType);
-        // alert(String(stringType))
-        console.log('menu', menu)
-        let clickBrand;
-        function getStringBrand(selection) {
-            Object.keys(STRING_BRANDS).map(type=>{
-                STRING_BRANDS[type].map(brand=>{
-                    // console.log('selection', selection);
-                    // console.log(selection.toUpperCase(),brand.toUpperCase())
-                    if (selection.toUpperCase().includes(brand.toUpperCase())) console.log('found it!!!!!!!!!!!!', brand)
-                });
-            });
-        }
-        // getStringBrand(selection);
+        console.log(`stringMenu${menu.target.id.substr(menu.target.id.length-2)}`)
+        const stringType = document.querySelector(`#${menu.target.id}`).value;
+        document.querySelector(`#stringMenu${menu.target.id.substr(menu.target.id.length-2)}`).value=`stringMenu${note}`;
         const clickOctave = parseInt(note.substr(0,1));
         const clickNote = note.substr(1);
-        // create new object
-        // const newObject = [...stringForm];
-        // get string id (temporarily title)
-        // console.log(stringForm[0]["G"])
-        // console.log(octave)
+        
         if (stringForm[clickOctave].octave===0) {
-            // alert('iminif')
-            // console.log(clickOctave, clickNote, stringType)
             const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = stringType];
-            // console.log(newObject);
             setStringForm(newObject);
-            document.querySelector(`stringType${note}`).innerText='stringType';
+            setOctaveBrand([stringType, octaveBrand[1]]);
         } else if (stringForm[clickOctave].octave===1){
-            // alert('iminelseif')
             let newObject;
             if (clickOctave===0) newObject =  [...stringForm,
                 stringForm[clickOctave]["G"].id = stringType,
@@ -63,11 +42,6 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                 stringForm[clickOctave]["D"].id = stringType,
                 stringForm[clickOctave]["C"].id = stringType,
             ];
-            // console.log(newObject[0])
-            // console.log(stringForm[0]["G"].id)
-            // console.log(stringForm[clickOctave]["G"].id)
-            // console.log(stringForm[2]["G"].id)
-            // console.log(newObject[clickOctave]["G"].id)
             setStringForm(newObject);
             setOctaveBrand([stringType, octaveBrand[1]]);
         }
@@ -102,10 +76,10 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
     // useEffect(()=>setStringBrand(defaultStringBrand))
     return (
         <>
-            <div className="menu-wrapper menu-gold">
+            <div className="menu-wrapper">
                 <div style={{display: 'flex'}}>            
-                    <select onChange={(e)=>{handleSelect(e)}} style={{width: 'fit-content'}}>
-                        <option value={`stringType${note}`}>String Type</option>
+                    <select id={`stringMenu${note}`} onChange={(e)=>{handleSelect(e)}} style={{width: 'fit-content'}}>
+                        <option value={`stringMenu${note}`}>Change Type</option>
                         <option value={`notSureMenu${note}`}>Not Sure</option>
                         <option value={`gutMenu${note}`}>Gut</option>
                         <option value={`nylonMenu${note}`}>Nylon</option>
@@ -124,7 +98,7 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                         <option value={`Burgundy Gut`}>Burgundy Gut</option>
                         <option value={`Silkgut`}>Silkgut</option>
                     </select>
-                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={()=>handleClick(this)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option value={`Select Brand`}>Select Brand</option>
                         <option value={`Bow Brand Pedal Nylon`}>Bow Brand Pedal Nylon</option>
                         <option value={`Bow Brand Lever Nylon`}>Bow Brand Lever Nylon</option>
