@@ -3,6 +3,7 @@ import SelectStringCss from '../../styles/stringForm/SelectString.css';
 import parseNum from 'parse-num';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { STRING_NUMBER, STRING_BRANDS } from '../../constants/constants';
+import { FindInPageSharp } from '@material-ui/icons';
 
 function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -14,51 +15,71 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         console.log(menu.target.id)
         console.log(`stringMenu${menu.target.id.substr(menu.target.id.length-2)}`)
         const stringType = document.querySelector(`#${menu.target.id}`).value;
+        if (stringType==='email') {location.href = "mailto: tisha@findaharp.com?subject=Harp String Questions"; return;}
+        if (stringType==='charts') {alert('View string charts under construction. Expected March 2021.'); return;}
         document.querySelector(`#stringMenu${menu.target.id.substr(menu.target.id.length-2)}`).value=`stringMenu${note}`;
         const clickOctave = parseInt(note.substr(0,1));
         const clickNote = note.substr(1);
-        
+        let stringObject;
+        strings.map(string=>{
+            if(string.order===STRING_NUMBER[note]&&string.title.includes(stringType))stringObject=string});
+        if (!stringObject) {alert(`This string brand, ${stringType}, not found for string ${note}.`); return}
         if (stringForm[clickOctave].octave===0) {
-            const newObject = [...stringForm, stringForm[clickOctave][clickNote].id = stringType];
-            setStringForm(newObject);
-            setOctaveBrand([stringType, octaveBrand[1]]);
+            let newObject = {...stringForm[clickOctave]};
+            newObject[clickNote].id=stringType;
+            newObject[clickNote].price=stringObject.price;
+            console.log(newObject)
+            setStringForm([...stringForm, stringForm[clickOctave]=newObject]);
+            // setOctaveBrand([stringType, octaveBrand[1]]);
         } else if (stringForm[clickOctave].octave===1){
             let newObject;
             if (clickOctave===0) newObject =  [...stringForm,
                 stringForm[clickOctave]["G"].id = stringType,
-                stringForm[clickOctave]["F"].id = stringType
+                stringForm[clickOctave]["G"].price = stringObject.price,
+                stringForm[clickOctave]["F"].id = stringType,
+                stringForm[clickOctave]["F"].price = stringObject.price,
             ];
             if (clickOctave>0&&clickOctave<7) newObject = [...stringForm,
                 stringForm[clickOctave]["E"].id = stringType,
+                stringForm[clickOctave]["E"].price = stringObject.price,
                 stringForm[clickOctave]["D"].id = stringType,
+                stringForm[clickOctave]["D"].price = stringObject.price,
                 stringForm[clickOctave]["C"].id = stringType,
+                stringForm[clickOctave]["C"].price = stringObject.price,
                 stringForm[clickOctave]["B"].id = stringType,
+                stringForm[clickOctave]["B"].price = stringObject.price,
                 stringForm[clickOctave]["A"].id = stringType,
+                stringForm[clickOctave]["A"].price = stringObject.price,
                 stringForm[clickOctave]["G"].id = stringType,
-                stringForm[clickOctave]["F"].id = stringType
+                stringForm[clickOctave]["G"].price = stringObject.price,
+                stringForm[clickOctave]["F"].id = stringType,
+                stringForm[clickOctave]["F"].price = stringObject.price
             ];;
             if (clickOctave===7) newObject = [...stringForm,
                 stringForm[clickOctave]["E"].id = stringType,
+                tringForm[clickOctave]["E"].price = stringObject.price,
                 stringForm[clickOctave]["D"].id = stringType,
+                tringForm[clickOctave]["D"].price = stringObject.price,
                 stringForm[clickOctave]["C"].id = stringType,
+                tringForm[clickOctave]["C"].price = stringObject.price
             ];
             setStringForm(newObject);
-            setOctaveBrand([stringType, octaveBrand[1]]);
+            // setOctaveBrand([stringType, octaveBrand[1]]);
         }
         
         setStringBrand(stringType);
-        setOctaveBrand([stringType, octaveBrand[1]]);
+        // setOctaveBrand([stringType, octaveBrand[1]]);
         // console.log(newObject)
         // find price in strings object
         // console.log(stringForm[clickOctave].octave)
 
-        const stringObject = strings.map(string=>
-            {
-                // console.log(string.order, "|", STRING_NUMBER[note], "|", string.title)
-                if (string.order===STRING_NUMBER[note]&&string.title.includes(stringType)&&stringForm[clickOctave].octave===1) {console.log(string.title); console.log(parseNum(string.price).toFixed(2)); setOctaveBrand([stringType, parseNum(string.price).toFixed(2)])}
-            });
+        // const stringObject = strings.map(string=>
+        //     {
+        //         // console.log(string.order, "|", STRING_NUMBER[note], "|", string.title)
+        //         if (string.order===STRING_NUMBER[note]&&string.title.includes(stringType)&&stringForm[clickOctave].octave===1) {console.log(string.title); console.log(parseNum(string.price).toFixed(2)); setOctaveBrand([stringType, parseNum(string.price).toFixed(2)])}
+        //     });
         
-        // setOctaveBrand(stringObject.title, parseNum(stringObject.price).toFixed(2))
+        // setOctaveBrand([stringType, parseNum(stringObject.price).toFixed(2)])
         // console.log(stringObject);
 
         // console.log(newObject);
@@ -87,8 +108,9 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                         <option value={`syntheticMenu${note}`}>Synthetic</option>
                     </select>
                     <select className={`clear${note}`} id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                        <option>Let us Help</option>
                         <option value='email'>Send us an email for advice on string types and brands</option>
-                        <option onClick={()=>alert('Under Construction. Expected March 2021')}>View string charts by harp make and model</option>
+                        <option value='charts'>View string charts by harp make and model</option>
                     </select>
                     <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option value={`Select Brand`}>Select Brand</option>
@@ -106,15 +128,15 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
                         <option value={`Nylon Monofilament`}>Nylon Monofilament</option>
                     </select>
                     <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option>Select Brand</option>
-                        <option>Silver-Plated Pedal Bass Wire</option>
-                        <option>Pedal Bass Wire (Tarnish-Resistant)</option>
-                        <option>Bow Brand Lever Bass Wire</option>
-                        <option>Professional Lever Bass Wire</option>
+                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Silver-Plated Pedal Bass Wire`}>Silver-Plated Pedal Bass Wire</option>
+                        <option value={`Pedal Bass Wire (Tarnish-Resistant)`}>Pedal Bass Wire (Tarnish-Resistant)</option>
+                        <option value={`Bow Brand Lever Bass Wire`}>Bow Brand Lever Bass Wire</option>
+                        <option value={`Professional Lever Bass Wire`}>Professional Lever Bass Wire</option>
                     </select>
                     <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option>Select Brand</option>
-                        <option>Saverez KF Composite (synthetic)</option>
+                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Saverez KF Composite (synthetic)`}>Saverez KF Composite (synthetic)</option>
                     </select>
                 </div>
 
