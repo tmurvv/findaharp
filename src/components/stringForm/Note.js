@@ -4,37 +4,14 @@ import NoteCss from '../../styles/stringForm/Note.css';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { STRING_NUMBER } from '../../constants/constants';
 import SelectString from '../../components/stringForm/SelectString';
-import Quantity from '../../utils/codestorage/onlinestores/Quantity';
 
 function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
-    const [ price, setPrice ] = useState('0.00');
-    const [ qty, setQty ] = useState(0);
     
     function handleChange(e) {
-        console.log('qty', e.target.value)
-        console.log('qty', e.target.value)
-        setQty(e.target.value)
-    }
-    function getPrice(e, myStrings) {
-        const stringOctave = parseInt(note.substr(0,1));
-        const stringNote = note.substr(1);
-        const stringType = stringForm[stringOctave][stringNote].id;
-        console.log('price')
-        console.log(stringOctave, stringNote, stringType)
-        // find price in strings object
-        strings.map(string=>
-            {
-                // console.log(string.order, "|", STRING_NUMBER[note], "|", string.title)
-                if (string.order===STRING_NUMBER[note]&&string.title.includes(stringType)&&stringForm[stringOctave].octave===1) {
-                    console.log(string.title); 
-                    
-                    setOctaveBrand([stringType, parseNum(string.price).toFixed(2)])
-                    setPrice(parseNum(string.price).toFixed(2)); 
-                }
-
-            });
-            setPrice('0.00')
+        let newObject = {...stringForm[note.substr(0,1)]};
+        newObject[note.substr(1)].qty=e.target.value;
+        setStringForm([...stringForm, stringForm[note.substr(0,1)]=newObject]);
     }
     return (
         
@@ -63,8 +40,15 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                 <div className="item5 colHeader" style={{border: '2px solid'}}>Price</div>
                 <div className="item6 colHeader" style={{border: '2px solid'}}>Total</div>
                 </> 
-                // :<><input data-id={`${octave}${note}`} className="item4" placeholder='0' />
-                :<><div><input className='qty-input' type='number' value={qty} onChange={(e)=>handleChange(e)} note={`${note}`}/></div>
+                :<>
+                <div>
+                    <input 
+                        className='qty-input' 
+                        type='number' 
+                        value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
+                        onChange={(e)=>handleChange(e)} note={`${note}`}
+                    />
+                </div>
                 <div className="note" id='note'>{note}</div>
                 <div 
                     className="stringtype" 
@@ -74,17 +58,18 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                     <SelectString 
                         octaveBrand={octaveBrand} 
                         setOctaveBrand={setOctaveBrand} 
-                        getPrice={getPrice} 
                         strings={strings}
                         note={note}
                     />
                     &nbsp;&nbsp;{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].id}
                 </div>
-
-                {/* <div className="stringtype" id={`stringType${note}`}>{octaveBrand&&octaveBrand[0]&&octaveBrand[0]!=='String Type'?<><button onClick={()=>setOctaveBrand(['String Type', "0.00"])}>change</button>{octaveBrand[0]}</>:<SelectString octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} getPrice={getPrice} strings={strings} localBrand={applyToOctaves?octaveBrand:localBrand} note={note}/>}</div> */}
                 <div className="item6">{stringForm[note.substr(0,1)][note.substr(1)].price}</div>
-                <div className="item7">${octaveBrand&&octaveBrand[1]&&qty>0?(parseNum(octaveBrand[1])*qty).toFixed(2):"0.00"}</div>
-                
+                <div className="item7">
+                    ${stringForm[note.substr(0,1)][note.substr(1)].qty>0
+                    ?(parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)
+                        *stringForm[note.substr(0,1)][note.substr(1)].qty).toFixed(2)
+                    :"0.00"}
+                </div>
                 </>
                 }
             </div>  
@@ -94,3 +79,26 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
 }
 
 export default Note;
+
+
+
+    // function getPrice(e, myStrings) {
+    //     const stringOctave = parseInt(note.substr(0,1));
+    //     const stringNote = note.substr(1);
+    //     const stringType = stringForm[stringOctave][stringNote].id;
+    //     console.log('price')
+    //     console.log(stringOctave, stringNote, stringType)
+    //     // find price in strings object
+    //     strings.map(string=>
+    //         {
+    //             // console.log(string.order, "|", STRING_NUMBER[note], "|", string.title)
+    //             if (string.order===STRING_NUMBER[note]&&string.title.includes(stringType)&&stringForm[stringOctave].octave===1) {
+    //                 console.log(string.title); 
+                    
+    //                 setOctaveBrand([stringType, parseNum(string.price).toFixed(2)])
+    //                 setPrice(parseNum(string.price).toFixed(2)); 
+    //             }
+
+    //         });
+    //         setPrice('0.00')
+    // }
