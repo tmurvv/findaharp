@@ -188,7 +188,7 @@ function StoreProductSearchStrings(props) {
     return (
         <>       
         <div className='storeproductSearchOuter'>
-            <h3 className='storesearchTitle'>Searching for STRINGS? Refine your search here.<br /><img src='img/fastTruck.png' alt='fast truck' style={{width: '45px', transform: 'translate(-6px, 5px)'}}/><span style={{fontStyle: 'normal', fontWeight: 'bold'}}>Fast and Easy</span> string order form coming soon!!</h3>
+            <h3 className='storesearchTitle'>Searching for STRINGS? Refine your search here.<br /><img src='img/store/icon-fast-0.jpg' alt='fast cart' style={{width: '35px', height: '20px', transform: 'translate(-6px, 5px)', opacity: '.6'}}/><span style={{fontStyle: 'normal', fontWeight: 'bold'}}>Fast and Easy</span> string order form coming soon!!</h3>
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
