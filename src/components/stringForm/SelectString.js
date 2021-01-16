@@ -28,41 +28,55 @@ function SelectString({strings, note, octave, octaveBrand, setOctaveBrand}) {
         // set stringForm id and price for this string only
         if (stringForm[clickOctave].octave===0) {
             let newObject = {...stringForm[clickOctave]};
-            newObject[clickNote].id=stringType;
+            newObject[clickNote].brand=stringType;
+            newObject[clickNote].id=stringObject.id;
             newObject[clickNote].price=stringObject.price;
             setStringForm([...stringForm, stringForm[clickOctave]=newObject]);
         // set stringForm id and price for all strings in octave
         } else if (stringForm[clickOctave].octave===1){
             let newObject;
             if (clickOctave===0) newObject =  [...stringForm,
-                stringForm[clickOctave]["G"].id = stringType,
+                stringForm[clickOctave]["G"].brand = stringType,
+                stringForm[clickOctave]["G"].id = stringObject.id,
                 stringForm[clickOctave]["G"].price = stringObject.price,
-                stringForm[clickOctave]["F"].id = stringType,
+                stringForm[clickOctave]["F"].brand = stringType,
+                stringForm[clickOctave]["F"].id = stringObject.id,
                 stringForm[clickOctave]["F"].price = stringObject.price,
             ];
             if (clickOctave>0&&clickOctave<7) newObject = [...stringForm,
-                stringForm[clickOctave]["E"].id = stringType,
+                stringForm[clickOctave]["E"].brand = stringType,
                 stringForm[clickOctave]["E"].price = stringObject.price,
-                stringForm[clickOctave]["D"].id = stringType,
+                stringForm[clickOctave]["E"].id = stringObject.id,
+                stringForm[clickOctave]["D"].brand = stringType,
                 stringForm[clickOctave]["D"].price = stringObject.price,
-                stringForm[clickOctave]["C"].id = stringType,
+                stringForm[clickOctave]["D"].id = stringObject.id,
+                stringForm[clickOctave]["C"].brand = stringType,
                 stringForm[clickOctave]["C"].price = stringObject.price,
-                stringForm[clickOctave]["B"].id = stringType,
+                stringForm[clickOctave]["C"].id = stringObject.id,
+                stringForm[clickOctave]["B"].brand = stringType,
                 stringForm[clickOctave]["B"].price = stringObject.price,
-                stringForm[clickOctave]["A"].id = stringType,
+                stringForm[clickOctave]["B"].id = stringObject.id,
+                stringForm[clickOctave]["A"].brand = stringType,
                 stringForm[clickOctave]["A"].price = stringObject.price,
-                stringForm[clickOctave]["G"].id = stringType,
+                stringForm[clickOctave]["A"].id = stringObject.id,
+                stringForm[clickOctave]["G"].brand = stringType,
                 stringForm[clickOctave]["G"].price = stringObject.price,
-                stringForm[clickOctave]["F"].id = stringType,
-                stringForm[clickOctave]["F"].price = stringObject.price
+                stringForm[clickOctave]["G"].id = stringObject.id,
+                stringForm[clickOctave]["F"].brand = stringType,
+                stringForm[clickOctave]["F"].price = stringObject.price,
+                stringForm[clickOctave]["F"].id = stringObject.id
             ];;
             if (clickOctave===7) newObject = [...stringForm,
-                stringForm[clickOctave]["E"].id = stringType,
+                stringForm[clickOctave]["E"].brand = stringType,
                 stringForm[clickOctave]["E"].price = stringObject.price,
-                stringForm[clickOctave]["D"].id = stringType,
+                stringForm[clickOctave]["E"].id = stringObject.id,
+                stringForm[clickOctave]["D"].brand = stringType,
                 stringForm[clickOctave]["D"].price = stringObject.price,
-                stringForm[clickOctave]["C"].id = stringType,
-                stringForm[clickOctave]["C"].price = stringObject.price
+                stringForm[clickOctave]["D"].id = stringObject.id,
+                stringForm[clickOctave]["C"].brand = stringType,
+                stringForm[clickOctave]["C"].price = stringObject.price,
+                stringForm[clickOctave]["C"].id = stringObject.id
+                
             ];
             setStringForm(newObject);
         }

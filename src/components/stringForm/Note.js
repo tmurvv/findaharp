@@ -61,7 +61,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                         strings={strings}
                         note={note}
                     />
-                    &nbsp;&nbsp;{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].id}
+                    &nbsp;&nbsp;{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].brand}
                 </div>
                 <div className="item6">{stringForm[note.substr(0,1)][note.substr(1)].price}</div>
                 <div className="item7">
