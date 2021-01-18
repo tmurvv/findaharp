@@ -1,5 +1,6 @@
 import uuid from 'uuid';
 
+export const NOTES_IN_OCTAVE = [ "E","D","C","B","A","G","F" ];
 export const SOLO_ENSEMBLE = [
     'solo',
     'fl/hp',
@@ -9,7 +10,7 @@ export const SOLO_ENSEMBLE = [
     'other',
     'concerto',
     'orchestra part'
-]
+];
 export const RESULTS_INITIAL_STATE = {
     resultContainer: 'none',
     resultText: 'none',

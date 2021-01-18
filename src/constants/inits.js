@@ -7,12 +7,12 @@ exports.CART_SUBTOTALS_INIT = {
 }
 exports.STRING_FORM_INIT =
     [{
-        octave: 1,
+        applytooctave: 1,
         G: {id:'', qty: 0, brand: '', price: '0.00'},
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 1,
+        applytooctave: 1,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'},
@@ -22,7 +22,7 @@ exports.STRING_FORM_INIT =
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 1,
+        applytooctave: 1,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'},
@@ -32,7 +32,7 @@ exports.STRING_FORM_INIT =
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 1,
+        applytooctave: 1,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'},
@@ -42,7 +42,7 @@ exports.STRING_FORM_INIT =
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 1,
+        applytooctave: 1,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'},
@@ -52,7 +52,7 @@ exports.STRING_FORM_INIT =
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 0,
+        applytooctave: 0,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'},
@@ -62,7 +62,7 @@ exports.STRING_FORM_INIT =
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 1,
+        applytooctave: 1,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'},
@@ -72,7 +72,7 @@ exports.STRING_FORM_INIT =
         F: {id:'', qty: 0, brand: '', price: '0.00'},
     },
     {
-        octave: 1,
+        applytooctave: 1,
         E: {id:'', qty: 0, brand: '', price: '0.00'},
         D: {id:'', qty: 0, brand: '', price: '0.00'},
         C: {id:'', qty: 0, brand: '', price: '0.00'}

@@ -15,15 +15,19 @@ function NoteCss() {
                 background-color: rgba(255, 255, 255);
                 text-align: center;
                 padding: 5px 12px;
-                font-size: 20px;
+                font-size: 16px;
                 border: 1px solid;
                 align-items: center;
+                display: flex;
+                justify-content: center;
+                width: 100%;
             }
             .qty-input {
                 max-width: 50px;
                 height: 30px;
                 text-align: right;
             }
+            
             .qty-input:hover::-webkit-inner-spin-button {  
                 width: 14px;
                 height: 30px;

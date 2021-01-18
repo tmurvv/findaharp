@@ -3,27 +3,32 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import uuid from 'uuid';
 import parseNum from 'parse-num';
-// internal
-import StringFormCss from '../src/styles/stringForm/StringForm.css';
-import Octave from '../src/components/stringForm/Octave';
-import PageTitle from '../src/components/PageTitle';
+// contexts
 import { StringFormContext } from '../src/contexts/StringFormContext';
 import { CartContext } from '../src/contexts/CartContext';
+// components
+import Octave from '../src/components/stringForm/Octave';
+import PageTitle from '../src/components/PageTitle';
+// other internal
+import StringFormCss from '../src/styles/stringForm/StringForm.css';
 import { setlocalCart } from '../src/utils/checkoutHelpers';
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const { cart, setCart } = useContext(CartContext);
-    const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,1,1,1]);
+    const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
+    const [ total, setTotal ] = useState('0.00');
+
     function updateCart(addArray) {
-        // console.log(addArray[0])
         const cartCopy = [...cart];
+        // find item in items object
         addArray.map(addItem=>{
             let foundString;
             props.strings.map(string=>{if (String(string.id).trim()===String(addItem[0]).trim()){
                 console.log('inif',string.id);
                 foundString=string;}
             });
+            // prepare new cart object
             if (foundString) {
                 console.log('found', foundString)
                 const thisItem = {
@@ -41,21 +46,17 @@ const StringForm = (props) => {
                 cartCopy.push(thisItem);
             }
         });
-        
-        // console.log('cartItem', thisItem);
-        // cartCopy.push(thisItem);
+        // update cart and local cart
         cartCopy.sort((a,b) => (a.store > b.store) ? 1 : ((b.store > a.store) ? -1 : 0));
         const tempCartJson = JSON.stringify(cartCopy);
         setlocalCart('fah-cart', tempCartJson);
         setCart(cartCopy);
-    
     }
     function handleSubmit(e) {
-        const addArray = [];
         e.preventDefault();
-        console.log('imin handle submit', e.target.name)
+        const addArray = [];
+        // check for qty and additem to update cart list
         stringForm.map((octave,idx)=>{
-            // if(idx<8&&octave.E&&octave.E.qty>0) {const addObject = {[`${idx}E`]: [octave.E.id,octave.E.qty,octave.E.price]}; addArray.push(addObject)};
             if(idx<8&&octave.E&&octave.E.qty>0) {const addObject = [octave.E.id,octave.E.qty,octave.E.price]; addArray.push(addObject)};
             if(idx<8&&octave.D&&octave.D.qty>0) {const addObject = [octave.D.id,octave.D.qty,octave.D.price]; addArray.push(addObject)};
             if(idx<8&&octave.C&&octave.C.qty>0) {const addObject = [octave.C.id,octave.C.qty,octave.C.price]; addArray.push(addObject)};
@@ -64,6 +65,7 @@ const StringForm = (props) => {
             if(idx<8&&octave.G&&octave.G.qty>0) {const addObject = [octave.G.id,octave.G.qty,octave.G.price]; addArray.push(addObject)};
             if(idx<8&&octave.F&&octave.F.qty>0) {const addObject = [octave.F.id,octave.F.qty,octave.F.price]; addArray.push(addObject)};
         });
+        // update cart
         updateCart(addArray);
     }
     // display cart??
@@ -75,16 +77,26 @@ const StringForm = (props) => {
         <div className="stringForm" >  
             <PageTitle maintitle='EZ String Order Form' subtitle='We can remember your harp(s) for next time!!' />
             <form onSubmit={handleSubmit}>
-                <button name='stringForm' className='submit-btn' style={{fontSize: '16px'}} type='submit'>Submit String Order</button>
-                <Octave octave='0' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='1' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='2' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='3' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='4' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='5' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='6' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>                 
-                <Octave octave='7' strings={props.strings} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>  
-                <button className='submit-btn' style={{fontSize: '16px', marginTop: '15px'}} type='submit'>Submit String Order</button>
+                <button 
+                    className='submit-btn' 
+                    style={{fontSize: '16px'}} 
+                    type='submit'
+                >Submit String Order</button>
+                <h1>here{stringForm.length}</h1>
+                <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='3' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='4' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='5' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='6' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
+                <Octave octave='7' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />  
+                <h3 style={{width: 'fit-content', float: 'right', border: '2px solid', padding: '5px'}}>Total for Strings on this Form:&nbsp;&nbsp;${total}</h3>
+                <button 
+                    className='submit-btn' 
+                    style={{fontSize: '16px', marginTop: '15px'}} 
+                    type='submit'
+                >Submit String Order</button>
             </form>               
         </div>
         <StringFormCss />
