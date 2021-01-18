@@ -3,6 +3,7 @@ import SelectStringCss from '../../styles/stringForm/SelectString.css';
 import parseNum from 'parse-num';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { STRING_NUMBER, NOTES_IN_OCTAVE } from '../../constants/constants';
+import { setIn } from 'formik';
 
 function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -20,7 +21,13 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
         // reset string type menu to "Change Type"
         document.querySelector(`#typeMenu${note}`).value=`stringMenu${note}`;
         // if selection is from 'not sure' or help menu
-        if (stringType==='email') {location.href = "mailto: tisha@findaharp.com?subject=Harp String Questions"; return;}
+        if (stringType==='email') {
+            document.querySelector(`#spinner${note}`).style.display='block';
+            setTimeout(()=>{document.querySelector(`#spinner${note}`).style.display='none';},1800);
+            location.href = "mailto: tisha@findaharp.com?subject=Harp String Questions"; 
+            document.querySelector(`#spinner${note}`).style.display='block';
+            return;
+        }
         if (stringType==='charts') {alert('View string charts under construction. Expected March 2021.'); return;}
         // get string object for price       
         strings.map(string=>{if(string.order===STRING_NUMBER[note]&&string.title.includes(stringType))stringObject=string});
@@ -83,7 +90,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
     }
     function handleSelect(e) {
         // clear all brand menus
-        Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
+        document.querySelectorAll(`.clear${note}`).length>0&&Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
         // show selected brand menu
         document.querySelector(`#${e.target.value}`).style.display='block';
         document.querySelector(`#stringTypeText${note}`).style.opacity='0';
@@ -91,15 +98,24 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
     return (
         <>
             <div className="menu-wrapper">
-                <div style={{display: 'flex'}}>            
+                <div id={`spinner${note}`} style={{position: 'fixed', top: '50%', left: '50%', zIndex: '6000', display: 'none'}}>
+                    <img src="img/spinner.gif" alt="spinner" />
+                </div>
+                <div style={{display: 'flex'}}>  
+                
+                          
                     <select 
                         id={`typeMenu${note}`} 
                         onChange={(e)=>{handleSelect(e)}} 
-                        style={{width: 'fit-content', opacity: '.5'}} 
-                        onMouseOver={(e)=>e.target.style.opacity='1'} 
-                        onMouseOut={(e)=>e.target.style.opacity='.5'}
+                        style={{width: 'fit-content', border:'none', fontSize: '16px'}} 
+                        // onMouseOver={(e)=>e.target.style.opacity='1'} 
+                        // onMouseOut={(e)=>e.target.style.opacity='.5'}
                     >
-                        <option value={`stringMenu${note}`}>Change Type</option>
+                        <option value={`stringMenu${note}`}>{
+                                                    stringForm[note.substr(0,1)][note.substr(1)].brand===''
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand==='THIS IS "MIDDLE C"'
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.startsWith('LEVER HARPS-')
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.startsWith('PEDAL HARPS-')?'Select String Type':'Change'}</option>
                         <option value={`notSureMenu${note}`}>Not Sure</option>
                         <option value={`gutMenu${note}`}>Gut</option>
                         <option value={`nylonMenu${note}`}>Nylon</option>
@@ -107,9 +123,9 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                         <option value={`syntheticMenu${note}`}>Synthetic</option>
                     </select>
                     <select className={`clear${note}`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option value={`Let us help`}>Let us help</option>
-                        <option value='email'>Send us an email for advice on string types and brands</option>
-                        <option value='charts'>View string charts by harp make and model</option>
+                        <option value={`Let us help`}>Let us help...</option>
+                        <option value='email'>Send us an email for advice on string types and brands.</option>
+                        <option value='charts'>Tell us harp make and model to view string chart.</option>
                     </select>
                     <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option value={`Select Brand`}>Select Brand</option>

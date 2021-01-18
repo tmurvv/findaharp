@@ -77,12 +77,27 @@ const StringForm = (props) => {
         <div className="stringForm" >  
             <PageTitle maintitle='EZ String Order Form' subtitle='We can remember your harp(s) for next time!!' />
             <form onSubmit={handleSubmit}>
-                <button 
-                    className='submit-btn' 
-                    style={{fontSize: '16px', width: '20%', marginLeft: '40%'}} 
-                    type='submit'
-                >Submit String Order</button>
-                <h3 style={{width: 'fit-content', float: 'right', border: '2px solid', padding: '5px'}}>Total for Strings on this Form:&nbsp;&nbsp;${total}</h3>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                    <button 
+                        className='submit-btn' 
+                        style={{
+                            fontSize: '16px', 
+                            width: '200px', 
+                            backgroundColor: '#e0e0e0'
+                        }} 
+                        type='submit'
+                    >Submit String Order</button>
+                </div>
+                <div style={{
+                        width: 'fit-content', 
+                        float: 'right', 
+                        border: '2px solid', 
+                        padding: '5px', 
+                        backgroundColor: '#f6f6f6',
+                        transform: 'translate(4px, 47px)'
+
+                    }}
+                >Total<span style={{fontFamily: 'Metropolis Extra Bold', fontStyle: 'italic', textTransform: 'uppercase', fontSize: '10px'}}>This form only</span>:&nbsp;&nbsp;${total}</div>
                 <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
@@ -91,12 +106,33 @@ const StringForm = (props) => {
                 <Octave octave='5' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='6' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='7' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />  
-                <h3 style={{width: 'fit-content', float: 'right', border: '2px solid', padding: '5px'}}>Total for Strings on this Form:&nbsp;&nbsp;${total}</h3>
-                <button 
-                    className='submit-btn' 
-                    style={{fontSize: '16px', marginTop: '50px', width: '20%', marginLeft: '40%'}} 
-                    type='submit'
-                >Submit String Order</button>
+                <div style={{
+                    width: 'fit-content', 
+                    float: 'right', 
+                    border: '2px solid', 
+                    padding: '5px', 
+                    backgroundColor: '#f6f6f6', 
+                    transform: "translateX(2px)"
+                    }}
+                >
+                    Total<span style={{
+                        fontFamily: 'Metropolis Extra Bold', 
+                        fontStyle: 'italic', 
+                        textTransform: 'uppercase', 
+                        fontSize: '10px'
+                    }}> This form only</span>:&nbsp;&nbsp;${total}
+                </div>
+                <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                    <button 
+                        className='submit-btn' 
+                        style={{
+                            fontSize: '16px',
+                            width: '200px',
+                            backgroundColor: '#e0e0e0'
+                        }} 
+                        type='submit'
+                    >Submit String Order</button>
+                </div>
             </form>               
         </div>
         <StringFormCss />

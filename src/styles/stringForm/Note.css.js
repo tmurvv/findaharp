@@ -6,15 +6,12 @@ function NoteCss() {
             .noteGridContainer {
                 width: 100%;
                 display: grid;
-                grid-template-columns: 10% 10% 40% 20% 20%;
-                // padding: 5px 0;
+                grid-template-columns: 10% 10% 60% 10% 10%;
                 position: relative;
-                // height: 32px;
             }
             .noteGridContainer > div {
-                background-color: rgba(255, 255, 255);
+                background-color: #f6f6f6;
                 text-align: center;
-                padding: 5px 12px;
                 font-size: 16px;
                 border: 1px solid;
                 align-items: center;
@@ -23,13 +20,12 @@ function NoteCss() {
                 width: 100%;
             }
             .qty-input {
-                max-width: 50px;
                 height: 40px;
                 text-align: right;
                 border: none;
-                font-size: 18px
+                font-size: 18px;
+                width: 100%;
             }
-            
             .qty-input::-webkit-inner-spin-button {  
                 width: 14px;
                 height: 30px;

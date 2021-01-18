@@ -27,8 +27,9 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
         <div style={{position: 'relative'}}>
             <div className="noteGridContainer">
                 {note==='Header'
-                ?<><div className="item3 colHeader" style={{border: '2px solid'}}>Qty</div>
-                <div className="item4colHeader" style={{border: '2px solid'}}>Note</div>
+                ?<>
+                <div className="item4 colHeader" style={{border: '2px solid'}}>Note</div>
+                <div className="item3 colHeader" style={{border: '2px solid'}}>Qty</div>
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
                     <div style={{width: '90%'}}>
                     <div style={{display:'flex', justifyContent: 'space-between'}}>
@@ -51,6 +52,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                 <div className="item6 colHeader" style={{border: '2px solid'}}>Total</div>
                 </> 
                 :<>
+                <div className="note" id='note'>{note}</div>
                 <div>
                     <input 
                         className='qty-input' 
@@ -60,7 +62,6 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                         onChange={(e)=>handleChange(e)} note={`${note}`}
                     />
                 </div>
-                <div className="note" id='note'>{note}</div>
                 <div 
                     className="stringtype" 
                     id={`stringType${note}`} 
