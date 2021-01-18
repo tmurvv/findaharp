@@ -6,7 +6,6 @@ import { STRING_NUMBER, NOTES_IN_OCTAVE } from '../../constants/constants';
 
 function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
-    const [ stringBrand, setStringBrand ] = useState();
 
     function handleClick(menu) {  
         // clear all brand menus and restore menu text to selected menu
@@ -40,82 +39,47 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                 NOTES_IN_OCTAVE.map(noteio=>{
                     string[noteio]&&string[noteio].qty>0?newTotal += parseNum(string[noteio].qty)*parseNum(string[noteio].price):'';
                 });
-                // string["E"]&&string["E"].qty>0?newTotal += parseNum(string.E.qty)*parseNum(string.E.price):'';
-                // string["D"]&&string["D"].qty>0?newTotal += parseNum(string.D.qty)*parseNum(string.D.price):'';
-                // string["C"]&&string["C"].qty>0?newTotal += parseNum(string.C.qty)*parseNum(string.C.price):'';
-                // string["B"]&&string["B"].qty>0?newTotal += parseNum(string.B.qty)*parseNum(string.B.price):'';
-                // string["A"]&&string["A"].qty>0?newTotal += parseNum(string.A.qty)*parseNum(string.A.price):'';
-                // string["G"]&&string["G"].qty>0?newTotal += parseNum(string.G.qty)*parseNum(string.G.price):'';
-                // string["F"]&&string["F"].qty>0?newTotal += parseNum(string.F.qty)*parseNum(string.F.price):'';
-            }) 
-            console.log('outloop', newTotal)
+            });
             setTotal(newTotal.toFixed(2));
         // set stringForm id and price for all strings in octave
         } else if (stringForm[clickOctave].applytooctave===1){
-            console.log('topstring',stringForm)
             let newObject=[...stringForm];
-            console.log('top', newObject);
             if (clickOctave===0) {
-                newObject[clickOctave]["G"].brand = stringType;
-                newObject[clickOctave]["G"].id = stringObject.id;
-                newObject[clickOctave]["G"].price = stringObject.price;
-                newObject[clickOctave]["F"].brand = stringType;
-                newObject[clickOctave]["F"].id = stringObject.id;
-                newObject[clickOctave]["F"].price = stringObject.price;
+                const Notes = [ "G", "F" ];
+                Notes.map(noteinmap=>{
+                    newObject[clickOctave][noteinmap].brand = stringType;
+                    newObject[clickOctave][noteinmap].price = stringObject.price;
+                    newObject[clickOctave][noteinmap].id = stringObject.id;
+                });
             }
             if (clickOctave>0&&clickOctave<7) {
-                newObject[clickOctave]["E"].brand = stringType;
-                newObject[clickOctave]["E"].price = stringObject.price;
-                newObject[clickOctave]["E"].id = stringObject.id;
-                newObject[clickOctave]["D"].brand = stringType;
-                newObject[clickOctave]["D"].price = stringObject.price;
-                newObject[clickOctave]["D"].id = stringObject.id;
-                newObject[clickOctave]["C"].brand = stringType;
-                newObject[clickOctave]["C"].price = stringObject.price;
-                newObject[clickOctave]["C"].id = stringObject.id;
-                newObject[clickOctave]["B"].brand = stringType;
-                newObject[clickOctave]["B"].price = stringObject.price;
-                newObject[clickOctave]["B"].id = stringObject.id;
-                newObject[clickOctave]["A"].brand = stringType;
-                newObject[clickOctave]["A"].price = stringObject.price;
-                newObject[clickOctave]["A"].id = stringObject.id;
-                newObject[clickOctave]["G"].brand = stringType;
-                newObject[clickOctave]["G"].price = stringObject.price;
-                newObject[clickOctave]["G"].id = stringObject.id;
-                newObject[clickOctave]["F"].brand = stringType;
-                newObject[clickOctave]["F"].price = stringObject.price;
-                newObject[clickOctave]["F"].id = stringObject.id;
+                NOTES_IN_OCTAVE.map(noteinmap=>{
+                    newObject[clickOctave][noteinmap].brand = stringType;
+                    newObject[clickOctave][noteinmap].price = stringObject.price;
+                    newObject[clickOctave][noteinmap].id = stringObject.id;
+                });
             }
             if (clickOctave===7) {
-                newObject[clickOctave]["E"].brand = stringType;
-                newObject[clickOctave]["E"].price = stringObject.price;
-                newObject[clickOctave]["E"].id = stringObject.id;
-                newObject[clickOctave]["D"].brand = stringType;
-                newObject[clickOctave]["D"].price = stringObject.price;
-                newObject[clickOctave]["D"].id = stringObject.id;
-                newObject[clickOctave]["C"].brand = stringType;
-                newObject[clickOctave]["C"].price = stringObject.price;
-                newObject[clickOctave]["C"].id = stringObject.id;
+                const Notes = [ "E", "D", "C"];
+                Notes.map(noteinmap=>{
+                    newObject[clickOctave][noteinmap].brand = stringType;
+                    newObject[clickOctave][noteinmap].price = stringObject.price;
+                    newObject[clickOctave][noteinmap].id = stringObject.id;
+                });
             }
             setStringForm(newObject);
             // set total
             let newTotal = 0;
             console.log(newObject)
             newObject.map((string,idx)=>{
-                string["E"]&&string["E"].qty>0?newTotal += parseNum(string.E.qty)*parseNum(string.E.price):'';
-                string["D"]&&string["D"].qty>0?newTotal += parseNum(string.D.qty)*parseNum(string.D.price):'';
-                string["C"]&&string["C"].qty>0?newTotal += parseNum(string.C.qty)*parseNum(string.C.price):'';
-                string["B"]&&string["B"].qty>0?newTotal += parseNum(string.B.qty)*parseNum(string.B.price):'';
-                string["A"]&&string["A"].qty>0?newTotal += parseNum(string.A.qty)*parseNum(string.A.price):'';
-                string["G"]&&string["G"].qty>0?newTotal += parseNum(string.G.qty)*parseNum(string.G.price):'';
-                string["F"]&&string["F"].qty>0?newTotal += parseNum(string.F.qty)*parseNum(string.F.price):'';
-            }) 
-            console.log('outloop', newTotal)
+                NOTES_IN_OCTAVE.map(noteio=>{
+                    string[noteio]&&string[noteio].qty>0?newTotal += parseNum(string[noteio].qty)*parseNum(string[noteio].price):'';
+                });
+            });
             setTotal(newTotal.toFixed(2));
         }
-        
+        // reset string type menu 
         document.querySelector(`#stringTypeText${note}`).innerText=stringType;
-        setStringBrand(stringType);
     }
     function handleSelect(e) {
         // clear all brand menus

@@ -24,14 +24,16 @@ function NoteCss() {
             }
             .qty-input {
                 max-width: 50px;
-                height: 30px;
+                height: 40px;
                 text-align: right;
+                border: none;
+                font-size: 18px
             }
             
-            .qty-input:hover::-webkit-inner-spin-button {  
+            .qty-input::-webkit-inner-spin-button {  
                 width: 14px;
                 height: 30px;
-                // margin-left: 5px;
+                margin-left: 7.5px;
             }
             .item4 {
                 // width: 100%;

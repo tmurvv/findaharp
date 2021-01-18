@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import parseNum from 'parse-num';
 import NoteCss from '../../styles/stringForm/Note.css';
 import { StringFormContext } from '../../contexts/StringFormContext';
-import { STRING_NUMBER } from '../../constants/constants';
+import { NOTES_IN_OCTAVE } from '../../constants/constants';
 import SelectString from '../../components/stringForm/SelectString';
 
 function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
@@ -12,11 +12,19 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
         setStringForm(newObject);
+         // set total
+         let newTotal = 0;
+         console.log(newObject)
+         newObject.map((string,idx)=>{
+             NOTES_IN_OCTAVE.map(noteio=>{
+                 string[noteio]&&string[noteio].qty>0?newTotal += parseNum(string[noteio].qty)*parseNum(string[noteio].price):'';
+             });
+         });
+         setTotal(newTotal.toFixed(2));
     }
     return (
         
         <div style={{position: 'relative'}}>
-            {note==='Header'&&<br/>}
             <div className="noteGridContainer">
                 {note==='Header'
                 ?<><div className="item3 colHeader" style={{border: '2px solid'}}>Qty</div>
@@ -46,7 +54,8 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                 <div>
                     <input 
                         className='qty-input' 
-                        type='number' 
+                        type='number'
+                        min='0'
                         value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
                         onChange={(e)=>handleChange(e)} note={`${note}`}
                     />

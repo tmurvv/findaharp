@@ -9,10 +9,7 @@ function Octave({strings, octave, applyToOctaves, setApplyToOctaves, setTotal}) 
     
     return (
         <>
-            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center', paddingTop: '40px'}}>{CARDINALS[octave]} Octave {octave==='0'&&' (pedal harp only)'}{octaveBrand[0]}</p>
-            {/* <div style={{display: 'flex'}}>
-                <SelectString octave={octave}/>
-            </div> */}
+            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center', paddingTop: '40px'}}>{CARDINALS[octave]} Octave {octave==='0'&&' (pedal harp only)'}</p>
             <Note note={`Header`} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
             {octave==='0'
             ?<div>

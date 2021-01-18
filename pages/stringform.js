@@ -79,10 +79,10 @@ const StringForm = (props) => {
             <form onSubmit={handleSubmit}>
                 <button 
                     className='submit-btn' 
-                    style={{fontSize: '16px'}} 
+                    style={{fontSize: '16px', width: '20%', marginLeft: '40%'}} 
                     type='submit'
                 >Submit String Order</button>
-                <h1>here{stringForm.length}</h1>
+                <h3 style={{width: 'fit-content', float: 'right', border: '2px solid', padding: '5px'}}>Total for Strings on this Form:&nbsp;&nbsp;${total}</h3>
                 <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
@@ -94,7 +94,7 @@ const StringForm = (props) => {
                 <h3 style={{width: 'fit-content', float: 'right', border: '2px solid', padding: '5px'}}>Total for Strings on this Form:&nbsp;&nbsp;${total}</h3>
                 <button 
                     className='submit-btn' 
-                    style={{fontSize: '16px', marginTop: '15px'}} 
+                    style={{fontSize: '16px', marginTop: '50px', width: '20%', marginLeft: '40%'}} 
                     type='submit'
                 >Submit String Order</button>
             </form>               
