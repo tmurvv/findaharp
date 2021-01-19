@@ -113,9 +113,9 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                     >
                         <option value={`stringMenu${note}`}>{
                                                     stringForm[note.substr(0,1)][note.substr(1)].brand===''
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand==='THIS IS "MIDDLE C"'
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.startsWith('LEVER HARPS-')
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.startsWith('PEDAL HARPS-')?'Select String Type':'Change'}</option>
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase()==='THIS IS "MIDDLE C"'
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('LEVER HARPS-')
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('PEDAL HARPS-')?'Select String Type':'Change'}</option>
                         <option value={`notSureMenu${note}`}>Not Sure</option>
                         <option value={`gutMenu${note}`}>Gut</option>
                         <option value={`nylonMenu${note}`}>Nylon</option>
