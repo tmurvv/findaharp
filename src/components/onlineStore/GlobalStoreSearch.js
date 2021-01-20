@@ -326,7 +326,6 @@ function GlobalStoreSearch(props) {
                 <h3 className='searchHelperText'>Search by category</h3>
                 <div className='selectContainer'>    
                     <select onChange={()=>handleChange('','category')} id='category'>
-                    
                         <option name='All'>All</option>
                         <option name='Strings'>Strings</option>
                         <option name='Music'>Music</option>
@@ -466,7 +465,7 @@ function GlobalStoreSearch(props) {
             {searchResultsText==='entry'&&
             <>
                 <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
-                <ProductScroll filteredproductscontainer={props.usedProducts} handleResults={handleResults} title="Browse Used / Prepurchased Items"/>
+                <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Browse Featured Items"/>
                 <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
             </>
             }

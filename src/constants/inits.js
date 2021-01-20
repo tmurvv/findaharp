@@ -9,7 +9,7 @@ exports.STRING_FORM_INIT =
     [{
         octave: 1,
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,
@@ -19,7 +19,7 @@ exports.STRING_FORM_INIT =
         B: {id:'', qty:''},
         A: {id:'', qty:''},
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,
@@ -29,7 +29,7 @@ exports.STRING_FORM_INIT =
         B: {id:'', qty:''},
         A: {id:'', qty:''},
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,
@@ -39,7 +39,7 @@ exports.STRING_FORM_INIT =
         B: {id:'', qty:''},
         A: {id:'', qty:''},
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,
@@ -49,7 +49,7 @@ exports.STRING_FORM_INIT =
         B: {id:'', qty:''},
         A: {id:'', qty:''},
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,
@@ -59,7 +59,7 @@ exports.STRING_FORM_INIT =
         B: {id:'', qty:''},
         A: {id:'', qty:''},
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,
@@ -69,7 +69,7 @@ exports.STRING_FORM_INIT =
         B: {id:'', qty:''},
         A: {id:'', qty:''},
         G: {id:'', qty:''},
-        F: {id:'', qty:''},
+        F: {id:'', qty:''}
     },
     {
         octave: 1,

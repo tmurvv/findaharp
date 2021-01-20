@@ -36,6 +36,7 @@ export const STORE_PARTNERS = [
         id: 'michiganharpcenter',
         sellerCountry: "USA",
         sellerRegion: "Clawson, MI",
+        shipsTo: "Anywhere",
         productTitle: "Michigan Harp Center",
         productPrice: "",
         productLongDesc: `
