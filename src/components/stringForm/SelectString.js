@@ -101,9 +101,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                 <div id={`spinner${note}`} style={{position: 'fixed', top: '50%', left: '50%', zIndex: '6000', display: 'none'}}>
                     <img src="img/spinner.gif" alt="spinner" />
                 </div>
-                <div style={{display: 'flex'}}>  
-                
-                          
+                <div style={{display: 'flex'}}>      
                     <select 
                         id={`typeMenu${note}`} 
                         onChange={(e)=>{handleSelect(e)}} 
@@ -115,20 +113,20 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                                                     stringForm[note.substr(0,1)][note.substr(1)].brand===''
                                                     ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase()==='THIS IS "MIDDLE C"'
                                                     ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('LEVER HARPS-')
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('PEDAL HARPS-')?'Select String Type':'Change'}</option>
+                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('PEDAL HARPS-')?'String Type':'String Type'}</option>
                         <option value={`notSureMenu${note}`}>Not Sure</option>
                         <option value={`gutMenu${note}`}>Gut</option>
                         <option value={`nylonMenu${note}`}>Nylon</option>
                         <option value={`wireMenu${note}`}>Wires</option>
                         <option value={`syntheticMenu${note}`}>Synthetic</option>
                     </select>
-                    <select className={`clear${note}`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note} selectStringBrand`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
                         <option value={`Let us help`}>Let us help...</option>
                         <option value='email'>Send us an email for advice on string types and brands.</option>
                         <option value='charts'>Tell us harp make and model to view string chart.</option>
                     </select>
                     <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Natural Gut`}>Bow Brand Pedal Natural Gut</option>
                         <option value={`Bow Brand Lever Natural Gut`}>Bow Brand Lever Natural Gut</option>
                         <option value={`Concedo Gut`}>Concedo Gut</option>
@@ -136,21 +134,21 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                         <option value={`Silkgut`}>Silkgut</option>
                     </select>
                     <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Nylon`}>Bow Brand Pedal Nylon</option>
                         <option value={`Bow Brand Lever Nylon`}>Bow Brand Lever Nylon</option>
                         <option value={`Artist Nylon`}>Artist Nylon</option>
                         <option value={`Nylon Monofilament`}>Nylon Monofilament</option>
                     </select>
                     <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Select Brand`}>Brand</option>
                         <option value={`Silver-Plated Pedal Bass Wire`}>Silver-Plated Pedal Bass Wire</option>
                         <option value={`Pedal Bass Wire (Tarnish-Resistant Nickle-Plated)`}>Pedal Bass Wire (Tarnish-Resistant)</option>
                         <option value={`Bow Brand Lever Bass Wire`}>Bow Brand Lever Bass Wire</option>
                         <option value={`Professional Lever Bass Wire`}>Professional Lever Bass Wire</option>
                     </select>
                     <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
-                        <option value={`Select Brand`}>Select Brand</option>
+                        <option value={`Select Brand`}>Brand</option>
                         <option value={`Saverez KF Composite (synthetic)`}>Saverez KF Composite (synthetic)</option>
                     </select>
                 </div>
