@@ -19,6 +19,7 @@ const StringForm = (props) => {
     const { cart, setCart } = useContext(CartContext);
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
     const [ total, setTotal ] = useState('0.00');
+    const [ rememberModal, setRememberModal ] = useState(false);
 
     function updateCart(addArray) {
         const cartCopy = [...cart];
@@ -76,10 +77,44 @@ const StringForm = (props) => {
     return (
         <>
         <div className="stringForm" >
-            <RememberHarp />  
+            {rememberModal&&
+                <RememberHarp setRememberModal={setRememberModal}/>  
+            }
             <PageTitle maintitle='EZ String Order Form' subtitle='We can remember your harp(s) for next time!!' />
+            <div 
+                style={{
+                    margin: '-10px auto 30px', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems:'center',
+                }}  
+            >
+                <img 
+                    src='./img/store/speedy_harp.png' 
+                    alt='speedy harpist pushing harp on dolly' 
+                    style={{height: '40px'}}
+                /> 
+                <button 
+                    style={{
+                        marginRight: '7px',
+                        marginLeft: '7px', 
+                        padding: '5px 10px', 
+                        color: '#FFF', 
+                        backgroundColor: '#6A75AA'
+                    }} 
+                    onClick={()=>setRememberModal(true)}
+                >Remember My Harp<br/>Login/Signup</button>
+                <a 
+                    href='./rememberdetails' 
+                    style={{
+                        flex: 'none', 
+                        fontStyle: 'italic', 
+                        fontSize: '14px'
+                    }}
+                >What's this?</a>
+            </div>
             <form onSubmit={handleSubmit}>
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
                     <button 
                         className='submit-btn' 
                         style={{
@@ -98,7 +133,7 @@ const StringForm = (props) => {
                         color: '#000',
                         textAlign: 'center'
                     }}
-                >Form Subtotal:&nbsp;&nbsp;${total}</div>
+                >Form Subtotal:&nbsp;&nbsp;${total}</div> */}
                 <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
                 <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 

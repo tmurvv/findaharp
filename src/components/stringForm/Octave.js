@@ -7,7 +7,7 @@ import OctaveCss from '../../styles/stringForm/Octave.css';
 const CARDINALS = ['zero', '1st','2nd', '3rd', '4th', '5th', '6th', '7th']
 function Octave({strings, octave, applyToOctaves, setApplyToOctaves, setTotal}) {
     const [ octaveBrand, setOctaveBrand] = useState(["String Type", "0.00"]);
-    const [ mobile, setMobile] = useState(true);
+    const [ mobile, setMobile] = useState(false);
     
     return (
         <>

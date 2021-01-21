@@ -18,8 +18,7 @@ function RememberHarpModal(props) {
     const { user } = useContext(UserContext);
     
     function handleClick(evt, product, openContact) {
-        alert('Not Yet Implemented')
-        // props.handleCloseDetail(evt, product, openContact);
+        props.setRememberModal(false);
     }
     const handleChange = (evt) => {
         switch (evt.target.name) {
@@ -90,26 +89,26 @@ function RememberHarpModal(props) {
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div> 
             <div style={{fontSize: '24px'}}>Remember My Harp(s)</div>
-            {/* <div style={{fontSize: '14px', fontStyle: 'italic', marginBottom: '15px'}}></div> */}
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='rememberdetailInfo' style={{marginTop: '25px'}}>
                 <div className={`rememberdetailImg`}><img src= './img/store/speedy_harp.png' alt='speedy harpist pushing harp on dolly' /></div>
                 <div className={`rememberdetailText`}>  
-                    <h3 style={{textAlign: 'center', marginBottom: '25px'}}>Save valuable time!! </h3>
+                    <div style={{textAlign: 'center', fontSize: '22px', marginBottom: '10px', fontWeight: 'bold'}}>Save valuable time!! </div>
+                    <div style={{textAlign: 'center',  fontSize: '16px', fontWeight: 'bold', marginBottom: '25px'}}>Signup / Login</div>
                     <div className='rememberInput'>
                         <div style={{textAlign: 'right', flex: '4'}}>
                             <label htmlFor="harpname">Harp Name:</label>
-                            <input name='harpname' placeholder='Troubadour, Genevieve, etc.' />
+                            <input name='harpname'/>
                         </div>
                         <div style={{textAlign: 'right', flex: '6'}}>
                             <label>Email:</label>
-                            <input type='email' placeholder='harpist@example.com' name='email'/>
+                            <input type='email' name='email'/>
                         </div>
                     </div>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
                         <ul>
                             <li>Enter a name and email for your harp</li>
-                            <li>Enter as many harps as you like</li>
+                            <li>Signup as many harps as you like</li>
                             <li>We will remember your string brands</li>
                             <li>Teachers, you can enter your students' harps!</li>
                             <li>Rentors, you can enter your rental harps!</li>
@@ -131,7 +130,7 @@ function RememberHarpModal(props) {
                             className='submit-btn'
                             type="button"
                             style={{width: '45%', margin: '1%'}}
-                            
+                            onClick={(evt) => handleClick(evt, props.product, false)}
                         >
                             No Thank You
                         </button>

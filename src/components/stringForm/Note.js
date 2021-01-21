@@ -7,6 +7,7 @@ import SelectString from '../../components/stringForm/SelectString';
 
 function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
+    const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
         let newObject = [...stringForm];
@@ -22,6 +23,18 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
          });
          setTotal(newTotal.toFixed(2));
     }
+    useEffect(()=> {
+        let setIt;
+        if (parseInt(octave)===0) setIt = 'Zero Octave - Pedal harps only';
+        if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st octave';
+        if (parseInt(octave)>1&&parseInt(octave)<4) setIt = 'Gut, Nylon, or Synthetic';
+        if (parseInt(octave)===4) setIt = '"Middle C" is in the 4th octave';
+        if (parseInt(octave)===5) setIt = 'Wires usually start somewhere in the 5th Octave';
+        if (parseInt(octave)===6) setIt = 'Wires';
+        if (parseInt(octave)===7) setIt = '7th Octave - usually pedal harps only';
+        console.log('bl', octave, setIt)
+        setGetTip(setIt);
+    })
     return (
         
         <div style={{position: 'relative'}}>
@@ -33,7 +46,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
                     <div style={{width: '90%'}}>
                     <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div style={{whiteSpace: 'nowrap'}}>String Type</div>
+                        <div style={{whiteSpace: 'nowrap', color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
                         <div style={{width: '90%', textAlign: 'right'}}>
                             <input 
                                 type='checkbox'
@@ -43,7 +56,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                                 }} 
                                 defaultChecked={applyToOctaves[octave]===0?'':`true`}
                             />
-                            <label style={{fontSize: '16px'}}>Apply to Octave?</label>
+                            <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                         </div>
                     </div>
                     </div>

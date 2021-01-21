@@ -455,8 +455,8 @@ function GlobalStoreSearch(props) {
             }
             {searchResultsText==='entry'&&
             <>
-                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
                 <ProductScroll filteredproductscontainer={props.usedProducts} handleResults={handleResults} title="Browse Used / Prepurchased Items"/>
+                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
                 <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
             </>
             }
