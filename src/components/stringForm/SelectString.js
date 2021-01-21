@@ -3,7 +3,6 @@ import SelectStringCss from '../../styles/stringForm/SelectString.css';
 import parseNum from 'parse-num';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { STRING_NUMBER, NOTES_IN_OCTAVE } from '../../constants/constants';
-import { setIn } from 'formik';
 
 function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -97,35 +96,31 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
     }
     return (
         <>
-            <div className="menu-wrapper">
-                <div id={`spinner${note}`} style={{position: 'fixed', top: '50%', left: '50%', zIndex: '6000', display: 'none'}}>
+            <div className="menu-wrapper" style={{width: '33%', minWidth: '33%', position: 'relative'}}>
+                <div id={`spinner${note}`} style={{position: 'fixed', top: '50%', left: '50%', zIndex: '6000', display: 'none', position: 'absolute', left: '100%'}}>
                     <img src="img/spinner.gif" alt="spinner" />
                 </div>
                 <div style={{display: 'flex'}}>      
                     <select 
                         id={`typeMenu${note}`} 
                         onChange={(e)=>{handleSelect(e)}} 
-                        style={{width: 'fit-content', border:'none', fontSize: '16px'}} 
+                        style={{width: '100%', border:'none', fontSize: '16px', paddingLeft: '0', paddingRight: '0'}} 
                         // onMouseOver={(e)=>e.target.style.opacity='1'} 
                         // onMouseOut={(e)=>e.target.style.opacity='.5'}
                     >
-                        <option value={`stringMenu${note}`}>{
-                                                    stringForm[note.substr(0,1)][note.substr(1)].brand===''
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase()==='THIS IS "MIDDLE C"'
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('LEVER HARPS-')
-                                                    ||stringForm[note.substr(0,1)][note.substr(1)].brand.toUpperCase().startsWith('PEDAL HARPS-')?'String Type':'String Type'}</option>
+                        <option value={`stringMenu${note}`}>{stringForm[note.substr(0,1)][note.substr(1)].brand===''?'String Type': 'Change Type'}</option>
                         <option value={`notSureMenu${note}`}>Not Sure</option>
                         <option value={`gutMenu${note}`}>Gut</option>
                         <option value={`nylonMenu${note}`}>Nylon</option>
                         <option value={`wireMenu${note}`}>Wires</option>
                         <option value={`syntheticMenu${note}`}>Synthetic</option>
                     </select>
-                    <select className={`clear${note} selectStringBrand`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note} selectStringBrand`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none', position: 'absolute', left: '100%'}}>
                         <option value={`Let us help`}>Let us help...</option>
                         <option value='email'>Send us an email for advice on string types and brands.</option>
                         <option value='charts'>Tell us harp make and model to view string chart.</option>
                     </select>
-                    <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none', position: 'absolute', left: '100%'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Natural Gut`}>Bow Brand Pedal Natural Gut</option>
                         <option value={`Bow Brand Lever Natural Gut`}>Bow Brand Lever Natural Gut</option>
@@ -133,21 +128,21 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                         <option value={`Burgundy Gut`}>Burgundy Gut</option>
                         <option value={`Silkgut`}>Silkgut</option>
                     </select>
-                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none', position: 'absolute', left: '100%'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Nylon`}>Bow Brand Pedal Nylon</option>
                         <option value={`Bow Brand Lever Nylon`}>Bow Brand Lever Nylon</option>
                         <option value={`Artist Nylon`}>Artist Nylon</option>
                         <option value={`Nylon Monofilament`}>Nylon Monofilament</option>
                     </select>
-                    <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none', position: 'absolute', left: '100%'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Silver-Plated Pedal Bass Wire`}>Silver-Plated Pedal Bass Wire</option>
                         <option value={`Pedal Bass Wire (Tarnish-Resistant Nickle-Plated)`}>Pedal Bass Wire (Tarnish-Resistant)</option>
                         <option value={`Bow Brand Lever Bass Wire`}>Bow Brand Lever Bass Wire</option>
                         <option value={`Professional Lever Bass Wire`}>Professional Lever Bass Wire</option>
                     </select>
-                    <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none'}}>
+                    <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none', position: 'absolute', left: '100%'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Saverez KF Composite (synthetic)`}>Saverez KF Composite (synthetic)</option>
                     </select>

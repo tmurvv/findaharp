@@ -11,7 +11,7 @@ function Octave({strings, octave, applyToOctaves, setApplyToOctaves, setTotal}) 
     
     return (
         <>
-            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center', paddingTop: '25px'}}>{CARDINALS[octave]} Octave {(octave==='0'||octave==='7')&&' (pedal harp only)'}</p>
+            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center'}}>{CARDINALS[octave]} Octave</p>
             {mobile
             ?<><MobileNote note={`Header`} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves}/>
                 {octave==='0'

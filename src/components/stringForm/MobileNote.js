@@ -7,6 +7,7 @@ import SelectString from '../../components/stringForm/SelectString';
 
 function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
+    const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
         let newObject = [...stringForm];
@@ -22,26 +23,48 @@ function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyTo
          });
          setTotal(newTotal.toFixed(2));
     }
+    useEffect(()=> {
+        let setIt;
+        if (parseInt(octave)===0) setIt = 'Zero Octave - Pedal harps only';
+        if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st octave';
+        if (parseInt(octave)>1&&parseInt(octave)<4) setIt = 'Gut, Nylon, or Synthetic';
+        if (parseInt(octave)===4) setIt = '"Middle C" is in the 4th octave';
+        if (parseInt(octave)===5) setIt = 'Wires start somewhere in the 5th Octave';
+        if (parseInt(octave)===6) setIt = 'Wires';
+        if (parseInt(octave)===7) setIt = '7th Octave - usually pedal harps only';
+        console.log('bl', octave, setIt)
+        setGetTip(setIt);
+    })
     return (
         <div style={{position: 'relative'}}>
-            <div className="mobilenoteContainer">
+            <div className="mobilenoteContainer" style={note==='Header'?{border: '7px double'}:{borderTop: 'none'}}>
                 {note==='Header'
                 ?<>
                 <div>
                     <div className="item6 mobilestringtype mobilecolHeader">
                         <div style={{width: '100%', padding: '5px 7px'}}>
-                        <div style={{display:'flex', justifyContent: 'space-between'}}>
-                            <div style={{whiteSpace: 'nowrap'}}>String Type</div>
-                            <div style={{width: '90%', textAlign: 'right'}}>
+                        <div style={{display:'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
+                            <div 
+                                style={{
+                                    display: 'flex', 
+                                    alignItems:'center', 
+                                    color: '#6A75AA', 
+                                    fontStyle: 'italic',
+                                    fontSize: '14px',
+                                    textAlign: 'left',
+                                    flex: 6
+                                }}
+                            >{getTip}</div>
+                            <div style={{textAlign: 'right', flex: 5}}>
                                 <input 
                                     type='checkbox'
                                     onClick={()=>{
                                         const newObject = [...stringForm, stringForm[octave].applytooctave=stringForm[octave].applytooctave===0?1:0]
                                         setStringForm(newObject)
                                     }} 
-                                    defaultChecked={applyToOctaves[octave]===0?'':`true`}
+                                    defaultChecked={applyToOctaves[octave]===0?'':true}
                                 />
-                                <label style={{fontSize: '16px'}}>Apply to Octave?</label>
+                                <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                             </div>
                         </div>
                         </div>
@@ -76,7 +99,16 @@ function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyTo
                         note={note}
                         setTotal={setTotal}
                     />
-                    <div className='mobilestringBrand' id={`stringTypeText${note}`} style={{paddingLeft: '15px'}}>{stringForm&&note?stringForm[note.substr(0,1)][note.substr(1)].brand:"Select String Type"}</div>
+                    <div 
+                        className='mobilestringBrand' 
+                        id={`stringTypeText${note}`} 
+                        style={{paddingLeft: '15px'}}
+                    >
+                        {stringForm&&note
+                        ?stringForm[note.substr(0,1)][note.substr(1)].brand
+                        :"Select String Type"
+                        }
+                    </div>
                 </div>
                 <div className='mobileline2'>
                     <div className="mobileqty">

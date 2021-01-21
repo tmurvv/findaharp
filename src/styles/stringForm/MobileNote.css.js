@@ -18,6 +18,9 @@ function MobileNoteCss() {
                 border: 3px solid;
                 align-items: center;
             }
+            #lastChild:last-child {
+                border-bottom: 3px solid;
+            }
             .mobilenoteContainer select {
                 font-size: 14px !important;
             }
@@ -31,10 +34,10 @@ function MobileNoteCss() {
             .mobileqty {
                 display: flex;
                 align-items: center;
-                flex: 3;
+                flex: 32;
             }
             .mobilenote {
-                flex: 1;
+                flex: 10;
             }
             .mobileqty-input {
                 height: 38px;
@@ -50,7 +53,7 @@ function MobileNoteCss() {
             }
             .mobilepriceper,
             .mobilelinetotal {
-                flex:3;
+                flex:27.5;
             }
             .mobilecolHeader {
                 // font-size: 14px;
