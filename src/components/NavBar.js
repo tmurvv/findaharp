@@ -31,7 +31,7 @@ export default function NavBar(props) {
             }
             {/* show menu */}
             {!props.mobile || props.mobile&&props.open?
-                <div className='navLinks'>
+                <div className='navLinks' id='navLinks'>
                     {props.mobile&&props.open?
                         <div className='closeIcon' onClick={props.handleNavOpen}>
                             <img src='/img/clear_search.png' alt="close mobile menu icon"/>

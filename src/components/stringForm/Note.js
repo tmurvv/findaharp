@@ -5,11 +5,12 @@ import { StringFormContext } from '../../contexts/StringFormContext';
 import { NOTES_IN_OCTAVE } from '../../constants/constants';
 import SelectString from '../../components/stringForm/SelectString';
 
-function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
+function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
+        setChanges(true);
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
         setStringForm(newObject);
@@ -25,7 +26,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
     }
     useEffect(()=> {
         let setIt;
-        if (parseInt(octave)===0) setIt = 'Zero Octave - Pedal harps only';
+        if (parseInt(octave)===0) setIt = 'Zero Octave - usually only pedal harps';
         if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st octave';
         if (parseInt(octave)>1&&parseInt(octave)<4) setIt = 'Gut, Nylon, or Synthetic';
         if (parseInt(octave)===4) setIt = '"Middle C" is in the 4th octave';
@@ -54,7 +55,7 @@ function Note({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctave
                                     const newObject = [...stringForm, stringForm[octave].applytooctave=stringForm[octave].applytooctave===0?1:0]
                                     setStringForm(newObject)
                                 }} 
-                                defaultChecked={applyToOctaves[octave]===0?'':`true`}
+                                defaultChecked={applyToOctaves[octave]}
                             />
                             <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                         </div>

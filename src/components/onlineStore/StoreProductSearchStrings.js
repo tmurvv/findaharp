@@ -190,7 +190,7 @@ function StoreProductSearchStrings(props) {
         <div className='storeproductSearchOuter'>
             <h3 className='storesearchTitle'>
                 Searching for STRINGS? Refine your search here.<br />
-                <img 
+                {/* <img 
                     src='img/store/icon-fast-0.jpg' 
                     alt='fast cart' 
                     style={{
@@ -202,7 +202,7 @@ function StoreProductSearchStrings(props) {
                 />
                     &nbsp;&nbsp;<span style={{fontStyle: 'normal', fontWeight: 'bold'}}>
                         Fast and Easy
-                    </span> string order form coming soon!!
+                    </span> string order form coming soon!! */}
             </h3>
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>

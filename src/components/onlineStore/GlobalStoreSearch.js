@@ -2,6 +2,7 @@
 import { useEffect, useState, useReducer } from 'react';
 import InfiniteScrollLoading from "react-infinite-scroll-loading";
 import uuid from 'react-uuid';
+import Router from 'next/router';
 // components
 import StoreProduct from '../../components/onlineStore/StoreProduct';
 import StoreProductModal from '../../components/onlineStore/StoreProductModal';
@@ -318,11 +319,49 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            {/* <button onClick={()=>searchText()}>Search Text</button> */}
+            <div 
+                style={{
+                    margin: '-20px auto 40px', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems:'center',
+                    width: '100%'
+                }}  
+            >
+                <img 
+                    src='./img/store/speedy_harp.png' 
+                    alt='speedy harpist pushing harp on dolly' 
+                    style={{height: '60px'}}
+                /> 
+                <div>
+                    <button 
+                        className='stringForm-btn'
+                        onClick={()=>Router.push('/stringform')}
+                    >Fast and Easy String Form</button>
+                    <div style={{
+                        fontSize: '12px', 
+                        opacity: '.8', 
+                        textAlign: 'center', 
+                        marginTop: '3px', 
+                        fontStyle: 'italic'
+                        }}
+                    >w/optional "Remember My Harp"</div>
+                </div>
+                {/* <a 
+                    href='./rememberdetails' 
+                    style={{
+                        flex: 'none', 
+                        fontStyle: 'italic', 
+                        fontSize: '14px'
+                    }}
+                >What's this?</a> */}
+            </div>
+            
             <div className='storeSearchLine' >
                 {screenWidth>750
                 ?
                 <>
+                
                 <h3 className='searchHelperText'>Search by category</h3>
                 <div className='selectContainer'>    
                     <select onChange={()=>handleChange('','category')} id='category'>
@@ -455,8 +494,8 @@ function GlobalStoreSearch(props) {
             }
             {searchResultsText==='entry'&&
             <>
-                <ProductScroll filteredproductscontainer={props.usedProducts} handleResults={handleResults} title="Browse Used / Prepurchased Items"/>
                 <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
+                <ProductScroll filteredproductscontainer={props.usedProducts} handleResults={handleResults} title="Browse Used / Prepurchased Items"/>
                 <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
             </>
             }

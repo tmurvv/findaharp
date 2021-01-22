@@ -38,7 +38,6 @@ import {
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
-
 function MyApp(props) {
     const { Component, pageProps } = props;
     const [user, setUser] = useState({
@@ -56,7 +55,7 @@ function MyApp(props) {
     const [cartSubtotals, setCartSubtotals] = useState(CART_SUBTOTALS_INIT);
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
-    const [stringForm, setStringForm] = useState(STRING_FORM_INIT);
+    const [stringForm, setStringForm] = useState(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
@@ -143,6 +142,14 @@ function MyApp(props) {
     }, []);
 
     function handleNavOpen() {
+        console.log('router', Router.route)
+        if (Router.route==='/stringform'&&!confirm('Your changes may not be saved. Continue?')) 
+            {
+                window.onbeforeunload = function () {
+                    // blank function do nothing
+                }
+                return;
+            }
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }

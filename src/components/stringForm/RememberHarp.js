@@ -105,19 +105,10 @@ function RememberHarpModal(props) {
                             <input type='email' name='email'/>
                         </div>
                     </div>
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <ul>
-                            <li>Enter a name and email for your harp</li>
-                            <li>Signup as many harps as you like</li>
-                            <li>We will remember your string brands</li>
-                            <li>Teachers, you can enter your students' harps!</li>
-                            <li>Rentors, you can enter your rental harps!</li>
-                            <li>What a great idea!</li>
-                        </ul>
-                    </div>
+                    
                     <NewsletterSignup />
                     
-                    <div style={{margin: '25px auto 0', width: '100%', textAlign: 'center'}}>
+                    <div style={{margin: '25px auto -20px', width: '100%', textAlign: 'center'}}>
                         <button 
                             className='submit-btn'
                             type="button"
@@ -134,6 +125,16 @@ function RememberHarpModal(props) {
                         >
                             No Thank You
                         </button>
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <ul> Instructions:
+                            <li>Enter a name and email for your harp</li>
+                            <li>Signup as many harps as you like</li>
+                            <li>We will remember your string brands</li>
+                            <li>Teachers, you can enter your students' harps!</li>
+                            <li>Rentors, you can enter your rental harps!</li>
+                            <li>What a great idea!</li>
+                        </ul>
                     </div>
                 </div> 
             </div>

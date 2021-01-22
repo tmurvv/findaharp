@@ -39,6 +39,7 @@ function RememberHarpModalCSS() {
             .rememberInput {
                 width: fit-content;
                 margin: auto;
+                margin-bottom: 10px;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;

@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import uuid from 'uuid';
 import parseNum from 'parse-num';
+import Router from 'next/router';
 // contexts
 import { StringFormContext } from '../src/contexts/StringFormContext';
 import { CartContext } from '../src/contexts/CartContext';
@@ -13,6 +14,7 @@ import PageTitle from '../src/components/PageTitle';
 // other internal
 import StringFormCss from '../src/styles/stringForm/StringForm.css';
 import { setlocalCart } from '../src/utils/checkoutHelpers';
+import { STRING_FORM_INIT } from '../src/constants/inits';
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -20,6 +22,7 @@ const StringForm = (props) => {
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
     const [ total, setTotal ] = useState('0.00');
     const [ rememberModal, setRememberModal ] = useState(false);
+    const [ changes, setChanges ] = useState(false);
 
     function updateCart(addArray) {
         const cartCopy = [...cart];
@@ -36,7 +39,7 @@ const StringForm = (props) => {
                 const thisItem = {
                     id: uuid(), 
                     store: foundString.store,
-                    title: foundString.title,
+                    title: `From string from ${foundString.title}`,
                     description: foundString.description, 
                     price: parseNum(addItem[2]), 
                     newprice: parseNum(foundString.newprice),
@@ -69,14 +72,52 @@ const StringForm = (props) => {
         });
         // update cart
         updateCart(addArray);
+        setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
     }
+    function handleNavOpen(e) {
+        // alert('imin')
+        if (!changes||(changes&&confirm('Changes may not be saved. Continue?'))) {
+            // Cancel the before unload event
+            window.onbeforeunload = function () {
+                // blank function do nothing
+            }
+            if (document.querySelector('#stringFormNav')) document.querySelector('#stringFormNav').style.display = 'none';
+            if (document.querySelector('#navLinks')) document.querySelector('#navLinks').style.display = 'flex';
+            Router.push(e.target.getAttribute('route'));
+        }
+    }
+    useEffect(() => {
+        window.addEventListener('beforeunload', function (e) {
+            // Cancel the event
+            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            // Chrome requires returnValue to be set
+            e.returnValue = '';
+            // Cancel the before unload event
+            window.onbeforeunload = function () {
+                // blank function do nothing
+            }
+        });
+    });
+    
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
+    
+    useEffect(()=>{
+        if (document.querySelector('#navLinks')) document.querySelector('#navLinks').style.display = 'none';
+    },[]);
     return (
         <>
         <div className="stringForm" >
+            <div style={{display: 'flex', position:'absolute', top: '0', left: '0'}} id='stringFormNav'>
+                <div href='/'>
+                    <button style={{backgroundColor: 'transparent', outline: 'none', transform: 'translate(0,-30px)', marginRight: '5x'}} onClick={handleNavOpen} route='/'>Find a Harp</button>
+                </div>
+                <div href='/onlinestore' as='/onlinestore'>
+                    <button style={{backgroundColor: 'transparent', outline: 'none', transform: 'translate(0,-30px)', marginLeft: '5x'}} onClick={handleNavOpen} route='/onlinestore'>Online Store</button>
+                </div>
+            </div>  
             {rememberModal&&
                 <RememberHarp setRememberModal={setRememberModal}/>  
             }
@@ -134,14 +175,14 @@ const StringForm = (props) => {
                         textAlign: 'center'
                     }}
                 >Form Subtotal:&nbsp;&nbsp;${total}</div> */}
-                <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='3' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='4' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='5' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='6' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />                 
-                <Octave octave='7' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} />   
+                <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='3' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='4' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='5' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='6' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
+                <Octave octave='7' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>   
                 <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
                     <button 
                         className='submit-btn' 

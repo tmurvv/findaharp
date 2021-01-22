@@ -4,12 +4,14 @@ import MobileNoteCss from '../../styles/stringForm/MobileNote.css';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { NOTES_IN_OCTAVE } from '../../constants/constants';
 import SelectString from '../../components/stringForm/SelectString';
+import { propTypes } from 'react-addons-css-transition-group';
 
-function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
+function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
+        setChanges(true);
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
         setStringForm(newObject);
@@ -25,14 +27,13 @@ function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyTo
     }
     useEffect(()=> {
         let setIt;
-        if (parseInt(octave)===0) setIt = 'Zero Octave - Pedal harps only';
+        if (parseInt(octave)===0) setIt = 'Zero Octave - usually only pedal harps';
         if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st octave';
         if (parseInt(octave)>1&&parseInt(octave)<4) setIt = 'Gut, Nylon, or Synthetic';
         if (parseInt(octave)===4) setIt = '"Middle C" is in the 4th octave';
         if (parseInt(octave)===5) setIt = 'Wires start somewhere in the 5th Octave';
         if (parseInt(octave)===6) setIt = 'Wires';
         if (parseInt(octave)===7) setIt = '7th Octave - usually pedal harps only';
-        console.log('bl', octave, setIt)
         setGetTip(setIt);
     })
     return (
@@ -42,7 +43,9 @@ function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyTo
                 ?<>
                 <div>
                     <div className="item6 mobilestringtype mobilecolHeader">
+                        
                         <div style={{width: '100%', padding: '5px 7px'}}>
+                        
                         <div style={{display:'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
                             <div 
                                 style={{
@@ -68,16 +71,42 @@ function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyTo
                             </div>
                         </div>
                         </div>
+                        
+                    </div>
+                    <div className='mobileline2' style={{padding: '7px'}}>
+                        <div className="item3 mobileqty mobilecolHeader">Qty</div>
+                        <div className="item4 mobilenote mobilecolHeader">Note</div>
+                        <div className="item5 mobilepriceper mobilecolHeader">Price</div>
+                        <div className="item6 mobilelinetotal mobilecolHeader">Total</div>
                     </div>
                 </div>
-                <div className='mobileline2' style={{padding: '7px'}}>
-                    <div className="item3 mobileqty mobilecolHeader">Qty</div>
-                    <div className="item4 mobilenote mobilecolHeader">Note</div>
-                    <div className="item5 mobilepriceper mobilecolHeader">Price</div>
-                    <div className="item6 mobilelinetotal mobilecolHeader">Total</div>
-                </div>
+                
                 </> 
                 :<>
+                <div className='mobileline2'>
+                    <div className="mobileqty">
+                        <div>&nbsp;Qty:&nbsp;</div>
+                        <input 
+                            className='mobileqty-input' 
+                            type='number'
+                            min='0'
+                            value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
+                            onChange={(e)=>handleChange(e)} note={`${note}`}
+                        />
+                    </div>
+                    <div className="mobilenote" id='note'>{note}</div>
+                    <div className="mobilepriceper">
+                        {parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0
+                        ?"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)
+                        :"$0.00"}
+                    </div>
+                    <div className="mobilelinetotal">
+                        {stringForm[note.substr(0,1)][note.substr(1)].qty>0
+                        ?"$"+(parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)
+                            *stringForm[note.substr(0,1)][note.substr(1)].qty).toFixed(2)
+                        :"$0.00"}
+                    </div>
+                </div>
                 <div 
                     className="mobilestringtype" 
                     id={`stringType${note}`} 
@@ -110,30 +139,7 @@ function MobileNote({strings, note, octave, octaveBrand, setOctaveBrand, applyTo
                         }
                     </div>
                 </div>
-                <div className='mobileline2'>
-                    <div className="mobileqty">
-                        <div>&nbsp;Qty:&nbsp;</div>
-                        <input 
-                            className='mobileqty-input' 
-                            type='number'
-                            min='0'
-                            value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
-                            onChange={(e)=>handleChange(e)} note={`${note}`}
-                        />
-                    </div>
-                    <div className="mobilenote" id='note'>{note}</div>
-                    <div className="mobilepriceper">
-                        {parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0
-                        ?"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)
-                        :"$0.00"}
-                    </div>
-                    <div className="mobilelinetotal">
-                        {stringForm[note.substr(0,1)][note.substr(1)].qty>0
-                        ?"$"+(parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)
-                            *stringForm[note.substr(0,1)][note.substr(1)].qty).toFixed(2)
-                        :"$0.00"}
-                    </div>
-                </div>
+                
                 </>
                 }
             </div>  
