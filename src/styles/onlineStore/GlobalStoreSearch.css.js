@@ -35,23 +35,7 @@ function GlobalStoreSearchCss() {
             font-size: 36px;
             pointer-events: none;
           }
-          @media only screen and (max-width: 750px) {
-            .selectContainer {
-              // width: 100%;
-              // display: flex;
-            }
-            // select {
-            //   width: 100%;
-            // }
-            // .selectContainer>span {
-            //   display: none;
-            //   // right: 4px;
-            //   // top: 12px;
-            //   // position: absolute;
-            //   // font-size: 18px;
-            //   // pointer-events: none;
-            // }
-          }
+          
           #searchInput
           {
             background-image: url('/css/searchicon.png');
