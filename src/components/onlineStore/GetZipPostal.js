@@ -111,7 +111,7 @@ function GetPostalZip() {
                     </div>
                 </div>
             </div>
-            {user.shippingcountry==='Canada'||user.shippingcountry==="United States"
+            {user.shippingcountry==="United States"
             ?<><div className='regionDrop' style={{marginLeft: '0'}}>
                 <label htmlFor="country" style={{display: 'block'}}>Select {user.shippingcountry==="Canada"?'Province':'State'} to calculate taxes</label>
                 <div className="selectContainer" style={{position: 'relative', display: 'inline-block'}}>

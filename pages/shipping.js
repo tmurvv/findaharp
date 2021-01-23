@@ -440,11 +440,11 @@ function Shipping() {
                                             name='shippingcountry'
                                             onChange={(val)=> changeCountry(val)} 
                                         />
-                                        <span style={{
+                                         <span style={{
                                             position: 'absolute',
                                             right: '8px',
                                             top: '20px',
-                                            fontSize: '18px',
+                                            fontSize: '36px',
                                             pointerEvents: 'none'
                                         }}>&#711;</span>
                                         </div>

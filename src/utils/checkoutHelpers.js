@@ -69,12 +69,12 @@ function harpsetc_shipping(cart, shippingcountry) {
         if (subtotal>400) return [ 29.95, 'USPS' ];
     } else if (shippingcountry === 'Canada') {
         if (subtotal<10) return [ 19, '*International Shipping' ];
-        if (subtotal>=10&&subtotal<35) return [ 22.95, '*International Shipping' ];
-        if (subtotal>=35&&subtotal<50) return [ 24.50, '*International Shipping' ];
-        if (subtotal>=50&&subtotal<100) return [ 26.25, '*International Shipping' ];
-        if (subtotal>=100&&subtotal<250) return [ 28.25, '*International Shipping' ];
-        if (subtotal>=250&&subtotal<400) return [ 37.25, '*International Shipping' ];
-        if (subtotal>400) return [ 42.95, '*International Shipping' ];
+        if (subtotal>=10&&subtotal<35) return [ 29.95, '*International Shipping' ];
+        if (subtotal>=35&&subtotal<50) return [ 31.50, '*International Shipping' ];
+        if (subtotal>=50&&subtotal<100) return [ 33.25, '*International Shipping' ];
+        if (subtotal>=100&&subtotal<250) return [ 35.25, '*International Shipping' ];
+        if (subtotal>=250&&subtotal<400) return [ 44.25, '*International Shipping' ];
+        if (subtotal>400) return [ 49.95, '*International Shipping' ];
     } else {
         return [-1,''];
     } 

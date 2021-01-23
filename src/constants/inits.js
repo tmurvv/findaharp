@@ -76,5 +76,6 @@ exports.STRING_FORM_INIT =
         E: {id:'', qty:''},
         D: {id:'', qty:''},
         C: {id:'', qty:''}
+
     } 
 ]  

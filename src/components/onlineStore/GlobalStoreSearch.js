@@ -335,7 +335,7 @@ function GlobalStoreSearch(props) {
                         <option name='CDs'>CDs</option>
                         <option name='Digital Downloads'>Digital Downloads</option>
                     </select>
-                    <span>&#11206;</span>
+                    <span>&#711;</span>
                 </div>
                 <h3 className='searchHelperText'>and / or search term</h3>
                 <div className="searchTextImg">
@@ -352,7 +352,7 @@ function GlobalStoreSearch(props) {
                         <option value='New' name='New'>New Only</option>
                         <option value='Used' name='Used'>Used Only</option>
                     </select>
-                    <span>&#11206;</span>
+                    <span>&#711;</span>
                 </div>
                 </>
                 :
@@ -370,7 +370,7 @@ function GlobalStoreSearch(props) {
                         <option name='CDs'>CDs</option>
                         <option name='Digital Downloads'>Digital Downloads</option>
                     </select>
-                    <span>&#11206;</span>
+                    <span>&#711;</span>
                 </div>
                 <div className='selectContainer'> 
                     <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px'}}>
@@ -378,7 +378,7 @@ function GlobalStoreSearch(props) {
                         <option value='New' name='New'>New Only</option>
                         <option value='Used' name='Used'>Used Only</option>
                     </select>
-                    <span>&#11206;</span>
+                    <span>&#711;</span>
                 </div>
                 </div>
                 <h3 className='searchHelperText'>and / or search term</h3>
