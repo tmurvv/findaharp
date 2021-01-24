@@ -1,10 +1,12 @@
 // packages
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useReducer } from 'react';
+import axios from 'axios';
 import uuid from 'uuid';
 import parseNum from 'parse-num';
 // contexts
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
+import { StringFormContext } from '../../contexts/StringFormContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 // other internal
@@ -13,30 +15,182 @@ import RememberHarpModalCSS from '../../styles/stringForm/RememberHarpModal.css'
 import { STORE_PARTNERS } from '../../constants/storeDirectory';
 import { incQty } from '../../utils/storeHelpers';
 import { setlocalCart } from '../../utils/checkoutHelpers';
+import Results from '../../components/Results';
+import { RESULTS_INITIAL_STATE } from '../../constants/constants';
+import { resultInfoReducer } from '../../reducers/reducers';
 
 function RememberHarpModal(props) {
-    const { user } = useContext(UserContext);
+    const [ localHarpname, setLocalHarpname] = useState();
+    const [ localEmail, setLocalEmail] = useState();
+    const [ localNews, setLocalNews] = useState();
+    const [ change, setChange ] = useState(false);
+    const { stringForm, setStringForm } = useContext(StringFormContext);
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     
-    function handleClick(evt, product, openContact) {
+    function handleClose() {
+        if (change&&!confirm('Changes will be lost. Continue?')) return;
         props.setRememberModal(false);
     }
-    const handleChange = (evt) => {
-        switch (evt.target.name) {
-            case 'harpname': 
-                console.log('nyi-harpname', evt.target.name)
-                // setUserContact({...userContact, firstname: evt.target.value, change: true});
-                break           
-            case 'email': 
-                console.log('nyi-email', evt.target.name)
-                // setUserContact({...userContact, contactemail: evt.target.value, change: true});
-                break     
-            case 'newsletter': 
-                setUserContact({...userContact, newsletter: !user.newsletter, change: true});
-                break     
-            default :
+    async function handleSubmit() {
+        const resultText = document.querySelector('#loadingLoginText');
+        let submitHarpname = localHarpname || props.userharp.harpname;
+        let submitEmail = localEmail || props.userharp.email;
+        if (!submitHarpname) {
+            resultText.innerText=`Harp name is required.`;
+            dispatchResultInfo({type: 'tryAgain'});
+            return;
         }
+        if (!submitEmail) {
+            resultText.innerText=`Email is required.`;
+            dispatchResultInfo({type: 'tryAgain'});
+            return;
+        }
+        document.querySelector('#spinnerRemember').style.display='block';
+        const harpObject = {
+            harpname: submitHarpname,
+            email: submitEmail,
+            stringform: stringForm
+            // newsletter: localNews
+        }
+        props.setUserharp({...harpObject});
+        try {
+            const res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
+            setChange(false);
+            setStringForm(res.data.userharp.stringform);
+            resultText.innerText=res&&res.data&&res.data.login?`Remember My Harp login successful for ${harpObject.harpname}.`:`Remember My Harp signup successful for ${harpObject.harpname}.`;
+            dispatchResultInfo({type: 'OK'});    
+        } catch(e) {
+            setChange(false);
+            console.log(e.message);
+            resultText.innerText=`Something went wrong on harp signup. Please contact tisha@findaharp.com.`;
+            dispatchResultInfo({type: 'tryAgain'});
+        }
+        document.querySelector('#spinnerRemember').style.display='none';
+    }    
+    const handleChange = (e) => {
+        setChange(true);
+        // handle newsletter change
+        if (e===true||e===false) {
+            setLocalNews(e);
+            return;
+        }
+        // handle other change
+        if (e.target.name==='harpname') setLocalHarpname(e.target.value);
+        if (e.target.name==='email') setLocalEmail(e.target.value);
     }
-    // async function updateCart(e) {
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
+    async function loginGuest(evt) {   
+        resetResults();
+        handleClose();
+    }
+    useEffect(()=>{
+        // setLocalHarp&&setLocalHarp(props.userharp)
+        // setLocalHarpname&&setLocalHarpname(props.userharp.harpname);
+        // setLocalEmail&&setLocalEmail(props.userharp.email);
+    });
+    return (
+        <>
+        <Results 
+            resultInfo={resultInfo} 
+            loginGuest={loginGuest}
+            resetResults={resetResults} 
+        />
+        <div className='rememberdetailContainer' style={{display: 'block'}}>
+            <div 
+                id={`spinnerRemember`} 
+                style={{
+                    position: 'fixed', 
+                    top: '50%', 
+                    left: '50%', 
+                    zIndex: '6000',
+                    display: 'none', 
+                    transform: 'translate(-50%, -50%)'
+                }}
+            >
+                <img src="img/spinner.gif" alt="spinner" />
+            </div>
+            <div onClick={() => handleClose()} className='rememberclearModal'>
+                <img src='/img/clear_search.png' alt='clear filters'/>
+            </div> 
+            <div style={{fontSize: '24px'}}>Remember My Harp(s)</div>
+            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
+            <div className='rememberdetailInfo' style={{marginTop: '25px'}}>
+                <div className={`rememberdetailImg`}><img src= './img/store/speedy_harp.png' alt='speedy harpist pushing harp on dolly' /></div>
+                <div className={`rememberdetailText`}>  
+                    <div style={{textAlign: 'center', fontSize: '22px', marginBottom: '10px', fontWeight: 'bold'}}>Save valuable time!! </div>
+                    <div style={{textAlign: 'center',  fontSize: '16px', fontWeight: 'bold', marginBottom: '25px'}}>Signup / Login</div>
+                    <div className='rememberInput'>
+                        <div style={{textAlign: 'right', flex: '4'}}>
+                            <label htmlFor="harpname"><span style={{color: 'red'}}>*</span>&nbsp;Harp Name:</label>
+                            <input 
+                                onChange={(e)=>handleChange(e)} 
+                                name='harpname' 
+                                value={localHarpname}
+                                defaultValue={props.userharp.harpname}
+                            />
+                        </div>
+                        <div style={{textAlign: 'right', flex: '6'}}>
+                            <label><span style={{color: 'red'}}>*</span>&nbsp;Email:</label>
+                            <input 
+                                onChange={(e)=>handleChange(e)} 
+                                type='email' 
+                                name='email' 
+                                value={localEmail}
+                                defaultValue={props.userharp.email}
+                            />
+                        </div>
+                    </div>
+                    
+                    <NewsletterSignup handleChange={handleChange}/>
+                    
+                    <div style={{
+                        margin: '25px auto -20px', 
+                        width: '100%', 
+                        textAlign: 'center'}}
+                    >
+                        <button 
+                            className='submit-btn'
+                            type="button"
+                            style={{width: '45%', margin: '1%', cursor: 'pointer'}}
+                            onClick={()=>handleSubmit()}
+                        >
+                            Signup/Login
+                        </button>
+                        <button 
+                            className='submit-btn'
+                            type="button"
+                            style={{width: '45%', margin: '1%', cursor: 'pointer'}}
+                            onClick={() => handleClose()}
+                        >
+                            No Thank You
+                        </button>
+                    </div>
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <ul> Instructions:
+                            <li>Enter a name and email for your harp</li>
+                            <li>Signup as many harps as you like</li>
+                            <li>We will remember your string brands</li>
+                            <li>Teachers, you can enter your students' harps!</li>
+                            <li>Rentors, you can enter your rental harps!</li>
+                            <li>What a great idea!</li>
+                        </ul>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <RememberHarpModalCSS />
+        </>
+    )
+}
+
+export default RememberHarpModal;
+
+
+// async function updateCart(e) {
     //     if (cart.findIndex(item=>item.title===e.target.getAttribute('data-item-title'))>-1) {
     //         const targetItem = cart.find(item=>item.title===e.target.getAttribute('data-item-title'));
     //         if (targetItem&&targetItem.newused&&targetItem.newused==='used') {
@@ -82,66 +236,3 @@ function RememberHarpModal(props) {
     //         if (seller.id===props.product.store) setSellerInfo(seller);
     //     });
     // });
-    return (
-        <>
-        <div className='rememberdetailContainer' style={{display: 'block'}}>
-            <div onClick={(evt) => handleClick(evt, props.product, false)} className='rememberclearModal'>
-                <img src='/img/clear_search.png' alt='clear filters'/>
-            </div> 
-            <div style={{fontSize: '24px'}}>Remember My Harp(s)</div>
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
-            <div className='rememberdetailInfo' style={{marginTop: '25px'}}>
-                <div className={`rememberdetailImg`}><img src= './img/store/speedy_harp.png' alt='speedy harpist pushing harp on dolly' /></div>
-                <div className={`rememberdetailText`}>  
-                    <div style={{textAlign: 'center', fontSize: '22px', marginBottom: '10px', fontWeight: 'bold'}}>Save valuable time!! </div>
-                    <div style={{textAlign: 'center',  fontSize: '16px', fontWeight: 'bold', marginBottom: '25px'}}>Signup / Login</div>
-                    <div className='rememberInput'>
-                        <div style={{textAlign: 'right', flex: '4'}}>
-                            <label htmlFor="harpname">Harp Name:</label>
-                            <input name='harpname'/>
-                        </div>
-                        <div style={{textAlign: 'right', flex: '6'}}>
-                            <label>Email:</label>
-                            <input type='email' name='email'/>
-                        </div>
-                    </div>
-                    
-                    <NewsletterSignup />
-                    
-                    <div style={{margin: '25px auto -20px', width: '100%', textAlign: 'center'}}>
-                        <button 
-                            className='submit-btn'
-                            type="button"
-                            style={{width: '45%', margin: '1%'}}
-
-                        >
-                            Remember My Harp
-                        </button>
-                        <button 
-                            className='submit-btn'
-                            type="button"
-                            style={{width: '45%', margin: '1%'}}
-                            onClick={(evt) => handleClick(evt, props.product, false)}
-                        >
-                            No Thank You
-                        </button>
-                    </div>
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <ul> Instructions:
-                            <li>Enter a name and email for your harp</li>
-                            <li>Signup as many harps as you like</li>
-                            <li>We will remember your string brands</li>
-                            <li>Teachers, you can enter your students' harps!</li>
-                            <li>Rentors, you can enter your rental harps!</li>
-                            <li>What a great idea!</li>
-                        </ul>
-                    </div>
-                </div> 
-            </div>
-        </div>
-        <RememberHarpModalCSS />
-        </>
-    )
-}
-
-export default RememberHarpModal;

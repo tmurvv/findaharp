@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useReducer } from "react";
 import axios from 'axios';
 import uuid from 'uuid';
 import parseNum from 'parse-num';
@@ -15,6 +15,9 @@ import PageTitle from '../src/components/PageTitle';
 import StringFormCss from '../src/styles/stringForm/StringForm.css';
 import { setlocalCart } from '../src/utils/checkoutHelpers';
 import { STRING_FORM_INIT } from '../src/constants/inits';
+import Results from '../src/components/Results';
+import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
+import { resultInfoReducer } from '../src/reducers/reducers';
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -23,7 +26,9 @@ const StringForm = (props) => {
     const [ total, setTotal ] = useState('0.00');
     const [ rememberModal, setRememberModal ] = useState(false);
     const [ changes, setChanges ] = useState(false);
-
+    const [ userharp, setUserharp ] = useState({harpname:'', email: ''});
+    const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
+    
     function updateCart(addArray) {
         const cartCopy = [...cart];
         // find item in items object
@@ -57,8 +62,9 @@ const StringForm = (props) => {
         setlocalCart('fah-cart', tempCartJson);
         setCart(cartCopy);
     }
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+        const resultText = document.querySelector('#loadingLoginText');
         const addArray = [];
         // check for qty and additem to update cart list
         stringForm.map((octave,idx)=>{
@@ -73,6 +79,39 @@ const StringForm = (props) => {
         // update cart
         updateCart(addArray);
         setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
+        let stringFormCopy = JSON.parse(JSON.stringify({...stringForm}));
+        Array.from(stringFormCopy).map((octave,idx)=>{
+            if(idx<8&&octave.E&&octave.E.qty>0) octave.E.qty=0;
+            if(idx<8&&octave.D&&octave.D.qty>0) octave.D.qty=0;
+            if(idx<8&&octave.C&&octave.C.qty>0) octave.C.qty=0;
+            if(idx<8&&octave.B&&octave.B.qty>0) octave.B.qty=0;
+            if(idx<8&&octave.A&&octave.A.qty>0) octave.A.qty=0;
+            if(idx<8&&octave.G&&octave.G.qty>0) octave.G.qty=0;
+            if(idx<8&&octave.F&&octave.F.qty>0) octave.F.qty=0;
+        });
+        if (confirm(`Update remembered harp ${userharp.harpname} with these string brands?`)) {
+            
+            // document.querySelector('#spinnerRemember').style.display='block';
+            const harpObject = {
+                harpname: userharp.harpname,
+                email: userharp.email,
+                stringform: stringFormCopy
+                // newsletter: localNews
+            }
+            try {
+                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
+                // setStringForm(res.data.userharp.stringform);
+                resultText.innerText=res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`;
+                dispatchResultInfo({type: 'OK'});    
+            } catch(e) {
+                console.log(e.message);
+                resultText.innerText=`Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`;
+                dispatchResultInfo({type: 'tryAgain'});
+            }
+            // document.querySelector('#spinnerRemember').style.display='none';
+        }
+        setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
+        setUserharp({harpname:'', email: ''});
     }
     function handleNavOpen(e) {
         // alert('imin')
@@ -85,6 +124,14 @@ const StringForm = (props) => {
             if (document.querySelector('#navLinks')) document.querySelector('#navLinks').style.display = 'flex';
             Router.push(e.target.getAttribute('route'));
         }
+    }
+    function resetResults() {
+        if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
+        document.querySelector('#loadingLoginText').innerText='';
+        dispatchResultInfo({type: 'initial'});
+    }
+    async function loginGuest(evt) {   
+        resetResults();
     }
     useEffect(() => {
         window.addEventListener('beforeunload', function (e) {
@@ -110,19 +157,85 @@ const StringForm = (props) => {
     return (
         <>
         <div className="stringForm" >
+            <Results 
+                resultInfo={resultInfo} 
+                loginGuest={loginGuest}
+                resetResults={resetResults} 
+            />
             <div style={{display: 'flex', position:'absolute', top: '0', left: '0'}} id='stringFormNav'>
                 <div href='/'>
-                    <button style={{backgroundColor: 'transparent', outline: 'none', transform: 'translate(0,-30px)', marginRight: '5x'}} onClick={handleNavOpen} route='/'>Find a Harp</button>
+                    <button 
+                        style={{
+                            backgroundColor: 
+                            'transparent', 
+                            outline: 'none', 
+                            transform: 'translate(0,-30px)', 
+                            marginRight: '5x',
+                            cursor: 'pointer'
+                        }} 
+                        onClick={handleNavOpen} 
+                        route='/'
+                    >Find a Harp</button>
                 </div>
                 <div href='/onlinestore' as='/onlinestore'>
-                    <button style={{backgroundColor: 'transparent', outline: 'none', transform: 'translate(0,-30px)', marginLeft: '5x'}} onClick={handleNavOpen} route='/onlinestore'>Online Store</button>
+                    <button 
+                        style={{
+                            backgroundColor: 
+                            'transparent', 
+                            outline: 'none', 
+                            transform: 'translate(0,-30px)', 
+                            marginLeft: '5x',
+                            cursor: 'pointer'
+                        }} 
+                        onClick={handleNavOpen} 
+                        route='/onlinestore'
+                    >Online Store</button>
                 </div>
             </div>  
             {rememberModal&&
-                <RememberHarp setRememberModal={setRememberModal}/>  
+                <RememberHarp setRememberModal={setRememberModal} userharp={userharp} setUserharp={setUserharp}/>  
             }
             <PageTitle maintitle='EZ String Order Form' subtitle='We can remember your harp(s) for next time!!' />
-            <div 
+            
+            {userharp.harpname
+            ?<div 
+                style={{
+                    margin: '-10px auto 30px', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems:'center',
+                }}  
+            >
+                <img 
+                    src='./img/store/speedy_harp.png' 
+                    alt='speedy harpist pushing harp on dolly' 
+                    style={{height: '40px'}}
+                /> 
+                <div style={{
+                        marginRight: '7px',
+                        marginLeft: '7px', 
+                        padding: '5px 10px', 
+                        color: '#FFF', 
+                        backgroundColor: '#6A75AA',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                    <div>Showing brands for</div>
+                    <div>harp: {userharp.harpname}</div>
+                </div>
+                <a 
+                    href='./rememberdetails' 
+                    style={{
+                        flex: 'none', 
+                        fontStyle: 'italic', 
+                        fontSize: '14px',
+                        textDecoration: 'underline'
+                    }}
+                >Edit harp<br/>profile</a>
+            </div>
+            :<div 
                 style={{
                     margin: '-10px auto 30px', 
                     display: 'flex', 
@@ -141,7 +254,8 @@ const StringForm = (props) => {
                         marginLeft: '7px', 
                         padding: '5px 10px', 
                         color: '#FFF', 
-                        backgroundColor: '#6A75AA'
+                        backgroundColor: '#6A75AA',
+                        cursor: 'pointer'
                     }} 
                     onClick={()=>setRememberModal(true)}
                 >Remember My Harp<br/>Login/Signup</button>
@@ -154,6 +268,7 @@ const StringForm = (props) => {
                     }}
                 >What's this?</a>
             </div>
+            }
             <form onSubmit={handleSubmit}>
                 {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
                     <button 
@@ -161,7 +276,8 @@ const StringForm = (props) => {
                         style={{
                             fontSize: '16px', 
                             width: '200px', 
-                            backgroundColor: '#e0e0e0'
+                            backgroundColor: '#e0e0e0',
+                            cursor: 'pointer'
                         }} 
                         type='submit'
                     >Submit String Order</button>
@@ -190,7 +306,8 @@ const StringForm = (props) => {
                             fontSize: '16px',
                             width: '200px',
                             backgroundColor: '#e0e0e0',
-                            marginTop: '20px'
+                            marginTop: '20px',
+                            cursor: 'pointer'
                         }} 
                         type='submit'
                     >Submit String Order</button>
@@ -223,10 +340,10 @@ StringForm.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKIN
+    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKING
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
 
     return {

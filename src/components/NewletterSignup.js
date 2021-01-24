@@ -1,15 +1,17 @@
 import React from 'react';
 import uuid from 'react-uuid';
  
-function NewsletterSignup() {
-    const handleChange = (evt) => {
-        switch (evt.target.name) {
+function NewsletterSignup(props) {
+    const handleChange = (e) => {
+        console.log('nues', e.target.checked)
+        switch (e.target.name) {
             case 'newsletter':
-                console.log('nyi-news', evt.target.name) 
+                console.log('nyi-news', e.target.name) 
                 // setUserContact({...userContact, newsletter: !user.newsletter, change: true});
                 break     
             default :
         }
+        props.handleChange(e.target.checked)
     }
     return (
         <>

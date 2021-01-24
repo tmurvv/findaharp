@@ -10,7 +10,6 @@ function Octave({setChanges, strings, octave, applyToOctaves, setApplyToOctaves,
     const [ mobile, setMobile] = useState(false);
     
     useEffect(() => {
-        console.log('here', window.innerWidth);
         if (window.innerWidth&&window.innerWidth<556) setMobile(true)
     });
     return (
