@@ -224,20 +224,20 @@ const StringForm = (props) => {
                     alt='speedy harpist pushing harp on dolly' 
                     style={{height: '40px'}}
                 /> 
-                <div style={{
+                <button 
+                    style={{
                         marginRight: '7px',
                         marginLeft: '7px', 
                         padding: '5px 10px', 
                         color: '#FFF', 
                         backgroundColor: '#6A75AA',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center'
-                    }}>
+                        cursor: 'pointer'
+                    }} 
+                    onClick={()=>setRememberModal(true)}
+                >
                     <div>Showing brands for</div>
                     <div>harp: {userharp.harpname}</div>
-                </div>
+                </button>
                 <a 
                     href='./rememberdetails' 
                     style={{
@@ -246,7 +246,7 @@ const StringForm = (props) => {
                         fontSize: '14px',
                         textDecoration: 'underline'
                     }}
-                >Edit harp<br/>profile</a>
+                >Add/Edit harp<br/>profiles</a>
             </div>
             :<div 
                 style={{

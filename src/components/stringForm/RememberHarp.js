@@ -26,7 +26,7 @@ function RememberHarpModal(props) {
     const [ change, setChange ] = useState(false);
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
-    
+    const [ showAddNew, setShowAddNew ] = useState(false);
     function handleClose() {
         if (change&&!confirm('Changes will be lost. Continue?')) return;
         props.setRememberModal(false);
@@ -93,6 +93,10 @@ function RememberHarpModal(props) {
         // setLocalHarp&&setLocalHarp(props.userharp)
         // setLocalHarpname&&setLocalHarpname(props.userharp.harpname);
         // setLocalEmail&&setLocalEmail(props.userharp.email);
+        setShowAddNew&&console.log(showAddNew)
+        
+        console.log(props)
+        if (setShowAddNew&&props.userharp&&props.userharp.harpname) setShowAddNew(true);
     });
     return (
         <>
@@ -124,7 +128,18 @@ function RememberHarpModal(props) {
                 <div className={`rememberdetailImg`}><img src= './img/store/speedy_harp.png' alt='speedy harpist pushing harp on dolly' /></div>
                 <div className={`rememberdetailText`}>  
                     <div style={{textAlign: 'center', fontSize: '22px', marginBottom: '10px', fontWeight: 'bold'}}>Save valuable time!! </div>
-                    <div style={{textAlign: 'center',  fontSize: '16px', fontWeight: 'bold', marginBottom: '25px'}}>Signup / Login</div>
+                    {showAddNew
+                    ?<button  style={{
+                        padding: '5px 10px', 
+                        color: '#6A75AA', 
+                        fontStyle: 'italic',
+                        textDecoration: 'underline',
+                        backgroundColor: 'transparent',
+                        cursor: 'pointer',
+                        width: 'fit-content',
+                        margin: 'auto',
+                        marginBottom: '15px'
+                    }} onClick={()=>{setLocalEmail(''); setLocalHarpname('');}}>Add New Harp Profile</button>:<div style={{textAlign: 'center',  fontSize: '16px', fontWeight: 'bold', marginBottom: '25px'}}>Signup / Login</div>}
                     <div className='rememberInput'>
                         <div style={{textAlign: 'right', flex: '4'}}>
                             <label htmlFor="harpname"><span style={{color: 'red'}}>*</span>&nbsp;Harp Name:</label>
