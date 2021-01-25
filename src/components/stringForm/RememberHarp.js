@@ -49,14 +49,16 @@ function RememberHarpModal(props) {
         const harpObject = {
             harpname: submitHarpname,
             email: submitEmail,
-            stringform: stringForm
+            stringform: JSON.stringify(stringForm)
             // newsletter: localNews
         }
         props.setUserharp({...harpObject});
         try {
             const res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
             setChange(false);
-            setStringForm(res.data.userharp.stringform);
+            console.log('axios', res.data.userharp.stringform)
+            const parseStringForm = await JSON.parse(res.data.userharp.stringform)
+            setStringForm(parseStringForm);
             resultText.innerText=res&&res.data&&res.data.login?`Remember My Harp login successful for ${harpObject.harpname}.`:`Remember My Harp signup successful for ${harpObject.harpname}.`;
             dispatchResultInfo({type: 'OK'});    
         } catch(e) {

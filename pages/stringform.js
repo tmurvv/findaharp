@@ -78,19 +78,31 @@ const StringForm = (props) => {
         });
         // update cart
         updateCart(addArray);
+        
+        let stringFormCopy = JSON.stringify(stringForm);
+        console.log('copy',stringFormCopy)
         setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
-        let stringFormCopy = JSON.parse(JSON.stringify({...stringForm}));
-        Array.from(stringFormCopy).map((octave,idx)=>{
-            if(idx<8&&octave.E&&octave.E.qty>0) octave.E.qty=0;
-            if(idx<8&&octave.D&&octave.D.qty>0) octave.D.qty=0;
-            if(idx<8&&octave.C&&octave.C.qty>0) octave.C.qty=0;
-            if(idx<8&&octave.B&&octave.B.qty>0) octave.B.qty=0;
-            if(idx<8&&octave.A&&octave.A.qty>0) octave.A.qty=0;
-            if(idx<8&&octave.G&&octave.G.qty>0) octave.G.qty=0;
-            if(idx<8&&octave.F&&octave.F.qty>0) octave.F.qty=0;
-        });
-        if (confirm(`Update remembered harp ${userharp.harpname} with these string brands?`)) {
-            
+        
+        if (confirm(`Update remembered harp ${userharp.harpname} with these string brands?`)) {          
+            // // for (var idx = 0; idx<8; idx++) {
+            // //     if(idx<8&&stringFormCopy[idx].E&&stringFormCopy[idx].E.qty>0) stringFormCopy[idx].E.qty=0;
+            // //     if(idx<8&&stringFormCopy[idx].D&&stringFormCopy[idx].D.qty>0) stringFormCopy[idx].D.qty=0;
+            // //     if(idx<8&&stringFormCopy[idx].C&&stringFormCopy[idx].C.qty>0) stringFormCopy[idx].C.qty=0;
+            // //     if(idx<8&&stringFormCopy[idx].B&&stringFormCopy[idx].B.qty>0) stringFormCopy[idx].B.qty=0;
+            // //     if(idx<8&&stringFormCopy[idx].A&&stringFormCopy[idx].A.qty>0) stringFormCopy[idx].A.qty=0;
+            // //     if(idx<8&&stringFormCopy[idx].G&&stringFormCopy[idx].G.qty>0) stringFormCopy[idx].G.qty=0;
+            // //     if(idx<8&&stringFormCopy[idx].F&&stringFormCopy[idx].F.qty>0) stringFormCopy[idx].F.qty=0;
+            // // }
+            // // check for qty and additem to update cart list
+            // stringFormCopy.map((octave,idx)=>{
+            //     if(idx<8&&octave.E&&octave.E.qty>0) {const addObject = [octave.E.id,octave.E.qty,octave.E.price]; addArray.push(addObject)};
+            //     if(idx<8&&octave.D&&octave.D.qty>0) {const addObject = [octave.D.id,octave.D.qty,octave.D.price]; addArray.push(addObject)};
+            //     if(idx<8&&octave.C&&octave.C.qty>0) {const addObject = [octave.C.id,octave.C.qty,octave.C.price]; addArray.push(addObject)};
+            //     if(idx<8&&octave.B&&octave.B.qty>0) {const addObject = [octave.B.id,octave.B.qty,octave.B.price]; addArray.push(addObject)};
+            //     if(idx<8&&octave.A&&octave.A.qty>0) {const addObject = [octave.A.id,octave.A.qty,octave.A.price]; addArray.push(addObject)};
+            //     if(idx<8&&octave.G&&octave.G.qty>0) {const addObject = [octave.G.id,octave.G.qty,octave.G.price]; addArray.push(addObject)};
+            //     if(idx<8&&octave.F&&octave.F.qty>0) {const addObject = [octave.F.id,octave.F.qty,octave.F.price]; addArray.push(addObject)};
+            // });
             // document.querySelector('#spinnerRemember').style.display='block';
             const harpObject = {
                 harpname: userharp.harpname,
@@ -134,6 +146,7 @@ const StringForm = (props) => {
         resetResults();
     }
     useEffect(() => {
+        console.log('useeffect', stringForm)
         window.addEventListener('beforeunload', function (e) {
             // Cancel the event
             e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
@@ -310,7 +323,7 @@ const StringForm = (props) => {
                             cursor: 'pointer'
                         }} 
                         type='submit'
-                    >Submit String Order</button>
+                    >Add String Order to Cart</button>
                 </div>
                 <div style={{
                         width: '200px',

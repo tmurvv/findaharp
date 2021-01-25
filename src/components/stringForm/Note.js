@@ -33,7 +33,6 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
         if (parseInt(octave)===5) setIt = 'Wires usually start somewhere in the 5th Octave';
         if (parseInt(octave)===6) setIt = 'Wires';
         if (parseInt(octave)===7) setIt = '7th Octave - usually pedal harps only';
-        console.log('bl', octave, setIt)
         setGetTip(setIt);
     })
     return (
