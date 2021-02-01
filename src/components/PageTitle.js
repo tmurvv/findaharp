@@ -5,7 +5,7 @@ import Router from 'next/router';
 function PageTitle({ maintitle, subtitle }) {
     return (
         <>
-        {maintitle.toUpperCase()!=='ONLINE STORE'&&maintitle.toUpperCase()!=='YOUR CART'&&!maintitle.toUpperCase().startsWith('EZ')
+        {maintitle.toUpperCase()!=='ONLINE STORE'&&maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
         ?<div style={{position:'absolute', top: '12px', left: '5px'}}>
             <a 
                 onClick={()=>Router.push('/onlinestore')} 

@@ -22,6 +22,17 @@ function StringFormCss() {
                 margin-block-end:0;
                 margin-block-start:0;
             }
+            .stringForm-btn {
+                width: 175px;
+                padding: 10px 20px;
+                color: #ffffff;
+                background-color: #6A75AA;
+                cursor: pointer;
+                font-size: 14px;
+                outline: none;
+                border: none;
+                box-shadow: 3px 3px 3px lightgrey;
+            }
         `}
     </style>
     )

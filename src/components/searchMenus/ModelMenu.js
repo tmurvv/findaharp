@@ -21,7 +21,7 @@ export default function ModelMenu(props) {
      // models = itemsSortByDisabled(models, currentModels);
     models=itemsSortByDisabled(models, currentModels).map(model => <p 
             name={model}
-        >{model.trim()}</p>);
+        >{model&&model.trim()}</p>);
 
     const handleClose = (evt) => {
         props.handleModelChange(evt.target.getAttribute('name'));

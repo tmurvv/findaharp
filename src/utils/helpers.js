@@ -383,7 +383,7 @@ export const itemsSortByDisabled = (items, currentItems) => {
     items.map(model => {
         itemsWithDisabled.push({name:model,disabled:!currentItems.find(currentModel => currentModel === model)})  
     });
-    itemsWithDisabled.sort((a, b) => a.disabled-b.disabled || a.name.localeCompare(b.name));  
+    itemsWithDisabled.sort((a, b) => a.disabled-b.disabled || (a.name&&b.name&&a.name.localeCompare(b.name)));  
     let lastValue=false; //to add 'no listings'
     itemsWithDisabled.map(modelboo => {
         if (lastValue !== modelboo.disabled) sortItems.push('---no listings---');

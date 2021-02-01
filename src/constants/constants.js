@@ -19,6 +19,14 @@ export const RESULTS_INITIAL_STATE = {
     tryAgainMarginLeft: '0',
     resultImg: 'none'
 }
+export const RESULTSWINDOW_INITIAL_STATE = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
 export const STORE_INITIAL_STATE = {
     selectionType: '',
     artist: 'All Artists',

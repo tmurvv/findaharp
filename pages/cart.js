@@ -163,7 +163,7 @@ function Cart(props) {
                                 fontSize: '16px',
                                 cursor: 'pointer'
                             }}
-                            onClick={()=>{if (confirm("This will remove all items from your cart without purchasing them? Continue?")) deleteCart()}}
+                            onClick={()=>{if (confirm("This will remove all items from your cart without purchasing them. Continue?")) deleteCart()}}
                         >
                             <img style={{height:'20px', width:'20px', color: '#6A75AA', transform: 'translate(-4px, 4px)'}} src='/img/trashCanRed.png' alt='garbage can' />
                             Empty Cart

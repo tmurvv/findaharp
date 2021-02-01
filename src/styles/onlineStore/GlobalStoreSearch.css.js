@@ -25,14 +25,18 @@ function GlobalStoreSearchCss() {
                 margin-right: 10px;
                 margin-left: 10px;
                 padding: 10px 15px;
-                color: #000000;
-                background-color: #ffe58a;
+                color: #fff;
+                background-color: #6A75AA;
+                box-shadow: 2px 2px 3px lightgrey;
                 border: none;
                 outline: none;
             } 
             .stringForm-btn:focus, 
             .stringForm-btn:active {
-                outline: 1px solid #efc226;
+                outline: 1px solid #6A75A1;
+            } 
+            .stringForm-btn:active {
+                box-shadow: none;
             } 
             .selectContainer {
                 position: relative;
