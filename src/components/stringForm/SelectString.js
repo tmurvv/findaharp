@@ -11,7 +11,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
 
     function handleClick(menu) {  
         // clear all brand menus and restore menu text to selected menu
-        document.querySelector(`#stringTypeText${note}`).style.opacity='1';
+        document.querySelector(`#stringTypeText${note}`).style.display='block';
         Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
         // vars for brand selection, octave, note
         const stringType = document.querySelector(`#${menu.target.id}`).value;
@@ -40,6 +40,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
         // set stringForm id and price for this string only
         
             let newObject = [...stringForm];
+            
             newObject[clickOctave][clickNote].brand=stringType;
             newObject[clickOctave][clickNote].id=stringObject.id;
             newObject[clickOctave][clickNote].price=stringObject.price;
@@ -55,8 +56,8 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
             setTotal(newTotal.toFixed(2));
         // set stringForm id and price for all strings in octave
         if (stringForm[clickOctave].applytooctave===1){
+            console.log('here')
             let newObject=[...stringForm];
-            // NYI create object with all the string ranges, only fill in correct ranges
             if (clickOctave===0) {
                     const Notes = [ "G", "F" ];
                     Notes.map(noteinmap=>{
@@ -74,8 +75,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
             if (clickOctave>0&&clickOctave<7) {
                 console.log('brand', brandObject);
                 NOTES_IN_OCTAVE.map(noteinmap=>{
-                    if ((!newObject[clickOctave][noteinmap].brand)
-                        &&parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
+                    if (parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
                         &&parseInt(newObject[clickOctave][noteinmap].order)>=parseInt(brandObject.high)) {
                         
                         newObject[clickOctave][noteinmap].brand = stringType;
@@ -105,7 +105,10 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                 });
                 if (notAvailable) alert(`${stringType} not available in all notes in this octave.`);
             } 
-            
+            // turn off apply to octave
+            newObject[clickOctave].applytooctave=0;
+            newObject.changes="true";
+            document.querySelector(`#applytooctave${note.substr(0,1)}`).checked=false;
             setStringForm(newObject);
             // set total
             let newTotal = 0;
@@ -125,7 +128,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
         if (document.querySelectorAll(`.clear${note}`).length>0) document.querySelectorAll(`.clear${note}`).length>0&&Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
         // show selected brand menu
         if (document.querySelector(`#${e.target.value}`)) document.querySelector(`#${e.target.value}`).style.display='block';
-        if (document.querySelector(`#stringTypeText${note}`)) document.querySelector(`#stringTypeText${note}`).style.opacity='0';
+        if (document.querySelector(`#stringTypeText${note}`)) document.querySelector(`#stringTypeText${note}`).style.display='none';
     }
     return (
         <>

@@ -17,7 +17,7 @@ function Octave({setChanges, strings, octave, applyToOctaves, setApplyToOctaves,
     if (addedit) {
         return (
             <>
-                <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center'}}>{CARDINALS[octave]} Octave</p>
+                <p style={{color: 'grey', fontStyle: 'italic', marginTop: '30px'}}>{CARDINALS[octave]} Octave</p>
                 <EditNote note={`Header`} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>
                 {octave==='0'
                 ?<div>
@@ -41,7 +41,8 @@ function Octave({setChanges, strings, octave, applyToOctaves, setApplyToOctaves,
     } else {
     return (
         <>
-            <p style={{color: 'grey', fontStyle: 'italic', textAlign: 'center'}}>{CARDINALS[octave]} Octave</p>
+            <div style={{color: 'grey', fontStyle: 'italic', marginTop: '30px'}}>{CARDINALS[octave]} Octave</div>
+            
             
             {mobile
             ?<><MobileNote note={`Header`} octave={octave} octaveBrand={octaveBrand} setOctaveBrand={setOctaveBrand} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>

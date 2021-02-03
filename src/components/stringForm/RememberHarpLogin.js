@@ -1,12 +1,14 @@
 // packages
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
+import Router from 'next/router';
 import uuid from 'uuid';
 import parseNum from 'parse-num';
 // contexts
 import { UserContext } from '../../contexts/UserContext';
 import { CartContext } from '../../contexts/CartContext';
 import { StringFormContext } from '../../contexts/StringFormContext';
+import { StringFormInfoContext } from '../../contexts/StringFormInfoContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
 import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 // other internal
@@ -26,6 +28,7 @@ function RememberHarpLogin(props) {
     const [ localNews, setLocalNews] = useState();
     const [ change, setChange ] = useState(false);
     const { stringForm, setStringForm } = useContext(StringFormContext);
+    const { stringFormInfo, setStringFormInfo } = useContext(StringFormInfoContext);
     const [resultInfo, dispatchResultInfo] = useReducer(resultsWindowReducer, RESULTSWINDOW_INITIAL_STATE);
     const [ showAddNew, setShowAddNew ] = useState(props.step&&props.step.startsWith('add'));
     function handleClose() {
@@ -34,8 +37,8 @@ function RememberHarpLogin(props) {
     }
     async function handleSubmit() {
         // const resultText = document.querySelector('#loadingLoginText');
-        let submitHarpname = localHarpname || props.userharp.harpname;
-        let submitEmail = localEmail || props.userharp.email;
+        let submitHarpname = localHarpname || stringFormInfo.harpname;
+        let submitEmail = localEmail || stringFormInfo.email;
         if (!submitHarpname) {
             // resultText.innerText=`Harp name is required.`;
             dispatchResultInfo({type: 'tryAgain', payload: `Harp name is required.`});
@@ -53,29 +56,43 @@ function RememberHarpLogin(props) {
             stringform: JSON.stringify(stringForm)
             // newsletter: localNews
         }
-        console.log('harpobject', harpObject)
-        props.setUserharp({...harpObject});
         try {
-            const res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
-            setChange(false);
-            props.setStep&&props.setStep('getBrands-edit');
-            console.log('axios', res.data.userharp.stringform)
-            props.setOldEmail&&props.setOldEmail(res.data.userharp.email);
-            props.setOldHarpname&&props.setOldHarpname(res.data.userharp.harpname);
-            const parseStringForm = await JSON.parse(res.data.userharp.stringform)
-            parseStringForm.email = res.data.userharp.email;
-            parseStringForm.harpname = res.data.userharp.harpname
-            setStringForm(parseStringForm);
-            props.setUserharp&&props.setUserharp({harpname: res.data.userharp.harpname, email: res.data.userharp.email})
-            console.log('parse', parseStringForm)
-            // resultText.innerText=res&&res.data&&res.data.login?`Remember My Harp login successful for ${harpObject.harpname}.`:`Remember My Harp signup successful for ${harpObject.harpname}.`;
-            dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp login successful for ${harpObject.oldharpname}.`:`Remember My Harp signup successful for ${harpObject.oldharpname}.`});    
+            let res;
+            if (props.step.includes('add')) {res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
+                setChange(false);
+                props.setStep&&props.setStep('getBrands-edit');
+                const parseStringForm = await JSON.parse(res.data.userharp.stringform)
+                setStringForm(parseStringForm);
+                setStringFormInfo({
+                    harpname: harpObject.oldharpname, 
+                    email: harpObject.oldemail, 
+                    oldharpname: harpObject.oldharpname, 
+                    oldemail: harpObject.oldemail
+                });
+                props.setStep('')
+                alert('Harp profile added.');
+                return Router.push('/stringform');
+            } else {
+                res = await axios.post('http://localhost:3000/api/v1/userharps/loginuserharp', harpObject);
+                setChange(false);
+                props.setStep&&props.setStep('getBrands-edit');
+                const parseStringForm = await JSON.parse(res.data.userharp.stringform)
+                setStringForm(parseStringForm);
+            }
+            setStringFormInfo({
+                harpname: harpObject.oldharpname, 
+                email: harpObject.oldemail, 
+                oldharpname: harpObject.oldharpname, 
+                oldemail: harpObject.oldemail
+            });
+            dispatchResultInfo({type: 'OK', payload: props.step.includes('add')?`Remember My Harp signup successful for ${harpObject.oldharpname}.`:`Remember My Harp login successful for ${harpObject.oldharpname}.`});    
         } catch(e) {
             setChange(false);
-            console.log(e.message);
-            // resultText.innerText=`Something went wrong on harp signup. Please contact tisha@findaharp.com.`;
-            dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp ${props.step&&props.step.startsWith('add')?'signup':'login'}. If problem persists, please contact tisha@findaharp.com.`});
-            
+            if (e.response) {
+                dispatchResultInfo({type: 'tryAgain', payload: e.response.data.message.includes('combination')?`This email and harp name combination already in use.`:`Something went wrong on harp ${props.step&&props.step.startsWith('add')?'signup':'login'}. If problem persists, please contact tisha@findaharp.com.`});
+            } else {
+                dispatchResultInfo({type: 'tryAgain', payload: `${e.message}Something went wrong on harp ${props.step&&props.step.includes('add')?'signup':'login'}. If problem persists, please contact tisha@findaharp.com.`});
+            }
         }
         document.querySelector('#spinnerRemember').style.display='none';
     }    
@@ -100,10 +117,7 @@ function RememberHarpLogin(props) {
         handleClose();
     }
     useEffect(()=>{
-        // setLocalHarp&&setLocalHarp(props.userharp)
-        // setLocalHarpname&&setLocalHarpname(props.userharp.harpname);
-        // setLocalEmail&&setLocalEmail(props.userharp.email);
-        if (setShowAddNew&&props.userharp&&props.userharp.harpname) setShowAddNew(true);
+        if (setShowAddNew&&stringFormInfo.harpname) setShowAddNew(true);
     });
     return (
         <>
@@ -133,14 +147,14 @@ function RememberHarpLogin(props) {
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='rememberdetailInfo' style={{marginTop: '25px'}}>
                 <div className={`rememberdetailImg`}><img src= './img/store/speedy_harp.png' alt='speedy harpist pushing harp on dolly' /></div>
-                <div className={`rememberdetailText`}>  
+                <div className={`rememberdetailText`}> 
                     <div style={{textAlign: 'center', fontSize: '22px', marginBottom: '10px', fontWeight: 'bold'}}>Save valuable time!! </div>
                     <div style={{
                         textAlign: 'center',  
                         fontSize: '16px', 
                         fontWeight: 'bold', 
                         marginBottom: '25px'}}
-                    >{showAddNew?'Add harp name and email':'Login to Load Harp Profile'}</div>
+                    >{props.step.includes('add')?'Add harp name and email':'Login to Load Harp Profile'}</div>
                     <div className='rememberInput' style={{marginTop: '0'}}>
                         <div style={{textAlign: 'right', flex: '4'}}>
                             <label htmlFor="harpname"><span style={{color: 'red'}}>*</span>&nbsp;Harp Name:</label>
@@ -148,7 +162,7 @@ function RememberHarpLogin(props) {
                                 onChange={(e)=>handleChange(e)} 
                                 name='harpname' 
                                 value={localHarpname}
-                                defaultValue={props.userharp.harpname}
+                                defaultValue={props.step.includes('add')?'':stringFormInfo.harpname}
                             />
                         </div>
                         <div style={{textAlign: 'right', flex: '6'}}>
@@ -158,7 +172,7 @@ function RememberHarpLogin(props) {
                                 type='email' 
                                 name='email' 
                                 value={localEmail}
-                                defaultValue={props.userharp.email}
+                                defaultValue={props.step.includes('add')?'':stringFormInfo.email}
                             />
                         </div>
                     </div>
@@ -174,7 +188,7 @@ function RememberHarpLogin(props) {
                             style={{width: '45%', margin: '1%', cursor: 'pointer'}}
                             onClick={()=>handleSubmit()}
                         >
-                            {showAddNew?'Add Harp Profile':'Login Harp Profile'}
+                            {props.step.includes('add')?'Add Harp Profile':'Login Harp Profile'}
                         </button>
                         <button 
                             className='submit-btn'

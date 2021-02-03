@@ -38,6 +38,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
     return (
         
         <div style={{position: 'relative'}}>
+            {/* applytooctave: {stringForm&&stringForm[parseInt(octave)]&&stringForm[parseInt(octave)].applytooctave} */}
             <div className="noteGridContainer">
                 {note==='Header'
                 ?<>
@@ -49,12 +50,13 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                         <div style={{whiteSpace: 'nowrap', color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
                         <div style={{width: '90%', textAlign: 'right'}}>
                             <input 
+                                id={`applytooctave${octave}`}
                                 type='checkbox'
                                 onClick={()=>{
                                     const newObject = [...stringForm, stringForm[octave].applytooctave=stringForm[octave].applytooctave===0?1:0]
                                     setStringForm(newObject)
                                 }} 
-                                defaultChecked={applyToOctaves[octave]}
+                                defaultChecked={stringForm&&stringForm[parseInt(octave)]&&stringForm[parseInt(octave)].applytooctave}
                             />
                             <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                         </div>

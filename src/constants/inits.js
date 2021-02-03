@@ -76,11 +76,12 @@ exports.STRING_FORM_INIT =
         E: {id:'', qty: 0, brand: '', price: '0.00', order: 43},
         D: {id:'', qty: 0, brand: '', price: '0.00', order: 44},
         C: {id:'', qty: 0, brand: '', price: '0.00', order: 45}
-    },
-    {
-        harpname: '',
-        email: '',
-        oldharpname: '',
-        oldemail: ''
     }
-]  
+];
+
+exports.STRING_FORM_INFO_INIT = {
+    harpname: '',
+    email: '',
+    oldharpname: '',
+    oldemail: ''
+}

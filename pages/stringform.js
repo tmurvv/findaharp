@@ -6,6 +6,7 @@ import parseNum from 'parse-num';
 import Router from 'next/router';
 // contexts
 import { StringFormContext } from '../src/contexts/StringFormContext';
+import { StringFormInfoContext } from '../src/contexts/StringFormInfoContext';
 import { CartContext } from '../src/contexts/CartContext';
 // components
 import Octave from '../src/components/stringForm/Octave';
@@ -15,7 +16,7 @@ import PageTitle from '../src/components/PageTitle';
 // other internal
 import StringFormCss from '../src/styles/stringForm/StringForm.css';
 import { setlocalCart } from '../src/utils/checkoutHelpers';
-import { STRING_FORM_INIT } from '../src/constants/inits';
+import { STRING_FORM_INIT, STRING_FORM_INFO_INIT } from '../src/constants/inits';
 import ResultsWindow from '../src/components/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE } from '../src/constants/constants';
 import { STRING_BRANDS } from '../src/constants/stringBrands';
@@ -23,11 +24,13 @@ import { resultsWindowReducer } from '../src/reducers/ResultsWindowReducer';
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);
+    const { stringFormInfo, setStringFormInfo } = useContext(StringFormInfoContext);
     const { cart, setCart } = useContext(CartContext);
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
     const [ total, setTotal ] = useState('0.00');
     const [ rememberModal, setRememberModal ] = useState(false);
     const [ changes, setChanges ] = useState(false);
+    const [ step, setStep ] = useState('');
     const [ resultInfo, dispatchResultInfo ] = useReducer(resultsWindowReducer, RESULTSWINDOW_INITIAL_STATE);
     
     function updateCart(addArray) {
@@ -81,10 +84,9 @@ const StringForm = (props) => {
         updateCart(addArray);
         
         let stringFormCopy = JSON.stringify(stringForm);
-        console.log('copy',stringFormCopy)
         setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
         
-        if (confirm(`Update remembered harp ${stringForm.harpname} with these string brands?`)) {          
+        if (stringFormInfo.harpname&&confirm(`Update remembered harp ${stringFormInfo.harpname} with these string brands?`)) {          
             // // for (var idx = 0; idx<8; idx++) {
             // //     if(idx<8&&stringFormCopy[idx].E&&stringFormCopy[idx].E.qty>0) stringFormCopy[idx].E.qty=0;
             // //     if(idx<8&&stringFormCopy[idx].D&&stringFormCopy[idx].D.qty>0) stringFormCopy[idx].D.qty=0;
@@ -106,10 +108,10 @@ const StringForm = (props) => {
             // });
             // document.querySelector('#spinnerRemember').style.display='block';
             const harpObject = {
-                oldharpname: stringForm.harpname,
-                oldemail: stringForm.email,
-                harpname: stringForm.harpname,
-                email: stringForm.email,
+                oldharpname: stringFormInfo.harpname,
+                oldemail: stringFormInfo.email,
+                harpname: stringFormInfo.harpname,
+                email: stringFormInfo.email,
                 stringform: stringFormCopy
                 // newsletter: localNews
             }
@@ -124,7 +126,8 @@ const StringForm = (props) => {
             // document.querySelector('#spinnerRemember').style.display='none';
         }
         setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
-        setUserharp({harpname:'', email: ''});
+        setStringFormInfo(STRING_FORM_INFO_INIT);
+        dispatchResultInfo({type: 'OK', payload: `Strings added to cart.`});
     }
     function handleNavOpen(e) {
         // alert('imin')
@@ -207,128 +210,134 @@ const StringForm = (props) => {
                 </div>
             </div>   */}
             {rememberModal&&
-                <RememberHarpLogin setRememberModal={setRememberModal} userharp={userharp} setUserharp={setUserharp} />  
+                <RememberHarpLogin setRememberModal={setRememberModal} step={step} setStep={setStep} />  
             }
-            <PageTitle maintitle='EZ String Order Form' subtitle='We can remember your harp(s) for next time!!' />
-            <div style={{
-                // border: '7px double #6A75AA',
-                borderBottom: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '10px 5px',
-                fontSize: '22px',
-                fontWeight: '400',
-                color: '#6A75AA'
-            }}>
-                <div>Remember My Harp(s)</div>
-                <div style={{opacity: '.8', color: '#6A75AA', fontSize:'14px', fontStyle: 'italic'}}>{stringForm&&stringForm.harpname?`Using ${stringForm.harpname} profile`:'Scroll down to skip'}</div>
+            <div style={{width: '100%', margin: 'auto'}}>
+                <PageTitle maintitle='EZ String Order Form' subtitle="" />
             </div>
             <div style={{
-                // border: '7px double #6A75AA', 
-                borderBottom: '1px solid #6A75AA', 
+                    opacity: '.8', 
+                    margin: '-40px auto 25px', 
+                    textAlign: 'center', 
+                    fontStyle: 'italic', 
+                    width: '60%', 
+                    fontSize: '16px'
+                }}
+            >
+                This form is for new strings labelled by octave (Lyon Healy/Salvi lever harps, all pedal harps, etc). If your harp uses numbered strings, (Dusty Strings, Triplett, etc), please use the online store menu above.
+            </div>
+            {/* harpname: {stringFormInfo.harpname} <br />
+            email: {stringFormInfo.email} <br />
+            oldharpname: {stringFormInfo.oldharpname} <br />
+            oldemail: {stringFormInfo.oldemail} <br /> */}
+            <div style={{
+                border: '1px solid #868686',
+                width: 'fit-content',
+                alignItems: 'center',
+                padding: '3px 0px 3px 5px',
+                fontSize: '14px',
+                fontWeight: '400',
+                color: '#6A75AA',
+                margin: 'auto',
+                zIndex: '1000'
+            }}>optional Remember My Harp(s) Login/Signup &nbsp;&nbsp;
+                <button id='remember' style={{transform: 'scaleY(1.3)'}} onClick={()=>{
+                    if (document.querySelector('#remember').innerText ==='🞀') {
+                        document.querySelector('#remember').innerText ='🞃';
+                        document.querySelector('#addHarp').style.opacity = '1';
+                        document.querySelector('#addHarp').style.visibility = 'visible';
+                        document.querySelector('#addHarp').style.marginTop = '0px';
+
+                        // document.querySelector('#addHarp').style.display = 'flex';
+                    } else {
+                        document.querySelector('#remember').innerText ='🞀';
+                        document.querySelector('#addHarp').style.opacity = '0';
+                        document.querySelector('#addHarp').style.visibility = 'none';
+                        // document.querySelector('#addHarp').style.display = 'none';
+                    }
+                }}> 🞀</button>
+                
+                {/* <div style={{opacity: '.8', color: '#6A75AA', fontSize:'14px', fontStyle: 'italic'}}>{stringFormInfo&&stringFormInfo.harpname?`Using ${stringFormInfo.harpname} profile`:'Scroll down to skip'}</div> */}
+            </div>
+            <div id='addHarp' style={{
+                // // border: '7px double #6A75AA', 
+                // borderBottom: '1px solid #6A75AA', 
                 display: 'flex', 
                 justifyContent: 'space-evenly',
-                padding: '15px 5px 25px',
+                padding: '15px 5px 0',
                 width: '60%',
                 midWidth: '360px',
-                margin: 'auto'
+                margin: 'auto',
+                marginTop: '-50px',
+                // display: 'none',
+                opacity: '0',
+                visibility: 'hidden',
+                transition: 'opacity 600ms, visibility 600ms, marginTop 600ms',
+                zIndex: '0'
             }}>
-                <button className='stringForm-btn' onClick={()=>setRememberModal(true)}>Load Harp Profile</button>
-                <button className='stringForm-btn' onClick={()=>Router.push('/harpprofile')}>Add/Edit Harp Profile</button>
+                <button style={{transform: 'none'}} className='stringForm-btn' onClick={()=>setRememberModal(true)}>{stringFormInfo.harpname?'Switch Harp Profile':'Load Harp Profile'}</button>
+                <button style={{transform: 'none'}} className='stringForm-btn' onClick={()=>Router.push('/harpprofile')}>Add/Edit Harp Profile</button>
             </div>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '10px 5px 0',
-                fontSize: '22px',
-                fontWeight: '600',
-                marginBottom: '25px'
-                // color: '#6A75AA'
-            }}>
-                <div style={{display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'space-between', fontWeight: '300', fontStyle: 'italic', lineHeight: '1.5', width: '300px', fontSize: '12px', marginBottom: '25px'}}>
-                    <div style={{width:'200px', textAlign: 'center'}}>Strings are sold by HarpsEtc, USA, and ship to USA and Canada.</div>
-                    {/* <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' /> */}
-                    {/* <div style={{width:'fit-content'}}>Strings Ship To: US and Canada</div> */}
+            
+            {/* <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}> */}
+               
+            {/* </div> */}
+            <form onSubmit={handleSubmit} style={{position: 'relative', marginTop: '15px'}}>
+            {stringForm.changes?
+            <div style={{justifyContent: 'center', display: 'flex'}}>
+                    <button 
+                        className='submit-btn' 
+                        style={{
+                            // fontSize: '14px',
+                            // width: '200px',
+                            // color: '#fff',
+                            // backgroundColor: '#6A75AA',
+                            // cursor: 'pointer', 
+                            // margin: 'auto',
+                            // marginBottom: '-50px',
+                            // marginTop: '20px',
+                            // textAlign: 'center',
+                            // display: `${changes?'flex':'none'}`
+                            padding: '5px 0',
+                            fontSize: '16px',
+                            width: '200px',
+                            backgroundColor: '#f6f6f6',
+                            color: '#000000',
+                            textAlign: 'center',
+                            whiteSpace: 'nowrap',
+                            marginTop: '20px',
+                            position: 'absolute',
+                            // top: '-28px',
+                            left: '50%',
+                            transform: 'translate(-50%, 0)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }} 
+                        type='submit'
+                    >Add String Order to Cart</button>
                 </div>
-                <div>Order Form <span style={{marginBottom: '10px', opacity: '.8', fontSize: '14px', fontStyle: 'italic'}}>- new strings only</span>
-                </div>
-                
-            </div>
-            {/* {userharp.harpname
-            ?<div 
-                style={{
-                    margin: '-10px auto 30px', 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems:'center',
-                }}  
-            >
-                <img 
-                    src='./img/store/speedy_harp.png' 
-                    alt='speedy harpist pushing harp on dolly' 
-                    style={{height: '40px'}}
-                /> 
-                <button 
-                    style={{
-                        marginRight: '7px',
-                        marginLeft: '7px', 
-                        padding: '5px 10px', 
-                        color: '#FFF', 
-                        backgroundColor: '#6A75AA',
-                        cursor: 'pointer'
-                    }} 
-                    onClick={()=>setRememberModal(true)}
+                :
+                <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        padding: '10px 5px 0',
+                        fontSize: '22px',
+                        fontWeight: '600',
+                        margin: 'auto',
+                        width: '60%',
+                        marginBottom: '-50px'
+                        // color: '#6A75AA'
+                    }}
                 >
-                    <div>Showing brands for</div>
-                    <div>harp: {userharp.harpname}</div>
-                </button>
-                <a 
-                    href='./rememberdetails' 
-                    style={{
-                        flex: 'none', 
-                        fontStyle: 'italic', 
-                        fontSize: '14px',
-                        textDecoration: 'underline'
-                    }}
-                >Add/Edit harp<br/>profiles</a>
-            </div>
-            :<div 
-                style={{
-                    margin: '-10px auto 30px', 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems:'center',
-                }}  
-            >
-                <img 
-                    src='./img/store/speedy_harp.png' 
-                    alt='speedy harpist pushing harp on dolly' 
-                    style={{height: '40px'}}
-                /> 
-                <button 
-                    style={{
-                        marginRight: '7px',
-                        marginLeft: '7px', 
-                        padding: '5px 10px', 
-                        color: '#FFF', 
-                        backgroundColor: '#6A75AA',
-                        cursor: 'pointer'
-                    }} 
-                    onClick={()=>setRememberModal(true)}
-                >Remember My Harp<br/>Login/Signup</button>
-                <a 
-                    href='./rememberdetails' 
-                    style={{
-                        flex: 'none', 
-                        fontStyle: 'italic', 
-                        fontSize: '14px'
-                    }}
-                >What's this?</a>
-            </div>
-            } */}
-            <form onSubmit={handleSubmit}>
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontWeight: '300', fontStyle: 'italic', lineHeight: '1.5', fontSize: '12px', margin: '15px auto 0'}}>
+                        <div style={{marginRight: '15px'}}>Ships from: USA</div>
+                        <img style={{maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                        <div style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>To: US and Canada</div>
+                    </div>   
+                </div> 
+                }
                 {/* <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
                     <button 
                         className='submit-btn' 
@@ -350,6 +359,22 @@ const StringForm = (props) => {
                         textAlign: 'center'
                     }}
                 >Form Subtotal:&nbsp;&nbsp;${total}</div> */}
+                <div style={{
+                        padding: '5px 0',
+                        fontSize: '16px',
+                        width: '200px',
+                        backgroundColor: '#f6f6f6',
+                        color: '#000000',
+                        textAlign: 'center',
+                        whiteSpace: 'nowrap',
+                        marginTop: '20px',
+                        position: 'absolute',
+                        right: '0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >Form Subtotal:&nbsp;&nbsp;${total}</div>
                 <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
                 <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
                 <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
@@ -358,7 +383,25 @@ const StringForm = (props) => {
                 <Octave octave='5' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
                 <Octave octave='6' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>                 
                 <Octave octave='7' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges}/>   
-                <div style={{ width: '100%', display: 'flex', justifyContent: 'center'}}>
+                {/* <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}> */}
+                <div style={{
+                        padding: '5px 0',
+                        fontSize: '16px',
+                        width: '200px',
+                        backgroundColor: '#f6f6f6',
+                        color: '#000000',
+                        textAlign: 'center',
+                        whiteSpace: 'nowrap',
+                        marginTop: '20px',
+                        position: 'absolute',
+                        bottom: '40px',
+                        right: '0',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                >Form Subtotal:&nbsp;&nbsp;${total}</div>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
                     <button 
                         className='submit-btn' 
                         style={{
@@ -366,22 +409,34 @@ const StringForm = (props) => {
                             width: '200px',
                             color: '#fff',
                             backgroundColor: '#6A75AA',
-                            marginTop: '20px',
-                            cursor: 'pointer'
+                            cursor: 'pointer', 
+                            margin: 'auto',
+                            marginTop: '30px',
+                            textAlign: 'center'
                         }} 
                         type='submit'
                     >Add String Order to Cart</button>
                 </div>
-                <div style={{
-                        width: '200px',
-                        padding: '5px 0',
-                        backgroundColor: '#f6f6f6',
-                        margin: 'auto',
-                        color: '#000',
-                        textAlign: 'center'
-                    }}
-                >Form Subtotal:&nbsp;&nbsp;${total}</div>
-            </form>               
+            </form> 
+            <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: '10px 5px 0',
+                    fontSize: '22px',
+                    fontWeight: '600',
+                    margin: 'auto',
+                    marginBottom: '25px',
+                    width: '60%'
+                    // color: '#6A75AA'
+                }}
+            >
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontWeight: '300', fontStyle: 'italic', lineHeight: '1.5', fontSize: '12px', margin: '15px auto 0'}}>
+                    <div style={{marginRight: '15px'}}>Ships from: USA</div>
+                    <img style={{maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                    <div style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>To: US and Canada</div>
+                </div>   
+            </div>     
         </div>
         <StringFormCss />
         </>
@@ -412,3 +467,78 @@ StringForm.getInitialProps = async (props) => {
 }
 
 export default StringForm;
+
+
+
+            // {/* {userharp.harpname
+            // ?<div 
+            //     style={{
+            //         margin: '-10px auto 30px', 
+            //         display: 'flex', 
+            //         justifyContent: 'center', 
+            //         alignItems:'center',
+            //     }}  
+            // >
+            //     <img 
+            //         src='./img/store/speedy_harp.png' 
+            //         alt='speedy harpist pushing harp on dolly' 
+            //         style={{height: '40px'}}
+            //     /> 
+            //     <button 
+            //         style={{
+            //             marginRight: '7px',
+            //             marginLeft: '7px', 
+            //             padding: '5px 10px', 
+            //             color: '#FFF', 
+            //             backgroundColor: '#6A75AA',
+            //             cursor: 'pointer'
+            //         }} 
+            //         onClick={()=>setRememberModal(true)}
+            //     >
+            //         <div>Showing brands for</div>
+            //         <div>harp: {userharp.harpname}</div>
+            //     </button>
+            //     <a 
+            //         href='./rememberdetails' 
+            //         style={{
+            //             flex: 'none', 
+            //             fontStyle: 'italic', 
+            //             fontSize: '14px',
+            //             textDecoration: 'underline'
+            //         }}
+            //     >Add/Edit harp<br/>profiles</a>
+            // </div>
+            // :<div 
+            //     style={{
+            //         margin: '-10px auto 30px', 
+            //         display: 'flex', 
+            //         justifyContent: 'center', 
+            //         alignItems:'center',
+            //     }}  
+            // >
+            //     <img 
+            //         src='./img/store/speedy_harp.png' 
+            //         alt='speedy harpist pushing harp on dolly' 
+            //         style={{height: '40px'}}
+            //     /> 
+            //     <button 
+            //         style={{
+            //             marginRight: '7px',
+            //             marginLeft: '7px', 
+            //             padding: '5px 10px', 
+            //             color: '#FFF', 
+            //             backgroundColor: '#6A75AA',
+            //             cursor: 'pointer'
+            //         }} 
+            //         onClick={()=>setRememberModal(true)}
+            //     >Remember My Harp<br/>Login/Signup</button>
+            //     <a 
+            //         href='./rememberdetails' 
+            //         style={{
+            //             flex: 'none', 
+            //             fontStyle: 'italic', 
+            //             fontSize: '14px'
+            //         }}
+            //     >What's this?</a>
+            // </div>
+            // } */}

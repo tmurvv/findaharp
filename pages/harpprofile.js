@@ -8,6 +8,7 @@ import Router from 'next/router';
 // import { HarpProfileContext } from '../src/contexts/HarpProfileContext';
 import { CartContext } from '../src/contexts/CartContext';
 import { StringFormContext } from '../src/contexts/StringFormContext';
+import { StringFormInfoContext } from '../src/contexts/StringFormInfoContext';
 // components
 import Octave from '../src/components/stringForm/Octave';
 import RememberHarpLogin from '../src/components/stringForm/RememberHarpLogin';
@@ -28,6 +29,7 @@ const HarpProfile = (props) => {
     const [ localNews, setLocalNews] = useState();
     const [ change, setChange ] = useState(false);
     const { stringForm, setStringForm } = useContext(StringFormContext);
+    const { stringFormInfo, setStringFormInfo } = useContext(StringFormInfoContext);
     const [ showAddNew, setShowAddNew ] = useState(false);
     const { cart, setCart } = useContext(CartContext);
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
@@ -38,9 +40,6 @@ const HarpProfile = (props) => {
     const [ changes, setChanges ] = useState(false);
     const [ harpnameEdit, setHarpnameEdit ] = useState(false);
     const [ emailEdit, setEmailEdit ] = useState(false);
-    const [ userharp, setUserharp ] = useState({harpname:'', email: ''});
-    const [ oldEmail, setOldEmail ] = useState(localEmail);
-    const [ oldHarpname, setOldHarpname] = useState(localHarpname);
     const [resultInfo, dispatchResultInfo] = useReducer(resultsWindowReducer, RESULTSWINDOW_INITIAL_STATE);
     
     const handleChange = (e) => {
@@ -93,18 +92,25 @@ const HarpProfile = (props) => {
             }
             try {
                 const res = await axios.post('http://localhost:3000/api/v1/userharps', harpObject);
-                setOldEmail(localEmail)  
-                setOldHarpname(localHarpname)
+                setStringFormInfo({
+                    harpname: harpObject.harpname, 
+                    email: harpObject.email, 
+                    oldharpname: harpObject.harpname, 
+                    oldemail: harpObject.oldemail
+                });
                 //set stringForm here
                 console.log('data', res.data) 
                 const parseStringBrands = await JSON.parse(res.data.userharp.stringform);
                 setStringForm(parseStringBrands)
+                
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
             }
             document.querySelector('#spinnerRemember').style.display='none';
             setStep('getBrands-edit');
+            setEmailEdit(false);
+            setHarpnameEdit(false);
         }
     }
     // UPDATE HARPNAME / EMAIL
@@ -117,8 +123,8 @@ const HarpProfile = (props) => {
             
             document.querySelector('#spinnerRemember').style.display='block';
             const harpObject = {
-                oldemail: oldEmail,
-                oldharpname: oldHarpname,
+                oldemail: stringFormInfo.oldemail,
+                oldharpname: stringFormInfo.oldharpname,
                 email: localEmail,
                 harpname: localHarpname,
                 stringform: JSON.stringify(stringForm)
@@ -126,19 +132,26 @@ const HarpProfile = (props) => {
             try {
                 const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
                 console.log('whtasehre', harpObject)
-                setOldHarpname(localHarpname);
+                setStringFormInfo({
+                    harpname: harpObject.harpname, 
+                    email: harpObject.email, 
+                    oldharpname: harpObject.harpname, 
+                    oldemail: harpObject.oldemail
+                });
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${localHarpname}.`});  
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
             }
             document.querySelector('#spinnerRemember').style.display='none';
+            setEmailEdit(false);
+            setHarpnameEdit(false);
         }
         if (type==='email') {
             document.querySelector('#spinnerRemember').style.display='block';
             const harpObject = {
-                oldemail: oldEmail,
-                oldharpname: oldHarpname,
+                oldemail: stringFormInfo.oldemail,
+                oldharpname: stringFormInfo.oldharpname,
                 email: localEmail,
                 harpname: localHarpname,
                 stringform: JSON.stringify(stringForm)
@@ -146,16 +159,23 @@ const HarpProfile = (props) => {
             try {
                 const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`}); 
-                setOldEmail(localEmail); 
+                setStringFormInfo({
+                    harpname: harpObject.harpname, 
+                    email: harpObject.email, 
+                    oldharpname: harpObject.harpname, 
+                    oldemail: harpObject.oldemail
+                });
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
                 console.log('hereee', resultInfo)
             }
             document.querySelector('#spinnerRemember').style.display='none';
+            
             // alert('update email NYI')
-            if (document.querySelector('#emailInput')) document.querySelector('#emailInput').disabled=!document.querySelector('#emailInput').disabled; 
-            if (document.querySelector('#emailInput')) setEmailEdit(!document.querySelector('#emailInput').disabled); 
+            if (document.querySelector('#emailInput')) document.querySelector('#emailInput').disabled=true; 
+            if (document.querySelector('#emailInput')) setEmailEdit(false); 
+            // if (document.querySelector('#emailInput')) setEmailEdit(!document.querySelector('#emailInput').disabled); 
         }                                
     }
     function handleNavOpen(e) {
@@ -176,18 +196,18 @@ const HarpProfile = (props) => {
     async function loginGuest(evt) {   
         resetResultsWindow();
     }
-    useEffect(() => {
-        window.addEventListener('beforeunload', function (e) {
-            // Cancel the event
-            e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-            // Chrome requires returnValue to be set
-            e.returnValue = '';
-            // Cancel the before unload event
-            window.onbeforeunload = function () {
-                // blank function do nothing
-            }
-        });
-    });
+    // useEffect(() => {
+    //     window.addEventListener('beforeunload', function (e) {
+    //         // Cancel the event
+    //         e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+    //         // Chrome requires returnValue to be set
+    //         e.returnValue = '';
+    //         // Cancel the before unload event
+    //         window.onbeforeunload = function () {
+    //             // blank function do nothing
+    //         }
+    //     });
+    // });
     function handleClose() {
         if (change&&!confirm('Changes will be lost. Continue?')) return;
         // alert('handle cancel-NYI')
@@ -199,8 +219,10 @@ const HarpProfile = (props) => {
     },[]);
     
     useEffect(()=>{
-        setLocalEmail&&setLocalEmail(oldEmail);
-        setLocalHarpname&&setLocalHarpname(oldHarpname);
+        setLocalEmail&&setLocalEmail(stringFormInfo.oldemail);
+        setLocalHarpname&&setLocalHarpname(stringFormInfo.oldharpname);
+        setEmailEdit(false);
+        setHarpnameEdit(false);
     },[]);
     return (  
         <>
@@ -223,6 +245,7 @@ const HarpProfile = (props) => {
             >
                 <img src="img/spinner.gif" alt="spinner" />
             </div>
+            emailedit: { emailEdit?'enable':'disable' }
             <div style={{position:'absolute', top: '12px', left: '5px'}}>
                 <a 
                     onClick={()=>Router.push('/stringform')} 
@@ -237,9 +260,12 @@ const HarpProfile = (props) => {
                 >Back to String Order Form</a>
             </div>            
             {rememberModal&&
-                <RememberHarpLogin setRememberModal={setRememberModal} step={step} setStep={setStep} setOldEmail={setOldEmail} setOldHarpname={setOldHarpname} userharp={userharp} setUserharp={setUserharp}/>  
+                <RememberHarpLogin setRememberModal={setRememberModal} step={step} setStep={setStep} />  
             }
             <PageTitle maintitle='Harp Profiles' subtitle='Add/Edit harp profiles on this page.' />
+            <div>stringform: {stringFormInfo.harpname}
+                old: {stringFormInfo.oldharpname}
+                step: {step}</div>
             {step==='preselect'&&
             <div style={{
                 display: 'flex', 
@@ -247,7 +273,8 @@ const HarpProfile = (props) => {
                 padding: '15px 5px'
             }}>
                 <button className='harpProfileButton' onClick={()=>{setStep("add-getInfo");setRememberModal(true);}}>Add Harp Profile</button>
-                <button className='harpProfileButton' onClick={()=>{setStep("edit-getInfo");setRememberModal(true);}}>Edit Harp Profile</button>
+                <button className='harpProfileButton' onClick={()=>{setStep("getBrands-edit"); if (!stringFormInfo.harpname||stringFormInfo.harpname==='') setRememberModal(true);}}>Edit Harp Profile</button>
+                here{stringFormInfo.harpname}
             </div>
             }
             
@@ -259,8 +286,8 @@ const HarpProfile = (props) => {
                         <li>We will remember your harp's string brands when you place an order</li>
                         <li>Next time, simply load your profile and enter the quantities for the strings you would like to order</li>
                         <li>Signup as many harps as you like</li>
-                        <li>Teachers, you can enter your students' harps</li>
-                        <li>Rentors, you can enter your rental harps</li>
+                        <li>Teachers, you can signup your students' harps</li>
+                        <li>Rentors, you can signup your rental harps</li>
                         <li>What a great idea!</li>
                     </ul>
                 </div>
@@ -288,6 +315,8 @@ const HarpProfile = (props) => {
                         textAlign: 'center'
                     }}
                 >Form Subtotal:&nbsp;&nbsp;${total}</div> */}
+                check it: {step}
+                includes: {step.includes('edit')}
                 {step.includes('edit')&&<div className='harpProfileInput'>
                         <div style={{textAlign: 'center', flex: '4', marginRight: '10px'}}>
                             <label htmlFor="harpname"><span style={{color: 'tomato'}}>*</span>&nbsp;Harp Name:</label>
@@ -295,8 +324,8 @@ const HarpProfile = (props) => {
                                 onChange={(e)=>handleChange(e)} 
                                 name='harpname' 
                                 value={localHarpname}
-                                placeholder={oldHarpname}
-                                onFocus={()=>{setLocalHarpname(oldHarpname);setLocalEmail(oldEmail);}}
+                                placeholder={stringFormInfo.oldharpname}
+                                onFocus={()=>{setLocalHarpname(stringFormInfo.oldharpname);setLocalEmail(stringFormInfo.email);}}
                                 id='harpnameInput'
                                 disabled
                             />
@@ -333,8 +362,8 @@ const HarpProfile = (props) => {
                                 type='email' 
                                 name='email' 
                                 value={localEmail}
-                                placeholder={oldEmail}
-                                onFocus={()=>{setLocalHarpname(oldHarpname);setLocalEmail(oldEmail);}}
+                                placeholder={stringFormInfo.oldemail}
+                                onFocus={()=>{setLocalHarpname(stringFormInfo.oldharpname);setLocalEmail(stringFormInfo.oldemail);}}
                                 disabled
                                 // defaultValue={props.userharp.email}
                             />
@@ -349,7 +378,9 @@ const HarpProfile = (props) => {
                             > */}
                                 {!emailEdit
                                     ?<button 
-                                        onClick={()=>{if (document.querySelector('#harpnameInput').disabled) {document.querySelector('#emailInput').disabled=!document.querySelector('#emailInput').disabled; setEmailEdit(!document.querySelector('#emailInput').disabled)}}} 
+                                        onClick={()=>{if (document.querySelector('#harpnameInput').disabled) {document.querySelector('#emailInput').disabled=!document.querySelector('#emailInput').disabled; 
+                                        setEmailEdit(!document.querySelector('#emailInput').disabled)
+                                    }}} 
                                         style={{cursor: 'pointer', opacity: '.6', transform: 'translate(0,6px)', marginLeft: '3px', backgroundColor: 'transparent'}}
                                     >
                                             <img src='/img/editItemIcon.png' style={{width: '25px'}} alt='edit pencil'/>
@@ -367,7 +398,7 @@ const HarpProfile = (props) => {
                         </div>
                     </div>}
                 <p>{step==='getBrands-add'?`Welcome ${localHarpname}! You may enter string brands below or place an order and Find a Harp will remember your string brands.`:`Edit String Brands below or place an order and Find a Harp will remember any changed brands.`} <a href='/stringform' style={{textDecoration: 'underline', color: '#6A75AA'}}> Back to order form</a></p>
-                <h3 style={{textAlign: 'center'}}>{step==='getBrands-add'?'Add':'Edit'} Brands for {oldHarpname}</h3>
+                <h3 style={{textAlign: 'center'}}>{step==='getBrands-add'?'Add':'Edit'} Brands for {stringFormInfo.oldharpname}</h3>
                 <Octave octave='0' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges} addedit={editModal}/>                 
                 <Octave octave='1' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges} addedit={editModal}/>                 
                 <Octave octave='2' strings={props.strings} setTotal={setTotal} applyToOctaves={applyToOctaves} setApplyToOctaves={setApplyToOctaves} setChanges={setChanges} addedit={editModal}/>                 
