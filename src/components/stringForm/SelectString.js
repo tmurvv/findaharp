@@ -61,8 +61,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
             if (clickOctave===0) {
                     const Notes = [ "G", "F" ];
                     Notes.map(noteinmap=>{
-                        if ((!newObject[clickOctave][noteinmap].brand)
-                            &&parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
+                        if (parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
                             &&parseInt(newObject[clickOctave][noteinmap].order)>=parseInt(brandObject.high)) {
                             newObject[clickOctave][noteinmap].brand = stringType;
                             newObject[clickOctave][noteinmap].price = stringObject.price;

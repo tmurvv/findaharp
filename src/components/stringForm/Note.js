@@ -13,6 +13,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
         setChanges(true);
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
+        newObject.changes="true";
         setStringForm(newObject);
          // set total
          let newTotal = 0;
@@ -37,7 +38,15 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
     })
     return (
         
-        <div style={{position: 'relative'}}>
+        <div style={{position: 'relative'}} onBlur={()=>{
+            
+            // if (parseInt(document.querySelector(`#qty${note}`).value)>0)
+            //     alert(document.querySelector(`#qty${note}`).value)
+            // }}>
+            if (parseInt(document.querySelector(`#qty${note}`).value)>0) 
+                alert(document.querySelector(`stringTypeText${note}`)&&document.querySelector(`stringTypeText${note}`).innerText)
+                if (!document.querySelector(`stringTypeText${note}`) alert(`${note}, no brand selected. Change quantity to zero?`)
+            }}>
             {/* applytooctave: {stringForm&&stringForm[parseInt(octave)]&&stringForm[parseInt(octave)].applytooctave} */}
             <div className="noteGridContainer">
                 {note==='Header'
@@ -70,6 +79,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                 <div className="note" id='note'>{note}</div>
                 <div>
                     <input 
+                        id={`qty${note}`}
                         className='qty-input' 
                         type='number'
                         min='0'

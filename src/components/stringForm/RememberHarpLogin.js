@@ -88,8 +88,11 @@ function RememberHarpLogin(props) {
             dispatchResultInfo({type: 'OK', payload: props.step.includes('add')?`Remember My Harp signup successful for ${harpObject.oldharpname}.`:`Remember My Harp login successful for ${harpObject.oldharpname}.`});    
         } catch(e) {
             setChange(false);
-            if (e.response) {
-                dispatchResultInfo({type: 'tryAgain', payload: e.response.data.message.includes('combination')?`This email and harp name combination already in use.`:`Something went wrong on harp ${props.step&&props.step.startsWith('add')?'signup':'login'}. If problem persists, please contact tisha@findaharp.com.`});
+            if (e.response&&e.response.data.message.includes('combination')) {
+                dispatchResultInfo({type: 'tryAgain', payload: `This email and harp name combination already in use.`});
+            } else if (e.response.data.message==='Harp not found.') {
+                alert('here')
+                dispatchResultInfo({type: 'tryAgain', payload: `Harp profile not found.`});
             } else {
                 dispatchResultInfo({type: 'tryAgain', payload: `${e.message}Something went wrong on harp ${props.step&&props.step.includes('add')?'signup':'login'}. If problem persists, please contact tisha@findaharp.com.`});
             }

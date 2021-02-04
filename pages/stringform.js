@@ -80,6 +80,10 @@ const StringForm = (props) => {
             if(idx<8&&octave.G&&octave.G.qty>0) {const addObject = [octave.G.id,octave.G.qty,octave.G.price]; addArray.push(addObject)};
             if(idx<8&&octave.F&&octave.F.qty>0) {const addObject = [octave.F.id,octave.F.qty,octave.F.price]; addArray.push(addObject)};
         });
+        if (addArray.length===0) {
+            dispatchResultInfo({type: 'OK', payload: 'No quantities were found. Please enter the quantity of each string you would like to order.'}); 
+            return;
+        }
         // update cart
         updateCart(addArray);
         
@@ -226,6 +230,7 @@ const StringForm = (props) => {
             >
                 This form is for new strings labelled by octave (Lyon Healy/Salvi lever harps, all pedal harps, etc). If your harp uses numbered strings, (Dusty Strings, Triplett, etc), please use the online store menu above.
             </div>
+            changes: {stringForm.changes}
             {/* harpname: {stringFormInfo.harpname} <br />
             email: {stringFormInfo.email} <br />
             oldharpname: {stringFormInfo.oldharpname} <br />
