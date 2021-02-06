@@ -6,7 +6,7 @@ function EditNoteCss() {
             .editNoteGridContainer {
                 width: 100%;
                 display: grid;
-                grid-template-columns: 10% 80% 10%;
+                grid-template-columns: 13% 74% 13%;
                 position: relative;
             }
             .editNoteGridContainer > div {

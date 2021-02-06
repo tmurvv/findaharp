@@ -161,7 +161,8 @@ function RememberHarpLogin(props) {
                     <div className='rememberInput' style={{marginTop: '0'}}>
                         <div style={{textAlign: 'right', flex: '4'}}>
                             <label htmlFor="harpname"><span style={{color: 'red'}}>*</span>&nbsp;Harp Name:</label>
-                            <input 
+                            <input  
+                                style={{outlineColor: '#6A75AA'}}
                                 onChange={(e)=>handleChange(e)} 
                                 name='harpname' 
                                 value={localHarpname}
@@ -171,6 +172,7 @@ function RememberHarpLogin(props) {
                         <div style={{textAlign: 'right', flex: '6'}}>
                             <label><span style={{color: 'red'}}>*</span>&nbsp;Email:</label>
                             <input 
+                                style={{outlineColor:'#6A75AA'}} 
                                 onChange={(e)=>handleChange(e)} 
                                 type='email' 
                                 name='email' 
@@ -188,7 +190,7 @@ function RememberHarpLogin(props) {
                         <button 
                             className='submit-btn'
                             type="button"
-                            style={{width: '45%', margin: '1%', cursor: 'pointer'}}
+                            style={{width: '45%', margin: '1%', cursor: 'pointer', color: '#ffffff', backgroundColor:'#6A75AA'}}
                             onClick={()=>handleSubmit()}
                         >
                             {props.step.includes('add')?'Add Harp Profile':'Login Harp Profile'}
@@ -196,7 +198,7 @@ function RememberHarpLogin(props) {
                         <button 
                             className='submit-btn'
                             type="button"
-                            style={{width: '45%', margin: '1%', cursor: 'pointer'}}
+                            style={{width: '45%', margin: '1%', cursor: 'pointer', color: '#ffffff', backgroundColor:'#6A75AA'}}
                             onClick={() => {props.setStep&&props.setStep('preselect');handleClose();}}
                         >
                             Cancel

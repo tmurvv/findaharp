@@ -245,7 +245,6 @@ const HarpProfile = (props) => {
             >
                 <img src="img/spinner.gif" alt="spinner" />
             </div>
-            emailedit: { emailEdit?'enable':'disable' }
             <div style={{position:'absolute', top: '12px', left: '5px'}}>
                 <a 
                     onClick={()=>Router.push('/stringform')} 
@@ -263,9 +262,9 @@ const HarpProfile = (props) => {
                 <RememberHarpLogin setRememberModal={setRememberModal} step={step} setStep={setStep} />  
             }
             <PageTitle maintitle='Harp Profiles' subtitle='Add/Edit harp profiles on this page.' />
-            <div>stringform: {stringFormInfo.harpname}
+            {/* <div>stringform: {stringFormInfo.harpname}
                 old: {stringFormInfo.oldharpname}
-                step: {step}</div>
+                step: {step}</div> */}
             {step==='preselect'&&
             <div style={{
                 display: 'flex', 
@@ -274,14 +273,14 @@ const HarpProfile = (props) => {
             }}>
                 <button className='harpProfileButton' onClick={()=>{setStep("add-getInfo");setRememberModal(true);}}>Add Harp Profile</button>
                 <button className='harpProfileButton' onClick={()=>{setStep("getBrands-edit"); if (!stringFormInfo.harpname||stringFormInfo.harpname==='') setRememberModal(true);}}>Edit Harp Profile</button>
-                here{stringFormInfo.harpname}
+                {/* here{stringFormInfo.harpname} */}
             </div>
             }
             
             {(step==='preselect'||step==='add-getInfo'||step==='edit-getInfo')&&
                 <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                     <h4>How does it work?</h4> 
-                    <ul style={{width: 'fit-content', margin: 'auto'}}>
+                    <ul style={{padding: '0 30px', marginLeft: '0', width: 'auto'}}>
                         <li>Enter a name and email for your harp</li>
                         <li>We will remember your harp's string brands when you place an order</li>
                         <li>Next time, simply load your profile and enter the quantities for the strings you would like to order</li>
@@ -315,10 +314,10 @@ const HarpProfile = (props) => {
                         textAlign: 'center'
                     }}
                 >Form Subtotal:&nbsp;&nbsp;${total}</div> */}
-                check it: {step}
-                includes: {step.includes('edit')}
+                {/* check it: {step}
+                includes: {step.includes('edit')} */}
                 {step.includes('edit')&&<div className='harpProfileInput'>
-                        <div style={{textAlign: 'center', flex: '4', marginRight: '10px'}}>
+                        <div style={{textAlign: 'center', flex: '4', display: 'flex'}}>
                             <label htmlFor="harpname"><span style={{color: 'tomato'}}>*</span>&nbsp;Harp Name:</label>
                             <input 
                                 onChange={(e)=>handleChange(e)} 

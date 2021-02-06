@@ -10,7 +10,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
     const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
-        setChanges(true);
+        setChanges("true");
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
         newObject.changes="true";
@@ -43,9 +43,9 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
             // if (parseInt(document.querySelector(`#qty${note}`).value)>0)
             //     alert(document.querySelector(`#qty${note}`).value)
             // }}>
-            if (parseInt(document.querySelector(`#qty${note}`).value)>0) 
-                alert(document.querySelector(`stringTypeText${note}`)&&document.querySelector(`stringTypeText${note}`).innerText)
-                if (!document.querySelector(`stringTypeText${note}`) alert(`${note}, no brand selected. Change quantity to zero?`)
+            // if (parseInt(document.querySelector(`#qty${note}`).value)>0) 
+                // alert(document.querySelector(`stringTypeText${note}`)&&document.querySelector(`stringTypeText${note}`).innerText)
+                // if (!document.querySelector(`stringTypeText${note}`)) alert(`${note}, no brand selected. Change quantity to zero?`)
             }}>
             {/* applytooctave: {stringForm&&stringForm[parseInt(octave)]&&stringForm[parseInt(octave)].applytooctave} */}
             <div className="noteGridContainer">
@@ -56,8 +56,8 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
                     <div style={{width: '90%'}}>
                     <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div style={{whiteSpace: 'nowrap', color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
-                        <div style={{width: '90%', textAlign: 'right'}}>
+                        <div style={{color: '#6A75AA', fontSize: '14px', fontStyle: 'italic', textAlign: 'left'}}>{getTip}</div>
+                        <div style={{width: '50%', textAlign: 'right'}}>
                             <input 
                                 id={`applytooctave${octave}`}
                                 type='checkbox'

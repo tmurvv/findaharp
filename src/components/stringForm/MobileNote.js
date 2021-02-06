@@ -11,7 +11,7 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
     const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
-        setChanges(true);
+        setChanges("true");
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
         setStringForm(newObject);
@@ -27,8 +27,8 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
     }
     useEffect(()=> {
         let setIt;
-        if (parseInt(octave)===0) setIt = 'Zero Octave - usually only pedal harps';
-        if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st octave';
+        if (parseInt(octave)===0) setIt = 'Usually only pedal harps';
+        if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st oct';
         if (parseInt(octave)>1&&parseInt(octave)<4) setIt = 'Gut, Nylon, or Synthetic';
         if (parseInt(octave)===4) setIt = '"Middle C" is in the 4th octave';
         if (parseInt(octave)===5) setIt = 'Wires start somewhere in the 5th Octave';
@@ -46,7 +46,7 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                         
                         <div style={{width: '100%', padding: '5px 7px'}}>
                         
-                        <div style={{display:'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
+                        <div style={{display:'flex', justifyContent: 'space-between'}}>
                             <div 
                                 style={{
                                     display: 'flex', 
@@ -74,8 +74,8 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                         
                     </div>
                     <div className='mobileline2' style={{padding: '7px'}}>
-                        <div className="item3 mobileqty mobilecolHeader">Qty</div>
-                        <div className="item4 mobilenote mobilecolHeader">Note</div>
+                        <div className="item3 mobilenote mobilecolHeader"></div>
+                        <div className="item4 mobileqty mobilecolHeader">Qty</div>
                         <div className="item5 mobilepriceper mobilecolHeader">Price</div>
                         <div className="item6 mobilelinetotal mobilecolHeader">Total</div>
                     </div>
@@ -84,17 +84,18 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                 </> 
                 :<>
                 <div className='mobileline2'>
-                    <div className="mobileqty">
-                        <div>&nbsp;Qty:&nbsp;</div>
-                        <input 
-                            className='mobileqty-input' 
-                            type='number'
-                            min='0'
-                            value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
-                            onChange={(e)=>handleChange(e)} note={`${note}`}
+                    <div className="mobilenote" id='note'>
+                        {/* <div>&nbsp;Qty:&nbsp;</div> */}
+                        {note}
+                    </div>
+                    <div  className="mobileqty"><input 
+                        className='mobileqty-input' 
+                        type='number'
+                        min='0'
+                        value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
+                        onChange={(e)=>handleChange(e)} note={`${note}`}
                         />
                     </div>
-                    <div className="mobilenote" id='note'>{note}</div>
                     <div className="mobilepriceper">
                         {parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0
                         ?"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)
@@ -121,6 +122,7 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                         alignItems: 'center'
                     }}
                 >
+                    <div style={{width: '17.5%'}}></div>
                     <SelectString 
                         octaveBrand={octaveBrand} 
                         setOctaveBrand={setOctaveBrand} 
@@ -128,10 +130,10 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                         note={note}
                         setTotal={setTotal}
                     />
+                    
                     <div 
                         className='mobilestringBrand' 
                         id={`stringTypeText${note}`} 
-                        style={{paddingLeft: '15px'}}
                     >
                         {stringForm&&note
                         ?stringForm[note.substr(0,1)][note.substr(1)].brand

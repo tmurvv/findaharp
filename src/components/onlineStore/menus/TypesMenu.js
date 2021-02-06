@@ -24,7 +24,7 @@ export default function TypesMenu(props) {
                 }}
                 style={{color: '#000000'}}
             >
-                Types
+                By String Number
             </button>               
             <ul
                 id="types-select"
@@ -36,8 +36,33 @@ export default function TypesMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='All Types'
-                >All Types</li>    
+                    name='All Strings'
+                >Dusty, Triplett, etc</li>   
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Delta'
+                >Delta</li> 
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Dusty Strings'
+                >Dusty Strings</li>    
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Rees'
+                >Rees</li>  
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Stoney End'
+                >Stoney End</li>    
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Triplett'
+                >Triplett</li>       
                 <li 
                     onClick={handleClose} 
                     key={uuid()}

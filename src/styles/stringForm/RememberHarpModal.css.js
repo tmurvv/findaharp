@@ -11,7 +11,7 @@ function RememberHarpModalCSS() {
             .rememberdetailContainer {
                 width: 80vw;
                 background-color: #ffffff;
-                border: 4px solid #f9bf1e;
+                // border: 4px solid #f9bf1e;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
                 position: fixed;
@@ -48,7 +48,8 @@ function RememberHarpModalCSS() {
             .rememberInput input{
                 font-size: 14px;
                 padding: 7px 10px;
-                border: 1px solid #ffe58a;
+                // border: 1px solid #ffe58a;
+                border: 1px solid #6A75AA;
                 margin-bottom: 10px;
             }
             .rememberInput label{

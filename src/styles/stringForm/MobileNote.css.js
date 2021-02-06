@@ -3,14 +3,7 @@ import React from "react";
 function MobileNoteCss() {
     return (
         <style jsx="true">{`
-            .mobilenoteGridContainer {
-                // display: grid;
-                
-                // gap: 0px 0px;
-                // grid-template-areas:
-                //     "10% 10% 80%"
-                //     "60% 20% 20%;
-            }
+            
             .mobilenoteContainer {
                 background-color: #f6f6f6;
                 text-align: center;
@@ -26,25 +19,28 @@ function MobileNoteCss() {
             }
             .mobileline2 {
                 display: flex;
-                justify-content: center;
+                justify-content: space-evenly;
                 align-items: center;
                 width: 100%;
                 border-top: 1px solid #676767;
             }
-            .mobileqty {
-                display: flex;
-                align-items: center;
-                flex: 32;
-            }
             .mobilenote {
-                flex: 10;
+                flex: 2.1;
+                transform: translateY(22px);
             }
+            .mobileqty {
+                // display: flex;
+                // align-items: center;
+                flex: 3.3;
+            }
+            
             .mobileqty-input {
                 height: 38px;
                 text-align: right;
                 border: none;
                 font-size: 18px;
                 width: 100%;
+                // flex: 2.5;
             }
             .mobileqty-input::-webkit-inner-spin-button {  
                 width: 14px;
@@ -53,7 +49,7 @@ function MobileNoteCss() {
             }
             .mobilepriceper,
             .mobilelinetotal {
-                flex:27.5;
+                flex: 3.3;
             }
             .mobilecolHeader {
                 // font-size: 14px;

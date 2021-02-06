@@ -20,7 +20,6 @@ import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../constants/cons
 import { findNested, getStoreSearchInfo, searchBar } from '../../utils/searchProductsHelpers';
 
 function GlobalStoreSearch(props) {
-    // console.log('globlaprops', props.usedProducts.length)
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [ allState, setAllState ] = useState(STORE_INITIAL_STATE);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
@@ -54,7 +53,7 @@ function GlobalStoreSearch(props) {
     }
 
     function handleChange(type, menu, value1, value2, value3, value4) {
-        console.log('iminhandelcahage', type, menu, value1, value2, value3, value4)
+        
         // update menu text -- not for search term
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
         if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, types: value4 });
@@ -186,7 +185,7 @@ function GlobalStoreSearch(props) {
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2="All Notes";
             if (!value3||value3===undefined) value3="All Brands";
-            if (!value4||value4===undefined) value4="All Types";
+            if (!value4||value4===undefined) value4="Dusty, Triplett, etc";
             const octave = menu==='octaves'?value1:allState.octaves;
             const note = menu==='notes'?value2:allState.notes;
             const brand = menu==='brands'?value3:allState.brands;
@@ -345,7 +344,8 @@ function GlobalStoreSearch(props) {
                         marginTop: '3px', 
                         fontStyle: 'italic'
                         }}
-                    >w/optional "Remember My Harp"</div>
+                    ></div>
+                    {/* >w/optional "Remember My Harp"</div> */}
                 </div>
                 {/* <a 
                     href='./rememberdetails' 

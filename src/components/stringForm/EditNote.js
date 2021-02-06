@@ -10,7 +10,6 @@ function EditNote({setChanges, strings, note, octave, octaveBrand, setOctaveBran
     const [ getTip, setGetTip ] = useState('here');
     
     function handleChange(e) {
-        setChanges(true);
         let newObject = [...stringForm];
         newObject[note.substr(0,1)][note.substr(1)].qty=e.target.value;
         setStringForm(newObject);
@@ -26,13 +25,13 @@ function EditNote({setChanges, strings, note, octave, octaveBrand, setOctaveBran
     }
     useEffect(()=> {
         let setIt;
-        if (parseInt(octave)===0) setIt = 'Zero Octave - usually only pedal harps';
-        if (parseInt(octave)===1) setIt = 'Lever harps - highest note usually in 1st octave';
+        if (parseInt(octave)===0) setIt = 'Zero Octave-usually only pedal harps';
+        if (parseInt(octave)===1) setIt = 'Lever harps-highest note usually in 1st oct';
         if (parseInt(octave)>1&&parseInt(octave)<4) setIt = 'Gut, Nylon, or Synthetic';
         if (parseInt(octave)===4) setIt = '"Middle C" is in the 4th octave';
-        if (parseInt(octave)===5) setIt = 'Wires usually start somewhere in the 5th Octave';
+        if (parseInt(octave)===5) setIt = 'Wires start somewhere in the 5th Oct';
         if (parseInt(octave)===6) setIt = 'Wires';
-        if (parseInt(octave)===7) setIt = '7th Octave - usually pedal harps only';
+        if (parseInt(octave)===7) setIt = '7th Octave-usually pedal harps only';
         setGetTip(setIt);
     })
     return (
@@ -45,8 +44,8 @@ function EditNote({setChanges, strings, note, octave, octaveBrand, setOctaveBran
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
                     <div style={{width: '90%'}}>
                     <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div style={{whiteSpace: 'nowrap', color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
-                        <div style={{width: '90%', textAlign: 'right'}}>
+                        <div style={{color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
+                        <div style={{width: '50%', textAlign: 'right'}}>
                             <input 
                                 type='checkbox'
                                 onClick={()=>{

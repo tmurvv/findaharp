@@ -10,6 +10,11 @@ function HarpProfileCss() {
                 font-variant:normal;
                 src: url('./fonts/metropolis_ff/Metropolis-ExtraBold.otf') format('opentype');
             }
+            @media screen only and (max-width: 550px) {
+                // ul {
+                //     padding: 20px;
+                // }
+            }
             .harpProfile {
                 // background-image: linear-gradient(to bottom, #f6f6f6, #ffffff 300px);
                 background-color: transparent;
@@ -26,27 +31,42 @@ function HarpProfileCss() {
                 flex: 4;
                 height: 100%;
             }
-            
             .harpProfileButton {
+                width: 175px;
                 padding: 10px 20px;
                 color: #ffffff;
                 background-color: #6A75AA;
                 cursor: pointer;
-                font-size: 18px;
+                font-size: 14px;
                 outline: none;
                 border: none;
                 box-shadow: 3px 3px 3px lightgrey;
-                // background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
-                // padding: 5px 10px;
-                // font-size: 16px;
-                // border-radius: 3px;
-                // outline: none;
-                // border-style: none;
-                // border-color: none;
-                // box-shadow: 1.5px 1.5px 1.5px 0px #555555;
-                // /*-webkit-box-shadow: 2px 2px 2px 0px #555555;
-                // box-shadow: 2px 2px 2px 0px #555555;*/
             }
+            @media only screen and (max-width: 550px) {
+                .harpProfileButton {
+                    width: 48%;
+                }
+            }
+            // .harpProfileButton {
+            //     padding: 10px 20px;
+            //     color: #ffffff;
+            //     background-color: #6A75AA;
+            //     cursor: pointer;
+            //     font-size: 18px;
+            //     outline: none;
+            //     border: none;
+            //     box-shadow: 3px 3px 3px lightgrey;
+            //     // background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
+            //     // padding: 5px 10px;
+            //     // font-size: 16px;
+            //     // border-radius: 3px;
+            //     // outline: none;
+            //     // border-style: none;
+            //     // border-color: none;
+            //     // box-shadow: 1.5px 1.5px 1.5px 0px #555555;
+            //     // /*-webkit-box-shadow: 2px 2px 2px 0px #555555;
+            //     // box-shadow: 2px 2px 2px 0px #555555;*/
+            // }
             .harpProfileButton:active {
                 box-shadow: none;
             }

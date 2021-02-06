@@ -10,6 +10,8 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
     const [ notAvailable, setNotAvailable ] = useState(false);
 
     function handleClick(menu) {  
+        // short circuit
+        if (stringType==='brand') return;
         // clear all brand menus and restore menu text to selected menu
         document.querySelector(`#stringTypeText${note}`).style.display='block';
         Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
@@ -107,7 +109,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
             // turn off apply to octave
             newObject[clickOctave].applytooctave=0;
             newObject.changes="true";
-            document.querySelector(`#applytooctave${note.substr(0,1)}`).checked=false;
+            if (document.querySelector(`#applytooctave${note.substr(0,1)}`)) document.querySelector(`#applytooctave${note.substr(0,1)}`).checked=false;
             setStringForm(newObject);
             // set total
             let newTotal = 0;
@@ -141,7 +143,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                         placeholder={stringForm[note.substr(0,1)][note.substr(1)].brand}
                         id={`typeMenu${note}`} 
                         onChange={(e)=>{handleSelect(e)}} 
-                        style={{width: '100%', border:'none', fontSize: '16px', padding: '10px 0'}} 
+                        style={{width: '86%', border:'none', fontSize: '16px', padding: '10px 0'}} 
                         // onMouseOver={(e)=>e.target.style.opacity='1'} 
                         // onMouseOut={(e)=>e.target.style.opacity='.5'}
                     >
