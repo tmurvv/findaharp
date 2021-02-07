@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
-export default function TypesMenu(props) {
+export default function DustyetcMenu(props) {
     const handleClose = (evt) => {
-        if (evt.target.value === 'All Types') return;
-        props.handleTypesChange(evt.target.getAttribute('name')); 
+        if (evt.target.value === 'Dusty, Triplett, etc') return;
+        props.handleDustyetcChange(evt.target.getAttribute('name')); 
     };
     // get currency conversions
     async function getCurrency() {
@@ -17,32 +17,32 @@ export default function TypesMenu(props) {
         <div className='relative'>
             <button 
                 className="menuButton" 
-                name='types' 
+                name='dustyetc' 
                 onClick={(e)=>{
-                    // alert('String "Types" menu under construction. Check back soon!')
+                    // alert('String "Dustyetc" menu under construction. Check back soon!')
                     props.handleclick(e); 
                 }}
                 style={{color: '#000000'}}
             >
-                By String Number
+                By String Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </button>               
             <ul
-                id="types-select"
+                id="dustyetc-select"
                 onClose={handleClose}
                 hidden={!props.open}
-                name='Types Menu'
+                name='Dusty, Triplett, etc'
                 className='storePlainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='All Strings'
-                >Dusty, Triplett, etc</li>   
-                <li 
+                    name='Dusty, Triplett, etc'
+                >Dusty, Triplett, etc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>   
+                {/* <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='Delta'
-                >Delta</li> 
+                >Delta</li>  */}
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 

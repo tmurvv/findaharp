@@ -2,14 +2,13 @@
 import { useEffect, useState, useReducer } from 'react';
 import InfiniteScrollLoading from "react-infinite-scroll-loading";
 import uuid from 'react-uuid';
-import Router from 'next/router';
 // components
-import StoreProduct from '../../components/onlineStore/StoreProduct';
-import StoreProductModal from '../../components/onlineStore/StoreProductModal';
-import StoreProductSearch from '../../components/onlineStore/StoreProductSearch';
-import StoreProductSearchStrings from '../../components/onlineStore/StoreProductSearchStrings';
+import StoreProduct from './StoreProduct';
+import StoreProductModal from './StoreProductModal';
+import StoreProductSearch from './StoreProductSearch';
+import StoreProductSearchStrings from './StoreProductSearchStrings';
 import SearchBar from '../../components/onlineStore/SearchBar';
-import ProductScroll from '../../components/onlineStore/ProductScroll';
+import ProductScroll from './ProductScroll';
 import StoreResults from './StoreResults';
 // other internal
 import GlobalStoreSearchCss from '../../styles/onlineStore/GlobalStoreSearch.css';
@@ -18,6 +17,7 @@ import StoreProductContainerCss from '../../styles/onlineStore/StoreProductConta
 import { resultInfoReducer } from '../../reducers/reducers';
 import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../constants/constants';
 import { findNested, getStoreSearchInfo, searchBar } from '../../utils/searchProductsHelpers';
+import FastNEasyStringForm from './FastNEasyStringForm';
 
 function GlobalStoreSearch(props) {
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
@@ -27,7 +27,7 @@ function GlobalStoreSearch(props) {
     const [ octavesSearch, setOctavesSearch ] = useState();
     const [ notesSearch, setNotesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
-    const [ typesSearch, setTypesSearch ] = useState();
+    const [ dustyetcSearch, setDustyetcSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
     const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
     const [ openStoreDetail, setopenStoreDetail ] = useState(false);
@@ -56,7 +56,7 @@ function GlobalStoreSearch(props) {
         
         // update menu text -- not for search term
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, types: value4 });
+        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, dustyetc: value4 });
         // get search items
         let category = document.querySelector('#category').value;
         let searchTerm = document.querySelector('#searchTerm').value;
@@ -84,7 +84,7 @@ function GlobalStoreSearch(props) {
             document.querySelector('#category').value='Music';
             type = 'music';
         } 
-        if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='types') {
+        if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='dustyetc') {
             category = "Strings";
             document.querySelector('#category').value='Strings';
             type = 'strings'
@@ -189,12 +189,12 @@ function GlobalStoreSearch(props) {
             const octave = menu==='octaves'?value1:allState.octaves;
             const note = menu==='notes'?value2:allState.notes;
             const brand = menu==='brands'?value3:allState.brands;
-            const type = menu==='types'?value4:allState.types;
+            const dustyetc = menu==='dustyetc'?value4:allState.dustyetc;
             // initialize variables
             let octavesProductList=[];
             let notesProductList=[];
             let brandsProductList=[];
-            let typesProductList=[];
+            let dustyetcProductList=[];
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
@@ -242,25 +242,25 @@ function GlobalStoreSearch(props) {
             }
 
             finalProductList=[...brandsProductList];
-            // check string types
-            if (type&&type!==undefined&&type.toUpperCase()!=="ALL TYPES") {
+            // check string dustyetc
+            if (dustyetc&&dustyetc!==undefined&&dustyetc.toUpperCase()!=="ALL TYPES") {
                 brandsProductList.map(product=> {
-                    if (type.toUpperCase()==='NEW' || type.toUpperCase()==='USED') {
-                        if (product.newused.toUpperCase()==='NEW'&&type.toUpperCase()==='NEW') typesProductList.push(product); 
-                        if (product.newused.toUpperCase()==='USED'&&type.toUpperCase()==='USED') typesProductList.push(product); 
+                    if (dustyetc.toUpperCase()==='NEW' || dustyetc.toUpperCase()==='USED') {
+                        if (product.newused.toUpperCase()==='NEW'&&dustyetc.toUpperCase()==='NEW') dustyetcProductList.push(product); 
+                        if (product.newused.toUpperCase()==='USED'&&dustyetc.toUpperCase()==='USED') dustyetcProductList.push(product); 
                     }
-                    else if (String(product.title).toUpperCase().includes(type.toUpperCase())) {
-                        typesProductList.push(product);
+                    else if (String(product.title).toUpperCase().includes(dustyetc.toUpperCase())) {
+                        dustyetcProductList.push(product);
                     } else if (product.subcategories) {
                         product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===type.toUpperCase()) typesProductList.push(product);
+                            if (subcategory.toUpperCase()===dustyetc.toUpperCase()) dustyetcProductList.push(product);
                         });
                     }
                 }); 
             } else {
-                typesProductList=[...brandsProductList];
+                dustyetcProductList=[...brandsProductList];
             }
-            finalProductList=[...typesProductList];
+            finalProductList=[...dustyetcProductList];
         } else {
             finalProductList=[...newusedProductList]
         }
@@ -276,7 +276,6 @@ function GlobalStoreSearch(props) {
         
         finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
         setTypeOfSearch(type);
-
         setSearchResults(finalProductList)
     }
     
@@ -294,7 +293,7 @@ function GlobalStoreSearch(props) {
     }
     function handleCloseDetail() {
         setDetailProduct([]);
-        setopenStoreDetail(false);
+        setopenStoreDetail(false); 
     }
     const loadMore = page => {  
         setHasMore(true);
@@ -318,44 +317,7 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            <div 
-                style={{
-                    margin: '-20px auto 40px', 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    alignItems:'center',
-                    width: '100%'
-                }}  
-            >
-                <img 
-                    src='./img/store/speedy_harp.png' 
-                    alt='speedy harpist pushing harp on dolly' 
-                    style={{height: '60px'}}
-                /> 
-                <div>
-                    <button 
-                        className='stringForm-btn'
-                        onClick={()=>Router.push('/stringform')}
-                    >Fast and Easy String Form</button>
-                    <div style={{
-                        fontSize: '12px', 
-                        opacity: '.8', 
-                        textAlign: 'center', 
-                        marginTop: '3px', 
-                        fontStyle: 'italic'
-                        }}
-                    ></div>
-                    {/* >w/optional "Remember My Harp"</div> */}
-                </div>
-                {/* <a 
-                    href='./rememberdetails' 
-                    style={{
-                        flex: 'none', 
-                        fontStyle: 'italic', 
-                        fontSize: '14px'
-                    }}
-                >What's this?</a> */}
-            </div>
+            <FastNEasyStringForm />
             
             <div className='storeSearchLine' >
                 {screenWidth>750
@@ -441,7 +403,7 @@ function GlobalStoreSearch(props) {
                 setOctavesSearch={setOctavesSearch} 
                 setNotesSearch={setNotesSearch} 
                 setBrandsSearch={setBrandsSearch} 
-                setTypesSearch={setTypesSearch}
+                setDustyetcSearch={setDustyetcSearch}
             />
             {searchResults&&searchResults.length>0&&
             <>

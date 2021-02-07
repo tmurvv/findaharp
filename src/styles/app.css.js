@@ -109,6 +109,7 @@ function AppCss() {
                 width: 75%;
                 transform: translateX(16.5%);
                 text-align: center;
+                max-width: 200px;
             }
             .plainTextSelectLine2 p {
                 margin-block-start: 0;
@@ -166,8 +167,9 @@ function AppCss() {
                 width: 85%;
                 transform: translateX(16.5%);
                 text-align: center;
+                max-width: 200px;
             }
-            .storePlainTextSelectLine2 p {
+            .storePlainTextSelectLine2 p { 
                 margin-block-start: 0;
                 margin-block-end: 0;
             }

@@ -243,7 +243,15 @@ function ProductSearchCss() {
                     top: 125px;
                     right: 0;
                 } 
-            }*/
+            }
+            #dustyetc {
+                transform: translateX(-15px);
+            }
+            @media only screen and (max-width: 550px) {
+                #dustyetc {
+                    transform: none;
+                }
+            }
         `}
     </style>
     )

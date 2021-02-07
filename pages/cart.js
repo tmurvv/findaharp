@@ -26,6 +26,7 @@ import GetZipPostal from '../src/components/onlineStore/GetZipPostal';
 import PageTitle from '../src/components/PageTitle';
 import SubCart from '../src/components/onlineStore/SubCart';
 import { CART_ITEMS_INIT } from '../src/constants/inits';
+import FastNEasyStringForm from '../src/components/onlineStore/FastNEasyStringForm';
 
 
 function Cart(props) {
@@ -68,6 +69,7 @@ function Cart(props) {
     }, []);
     return (
         <>
+            
             <div className='index' style={{width: '100%'}}>
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
                 <Results 
@@ -76,6 +78,7 @@ function Cart(props) {
                     resetResults={resetResults} 
                 />
             <div className="cartContainer">  
+                <FastNEasyStringForm />
                 <div id='cart'>
                     {cart.length===0?<h3 style={{paddingLeft: '15px'}}>No Items in Cart</h3>:''}
                     {/* <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1> */}

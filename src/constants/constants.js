@@ -38,7 +38,7 @@ export const STORE_INITIAL_STATE = {
     octaves: 'All Octaves',
     notes: 'All Notes',
     brands: 'All Brands',
-    types: 'All Types',
+    dustyetc: 'Dusty, Triplett, etc',
     searchInfo: ''
 }
 export const RESET_SHIPPING_INFO = {

@@ -158,9 +158,10 @@ const StringForm = (props) => {
             <div className="stringForm-subheader"
             >
                 <ul> 
-                    <li>For new strings</li>
-                    <li>For harps with strings labelled by octave</li>
-                    <li>Others can use the online store on the main menu</li>
+                    <li>new strings</li>
+                    <li>strings labelled by octave</li>
+                    <li>for numbered strings (Dusty, Triplett, etc), please use 'online store' on the main menu</li>
+                    <li>If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li>
                 </ul>
             </div>
             {changes?
