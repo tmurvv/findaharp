@@ -18,6 +18,7 @@ import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import {StatusContext} from "../src/contexts/StatusContext";
 import {StringFormContext} from "../src/contexts/StringFormContext";
+import {StringFormInfoContext} from "../src/contexts/StringFormInfoContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -33,11 +34,11 @@ import {
     CART_OPEN_INIT,
     CART_ITEMS_INIT,
     CART_SUBTOTALS_INIT,
-    STRING_FORM_INIT
+    STRING_FORM_INIT,
+    STRING_FORM_INFO_INIT
 } from '../src/constants/inits.js'
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
-
 
 function MyApp(props) {
     const { Component, pageProps } = props;
@@ -56,7 +57,8 @@ function MyApp(props) {
     const [cartSubtotals, setCartSubtotals] = useState(CART_SUBTOTALS_INIT);
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
-    const [stringForm, setStringForm] = useState(STRING_FORM_INIT);
+    const [stringForm, setStringForm] = useState(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
+    const [stringFormInfo, setStringFormInfo] = useState(JSON.parse(JSON.stringify(STRING_FORM_INFO_INIT)));
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
@@ -143,6 +145,14 @@ function MyApp(props) {
     }, []);
 
     function handleNavOpen() {
+        console.log('router', Router.route)
+        if (Router.route==='/stringform'&&!confirm('Your changes may not be saved. Continue?')) 
+            {
+                window.onbeforeunload = function () {
+                    // blank function do nothing
+                }
+                return;
+            }
         if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
@@ -228,6 +238,7 @@ function MyApp(props) {
             <UserContext.Provider value={{user, setUser}}>
             <StatusContext.Provider value={{status, setStatus}}>
             <StringFormContext.Provider value={{stringForm, setStringForm}}>
+            <StringFormInfoContext.Provider value={{stringFormInfo, setStringFormInfo}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -255,6 +266,7 @@ function MyApp(props) {
                     </CartSubtotalsContext.Provider>
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
+            </StringFormInfoContext.Provider>
             </StringFormContext.Provider>
             </StatusContext.Provider>
             </UserContext.Provider>

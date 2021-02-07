@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Head from 'next/head';
 import axios from 'axios';
-import Router from 'next/router';
 
 // internal
 import IndexCss from '../src/styles/index.css.js';
@@ -63,10 +62,10 @@ Index.getInitialProps = async (props) => {
          * API DATA
          *******************/
         // API
-        const res = await axios.get(`https://findaharp-api.herokuapp.com`);
+        // const res = await axios.get(`https://findaharp-api.herokuapp.com`);
         // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
         // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
-        // const res = await axios.get(`http://localhost:3000`); // BREAKINk
+        const res = await axios.get(`http://localhost:3000`); // BREAKING
         // API DATA Populate variables
         const products = res.data.harpData;
         const makesModels = res.data.harpMakesModels;

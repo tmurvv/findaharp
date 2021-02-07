@@ -1,5 +1,6 @@
 import uuid from 'uuid';
 
+export const NOTES_IN_OCTAVE = [ "E","D","C","B","A","G","F" ];
 export const SOLO_ENSEMBLE = [
     'solo',
     'fl/hp',
@@ -9,8 +10,16 @@ export const SOLO_ENSEMBLE = [
     'other',
     'concerto',
     'orchestra part'
-]
+];
 export const RESULTS_INITIAL_STATE = {
+    resultContainer: 'none',
+    resultText: 'none',
+    resultOkButton: 'none',
+    resultTryAgainButton: 'none',
+    tryAgainMarginLeft: '0',
+    resultImg: 'none'
+}
+export const RESULTSWINDOW_INITIAL_STATE = {
     resultContainer: 'none',
     resultText: 'none',
     resultOkButton: 'none',
@@ -29,7 +38,7 @@ export const STORE_INITIAL_STATE = {
     octaves: 'All Octaves',
     notes: 'All Notes',
     brands: 'All Brands',
-    types: 'All Types',
+    dustyetc: 'Dusty, Triplett, etc',
     searchInfo: ''
 }
 export const RESET_SHIPPING_INFO = {
@@ -78,6 +87,30 @@ export const PRODUCTAD_PLACEHOLDER = {
         sellerCountry: "",
         sellerName: "",
         sellerRegion: ""
+}
+export const STRING_BRANDS = {
+    gut: [
+        'Bow Brand Pedal Natural Gut',
+        'Bow Brand Lever Natural Gut',
+        'Concedo Gut',
+        'Burgundy Gut',
+        'Silkgut'
+    ],
+    nylon: [
+            'Bow Brand Pedal Nylon',
+            'Bow Brand Lever Nylon',
+            'Artist Nylon',
+            'Nylon Monofilament'
+    ],
+    wires: [
+        'Silver-Plated Pedal Bass Wire',
+        'Pedal Bass Wire (Tarnish-Resistant)',
+        'Bow Brand Lever Bass Wire',
+        'Professional Lever Bass Wire'
+    ],
+    synthetic: [
+            'Saverez KF Composite (synthetic)'
+    ]                       
 }
 export const STRING_NUMBER = {
     "0G": -.5,

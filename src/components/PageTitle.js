@@ -1,13 +1,15 @@
 import React from 'react';
 import IndexCss from '../styles/index.css.js';
 import Router from 'next/router';
+import FastNEasyStringForm from './onlineStore/FastNEasyStringForm.js';
 
 function PageTitle({ maintitle, subtitle }) {
     return (
         <>
-        {maintitle.toUpperCase()!=='ONLINE STORE'&&maintitle.toUpperCase()!=='YOUR CART'
-        ?<div style={{position:'absolute', top: '12px', left: '5px'}}>
-            <a 
+        {maintitle.toUpperCase()!=='ONLINE STORE'&&maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
+        ?<div>
+            <FastNEasyStringForm />
+            {/* <a 
                 onClick={()=>Router.push('/onlinestore')} 
                 style={{
                     color: '#6A75AA',
@@ -17,7 +19,7 @@ function PageTitle({ maintitle, subtitle }) {
                     fontStyle: 'italic', 
                     fontWeight: '600', 
                     textDecoration: 'underline'}}
-            >STRINGS AND MUSIC HERE</a>
+            >STRINGS AND MUSIC HERE</a> */}
         </div>
         :''}
         <div className='mainTitle'>

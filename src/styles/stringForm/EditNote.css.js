@@ -1,15 +1,15 @@
 import React from "react";
 
-function NoteCss() {
+function EditNoteCss() {
     return (
         <style jsx="true">{`
-            .noteGridContainer {
+            .editNoteGridContainer {
                 width: 100%;
                 display: grid;
-                grid-template-columns: 10% 10% 60% 10% 10%;
+                grid-template-columns: 13% 74% 13%;
                 position: relative;
             }
-            .noteGridContainer > div {
+            .editNoteGridContainer > div {
                 background-color: #f6f6f6;
                 text-align: center;
                 font-size: 16px;
@@ -19,18 +19,26 @@ function NoteCss() {
                 justify-content: center;
                 width: 100%;
             }
-            .qty-input {
+            .editNote {
                 height: 40px;
                 text-align: right;
                 border: none;
                 font-size: 18px;
                 width: 100%;
             }
-            .qty-input::-webkit-inner-spin-button {  
-                width: 14px;
-                height: 30px;
-                margin-left: 7.5px;
+            .editNote select {
+                height: 40px;
+                text-align: right;
+                border: none;
+                font-size: 18px;
+                width: 100%;
+                padding: 10px;
             }
+            // .edit-input::-webkit-inner-spin-button {  
+            //     width: 14px;
+            //     height: 30px;
+            //     margin-left: 7.5px;
+            // }
             .item4 {
                 // width: 100%;
                 // text-align: center;
@@ -45,4 +53,4 @@ function NoteCss() {
     )
 }
 
-export default NoteCss;
+export default EditNoteCss;

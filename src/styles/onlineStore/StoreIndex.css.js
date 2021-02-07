@@ -12,7 +12,7 @@ function StoreIndexCss() {
             }
             @media only screen and (max-width: 550px) {
                 .storeIndex {
-                    padding: 40px 10px;
+                    padding: 70px 10px;
                 }
             }
             

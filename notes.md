@@ -4,6 +4,7 @@ MHC - Daphne 40
 ETC - Salzedo
 ETC - 17
 Vavra - thingy
+ETC - Rees, Aberdeen
 
 
 - STAGING -- onestop-staging.take2tech.ca

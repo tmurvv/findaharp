@@ -4,6 +4,8 @@
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
+- try to solve 'content not matching server console warning' with https://nextjs.org/docs/basic-features/built-in-css-support A component using styled-jsx looks like this:
+- update all results info to ResultsWindow
 - record keeping on sellers needs to be improved
 - separate store partner program info into a component
 - check do we need to pass all open/close functions to Product
@@ -31,6 +33,8 @@
 - clear all button in store search
 
 ### functionality
+- get Delta back on menu
+- on string menu, get models in sub-menus
 - back-button from PayPal page loses cart
 - back to shopping goes to top of screen
 - store cart saving in db instead of cookie, from stackoverflow No large sites would dare store a user's cart in a session or cookie - that data is just to valuable. Use a database table to store this information and then link it to the user's session. 

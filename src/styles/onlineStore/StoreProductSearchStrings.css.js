@@ -219,6 +219,7 @@ function StoreProductSearchStringsCss() {
                 width: 160%;
                 transform: translateX(16.5%);
                 text-align: center;
+                max-width: 200px;
             }
             .plainTextSelectLine2 p {
                 margin-block-start: 0;
