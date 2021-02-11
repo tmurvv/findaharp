@@ -56,12 +56,12 @@ function StoreProductSearch(props) {
     async function handlePublicationTypeSelection(publicationtype) {
         props.setTypeOfSearch("music");
         const newState = {...props.allState, 
-            publicationtype: publicationtype==='All Publication Dustyetc'?'All Publication Dustyetc':publicationtype,
+            publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
         }
         props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', publicationtype);
         props.setAllState({...props.allState, 
-            publicationtype: publicationtype==='All Publication Dustyetc'?'All Publication Dustyetc':publicationtype,
+            publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
             searchInfo: getSearchInfo(newState, 'music')
         });
@@ -144,7 +144,7 @@ function StoreProductSearch(props) {
         const menuClick = e.target.name;
         if (menuClick==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
         if (menuClick==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
-        if (menuClick==='publicationtype') {props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Dustyetc");}
+        if (menuClick==='publicationtype') {props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
         e.target.name==="soloensemble"?e.target.name="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         e.target.name==="publicationtype"?e.target.name="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...props.allState, [menuClick]: `All ${e.target.name.charAt(0).toUpperCase()}${e.target.name.slice(1)}s`}
@@ -181,7 +181,7 @@ function StoreProductSearch(props) {
                     <PublicationTypeMenu 
                         id='publicationtypemenu'
                         handlePublicationTypeChange = {handlePublicationTypeSelection}
-                        currentselected={props.allState?props.allState.publicationtype:'All Publication Dustyetc'}
+                        currentselected={props.allState?props.allState.publicationtype:'All Publication Types'}
                         open={menus.publicationtype}
                         handleclick={handleClick}
                     /> 
@@ -235,14 +235,14 @@ function StoreProductSearch(props) {
                             
                         </div>
                         <div 
-                            id="selectedAll Publication Dustyetc" 
+                            id="selectedAll Publication Types" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.publicationtype}
                             onClick={()=>handleClick({target: {name: 'publicationtype'}})}
                             style={{cursor: 'pointer'}}
                         >
                             {props.allState&&props.allState.publicationtype}
-                            {props.allState&&props.allState.publicationtype!=="All Publication Dustyetc"
+                            {props.allState&&props.allState.publicationtype!=="All Publication Types"
                                 ?<img 
                                     name='publicationtypes'
                                     onClick={

@@ -244,11 +244,11 @@ function ProductSearchCss() {
                     right: 0;
                 } 
             }
-            #dustyetc {
+            #makesmodels {
                 transform: translateX(-15px);
             }
             @media only screen and (max-width: 550px) {
-                #dustyetc {
+                #makesmodels {
                     transform: none;
                 }
             }

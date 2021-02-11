@@ -41,74 +41,98 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
         if (!stringObject) {alert(`This string brand, ${stringType}, not found for string ${note}.`); return}
         // set stringForm id and price for this string only
         
-            let newObject = [...stringForm];
-            
-            newObject[clickOctave][clickNote].brand=stringType;
-            newObject[clickOctave][clickNote].id=stringObject.id;
-            newObject[clickOctave][clickNote].price=stringObject.price;
-            setStringForm(newObject);
-            // set total
-            let newTotal = 0;
-            console.log(newObject)
-            newObject.map((string)=>{
-                NOTES_IN_OCTAVE.map(noteio=>{
-                    string[noteio]&&string[noteio].qty>0?newTotal += parseNum(string[noteio].qty)*parseNum(string[noteio].price):'';
-                });
+        let newObject = [...stringForm];
+        
+        newObject[clickOctave][clickNote].brand=stringType;
+        newObject[clickOctave][clickNote].id=stringObject.id;
+        newObject[clickOctave][clickNote].price=stringObject.price;
+        setStringForm(newObject);
+        // set total
+        let newTotal = 0;
+        console.log(newObject)
+        newObject.map((string)=>{
+            NOTES_IN_OCTAVE.map(noteio=>{
+                string[noteio]&&string[noteio].qty>0?newTotal += parseNum(string[noteio].qty)*parseNum(string[noteio].price):'';
             });
-            setTotal(newTotal.toFixed(2));
+        });
+        setTotal(newTotal.toFixed(2));
+        let stringOctaveObject=[];
         // set stringForm id and price for all strings in octave
         if (stringForm[clickOctave].applytooctave===1){
-            console.log('here')
             let newObject=[...stringForm];
             if (clickOctave===0) {
-                    const Notes = [ "G", "F" ];
-                    Notes.map(noteinmap=>{
-                        if (parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
-                            &&parseInt(newObject[clickOctave][noteinmap].order)>=parseInt(brandObject.high)) {
-                            newObject[clickOctave][noteinmap].brand = stringType;
-                            newObject[clickOctave][noteinmap].price = stringObject.price;
-                            newObject[clickOctave][noteinmap].id = stringObject.id;
-                        } else {
-                            setNotAvailable(true);
-                        }
-                    }); 
+                strings.map(string=>{
+                    if(Math.abs(Math.ceil(parseInt(string.order)/7))===clickOctave&&string.title.toUpperCase().includes(String(brandObject.name).toUpperCase())&&!(String(string.title).toUpperCase().includes('SET'))) {
+                        stringOctaveObject.push(string)
+                        // get string note name from order
+                        const noteName=Number(string.order)===-0.5?"G":"F";
+                        newObject[0][noteName].brand = brandObject.name;
+                        newObject[0][noteName].id = string.id;
+                        newObject[0][noteName].price = string.price;
+                    }
+                });
             }
             if (clickOctave>0&&clickOctave<7) {
-                console.log('brand', brandObject);
-                NOTES_IN_OCTAVE.map(noteinmap=>{
-                    if (parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
-                        &&parseInt(newObject[clickOctave][noteinmap].order)>=parseInt(brandObject.high)) {
-                        
-                        newObject[clickOctave][noteinmap].brand = stringType;
-                        newObject[clickOctave][noteinmap].price = stringObject.price;
-                        newObject[clickOctave][noteinmap].id = stringObject.id;
+                strings.map(string=>{ 
+                    let noteName;
+                    if (Number.isInteger((Number(string.order)+6)/7)) noteName='E';
+                    if (Number.isInteger((Number(string.order)+5)/7)) noteName='D';
+                    if (Number.isInteger((Number(string.order)+4)/7)) noteName='C';
+                    if (Number.isInteger((Number(string.order)+3)/7)) noteName='B';
+                    if (Number.isInteger((Number(string.order)+2)/7)) noteName='A';
+                    if (Number.isInteger((Number(string.order)+1)/7)) noteName='G';
+                    if (Number.isInteger((Number(string.order)+0)/7)) noteName='F';
+                    
+                    if(Math.abs(Math.ceil(parseInt(string.order)/7))===clickOctave&&string.title.toUpperCase().includes(String(brandObject.name).toUpperCase())&&!(String(string.title).toUpperCase().includes('SET'))) {
+                        if (parseInt(newObject[clickOctave][noteName].order)<=parseInt(brandObject.low)
+                        &&parseInt(newObject[clickOctave][noteName].order)>=parseInt(brandObject.high)) {
+                            newObject[clickOctave][noteName].brand = brandObject.name;
+                            newObject[clickOctave][noteName].id = string.id;
+                            newObject[clickOctave][noteName].price = string.price;
+                        }
                     } else {
-                        console.log('hereelse')
                         setNotAvailable(true);
                     }
                 });
                 if (notAvailable) alert(`${stringType} not available in all notes in this octave.`);
             }
             if (clickOctave===7) {
-                NOTES_IN_OCTAVE.map(noteinmap=>{
-                    if ((!newObject[clickOctave][noteinmap].brand)
-                        &&parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
-                        &&parseInt(newObject[clickOctave][noteinmap].order)>=parseInt(brandObject.high)) {
-                        const Notes = [ "E", "D", "C"];
-                        Notes.map(noteinmap=>{
-                            newObject[clickOctave][noteinmap].brand = stringType;
-                            newObject[clickOctave][noteinmap].price = stringObject.price;
-                            newObject[clickOctave][noteinmap].id = stringObject.id;
-                        });
-                    } else {
-                        setNotAvailable(true);
+                strings.map(string=>{ 
+                    if(Math.abs(Math.ceil(parseInt(string.order)/7))===clickOctave&&string.title.toUpperCase().includes(String(brandObject.name).toUpperCase())&&!(String(string.title).toUpperCase().includes('SET'))) {
+                        // get string note name from order
+                        let noteName;
+                        if (Number.isInteger((Number(string.order)+6)/7)) noteName='E';
+                        if (Number.isInteger((Number(string.order)+5)/7)) noteName='D';
+                        if (Number.isInteger((Number(string.order)+4)/7)) noteName='C';
+                        if (noteName) {
+                            newObject[7][noteName].brand = brandObject.name;
+                            newObject[7][noteName].id = string.id;
+                            newObject[7][noteName].price = string.price;
+                        }
                     }
                 });
+
+                // NOTES_IN_OCTAVE.map(noteinmap=>{
+                //     if ((newObject[clickOctave][noteinmap]&&!newObject[clickOctave][noteinmap].brand)
+                //         &&parseInt(newObject[clickOctave][noteinmap].order)<=parseInt(brandObject.low)
+                //         &&parseInt(newObject[clickOctave][noteinmap].order)>=parseInt(brandObject.high)) {
+                //         const Notes = [ "E", "D", "C"];
+                //         Notes.map(noteinmap=>{
+                //             newObject[clickOctave][noteinmap].brand = stringType;
+                //             newObject[clickOctave][noteinmap].price = stringObject.price;
+                //             newObject[clickOctave][noteinmap].id = stringObject.id;
+                //         });
+                //     } else {
+                //         setNotAvailable(true);
+                //     }
+                // });
                 if (notAvailable) alert(`${stringType} not available in all notes in this octave.`);
             } 
             // turn off apply to octave
             newObject[clickOctave].applytooctave=0;
             newObject.changes="true";
+            console.log('select137')
+            console.log(newObject)
             if (document.querySelector(`#applytooctave${note.substr(0,1)}`)) document.querySelector(`#applytooctave${note.substr(0,1)}`).checked=false;
             setStringForm(newObject);
             // set total

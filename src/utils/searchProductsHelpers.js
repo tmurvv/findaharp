@@ -147,8 +147,8 @@ export const getStoreSearchInfo = (allState, type) => {
         return `Showing ${allState.category}: ${searchInfo}`;
     }   
     if (type==='strings') {
-        [allState.octaves, allState.brands, allState.dustyetc].map(menuItem => {
-            if(!['All Octaves', 'All Brands', 'Dusty, Triplett, etc'].includes(menuItem)) searchInfo += `${menuItem} | `
+        [allState.octaves, allState.brands, allState.makesmodels].map(menuItem => {
+            if(!['All Octaves', 'All Brands', 'All Makes/Models'].includes(menuItem)) searchInfo += `${menuItem} | `
             // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='flex';
         });
     }

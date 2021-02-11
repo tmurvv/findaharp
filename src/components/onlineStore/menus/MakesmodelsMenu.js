@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
-export default function DustyetcMenu(props) {
+export default function MakesmodelsMenu(props) {
     const handleClose = (evt) => {
-        if (evt.target.value === 'Dusty, Triplett, etc') return;
-        props.handleDustyetcChange(evt.target.getAttribute('name')); 
+        if (evt.target.value === 'Makes/Models') return;
+        props.handleMakesmodelsChange(evt.target.getAttribute('name')); 
     };
     // get currency conversions
     async function getCurrency() {
@@ -17,27 +17,28 @@ export default function DustyetcMenu(props) {
         <div className='relative'>
             <button 
                 className="menuButton" 
-                name='dustyetc' 
+                name='makesmodels' 
+
                 onClick={(e)=>{
-                    // alert('String "Dustyetc" menu under construction. Check back soon!')
-                    props.handleclick(e); 
+                    alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.')
+                    // props.handleclick(e); 
                 }}
                 style={{color: '#000000'}}
             >
-                By String Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                By Make/Model
             </button>               
             <ul
-                id="dustyetc-select"
+                id="makesmodels-select"
                 onClose={handleClose}
                 hidden={!props.open}
-                name='Dusty, Triplett, etc'
+                name='Makes/Models'
                 className='storePlainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Dusty, Triplett, etc'
-                >Dusty, Triplett, etc&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>   
+                    name='Makes/Models'
+                >All Makes/Models</li>   
                 {/* <li 
                     onClick={handleClose} 
                     key={uuid()} 

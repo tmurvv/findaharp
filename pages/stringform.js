@@ -36,6 +36,7 @@ const StringForm = (props) => {
     function updateCart(addArray) {
         const cartCopy = [...cart];
         // find item in items object
+        console.log(addArray)
         addArray.map(addItem=>{
             let foundString;
             props.strings.map(string=>{if (String(string.id).trim()===String(addItem[0]).trim()){
@@ -47,7 +48,7 @@ const StringForm = (props) => {
                 const thisItem = {
                     id: uuid(), 
                     store: foundString.store,
-                    title: `From string from ${foundString.title}`,
+                    title: `From string form ${foundString.title}`,
                     description: foundString.description, 
                     price: parseNum(addItem[2]), 
                     newprice: parseNum(foundString.newprice),
@@ -70,6 +71,8 @@ const StringForm = (props) => {
         const addArray = [];
         // check for qty and additem to update cart list
         stringForm.map((octave,idx)=>{
+            console.log('74')
+            console.log(octave)
             if(idx<8&&octave.E&&octave.E.qty>0&&octave.E.brand) {const addObject = [octave.E.id,octave.E.qty,octave.E.price]; addArray.push(addObject)};
             if(idx<8&&octave.D&&octave.D.qty>0&&octave.D.brand) {const addObject = [octave.D.id,octave.D.qty,octave.D.price]; addArray.push(addObject)};
             if(idx<8&&octave.C&&octave.C.qty>0&&octave.C.brand) {const addObject = [octave.C.id,octave.C.qty,octave.C.price]; addArray.push(addObject)};
@@ -160,7 +163,7 @@ const StringForm = (props) => {
                 <ul> 
                     <li>new strings</li>
                     <li>strings labelled by octave</li>
-                    <li>for numbered strings (Dusty, Triplett, etc), please use 'online store' on the main menu</li>
+                    <li>for numbered strings, please use Online Store, Makes/Models</li>
                     <li>If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li>
                 </ul>
             </div>

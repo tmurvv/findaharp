@@ -8,8 +8,8 @@ function PageTitle({ maintitle, subtitle }) {
         <>
         {maintitle.toUpperCase()!=='ONLINE STORE'&&maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
         ?<div>
-            <FastNEasyStringForm />
-            {/* <a 
+            {/* <FastNEasyStringForm /> */}
+            <a 
                 onClick={()=>Router.push('/onlinestore')} 
                 style={{
                     color: '#6A75AA',
@@ -18,8 +18,12 @@ function PageTitle({ maintitle, subtitle }) {
                     fontFamily: 'Metropolis Extra Bold', 
                     fontStyle: 'italic', 
                     fontWeight: '600', 
-                    textDecoration: 'underline'}}
-            >STRINGS AND MUSIC HERE</a> */}
+                    textDecoration: 'underline',
+                    position: 'absolute',
+                    top: '15px',
+                    left: '15px'
+                }}
+            >STRINGS AND MUSIC HERE</a>
         </div>
         :''}
         <div className='mainTitle'>

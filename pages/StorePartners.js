@@ -45,7 +45,6 @@ export default function StorePartners() {
                             key={partner.id} 
                             product={partner} 
                             placeholder={!partner.productTitle}
-                            
                         />)
                     }
                 </div>

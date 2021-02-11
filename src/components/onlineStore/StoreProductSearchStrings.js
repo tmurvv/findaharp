@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import OctavesMenu from './menus/OctavesMenu';
 import NotesMenu from './menus/NotesMenu';
 import BrandsMenu from './menus/BrandsMenu';
-import DustyetcMenu from './menus/DustyetcMenu';
+import MakesmodelsMenu from './menus/MakesmodelsMenu';
 // other internal
 import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
 import { getSearchInfo, triggerLazy } from '../../utils/helpers';
@@ -16,7 +16,7 @@ const initialState = {
     octaves: false,
     notes: false,
     brands: false, 
-    dustyetc: false
+    makesmodels: false
 }
 function StoreProductSearchStrings(props) {
     const [menus, setMenus] = useState(initialState);
@@ -28,7 +28,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setOctavesSearch(octaves);
-        props.handleChange('strings', 'octaves', octaves, props.allState.notes, props.allState.brands, props.allState.dustyetc);
+        props.handleChange('strings', 'octaves', octaves, props.allState.notes, props.allState.brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             octaves,
             productType: 'all',
@@ -43,7 +43,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setNotesSearch(notes);
-        props.handleChange('strings', 'notes', props.allState.octaves, notes, props.allState.brands, props.allState.dustyetc);
+        props.handleChange('strings', 'notes', props.allState.octaves, notes, props.allState.brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             notes,
             productType: 'all',
@@ -58,7 +58,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all',
         }
         props.setBrandsSearch(brands);
-        props.handleChange('strings', 'brands', props.allState.octaves, props.allState.notes, brands, props.allState.dustyetc);
+        props.handleChange('strings', 'brands', props.allState.octaves, props.allState.notes, brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             brands,
             productType: 'all',
@@ -66,16 +66,16 @@ function StoreProductSearchStrings(props) {
         });
         setMenus(initialState);      
     }
-    function handleDustyetcSelection(dustyetc) {
+    function handleMakesmodelsSelection(makesmodels) {
         props.setTypeOfSearch("strings");
         const newState = {...props.allState, 
-            dustyetc,
+            makesmodels,
             productType: 'all'
         }
-        props.setDustyetcSearch(dustyetc);
-        props.handleChange('strings', 'dustyetc', props.allState.octaves, props.allState.notes, props.allState.brands, dustyetc);
+        props.setMakesmodelsSearch(makesmodels);
+        props.handleChange('strings', 'makesmodels', props.allState.octaves, props.allState.notes, props.allState.brands, makesmodels);
         props.setAllState({...props.allState, 
-            dustyetc,
+            makesmodels,
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
@@ -91,7 +91,7 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: false,
                     brands: false,
-                    dustyetc: false
+                    makesmodels: false
                 });
                 break;
             case 'artist':
@@ -102,7 +102,7 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: false,
                     brands: false,
-                    dustyetc: false
+                    makesmodels: false
                 });
                 break;
             case 'title':   
@@ -113,7 +113,7 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: false,
                     brands: false,
-                    dustyetc: false
+                    makesmodels: false
                 });               
                 break;
             case 'octaves':
@@ -124,7 +124,7 @@ function StoreProductSearchStrings(props) {
                     octaves: !menus.octaves,
                     notes: false,
                     brands: false,
-                    dustyetc: false
+                    makesmodels: false
                 });
                 break;
             case 'notes':
@@ -135,7 +135,7 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: !menus.notes,
                     brands: false,
-                    dustyetc: false
+                    makesmodels: false
                 });
                 break;
             case 'brands':
@@ -146,10 +146,10 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: false,
                     brands: !menus.brands,
-                    dustyetc: false
+                    makesmodels: false
                 });
                 break;
-            case 'dustyetc':
+            case 'makesmodels':
                 setMenus({
                     category: false,
                     artist: false,
@@ -157,7 +157,7 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: false,
                     brands: false,
-                    dustyetc: !menus.dustyetc
+                    makesmodels: !menus.makesmodels
                 });
                 break;
             default:
@@ -168,17 +168,17 @@ function StoreProductSearchStrings(props) {
                     octaves: false,
                     notes: false,
                     brands: false,
-                    dustyetc: false
+                    makesmodels: false
                 });
         }
     }
    function clearOneFilter(e) {
         let menuClick = e.target.name;
-        menuClick==="dustyetc"?menuClick="Dusty, Triplett, etc":''; // hack change e.target.name to 'Lever/Pedal/Ens'
-        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.dustyetc);}
-        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange("strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.dustyetc);}
-        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.dustyetc);}
-        if (menuClick==='dustyetc') {props.setDustyetcSearch("Dusty, Triplett, etc"); props.handleChange("strings","dustyetc",props.allState.octaves, props.allState.notes, props.allState.brands, "Dusty, Triplett, etc");}
+        menuClick==="makesmodels"?menuClick="Makes/Models":''; // hack change e.target.name to 'Lever/Pedal/Ens'
+        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.makesmodels);}
+        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange("strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.makesmodels);}
+        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels);}
+        if (menuClick==='makesmodels') {props.setMakesmodelsSearch("Makes/Models"); props.handleChange("strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "Makes/Models");}
         
         const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
@@ -209,6 +209,13 @@ function StoreProductSearchStrings(props) {
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
+                    <MakesmodelsMenu 
+                        id='makesmodelsmenu'
+                        handleMakesmodelsChange = {handleMakesmodelsSelection}
+                        currentselected={props.allState.makesmodels?props.allState.makesmodels:'Makes/Models'}
+                        open={menus.makesmodels}
+                        handleclick={handleClick}
+                    /> 
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -238,108 +245,107 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-                    <DustyetcMenu 
-                        id='dustyetcmenu'
-                        handleDustyetcChange = {handleDustyetcSelection}
-                        currentselected={props.allState.dustyetc?props.allState.dustyetc:'Dusty, Triplett, etc'}
-                        open={menus.dustyetc}
-                        handleclick={handleClick}
-                    /> 
+                    
                 </div>
                 <div className="storesearchLine2Sub">
-                        <div 
-                            id="selectedOctaves" 
-                            className={`storesearch-grid-item`} 
-                            value={props.allState&&props.allState.octaves}
-                            onClick={()=>handleClick({target: {name: 'octaves'}})}
-                            style={{cursor: 'pointer'}}
-                        >
-                            {props.allState&&props.allState.octaves}
-                            {props.allState&&props.allState.octaves!=="All Octaves"
-                                ?<img 
-                                    name='octaves'
-                                    onClick={
-                                        (e)=>{
-                                            e.stopPropagation(); 
-                                            clearOneFilter({target:{name:'octaves'}});
-                                        }
+                    <div 
+                        id="makesmodels" 
+                        className={`storesearch-grid-item`} 
+                        value={props.allState&&props.allState.makesmodels}
+                        onClick={()=>{
+                            // handleClick({target: {name: 'makesmodels'}});
+                            alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.');
+                    
+                        }}
+                        style={{cursor: 'pointer'}}
+                    >
+                        {props.allState&&props.allState.makesmodels}
+                        {props.allState&&props.allState.makesmodels!=="All Makes/Models"
+                            ?<img 
+                                name='makesmodels'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'makesmodels'}});
                                     }
-                                    src='/img/clear_search.png' 
-                                    alt='clear filters'
-                                />
-                                :''
-                            }
-                        </div>
-                        <div 
-                            id="selectedNotes" 
-                            className={`storesearch-grid-item`} 
-                            value={props.allState&&props.allState.notes}
-                            onClick={()=>handleClick({target: {name: 'notes'}})}
-                            style={{cursor: 'pointer'}}
-                        >
-                            {props.allState&&props.allState.notes}
-                            {props.allState&&props.allState.notes!=="All Notes"
-                                ?<img 
-                                    name='notes'
-                                    onClick={
-                                        (e)=>{
-                                            e.stopPropagation(); 
-                                            clearOneFilter({target:{name:'notes'}});
-                                        }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
+                            :''
+                        }
+                    </div>
+                    <div 
+                        id="selectedOctaves" 
+                        className={`storesearch-grid-item`} 
+                        value={props.allState&&props.allState.octaves}
+                        onClick={()=>handleClick({target: {name: 'octaves'}})}
+                        style={{cursor: 'pointer'}}
+                    >
+                        {props.allState&&props.allState.octaves}
+                        {props.allState&&props.allState.octaves!=="All Octaves"
+                            ?<img 
+                                name='octaves'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'octaves'}});
                                     }
-                                    src='/img/clear_search.png' 
-                                    alt='clear filters'
-                                />
-                                :''
-                            }
-                        </div>
-                        <div 
-                            id="selectedBrands" 
-                            className={`storesearch-grid-item`} 
-                            value={props.allState&&props.allState.brands}
-                            onClick={()=>handleClick({target: {name: 'brands'}})}
-                            style={{cursor: 'pointer'}}
-                        >
-                            {props.allState&&props.allState.brands}
-                            {props.allState&&props.allState.brands!=="All Brands"
-                                ?<img 
-                                    name='brands'
-                                    onClick={
-                                        (e)=>{
-                                            e.stopPropagation(); 
-                                            clearOneFilter({target:{name:'brands'}});
-                                        }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
+                            :''
+                        }
+                    </div>
+                    <div 
+                        id="selectedNotes" 
+                        className={`storesearch-grid-item`} 
+                        value={props.allState&&props.allState.notes}
+                        onClick={()=>handleClick({target: {name: 'notes'}})}
+                        style={{cursor: 'pointer'}}
+                    >
+                        {props.allState&&props.allState.notes}
+                        {props.allState&&props.allState.notes!=="All Notes"
+                            ?<img 
+                                name='notes'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'notes'}});
                                     }
-                                    src='/img/clear_search.png' 
-                                    alt='clear filters'
-                                />
-                                :''
-                            }
-                            
-                        </div>
-                        <div 
-                            id="dustyetc" 
-                            className={`storesearch-grid-item`} 
-                            value={props.allState&&props.allState.dustyetc}
-                            onClick={()=>handleClick({target: {name: 'dustyetc'}})}
-                            style={{cursor: 'pointer'}}
-                        >
-                            {props.allState&&props.allState.dustyetc}
-                            {props.allState&&props.allState.dustyetc!=="Dusty, Triplett, etc"
-                                ?<img 
-                                    name='dustyetc'
-                                    onClick={
-                                        (e)=>{
-                                            e.stopPropagation(); 
-                                            clearOneFilter({target:{name:'dustyetc'}});
-                                        }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
+                            :''
+                        }
+                    </div>
+                    <div 
+                        id="selectedBrands" 
+                        className={`storesearch-grid-item`} 
+                        value={props.allState&&props.allState.brands}
+                        onClick={()=>handleClick({target: {name: 'brands'}})}
+                        style={{cursor: 'pointer'}}
+                    >
+                        {props.allState&&props.allState.brands}
+                        {props.allState&&props.allState.brands!=="All Brands"
+                            ?<img 
+                                name='brands'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'brands'}});
                                     }
-                                    src='/img/clear_search.png' 
-                                    alt='clear filters'
-                                />
-                                :''
-                            }
-                        </div>
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
+                            :''
+                        }
+                        
+                    </div>
+                    
                 </div>
             </div>
             <StoreProductSearchCss />             

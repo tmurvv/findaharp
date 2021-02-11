@@ -136,7 +136,8 @@ export const STORE_PARTNERS = [
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'http://vixenharps.com',
         sellerWebsiteText: 'vixenharps.com',
-        sellerEmail: 'info@vixenharps.com'
+        sellerEmail: 'info@vixenharps.com',
+        onlinestoreShipsTo: 'US and Canada'
     },
     {
         id: 'chiaraarpa',

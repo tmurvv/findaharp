@@ -27,7 +27,7 @@ function GlobalStoreSearch(props) {
     const [ octavesSearch, setOctavesSearch ] = useState();
     const [ notesSearch, setNotesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
-    const [ dustyetcSearch, setDustyetcSearch ] = useState();
+    const [ makesmodelsSearch, setMakesmodelsSearch ] = useState();
     const [ searchResults, setSearchResults ] = useState();
     const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
     const [ openStoreDetail, setopenStoreDetail ] = useState(false);
@@ -53,10 +53,10 @@ function GlobalStoreSearch(props) {
     }
 
     function handleChange(type, menu, value1, value2, value3, value4) {
-        
+        console.log('handleChange', type, menu)
         // update menu text -- not for search term
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, dustyetc: value4 });
+        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 });
         // get search items
         let category = document.querySelector('#category').value;
         let searchTerm = document.querySelector('#searchTerm').value;
@@ -70,7 +70,7 @@ function GlobalStoreSearch(props) {
         let categoryProductList=[];
         let newusedProductList=[];
         let searchProductList=[];
-
+        console.log('cat', category.toUpperCase())
         if (category&&category.toUpperCase()!=='ALL') {
             if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
                 // document.querySelector('#category').value= 'All';
@@ -84,7 +84,7 @@ function GlobalStoreSearch(props) {
             document.querySelector('#category').value='Music';
             type = 'music';
         } 
-        if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='dustyetc') {
+        if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
             category = "Strings";
             document.querySelector('#category').value='Strings';
             type = 'strings'
@@ -105,6 +105,7 @@ function GlobalStoreSearch(props) {
         } else {
             categoryProductList = [...productListCopy]
         }
+        console.log('catprdlist', categoryProductList.length)
         // newused
         if(newused!=='New/Used') {
             categoryProductList.map(product=>{
@@ -185,16 +186,16 @@ function GlobalStoreSearch(props) {
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2="All Notes";
             if (!value3||value3===undefined) value3="All Brands";
-            if (!value4||value4===undefined) value4="Dusty, Triplett, etc";
+            if (!value4||value4===undefined) value4="All Makes/Models";
             const octave = menu==='octaves'?value1:allState.octaves;
             const note = menu==='notes'?value2:allState.notes;
             const brand = menu==='brands'?value3:allState.brands;
-            const dustyetc = menu==='dustyetc'?value4:allState.dustyetc;
+            const makesmodels = menu==='makesmodels'?value4:allState.makesmodels;
             // initialize variables
             let octavesProductList=[];
             let notesProductList=[];
             let brandsProductList=[];
-            let dustyetcProductList=[];
+            let makesmodelsProductList=[];
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
@@ -242,25 +243,28 @@ function GlobalStoreSearch(props) {
             }
 
             finalProductList=[...brandsProductList];
-            // check string dustyetc
-            if (dustyetc&&dustyetc!==undefined&&dustyetc.toUpperCase()!=="ALL TYPES") {
+            console.log('brands', finalProductList.length)
+            // check string makesmodels
+            console.log(makesmodels.toUpperCase())
+            if (makesmodels&&makesmodels!==undefined&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") {
                 brandsProductList.map(product=> {
-                    if (dustyetc.toUpperCase()==='NEW' || dustyetc.toUpperCase()==='USED') {
-                        if (product.newused.toUpperCase()==='NEW'&&dustyetc.toUpperCase()==='NEW') dustyetcProductList.push(product); 
-                        if (product.newused.toUpperCase()==='USED'&&dustyetc.toUpperCase()==='USED') dustyetcProductList.push(product); 
+                    if (makesmodels.toUpperCase()==='NEW' || makesmodels.toUpperCase()==='USED') {
+                        if (product.newused.toUpperCase()==='NEW'&&makesmodels.toUpperCase()==='NEW') makesmodelsProductList.push(product); 
+                        if (product.newused.toUpperCase()==='USED'&&makesmodels.toUpperCase()==='USED') makesmodelsProductList.push(product); 
                     }
-                    else if (String(product.title).toUpperCase().includes(dustyetc.toUpperCase())) {
-                        dustyetcProductList.push(product);
+                    else if (String(product.title).toUpperCase().includes(makesmodels.toUpperCase())) {
+                        makesmodelsProductList.push(product);
                     } else if (product.subcategories) {
                         product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===dustyetc.toUpperCase()) dustyetcProductList.push(product);
+                            if (subcategory.toUpperCase()===makesmodels.toUpperCase()) makesmodelsProductList.push(product);
                         });
                     }
                 }); 
             } else {
-                dustyetcProductList=[...brandsProductList];
+                makesmodelsProductList=[...brandsProductList];
             }
-            finalProductList=[...dustyetcProductList];
+            console.log('dusty', makesmodelsProductList.length)
+            finalProductList=[...makesmodelsProductList];
         } else {
             finalProductList=[...newusedProductList]
         }
@@ -273,7 +277,7 @@ function GlobalStoreSearch(props) {
             searchProductList=[...preSearchProductList]
         }
         finalProductList=[...searchProductList];
-        
+        console.log('final', finalProductList.length)
         finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
         setTypeOfSearch(type);
         setSearchResults(finalProductList)
@@ -317,7 +321,7 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            <FastNEasyStringForm />
+            {/* <FastNEasyStringForm /> */}
             
             <div className='storeSearchLine' >
                 {screenWidth>750
@@ -412,7 +416,7 @@ function GlobalStoreSearch(props) {
                 setOctavesSearch={setOctavesSearch} 
                 setNotesSearch={setNotesSearch} 
                 setBrandsSearch={setBrandsSearch} 
-                setDustyetcSearch={setDustyetcSearch}
+                setMakesmodelsSearch={setMakesmodelsSearch}
             />
             {searchResults&&searchResults.length>0&&
             <>
@@ -465,8 +469,8 @@ function GlobalStoreSearch(props) {
             }
             {searchResultsText==='entry'&&
             <>
-                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
                 <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Browse Featured Items"/>
+                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
                 <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
             </>
             }
