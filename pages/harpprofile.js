@@ -180,15 +180,15 @@ const HarpProfile = (props) => {
     }
     function handleNavOpen(e) {
         // alert('imin')
-        if (!changes||(changes&&confirm('Changes may not be saved. Continue?'))) {
-            // Cancel the before unload event
-            window.onbeforeunload = function () {
-                // blank function do nothing
-            }
-            if (document.querySelector('#harpProfileNav')) document.querySelector('#harpProfileNav').style.display = 'none';
-            if (document.querySelector('#navLinks')) document.querySelector('#navLinks').style.display = 'flex';
-            Router.push(e.target.getAttribute('route'));
-        }
+        // if (!changes||(changes&&confirm('Changes may not be saved. Continue?'))) {
+        //     // Cancel the before unload event
+        //     window.onbeforeunload = function () {
+        //         // blank function do nothing
+        //     }
+        //     if (document.querySelector('#harpProfileNav')) document.querySelector('#harpProfileNav').style.display = 'none';
+        //     if (document.querySelector('#navLinks')) document.querySelector('#navLinks').style.display = 'flex';
+        //     Router.push(e.target.getAttribute('route'));
+        // }
     }
     function resetResultsWindow() {
         dispatchResultInfo({type: 'initial'});

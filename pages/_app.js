@@ -146,14 +146,13 @@ function MyApp(props) {
 
     function handleNavOpen() {
         console.log('router', Router.route)
-        if (Router.route==='/stringform'&&!confirm('Your changes may not be saved. Continue?')) 
-            {
-                window.onbeforeunload = function () {
-                    // blank function do nothing
-                }
-                return;
-            }
-        if (navOpen===undefined) {setNavOpen(true); return;};
+        // if (Router.route==='/stringform'&&!confirm('Your changes may not be saved. Continue?')) 
+        //     {
+        //         window.onbeforeunload = function () {
+        //             // blank function do nothing
+        //         }
+        //     }
+        // if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
     useEffect(()=>{

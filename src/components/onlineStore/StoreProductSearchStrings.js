@@ -253,8 +253,8 @@ function StoreProductSearchStrings(props) {
                         className={`storesearch-grid-item`} 
                         value={props.allState&&props.allState.makesmodels}
                         onClick={()=>{
-                            // handleClick({target: {name: 'makesmodels'}});
-                            alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.');
+                            handleClick({target: {name: 'makesmodels'}});
+                            // alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.');
                     
                         }}
                         style={{cursor: 'pointer'}}

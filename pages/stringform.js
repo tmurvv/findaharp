@@ -29,14 +29,13 @@ const StringForm = (props) => {
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
     const [ total, setTotal ] = useState('0.00');
     const [ rememberModal, setRememberModal ] = useState(false);
-    const [ changes, setChanges ] = useState();
+    const [ changes, setChanges ] = useState(false);
     const [ step, setStep ] = useState('');
     const [ resultInfo, dispatchResultInfo ] = useReducer(resultsWindowReducer, RESULTSWINDOW_INITIAL_STATE);
     
     function updateCart(addArray) {
         const cartCopy = [...cart];
         // find item in items object
-        console.log(addArray)
         addArray.map(addItem=>{
             let foundString;
             props.strings.map(string=>{if (String(string.id).trim()===String(addItem[0]).trim()){
@@ -67,12 +66,9 @@ const StringForm = (props) => {
         setCart(cartCopy);
     }
     async function handleSubmit(e) {
-        e.preventDefault();
         const addArray = [];
         // check for qty and additem to update cart list
         stringForm.map((octave,idx)=>{
-            console.log('74')
-            console.log(octave)
             if(idx<8&&octave.E&&octave.E.qty>0&&octave.E.brand) {const addObject = [octave.E.id,octave.E.qty,octave.E.price]; addArray.push(addObject)};
             if(idx<8&&octave.D&&octave.D.qty>0&&octave.D.brand) {const addObject = [octave.D.id,octave.D.qty,octave.D.price]; addArray.push(addObject)};
             if(idx<8&&octave.C&&octave.C.qty>0&&octave.C.brand) {const addObject = [octave.C.id,octave.C.qty,octave.C.price]; addArray.push(addObject)};
@@ -90,7 +86,11 @@ const StringForm = (props) => {
         
         let stringFormCopy = JSON.stringify(stringForm);
         setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
-        setChanges();
+        setChanges(false);
+        // Cancel the before unload event
+        // window.addEventListener('beforeunload', (event) => {
+        //     // empty function to cancel beforeunload
+        // });
         
         if (stringFormInfo.harpname&&confirm(`Update remembered harp ${stringFormInfo.harpname} with these string brands?`)) {          
             const harpObject = {
@@ -125,18 +125,21 @@ const StringForm = (props) => {
         resetResultsWindow();
     }
     useEffect(() => {
-        window.addEventListener('beforeunload', function (e) {
-            if (changes) {
-                // Cancel the event
-                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-                // Chrome requires returnValue to be set
-                e.returnValue = '';
-            }
-            // Cancel the before unload event
-            window.onbeforeunload = function () {
-                // blank function do nothing
-            }
-        });
+        // window.addEventListener('beforeunload', function (e) {
+        //     if (changes) {
+        //         // Cancel the event
+        //         e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+        //         // Chrome requires returnValue to be set
+        //         e.returnValue = '';
+        //     }
+        //     // Cancel the before unload event
+        //     window.onbeforeunload = function () {
+        //         // blank function do nothing
+        //     }
+        // });
+        // setChanges&&setChanges(false)
+        // document&&document.querySelector('#stringForm').addEventListener('change', () => formChanged = true);
+        
     });
     
     // display cart??
@@ -194,7 +197,7 @@ const StringForm = (props) => {
                     </div>   
                 </div> 
                 }
-            <form onSubmit={handleSubmit} style={{position: 'relative', marginTop: '15px'}}>
+            <form id='stringForm' onSubmit={handleSubmit} style={{position: 'relative', marginTop: '15px'}}>
             {/* changes: {changes} */}
             
                 

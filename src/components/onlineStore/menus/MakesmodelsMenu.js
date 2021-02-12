@@ -20,8 +20,8 @@ export default function MakesmodelsMenu(props) {
                 name='makesmodels' 
 
                 onClick={(e)=>{
-                    alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.')
-                    // props.handleclick(e); 
+                    // alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.')
+                    props.handleclick(e); 
                 }}
                 style={{color: '#000000'}}
             >
@@ -39,11 +39,11 @@ export default function MakesmodelsMenu(props) {
                     key={uuid()} 
                     name='Makes/Models'
                 >All Makes/Models</li>   
-                {/* <li 
+                <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='Delta'
-                >Delta</li>  */}
+                >Delta</li> 
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 

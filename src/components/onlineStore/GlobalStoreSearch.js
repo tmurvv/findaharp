@@ -53,7 +53,7 @@ function GlobalStoreSearch(props) {
     }
 
     function handleChange(type, menu, value1, value2, value3, value4) {
-        console.log('handleChange', type, menu)
+        console.log('handleChange', type, menu, value1, value2, value3, value4)
         // update menu text -- not for search term
         if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
         if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 });
@@ -70,7 +70,6 @@ function GlobalStoreSearch(props) {
         let categoryProductList=[];
         let newusedProductList=[];
         let searchProductList=[];
-        console.log('cat', category.toUpperCase())
         if (category&&category.toUpperCase()!=='ALL') {
             if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
                 // document.querySelector('#category').value= 'All';
@@ -105,7 +104,6 @@ function GlobalStoreSearch(props) {
         } else {
             categoryProductList = [...productListCopy]
         }
-        console.log('catprdlist', categoryProductList.length)
         // newused
         if(newused!=='New/Used') {
             categoryProductList.map(product=>{
@@ -243,11 +241,11 @@ function GlobalStoreSearch(props) {
             }
 
             finalProductList=[...brandsProductList];
-            console.log('brands', finalProductList.length)
             // check string makesmodels
-            console.log(makesmodels.toUpperCase())
             if (makesmodels&&makesmodels!==undefined&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") {
                 brandsProductList.map(product=> {
+                    console.log(makesmodels.toUpperCase(), String(product.title).toUpperCase())
+                
                     if (makesmodels.toUpperCase()==='NEW' || makesmodels.toUpperCase()==='USED') {
                         if (product.newused.toUpperCase()==='NEW'&&makesmodels.toUpperCase()==='NEW') makesmodelsProductList.push(product); 
                         if (product.newused.toUpperCase()==='USED'&&makesmodels.toUpperCase()==='USED') makesmodelsProductList.push(product); 
@@ -321,7 +319,7 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            {/* <FastNEasyStringForm /> */}
+            <FastNEasyStringForm />
             
             <div className='storeSearchLine' >
                 {screenWidth>750

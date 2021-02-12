@@ -3,7 +3,28 @@ import Router from 'next/router';
 function FastNEasyStringForm() {
     return (
         <>
-            <div 
+            <a 
+                onClick={()=>Router.push('/stringform')} 
+                style={{
+                    color: '#6A75AA',
+                    cursor: 'pointer', 
+                    fontSize: '11px', 
+                    fontFamily: 'Metropolis Extra Bold', 
+                    fontStyle: 'italic', 
+                    fontWeight: '600', 
+                    textDecoration: 'underline',
+                    position: 'absolute',
+                    top: '15px',
+                    left: '15px'
+                }}
+            ><img 
+            src='./img/store/speedy_harp.png' 
+            alt='speedy harpist pushing harp on dolly' 
+            style={{height: '30px'}}
+        /> Fast N Easy String Form</a>
+
+
+            {/* <div 
                 style={{
                     position: 'absolute',
                     top: '0',
@@ -35,17 +56,17 @@ function FastNEasyStringForm() {
                         fontStyle: 'italic'
                         }}
                     ></div>
-                    {/* >w/optional "Remember My Harp"</div> */}
+                    <div>w/optional "Remember My Harp"</div>
                 </div>
-                {/* <a 
+                <a 
                     href='./rememberdetails' 
                     style={{
                         flex: 'none', 
                         fontStyle: 'italic', 
                         fontSize: '14px'
                     }}
-                >What's this?</a> */}
-            </div>
+                >What's this?</a>
+            </div> */}
             <style jsx='true'>{`
                 .fastNEasy-btn {
                     padding: 7px 7px;

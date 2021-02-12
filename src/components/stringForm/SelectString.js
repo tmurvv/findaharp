@@ -12,6 +12,11 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
     function handleClick(menu) {  
         // short circuit
         if (stringType==='brand') return;
+        // add before unload
+        // window.addEventListener('beforeunload', (event) => {
+        //     console.log('changes', changes)
+        //     event.returnValue = 'You have unfinished changes!';
+        // });
         // clear all brand menus and restore menu text to selected menu
         document.querySelector(`#stringTypeText${note}`).style.display='block';
         Array.from(document.querySelectorAll(`.clear${note}`)).map(menu=>menu.style.display='none');
