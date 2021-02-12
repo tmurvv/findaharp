@@ -13,15 +13,22 @@ function FastNEasyStringForm() {
                     fontStyle: 'italic', 
                     fontWeight: '600', 
                     textDecoration: 'underline',
-                    position: 'absolute',
-                    top: '15px',
-                    left: '15px'
+                    display: 'flex',
+                    alignItems: 'center'
                 }}
-            ><img 
-            src='./img/store/speedy_harp.png' 
-            alt='speedy harpist pushing harp on dolly' 
-            style={{height: '30px'}}
-        /> Fast N Easy String Form</a>
+            >
+                {/* <img 
+                    src='./img/store/speedy_harp.png' 
+                    alt='speedy harpist pushing harp on dolly' 
+                    style={{height: '30px'}}
+                />  */}
+                <img 
+                    src='./img/store/speedy_harp_blue.png' 
+                    alt='speedy harpist pushing harp on dolly' 
+                    style={{height: '30px', marginRight: '2px'}}
+                /> 
+                <div>Fast N Easy String Form</div>
+            </a>
 
 
             {/* <div 

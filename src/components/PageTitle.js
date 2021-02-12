@@ -6,24 +6,28 @@ import FastNEasyStringForm from './onlineStore/FastNEasyStringForm.js';
 function PageTitle({ maintitle, subtitle }) {
     return (
         <>
-        {maintitle.toUpperCase()!=='ONLINE STORE'&&maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
+        {maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
         ?<div>
-            {/* <FastNEasyStringForm /> */}
-            <a 
-                onClick={()=>Router.push('/onlinestore')} 
-                style={{
-                    color: '#6A75AA',
-                    cursor: 'pointer', 
-                    fontSize: '11px', 
-                    fontFamily: 'Metropolis Extra Bold', 
-                    fontStyle: 'italic', 
-                    fontWeight: '600', 
-                    textDecoration: 'underline',
-                    position: 'absolute',
-                    top: '15px',
-                    left: '15px'
-                }}
-            >STRINGS AND MUSIC HERE</a>
+            <div onClick={()=>Router.push('/stringform')} style={{ position: 'absolute', top: '15px', left: '15px'}}>
+                <FastNEasyStringForm />
+            </div>
+            {maintitle.toUpperCase()!=='ONLINE STORE'&&
+                <a 
+                    onClick={()=>Router.push('/onlinestore')} 
+                    style={{
+                        color: '#6A75AA',
+                        cursor: 'pointer', 
+                        fontSize: '11px', 
+                        fontFamily: 'Metropolis Extra Bold', 
+                        fontStyle: 'italic', 
+                        fontWeight: '600', 
+                        textDecoration: 'underline',
+                        position: 'absolute',
+                        top: '50px',
+                        left: '15px'
+                    }}
+                >Music, Accessories, Gifts Here</a>
+            }
         </div>
         :''}
         <div className='mainTitle'>

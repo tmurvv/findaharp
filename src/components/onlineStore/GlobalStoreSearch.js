@@ -319,7 +319,6 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            <FastNEasyStringForm />
             
             <div className='storeSearchLine' >
                 {screenWidth>750
@@ -404,6 +403,9 @@ function GlobalStoreSearch(props) {
                 allState={allState}
                 setAllState={setAllState} 
             />
+            <div style={{width: 'fit-content', margin: 'auto', marginTop: '20px', marginBottom: '-20px'}}>
+                <FastNEasyStringForm />
+            </div>
             <StoreProductSearchStrings              
                 clearMenus={clearMenus} 
                 setTypeOfSearch={setTypeOfSearch} 
