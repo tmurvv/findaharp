@@ -20,7 +20,7 @@ function StringFormCss() {
             }
             .stringForm-subheader {
                 opacity: .8;
-                margin: -40px auto 25px;
+                margin: 25px auto 25px;
                 // text-align: center;
                 font-style: italic;
                 width: 60%;

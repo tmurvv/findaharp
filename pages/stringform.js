@@ -161,16 +161,25 @@ const StringForm = (props) => {
             <div style={{width: '100%', margin: 'auto'}}>
                 <PageTitle maintitle='EZ String Order Form' subtitle="" />
             </div>
+            <div style={{marginTop: '-20px'}}>
+                <img style={{width: '80%', margin: '0 10%', maxHeight: '5px'}}src="img/golden_tapered_line.png" alt='golden tapered divider line' />
+            </div>
             <div className="stringForm-subheader"
             >
-                <ul> 
-                    <li>new strings</li>
-                    <li>strings labelled by octave</li>
-                    <li>for numbered strings, please use Online Store, Makes/Models</li>
-                    <li>If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li>
+                <ul style={{listStyleType: "none", lineHeight: '27.5px'}}> 
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;new strings</li>
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;strings labelled by octave</li>
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models</li>
+                    <li style={{display: 'flex', width: 'fit-content'}}>
+                        <img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />
+                        <div style={{marginRight: '15px'}}>&nbsp;&nbsp;Ships from: USA</div>
+                            <img style={{maxHeight: '20px', transform: 'translateY(5px)'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                        <div style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>To: US and Canada</div>
+                    </li>
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
                 </ul>
             </div>
-            {changes?
+            {/* {changes&& */}
             <div style={{justifyContent: 'center', display: 'flex'}}>
                     <button 
                         className='submit-btn' 
@@ -187,17 +196,8 @@ const StringForm = (props) => {
                         onClick={handleSubmit}
                     >Add String Order to Cart</button>
                 </div>
-                :
-                <div className='shipsTo-container'
-                >
-                    <div className='shipsTo'>
-                        <div style={{marginRight: '15px'}}>Ships from: USA</div>
-                        <img style={{maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                        <div style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>To: US and Canada</div>
-                    </div>   
-                </div> 
-                }
-            <form id='stringForm' onSubmit={handleSubmit} style={{position: 'relative', marginTop: '15px'}}>
+                
+            <form id='stringForm' onSubmit={handleSubmit} style={{position: 'relative', marginTop: '-10px'}}>
             {/* changes: {changes} */}
             
                 
@@ -271,10 +271,10 @@ StringForm.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKING
+    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
 
     return {

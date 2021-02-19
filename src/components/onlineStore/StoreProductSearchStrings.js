@@ -209,13 +209,7 @@ function StoreProductSearchStrings(props) {
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
-                    <MakesmodelsMenu 
-                        id='makesmodelsmenu'
-                        handleMakesmodelsChange = {handleMakesmodelsSelection}
-                        currentselected={props.allState.makesmodels?props.allState.makesmodels:'Makes/Models'}
-                        open={menus.makesmodels}
-                        handleclick={handleClick}
-                    /> 
+                     
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -245,36 +239,16 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-                    
+                    <MakesmodelsMenu 
+                        id='makesmodelsmenu'
+                        handleMakesmodelsChange = {handleMakesmodelsSelection}
+                        currentselected={props.allState.makesmodels?props.allState.makesmodels:'Makes/Models'}
+                        open={menus.makesmodels}
+                        handleclick={handleClick}
+                    />
                 </div>
                 <div className="storesearchLine2Sub">
-                    <div 
-                        id="makesmodels" 
-                        className={`storesearch-grid-item`} 
-                        value={props.allState&&props.allState.makesmodels}
-                        onClick={()=>{
-                            handleClick({target: {name: 'makesmodels'}});
-                            // alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.');
                     
-                        }}
-                        style={{cursor: 'pointer'}}
-                    >
-                        {props.allState&&props.allState.makesmodels}
-                        {props.allState&&props.allState.makesmodels!=="All Makes/Models"
-                            ?<img 
-                                name='makesmodels'
-                                onClick={
-                                    (e)=>{
-                                        e.stopPropagation(); 
-                                        clearOneFilter({target:{name:'makesmodels'}});
-                                    }
-                                }
-                                src='/img/clear_search.png' 
-                                alt='clear filters'
-                            />
-                            :''
-                        }
-                    </div>
                     <div 
                         id="selectedOctaves" 
                         className={`storesearch-grid-item`} 
@@ -345,7 +319,33 @@ function StoreProductSearchStrings(props) {
                         }
                         
                     </div>
+                    <div 
+                        id="makesmodels" 
+                        className={`storesearch-grid-item`} 
+                        value={props.allState&&props.allState.makesmodels}
+                        onClick={()=>{
+                            handleClick({target: {name: 'makesmodels'}});
+                            // alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.');
                     
+                        }}
+                        style={{cursor: 'pointer', transform: 'translateX(-20px)'}}
+                    >
+                        {props.allState&&props.allState.makesmodels}
+                        {props.allState&&props.allState.makesmodels!=="All Makes/Models"
+                            ?<img 
+                                name='makesmodels'
+                                onClick={
+                                    (e)=>{
+                                        e.stopPropagation(); 
+                                        clearOneFilter({target:{name:'makesmodels'}});
+                                    }
+                                }
+                                src='/img/clear_search.png' 
+                                alt='clear filters'
+                            />
+                            :''
+                        }
+                    </div>
                 </div>
             </div>
             <StoreProductSearchCss />             

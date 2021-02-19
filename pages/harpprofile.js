@@ -440,10 +440,10 @@ HarpProfile.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKING
+    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
 
     return {

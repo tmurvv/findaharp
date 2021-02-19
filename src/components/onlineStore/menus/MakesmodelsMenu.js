@@ -37,7 +37,7 @@ export default function MakesmodelsMenu(props) {
                     setTriplett(false);
                     props.handleclick(e); 
                 }}
-                style={{color: '#000000'}}
+                style={{color: '#000000', transform: 'translateX(-20px)'}}
             >
                 By Make/Model
             </button>               
@@ -51,15 +51,15 @@ export default function MakesmodelsMenu(props) {
                 <li 
                     onClick={()=>{if (confirm(`Pedal harps${useOctaveMenu}`)) Router.push('/stringform')}} 
                     key={uuid()} 
-                    name='Pedal Harps'
-                >All Pedal Harps</li>
+                    name='All Makes/Models'
+                >All Makes/Models</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='Delta'
                 >Delta</li> 
                 <li 
-                    onClick={()=>setDusty(true)} 
+                    onClick={()=>{setRees(false);setDusty(true);setTriplett(false);setStoney(false)}} 
                     key={uuid()} 
                     name='Dusty Strings'
                 >Dusty Strings
@@ -97,14 +97,9 @@ export default function MakesmodelsMenu(props) {
                             name='Allegro'
                         >Allegro</li> 
                     </ul>
-                </li>    
+                </li>
                 <li 
-                    onClick={()=>{if (confirm(`Lyon & Healy harps${useOctaveMenu}`)) Router.push('/stringform')}} 
-                    key={uuid()} 
-                    name='Lyon & Healy'
-                >Lyon & Healy</li>
-                <li 
-                    onClick={()=>setRees(true)} 
+                    onClick={()=>{setRees(true);setDusty(false);setTriplett(false);setStoney(false)}} 
                     key={uuid()} 
                     name='Rees'
                 >Rees
@@ -183,14 +178,9 @@ export default function MakesmodelsMenu(props) {
                         >Special Edition Fullsicle</li> 
                     </ul>
                 
-                </li>  
+                </li>
                 <li 
-                    onClick={()=>{if (confirm(`Salvi harps${useOctaveMenu}`)) Router.push('/stringform')}} 
-                    key={uuid()} 
-                    name='Salvi'
-                >Salvi</li>
-                <li 
-                    onClick={()=>setStoney(true)} 
+                    onClick={()=>{setRees(false);setDusty(false);setTriplett(false);setStoney(true)}} 
                     key={uuid()} 
                     name='Stoney End'
                 >Stoney End
@@ -247,7 +237,7 @@ export default function MakesmodelsMenu(props) {
                 
                 </li>    
                 <li 
-                    onClick={()=>setTriplett(true)} 
+                    onClick={()=>{setRees(false);setDusty(false);setTriplett(true);setStoney(false)}} 
                     key={uuid()} 
                     name='Triplett'
                 >Triplett
@@ -292,8 +282,8 @@ export default function MakesmodelsMenu(props) {
                         <li 
                             onClick={(e)=>{e.stopPropagation(); setDusty(false); handleClose(e);}} 
                             key={uuid()} 
-                            name='Axline/Nino 30'
-                        >Axline/Nino 30</li> 
+                            name='Axline'
+                        >Axline</li> 
                         <li 
                             onClick={(e)=>{e.stopPropagation(); setDusty(false); handleClose(e);}} 
                             key={uuid()} 
@@ -367,21 +357,6 @@ export default function MakesmodelsMenu(props) {
                          
                     </ul>
                 </li>       
-                {/* <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='Gut'
-                >Gut Strings</li>    
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='Nylon'
-                >Nylon Strings</li> 
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='Wire'
-                >Wire Strings</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -391,7 +366,7 @@ export default function MakesmodelsMenu(props) {
                     onClick={handleClose} 
                     key={uuid()} 
                     name='Nylon Wire Monofilament'
-                >Nylon Wire Monofilament</li> */}
+                >Nylon Wire Monofilament</li>
             </ul>     
         </div>
     );
