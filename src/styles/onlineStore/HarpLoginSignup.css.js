@@ -151,7 +151,7 @@ function HarpLoginSignupCSS() {
             }
             @media only screen and (max-width: 550px) {
                 #harplogin {
-                    transform: translate(0%, -215%);
+                    transform: translate(10%, -95%);
                 }
                 #harpsignup {
                     transform: translateX(-10%);

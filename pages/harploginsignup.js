@@ -8,6 +8,7 @@ import uuid from 'react-uuid';
 import HarpLoginSignupCSS from '../src/styles/onlineStore/HarpLoginSignup.css';
 import PageTitle from '../src/components/PageTitle';
 import Results from '../src/components/Results';
+import NewsletterSignup from '../src/components/NewsletterSignup';
 import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 // import { HarpContext } from '../src/contexts/HarpContext';
 import { resultInfoReducer, harpactiveWindowReducer } from '../src/reducers/reducers';
@@ -36,41 +37,42 @@ function HarpLoginSignup(props) {
         currency: 'USD'
     });
     const [harpLogin, setHarpLogin] = useState({
-        loginemail: '',
-        loginpassword: '',
-        loginchange: false
+        harploginemail: '',
+        harploginpassword: '',
+        harploginchange: false
     });
     const handleChange = (evt) => {
+        console.log(evt.target.name);
         switch (evt.target.name) {
             case 'firstname': 
-                setHarpSignup({...harpSignup, firstname: evt.target.value, signupchange: true});
+                setHarpSignup({...harpSignup, firstname: evt.target.value, harpsignupchange: true});
                 break
             case 'lastname': 
-                setHarpSignup({...harpSignup, lastname: evt.target.value, signupchange: true});
+                setHarpSignup({...harpSignup, lastname: evt.target.value, harpsignupchange: true});
                 break
-            case 'signupemail': 
-                setHarpSignup({...harpSignup, signupemail: evt.target.value, signupchange: true});
+            case 'harpsignupemail': 
+                setHarpSignup({...harpSignup, signupemail: evt.target.value, harpsignupchange: true});
                 break
             case 'harploginemail': 
-                setHarpLogin({...harpLogin, loginemail: evt.target.value, loginchange: true});
+                setHarpLogin({...harpLogin, harploginemail: evt.target.value, harploginchange: true});
                 break
-            case 'signuppassword': 
-                setHarpSignup({...harpSignup, signuppassword: evt.target.value, signupchange: true});
+            case 'harpsignuppassword': 
+                setHarpSignup({...harpSignup, harpsignuppassword: evt.target.value, harpsignupchange: true});
                 break
             case 'harploginpassword': 
-                setHarpLogin({...harpLogin, loginpassword: evt.target.value, loginchange: true});
+                setHarpLogin({...harpLogin, harploginpassword: evt.target.value, harploginchange: true});
                 break
             case 'confirmpassword': 
-                setHarpSignup({...harpSignup, confirmpassword: evt.target.value, signupchange: true});
+                setHarpSignup({...harpSignup, confirmpassword: evt.target.value, harpsignupchange: true});
                 break
             case 'newsletter': 
-                setHarpSignup({...harpSignup, newsletter: !harpSignup.newsletter, signupchange: true});
+                setHarpSignup({...harpSignup, newsletter: !harpSignup.newsletter, harpsignupchange: true});
                 break
             case 'distanceunit': 
-                setHarpSignup({...harpSignup, distanceunit: evt.target.value, signupchange: true});
+                setHarpSignup({...harpSignup, distanceunit: evt.target.value, harpsignupchange: true});
                 break
             case 'currency': 
-                setHarpSignup({...harpSignup, currency: evt.target.value, signupchange: true});
+                setHarpSignup({...harpSignup, currency: evt.target.value, harpsignupchange: true});
                 break
             default :
         }
@@ -298,7 +300,100 @@ function HarpLoginSignup(props) {
                 resetResults={resetResults} 
             />
             <div className={harpactiveWindow.harpsignupClasses} id="harpsignup" onClick={()=>handleSignupClick()}>
-                <form onSubmit={()=>handleSubmit()}>
+                <div className="harplogin-signup-title">
+                    HARP SIGNUP
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <>
+                        <div style={{padding: '25px'}}>   
+                            <div className="input-name" id='harploginEmail'>
+                                <h3>Email<span style={{fontSize: '80%', fontStyle: 'italic', fontWeight: 'normal'}}>&nbsp;more than one harp may use the same email</span></h3>
+                            </div>
+                            <input
+                                className="field-input"
+                                type='email'
+                                id={uuid()}
+                                value={harpSignup.signupemail}
+                                onChange={handleChange}
+                                name='harpsignupemail'
+                                required={harpactiveWindow.active==='harplogin'}
+                                disabled={harpactiveWindow.active==='harpsignup'}
+                            />
+                            <div className="input-name input-margin">
+                                <h3>Harp Name</h3>
+                            </div>
+                            <input 
+                                className="field-input"
+                                type='text'
+                                id={uuid()}
+                                value={harpSignup.signuppassword}
+                                onChange={handleChange}
+                                name='harpsignuppassword'
+                                required={harpactiveWindow.active==='harplogin'}
+                                disabled={harpactiveWindow.active==='harpsignup'}
+                            />
+                        </div>
+                        <div style={{padding: '0 25px 20px'}}>
+                            <NewsletterSignup />
+                        </div>
+                        <button type='submit' className="submit-btn login-signup-title">
+                            Submit
+                        </button>
+                    </>
+                </form>
+            </div>
+            <div className={harpactiveWindow.harploginClasses} id="harplogin" onClick={handleLoginClick}>
+                <div className="harplogin-signup-title">
+                    HARP LOGIN
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <>
+                        <div style={{padding: '25px'}}>   
+                            <div className="input-name" id='harploginEmail'>
+                                <h3>Email</h3>
+                            </div>
+                            <input
+                                className="field-input"
+                                type='email'
+                                id={uuid()}
+                                value={harpLogin.loginemail}
+                                onChange={handleChange}
+                                name='harploginemail'
+                                required={harpactiveWindow.active==='harplogin'}
+                                disabled={harpactiveWindow.active==='harpsignup'}
+                            />
+                            <div className="input-name input-margin">
+                                <h3>Harp Name</h3>
+                            </div>
+                            <input 
+                                className="field-input"
+                                type='text'
+                                id={uuid()}
+                                value={harpLogin.loginpassword}
+                                onChange={handleChange}
+                                name='harploginpassword'
+                                required={harpactiveWindow.active==='harplogin'}
+                                disabled={harpactiveWindow.active==='harpsignup'}
+                            />
+                        </div>
+                        <button type='submit' className="submit-btn login-signup-title">
+                            Submit
+                        </button>
+                        <div className="forgot-pass" onClick={handleForgot}>
+                            <a href="#">Forgot Harp Name?</a>
+                        </div>
+                    </>
+                </form>
+            </div>
+            <HarpLoginSignupCSS />
+        </div>
+        </>
+    )
+}
+
+export default HarpLoginSignup;
+
+{/* <form onSubmit={()=>handleSubmit()}>
                     <div className="harplogin-signup-title">
                         SIGN UP
                     </div>
@@ -384,119 +479,68 @@ function HarpLoginSignup(props) {
                                 />
                                 
                             {/* </div> */}
-                            <div className="rememberme">
-                                <label htmlFor="remember-me-2" style={{marginLeft: '7px'}}>Signup for newsletter? Fun talk about harps every other month.</label>
-                            </div>
-                        </div>
-                        <div className="input-name input-margin">
-                            <h3>I prefer distances in</h3>
-                        </div>
-                        <div className='flex'>
-                            <input 
-                                className="field-input"
-                                type='radio'
-                                id={uuid()}
-                                value='miles'
-                                onChange={handleChange}
-                                name='distanceunit'
-                                disabled={harpactiveWindow.active==='harplogin'}
-                                style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked
-                            />
-                            <label style={{marginRight: '30px'}} htmlFor="miles">Miles</label>
-                            <input 
-                                className="field-input"
-                                type='radio'
-                                id={uuid()}
-                                value='kms'
-                                onChange={handleChange}
-                                name='distanceunit'
-                                disabled={harpactiveWindow.active==='harplogin'}
-                                style={{marginRight: '10px', width: 'fit-content'}}
-                            />
-                            <label htmlFor="Kms">Kms</label>
-                        </div>   
-                        <div className="input-name input-margin">
-                            <h3>I prefer prices in</h3>
-                        </div>
-                        <div className='flex'>
-                            <input 
-                                className="field-input"
-                                type='radio'
-                                id={uuid()}
-                                value='USD'
-                                onChange={handleChange}
-                                name='currency'
-                                disabled={harpactiveWindow.active==='harplogin'}
-                                style={{marginRight: '10px', width: 'fit-content'}}
-                                defaultChecked
-                            />
-                            <label style={{marginRight: '30px'}} htmlFor="miles">USD</label>
-                            <input 
-                                className="field-input"
-                                type='radio'
-                                id={uuid()}
-                                value='CAD'
-                                onChange={handleChange}
-                                name='currency'
-                                disabled={harpactiveWindow.active==='harplogin'}
-                                style={{marginRight: '10px', width: 'fit-content'}}
-                            />
-                            <label htmlFor="Kms">CAD</label>
-                        </div>   
-                    </div>
-                    <button type='submit' className="submit-btn login-signup-title" onClick={handleSubmit}>
-                        Submit
-                    </button>
-                </form>
-            </div>
-            <div className={harpactiveWindow.harploginClasses} id="harplogin" onClick={handleLoginClick}>
-                <div className="harplogin-signup-title">
-                    LOG IN
-                </div>
-                <form onSubmit={handleSubmit}>
-                    <>
-                        <div style={{padding: '25px'}}>   
-                            <div className="input-name" id='harploginEmail'>
-                                <h3>Email</h3>
-                            </div>
-                            <input
-                                className="field-input"
-                                type='email'
-                                id={uuid()}
-                                value={harpLogin.loginemail}
-                                onChange={handleChange}
-                                name='harploginemail'
-                                required={harpactiveWindow.active==='harplogin'}
-                                disabled={harpactiveWindow.active==='harpsignup'}
-                            />
-                            <div className="input-name input-margin">
-                                <h3>Password</h3>
-                            </div>
-                            <input 
-                                className="field-input"
-                                type='password'
-                                id={uuid()}
-                                value={harpLogin.loginpassword}
-                                onChange={handleChange}
-                                name='harploginpassword'
-                                required={harpactiveWindow.active==='harplogin'}
-                                disabled={harpactiveWindow.active==='harpsignup'}
-                            />
-                        </div>
-                        <button type='submit' className="submit-btn login-signup-title">
-                            Submit
-                        </button>
-                        <div className="forgot-pass" onClick={handleForgot}>
-                            <a href="#">Forgot Password?</a>
-                        </div>
-                    </>
-                </form>
-            </div>
-            <HarpLoginSignupCSS />
-        </div>
-        </>
-    )
-}
-
-export default HarpLoginSignup;
+                //             <div className="rememberme">
+                //                 <label htmlFor="remember-me-2" style={{marginLeft: '7px'}}>Signup for newsletter? Fun talk about harps every other month.</label>
+                //             </div>
+                //         </div>
+                //         <div className="input-name input-margin">
+                //             <h3>I prefer distances in</h3>
+                //         </div>
+                //         <div className='flex'>
+                //             <input 
+                //                 className="field-input"
+                //                 type='radio'
+                //                 id={uuid()}
+                //                 value='miles'
+                //                 onChange={handleChange}
+                //                 name='distanceunit'
+                //                 disabled={harpactiveWindow.active==='harplogin'}
+                //                 style={{marginRight: '10px', width: 'fit-content'}}
+                //                 defaultChecked
+                //             />
+                //             <label style={{marginRight: '30px'}} htmlFor="miles">Miles</label>
+                //             <input 
+                //                 className="field-input"
+                //                 type='radio'
+                //                 id={uuid()}
+                //                 value='kms'
+                //                 onChange={handleChange}
+                //                 name='distanceunit'
+                //                 disabled={harpactiveWindow.active==='harplogin'}
+                //                 style={{marginRight: '10px', width: 'fit-content'}}
+                //             />
+                //             <label htmlFor="Kms">Kms</label>
+                //         </div>   
+                //         <div className="input-name input-margin">
+                //             <h3>I prefer prices in</h3>
+                //         </div>
+                //         <div className='flex'>
+                //             <input 
+                //                 className="field-input"
+                //                 type='radio'
+                //                 id={uuid()}
+                //                 value='USD'
+                //                 onChange={handleChange}
+                //                 name='currency'
+                //                 disabled={harpactiveWindow.active==='harplogin'}
+                //                 style={{marginRight: '10px', width: 'fit-content'}}
+                //                 defaultChecked
+                //             />
+                //             <label style={{marginRight: '30px'}} htmlFor="miles">USD</label>
+                //             <input 
+                //                 className="field-input"
+                //                 type='radio'
+                //                 id={uuid()}
+                //                 value='CAD'
+                //                 onChange={handleChange}
+                //                 name='currency'
+                //                 disabled={harpactiveWindow.active==='harplogin'}
+                //                 style={{marginRight: '10px', width: 'fit-content'}}
+                //             />
+                //             <label htmlFor="Kms">CAD</label>
+                //         </div>   
+                //     </div>
+                //     <button type='submit' className="submit-btn login-signup-title" onClick={handleSubmit}>
+                //         Submit
+                //     </button>
+                // </form> */}
