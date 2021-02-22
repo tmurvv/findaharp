@@ -126,3 +126,25 @@ export const activeWindowReducer = (state, action) => {
             }
     }
 }
+export const harpactiveWindowReducer = (state, action) => {
+    switch (action.type) {
+        case 'initial': 
+            return {
+                active: 'harplogin',
+                harploginClasses: 'harplogin-signup l-attop',
+                harpsignupClasses: 'harplogin-signup s-atbottom'
+            }
+        case 'harplogin':
+            return {
+                active: 'harplogin',
+                harploginClasses: 'harplogin-signup l-attop',
+                harpsignupClasses: 'harplogin-signup s-atbottom'
+            }
+        case 'signup':
+            return {
+                active: 'harpsignup',
+                harploginClasses: 'harplogin-signup l-atbottom',
+                harpsignupClasses: 'harplogin-signup s-attop'
+            }
+    }
+}

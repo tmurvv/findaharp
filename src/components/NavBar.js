@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
+import Router from 'next/router';
 
 //internal
 import NavBarCss from '../styles/NavBar.css';
@@ -52,9 +53,14 @@ export default function NavBar(props) {
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
+                    {Router.route==='/stringform'||Router.route==='/rememberdetails'
+                    ?<Link href='/harploginsignup' as='/harploginsignup'>
+                        <a id='userName' onClick={props.handleNavOpen}>Harp Login</a>
+                    </Link>
+                    :<Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
                         <a id='userName' onClick={props.handleNavOpen}>Login/Profile</a>
                     </Link>
+                    }
                     {/* <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
                         <a id='userName' onClick={props.handleNavOpen}>{user.firstname}</a>
                     </Link> */}
