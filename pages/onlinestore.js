@@ -17,7 +17,7 @@ const OnlineStore = (props) => {
     // sort products
     useEffect(()=>{
         // setFilteredProducts(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
-        //  BREAKING setSearchResults(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
+        setSearchResults(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
     },[]);
     return (
         <>
@@ -50,10 +50,10 @@ OnlineStore.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINg
+    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     const filteredProducts = res.data.storeitems;
     // const holidayProducts = res.data.storeitems.filter(product => product.title&&product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
     const usedProducts = res.data.storeitems.filter(product => product.newused==='used').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));

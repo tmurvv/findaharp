@@ -191,6 +191,8 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                             ||note==="5F"
                         }>Synthetic</option>
                     </select>
+                    
+                    <span>&#711;</span>
                     <select className={`clear${note} selectStringBrand`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
                         <option value={`Let us help`}>Let us help...</option>
                         <option value='email'>Send us an email for advice on string types and brands.</option>

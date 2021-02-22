@@ -33,6 +33,9 @@ function AppCss() {
                 color: #5c5b5b;
                 background-image: linear-gradient(to bottom, #fffedf, #fffedf 250px, #ffffff 450px);
             }
+            input[type="search"] {
+                -webkit-appearance: none;
+            }
             h2 {
                 margin-block-end:0;
                 margin-block-start:0;

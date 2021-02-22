@@ -6,6 +6,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "USA",
         sellerRegion: "Walnut Creek, CA",
         shipsTo: "US and Canada",
+        currency: "usd",
         productTitle: "Harps Etc.",
         productPrice: "$2,900",
         productLongDesc: `
@@ -37,6 +38,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "USA",
         sellerRegion: "Clawson, MI",
         shipsTo: "Anywhere",
+        currency: "usd",
         productTitle: "Michigan Harp Center",
         productPrice: "",
         productLongDesc: `
@@ -55,6 +57,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "Canada",
         sellerRegion: "Calgary, AB, Canada",
         shipsTo: "Anywhere",
+        currency: "usd",
         productTitle: "Find a Harp",
         productLongDesc: "<p><span>Find a Harp</span> is mainly interested in connecting buyers with sellers, but also has a few harps of it's own for sale and rent.</p> <p>Located at the foot of the Rocky Mountains, Find a Harp is always searching for a wide variety of pre-owned instruments for harp lovers and aspiring students alike.<p>",
         productMaker: "Find a Harp",
@@ -70,6 +73,7 @@ export const STORE_PARTNERS = [
         id: 'harpangelstore',
         sellerCountry: "Canada",
         sellerRegion: "Canmore, AB, Canada",
+        currency: "cad",
         productTitle: "Harp Angel Store",
         productPrice: "$2,900",
         productLongDesc: ` 
@@ -90,6 +94,7 @@ export const STORE_PARTNERS = [
         id: 'fourharpmusic',
         sellerCountry: "USA",
         sellerRegion: "Dallas, TX",
+        currency: "usd",
         productTitle: "4HarpMusic",
         productPrice: "",
         productLongDesc: `<p><span>4HarpMusic</span> Owner Margaret Weymann Atkinson, Dallas wedding harpist and special event harpist, sought after not only in the Dallas/Ft. Worth metroplex, but across the U.S. and Canada as well.</p> <p>Buyers are welcome from anywhere in the Dallas metroplex, including Dallas, Plano, McKinney, Denton, and Fort Worth, are welcome to schedule an appointment to view any of these beautiful harps.</p> <p>Margaret gladly serves all of North Texas, South Oklahoma to Oklahoma City, and the Tulsa, OK area. If you are outside the areas listed above, contact us. We occasionally have trucks headed to Alabama and Atlanta, Georgia.</p> `,
@@ -104,6 +109,7 @@ export const STORE_PARTNERS = [
         id: 'vavraharp',
         sellerCountry: "USA",
         sellerRegion: "Upstate South Carolina",
+        currency: "usd",
         productTitle: "Vavra Harp",
         productPrice: "",
         productLongDesc: `<p><span>Vavra Harp</span> It Is Our Pleasure to engage in the construction of harps. We use the finest materials we can find, applying a lifetime of skills to produce heirloom quality instruments that sound and look beautiful.</p><p>We create custom harps, repair, restore, or re-create harps, and we clean, regulate, and tune harps. Sorry, but we do not service pedal harps. Located in Upstate South Carolina, we can ship anywhere.</p><p>We have found that crafting a harp requires the precise melding of calculation, skill, and experience. The overall 'voice' of the instrument results from the consideration of wood, strings, finish, and decoration.  ​​​We can do whatever it takes to deliver what  you want. Please, browse our SHOP and peruse our GALLERY; you may see something that inspires!</p><p>In addition to our Stock Harps, Vavra Harp offers Custom Harps, Rental Harps, Used Harps, Trade-Ins, Harp Repair, Harp Restoration, and Harp Recreations (from pictures, sketches, etc.)</p>`,
@@ -117,6 +123,7 @@ export const STORE_PARTNERS = [
     {
         id: 'vixenharps',
         sellerCountry: "Canada",
+        currency: "cad",
         sellerRegion: "Ottawa, ON, Canada",
         productTitle: "Vixen Harps",
         productPrice: "",
@@ -142,6 +149,7 @@ export const STORE_PARTNERS = [
     {
         id: 'chiaraarpa',
         sellerCountry: "USA",
+        currency: "usd",
         sellerRegion: "San Diego Area",
         productTitle: "Chiara Arpa",
         productPrice: "",
@@ -164,6 +172,7 @@ export const STORE_PARTNERS = [
     {
         id: 'blevinsharps',
         sellerCountry: "USA",
+        currency: "usd",
         sellerRegion: "Western Colorado",
         productTitle: "Blevins Harps",
         productPrice: "",
@@ -188,6 +197,7 @@ export const STORE_PARTNERS = [
     {
         id: 'strummedstrings',
         sellerCountry: "USA",
+        currency: "usd",
         sellerRegion: "Logan, Utah",
         shipsTo: "US and Canada",
         productTitle: "Strummed Strings",
@@ -229,6 +239,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "Canada",
         sellerRegion: "Halifax, NS, Canada",
         shipsTo: "Canada",
+        currency: "cad",
         productTitle: "nova harps",
         productPrice: "",
         productLongDesc: `
@@ -250,6 +261,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "Canada",
         sellerRegion: "BC, Canada",
         shipsTo: "Canada",
+        currency: "cad",
         productTitle: "FAH-GLSat",
         productPrice: "",
         productLongDesc: `

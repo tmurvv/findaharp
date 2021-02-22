@@ -102,7 +102,8 @@ const StringForm = (props) => {
                 // newsletter: localNews
             }
             try {
-                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
+                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject); // BREAKINk
+                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 // setStringForm(res.data.userharp.stringform);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
@@ -167,9 +168,8 @@ const StringForm = (props) => {
             <div className="stringForm-subheader"
             >
                 <ul style={{listStyleType: "none", lineHeight: '27.5px'}}> 
-                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;new strings</li>
-                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;strings labelled by octave</li>
-                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models</li>
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
                     <li style={{display: 'flex', width: 'fit-content'}}>
                         <img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />
                         <div style={{marginRight: '15px'}}>&nbsp;&nbsp;Ships from: USA</div>

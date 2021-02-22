@@ -29,10 +29,10 @@ function GlobalStoreSearchCss() {
             }
             
             .selectContainer>span {
-                right: 4px;
-                top: 12px;
+                right: 7px;
+                top: 15px;
                 position: absolute;
-                font-size: 18px;
+                font-size: 28px;
                 pointer-events: none;
             }
             @media only screen and (max-width: 750px) {
@@ -71,6 +71,7 @@ function GlobalStoreSearchCss() {
                 border: 1px solid #ffe58a;
                 width: 100%;
                 background-color: #fff;
+                -webkit-appearance: none;
             }
 
             select:active,

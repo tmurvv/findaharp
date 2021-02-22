@@ -403,7 +403,7 @@ function GlobalStoreSearch(props) {
                 allState={allState}
                 setAllState={setAllState} 
             />
-            <div style={{width: 'fit-content', margin: 'auto', marginTop: '20px', marginBottom: '-20px'}}>
+            <div style={{width: 'fit-content', margin: 'auto', marginTop: '30px', marginBottom: '-20px'}}>
                 <FastNEasyStringForm />
             </div>
             <StoreProductSearchStrings              

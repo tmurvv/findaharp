@@ -30,7 +30,7 @@ function CartItemCss() {
         .subCart_item-image {
             // width: 100%;
             // flex: 4;
-            // margin-right: 10px;
+            margin-right: 10px;
             // display: flex;
             // justify-content: center;
             // padding-bottom: 25px;

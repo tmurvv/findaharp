@@ -77,8 +77,11 @@ function Cart(props) {
                     loginGuest={loginGuest}
                     resetResults={resetResults} 
                 />
-            <div className="cartContainer">  
+            <div className="cartContainer"> 
+            <div style={{position: 'absolute', top: '10px', left: '10px'}}>
                 <FastNEasyStringForm />
+            </div> 
+                
                 <div id='cart'>
                     {cart.length===0?<h3 style={{paddingLeft: '15px'}}>No Items in Cart</h3>:''}
                     {/* <h1>shippingArray: {cartSubtotals.shippingarray&&String(cartSubtotals.shippingarray)}</h1> */}
