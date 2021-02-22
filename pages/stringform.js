@@ -8,6 +8,7 @@ import Router from 'next/router';
 import { StringFormContext } from '../src/contexts/StringFormContext';
 import { StringFormInfoContext } from '../src/contexts/StringFormInfoContext';
 import { CartContext } from '../src/contexts/CartContext';
+import { UserContext } from '../src/contexts/UserContext';
 // components
 import Octave from '../src/components/stringForm/Octave';
 import RememberHarpLogin from '../src/components/stringForm/RememberHarpLogin';
@@ -21,11 +22,13 @@ import ResultsWindow from '../src/components/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE } from '../src/constants/constants';
 import { STRING_BRANDS } from '../src/constants/stringBrands';
 import { resultsWindowReducer } from '../src/reducers/ResultsWindowReducer';
+import { CompassCalibrationOutlined } from "@material-ui/icons";
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const { stringFormInfo, setStringFormInfo } = useContext(StringFormInfoContext);
     const { cart, setCart } = useContext(CartContext);
+    const { user, setUser } = useContext(UserContext);
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
     const [ total, setTotal ] = useState('0.00');
     const [ rememberModal, setRememberModal ] = useState(false);
@@ -102,8 +105,8 @@ const StringForm = (props) => {
                 // newsletter: localNews
             }
             try {
-                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject); // BREAKINk
-                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject); // BREAKING
+                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 // setStringForm(res.data.userharp.stringform);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
@@ -147,6 +150,10 @@ const StringForm = (props) => {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
+    // display cart??
+    useEffect(()=>{
+        // if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
+    },[]);
     
     return (
         <>
@@ -168,6 +175,7 @@ const StringForm = (props) => {
             <div className="stringForm-subheader"
             >
                 <ul style={{listStyleType: "none", lineHeight: '27.5px'}}> 
+                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;<a href='/harploginsignup' style={{fontStyle: 'normal', color: '#6A75AA', fontSize: '14px', textDecoration: 'underline'}}>Remember My Harp Login</a>&nbsp;&nbsp;<a href='/rememberdetails' style={{fontStyle: 'italic', color: '#6A75AA', fontSize: '12px', textDecoration: 'underline'}}>What's this?</a></li>
                     <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
                     <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
                     <li style={{display: 'flex', width: 'fit-content'}}>

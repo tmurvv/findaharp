@@ -10,7 +10,8 @@ import PageTitle from '../src/components/PageTitle';
 import Results from '../src/components/Results';
 import NewsletterSignup from '../src/components/NewsletterSignup';
 import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
-// import { HarpContext } from '../src/contexts/HarpContext';
+import { UserContext } from '../src/contexts/UserContext';
+import { StringFormContext } from '../src/contexts/StringFormContext';
 import { resultInfoReducer, harpactiveWindowReducer } from '../src/reducers/reducers';
 
 // initialize reducer object
@@ -21,7 +22,9 @@ const harpactiveWindowInitialState = {
 }
 function HarpLoginSignup(props) {
     // declare variables
-    // const { setHarp } = useContext(HarpContext);
+    const { stringForm, setStringForm } = useContext(StringFormContext);
+    const { user, setUser } = useContext(UserContext);
+    // const [ harp, setHarp ] = useState();
     const [resultInfo, dispatchResultInfo] = useReducer(resultInfoReducer, RESULTS_INITIAL_STATE);
     const [harpactiveWindow, dispatchharpactiveWindow] = useReducer(harpactiveWindowReducer, harpactiveWindowInitialState);
     const [needVerify, setNeedVerify] = useState(false);
@@ -174,38 +177,31 @@ function HarpLoginSignup(props) {
             }
         }       
         if (harpactiveWindow.active==='harplogin') {   
-            // shortcut - password not long enough
-            if (harpLogin.loginpassword.length<8) {
-                resultText.innerText=`Passwords must be at least 8 characters long.`;
-                dispatchResultInfo({type: 'tryAgain'});
-                return
-            }
             // set loading image
-            dispatchResultInfo({type:'loadingImage'});        
+            dispatchResultInfo({type:'loadingImage'});    
+            console.log(harpLogin)    
             try {
                 // login harp
-                const res = await axios.post(`${process.env.backend}/api/v1/harps/loginharp`, {email: harpLogin.loginemail, password: harpLogin.loginpassword});
-                
-                const returnedHarp = res.data.harp;
+                const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: harpLogin.harploginemail, oldharpname: harpLogin.harploginpassword});
+                console.log('data', res.data)
+                const returnedHarp = res.data.userharp;
                 const jwt = res.data.token;
 
                 // set harp context to login harp
-                await setHarp({
-                    firstname: returnedHarp.firstname, 
-                    lastname: returnedHarp.lastname, 
-                    email: returnedHarp.email, 
-                    distanceunit: returnedHarp.distanceunit, 
-                    _id: returnedHarp._id,
-                    newsletter: returnedHarp.newsletter,
-                    currency: returnedHarp.currency,
-                    role: returnedHarp.role
+                setUser({
+                    _idCurrentHarp: returnedHarp._id,
+                    emailCurrentHarp: returnedHarp.email,
+                    currentHarpname: returnedHarp.harpname,
+                    stringform: returnedHarp.stringform
                 });
+                setStringForm(returnedHarp.stringform);
                 // set JWT cookie
                  document.cookie = `JWT=${jwt}`
                 // display result window
-                resultText.innerText=`Login Successful: Welcome ${returnedHarp.firstname}`;
+                resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
+                console.log('error', e.message)
                 // email not found #1
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Cannot read property 'emailverified' of null") {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
@@ -232,6 +228,7 @@ function HarpLoginSignup(props) {
             }
         }
         resetSignupForm();
+        Router.push('/stringform');
     }
     // handle forgotPassword click
     async function handleForgot() {
@@ -283,7 +280,7 @@ function HarpLoginSignup(props) {
         }
         resetResults();
         // go to main window
-        Router.push('/');
+        // Router.push('/');
     }
     // display cart??
     useEffect(()=>{
