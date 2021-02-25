@@ -83,7 +83,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                         className='qty-input' 
                         type='number'
                         min='0'
-                        value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
+                        // value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
                         onChange={(e)=>handleChange(e)} note={`${note}`}
                     />
                 </div>

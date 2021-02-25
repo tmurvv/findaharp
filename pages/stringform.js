@@ -148,6 +148,7 @@ const StringForm = (props) => {
     
     // display cart??
     useEffect(()=>{
+        console.log('effect', stringForm)
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     // display cart??
@@ -158,6 +159,8 @@ const StringForm = (props) => {
     return (
         <>
         <div className="stringForm" >
+            {/* <h1>stringform: {stringForm[0]}</h1> */}
+
             <ResultsWindow 
                 resultInfo={resultInfo} 
                 loginGuest={loginGuest}

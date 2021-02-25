@@ -256,7 +256,7 @@ function UserProfile(props) {
     function logoutUser() {
         document.cookie = "JWT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; 
         setUser({
-            firstname: '',
+            firstname: 'Login',
             lastname: '',
             editemail: '',
             editpassword: '',

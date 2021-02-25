@@ -13,6 +13,7 @@ import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
 import { UserContext } from '../src/contexts/UserContext';
 import { StringFormContext } from '../src/contexts/StringFormContext';
 import { resultInfoReducer, harpactiveWindowReducer } from '../src/reducers/reducers';
+import { STRING_FORM_INFO_INIT, STRING_FORM_INIT } from '../src/constants/inits';
 
 // initialize reducer object
 const harpactiveWindowInitialState = {
@@ -31,8 +32,8 @@ function HarpLoginSignup(props) {
     const [harpSignup, setHarpSignup] = useState({
         firstname: '',
         lastname: '',
-        signupemail: '',
-        signuppassword: '',
+        harpsignupemail: '',
+        harpsignuppassword: '',
         confirmpassword: '',
         newsletter: false,
         distanceunit: 'miles',
@@ -45,7 +46,6 @@ function HarpLoginSignup(props) {
         harploginchange: false
     });
     const handleChange = (evt) => {
-        console.log(evt.target.name);
         switch (evt.target.name) {
             case 'firstname': 
                 setHarpSignup({...harpSignup, firstname: evt.target.value, harpsignupchange: true});
@@ -54,7 +54,7 @@ function HarpLoginSignup(props) {
                 setHarpSignup({...harpSignup, lastname: evt.target.value, harpsignupchange: true});
                 break
             case 'harpsignupemail': 
-                setHarpSignup({...harpSignup, signupemail: evt.target.value, harpsignupchange: true});
+                setHarpSignup({...harpSignup, harpsignupemail: evt.target.value, harpsignupchange: true});
                 break
             case 'harploginemail': 
                 setHarpLogin({...harpLogin, harploginemail: evt.target.value, harploginchange: true});
@@ -84,8 +84,8 @@ function HarpLoginSignup(props) {
         setHarpSignup({
             firstname: '',
             lastname: '',
-            signupemail: '',
-            signuppassword: '',
+            harpsignupemail: '',
+            harpsignuppassword: '',
             confirmpassword: '',
             newsletter: false,
             distanceunit: 'miles',
@@ -118,49 +118,35 @@ function HarpLoginSignup(props) {
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (harpactiveWindow.active==='harpsignup') {
-            // shortcut - password not long enough
-            if ((!harpSignup.harpsignuppassword)||harpSignup.harpsignuppassword.length<8) {
-                resultText.innerText=`Passwords must be at least 8 characters long.`;
-                dispatchResultInfo({type: 'tryAgain'});
-                return
-            }
-            // shortcut - passwords not matching
-            if (harpSignup.harpsignuppassword !== harpSignup.confirmpassword) {
-                resultText.innerText=`Passwords do not match.`;
-                dispatchResultInfo({type: 'tryAgain'});
-                return
-            } 
             // create signup harp object
+            console.log('harpsingup', harpSignup)
             const newHarp = {
-                firstname: harpSignup.firstname,
-                lastname: harpSignup.lastname,
-                email: harpSignup.harpsignupemail,
-                password: harpSignup.harpsignuppassword,
-                newsletter: harpSignup.newsletter,
-                distanceunit: harpSignup.distanceunit,
-                currency: harpSignup.currency
+                oldemail: harpSignup.harpsignupemail,
+                // oldemail: "6test@test.com",
+                // oldharpname: '6mytest',
+                oldharpname: harpSignup.harpsignuppassword,
+                stringform: JSON.stringify(stringForm),
+                newsletter: harpSignup.newsletter
             };
             // signup harp
             try {
-                const res = await axios.post(`${process.env.backend}/api/v1/harps/createharp`, newHarp);
+                const res = await axios.post(`${process.env.backend}/api/v1/userharps/createuserharp`, newHarp);
                 if (res.status===201 || res.status===200) {                   
                     // set harpContext to added harp
-                    const addedharp = res.data.harp;
-                    setHarp({
-                        firstname: addedharp.firstname, 
-                        lastname: addedharp.lastname, 
-                        email: addedharp.email,
-                        distanceunit: addedharp.distanceunit,
-                        _id: addedharp._id,
-                        newsletter: addedharp.newsletter,
-                        currency: addedharp.currency,
-                        role: 'not set'
+                    const returnedHarp = res.data.userharp;
+                    console.log(res.data)
+                    setUser({
+                        _idCurrentHarp: returnedHarp._id,
+                        emailCurrentHarp: returnedHarp.email,
+                        currentHarpname: returnedHarp.harpname
                     });
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
+                    resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword}`;
                     dispatchResultInfo({type: 'OK'});  
                 }
             // Error on signup
             } catch (e) {
+                console.log('signup error', e.message)
                 // duplicate email
                 if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('duplicate')) {
                     resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
@@ -183,18 +169,44 @@ function HarpLoginSignup(props) {
             try {
                 // login harp
                 const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: harpLogin.harploginemail, oldharpname: harpLogin.harploginpassword});
-                console.log('data', res.data)
                 const returnedHarp = res.data.userharp;
                 const jwt = res.data.token;
-
+                let parseStringForm = await JSON.parse(returnedHarp.stringform);
+                
+                // purge quantities
+                if (parseStringForm&&parseStringForm.length>0) {
+                    for (var i = 0; i<parseStringForm.length; i++) {
+                        if (i===0) {
+                            parseStringForm[0].G.qty=0; 
+                            parseStringForm[0].G.qty=0; 
+                            break;
+                        }
+                        if (i===7) {
+                            parseStringForm[0].E.qty=0; 
+                            parseStringForm[0].D.qty=0; 
+                            parseStringForm[0].C.qty=0; 
+                            break;
+                        }
+                        parseStringForm[0].E.qty=0; 
+                        parseStringForm[0].D.qty=0; 
+                        parseStringForm[0].C.qty=0;
+                        parseStringForm[0].B.qty=0;
+                        parseStringForm[0].A.qty=0;
+                        parseStringForm[0].G.qty=0;
+                        parseStringForm[0].F.qty=0;
+                    }
+                } else {
+                    parseStringForm = {...STRING_FORM_INIT}
+                }
+                
                 // set harp context to login harp
                 setUser({
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
-                    stringform: returnedHarp.stringform
+                    stringform: parseStringForm
                 });
-                setStringForm(returnedHarp.stringform);
+                setStringForm(parseStringForm);
                 // set JWT cookie
                  document.cookie = `JWT=${jwt}`
                 // display result window
@@ -228,7 +240,6 @@ function HarpLoginSignup(props) {
             }
         }
         resetSignupForm();
-        Router.push('/stringform');
     }
     // handle forgotPassword click
     async function handleForgot() {
@@ -279,6 +290,7 @@ function HarpLoginSignup(props) {
             }
         }
         resetResults();
+        Router.push('/stringform');
         // go to main window
         // Router.push('/');
     }
@@ -310,11 +322,11 @@ function HarpLoginSignup(props) {
                                 className="field-input"
                                 type='email'
                                 id={uuid()}
-                                value={harpSignup.signupemail}
+                                value={harpSignup.harpsignupemail}
                                 onChange={handleChange}
                                 name='harpsignupemail'
-                                required={harpactiveWindow.active==='harplogin'}
-                                disabled={harpactiveWindow.active==='harpsignup'}
+                                required={harpactiveWindow.active==='harpsignup'}
+                                disabled={harpactiveWindow.active==='harplogin'}
                             />
                             <div className="input-name input-margin">
                                 <h3>Harp Name</h3>
@@ -323,11 +335,11 @@ function HarpLoginSignup(props) {
                                 className="field-input"
                                 type='text'
                                 id={uuid()}
-                                value={harpSignup.signuppassword}
+                                value={harpSignup.harpsignuppassword}
                                 onChange={handleChange}
                                 name='harpsignuppassword'
-                                required={harpactiveWindow.active==='harplogin'}
-                                disabled={harpactiveWindow.active==='harpsignup'}
+                                required={harpactiveWindow.active==='harpsignup'}
+                                disabled={harpactiveWindow.active==='harplogin'}
                             />
                         </div>
                         <div style={{padding: '0 25px 20px'}}>
@@ -353,7 +365,7 @@ function HarpLoginSignup(props) {
                                 className="field-input"
                                 type='email'
                                 id={uuid()}
-                                value={harpLogin.loginemail}
+                                value={harpLogin.harploginemail}
                                 onChange={handleChange}
                                 name='harploginemail'
                                 required={harpactiveWindow.active==='harplogin'}
@@ -366,7 +378,7 @@ function HarpLoginSignup(props) {
                                 className="field-input"
                                 type='text'
                                 id={uuid()}
-                                value={harpLogin.loginpassword}
+                                value={harpLogin.harploginpassword}
                                 onChange={handleChange}
                                 name='harploginpassword'
                                 required={harpactiveWindow.active==='harplogin'}
