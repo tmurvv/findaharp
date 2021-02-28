@@ -1,4 +1,4 @@
-function UserHarpProfileCSS() {
+function UserharpprofileProfileCSS() {
     return (
         <style jsx="true">{`
             a {
@@ -9,7 +9,7 @@ function UserHarpProfileCSS() {
                 outline: 0;
             }
             
-            .harpupdatePassword-edit-container {
+            .harpprofileupdatePassword-edit-container {
                 // background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
                 overflow: hidden;
                 position: relative;
@@ -17,7 +17,7 @@ function UserHarpProfileCSS() {
                 padding-top: 70px;
                 min-height: 400px;
             }
-            .harplogin-signup {
+            .harpprofilelogin-signup {
                 width: 300px;
                 margin: 0 auto;
                 background: #e2e2e2;
@@ -26,10 +26,10 @@ function UserHarpProfileCSS() {
                 border: 1px solid #E2E2E2;
                 position: relative;
             }
-            .harpupdatePassword-form {
+            .harpprofileupdatePassword-form {
                 padding: 25px;
             }
-            .harpupdatePassword-edit-title {
+            .harpprofileupdatePassword-edit-title {
                 padding: 15px;
                 width: calc(100% - 30px);
                 text-align: center;
@@ -42,33 +42,33 @@ function UserHarpProfileCSS() {
                 transform: translate(-1px, -1px);
             }
             
-            .harpinput-name {
+            .harpprofileinput-name {
                 font-size: 14px;
             }
-            .harpinput-margin {
+            .harpprofileinput-margin {
                 margin-top: 10px;
             }
-            .harpinput-name h3 {
+            .harpprofileinput-name h3 {
                 padding-bottom: 5px;
             }
-            input.harpfield-input {
+            input.harpprofilefield-input {
                 width: calc(100% - 24px);
-                background-color: rgba(2, 2, 2, 0.harp07);
-                border: 1px solid rgba(0, 0, 0, 0.harp02);
+                background-color: rgba(2, 2, 2, 0.harpprofile07);
+                border: 1px solid rgba(0, 0, 0, 0.harpprofile02);
                 padding: 6px 12px;
                 border-radius: 5px;
             }
-            .harpcheck-input {
+            .harpprofilecheck-input {
                 width: 16px;
                 height: 16px;
                 position: relative;
                 float: left;
             }
-            input.harpcheckme {
+            input.harpprofilecheckme {
                 position: relative;
                 top: 2px;
             }
-            div.harprememberme {
+            div.harpprofilerememberme {
                 font-size: 12px;
                 top: 6px;
                 position: relative;
@@ -76,7 +76,7 @@ function UserHarpProfileCSS() {
                 margin-bottom: 30px;
                 float: left;
             }
-            .harpcheck-input label {
+            .harpprofilecheck-input label {
                 cursor: pointer;
                 position: absolute;
                 width: 14px;
@@ -85,12 +85,12 @@ function UserHarpProfileCSS() {
                 top: 5px;
                 left: 3px;
             }
-            .harpinput-r {
+            .harpprofileinput-r {
                 margin-top: 30px;
                 margin-bottom: 30px;
                 position: relative;
             }
-            // .harpcheck-input label:after {
+            // .harpprofilecheck-input label:after {
             //     opacity: 0;
             //     content: "";
             //     position: absolute;
@@ -109,19 +109,19 @@ function UserHarpProfileCSS() {
             //     transform: rotate(-45deg);
             // }
             
-            // .harpcheck-input label:hover:after {
-            //     -ms-filter: "progid:DXImageTransform.harpMicrosoft.harpAlpha(Opacity=50)";
+            // .harpprofilecheck-input label:hover:after {
+            //     -ms-filter: "progid:DXImageTransform.harpprofileMicrosoft.harpprofileAlpha(Opacity=50)";
             //     filter: alpha(opacity=50);
-            //     opacity: 0.harp5;
+            //     opacity: 0.harpprofile5;
             // }
             
-            // .harpcheck-input input[type=checkbox]:checked + label:after {
-            //     -ms-filter: "progid:DXImageTransform.harpMicrosoft.harpAlpha(Opacity=100)";
+            // .harpprofilecheck-input input[type=checkbox]:checked + label:after {
+            //     -ms-filter: "progid:DXImageTransform.harpprofileMicrosoft.harpprofileAlpha(Opacity=100)";
             //     filter: alpha(opacity=100);
             //     opacity: 1;
             // }
             
-            .harpsubmit-btn {
+            .harpprofilesubmit-btn {
                 width: 100%;
                 // margin-top: 28px;
                 // text-align: center;
@@ -130,76 +130,84 @@ function UserHarpProfileCSS() {
                 background-color: #ffe58a;
                 color: #000;
                 border: none;
-                // transition: 0.harp5s cubic-bezier(0.harp72, 0.harp15, 0.harp53, 0.harp84);
+                // transition: 0.harpprofile5s cubic-bezier(0.harpprofile72, 0.harpprofile15, 0.harpprofile53, 0.harpprofile84);
             }
-            .harpsubmit-btn-tryAgain {
+            .harpprofilesubmit-btn-tryAgain {
                 background-color: #333333;
                 margin-left: 30px;
                 color: white;
             }          
-            .harpforgot-pass {
+            .harpprofileforgot-pass {
                 width: 100%;
                 border-top: 1px solid #E0E0E0;
                 padding: 5px 0;
                 text-align: center;
             }
-            .harpforgot-pass a {
+            .harpprofileforgot-pass a {
                 text-align: center;
                 font-size: 12px;
                 color: #757575;
                 text-decoration: underline;
             }
-            #harpsignup .harpupdatePassword-edit-content {
+            #harpprofilesignup .harpprofileupdatePassword-edit-content {
                 padding-bottom: 46px;
             }
-            .harps-atbottom {
-                // transform: translate3d(100px, -506.harp5px, 0);
+            .harpprofiles-atbottom {
+                // transform: translate3d(100px, -506.harpprofile5px, 0);
                 z-index: 0;
                 -webkit-filter: blur(1px);
                 filter: blur(1px);
-                opacity: 0.harp6;
+                opacity: 0.harpprofile6;
             }
-            .harps-attop {
-                // transform: translate3d(100px, -506.harp5px, 0);
+            .harpprofiles-attop {
+                // transform: translate3d(100px, -506.harpprofile5px, 0);
                 z-index: 1;
                 -webkit-filter: blur(0);
                 filter: blur(0);
-                box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.harp75);
+                box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.harpprofile75);
                 opacity: 1;
             }
-            .harpl-attop {
-                // transform: translate3d(100px, -506.harp5px, 0);
+            .harpprofilel-attop {
+                // transform: translate3d(100px, -506.harpprofile5px, 0);
                 z-index: 1;
                 -webkit-filter: blur(0);
                 filter: blur(0);
-                box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.harp75);
+                box-shadow: -5px 6px 48px -13px rgba(0, 0, 0, 0.harpprofile75);
                 opacity: 1;
             }
-            .harpl-atbottom {
+            .harpprofilel-atbottom {
                 z-index: 0;
                 -webkit-filter: blur(1px);
                 filter: blur(1px);
-                opacity: 0.harp4;
+                opacity: 0.harpprofile4;
             }
-            #harpsignup,
-            #harplogin {
-                transition: 0.harp5s cubic-bezier(0.harp64, 0.harp35, 0.harp58, 1);
+            #harpprofilesignup,
+            #harpprofilelogin {
+                transition: 0.harpprofile5s cubic-bezier(0.harpprofile64, 0.harpprofile35, 0.harpprofile58, 1);
             }
-            #harplogin {
-                transform: translate(25%, -187%);
+            #harpprofilelogin {
+                transform: translate(10%, -150%);
             }
-            #harpsignup {
+            #harpprofilesignup {
                 transform: translateX(-28%);
             }
             @media only screen and (max-width: 550px) {
-                #harplogin {
-                    transform: translate(10%, -150%);
+                #harpprofilelogin {
+                    transform: translate(25%, -187%);
+                    
                 }
-                #harpsignup {
+                #harpprofilesignup {
+                    transform: translateX(-10%);
+                }
+                #login {
+                    transform: translate(25%, -187%);
+                    
+                }
+                #signup {
                     transform: translateX(-10%);
                 }
             }
-            #harploadingLogin {
+            #harpprofileloadingLogin {
                 display: none;
                 color: #6A75AA;
                 border: 2px solid #6A75AA;
@@ -214,20 +222,20 @@ function UserHarpProfileCSS() {
                 transform: translate(50%, 50%);
                 z-index: 5000;
             }
-            #harploadingLoginImg {
+            #harpprofileloadingLoginImg {
                 display: block;
                 height: 50px;
                 margin: auto;
             }
-            #harploadingLoginOk,
-            #harploadingLoginTryAgain {
+            #harpprofileloadingLoginOk,
+            #harpprofileloadingLoginTryAgain {
                 display: none;
                 padding: 7px;
             }
-            #harploadingLoginText {
+            #harpprofileloadingLoginText {
                 text-align: center;
             }
-            // .harpdetailButton {
+            // .harpprofiledetailButton {
             //     background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
             //     padding-top: 5px;
             //     font-size: 16px;
@@ -235,14 +243,14 @@ function UserHarpProfileCSS() {
             //     outline: none;
             //     border-style: none;
             //     border-color: none;
-            //     box-shadow: 1.harp5px 1.harp5px 1.harp5px 0px #555555;
+            //     box-shadow: 1.harpprofile5px 1.harpprofile5px 1.harpprofile5px 0px #555555;
             // }
-            .harpprofileDivider {
+            .harpprofileprofileDivider {
                 margin: 20px auto 50px;
                 height: 2px;
                 width: 80%;
             }
-            .harpprofileDivider img {
+            .harpprofileprofileDivider img {
                 width: 100%;
             }
         `}
@@ -250,4 +258,4 @@ function UserHarpProfileCSS() {
     )
 }
 
-export default UserHarpProfileCSS;
+export default UserharpprofileProfileCSS;

@@ -115,6 +115,8 @@ function HarpLoginSignup(props) {
         dispatchharpactiveWindow({type: 'harplogin'});
     }
     const handleSubmit = async (evt) => {
+        
+        document.querySelector('#spinner').style.display="block";
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (harpactiveWindow.active==='harpsignup') {
@@ -138,7 +140,8 @@ function HarpLoginSignup(props) {
                     setUser({
                         _idCurrentHarp: returnedHarp._id,
                         emailCurrentHarp: returnedHarp.email,
-                        currentHarpname: returnedHarp.harpname
+                        currentHarpname: returnedHarp.harpname,
+                        harplist
                     });
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword}`;
@@ -162,8 +165,9 @@ function HarpLoginSignup(props) {
                 }
             }
         }       
-        if (harpactiveWindow.active==='harplogin') {   
+        if (harpactiveWindow.active==='harplogin') { 
             // set loading image
+            document.querySelector('#spinner').style.display="block";
             dispatchResultInfo({type:'loadingImage'});    
             console.log(harpLogin)    
             try {
@@ -171,7 +175,9 @@ function HarpLoginSignup(props) {
                 const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: harpLogin.harploginemail, oldharpname: harpLogin.harploginpassword});
                 const returnedHarp = res.data.userharp;
                 const jwt = res.data.token;
-                let parseStringForm = await JSON.parse(returnedHarp.stringform);
+                console.log('returned', returnedHarp)
+                let parseStringForm;
+                if (returnedHarp.stringform) parseStringForm = await JSON.parse(returnedHarp.stringform);
                 
                 // purge quantities
                 if (parseStringForm&&parseStringForm.length>0) {
@@ -199,12 +205,14 @@ function HarpLoginSignup(props) {
                     parseStringForm = {...STRING_FORM_INIT}
                 }
                 
+                console.log('loginharplist', returnedHarp.harplist)
                 // set harp context to login harp
                 setUser({
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
-                    stringform: parseStringForm
+                    stringform: parseStringForm,
+                    harplist: returnedHarp.harplist
                 });
                 setStringForm(parseStringForm);
                 // set JWT cookie
@@ -265,30 +273,8 @@ function HarpLoginSignup(props) {
         }
     }
     async function loginGuest(evt) {
-        if (needVerify) {
-            // display loader
-            const resultText = document.querySelector('#loadingLoginText');
-            dispatchResultInfo({ type: 'loadingImage' });  
-            //create harp object
-            const forgotPasswordHarp = {
-                firstname: 'findaharp.com',
-                lastname: 'harp',
-                email: harpLogin.loginemail
-            }
-            try {
-                // this is a hack because program not returning for axios post, needs to be debugged and next three lines put below axios call
-                // display result
-                resultText.innerText=`Verify email sent.`;
-                dispatchResultInfo({type: 'OK'});
-                setNeedVerify(false);
-                // send forgot password email
-                await axios.post(`${process.env.backend}/api/v1/resendverify`, forgotPasswordHarp);
-            } catch (e) {
-                // display error
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong sending verification email. Please check your network connection.'} Log in as guest harp?`;
-                dispatchResultInfo({type: 'okTryAgain'});
-            }
-        }
+        
+        document.querySelector('#spinner').style.display="block";
         resetResults();
         Router.push('/stringform');
         // go to main window
@@ -300,6 +286,17 @@ function HarpLoginSignup(props) {
     },[]);
     return ( 
        <>
+       <img id='spinner' style={{
+                display: 'none', 
+                position: 'fixed', 
+                top: '50%', 
+                left: '50%', 
+                transform: 'translate(-50%,-50%)',
+                zIndex: '9000'
+            }} 
+            src='/img/spinner.gif' 
+            alt='spinner' 
+        />
         <div className='harplogin-signup-container'>
             <PageTitle maintitle='Harp Login/Signup' subtitle='Keep track of one or many harp string brands!' />
             <a href='/rememberdetails' style={{display: 'flex', justifyContent: 'center', fontSize: '14px', color: '#6A75AA', textDecoration: 'underline', width: '100%', textAlign:'center', marginTop: '-40px', marginBottom: '40px'}}>How does it work?</a>
@@ -351,7 +348,7 @@ function HarpLoginSignup(props) {
                     </>
                 </form>
             </div>
-            <div className={harpactiveWindow.harploginClasses} id="harplogin" onClick={handleLoginClick}>
+            <div className={harpactiveWindow.harploginClasses} style={{transform: 'translate(10%, -97%)'}} id="harplogin" onClick={handleLoginClick}>
                 <div className="harplogin-signup-title">
                     HARP LOGIN
                 </div>

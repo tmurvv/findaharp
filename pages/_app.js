@@ -97,24 +97,29 @@ function MyApp(props) {
                 // if JWT not found, just continue
             }
             if (jwtToken) {
-                const userId = parseJwt(jwtToken).id;
+                const parseToken = parseJwt(jwtToken);
                 (async () => {
                     try {
-                        const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {cookieId: userId});
-                        const returnedUser = res.data.user;
-                        const jwt = res.data.token;
-                        document.cookie = `JWT=${jwt}`
-                        await setUser({
-                            firstname: returnedUser.firstname, 
-                            lastname: returnedUser.lastname, 
-                            email: returnedUser.email, 
-                            distanceunit: returnedUser.distanceunit, 
-                            _id: returnedUser._id,
-                            newsletter: returnedUser.newsletter,
-                            currency: returnedUser.currency,
-                            role: returnedUser.role,
-                            agreementStatus: returnUser.agreementStatus
-                        });
+                        if (parseToken&&parseToken.id) {
+                            const res = await axios.post(`${process.env.backend}/api/v1/users/loginuser`, {cookieId: parseToken.id});
+                            const returnedUser = res.data.user;
+                            const jwt = res.data.token;
+                            document.cookie = `JWT=${jwt}`;
+                            
+                            if (returnedUser) {
+                                await setUser({
+                                    firstname: returnedUser.firstname, 
+                                    lastname: returnedUser.lastname, 
+                                    email: returnedUser.email, 
+                                    distanceunit: returnedUser.distanceunit, 
+                                    _id: returnedUser._id,
+                                    newsletter: returnedUser.newsletter,
+                                    currency: returnedUser.currency,
+                                    role: returnedUser.role,
+                                    agreementStatus: returnedUser.agreementStatus
+                                });
+                            }
+                        }
                     } catch (e) {
                         console.log('Something went wrong retrieving user with JWT cookie:', e.message)
                     }       
@@ -145,14 +150,6 @@ function MyApp(props) {
     }, []);
 
     function handleNavOpen() {
-        console.log('router', Router.route)
-        // if (Router.route==='/stringform'&&!confirm('Your changes may not be saved. Continue?')) 
-        //     {
-        //         window.onbeforeunload = function () {
-        //             // blank function do nothing
-        //         }
-        //     }
-        // if (navOpen===undefined) {setNavOpen(true); return;};
         setNavOpen(!navOpen);
     }
     useEffect(()=>{

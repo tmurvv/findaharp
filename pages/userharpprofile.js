@@ -37,11 +37,10 @@ function UserHarpProfile(props) {
         emailCurrentHarp: user.emailCurrentHarp?user.emailCurrentHarp:'',
         currentHarpname: user.currentHarpname?user.currentHarpname:'',
     });
-    const [userUpdatePassword, setUserUpdatePassword] = useState({
-        oldpassword: '',
-        newpassword: '',
-        confirmpassword: '',
-        updatePasswordchange: false
+    const [selectHarp, setSelectHarp] = useState({
+        selectemail: user.emailCurrentHarp?user.emailCurrentHarp:'',
+        selectharpname: user.currentHarpname?user.currentHarpname:'',
+        updateSelectchange: false
     });
     const handleChange = (evt) => {
         switch (evt.target.name) {
@@ -66,14 +65,11 @@ function UserHarpProfile(props) {
             case 'currency': 
                 setUserEdit({...userEdit, currency: evt.target.value, editchange: true});
                 break
-            case 'oldpassword': 
-                setUserUpdatePassword({...userUpdatePassword, oldpassword: evt.target.value, updatePasswordchange: true});
+            case 'selectemail': 
+                setSelectHarp({...selectHarp, selectemail: evt.target.value, updateSelectchange: true});
                 break
-            case 'newpassword': 
-                setUserUpdatePassword({...userUpdatePassword, newpassword: evt.target.value, updatePasswordchange: true});
-                break
-            case 'confirmpassword': 
-                setUserUpdatePassword({...userUpdatePassword, confirmpassword: evt.target.value, updatePasswordchange: true});
+            case 'selectharpname': 
+                setSelectHarp({...selectHarp, selectharpname: evt.target.value, updateSelectchange: true});
                 break
             default :
         }
@@ -96,11 +92,10 @@ function UserHarpProfile(props) {
             });
         };
         const clearPassword= () => {
-            setUserUpdatePassword({
-                oldpassword: '',
-                newpassword: '',
-                confirmpassword: '',
-                updatePasswordchange: false
+            setSelectHarp({
+                selectemail: '',
+                selectharpname: '',
+                updateSelectchange: false
             });
         };
         switch (form) {
@@ -126,12 +121,12 @@ function UserHarpProfile(props) {
     const handleSubmit = async (evt) => {
         if (evt) console.log('yes', harpList)
         if (evt) evt.preventDefault();
-        if (harpList.length===0) {
-            console.log('ingetlist')
-            document.querySelector('#harplist').style.display='block';
-            getHarpList();
-            return;
-        }
+        // if (harpList.length===0) {
+        //     console.log('ingetlist')
+        //     document.querySelector('#harplist').style.display='block';
+        //     // getHarpList();
+        //     return;
+        // }
         
         const resultText = document.querySelector('#loadingLoginText');
         if (activeWindow.active==='signup') {
@@ -174,9 +169,9 @@ function UserHarpProfile(props) {
                 }
             }
         }       
-        if (activeWindow.active==='login') {      
+        if (activeWindow.active==='login') { 
             // resultText.innerText=``;
-            const oldemail = document.querySelector('#email').value;
+            const oldemail = document.querySelector('#selectemail').value||user.emailCurrentHarp;
             const oldharpname = document.querySelector('#harplist').value;
             console.log(oldemail, oldharpname)
             dispatchResultInfo({type: 'loadingImage', payload: ''})
@@ -184,7 +179,7 @@ function UserHarpProfile(props) {
                 // login harp
                 const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail, oldharpname});
                 const returnedHarp = res.data.userharp;
-                const jwt = res.data.token;
+                const jwt = res.data.harpToken;
                 let parseStringForm = await JSON.parse(returnedHarp.stringform);
                 
                 // purge quantities
@@ -218,7 +213,8 @@ function UserHarpProfile(props) {
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
-                    stringform: parseStringForm
+                    stringform: parseStringForm,
+                    harplist: returnedHarp.harplist
                 });
                 setStringForm(parseStringForm);
                 // set JWT cookie
@@ -242,35 +238,34 @@ function UserHarpProfile(props) {
                     dispatchResultInfo({type: 'okTryAgain', payload: `Something went wrong on login. Please check your network connection. Login as guest?`});
                 }
             }
+            document.querySelector('#spinner').style.display='block';     
             Router.push('/stringform')
         }
     }
     async function getHarpList() {
-        console.log('in')
-        const inputEmail = document.querySelector('#email').value;
-        console.log(inputEmail)
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(!re.test(inputEmail)) alert('not email');
+        console.log('ingetharplist')
         try {
             //update password
-            const res = await axios.post(`${process.env.backend}/api/v1/userharps/getuserharplist`, {email: inputEmail});
-            console.log('res', res.data.harplist);
-            setHarpList(res.data.harplist)
+            console.log('select', selectHarp.selectemail)
+            console.log('currentharp', user.emailCurrentHarp)
+            const searchEmail = selectHarp.selectemail||user.emailCurrentHarp;
+            console.log("search email", searchEmail);
+            const res = await axios.post(`${process.env.backend}/api/v1/userharps/getuserharplist`, {email: searchEmail});
+            console.log('251')
+            const parseList = res.data.harplist;
+            console.log('253')
+            console.log(res.data.harplist)
+            setHarpList(parseList);
+            console.log(parseList)
             document.querySelector('#harplist').disabled = false;
             // dispatchResultInfo({type: 'OK', payload: 'found'});
             clearForm('Both');
-            // var dropdown = document.getElementById('harplist');
-            // var event = document.createEvent('MouseEvents');
-            // event.initMouseEvent('mousedown', true, true, window);
-            // dropdown.dispatchEvent(event);
         } catch(e) {
-            dispatchResultInfo({type: 'okTryAgain', payload: `Something went wrong finding harps for the email: ${inputEmail}.`});
-            console.log('error', e.error)
+            dispatchResultInfo({type: 'okTryAgain', payload: `Something went wrong finding harps for the email: ${selectHarp.selectemail}.`});
+            console.log('error', e.message)
             // resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Something went wrong on updatePassword.'}`;
         }
         // dispatchResultInfo({type: 'OK', payload: `Harp list loaded`});
-        
-        
     }
     function resetResultsWindow() {
         if (document.querySelector('#loadingLoginText').innerText.includes('records')) resetSignupForm();
@@ -319,6 +314,8 @@ function UserHarpProfile(props) {
         // clearForm('Both');
     }
     function logoutUser() {
+        
+        document.querySelector('#spinner').style.display="block";
         document.cookie = "JWT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; 
         setUser({
             currentHarpname: null,
@@ -331,6 +328,10 @@ function UserHarpProfile(props) {
     }
     // display cart??
     useEffect(()=>{
+        // console.log('ineffect')
+        setSelectHarp({...selectHarp, selectemail: user.emailCurrentHarp});
+        console.log('effect', user)
+        // getHarpList();
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     if (openAgreement===true) {
@@ -339,12 +340,23 @@ function UserHarpProfile(props) {
     return (
        <>
         <div className='updatePassword-edit-container'>
+            <img id='spinner' style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '25%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    zIndex: '9000'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <PageTitle maintitle='Harp Profile' subtitle='Change Password / Edit Profile' />
-            <Results 
+            {/* <Results 
                 resultInfo={resultInfo} 
                 resetResults={resetResults}
                 loginGuest={loginGuest}
-            />
+            /> */}
             <ResultsWindow 
                 resultInfo={resultInfo} 
                 loginGuest={loginGuest}
@@ -403,7 +415,7 @@ function UserHarpProfile(props) {
                     </button>
                 </form>
             </div>
-            <div className={activeWindow.loginClasses} id="login" onClick={handleUpdatePasswordClick}>
+            <div className={activeWindow.loginClasses} id="login" style={{transform: 'translate(10%, -142%)'}} onClick={handleUpdatePasswordClick}>
                 <div className="updatePassword-edit-title">
                     Login Another Harp
                 </div>
@@ -416,21 +428,21 @@ function UserHarpProfile(props) {
                             <input 
                                 className="field-input"
                                 type='email'
-                                // onBlur={(e)=>getHarpList(e)}
-                                id='email'
-                                value={userUpdatePassword.harpemail}
+                                id='selectemail'
+                                value={selectHarp.selectemail}
+                                placeholder={user.emailCurrentHarp}
                                 onChange={handleChange}
-                                name='email'
+                                name='selectemail'
                                 required={activeWindow.active==='changePassword'}
                                 disabled={activeWindow.active==='editProfile'}
                             />
                             <div className='harplist' className="input-name input-margin">
                                 <h3>Enter Email for List of Harps</h3>
                             </div>
-                            <select id='harplist' onChange={()=>handleSubmit()} style={{display: 'none', padding: '7px 10px', width: '100%'}}>
-                                <option key={()=>uuid()} value='selectharp'>select harp</option>
+                            <select id='harplist' onChange={()=>handleSubmit()} style={{padding: '7px 10px', width: '100%'}}>
+                                <option key={uuid()} name='selectharpname'>select harp</option>
                                 {
-                                    harpList.map(harp => <option key={()=>uuid()} value={harp}>{harp}</option>)
+                                    user.harplist&&user.harplist.map(harp => <option key={uuid()} value={harp.harpname}>{harp.harpname}</option>)
                                 }
                             </select>
                             

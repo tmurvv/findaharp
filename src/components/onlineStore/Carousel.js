@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import uuid from 'react-uuid';
 
 class Carousel extends React.Component {
     
@@ -34,7 +35,8 @@ class Carousel extends React.Component {
             }
             level = this.state.active - i
             items.push(<Item 
-                            key={index} 
+                            // key={index} 
+                            key={uuid()} 
                             id={this.state.items[index]} 
                             product={this.state.products[index]}
                             level={level} 

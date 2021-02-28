@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 
 //internal
-import NavBarCss from '../styles/NavBar.css';
+import NavBarCss from '../styles/NavBar.css.js';
 import { UserContext } from '../contexts/UserContext';
 
 export default function NavBar(props) {
@@ -123,6 +123,7 @@ export default function NavBar(props) {
             }
         </div>
         <NavBarCss />
+        
         </>
         }
        </>    

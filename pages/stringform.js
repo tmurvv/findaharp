@@ -178,7 +178,10 @@ const StringForm = (props) => {
             <div className="stringForm-subheader"
             >
                 <ul style={{listStyleType: "none", lineHeight: '27.5px'}}> 
-                    <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;<a href='/harploginsignup' style={{fontStyle: 'normal', color: '#6A75AA', fontSize: '14px', textDecoration: 'underline'}}>Remember My Harp Login</a>&nbsp;&nbsp;<a href='/rememberdetails' style={{fontStyle: 'italic', color: '#6A75AA', fontSize: '12px', textDecoration: 'underline'}}>What's this?</a></li>
+                    {user.emailCurrentHarp
+                        ?<li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;<a href='/userharpprofile' style={{fontStyle: 'normal', color: '#6A75AA', fontSize: '14px', textDecoration: 'underline'}}>Showing Brands for harp {user.currentHarpname} click to change harp</a></li>
+                        :<li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;<a href='/harploginsignup' style={{fontStyle: 'normal', color: '#6A75AA', fontSize: '14px', textDecoration: 'underline'}}>Remember My Harp Login</a>&nbsp;&nbsp;<a href='/rememberdetails' style={{fontStyle: 'italic', color: '#6A75AA', fontSize: '12px', textDecoration: 'underline'}}>What's this?</a></li>
+                    }
                     <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
                     <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
                     <li style={{display: 'flex', width: 'fit-content'}}>

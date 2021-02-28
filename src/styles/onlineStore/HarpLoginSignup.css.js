@@ -144,14 +144,15 @@ function HarpLoginSignupCSS() {
                 transition: 0.5s cubic-bezier(0.64, 0.35, 0.58, 1);
             }
             #harplogin {
-                transform: translate(28%, -203%);
+                transform: translate(10%, -95%);
             }
             #harpsignup {
                 transform: translateX(-28%);
             }
             @media only screen and (max-width: 550px) {
                 #harplogin {
-                    transform: translate(10%, -95%);
+                    
+                    transform: translate(28%, -203%);
                 }
                 #harpsignup {
                     transform: translateX(-10%);
