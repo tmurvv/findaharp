@@ -115,13 +115,12 @@ function HarpLoginSignup(props) {
         dispatchharpactiveWindow({type: 'harplogin'});
     }
     const handleSubmit = async (evt) => {
-        
         document.querySelector('#spinner').style.display="block";
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
         if (harpactiveWindow.active==='harpsignup') {
             // create signup harp object
-            console.log('harpsingup', harpSignup)
+            console.log('harpsingupstringform', stringForm)
             const newHarp = {
                 oldemail: harpSignup.harpsignupemail,
                 // oldemail: "6test@test.com",
@@ -130,6 +129,7 @@ function HarpLoginSignup(props) {
                 stringform: JSON.stringify(stringForm),
                 newsletter: harpSignup.newsletter
             };
+            console.log('newharp', newHarp)
             // signup harp
             try {
                 const res = await axios.post(`${process.env.backend}/api/v1/userharps/createuserharp`, newHarp);
@@ -137,11 +137,12 @@ function HarpLoginSignup(props) {
                     // set harpContext to added harp
                     const returnedHarp = res.data.userharp;
                     console.log(res.data)
+                    
                     setUser({
                         _idCurrentHarp: returnedHarp._id,
                         emailCurrentHarp: returnedHarp.email,
                         currentHarpname: returnedHarp.harpname,
-                        harplist
+                        harplist: returnedHarp.harplist
                     });
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
                     resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword}`;
@@ -221,11 +222,11 @@ function HarpLoginSignup(props) {
                 resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
-                console.log('error', e.message)
+                console.log('loginerror', e.response.data.message)
                 // email not found #1
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Cannot read property 'emailverified' of null") {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harp not found.") {
+                    resultText.innerText=`Harp not found. Select signup window to add harp.`;
+                    dispatchResultInfo({type: 'OK'});
                 // email not verified
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
                     setNeedVerify(true);                
@@ -273,7 +274,6 @@ function HarpLoginSignup(props) {
         }
     }
     async function loginGuest(evt) {
-        
         document.querySelector('#spinner').style.display="block";
         resetResults();
         Router.push('/stringform');
@@ -282,6 +282,7 @@ function HarpLoginSignup(props) {
     }
     // display cart??
     useEffect(()=>{
+        // console.log('loginstringform', stringForm) 
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     return ( 

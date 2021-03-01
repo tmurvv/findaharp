@@ -17,7 +17,7 @@ import { UserContext } from '../src/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
 import { resultsWindowReducer } from '../src/reducers/ResultsWindowReducer';
 import { StringFormContext } from '../src/contexts/StringFormContext';
-import { STRING_FORM_INIT } from '../src/constants/inits';
+import { STRING_FORM_INFO_INIT, STRING_FORM_INIT } from '../src/constants/inits';
 
 const activeWindowInitialState = {
     activeWindow: 'changePassword',
@@ -323,6 +323,7 @@ function UserHarpProfile(props) {
             stringform: STRING_FORM_INIT,
             _idCurrentHarp: null
         }); 
+        setStringForm(STRING_FORM_INIT);
         clearForm('both');
         Router.push('/stringform')
     }

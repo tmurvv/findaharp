@@ -60,9 +60,6 @@ export default function NavBar(props) {
                             <a id='userName' onClick={props.handleNavOpen}>Harp Login</a>
                         </Link>
                     }
-                    <Link href='/harpuserprofile' as='/harpuserprofile'>
-                        <a id='userName' onClick={props.handleNavOpen}>harp: {user.currentHarpname}</a>
-                    </Link>
                     <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>
                     </Link>
