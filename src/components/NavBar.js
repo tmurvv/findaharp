@@ -10,6 +10,7 @@ export default function NavBar(props) {
     const { user, setUser } = useContext(UserContext);
     useEffect(()=> {
         if (!user.firstname) setUser({
+            ...user,
             firstname: 'login',
             lastname: '',
             email: '',

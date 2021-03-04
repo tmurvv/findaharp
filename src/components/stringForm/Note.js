@@ -37,7 +37,6 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
         setGetTip(setIt);
     })
     return (
-        
         <div style={{position: 'relative'}} onBlur={()=>{
             
             // if (parseInt(document.querySelector(`#qty${note}`).value)>0)
@@ -83,7 +82,8 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                         className='qty-input' 
                         type='number'
                         min='0'
-                        // value={stringForm[note.substr(0,1)][note.substr(1)].qty} 
+                        value={stringForm[note.substr(0,1)][note.substr(1)].qty}
+                        // placeholder={stringForm[note.substr(0,1)][note.substr(1)].qty} 
                         onChange={(e)=>handleChange(e)} note={`${note}`}
                     />
                 </div>

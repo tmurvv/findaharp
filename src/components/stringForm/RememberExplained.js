@@ -1,29 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
 import Router from 'next/router';
 
-import { CartContext } from '../src/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
-import { UserContext } from '../src/contexts/UserContext';
-import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import { StatusContext } from '../src/contexts/StatusContext';
-import PageTitle from '../src/components/PageTitle';
-import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
-import CartCss from '../src/styles/onlineStore/cart.css'; 
-import IndexCss from '../src/styles/index.css'; 
-import ProductModalCSS from '../src/styles/ProductModal.css';
+import PageTitle from '../../components/PageTitle';
+import CartCss from '../../styles/onlineStore/cart.css'; 
+import IndexCss from '../../styles/index.css';
 
 
-function RememberDetails() {
-    const { setStatus } = useContext(StatusContext);
-    
-    // display cart
-    useEffect(()=>{
-        if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';
-    }, []);
-    // set status completed
-    useEffect(()=>{
-       setStatus('completed');
-    }, []);
+function RememberExplained(props) {  
     return ( 
         <>
             <div style={{ padding: '20px 0'}}>
@@ -40,15 +23,15 @@ function RememberDetails() {
                         </ul>
                     </div>
                     <div style={{display: 'flex', justifyContent: 'space-evenly',margin: '50px', maxWidth: '650px'}}>
-                        <button style={{fontSize: '14px', marginRight: '2.5px'}} className='submit-btn' onClick={()=>Router.push('/harploginsignup')}>Signup a Harp</button>
-                        <button style={{fontSize: '14px', marginLeft: '2.5px'}} className='submit-btn' onClick={()=>Router.push('/stringform')}>Back String Form</button> 
+                        <button style={{fontSize: '14px', marginRight: '2.5px'}} className='submit-btn' onClick={()=>[props.setstringformstatus('login')]}>Signup a Harp</button>
+                        <button style={{fontSize: '14px', marginLeft: '2.5px'}} className='submit-btn' onClick={()=>[props.setstringformstatus('stringform')]}>Back to String Form</button> 
                     </div>
                 </div>
             </div>
             <CartCss />
             <IndexCss />
         </>
-    )       
+    );      
 }
 
-export default RememberDetails;
+export default RememberExplained;

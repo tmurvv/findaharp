@@ -57,7 +57,7 @@ function MyApp(props) {
     const [cartSubtotals, setCartSubtotals] = useState(CART_SUBTOTALS_INIT);
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
-    const [stringForm, setStringForm] = useState(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
+    const [stringForm, setStringForm] = useState(Array.from(JSON.parse(JSON.stringify(STRING_FORM_INIT))));
     const [stringFormInfo, setStringFormInfo] = useState(JSON.parse(JSON.stringify(STRING_FORM_INFO_INIT)));
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27);
     const [windowWidth, setWindowWidth] = useState(0);
@@ -221,7 +221,6 @@ function MyApp(props) {
             </>
         )
     }
-
     return( 
         <>  
             <Head>
@@ -231,10 +230,10 @@ function MyApp(props) {
                 <script src="https://js.stripe.com/v3/" />
             </Head>
             <Banner />
+            
+            <StringFormContext.Provider value={{stringForm, setStringForm}}>
             <UserContext.Provider value={{user, setUser}}>
             <StatusContext.Provider value={{status, setStatus}}>
-            <StringFormContext.Provider value={{stringForm, setStringForm}}>
-            <StringFormInfoContext.Provider value={{stringFormInfo, setStringFormInfo}}>
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
@@ -262,11 +261,10 @@ function MyApp(props) {
                     </CartSubtotalsContext.Provider>
                     </CartContext.Provider>
                 </CartOpenContext.Provider>
-            </StringFormInfoContext.Provider>
-            </StringFormContext.Provider>
             </StatusContext.Provider>
             </UserContext.Provider>
             
+            </StringFormContext.Provider>
             <AppCss />
         </>
     )

@@ -1,20 +1,24 @@
+import { isFunction } from 'formik';
 import Router from 'next/router';
 
-function FastNEasyStringForm() {
+function FastNEasyStringForm({ setstringformstatus }) {
     return (
         <>
-            <a 
-                onClick={()=>Router.push('/stringform')} 
+            <button 
+                onClick={()=>isFunction(setstringformstatus)?setstringformstatus('stringform'):Router.push('/stringform')} 
                 style={{
-                    color: '#6A75AA',
-                    cursor: 'pointer', 
+                    color: '#6A75AA', 
                     fontSize: '11px', 
                     fontFamily: 'Metropolis Extra Bold', 
                     fontStyle: 'italic', 
                     fontWeight: '600', 
                     textDecoration: 'underline',
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    border: 'none',
+                    backgroundColor: 'transparent',
+                    padding: '0',
+                    cursor: 'pointer'
                 }}
             >
                 {/* <img 
@@ -28,7 +32,7 @@ function FastNEasyStringForm() {
                     style={{height: '30px', marginRight: '2px'}}
                 /> 
                 <div>Fast N Easy String Form</div>
-            </a>
+            </button>
 
 
             {/* <div 

@@ -14,6 +14,7 @@ import { UserContext } from '../src/contexts/UserContext';
 import { StringFormContext } from '../src/contexts/StringFormContext';
 import { resultInfoReducer, harpactiveWindowReducer } from '../src/reducers/reducers';
 import { STRING_FORM_INFO_INIT, STRING_FORM_INIT } from '../src/constants/inits';
+import { zeroQuantities } from '../src/utils/storeHelpers';
 
 // initialize reducer object
 const harpactiveWindowInitialState = {
@@ -115,6 +116,7 @@ function HarpLoginSignup(props) {
         dispatchharpactiveWindow({type: 'harplogin'});
     }
     const handleSubmit = async (evt) => {
+        console.log('signup', stringForm)
         document.querySelector('#spinner').style.display="block";
         evt.preventDefault();
         const resultText = document.querySelector('#loadingLoginText');
@@ -139,6 +141,7 @@ function HarpLoginSignup(props) {
                     console.log(res.data)
                     
                     setUser({
+                        ...user,
                         _idCurrentHarp: returnedHarp._id,
                         emailCurrentHarp: returnedHarp.email,
                         currentHarpname: returnedHarp.harpname,
@@ -179,36 +182,18 @@ function HarpLoginSignup(props) {
                 console.log('returned', returnedHarp)
                 let parseStringForm;
                 if (returnedHarp.stringform) parseStringForm = await JSON.parse(returnedHarp.stringform);
-                
+                console.log('parse from login', parseStringForm);
                 // purge quantities
                 if (parseStringForm&&parseStringForm.length>0) {
-                    for (var i = 0; i<parseStringForm.length; i++) {
-                        if (i===0) {
-                            parseStringForm[0].G.qty=0; 
-                            parseStringForm[0].G.qty=0; 
-                            break;
-                        }
-                        if (i===7) {
-                            parseStringForm[0].E.qty=0; 
-                            parseStringForm[0].D.qty=0; 
-                            parseStringForm[0].C.qty=0; 
-                            break;
-                        }
-                        parseStringForm[0].E.qty=0; 
-                        parseStringForm[0].D.qty=0; 
-                        parseStringForm[0].C.qty=0;
-                        parseStringForm[0].B.qty=0;
-                        parseStringForm[0].A.qty=0;
-                        parseStringForm[0].G.qty=0;
-                        parseStringForm[0].F.qty=0;
-                    }
+                    parseStringForm=zeroQuantities(parseStringForm);
                 } else {
-                    parseStringForm = {...STRING_FORM_INIT}
+                    parseStringForm = JSON.parse(JSON.stringify(STRING_FORM_INIT));
                 }
                 
                 console.log('loginharplist', returnedHarp.harplist)
                 // set harp context to login harp
                 setUser({
+                    ...user,
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
@@ -282,7 +267,8 @@ function HarpLoginSignup(props) {
     }
     // display cart??
     useEffect(()=>{
-        // console.log('loginstringform', stringForm) 
+        console.log('effectloginstringform', stringForm) 
+        console.log('effectloginstringformUser', user) 
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     return ( 

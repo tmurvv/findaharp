@@ -3,14 +3,14 @@ import IndexCss from '../styles/index.css.js';
 import Router from 'next/router';
 import FastNEasyStringForm from './onlineStore/FastNEasyStringForm.js';
 
-function PageTitle({ maintitle, subtitle }) {
+function PageTitle({ maintitle, subtitle, setstringformstatus }) {
     return (
         <>
         {maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
         ?<div>
-            <div onClick={()=>Router.push('/stringform')} style={{ position: 'absolute', top: '15px', left: '15px'}}>
+            {/* <div onClick={()=>setstringformstatus?setstringformstatus('stringform'):Router.push('/stringform')} style={{ position: 'absolute', top: '15px', left: '15px'}}>
                 <FastNEasyStringForm />
-            </div>
+            </div> */}
             {maintitle.toUpperCase()!=='ONLINE STORE'&&
                 <a 
                     onClick={()=>Router.push('/onlinestore')} 

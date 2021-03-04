@@ -7,6 +7,7 @@ import axios from 'axios';
 import IndexCss from '../src/styles/index.css.js';
 import ProductSearch from '../src/components/ProductSearch';
 import PageTitle from '../src/components/PageTitle';
+import FastNEasyStringForm from '../src/components/onlineStore/FastNEasyStringForm';
 
 // // local test data
 // import testData from '../src/utils/testData';
@@ -36,7 +37,10 @@ const Index = (props) => {
             <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
         </Head>
         
-        <div className="index" >  
+        <div className="index" >
+            <div style={{position: 'absolute', top: '15px', left: '15px'}}>
+                <FastNEasyStringForm />
+            </div>
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 
                 makesmodels={props.makesModels}

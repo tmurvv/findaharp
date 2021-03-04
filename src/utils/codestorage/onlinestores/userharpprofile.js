@@ -150,8 +150,9 @@ function UserHarpProfile(props) {
                     const userCopy = res.data;
                     console.log('res', res.data)
                     setUser({
-                           emailCurrentHarp: userCopy.email,
-                           currentHarpname: userCopy.harpname
+                            ...user,
+                            emailCurrentHarp: userCopy.email,
+                            currentHarpname: userCopy.harpname
                         }
                     );
                 }
@@ -205,11 +206,12 @@ function UserHarpProfile(props) {
                         parseStringForm[0].F.qty=0;
                     }
                 } else {
-                    parseStringForm = {...STRING_FORM_INIT}
+                    parseStringForm = JSON.parse(JSON.stringify(STRING_FORM_INIT));
                 }
                 
                 // set harp context to login harp
                 setUser({
+                    ...user,
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
@@ -320,10 +322,10 @@ function UserHarpProfile(props) {
         setUser({
             currentHarpname: null,
             emailCurrentHarp: null,
-            stringform: STRING_FORM_INIT,
+            stringform: JSON.parse(JSON.stringify(STRING_FORM_INIT)),
             _idCurrentHarp: null
         }); 
-        setStringForm(STRING_FORM_INIT);
+        setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
         clearForm('both');
         Router.push('/stringform')
     }
