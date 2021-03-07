@@ -69,7 +69,18 @@ function Cart(props) {
     }, []);
     return (
         <>
-            
+            <img id='spinner' style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '25%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    zIndex: '9000',
+                    height: '75px'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <div className='index' style={{width: '100%'}}>
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
                 <Results 
@@ -78,9 +89,9 @@ function Cart(props) {
                     resetResults={resetResults} 
                 />
             <div className="cartContainer"> 
-            <div style={{position: 'absolute', top: '10px', left: '10px'}}>
-                <FastNEasyStringForm />
-            </div> 
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
+                    <FastNEasyStringForm />
+            </div>
                 
                 <div id='cart'>
                     {cart.length===0?<h3 style={{paddingLeft: '15px'}}>No Items in Cart</h3>:''}

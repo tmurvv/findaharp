@@ -1,6 +1,6 @@
 export const STRING_BRANDS = [
     {
-        name: 'Pedal Bass Wire (Tarnish-Resistant)',
+        name: "Pedal Bass Wire (Tarnish-Resistant)",
         high: 34,
         low: 45
     },

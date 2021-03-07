@@ -56,26 +56,14 @@ export async function deleteItem(cart, setCart, prodId, cartSubtotals, setCartSu
     setCart(tempCart);
 }
 export function zeroQuantities(parseStringForm) {
-    console.log('from zero', parseStringForm)
     for (var i = 0; i<parseStringForm.length; i++) {
-        if (i===0) {
-            parseStringForm[0].G.qty=0; 
-            parseStringForm[0].G.qty=0; 
-            break;
-        }
-        if (i===7) {
-            parseStringForm[0].E.qty=0; 
-            parseStringForm[0].D.qty=0; 
-            parseStringForm[0].C.qty=0; 
-            break;
-        }
-        parseStringForm[0].E.qty=0; 
-        parseStringForm[0].D.qty=0; 
-        parseStringForm[0].C.qty=0;
-        parseStringForm[0].B.qty=0;
-        parseStringForm[0].A.qty=0;
-        parseStringForm[0].G.qty=0;
-        parseStringForm[0].F.qty=0;
+        if (parseStringForm[i].E) parseStringForm[i].E.qty='0'; 
+        if (parseStringForm[i].D) parseStringForm[i].D.qty='0'; 
+        if (parseStringForm[i].C) parseStringForm[i].C.qty='0';
+        if (parseStringForm[i].B) parseStringForm[i].B.qty='0';
+        if (parseStringForm[i].A) parseStringForm[i].A.qty='0';
+        if (parseStringForm[i].G) parseStringForm[i].G.qty='0';
+        if (parseStringForm[i].F) parseStringForm[i].F.qty='0';
     }
     return parseStringForm;
 }

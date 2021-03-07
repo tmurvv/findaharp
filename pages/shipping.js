@@ -184,12 +184,15 @@ function Shipping() {
     }
     return (
         <div className='whiteWallPaper'>
-            <img id='spinner' style={{
-                display: 'none', 
-                position: 'fixed', 
-                top: '50%', 
-                left: '50%', 
-                transform: 'translate(-50%,-50%)'
+            <img 
+                id='spinner' 
+                style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '50%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    height: '75px'
                 }} 
                 src='/img/spinner.gif' 
                 alt='spinner' 

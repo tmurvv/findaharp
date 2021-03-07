@@ -26,10 +26,26 @@ function StringFormCss() {
                 width: 60%;
                 font-size: 16px;
             }
+            .stringForm-subheader li {
+                padding-left: 19px;
+                text-indent: -19px;
+            }
+            .stringForm-subheader li:first-child {
+                padding-left: 0px;
+            }
+            shipsToImg {
+                height: 15px;
+            }
             @media only screen and (max-width: 550px) {
                 .stringForm-subheader {
                     width: 80%;
-                    font-size: 14px;
+                    font-size: 13px;
+                }
+                .shipsToImg{
+                    display: none;
+                }
+                .stringForm-subheader li:first-child {
+                    padding-left:19px;
                 }
             }
             #addHarp { 
@@ -69,6 +85,9 @@ function StringFormCss() {
                     width: 100%;
                 }
             }
+            .rememberLi {
+                display: flex;
+            }
             .shipsTo {
                 display: flex;
                 align-items: center;
@@ -76,12 +95,21 @@ function StringFormCss() {
                 font-weight: 300;
                 font-style: italic;
                 line-height: 1.5;
-                font-size: 12px;
+                font-size: 16px;
                 // margin: 15px auto 0;
             }
             @media only screen and (max-width: 550px) {
+                .rememberLi {
+                    display: block;
+                }
+                .rememberLi:first-child {
+                    padding-left: 19px;
+                }
+            }
+            @media only screen and (max-width: 650px) {
+                
                 .shipsTo {
-                    
+                    font-size: 12px;
                 }
             }
             .stringForm h2 {

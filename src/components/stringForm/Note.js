@@ -53,10 +53,9 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                 <div className="item4 colHeader" style={{border: '2px solid'}}>Note</div>
                 <div className="item3 colHeader" style={{border: '2px solid'}}>Qty</div>
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
-                    <div style={{width: '90%'}}>
+                    <div style={{width: '100%'}}>
                     <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div style={{color: '#6A75AA', fontSize: '14px', fontStyle: 'italic', textAlign: 'left'}}>{getTip}</div>
-                        <div style={{width: '50%', textAlign: 'right'}}>
+                        <div style={{width: 'fit-content', textAlign: 'left'}}>
                             <input 
                                 id={`applytooctave${octave}`}
                                 type='checkbox'
@@ -68,6 +67,16 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                             />
                             <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                         </div>
+                        <div 
+                            style={{
+                                color: '#6A75AA', 
+                                fontSize: '14px', 
+                                fontStyle: 'italic', 
+                                textAlign: 'left', 
+                                paddingLeft: '5px'
+                            }}>{getTip}&nbsp;&nbsp;&nbsp;
+                        </div>
+                        
                     </div>
                     </div>
                 </div>
@@ -107,7 +116,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                         note={note}
                         setTotal={setTotal}
                     />
-                    <div id={`stringTypeText${note}`} style={{paddingLeft: '15px'}}>{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].brand}</div>
+                    <div id={`stringTypeText${note}`}>{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].brand}</div>
                 </div>
                 <div className="item6">{parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0&&"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)}</div>
                 <div className="item7">

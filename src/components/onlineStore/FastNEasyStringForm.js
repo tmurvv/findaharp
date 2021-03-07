@@ -18,7 +18,8 @@ function FastNEasyStringForm({ setstringformstatus }) {
                     border: 'none',
                     backgroundColor: 'transparent',
                     padding: '0',
-                    cursor: 'pointer'
+                    cursor: 'pointer',
+                    outline: 'none'
                 }}
             >
                 {/* <img 

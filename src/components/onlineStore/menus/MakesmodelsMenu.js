@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
+import MakesModelsMenuCSS from '../../../styles/onlineStore/MakesModelsMenu.css';
+import MakesModelsAbbr, { MENU_ABBR } from '../../../constants/constants';
 
 export default function MakesmodelsMenu(props) {
     const [ dusty, setDusty ] = useState();
@@ -16,6 +18,7 @@ export default function MakesmodelsMenu(props) {
         setStoney(false);
         setTriplett(false);
         if (evt.target.value === 'Makes/Models') return;
+        console.log('makesmodelsmenu', evt.target.getAttribute('name'))
         props.handleMakesmodelsChange(evt.target.getAttribute('name')); 
     };
     // get currency conversions
@@ -26,18 +29,16 @@ export default function MakesmodelsMenu(props) {
     return (
         <div className='relative'>
             <button 
-                className="menuButton" 
+                className="menuButton makesmodels" 
                 name='makesmodels' 
-
                 onClick={(e)=>{
-                    // alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.')
                     setDusty(false);
                     setRees(false);
                     setStoney(false);
                     setTriplett(false);
                     props.handleclick(e); 
                 }}
-                style={{color: '#000000', transform: 'translateX(-20px)'}}
+                style={{color: '#000000'}}
             >
                 By Make/Model
             </button>               
@@ -46,13 +47,19 @@ export default function MakesmodelsMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Makes/Models'
-                className='storePlainTextSelectLine2'
+                className='storePlainTextSelectLine2 makesmodels'
             >
                 <li 
-                    onClick={()=>{if (confirm(`Pedal harps${useOctaveMenu}`)) Router.push('/stringform')}} 
+                    onClick={handleClose} 
                     key={uuid()} 
                     name='All Makes/Models'
                 >All Makes/Models</li>
+                <li 
+                    onClick={()=>{if (confirm(`Pedal harps${useOctaveMenu}`)) Router.push('/stringform')}} 
+                    key={uuid()} 
+                    name='Pedal Harps'
+                >Pedal Harps</li>
+
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -80,7 +87,7 @@ export default function MakesmodelsMenu(props) {
                             onClick={(e)=>{e.stopPropagation(); setDusty(false); handleClose(e);}} 
                             key={uuid()} 
                             name='FH'
-                        >FH36 Models</li> 
+                        >FH Models</li> 
                         <li 
                             onClick={(e)=>{e.stopPropagation(); setDusty(false); handleClose(e);}} 
                             key={uuid()} 
@@ -367,7 +374,8 @@ export default function MakesmodelsMenu(props) {
                     key={uuid()} 
                     name='Nylon Wire Monofilament'
                 >Nylon Wire Monofilament</li>
-            </ul>     
+            </ul>
+            <MakesModelsMenuCSS />     
         </div>
     );
 }

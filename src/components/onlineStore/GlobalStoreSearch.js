@@ -244,8 +244,6 @@ function GlobalStoreSearch(props) {
             // check string makesmodels
             if (makesmodels&&makesmodels!==undefined&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") {
                 brandsProductList.map(product=> {
-                    console.log(makesmodels.toUpperCase(), String(product.title).toUpperCase())
-                
                     if (makesmodels.toUpperCase()==='NEW' || makesmodels.toUpperCase()==='USED') {
                         if (product.newused.toUpperCase()==='NEW'&&makesmodels.toUpperCase()==='NEW') makesmodelsProductList.push(product); 
                         if (product.newused.toUpperCase()==='USED'&&makesmodels.toUpperCase()==='USED') makesmodelsProductList.push(product); 
@@ -261,7 +259,7 @@ function GlobalStoreSearch(props) {
             } else {
                 makesmodelsProductList=[...brandsProductList];
             }
-            console.log('dusty', makesmodelsProductList.length)
+            // console.log('dusty', makesmodelsProductList.length)
             finalProductList=[...makesmodelsProductList];
         } else {
             finalProductList=[...newusedProductList]
@@ -275,7 +273,7 @@ function GlobalStoreSearch(props) {
             searchProductList=[...preSearchProductList]
         }
         finalProductList=[...searchProductList];
-        console.log('final', finalProductList.length)
+        // console.log('final', finalProductList.length)
         finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
         setTypeOfSearch(type);
         setSearchResults(finalProductList)
@@ -319,7 +317,18 @@ function GlobalStoreSearch(props) {
                 idprefix={`SP`}
                 zipMsg='Only 1 in stock. Item already in cart.'
             />
-            
+            <img id='spinner' style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '25%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    zIndex: '9000',
+                    height: '75px'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <div className='storeSearchLine' >
                 {screenWidth>750
                 ?
@@ -403,7 +412,7 @@ function GlobalStoreSearch(props) {
                 allState={allState}
                 setAllState={setAllState} 
             />
-            <div style={{width: 'fit-content', margin: 'auto', marginTop: '30px', marginBottom: '-20px'}}>
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{width: 'fit-content', margin: 'auto', marginTop: '30px', marginBottom: '-20px', zIndex: '2000'}}>
                 <FastNEasyStringForm />
             </div>
             <StoreProductSearchStrings              

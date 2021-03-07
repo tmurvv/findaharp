@@ -47,6 +47,7 @@ function HarpLoginSignup(props) {
         harploginpassword: '',
         harploginchange: false
     });
+    const [ loginFail, setLoginFail ] = useState(false)
     const handleChange = (evt) => {
         switch (evt.target.name) {
             case 'firstname': 
@@ -189,7 +190,12 @@ function HarpLoginSignup(props) {
                 const jwt = res.data.token;
                 console.log('returned', returnedHarp)
                 let parseStringForm;
-                if (returnedHarp.stringform) parseStringForm = await JSON.parse(returnedHarp.stringform);
+                try {
+                    if (returnedHarp.stringform) parseStringForm = await JSON.parse(returnedHarp.stringform);
+                } catch(e) {
+                    parseStringForm = JSON.parse(JSON.stringify(STRING_FORM_INIT));
+                }
+                
                 console.log('parse from login', parseStringForm);
                 // purge quantities
                 if (parseStringForm&&parseStringForm.length>0) {
@@ -215,7 +221,7 @@ function HarpLoginSignup(props) {
                 resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
-                console.log('loginerror', e.response.data.message)
+                if (e.response&&e.response.data&&e.response.data.message) console.log('loginerror', e.response.data.message)
                 // email not found #1
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harp not found.") {
                     resultText.innerText=`Harp not found. Select signup window to add harp.`;
@@ -239,6 +245,7 @@ function HarpLoginSignup(props) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain'});
                 }
+                setLoginFail(true);
             }
         }
         resetSignupForm();
@@ -266,17 +273,66 @@ function HarpLoginSignup(props) {
             dispatchResultInfo({type: 'okTryAgain'});
         }
     }
+    async function getHarpList(e) {
+        setUser({...user, harplist: null})
+        const resultText = document.querySelector('#loadingLoginText');
+        console.log('e', e.target.value)
+        try {
+            // login harp
+            const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: e.target.value, oldharpname: "get list"});
+            const returnedHarp = res.data.userharp;
+            const jwt = res.data.token;
+            console.log('returned', returnedHarp)
+            
+            // set harp context to login harp
+            setUser({
+                ...user,
+                harplist: returnedHarp
+            });
+            // set JWT cookie
+            //  document.cookie = `JWT=${jwt}`
+            // display result window
+            // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
+            // dispatchResultInfo({type: 'OK'});
+        } catch(e) {
+            if (e.response&&e.response.data&&e.response.data.message) console.log('loginerror', e.response.data.message)
+            // email not found #1
+            if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harp not found.") {
+                resultText.innerText=`Harp not found. Select signup window to add harp.`;
+                dispatchResultInfo({type: 'OK'});
+            // email not verified
+            } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
+                // setNeedVerify(true);                
+                await setHarpLogin({...harpLogin, loginemail: e.response.data.harpemail})
+                resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
+                dispatchResultInfo({type: 'okTryAgain'});
+            // passwords don't match
+            } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
+                dispatchResultInfo({type: 'okTryAgain'});
+            // email not found #2
+            } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
+                dispatchResultInfo({type: 'okTryAgain'});
+            // other error
+            } else {
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
+                dispatchResultInfo({type: 'okTryAgain'});
+            }
+            setLoginFail(true);
+        }
+
+    }
     async function loginGuest(evt) {
-        document.querySelector('#spinner').style.display="block";
+        document.querySelector('#spinner').style.display="none";
         resetResults();
-        props.setstringformstatus('stringform');
+        if (!loginFail) props.setstringformstatus('stringform');
+        setLoginFail(false)
         // go to main window
         // Router.push('/');
     }
     // display cart??
     useEffect(()=>{
-        console.log('effectloginstringform', stringForm) 
-        console.log('effectloginstringformUser', user) 
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
     return ( 
@@ -287,7 +343,8 @@ function HarpLoginSignup(props) {
                 top: '50%', 
                 left: '50%', 
                 transform: 'translate(-50%,-50%)',
-                zIndex: '9000'
+                zIndex: '9000',
+                height: '75px'
             }} 
             src='/img/spinner.gif' 
             alt='spinner' 
@@ -363,13 +420,26 @@ function HarpLoginSignup(props) {
                                 value={harpLogin.harploginemail}
                                 onChange={handleChange}
                                 name='harploginemail'
+                                onBlur={(e)=>getHarpList(e)}
                                 required={harpactiveWindow.active==='harplogin'}
                                 disabled={harpactiveWindow.active==='harpsignup'}
                             />
                             <div className="input-name input-margin">
                                 <h3>Harp Name</h3>
                             </div>
-                            <input 
+                            <select 
+                                style={{padding: '7px 10px', width: '100%'}}
+                                value={harpLogin.harploginpassword}
+                                onChange={handleChange}
+                                name='harploginpassword'
+                                required={harpactiveWindow.active==='harplogin'}
+                                disabled={harpactiveWindow.active==='harpsignup'}
+                            >
+                                <option key={uuid()}>enter email to select harp</option>
+                                {user.harplist&&user.harplist.map(harp => <option key={uuid()} value={harp.harpname}>{harp.harpname}</option>)}
+                            </select>
+                            
+                            {/* <input 
                                 className="field-input"
                                 type='text'
                                 id={uuid()}
@@ -378,7 +448,9 @@ function HarpLoginSignup(props) {
                                 name='harploginpassword'
                                 required={harpactiveWindow.active==='harplogin'}
                                 disabled={harpactiveWindow.active==='harpsignup'}
-                            />
+                            /> */}
+                            
+                            
                         </div>
                         <button type='submit' className="submit-btn login-signup-title">
                             Submit

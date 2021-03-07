@@ -100,6 +100,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                     }
                 });
                 if (notAvailable) alert(`${stringType} not available in all notes in this octave.`);
+                setNotAvailable(false);
             }
             if (clickOctave===7) {
                 strings.map(string=>{ 
@@ -133,12 +134,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                 // });
                 if (notAvailable) alert(`${stringType} not available in all notes in this octave.`);
             } 
-            // turn off apply to octave
-            newObject[clickOctave].applytooctave=0;
             newObject.changes="true";
-            console.log('select137')
-            console.log(newObject)
-            if (document.querySelector(`#applytooctave${note.substr(0,1)}`)) document.querySelector(`#applytooctave${note.substr(0,1)}`).checked=false;
             setStringForm(newObject);
             // set total
             let newTotal = 0;

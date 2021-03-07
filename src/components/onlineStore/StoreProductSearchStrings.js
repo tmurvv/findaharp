@@ -8,6 +8,7 @@ import MakesmodelsMenu from './menus/MakesmodelsMenu';
 // other internal
 import StoreProductSearchCss from '../../styles/onlineStore/StoreProductSearch.css';
 import { getSearchInfo, triggerLazy } from '../../utils/helpers';
+import { MENU_ABBR } from '../../constants/constants';
 
 const initialState = {
     category: false,
@@ -20,6 +21,8 @@ const initialState = {
 }
 function StoreProductSearchStrings(props) {
     const [menus, setMenus] = useState(initialState);
+    const [modelAbbr, setModelAbbr] = useState("All Makes/Models");
+    const [BrandAbbr, setBrandAbbr] = useState("All Brands");
     
     function handleOctavesSelection(octaves) {
         props.setTypeOfSearch("strings");
@@ -64,6 +67,12 @@ function StoreProductSearchStrings(props) {
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
+        let abbr;
+        MENU_ABBR.map(abbrConst => { 
+            console.log('inmap', abbrConst[0], brands)
+            if (brands===abbrConst[0]) abbr=abbrConst[1];
+        });
+        abbr!==undefined?setBrandAbbr(abbr):setBrandAbbr(brands);
         setMenus(initialState);      
     }
     function handleMakesmodelsSelection(makesmodels) {
@@ -79,6 +88,13 @@ function StoreProductSearchStrings(props) {
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
+        let abbr;
+        MENU_ABBR.map(harp => { 
+            console.log('inmap', harp[0], makesmodels)
+            if (makesmodels===harp[0]) abbr=harp[1];
+            // console.log('ini', makesmodels, harp[0]);
+        });
+        abbr!==undefined?setModelAbbr(abbr):setModelAbbr(makesmodels);
         setMenus(initialState);
     }
     function handleClick(e) {
@@ -177,8 +193,8 @@ function StoreProductSearchStrings(props) {
         menuClick==="makesmodels"?menuClick="Makes/Models":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.makesmodels);}
         if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange("strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.makesmodels);}
-        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels);}
-        if (menuClick==='makesmodels') {props.setMakesmodelsSearch("Makes/Models"); props.handleChange("strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "Makes/Models");}
+        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels); setBrandAbbr("All Brands")}
+        if (menuClick==='makesmodels') {props.setMakesmodelsSearch("All Makes/Models"); props.handleChange("strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "All Makes/Models"); setModelAbbr("All Makes/Models")}
         
         const newState = {...props.allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
@@ -230,15 +246,15 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
-                    <BrandsMenu 
-                        id="brandsmenu"
-                        handleBrandsChange = {handleBrandsSelection}
-                        products={props.products}
-                        makestitles={props.makestitles}
-                        currentselected={props.allState.brands?props.allState.brands:'All Brands'}
-                        open={menus.brands}
-                        handleclick={handleClick}
-                    />
+                        <BrandsMenu 
+                            id="brandsmenu"
+                            handleBrandsChange = {handleBrandsSelection}
+                            products={props.products}
+                            makestitles={props.makestitles}
+                            currentselected={props.allState.brands?props.allState.brands:'All Brands'}
+                            open={menus.brands}
+                            handleclick={handleClick}
+                        />
                     <MakesmodelsMenu 
                         id='makesmodelsmenu'
                         handleMakesmodelsChange = {handleMakesmodelsSelection}
@@ -254,7 +270,7 @@ function StoreProductSearchStrings(props) {
                         className={`storesearch-grid-item`} 
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{cursor: 'pointer'}}
+                        style={{cursor: 'pointer', zIndex: '1000'}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"
@@ -300,9 +316,10 @@ function StoreProductSearchStrings(props) {
                         className={`storesearch-grid-item`} 
                         value={props.allState&&props.allState.brands}
                         onClick={()=>handleClick({target: {name: 'brands'}})}
-                        style={{cursor: 'pointer'}}
+                        style={{cursor: 'pointer', zIndex: '1000'}}
                     >
-                        {props.allState&&props.allState.brands}
+                        {/* {props.allState&&props.allState.brands} */}
+                        {BrandAbbr}
                         {props.allState&&props.allState.brands!=="All Brands"
                             ?<img 
                                 name='brands'
@@ -325,12 +342,12 @@ function StoreProductSearchStrings(props) {
                         value={props.allState&&props.allState.makesmodels}
                         onClick={()=>{
                             handleClick({target: {name: 'makesmodels'}});
-                            // alert('Make/Model menu under construction. For now, please search for your harp model name in the text field above.');
-                    
+                            
                         }}
-                        style={{cursor: 'pointer', transform: 'translateX(-20px)'}}
+                        style={{cursor: 'pointer'}}
                     >
-                        {props.allState&&props.allState.makesmodels}
+                        {/* {props.allState&&props.allState.makesmodels} */}
+                        {modelAbbr}
                         {props.allState&&props.allState.makesmodels!=="All Makes/Models"
                             ?<img 
                                 name='makesmodels'

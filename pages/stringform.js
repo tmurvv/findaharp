@@ -71,6 +71,11 @@ const StringForm = (props) => {
         const tempCartJson = JSON.stringify(cartCopy);
         setlocalCart('fah-cart', tempCartJson);
         setCart(cartCopy);
+        //zero quantities on string form
+        let zeroQty = JSON.parse(JSON.stringify(stringForm));
+        zeroQty = zeroQuantities(zeroQty)
+        setStringForm(zeroQty);
+        setChanges(false);
     }
     async function handleSubmit(e) {
         e.preventDefault();
@@ -91,61 +96,47 @@ const StringForm = (props) => {
         }
         // update cart
         updateCart(addArray);
-        
-        let stringFormCopy = JSON.stringify(stringForm);
-        console.log('updatestringfomr', JSON.parse(JSON.stringify(STRING_FORM_INIT)))
-        setChanges(false);
-        // Cancel the before unload event
-        // window.addEventListener('beforeunload', (event) => {
-        //     // empty function to cancel beforeunload
-        // });
-        
-        let stringFormCopy2 = zeroQuantities(stringForm);
-        if (user.currentHarpname&&confirm(`Update remembered harp ${user.currentHarpname} with these string brands?`)) {          
-            // stringFormCopy = zeroQuantities(stringFormCopy);
-            const harpObject = {
+        if (user.currentHarpname) {          
+             const harpObject = {
                 oldharpname: user.currentHarpname,
                 oldemail: user.emailCurrentHarp,
                 harpname: user.currentHarpname,
                 email: user.emailCurrentHarp,
-                stringform: stringFormCopy
+                stringform: JSON.stringify(stringForm)
                 // newsletter: localNews
             }
             try {
                 const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKING
-                console.log('updateharpres', res.data)
+                // console.log('updateharpres', res.data)
                 // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
-                setStringForm(res.data.userharp.stringform);
+                // setStringForm(res.data.userharp.stringform);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
             }
             // document.querySelector('#spinnerRemember').style.display='none';
-            setStringForm(stringFormCopy2);
         }
-        if (!user.currentHarpname&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')          
-            
+        if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
             const harpObject = {
                 oldharpname: user.currentHarpname,
                 oldemail: user.emailCurrentHarp,
                 harpname: user.currentHarpname,
                 email: user.emailCurrentHarp,
-                stringform: stringFormCopy
+                stringform: JSON.stringify(stringForm)
                 // newsletter: localNews
             }
             try {
                 const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKING
-                console.log('updateharpres', res.data)
+                // console.log('updateharpres', res.data)
                 // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
-                setStringForm(res.data.userharp.stringform);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
             }
             // document.querySelector('#spinnerRemember').style.display='none';
-        dispatchResultInfo({type: 'OK', payload: `Strings added to cart.`});
+        dispatchResultInfo({type: 'OK', payload: user.currentHarpname?`Strings added to cart. Harp ${user.currentHarpname.toUpperCase()} brands updated.`:`Strings added to cart.`});
     }
     
     function resetResultsWindow() {
@@ -176,14 +167,14 @@ const StringForm = (props) => {
     
     // display cart??
     useEffect(()=>{
-        console.log('stringformeffect', Array.from(stringForm))
-        console.log('stringformeffectUser', user)
+        // console.log('stringformeffect', Array.from(stringForm))
+        // console.log('stringformeffectUser', user)
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
         return () => {
             console.log('unmount', stringForm)
           }
     },[]);
-    if (stringformStatus) console.log('stats', stringformStatus)
+    // if (stringformStatus) console.log('stats', stringformStatus)
     if (stringformStatus==='login') {
         return (
             <HarpLoginSignup setstringformstatus={setStringformStatus}/>
@@ -220,27 +211,37 @@ const StringForm = (props) => {
                 >
                     <ul style={{listStyleType: "none", lineHeight: '27.5px'}}> 
                         {user.emailCurrentHarp
-                            ?<li style={{display: 'flex'}} onClick={()=>setStringformStatus('profile')}>
+                            ?<li 
+                                className="rememberLi" 
+                                style={{
+                                    display: 'flex', 
+                                    justifyContent: 'flex-start', 
+                                    paddingLeft: '0'
+                                }} 
+                                onClick={()=>setStringformStatus('profile')}
+                            >
                                 <img 
                                     style={{height: '15px', transform: 'translateY(15%)'}} 
                                     src="img/golden_harp_full.png" 
                                     alt="golden harp" 
                                 />
-                                &nbsp;&nbsp;Showing Brands for harp {String(user.currentHarpname).toUpperCase()}. 
-                                <button 
-                                    onClick={()=>setStringformStatus('profile')}
-                                    style={{
-                                        fontStyle: 'italic', 
-                                        color: '#6A75AA',
-                                        backgroundColor: '#fff', 
-                                        fontSize: '14px',
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    click here to change
-                                </button>
+                                <div style={{textIndent: '-8px', paddingLeft: '12px'}}>&nbsp;&nbsp;Showing Brands for harp {String(user.currentHarpname).toUpperCase()}.
+                                    <button 
+                                        onClick={()=>setStringformStatus('profile')}
+                                        style={{
+                                            fontStyle: 'italic', 
+                                            color: '#6A75AA',
+                                            backgroundColor: '#fff',
+                                            cursor: 'pointer',
+                                            textDecoration: 'underline'
+                                        }}
+                                    >
+                                        click here
+                                    </button>
+                                    to edit or switch harp
+                                </div>
                             </li>
-                            :<li style={{display: 'flex'}}>
+                            :<li className="rememberLi">
                                 <img 
                                     style={{height: '15px', transform: 'translateY(15%)'}} 
                                     src="img/golden_harp_full.png" 
@@ -275,11 +276,11 @@ const StringForm = (props) => {
                         }
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
-                        <li style={{display: 'flex', width: 'fit-content'}}>
+                        <li style={{display: 'flex', width: 'fit-content', paddingLeft: '0', textIndent: '0'}}>
                             <img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />
-                            <div style={{marginRight: '15px'}}>&nbsp;&nbsp;Ships from: USA</div>
-                                <img style={{maxHeight: '20px', transform: 'translateY(5px)'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
-                            <div style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>To: US and Canada</div>
+                            <div  className='shipsTo shipsToLeft'>&nbsp;&nbsp;Ships from: USA</div>
+                                <img className='shipsToImg' style={{transform: 'translate(10px, 5px)', maxHeight: '15px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
+                            <div  className='shipsTo' style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>&nbsp;To: US and Canada</div>
                         </li>
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
                     </ul>

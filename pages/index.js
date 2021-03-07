@@ -38,8 +38,20 @@ const Index = (props) => {
         </Head>
         
         <div className="index" >
-            <div style={{position: 'absolute', top: '15px', left: '15px'}}>
-                <FastNEasyStringForm />
+            <img id='spinner' style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '25%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    zIndex: '9000',
+                    height: '75px'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
+                    <FastNEasyStringForm />
             </div>
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 

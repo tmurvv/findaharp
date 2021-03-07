@@ -61,6 +61,16 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
+                    name='Bow Brand Lever Nylon'
+                >Bow Brand Lever Nylon</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Artist Nylon'
+                >Artist Nylon</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
                     name='Silver-Plated Pedal Bass Wire'
                 >Silver-Plated Pedal Bass Wire</li>
                 <li 
@@ -78,16 +88,6 @@ export default function BrandsMenu(props) {
                     key={uuid()} 
                     name='Professional Lever Bass Wire'
                 >Professional Lever Bass Wire</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Bow Brand Lever Nylon'
-                >Bow Brand Lever Nylon</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Artist Nylon'
-                >Artist Nylon</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 

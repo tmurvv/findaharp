@@ -279,7 +279,8 @@ function HarpLoginSignup(props) {
                 top: '50%', 
                 left: '50%', 
                 transform: 'translate(-50%,-50%)',
-                zIndex: '9000'
+                zIndex: '9000',
+                height: '75px'
             }} 
             src='/img/spinner.gif' 
             alt='spinner' 

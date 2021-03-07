@@ -46,7 +46,18 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                         
                         <div style={{width: '100%', padding: '5px 7px'}}>
                         
-                        <div style={{display:'flex', justifyContent: 'space-between'}}>
+                        <div style={{display:'flex', justifyContent: 'space-between'}}>                          
+                            <div style={{textAlign: 'left', flex: 5}}>
+                                <input 
+                                    type='checkbox'
+                                    onClick={()=>{
+                                        const newObject = [...stringForm, stringForm[octave].applytooctave=stringForm[octave].applytooctave===0?1:0]
+                                        setStringForm(newObject)
+                                    }} 
+                                    defaultChecked={applyToOctaves[octave]===0?'':true}
+                                />
+                                <label style={{fontSize: '14px'}}>Apply to Octave?</label>
+                            </div>
                             <div 
                                 style={{
                                     display: 'flex', 
@@ -58,17 +69,6 @@ function MobileNote({setChanges, strings, note, octave, octaveBrand, setOctaveBr
                                     flex: 6
                                 }}
                             >{getTip}</div>
-                            <div style={{textAlign: 'right', flex: 5}}>
-                                <input 
-                                    type='checkbox'
-                                    onClick={()=>{
-                                        const newObject = [...stringForm, stringForm[octave].applytooctave=stringForm[octave].applytooctave===0?1:0]
-                                        setStringForm(newObject)
-                                    }} 
-                                    defaultChecked={applyToOctaves[octave]===0?'':true}
-                                />
-                                <label style={{fontSize: '14px'}}>Apply to Octave?</label>
-                            </div>
                         </div>
                         </div>
                         

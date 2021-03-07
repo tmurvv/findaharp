@@ -143,9 +143,8 @@ function UserHarpProfile(props) {
         //         if (asked&&asked!=='not yet'&&string[noteio]) {string[noteio].qty=0;} else {return;}
         //     });
         // });
-        console.log('newObjectsignup', newObject)
         if (activeWindow.active==='signup') {
-            // shortcut
+            console.log('useredit', userEdit)
             const updatedUser = {
                 harpname: userEdit.currentHarpname?userEdit.currentHarpname:user.currentHarpname,
                 email: userEdit.emailCurrentHarp?userEdit.emailCurrentHarp:user.emailCurrentHarp,
@@ -163,7 +162,7 @@ function UserHarpProfile(props) {
                     resultText.innerText=`Update Successful.`;
                     dispatchResultInfo({type: 'OK'});
                     
-                    const userCopy = res.data;
+                    const userCopy = res.data.updatedUserharp;
                     console.log('res', res.data)
                     setUser({
                             ...user,
@@ -185,17 +184,16 @@ function UserHarpProfile(props) {
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update. Please check your network connection.'}`
                 }
             }
+                
+            props.setstringformstatus('stringform');
         }       
         if (activeWindow.active==='login') { 
             const newObject = JSON.parse(JSON.stringify(stringForm))
             let asked = 'not yet';
             //zero quantities
             newObject.map((string)=>{
-                    console.log('instring', string);
-                    
                 NOTES_IN_OCTAVE.map(noteio=>{
-                    console.log('here', noteio, asked)
-                    if (asked==='not yet'&&string[noteio]&&string[noteio].qty > 0) asked = confirm('Newly entered quantities and brands have not been added to the cart and will be lost. To proceed with new harp login, press "OK". To return to the string form, press "Cancel."')
+                    if (asked==='not yet'&&string[noteio]&&string[noteio].qty > 0) asked = confirm('Newly entered quantities and brands on the string form have not been added to the cart and will be lost. \n\n~To proceed with new harp login, press "OK". \n~To return to the string form, press "Cancel."')
                     if (asked&&asked!=='not yet'&&string[noteio]) {string[noteio].qty=0;} else {return;}
                 });
             });
@@ -210,33 +208,7 @@ function UserHarpProfile(props) {
                 const returnedHarp = res.data.userharp;
                 const jwt = res.data.harpToken;
                 let parseStringForm = await JSON.parse(returnedHarp.stringform);
-                
-                // // purge quantities
-                // if (parseStringForm&&parseStringForm.length>0) {
-                //     for (var i = 0; i<parseStringForm.length; i++) {
-                //         if (i===0) {
-                //             parseStringForm[0].G.qty=0; 
-                //             parseStringForm[0].G.qty=0; 
-                //             break;
-                //         }
-                //         if (i===7) {
-                //             parseStringForm[0].E.qty=0; 
-                //             parseStringForm[0].D.qty=0; 
-                //             parseStringForm[0].C.qty=0; 
-                //             break;
-                //         }
-                //         parseStringForm[0].E.qty=0; 
-                //         parseStringForm[0].D.qty=0; 
-                //         parseStringForm[0].C.qty=0;
-                //         parseStringForm[0].B.qty=0;
-                //         parseStringForm[0].A.qty=0;
-                //         parseStringForm[0].G.qty=0;
-                //         parseStringForm[0].F.qty=0;
-                //     }
-                // } else {
-                //     parseStringForm = JSON.parse(JSON.stringify(STRING_FORM_INIT));
-                // }
-                
+                console.log('login return', res.data.userharp)
                 // set harp context to login harp
                 setUser({
                     ...user,
@@ -246,14 +218,20 @@ function UserHarpProfile(props) {
                     stringform: parseStringForm,
                     harplist: returnedHarp.harplist
                 });
-                setStringForm(parseStringForm);
+                setUserEdit({
+                    emailCurrentHarp: returnedHarp.email,
+                    currentHarpname: returnedHarp.harpname
+                })
+                // setStringForm(parseStringForm);
                 // set JWT cookie
-                 document.cookie = `JWT=${jwt}`
+                //  document.cookie = `JWT=${jwt}`
                 // display result window
                 // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
                 dispatchResultInfo({type: 'OK', payload: `Login Successful: Welcome Harp ${returnedHarp.harpname}`});
             } catch(e) {
+                alert('error')
                 console.log('error', e.message)
+                console.log(e)
                 // email not found #1
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Cannot read property 'emailverified' of null") {
                     // resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
@@ -276,17 +254,10 @@ function UserHarpProfile(props) {
         console.log('ingetharplist')
         try {
             //update password
-            console.log('select', selectHarp.selectemail)
-            console.log('currentharp', user.emailCurrentHarp)
             const searchEmail = selectHarp.selectemail||user.emailCurrentHarp;
-            console.log("search email", searchEmail);
             const res = await axios.post(`${process.env.backend}/api/v1/userharps/getuserharplist`, {email: searchEmail});
-            console.log('251')
             const parseList = res.data.harplist;
-            console.log('253')
-            console.log(res.data.harplist)
             setHarpList(parseList);
-            console.log(parseList)
             document.querySelector('#harplist').disabled = false;
             // dispatchResultInfo({type: 'OK', payload: 'found'});
             clearForm('Both');
@@ -379,7 +350,8 @@ function UserHarpProfile(props) {
                     top: '25%', 
                     left: '50%', 
                     transform: 'translate(-50%,-50%)',
-                    zIndex: '9000'
+                    zIndex: '9000',
+                    height: '75px'
                 }} 
                 src='/img/spinner.gif' 
                 alt='spinner' 
@@ -454,7 +426,6 @@ function UserHarpProfile(props) {
                     Login Another Harp
                 </div>
                 <form onSubmit={handleSubmit}>
-                   
                     <div style={{padding: '25px'}}>   
                         <div className="input-name input-margin">
                                 <h3>Email</h3>
