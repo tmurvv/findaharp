@@ -22,7 +22,7 @@ const initialState = {
 function StoreProductSearchStrings(props) {
     const [menus, setMenus] = useState(initialState);
     const [modelAbbr, setModelAbbr] = useState("All Makes/Models");
-    const [BrandAbbr, setBrandAbbr] = useState("All Brands");
+    const [brandAbbr, setBrandAbbr] = useState("All Brands");
     
     function handleOctavesSelection(octaves) {
         props.setTypeOfSearch("strings");
@@ -246,15 +246,15 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
-                        <BrandsMenu 
-                            id="brandsmenu"
-                            handleBrandsChange = {handleBrandsSelection}
-                            products={props.products}
-                            makestitles={props.makestitles}
-                            currentselected={props.allState.brands?props.allState.brands:'All Brands'}
-                            open={menus.brands}
-                            handleclick={handleClick}
-                        />
+                    <BrandsMenu 
+                        id="brandsmenu"
+                        handleBrandsChange = {handleBrandsSelection}
+                        products={props.products}
+                        makestitles={props.makestitles}
+                        currentselected={props.allState.brands?props.allState.brands:'All Brands'}
+                        open={menus.brands}
+                        handleclick={handleClick}
+                    />
                     <MakesmodelsMenu 
                         id='makesmodelsmenu'
                         handleMakesmodelsChange = {handleMakesmodelsSelection}
@@ -319,7 +319,7 @@ function StoreProductSearchStrings(props) {
                         style={{cursor: 'pointer', zIndex: '1000'}}
                     >
                         {/* {props.allState&&props.allState.brands} */}
-                        {BrandAbbr}
+                        {brandAbbr}
                         {props.allState&&props.allState.brands!=="All Brands"
                             ?<img 
                                 name='brands'

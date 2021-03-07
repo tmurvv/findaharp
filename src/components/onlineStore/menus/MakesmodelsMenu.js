@@ -106,12 +106,15 @@ export default function MakesmodelsMenu(props) {
                     </ul>
                 </li>
                 <li 
-                    onClick={()=>{setRees(true);setDusty(false);setTriplett(false);setStoney(false)}} 
+                    id='trans'
+                    onClick={()=>{document.querySelector('#trans').style.maxHeight='1000px'; setRees(true);setDusty(false);setTriplett(false);setStoney(false)}} 
                     key={uuid()} 
+                    class='trans'
                     name='Rees'
                 >Rees
                     <ul
                         id="makesmodels-select"
+                        onClick={()=>document.querySelector('#makesmodels-select').backgroundColor='blue'}
                         onClose={(e)=>{setRees(false);handleClose(e)}}
                         hidden={!rees}
                         name='Makes/Models'

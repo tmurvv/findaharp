@@ -108,6 +108,9 @@ function StoreProductSearchStringsCss() {
                 display: grid;
                 grid-template-columns: 25% 25% 25% 25%;
             }
+            #makesmodelsmenu {
+                transform: scale(2);
+            }
             @media only screen and (max-width: 750px) {
                 .storesearchLine2 {
                     height: 120px;
