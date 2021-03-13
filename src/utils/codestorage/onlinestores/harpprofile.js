@@ -8,7 +8,6 @@ import Router from 'next/router';
 // import { HarpProfileContext } from '../src/contexts/HarpProfileContext';
 import { CartContext } from '../src/contexts/CartContext';
 import { StringFormContext } from '../src/contexts/StringFormContext';
-import { StringFormInfoContext } from '../src/contexts/StringFormInfoContext';
 // components
 import Octave from '../src/components/stringForm/Octave';
 import RememberHarpLogin from '../src/components/stringForm/RememberHarpLogin';
@@ -29,7 +28,6 @@ const HarpProfile = (props) => {
     const [ localNews, setLocalNews] = useState();
     const [ change, setChange ] = useState(false);
     const { stringForm, setStringForm } = useContext(StringFormContext);
-    const { stringFormInfo, setStringFormInfo } = useContext(StringFormInfoContext);
     const [ showAddNew, setShowAddNew ] = useState(false);
     const { cart, setCart } = useContext(CartContext);
     const [ applyToOctaves, setApplyToOctaves ] = useState([1,1,1,1,1,0,1,1]);
@@ -67,7 +65,8 @@ const HarpProfile = (props) => {
                 // newsletter: localNews
             }
             try {
-                const res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
+                // const res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
+                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/userharps/createuserharp', harpObject);
                 dispatchResultInfo({type: 'OK', payload: `Add a Harp Profile successful for ${harpObject.oldharpname}.`});    
             } catch(e) {
                 console.log(e.message);
@@ -91,13 +90,14 @@ const HarpProfile = (props) => {
                 // stringform: JSON.stringify(stringForm)
             }
             try {
-                const res = await axios.post('http://localhost:3000/api/v1/userharps', harpObject);
-                setStringFormInfo({
-                    harpname: harpObject.harpname, 
-                    email: harpObject.email, 
-                    oldharpname: harpObject.harpname, 
-                    oldemail: harpObject.oldemail
-                });
+                // const res = await axios.post('http://localhost:3000/api/v1/userharps', harpObject);
+                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/userharps', harpObject);
+                // setStringFormInfo({
+                //     harpname: harpObject.harpname, 
+                //     email: harpObject.email, 
+                //     oldharpname: harpObject.harpname, 
+                //     oldemail: harpObject.oldemail
+                // });
                 //set stringForm here
                 console.log('data', res.data) 
                 const parseStringBrands = await JSON.parse(res.data.userharp.stringform);
@@ -122,15 +122,16 @@ const HarpProfile = (props) => {
             setHarpnameEdit(!document.querySelector('#harpnameInput').disabled);
             
             document.querySelector('#spinnerRemember').style.display='block';
-            const harpObject = {
-                oldemail: stringFormInfo.oldemail,
-                oldharpname: stringFormInfo.oldharpname,
-                email: localEmail,
-                harpname: localHarpname,
-                stringform: JSON.stringify(stringForm)
-            }
+            // const harpObject = {
+            //     oldemail: stringFormInfo.oldemail,
+            //     oldharpname: stringFormInfo.oldharpname,
+            //     email: localEmail,
+            //     harpname: localHarpname,
+            //     stringform: JSON.stringify(stringForm)
+            // }
             try {
-                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
+                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
+                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 console.log('whtasehre', harpObject)
                 setStringFormInfo({
                     harpname: harpObject.harpname, 
@@ -157,7 +158,8 @@ const HarpProfile = (props) => {
                 stringform: JSON.stringify(stringForm)
             }
             try {
-                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
+                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
+                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`}); 
                 setStringFormInfo({
                     harpname: harpObject.harpname, 
@@ -440,10 +442,10 @@ HarpProfile.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKING
+    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
 
     return {

@@ -18,7 +18,6 @@ import {UserContext} from "../src/contexts/UserContext";
 import {CurrencyContext} from "../src/contexts/CurrencyContext";
 import {StatusContext} from "../src/contexts/StatusContext";
 import {StringFormContext} from "../src/contexts/StringFormContext";
-import {StringFormInfoContext} from "../src/contexts/StringFormInfoContext";
 import AppCss from '../src/styles/app.css.js';
 import Banner from '../src/components/Banner';
 import NavBar from '../src/components/NavBar';
@@ -58,7 +57,6 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
     const [stringForm, setStringForm] = useState(Array.from(JSON.parse(JSON.stringify(STRING_FORM_INIT))));
-    const [stringFormInfo, setStringFormInfo] = useState(JSON.parse(JSON.stringify(STRING_FORM_INFO_INIT)));
     const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27);
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
@@ -161,6 +159,7 @@ function MyApp(props) {
                 <Head>
                     <title>Find a Harp Pre-owned, Used</title>
                     <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                    <meta property="og:image" content="https://findaharp.com/img/favicon.io" />
                     <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                     <script src="https://js.stripe.com/v3/" />
                 </Head>
@@ -194,6 +193,7 @@ function MyApp(props) {
                 <Head>
                     <title>Find a Harp Pre-owned, Used</title>
                     <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                    <meta property="og:image" content="https://findaharp.com/img/favicon.io" />
                     <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                     <script src="https://js.stripe.com/v3/" />
                 </Head>
@@ -226,6 +226,7 @@ function MyApp(props) {
             <Head>
                 <title>Find a Harp Pre-owned, Used</title>
                 <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+                <meta property="og:image" content="https://findaharp.com/img/favicon.io" />
                 <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                 <script src="https://js.stripe.com/v3/" />
             </Head>

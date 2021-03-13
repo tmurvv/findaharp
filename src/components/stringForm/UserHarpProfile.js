@@ -28,6 +28,7 @@ const activeWindowInitialState = {
 }
 function UserHarpProfile(props) {
     const { user, setUser} = useContext(UserContext);
+    const [ logoutUserBool, setLogoutUserBool ] = useState(false);
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const Router = useRouter();
     const [ resultInfo, dispatchResultInfo ] = useReducer(resultsWindowReducer, RESULTSWINDOW_INITIAL_STATE);
@@ -144,6 +145,8 @@ function UserHarpProfile(props) {
         //     });
         // });
         if (activeWindow.active==='signup') {
+            
+            console.log('active wind', activeWindow.active)
             console.log('useredit', userEdit)
             const updatedUser = {
                 harpname: userEdit.currentHarpname?userEdit.currentHarpname:user.currentHarpname,
@@ -165,9 +168,20 @@ function UserHarpProfile(props) {
                     const userCopy = res.data.updatedUserharp;
                     console.log('res', res.data)
                     setUser({
-                            ...user,
-                            emailCurrentHarp: userCopy.email,
-                            currentHarpname: userCopy.harpname
+                            firstname: userCopy.firstname||'login',
+                            lastname: userCopy.lastname||'',
+                            email: userCopy.email||'',
+                            newsletter: userCopy.newsletter||'',
+                            distanceunit: userCopy.distanceunit||'miles',
+                            currency: userCopy.currency||"usd",
+                            _id: userCopy._id||'',
+                            role: userCopy.role||'',
+                            agreementStatus: userCopy.agreementStatus||'',
+                            emailCurrentHarp: userCopy.email||'',
+                            currentHarpname: userCopy.harpname||'',
+                            stringform: stringForm||STRING_FORM_INIT,
+                            _idCurrentHarp: userCopy._idCurrentHarp||'',
+                            harplist: returnedHarp.harplist||''
                         }
                     );
                 }
@@ -188,6 +202,10 @@ function UserHarpProfile(props) {
             props.setstringformstatus('stringform');
         }       
         if (activeWindow.active==='login') { 
+            
+            // console.log('active wind', activeWindow.active)
+            // console.log('stringform', stringForm)
+            // check for unsaved string brands
             const newObject = JSON.parse(JSON.stringify(stringForm))
             let asked = 'not yet';
             //zero quantities
@@ -199,19 +217,37 @@ function UserHarpProfile(props) {
             });
             // resultText.innerText=``;
             const oldemail = document.querySelector('#selectemail').value||user.emailCurrentHarp;
-            const oldharpname = document.querySelector('#harplist').value;
-            console.log(oldemail, oldharpname)
+            const oldharpname = document.querySelector('#harplist').value||"get list";
+            // console.log('proc', process.env.backend)
             dispatchResultInfo({type: 'loadingImage', payload: ''})
             try {
-                // login harp
-                const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail, oldharpname});
+
+                let config = { params: {oldemail, oldharpname} };
+                console.log('above')
+                let res = await axios.get(encodeURI(`${process.env.backend}/api/v1/userharps/loginuserharp/?oldemail=${oldemail}&oldharpname=${oldharpname}`));
+                let data = res.data;
+                console.log("withget", data);
+                // // login harp
+                // console.log(`${process.env.backend}/api/v1/userharps/loginuserharp`);
+                // console.log(oldemail, oldharpname)
+                // const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp?oldemail=tmurv@shaw.ca);
+                // console.log('227', document.querySelector('#harplist').value)
+                
                 const returnedHarp = res.data.userharp;
                 const jwt = res.data.harpToken;
                 let parseStringForm = await JSON.parse(returnedHarp.stringform);
-                console.log('login return', res.data.userharp)
+                console.log('login return', parseStringForm)
                 // set harp context to login harp
                 setUser({
-                    ...user,
+                    firstname: user.firstname||'login',
+                    lastname: user.lastname||'',
+                    email: user.email||'',
+                    newsletter: user.newsletter||'',
+                    distanceunit: user.distanceunit||'miles',
+                    currency: user.currency||"usd",
+                    _id: user._id||'',
+                    role: user.role||'',
+                    agreementStatus: user.agreementStatus||'',
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
@@ -222,20 +258,28 @@ function UserHarpProfile(props) {
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname
                 })
-                // setStringForm(parseStringForm);
+                setStringForm(parseStringForm);
                 // set JWT cookie
                 //  document.cookie = `JWT=${jwt}`
                 // display result window
                 // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
                 dispatchResultInfo({type: 'OK', payload: `Login Successful: Welcome Harp ${returnedHarp.harpname}`});
+                document.querySelector('#spinner').style.display='block';     
+                props.setstringformstatus('stringform');
             } catch(e) {
-                alert('error')
+                // alert('error', e.message)
+                console.log('doc harplist', document.querySelector('#harplist').value);
+                console.log('doc email', document.querySelector('#selectemail').value);
+                console.log('user', user)
                 console.log('error', e.message)
-                console.log(e)
+                console.log(e.res)
+                
                 // email not found #1
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Cannot read property 'emailverified' of null") {
-                    // resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain', payload: `${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`});
+                if (e.message&&e.message==="Network Error") {
+                    resultText.innerText=`Something went wrong switching harps, please try again.`;
+                    dispatchResultInfo({type: 'OK', payload: `Something went wrong switching harps, please try again.`});
+                    setLogoutUserBool(true)
+                    
                 // email not found #2
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
                     // resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
@@ -245,9 +289,7 @@ function UserHarpProfile(props) {
                     // resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
                     dispatchResultInfo({type: 'okTryAgain', payload: `Something went wrong on login. Please check your network connection. Login as guest?`});
                 }
-            }
-            document.querySelector('#spinner').style.display='block';     
-            props.setstringformstatus('stringform');
+            }        
         }
     }
     async function getHarpList() {
@@ -273,56 +315,81 @@ function UserHarpProfile(props) {
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
     }
-    async function loginGuest(evt) {   
+    async function loginGuest(evt, logout) { 
+        
+        props.setstringformstatus('stringform');  
         resetResultsWindow();
+        if (logoutUserBool) logoutUser();
     }
     async function handleDelete(e) {
+        console.log('useredit', userEdit)
+        console.log('user', user)
         e.preventDefault();
-        alert('Delete Harp Profile function under construction.')
-        // const resultText = document.querySelector('#loadingLoginText');
-        // e.preventDefault();
-        // if ((!userEdit.editpassword)||userEdit.editpassword.length<8) {
-        //     dispatchResultInfo({type: 'tryAgain'});
-        //     resultText.innerText=`Passwords must be at least 8 characters long.`;
-        //     return
-        // }
-        // if (prompt('Are you sure you want to delete your account? Please type in your account email to confirm.')!==user.email) return alert('Email does not match.');
+        // return alert('Delete Harp Profile function under construction.');
+        const resultText = document.querySelector('#loadingLoginText');
+        e.preventDefault();
+        const updatedUser = {
+            harpname: userEdit.currentHarpname?userEdit.currentHarpname:user.currentHarpname,
+            email: userEdit.emailCurrentHarp?userEdit.emailCurrentHarp:user.emailCurrentHarp,
+        };
+        if ((!updatedUser.harpname)||!updatedUser.email) {
+            dispatchResultInfo({type: 'tryAgain'});
+            resultText.innerText=`Harp name and email required.`;
+            return;
+        }
+        if (!confirm(`Are you sure you want to delete harp ${userEdit.harpname}`)) return;
         
-        // try {
-        //     // Delete User
-        //     const res=await axios.delete(`${process.env.backend}/api/v1/users/deleteuser/${user._id}?editpassword=${userEdit.editpassword}`, {editpassword: userEdit.editpassword});
-        //     dispatchResultInfo({type: 'OK'});
-        //     resultText.innerText=`Account ${user.email} has been deleted`;
-        //     await setUser({
-        //         firstname: '',
-        //         lastname: '',
-        //         email: '',
-        //         newsletter: false,
-        //         distanceunit: 'miles',
-        //         currency: 'USD',
-        //         _id: '',
-        //         role: 'not set'
-        //     });
-        // } catch(e) {
-        //     if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
-        //         resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
-        //         dispatchResultInfo({type: 'okTryAgain'});
-        //     } else {
-        //         dispatchResultInfo({type: 'okTryAgain'})
-        //         resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
-        //     }   
-        // }
-        // clearForm('Both');
+            
+        try {
+            // Delete User
+            const res=await axios.delete(`${process.env.backend}/api/v1/userharps/deleteUserharps`, updatedUser);
+            dispatchResultInfo({type: 'OK'});
+            resultText.innerText=`Harp ${userEdit.editpassword} has been deleted`;
+            await setUser({
+                firstname: user.firstname||'login',
+                lastname: user.lastname||'',
+                email: user.email||'',
+                newsletter: user.newsletter||'',
+                distanceunit: user.distanceunit||'miles',
+                currency: user.currency||"usd",
+                _id: user._id||'',
+                role: user.role||'',
+                agreementStatus: user.agreementStatus||'',
+                _idCurrentHarp: null,
+                emailCurrentHarp: null,
+                currentHarpname: null,
+                stringform: STRING_FORM_INIT,
+                harplist: null
+            });
+        } catch(e) {
+            // if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
+            //     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
+            //     dispatchResultInfo({type: 'okTryAgain'});
+            // } else {
+                dispatchResultInfo({type: 'okTryAgain'})
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
+            // }   
+        }
+        clearForm('Both');
     }
     function logoutUser() {
         
         document.querySelector('#spinner').style.display="block";
         document.cookie = "JWT=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; 
         setUser({
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            newsletter: user.newsletter,
+            distanceunit: user.distanceunit,
+            currency: user.currency,
+            _id: user._id,
+            role: user.role,
             currentHarpname: null,
             emailCurrentHarp: null,
             stringform: JSON.parse(JSON.stringify(STRING_FORM_INIT)),
-            _idCurrentHarp: null
+            _idCurrentHarp: null,
+            harplist: null
         }); 
         setStringForm(JSON.parse(JSON.stringify(STRING_FORM_INIT)));
         clearForm('both');
@@ -332,7 +399,7 @@ function UserHarpProfile(props) {
     useEffect(()=>{
         // console.log('ineffect')
         setSelectHarp({...selectHarp, selectemail: user.emailCurrentHarp});
-        console.log('effect', user)
+        // console.log('effect', user)
         // getHarpList();
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
@@ -439,7 +506,8 @@ function UserHarpProfile(props) {
                                 onChange={handleChange}
                                 name='selectemail'
                                 required={activeWindow.active==='changePassword'}
-                                disabled={activeWindow.active==='editProfile'}
+                                // disabled={activeWindow.active==='editProfile'}
+                                disabled={true}
                             />
                             <div className='harplist' className="input-name input-margin">
                                 <h3>Enter Email for List of Harps</h3>
@@ -452,8 +520,21 @@ function UserHarpProfile(props) {
                             </select>
                             
                         </div>
-                        <button type='submit' className="submit-btn updatePassword-edit-title">
-                            Submit Change
+                        <button 
+                            onClick={()=>props.setstringformstatus('login')} 
+                            type='text' 
+                            style={{
+                                textDecoration: 'underline',
+                                width: '100%',
+                                backgroundColor: 'transparent',
+                                outline: 'none',
+                                border: 'none',
+                                marginBottom: '25px',
+                                color: '#6A75AA',
+                                fontStyle: 'italic'
+                            }}
+                        >
+                            Click Here to Signup a New Harp
                         </button>
                     </form>
                 </div>

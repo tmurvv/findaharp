@@ -33,6 +33,7 @@
 - clear all button in store search
 
 ### functionality
+-- four times a bug when switching harps
 - get Delta back on menu
 - on string menu, get models in sub-menus
 - back-button from PayPal page loses cart

@@ -118,6 +118,8 @@ function HarpLoginSignup(props) {
         dispatchharpactiveWindow({type: 'harplogin'});
     }
     const handleSubmit = async (evt) => {
+        
+        console.log('active wind', harpactiveWindow.active)
         console.log('signup', stringForm)
         document.querySelector('#spinner').style.display="block";
         evt.preventDefault();
@@ -151,7 +153,15 @@ function HarpLoginSignup(props) {
                     console.log(res.data)
                     
                     setUser({
-                        ...user,
+                        firstname: user.firstname||'login',
+                        lastname: user.lastname||'',
+                        email: user.email||'',
+                        newsletter: user.newsletter||'',
+                        distanceunit: user.distanceunit||'miles',
+                        currency: user.currency||"usd",
+                        _id: user._id||'',
+                        role: user.role||'',
+                        agreementStatus: user.agreementStatus||'',
                         _idCurrentHarp: returnedHarp._id,
                         emailCurrentHarp: returnedHarp.email,
                         currentHarpname: returnedHarp.harpname,
@@ -179,13 +189,17 @@ function HarpLoginSignup(props) {
             }
         }       
         if (harpactiveWindow.active==='harplogin') { 
+            console.log('active wind', harpactiveWindow.active)
             // set loading image
             document.querySelector('#spinner').style.display="block";
             dispatchResultInfo({type:'loadingImage'});    
-            console.log(harpLogin)    
+            console.log(harpLogin);
+            if (!harpLogin.harploginemail) return alert('Please enter an email.')
+            const sendHarpname = harpLogin.harploginpassword || 'get list';
             try {
                 // login harp
-                const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: harpLogin.harploginemail, oldharpname: harpLogin.harploginpassword});
+                let res = await axios.get(encodeURI(`${process.env.backend}/api/v1/userharps/loginuserharp/?oldemail=${harpLogin.harploginemail}&oldharpname=${sendHarpname}`));
+                console.log('imhere')
                 const returnedHarp = res.data.userharp;
                 const jwt = res.data.token;
                 console.log('returned', returnedHarp)
@@ -205,9 +219,18 @@ function HarpLoginSignup(props) {
                 }
                 
                 console.log('loginharplist', returnedHarp.harplist)
+                
                 // set harp context to login harp
                 setUser({
-                    ...user,
+                    firstname: user.firstname||'login',
+                    lastname: user.lastname||'',
+                    email: user.email||'',
+                    newsletter: user.newsletter||'',
+                    distanceunit: user.distanceunit||'miles',
+                    currency: user.currency||"usd",
+                    _id: user._id||'',
+                    role: user.role||'',
+                    agreementStatus: user.agreementStatus||'',
                     _idCurrentHarp: returnedHarp._id,
                     emailCurrentHarp: returnedHarp.email,
                     currentHarpname: returnedHarp.harpname,
@@ -223,8 +246,8 @@ function HarpLoginSignup(props) {
             } catch(e) {
                 if (e.response&&e.response.data&&e.response.data.message) console.log('loginerror', e.response.data.message)
                 // email not found #1
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harp not found.") {
-                    resultText.innerText=`Harp not found. Select signup window to add harp.`;
+                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harpname or email not found.") {
+                    resultText.innerText=`Harp not found. Select Harp Signup window to add harp.`;
                     dispatchResultInfo({type: 'OK'});
                 // email not verified
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
@@ -274,30 +297,57 @@ function HarpLoginSignup(props) {
         }
     }
     async function getHarpList(e) {
-        setUser({...user, harplist: null})
+        document.querySelector('#spinner').style.display='block';
+        // Not sure why I added this setUser
+        // setUser({
+        //     ...user, 
+        //     harplist: null})
         const resultText = document.querySelector('#loadingLoginText');
         console.log('e', e.target.value)
         try {
-            // login harp
-            const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: e.target.value, oldharpname: "get list"});
+            // get list
+            // const res = await axios.post(`${process.env.backend}/api/v1/userharps/loginuserharp`, {oldemail: e.target.value, oldharpname: "get list"});
+            let res = await axios.get(encodeURI(`${process.env.backend}/api/v1/userharps/loginuserharp/?oldemail=${e.target.value}&oldharpname=get list`));
+                
             const returnedHarp = res.data.userharp;
             const jwt = res.data.token;
             console.log('returned', returnedHarp)
-            
+            document.querySelector('#spinner').style.display='none';
+            if (returnedHarp.length===0) {
+                setLoginFail(true);
+                resultText.innerText=`No harps found for this email. Select signup window to add a harp.`;
+                dispatchResultInfo({type: 'OK'});
+            }
+            console.log('above set')
             // set harp context to login harp
             setUser({
-                ...user,
+                firstname: user.firstname||'login',
+                lastname: user.lastname||'',
+                email: user.email||'',
+                newsletter: user.newsletter||'',
+                distanceunit: user.distanceunit||'miles',
+                currency: user.currency||"usd",
+                _id: user._id||'',
+                role: user.role||'',
+                agreementStatus: user.agreementStatus||'',
+                emailCurrentHarp: user.emailCurrentHarp||'',
+                currentHarpname: user.currentHarpname||'',
+                stringform: stringForm||STRING_FORM_INIT,
+                _idCurrentHarp: user._idCurrentHarp||'',
                 harplist: returnedHarp
             });
+            console.log('bel set')
             // set JWT cookie
             //  document.cookie = `JWT=${jwt}`
             // display result window
             // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
             // dispatchResultInfo({type: 'OK'});
         } catch(e) {
+            console.log(e.message)
+            document.querySelector('#spinner').style.display='none';
             if (e.response&&e.response.data&&e.response.data.message) console.log('loginerror', e.response.data.message)
             // email not found #1
-            if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harp not found.") {
+            if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harpname or email not found.") {
                 resultText.innerText=`Harp not found. Select signup window to add harp.`;
                 dispatchResultInfo({type: 'OK'});
             // email not verified
@@ -435,7 +485,7 @@ function HarpLoginSignup(props) {
                                 required={harpactiveWindow.active==='harplogin'}
                                 disabled={harpactiveWindow.active==='harpsignup'}
                             >
-                                <option key={uuid()}>enter email to select harp</option>
+                                <option key={uuid()}>select harp</option>
                                 {user.harplist&&user.harplist.map(harp => <option key={uuid()} value={harp.harpname}>{harp.harpname}</option>)}
                             </select>
                             

@@ -41,7 +41,7 @@ const Index = (props) => {
             <img id='spinner' style={{
                     display: 'none', 
                     position: 'fixed', 
-                    top: '25%', 
+                    top: '40%', 
                     left: '50%', 
                     transform: 'translate(-50%,-50%)',
                     zIndex: '9000',
@@ -50,7 +50,7 @@ const Index = (props) => {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
                     <FastNEasyStringForm />
             </div>
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
@@ -59,7 +59,8 @@ const Index = (props) => {
                 products={props.products}
                 clientlat={clientLat}
                 clientlong={clientLong}
-            />                 
+            />
+            ver: preL // BREAKING
         </div>
         <IndexCss />
         </>
@@ -78,10 +79,10 @@ Index.getInitialProps = async (props) => {
          * API DATA
          *******************/
         // API
-        // const res = await axios.get(`https://findaharp-api.herokuapp.com`);
+        const res = await axios.get(`https://findaharp-api.herokuapp.com`);
         // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com`);
         // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
-        const res = await axios.get(`http://localhost:3000`); // BREAKING
+        // const res = await axios.get(`http://localhost:3000`); // BREAKINk
         // API DATA Populate variables
         const products = res.data.harpData;
         const makesModels = res.data.harpMakesModels;

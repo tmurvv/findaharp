@@ -19,7 +19,8 @@ function FastNEasyStringForm({ setstringformstatus }) {
                     backgroundColor: 'transparent',
                     padding: '0',
                     cursor: 'pointer',
-                    outline: 'none'
+                    outline: 'none',
+                    overflow: 'hidden'
                 }}
             >
                 {/* <img 
@@ -32,7 +33,7 @@ function FastNEasyStringForm({ setstringformstatus }) {
                     alt='speedy harpist pushing harp on dolly' 
                     style={{height: '30px', marginRight: '2px'}}
                 /> 
-                <div>Fast N Easy String Form</div>
+                <div style={{whiteSpace: 'nowrap'}}>Fast N Easy String Form</div>
             </button>
 
 

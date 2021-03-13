@@ -15,11 +15,6 @@ export const STRING_BRANDS = [
         low: 30
     },
     {
-        name: "KF Composite Synthetic",
-        high: 5,
-        low: 33
-    },
-    {
         name: "Silver-Plated Pedal Bass Wire",
         high: 34,
         low: 45

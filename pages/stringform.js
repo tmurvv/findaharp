@@ -74,6 +74,7 @@ const StringForm = (props) => {
         //zero quantities on string form
         let zeroQty = JSON.parse(JSON.stringify(stringForm));
         zeroQty = zeroQuantities(zeroQty)
+        console.log("zero from update cart.", zeroQty)
         setStringForm(zeroQty);
         setChanges(false);
     }
@@ -94,6 +95,7 @@ const StringForm = (props) => {
             dispatchResultInfo({type: 'OK', payload: 'Please enter both quantities and string types for the notes you would like to purchase.'}); 
             return;
         }
+        console.log('update JSON stringfomr', JSON.stringify(stringForm))
         // update cart
         updateCart(addArray);
         if (user.currentHarpname) {          
@@ -102,15 +104,15 @@ const StringForm = (props) => {
                 oldemail: user.emailCurrentHarp,
                 harpname: user.currentHarpname,
                 email: user.emailCurrentHarp,
-                stringform: JSON.stringify(stringForm)
+                stringform: JSON.stringify(zeroQuantities(stringForm))
                 // newsletter: localNews
             }
             try {
-                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKING
-                // console.log('updateharpres', res.data)
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKING
+                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+                console.log('success update db stringform', res.data)
                 // setStringForm(res.data.userharp.stringform);
-                dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
+                // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
@@ -127,10 +129,10 @@ const StringForm = (props) => {
                 // newsletter: localNews
             }
             try {
-                const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKING
+                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
+                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 // console.log('updateharpres', res.data)
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
-                dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
+                // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
                 console.log(e.message);
                 dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
@@ -276,9 +278,9 @@ const StringForm = (props) => {
                         }
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
-                        <li style={{display: 'flex', width: 'fit-content', paddingLeft: '0', textIndent: '0'}}>
+                        <li style={{display: 'flex', width: 'fit-content', paddingLeft: '0', textIndent: '0', overflow: 'hidden'}}>
                             <img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />
-                            <div  className='shipsTo shipsToLeft'>&nbsp;&nbsp;Ships from: USA</div>
+                            <div  className='shipsTo shipsToLeft' style={{whiteSpace: 'nowrap'}}>&nbsp;&nbsp;Ships from: USA</div>
                                 <img className='shipsToImg' style={{transform: 'translate(10px, 5px)', maxHeight: '15px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                             <div  className='shipsTo' style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>&nbsp;To: US and Canada</div>
                         </li>

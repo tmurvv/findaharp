@@ -53,8 +53,8 @@ export default function NavBar(props) {
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname!==undefined&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
-                        <a id='userName' onClick={props.handleNavOpen}>{user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
+                    <Link href={user&&user.firstname&&user.firstname!==undefined&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
+                        <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
                     </Link>
                     {/* {user.currentHarpname
                         ?<Link href='/userharpprofile' as='/userharpprofile'>
@@ -110,8 +110,8 @@ export default function NavBar(props) {
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'} as={user.firstname.toUpperCase()==='LOGIN'?'/loginsignup':'/userprofile'}>
-                        <a id='userName' onClick={props.handleNavOpen}>{user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
+                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
+                        <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
                     </Link>
                     <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>
