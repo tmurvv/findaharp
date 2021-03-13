@@ -167,24 +167,21 @@ function HarpLoginSignup(props) {
                         currentHarpname: returnedHarp.harpname,
                         harplist: returnedHarp.harplist
                     });
-                    resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword}`;
+                    resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword.toUpperCase()}`;
                     dispatchResultInfo({type: 'OK'});  
                 }
             // Error on signup
             } catch (e) {
+                document.querySelector('#spinner').style.display='none';
                 console.log('signup error', e.message)
-                // duplicate email
-                if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('duplicate')) {
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'We already have that email in our records. Please try to login and/or select "forgot password" in the login box.'}`;
-                    dispatchResultInfo({type: 'okTryAgain'});
                 // email not valid
-                } else if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address. Log in as guest harp?'}`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address.'}`;
+                    dispatchResultInfo({type: 'tryAgain'});
                 // other error
                 } else {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup. Please check your network connection. Log in as guest harp?'}`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on signup. Please check your network connection.'}`;
+                    dispatchResultInfo({type: 'tryAgain'});
                 }
             }
         }       
@@ -241,61 +238,53 @@ function HarpLoginSignup(props) {
                 // set JWT cookie
                  document.cookie = `JWT=${jwt}`
                 // display result window
-                resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
+                resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname.toUpperCase()}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
+                document.querySelector('#spinner').style.display='none';
+                // console log the error
                 if (e.response&&e.response.data&&e.response.data.message) console.log('loginerror', e.response.data.message)
                 // email not found #1
                 if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harpname or email not found.") {
                     resultText.innerText=`Harp not found. Select Harp Signup window to add harp.`;
-                    dispatchResultInfo({type: 'OK'});
-                // email not verified
-                } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
-                    // setNeedVerify(true);                
-                    await setHarpLogin({...harpLogin, loginemail: e.response.data.harpemail})
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
-                    dispatchResultInfo({type: 'okTryAgain'});
-                // passwords don't match
-                } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                    dispatchResultInfo({type: 'tryAgain'});
                 // email not found #2
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'}`;
+                    dispatchResultInfo({type: 'tryAgain'});
                 // other error
                 } else {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'}`;
+                    dispatchResultInfo({type: 'tryAgain'});
                 }
                 setLoginFail(true);
             }
         }
         resetSignupForm();
     }
-    // handle forgotPassword click
-    async function handleForgot() {
-        const resultText = document.querySelector('#loadingLoginText');
-        // shortcut no email entered
-        if (!harpLogin.loginemail) {
-            resultText.innerText='Please enter your account email.';
-            dispatchResultInfo({type: 'tryAgain'});
-            return;
-        }
-        try {
-            // send forgot password email
-            const res = await axios.get(`${process.env.backend}/api/v1/harps/sendresetemail/${harpLogin.loginemail}`);
-            // display results
-            if (res.status===200) {
-                resultText.innerText=`Please check your inbox for an email with instructions to reset your password.`;
-                dispatchResultInfo({type: 'OK'});
-            }
-        } catch (e) {
-            // display error
-            resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset. Please check your netword connection.'} Log in as guest harp?`
-            dispatchResultInfo({type: 'okTryAgain'});
-        }
-    }
+    // // handle forgotPassword click
+    // async function handleForgot() {
+    //     const resultText = document.querySelector('#loadingLoginText');
+    //     // shortcut no email entered
+    //     if (!harpLogin.loginemail) {
+    //         resultText.innerText='Please enter your account email.';
+    //         dispatchResultInfo({type: 'tryAgain'});
+    //         return;
+    //     }
+    //     try {
+    //         // send forgot password email
+    //         const res = await axios.get(`${process.env.backend}/api/v1/harps/sendresetemail/${harpLogin.loginemail}`);
+    //         // display results
+    //         if (res.status===200) {
+    //             resultText.innerText=`Please check your inbox for an email with instructions to reset your password.`;
+    //             dispatchResultInfo({type: 'OK'});
+    //         }
+    //     } catch (e) {
+    //         // display error
+    //         resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong with password reset. Please check your netword connection.'} Log in as guest harp?`
+    //         dispatchResultInfo({type: 'okTryAgain'});
+    //     }
+    // }
     async function getHarpList(e) {
         document.querySelector('#spinner').style.display='block';
         // Not sure why I added this setUser
@@ -343,31 +332,21 @@ function HarpLoginSignup(props) {
             // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
             // dispatchResultInfo({type: 'OK'});
         } catch(e) {
-            console.log(e.message)
             document.querySelector('#spinner').style.display='none';
             if (e.response&&e.response.data&&e.response.data.message) console.log('loginerror', e.response.data.message)
-            // email not found #1
+            // harp not found #1
             if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message==="Harpname or email not found.") {
                 resultText.innerText=`Harp not found. Select signup window to add harp.`;
                 dispatchResultInfo({type: 'OK'});
-            // email not verified
-            } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('verified')) {
-                // setNeedVerify(true);                
-                await setHarpLogin({...harpLogin, loginemail: e.response.data.harpemail})
-                resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Email not yet verified. Please see your inbox for verification email.'} Resend verification email?`;
-                dispatchResultInfo({type: 'okTryAgain'});
-            // passwords don't match
-            } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
-                dispatchResultInfo({type: 'okTryAgain'});
+            
             // email not found #2
             } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
-                dispatchResultInfo({type: 'okTryAgain'});
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'}`;
+                dispatchResultInfo({type: 'OK'});
             // other error
             } else {
-                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
-                dispatchResultInfo({type: 'okTryAgain'});
+                resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'}`;
+                dispatchResultInfo({type: 'OK'});
             }
             setLoginFail(true);
         }
@@ -453,7 +432,7 @@ function HarpLoginSignup(props) {
                     </>
                 </form>
             </div>
-            <div className={harpactiveWindow.harploginClasses} style={{transform: 'translate(10%, -97%)'}} id="harplogin" onClick={handleLoginClick}>
+            <div className={harpactiveWindow.harploginClasses} style={process.browser&&window.innerWidth<550?{transform: 'translateY(-97%)'}:{transform: 'translate(10%, -97%)'}} id="harplogin" onClick={handleLoginClick}>
                 <div className="harplogin-signup-title">
                     HARP LOGIN
                 </div>
@@ -505,9 +484,9 @@ function HarpLoginSignup(props) {
                         <button type='submit' className="submit-btn login-signup-title">
                             Submit
                         </button>
-                        <div className="forgot-pass" onClick={handleForgot}>
+                        {/* <div className="forgot-pass" onClick={handleForgot}>
                             <a href="#">Forgot Harp Name?</a>
-                        </div>
+                        </div> */}
                     </>
                 </form>
             </div>

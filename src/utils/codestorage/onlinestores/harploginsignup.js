@@ -148,7 +148,7 @@ function HarpLoginSignup(props) {
                         harplist: returnedHarp.harplist
                     });
                     resultText.innerText=`Signup Successful. Please check your inbox to verify your email.`;
-                    resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword}`;
+                    resultText.innerText=`Signup Successful. Welcome harp ${harpSignup.harpsignuppassword.toUpperCase()}`;
                     dispatchResultInfo({type: 'OK'});  
                 }
             // Error on signup
@@ -204,7 +204,7 @@ function HarpLoginSignup(props) {
                 // set JWT cookie
                  document.cookie = `JWT=${jwt}`
                 // display result window
-                resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
+                resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname.toUpperCase()}`;
                 dispatchResultInfo({type: 'OK'});
             } catch(e) {
                 console.log('loginerror', e.response.data.message)

@@ -187,12 +187,9 @@ function UserHarpProfile(props) {
                 }
                 clearForm('Both');
             } catch (e) {
-                if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
-                    resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain'});
-                } else if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
-                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address. Log in as guest user?'}`;
-                    dispatchResultInfo({type: 'okTryAgain'});
+                if (e.response&&e.response.data&&e.response.data.data&&e.response.data.data.message.includes('not valid')) {
+                    resultText.innerText=`${process.env.next_env==='development'?e.response.data.data.message:'Please enter a valid email address.'}`;
+                    dispatchResultInfo({type: 'tryAgain'});
                 } else {
                     dispatchResultInfo({type: 'tryAgain'});
                     resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on update. Please check your network connection.'}`
@@ -222,7 +219,6 @@ function UserHarpProfile(props) {
             dispatchResultInfo({type: 'loadingImage', payload: ''})
             try {
 
-                let config = { params: {oldemail, oldharpname} };
                 console.log('above')
                 let res = await axios.get(encodeURI(`${process.env.backend}/api/v1/userharps/loginuserharp/?oldemail=${oldemail}&oldharpname=${oldharpname}`));
                 let data = res.data;
@@ -263,31 +259,31 @@ function UserHarpProfile(props) {
                 //  document.cookie = `JWT=${jwt}`
                 // display result window
                 // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
-                dispatchResultInfo({type: 'OK', payload: `Login Successful: Welcome Harp ${returnedHarp.harpname}`});
+                dispatchResultInfo({type: 'OK', payload: `Login Successful: Welcome Harp ${returnedHarp.harpname.toUpperCase()}`});
                 document.querySelector('#spinner').style.display='block';     
                 props.setstringformstatus('stringform');
             } catch(e) {
                 // alert('error', e.message)
-                console.log('doc harplist', document.querySelector('#harplist').value);
-                console.log('doc email', document.querySelector('#selectemail').value);
-                console.log('user', user)
-                console.log('error', e.message)
-                console.log(e.res)
+                // console.log('doc harplist', document.querySelector('#harplist').value);
+                // console.log('doc email', document.querySelector('#selectemail').value);
+                // console.log('user', user)
+                // console.log('error', e.message)
+                // console.log(e.res)
                 
                 // email not found #1
                 if (e.message&&e.message==="Network Error") {
-                    resultText.innerText=`Something went wrong switching harps, please try again.`;
-                    dispatchResultInfo({type: 'OK', payload: `Something went wrong switching harps, please try again.`});
+                    resultText.innerText=`Something went wrong switching harps, please check your network connection.`;
+                    dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong switching harps, please try again.`});
                     setLogoutUserBool(true)
                     
                 // email not found #2
                 } else if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('Email')) {
                     // resultText.innerText=`${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain', payload: `${process.env.next_env==='development'?e.message:'Email not found.'} Login as guest?`});
+                    dispatchResultInfo({type: 'tryAgain', payload: `${process.env.next_env==='development'?e.message:'Email not found.'}`});
                 // other error
                 } else {
                     // resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on login. Please check your network connection.'} Login as guest?`;
-                    dispatchResultInfo({type: 'okTryAgain', payload: `Something went wrong on login. Please check your network connection. Login as guest?`});
+                    dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on login. Please check your network connection.`});
                 }
             }        
         }
@@ -488,7 +484,7 @@ function UserHarpProfile(props) {
                     </button>
                 </form>
             </div>
-            <div className={activeWindow.loginClasses} id="login" style={{transform: 'translate(10%, -142%)'}} onClick={handleUpdatePasswordClick}>
+            <div className={activeWindow.loginClasses} id="login" style={process.browser&&window.innerWidth<550?{transform: 'translateY(-142%)'}:{transform: 'translate(10%, -142%)'}} onClick={handleUpdatePasswordClick}>
                 <div className="updatePassword-edit-title">
                     Login Another Harp
                 </div>

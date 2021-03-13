@@ -4,7 +4,7 @@ import ResultsCss from '../styles/Results.css';
 function Results({ resultInfo, resetResults, loginGuest, zipMsg }) {
     return (
         <>
-            <div id="loadingLogin" style={{display: resultInfo.resultContainer, zIndex: 9000}}>
+            <div id="loadingLogin" style={process.browser&&window.innerWidth<550?{backgroundColor: '#fffeee', border: 'none', display: resultInfo.resultContainer, zIndex: 9000}:{display: resultInfo.resultContainer, zIndex: 9000}}>
                 <img id='loadingLoginImg' style={{display: resultInfo.resultImg}} src='/img/spinner.gif' alt='loading spinner' />
                 <p id="loadingLoginText"></p>
                 <p>{zipMsg?zipMsg:''}</p>

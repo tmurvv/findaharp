@@ -22,7 +22,8 @@ function PageTitleCss() {
                 color: #868686;
                 letter-spacing: 1px;
                 font-weight: 500;
-                font-size:14px       
+                font-size:14px;
+                padding-top: 10px;      
             }
             `}
             </style>

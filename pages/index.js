@@ -60,7 +60,6 @@ const Index = (props) => {
                 clientlat={clientLat}
                 clientlong={clientLong}
             />
-            ver: preL // BREAKING
         </div>
         <IndexCss />
         </>

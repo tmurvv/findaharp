@@ -147,7 +147,8 @@ function MyApp(props) {
         }   
     }, []);
 
-    function handleNavOpen() {
+    function handleNavOpen(e) {
+        if (document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block';
         setNavOpen(!navOpen);
     }
     useEffect(()=>{

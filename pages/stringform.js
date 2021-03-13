@@ -98,7 +98,7 @@ const StringForm = (props) => {
         console.log('update JSON stringfomr', JSON.stringify(stringForm))
         // update cart
         updateCart(addArray);
-        if (user.currentHarpname) {          
+        if (user.currentHarpname) {
              const harpObject = {
                 oldharpname: user.currentHarpname,
                 oldemail: user.emailCurrentHarp,
@@ -108,7 +108,7 @@ const StringForm = (props) => {
                 // newsletter: localNews
             }
             try {
-                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKING
+                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
                 const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 console.log('success update db stringform', res.data)
                 // setStringForm(res.data.userharp.stringform);
@@ -238,7 +238,7 @@ const StringForm = (props) => {
                                             textDecoration: 'underline'
                                         }}
                                     >
-                                        click here
+                                        Click here
                                     </button>
                                     to edit or switch harp
                                 </div>
@@ -284,7 +284,7 @@ const StringForm = (props) => {
                                 <img className='shipsToImg' style={{transform: 'translate(10px, 5px)', maxHeight: '15px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                             <div  className='shipsTo' style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>&nbsp;To: US and Canada</div>
                         </li>
-                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
+                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '14px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
                     </ul>
                 </div>
                 {/* {changes&& */}

@@ -223,7 +223,7 @@ function UserHarpProfile(props) {
                  document.cookie = `JWT=${jwt}`
                 // display result window
                 // resultText.innerText=`Login Successful: Welcome Harp ${returnedHarp.harpname}`;
-                dispatchResultInfo({type: 'OK', payload: `Login Successful: Welcome Harp ${returnedHarp.harpname}`});
+                dispatchResultInfo({type: 'OK', payload: `Login Successful: Welcome Harp ${returnedHarp.harpname.toUpperCase()}`});
             } catch(e) {
                 console.log('error', e.message)
                 // email not found #1
