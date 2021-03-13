@@ -514,7 +514,6 @@ function UserHarpProfile(props) {
                                     user.harplist&&user.harplist.map(harp => <option key={uuid()} value={harp.harpname}>{harp.harpname}</option>)
                                 }
                             </select>
-                            
                         </div>
                         <button 
                             onClick={()=>props.setstringformstatus('login')} 

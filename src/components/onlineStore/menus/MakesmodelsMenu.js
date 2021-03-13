@@ -54,11 +54,11 @@ export default function MakesmodelsMenu(props) {
                     key={uuid()} 
                     name='All Makes/Models'
                 >All Makes/Models</li>
-                <li 
+                {/* <li 
                     onClick={()=>{if (confirm(`Pedal harps${useOctaveMenu}`)) Router.push('/stringform')}} 
                     key={uuid()} 
                     name='Pedal Harps'
-                >Pedal Harps</li>
+                >Pedal Harps</li> */}
 
                 <li 
                     onClick={handleClose} 

@@ -40,6 +40,25 @@ const StringForm = (props) => {
     const [ step, setStep ] = useState('');
     const [ resultInfo, dispatchResultInfo ] = useReducer(resultsWindowReducer, RESULTSWINDOW_INITIAL_STATE);
     
+    async function updateBrands(results) {
+        // alert('update brands under construction')
+        const harpObject = {
+            oldharpname: user.currentHarpname,
+            oldemail: user.emailCurrentHarp,
+            harpname: user.currentHarpname,
+            email: user.emailCurrentHarp,
+            stringform: JSON.stringify(zeroQuantities(stringForm))
+            // newsletter: localNews
+        }
+        try {
+            // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
+            const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+            if (results) dispatchResultInfo({type: 'OK', payload: `Update brands for harp ${user.currentHarpname.toUpperCase()} was successful.`});
+        } catch(e) {
+            console.log(e.message);
+            dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
+        }
+    }
     function updateCart(addArray) {
         const cartCopy = [...cart];
         // find item in items object
@@ -99,25 +118,7 @@ const StringForm = (props) => {
         // update cart
         updateCart(addArray);
         if (user.currentHarpname) {
-             const harpObject = {
-                oldharpname: user.currentHarpname,
-                oldemail: user.emailCurrentHarp,
-                harpname: user.currentHarpname,
-                email: user.emailCurrentHarp,
-                stringform: JSON.stringify(zeroQuantities(stringForm))
-                // newsletter: localNews
-            }
-            try {
-                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
-                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
-                console.log('success update db stringform', res.data)
-                // setStringForm(res.data.userharp.stringform);
-                // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
-            } catch(e) {
-                console.log(e.message);
-                dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
-            }
-            // document.querySelector('#spinnerRemember').style.display='none';
+            updateBrands();
         }
         if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
             const harpObject = {
@@ -213,14 +214,14 @@ const StringForm = (props) => {
                 >
                     <ul style={{listStyleType: "none", lineHeight: '27.5px'}}> 
                         {user.emailCurrentHarp
-                            ?<li 
+                            ?<>
+                            <li 
                                 className="rememberLi" 
                                 style={{
                                     display: 'flex', 
                                     justifyContent: 'flex-start', 
                                     paddingLeft: '0'
-                                }} 
-                                onClick={()=>setStringformStatus('profile')}
+                                }}
                             >
                                 <img 
                                     style={{height: '15px', transform: 'translateY(15%)'}} 
@@ -229,6 +230,7 @@ const StringForm = (props) => {
                                 />
                                 <div style={{textIndent: '-8px', paddingLeft: '12px'}}>&nbsp;&nbsp;Showing Brands for harp {String(user.currentHarpname).toUpperCase()}.
                                     <button 
+                                    type='button'
                                         onClick={()=>setStringformStatus('profile')}
                                         style={{
                                             fontStyle: 'italic', 
@@ -240,9 +242,41 @@ const StringForm = (props) => {
                                     >
                                         Click here
                                     </button>
-                                    to edit or switch harp
+                                    to edit or switch harp.
                                 </div>
                             </li>
+                            <li 
+                                className="rememberLi" 
+                                style={{
+                                    display: 'flex', 
+                                    justifyContent: 'flex-start', 
+                                    paddingLeft: '0'
+                                }}
+                            >
+                                <img 
+                                    style={{height: '15px', transform: 'translateY(15%)'}} 
+                                    src="img/golden_harp_full.png" 
+                                    alt="golden harp" 
+                                />
+                                <div style={{textIndent: '-8px', paddingLeft: '12px'}}>
+                                    
+                                    <button
+                                        type='button' 
+                                        onClick={()=>updateBrands(true)}
+                                        style={{
+                                            fontStyle: 'italic', 
+                                            color: '#6A75AA',
+                                            backgroundColor: '#fff',
+                                            cursor: 'pointer',
+                                            textDecoration: 'underline'
+                                        }}
+                                    >
+                                        Click here
+                                    </button>
+                                    to update brands for {String(user.currentHarpname).toUpperCase()}.
+                                </div>
+                            </li>
+                            </>
                             :<li className="rememberLi">
                                 <img 
                                     style={{height: '15px', transform: 'translateY(15%)'}} 
