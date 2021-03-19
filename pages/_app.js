@@ -160,7 +160,7 @@ function MyApp(props) {
                 <Head>
                     <title>Find a Harp Pre-owned, Used</title>
                     <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
-                    <meta property="og:image" content="https://findaharp.com/img/favicon.io" />
+                    <meta property="og:image" content="https://findaharp.com/img/logo.png" />
                     <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                     <script src="https://js.stripe.com/v3/" />
                 </Head>
@@ -194,7 +194,7 @@ function MyApp(props) {
                 <Head>
                     <title>Find a Harp Pre-owned, Used</title>
                     <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
-                    <meta property="og:image" content="https://findaharp.com/img/favicon.io" />
+                    <meta property="og:image" content="https://findaharp.com/img/logo.png" />
                     <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                     <script src="https://js.stripe.com/v3/" />
                 </Head>
@@ -227,7 +227,7 @@ function MyApp(props) {
             <Head>
                 <title>Find a Harp Pre-owned, Used</title>
                 <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
-                <meta property="og:image" content="https://findaharp.com/img/favicon.io" />
+                <meta property="og:image" content="https://findaharp.com/img/logo.png" />
                 <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                 <script src="https://js.stripe.com/v3/" />
             </Head>
