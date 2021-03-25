@@ -8,6 +8,15 @@ import { STRING_BRANDS } from '../../constants/stringBrands';
 function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBrand}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);
     const [ notAvailable, setNotAvailable ] = useState(false);
+    const [ stringTypes, setStringTypes ] = useState([]);
+    const [ leverGutHidden, setLeverGutHidden ] = useState();
+    const [ leverNylonHidden, setLeverNylonHidden ] = useState();
+    const [ silvWiresHidden, setSilvWiresHidden ] = useState();
+    const [ tarnWiresHidden, setTarnWiresHidden ] = useState();
+    const [ leverWiresHidden, setLeverWiresHidden ] = useState();
+    const [ profLeverWiresHidden, setProfLeverWiresHidden ] = useState();
+    const [ savSynHidden, setSavSynHidden ] = useState();
+    const [ silkSynHidden, setSilkSynHidden ] = useState();
 
     function handleClick(menu) {  
         // short circuit
@@ -156,6 +165,152 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
         if (document.querySelector(`#${e.target.value}`)) document.querySelector(`#${e.target.value}`).style.display='block';
         if (document.querySelector(`#stringTypeText${note}`)) document.querySelector(`#stringTypeText${note}`).style.display='none';
     }
+    useEffect(()=> {
+        console.log('imin selectstr useeffect');
+        // string types
+        const optionArr = [];
+        const option1 = React.createElement(
+            "option",
+            {value: `notSureMenu${note}`},
+            'Not Sure'
+          )
+        optionArr.push(option1)
+        if (!(note.substr(0,1)>5||note==="5F"||note==="5G")) {
+            const option = React.createElement(
+                "option",
+                {value: `gutMenu${note}`},
+                'Gut'
+            )
+            const optionA = React.createElement(
+                "option",
+                {value: `nylonMenu${note}`},
+                'Nylon'
+            )
+            optionArr.push(option)
+            optionArr.push(optionA)
+        }
+        if (!(note.substr(0,1)<1 
+            ||note.substr(0,1)>5
+            ||note==="5C"
+            ||note==="5B"
+            ||note==="5A"
+            ||note==="5G"
+            ||note==="5F")
+        ) {
+            const option = React.createElement(
+                "option",
+                {value: `syntheticMenu${note}`},
+                'Synthetic'
+            )
+            optionArr.push(option)
+        }
+        if (!(note.substr(0,1)<5)) {
+            const option = React.createElement(
+                "option",
+                {value: `wireMenu${note}`},
+                'Wires'
+            )
+            optionArr.push(option)
+        }
+        setStringTypes(optionArr);
+        // lever gut
+        if (!(note.substr(0,1)<1)) {
+            setLeverGutHidden(React.createElement(
+                "option",
+                {value: `Bow Brand Lever Natural Gut`},
+                'Bow Brand Lever Natural Gut'
+            ));
+        }
+        // lever nylon
+        if (!(note.substr(0,1)<1)) { 
+            setLeverNylonHidden(React.createElement(
+                "option",
+                {value: `Bow Brand Lever Nylon`},
+                'Bow Brand Lever Nylon'
+            ));
+        }
+       // wires
+       if (!(note.substr(0,1)==5&&note!=="5G"&&note!=="5F")) { 
+            setSilvWiresHidden(React.createElement(
+                "option",
+                {value: `Silver-Plated Pedal Bass Wire`},
+                'Silver-Plated Pedal Bass Wire'
+            ));
+        }
+        
+       if (!(note.substr(0,1)==5&&note!=="5G"&&note!=="5F")) { 
+            setTarnWiresHidden(React.createElement(
+                "option",
+                {value: `Pedal Bass Wire (Tarnish-Resistant)`},
+                'Pedal Bass Wire (Tarnish-Resistant)'
+            ));
+        }
+       if (!(note==="6G"||note==="6F"||note.substr(0,1)==7)) { 
+            setLeverWiresHidden(React.createElement(
+                "option",
+                {value: `Bow Brand Lever Bass Wire`},
+                'Bow Brand Lever Bass Wire'
+            ));
+        }
+       if (!(note==="6G"||note==="6F"||note.substr(0,1)==7)) { 
+            setProfLeverWiresHidden(React.createElement(
+                "option",
+                {value: `Professional Lever Bass Wire`},
+                'Professional Lever Bass Wire'
+            ));
+        }
+        // Synthetic
+        if (!( note.substr(0,1)<1
+            ||note.substr(0,1)>5
+            ||note==="1B"
+            ||note==="1C"
+            ||note==="1D"
+            ||note==="1E"
+            ||note==="5G"
+            ||note==="5F")
+        ) { 
+            setSavSynHidden(React.createElement(
+                "option",
+                {value: `KF Composite Synthetic`},
+                'KF Composite Synthetic'
+            ));
+        }
+        if (!(note.substr(0,1)<1
+            ||note.substr(0,1)>5
+            ||note==="5C"
+            ||note==="5B"
+            ||note==="5A"
+            ||note==="5G"
+            ||note==="5F")
+        ) { 
+            setSilkSynHidden(React.createElement(
+                "option",
+                {value: `Silkgut`},
+                'Silkgut'
+            ));
+        }
+
+
+        // <option value={`Silkgut`} hidden={
+            // note.substr(0,1)<1
+            // ||note.substr(0,1)>5
+            // ||note==="5C"
+            // ||note==="5B"
+            // ||note==="5A"
+            // ||note==="5G"
+            // ||note==="5F"
+        //     }>Silkgut by Bow Brand</option>
+        // <option value={`KF Composite Synthetic`} hidden={
+            // note.substr(0,1)<1
+            // ||note.substr(0,1)>5
+            // ||note==="1B"
+            // ||note==="1C"
+            // ||note==="1D"
+            // ||note==="1E"
+            // ||note==="5G"
+            // ||note==="5F"
+        //     }>Saverez KF Composite (synthetic)</option>
+    }, []);
     return (
         <>
             <div className="menu-wrapper" style={{width: '33%', minWidth: '33%', position: 'relative'}}>
@@ -169,23 +324,9 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                         id={`typeMenu${note}`} 
                         onChange={(e)=>{handleSelect(e)}} 
                         style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', width: '86%', border:'none', fontSize: '16px', padding: '10px 10px'}} 
-                        // onMouseOver={(e)=>e.target.style.opacity='1'} 
-                        // onMouseOut={(e)=>e.target.style.opacity='.5'}
                     >
                         <option value={`stringMenu${note}`}>{stringForm[note.substr(0,1)][note.substr(1)].brand===''?'String Type': 'Change Type'}</option>
-                        <option value={`notSureMenu${note}`}>Not Sure</option>
-                        <option value={`gutMenu${note}`} hidden={note.substr(0,1)>5||note==="5F"||note==="5G"}>Gut</option>
-                        <option value={`nylonMenu${note}`} hidden={note.substr(0,1)>5||note==="5F"||note==="5G"}>Nylon</option>
-                        <option value={`wireMenu${note}`} hidden={Number(note.substr(0,1))<5}>Wires</option>
-                        <option value={`syntheticMenu${note}`} hidden={
-                            note.substr(0,1)<1 
-                            ||note.substr(0,1)>5
-                            ||note==="5C"
-                            ||note==="5B"
-                            ||note==="5A"
-                            ||note==="5G"
-                            ||note==="5F"
-                        }>Synthetic</option>
+                        {stringTypes.map(item=>item)}
                     </select>
                     
                     <span>&#711;</span>
@@ -197,45 +338,27 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                     <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Natural Gut`}>Bow Brand Pedal Natural Gut</option>
-                        <option value={`Bow Brand Lever Natural Gut`} hidden={note.substr(0,1)<1}>Bow Brand Lever Natural Gut</option>
+                        {leverGutHidden&&leverGutHidden}
                         <option value={`Concedo Gut`}>Concedo Gut</option>
                         <option value={`Burgundy Gut`}>Burgundy Gut</option>
                     </select>
                     <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Nylon`}>Bow Brand Pedal Nylon</option>
-                        <option value={`Bow Brand Lever Nylon`} hidden={note.substr(0,1)<1}>Bow Brand Lever Nylon</option>
+                        {leverNylonHidden&&leverNylonHidden}
                         <option value={`Artist Nylon`}>Artist Nylon</option>
-                        {/* <option value={`Nylon Monofilament`}>Nylon Monofilament</option> */}
                     </select>
                     <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
                         <option value={`Select Brand`}>Brand</option>
-                        <option value={`Silver-Plated Pedal Bass Wire`} hidden={note.substr(0,1)==5&&note!=="5G"&&note!=="5F"}>Silver-Plated Pedal Bass Wire</option>
-                        <option value={`Pedal Bass Wire (Tarnish-Resistant)`} hidden={note.substr(0,1)==5&&note!=="5G"&&note!=="5F"}>Pedal Bass Wire (Tarnish-Resistant)</option>
-                        <option value={`Bow Brand Lever Bass Wire`} hidden={note==="6G"||note==="6F"||note.substr(0,1)==7}>Bow Brand Lever Bass Wire</option>
-                        <option value={`Professional Lever Bass Wire`} hidden={note==="6G"||note==="6F"||note.substr(0,1)==7}>Professional Lever Bass Wire</option>
+                        {silvWiresHidden&&silvWiresHidden}
+                        {tarnWiresHidden&&tarnWiresHidden}
+                        {leverWiresHidden&&leverWiresHidden}
+                        {profLeverWiresHidden&&profLeverWiresHidden}
                     </select>
                     <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
                         <option value={`Select Brand`}>Brand</option>
-                        <option value={`Silkgut`} hidden={
-                            note.substr(0,1)<1
-                            ||note.substr(0,1)>5
-                            ||note==="5C"
-                            ||note==="5B"
-                            ||note==="5A"
-                            ||note==="5G"
-                            ||note==="5F"
-                            }>Silkgut by Bow Brand</option>
-                        <option value={`KF Composite Synthetic`} hidden={
-                            note.substr(0,1)<1
-                            ||note.substr(0,1)>5
-                            ||note==="1B"
-                            ||note==="1C"
-                            ||note==="1D"
-                            ||note==="1E"
-                            ||note==="5G"
-                            ||note==="5F"
-                            }>Saverez KF Composite (synthetic)</option>
+                        {savSynHidden&&savSynHidden}
+                        {silkSynHidden&&silkSynHidden}
                     </select>
                 </div>
             </div>
