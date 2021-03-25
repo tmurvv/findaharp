@@ -5,16 +5,16 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import HarpLoginSignupCSS from '../src/main/styles/onlineStore/HarpLoginSignup.css';
-import PageTitle from '../src/main/components/PageTitle';
-import Results from '../src/main/components/Results';
-import NewsletterSignup from '../src/main/components/NewsletterSignup';
+import HarpLoginSignupCSS from '../src/store/styles//HarpLoginSignup.css';
+import PageTitle from '../src/main/components/main/PageTitle';
+import Results from '../src/main/components/main/Results';
+import NewsletterSignup from '../src/main/components/mainNewsletterSignup';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import { UserContext } from '../src/main/contexts/UserContext';
-import { StringFormContext } from '../src/main/contexts/StringFormContext';
+import { StringFormContext } from '../src/store/contexts/StringFormContext';
 import { resultInfoReducer, harpactiveWindowReducer } from '../src/main/reducers/reducers';
 import { STRING_FORM_INFO_INIT, STRING_FORM_INIT } from '../src/main/constants/inits';
-import { zeroQuantities } from '../src/main/utils/storeHelpers';
+import { zeroQuantities } from '../src/store/utils/storeHelpers';
 
 // initialize reducer object
 const harpactiveWindowInitialState = {

@@ -5,17 +5,17 @@ import Router from 'next/router';
 import axios from 'axios';
 // contexts
 import { UserContext } from '../src/main/contexts/UserContext';
-import { CartContext } from '../src/main/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/main/contexts/CartSubtotalsContext';
+import { CartContext } from '../src/store/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/store/contexts/CartSubtotalsContext';
 import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
-import { StatusContext } from '../src/main/contexts/StatusContext';
+import { StatusContext } from '../src/store/contexts/StatusContext';
 // components
-import StatusIndicator from '../src/main/components/onlineStore/StatusIndicator';
-import Subtotal from '../src/main/components/onlineStore/Subtotal';
-import OrderSummary from '../src/main/components/onlineStore/OrderSummary';
-import Results from '../src/main/components/Results';
+import StatusIndicator from '../src/store/components/main/StatusIndicator';
+import Subtotal from '../src/store/components/main/Subtotal';
+import OrderSummary from '../src/store/components/main/OrderSummary';
+import Results from '../src/main/components/main/Results';
 // other internal
-import ShippingCss from '../src/main/styles/onlineStore/Shipping.css';
+import ShippingCss from '../src/store/styles//Shipping.css';
 import { resultInfoReducer } from '../src/main/reducers/reducers';
 import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../src/main/constants/constants';
 import {
@@ -25,10 +25,10 @@ import {
     tax,
     deletelocalCart,
     getShippingArray
-} from '../src/main/utils/checkoutHelpers';
+} from '../src/store/utils/checkoutHelpers';
 import { 
     getNumItems, getStores
-} from '../src/main/utils/storeHelpers';
+} from '../src/store/utils/storeHelpers';
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);

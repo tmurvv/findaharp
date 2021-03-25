@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // internal
-import PageTitle from '../src/main/components/PageTitle';
-import GlobalStoreSearch from '../src/main/components/onlineStore/GlobalStoreSearch';
-import StoreIndexCss from '../src/main/styles/onlineStore/StoreIndex.css';
-import OnlineStoreCss from '../src/main/styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
+import PageTitle from '../src/main/components/main/PageTitle';
+import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
@@ -32,9 +30,6 @@ const OnlineStore = (props) => {
                     setSearchResults={setSearchResults}
                 />     
             </div>
-            
-            <StoreIndexCss />
-            <OnlineStoreCss />
         </>
     )
 }

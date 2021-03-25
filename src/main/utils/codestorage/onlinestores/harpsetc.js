@@ -5,10 +5,10 @@ import Router from 'next/router';
 
 // internal
 import { FINDAHARP_PRODUCTS } from '../../src/main/constants/FindaharpProducts'
-import StoreProduct from '../../src/main/components/onlineStore/StoreProduct';
-import PageTitle from '../../src/main/components/PageTitle';
+import StoreProduct from '../../src/store/components/main/StoreProduct';
+import PageTitle from '../../src/main/components/main/PageTitle';
 import IndexCss from '../../src/main/styles/index.css';
-import HarpsEtcOnlineStoreCss from '../../src/main/styles/onlineStore/onlinestores/HarpsEtcOnlineStore.css';
+import HarpsEtcOnlineStoreCss from '../../src/store/styles//onlinestores/HarpsEtcOnlineStore.css';
 
 const HarpsEtc = () => {
     // display cart??

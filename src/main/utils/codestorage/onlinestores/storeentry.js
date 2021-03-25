@@ -8,7 +8,7 @@ import OnlineStorePartner from '../../onlineStore/OnlineStorePartner';
 import PageTitle from '../../PageTitle';
 import ContactUsForm from '../../ContactUsForm';
 import IndexCss from '../../../styles/index.css';
-import StoreEntryCSS from '../../../styles/onlineStore/StoreEntry.css';
+import StoreEntryCSS from '../../../styles//StoreEntry.css';
 
 const StoreEntry = (props) => {
     const [ view, setView ] = useState('harps')

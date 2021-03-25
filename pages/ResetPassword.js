@@ -5,7 +5,7 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import PageTitle from '../src/main/components/PageTitle';
+import PageTitle from '../src/main/components/main/PageTitle';
 import { UserContext } from '../src/main/contexts/UserContext';
 import LoginSignupCSS from '../src/main/styles/LoginSignup.css';
 

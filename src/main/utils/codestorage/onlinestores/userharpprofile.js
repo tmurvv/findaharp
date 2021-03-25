@@ -5,18 +5,18 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import PageTitle from '../src/main/components/PageTitle';
-import NewsletterSignup from '../src/main/components/NewsletterSignup';
-import Results from '../src/main/components/Results';
-import SellerAgreement from '../src/main/components/SellerAgreement';
+import PageTitle from '../src/main/components/main/PageTitle';
+import NewsletterSignup from '../src/main/components/mainNewsletterSignup';
+import Results from '../src/main/components/main/Results';
+import SellerAgreement from '../src/main/components/mainSellerAgreement';
 import UserProfileCSS from '../src/main/styles/UserProfile.css';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
-import ResultsWindow from '../src/main/components/ResultsWindow';
+import ResultsWindow from '../src/main/components/main/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE } from '../src/main/constants/constants';
 import { UserContext } from '../src/main/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/main/reducers/reducers';
 import { resultsWindowReducer } from '../src/main/reducers/ResultsWindowReducer';
-import { StringFormContext } from '../src/main/contexts/StringFormContext';
+import { StringFormContext } from '../src/store/contexts/StringFormContext';
 import { STRING_FORM_INFO_INIT, STRING_FORM_INIT } from '../src/main/constants/inits';
 
 const activeWindowInitialState = {

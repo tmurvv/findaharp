@@ -2,13 +2,13 @@
 import { useEffect, useContext, useState } from 'react';
 
 // internal
-import PaymentCss from '../src/main/styles/onlineStore/Payment.css';
-import StatusIndicator from '../src/main/components/onlineStore/StatusIndicator';
-import Subtotal from '../src/main/components/onlineStore/Subtotal';
-import StripeCheckout from '../src/main/components/onlineStore/StripeCheckout';
-import PaypalCheckout from '../src/main/components/onlineStore/PaypalCheckout';
-import OrderSummary from '../src/main/components/onlineStore/OrderSummary';
-import { StatusContext } from '../src/main/contexts/StatusContext';
+import PaymentCss from '../src/store/styles//Payment.css';
+import StatusIndicator from '../src/store/components/main/StatusIndicator';
+import Subtotal from '../src/store/components/main/Subtotal';
+import StripeCheckout from '../src/store/components/main/StripeCheckout';
+import PaypalCheckout from '../src/store/components/main/PaypalCheckout';
+import OrderSummary from '../src/store/components/main/OrderSummary';
+import { StatusContext } from '../src/store/contexts/StatusContext';
 
 function Payment() {
     const { setStatus } = useContext(StatusContext);

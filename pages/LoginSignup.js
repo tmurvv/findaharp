@@ -6,8 +6,8 @@ import uuid from 'react-uuid';
 
 // internal
 import LoginSignupCSS from '../src/main/styles/LoginSignup.css';
-import PageTitle from '../src/main/components/PageTitle';
-import Results from '../src/main/components/Results';
+import PageTitle from '../src/main/components/main/PageTitle';
+import Results from '../src/main/components/main/Results';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import { UserContext } from '../src/main/contexts/UserContext';
 import { resultInfoReducer, activeWindowReducer } from '../src/main/reducers/reducers';

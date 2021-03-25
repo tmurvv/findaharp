@@ -9,7 +9,7 @@ import StoreProduct from '../../onlineStore/StoreProduct';
 import StoreProductContainer from '../../onlineStore/StoreProductContainer';
 import PageTitle from '../../PageTitle';
 import IndexCss from '../../../styles/index.css';
-import FindaharpOnlineStoreCss from '../../../styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
+import FindaharpOnlineStoreCss from '../../../styles//onlinestores/FindaharpOnlineStore.css';
 import StoreProductSearch from '../../onlineStore/StoreProductSearch';
 
 const Findaharp = () => {

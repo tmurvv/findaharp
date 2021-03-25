@@ -4,15 +4,14 @@ import Head from 'next/head';
 
 //internal
 import { STORE_PARTNERS } from '../src/main/constants/storeDirectory';
-import PageTitle from '../src/main/components/PageTitle';
-import AboutPartnerStore from '../src/main/components/AboutPartnerStore';
-import FastNEasyStringForm from '../src/main/components/onlineStore/FastNEasyStringForm';
+import PageTitle from '../src/main/components/main/PageTitle';
+import AboutPartnerStore from '../src/main/components/main/AboutPartnerStore';
 import StorePartnersCSS from '../src/main/styles/StorePartners.css';
 import { 
     getWindowSize,
     shuffleStorePartners,
     addPlaceholderStorePartners } from '../src/main/utils/helpers';
-import StorePartnerInfo from '../src/main/components/StorePartnerInfo';
+import StorePartnerInfo from '../src/main/components/main/StorePartnerInfo';
   
 export default function StorePartners() {
     const [openStoreOwnerInq, setOpenStoreOwnerInq] = useState(false);

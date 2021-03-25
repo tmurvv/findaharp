@@ -5,20 +5,20 @@ import uuid from 'uuid';
 import parseNum from 'parse-num';
 import Router from 'next/router';
 // contexts
-// import { HarpProfileContext } from '../src/main/contexts/HarpProfileContext';
+// import { HarpProfileContext } from '../src/store/contexts/HarpProfileContext';
 import { CartContext } from '../src/main/contexts/CartContext';
-import { StringFormContext } from '../src/main/contexts/StringFormContext';
+import { StringFormContext } from '../src/store/contexts/StringFormContext';
 // components
-import Octave from '../src/main/components/stringForm/Octave';
-import RememberHarpLogin from '../src/main/components/stringForm/RememberHarpLogin';
-import NewsletterSignup from '../src/main/components/NewsletterSignup';
-import Note from '../src/main/components/stringForm/Note';
-import PageTitle from '../src/main/components/PageTitle';
+import Octave from '../src/main/components/mainstringForm/Octave';
+import RememberHarpLogin from '../src/main/components/mainstringForm/RememberHarpLogin';
+import NewsletterSignup from '../src/main/components/mainNewsletterSignup';
+import Note from '../src/main/components/mainstringForm/Note';
+import PageTitle from '../src/main/components/main/PageTitle';
 // other internal
-import HarpProfileCss from '../src/main/styles/stringForm/HarpProfile.css';
-import { setlocalCart } from '../src/main/utils/checkoutHelpers';
+import HarpProfileCss from '../src/store/styles/stringForm/HarpProfile.css';
+import { setlocalCart } from '../src/store/utils/checkoutHelpers';
 import { STRING_FORM_INIT } from '../src/main/constants/inits';
-import ResultsWindow from '../src/main/components/ResultsWindow';
+import ResultsWindow from '../src/main/components/main/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE } from '../src/main/constants/constants';
 import { resultsWindowReducer } from '../src/main/reducers/ResultsWindowReducer';
 

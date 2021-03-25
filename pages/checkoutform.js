@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import Router from 'next/router';
 
-import { CartContext } from '../src/main/contexts/CartContext';
+import { CartContext } from '../src/store/contexts/CartContext';
 import { UserContext } from '../src/main/contexts/UserContext';
 import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
-import Results from '../src/main/components/Results';
+import Results from '../src/main/components/main/Results';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import { resultInfoReducer } from '../src/main/reducers/reducers';
 import {
@@ -12,10 +12,10 @@ import {
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
-import { getTotal } from "../src/main/utils/checkoutHelpers";
+import { getTotal } from "../src/store/utils/checkoutHelpers";
 import IndexCss from "../src/main/styles/index.css";
-import CheckoutFormCss from "../src/main/styles/onlineStore/CheckoutForm.css";
-import { deletelocalCart } from "../src/main/utils/checkoutHelpers";
+import CheckoutFormCss from "../src/store/styles//CheckoutForm.css";
+import { deletelocalCart } from "../src/store/utils/checkoutHelpers";
 
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);

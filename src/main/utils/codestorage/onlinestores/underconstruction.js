@@ -8,7 +8,7 @@ import { FINDAHARP_PRODUCTS } from '../../../constants/FindaharpProducts'
 import StoreProduct from '../../onlineStore/StoreProduct';
 import PageTitle from '../../PageTitle';
 import IndexCss from '../../../styles/index.css';
-import HarpsEtcOnlineStoreCss from '../../../styles/onlineStore/onlinestores/HarpsEtcOnlineStore.css';
+import HarpsEtcOnlineStoreCss from '../../../styles//onlinestores/HarpsEtcOnlineStore.css';
 
 const UnderConstruction = () => {
     // display cart??

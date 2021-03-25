@@ -5,9 +5,9 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import PageTitle from '../src/main/components/PageTitle';
-import Results from '../src/main/components/Results';
-import SellerAgreement from '../src/main/components/SellerAgreement';
+import PageTitle from '../src/main/components/main/PageTitle';
+import Results from '../src/main/components/main/Results';
+import SellerAgreement from '../src/main/components/mainSellerAgreement';
 import UserProfileCSS from '../src/main/styles/UserProfile.css';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import { UserContext } from '../src/main/contexts/UserContext';

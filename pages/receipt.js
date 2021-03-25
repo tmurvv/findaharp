@@ -1,14 +1,14 @@
 import { useState, useContext, useEffect } from 'react';
 import Router from 'next/router';
 
-import { CartContext } from '../src/main/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/main/contexts/CartSubtotalsContext';
+import { CartContext } from '../src/store/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/store/contexts/CartSubtotalsContext';
 import { UserContext } from '../src/main/contexts/UserContext';
 import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
-import { StatusContext } from '../src/main/contexts/StatusContext';
-import PageTitle from '../src/main/components/PageTitle';
-import StatusIndicator from '../src/main/components/onlineStore/StatusIndicator';
-import CartCss from '../src/main/styles/onlineStore/cart.css'; 
+import { StatusContext } from '../src/store/contexts/StatusContext';
+import PageTitle from '../src/main/components/main/PageTitle';
+import StatusIndicator from '../src/store/components/main/StatusIndicator';
+import CartCss from '../src/store/styles/cart.css'; 
 import IndexCss from '../src/main/styles/index.css'; 
 import ProductModalCSS from '../src/main/styles/ProductModal.css';
 

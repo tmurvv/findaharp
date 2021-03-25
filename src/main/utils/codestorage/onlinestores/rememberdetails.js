@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import Router from 'next/router';
 
-import PageTitle from '../src/main/components/PageTitle';
-import CartCss from '../src/main/styles/onlineStore/cart.css'; 
+import PageTitle from '../src/main/components/main/PageTitle';
+import CartCss from '../src/store/styles/cart.css'; 
 import IndexCss from '../src/main/styles/index.css';
 
 function RememberDetails() {

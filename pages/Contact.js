@@ -3,8 +3,8 @@ import {useEffect} from 'react';
 import Head from 'next/head';
 
 // internal
-import PageTitle from '../src/main/components/PageTitle';
-import ContactUsForm from '../src/main/components/ContactUsForm';
+import PageTitle from '../src/main/components/main/PageTitle';
+import ContactUsForm from '../src/main/components/main/ContactUsForm';
 import ContactCSS from '../src/main/styles/Contact.css';
 
 function Contact() {

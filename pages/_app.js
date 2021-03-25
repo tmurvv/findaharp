@@ -11,23 +11,23 @@ import * as gtag from '../lib/gtag';
 import 'react-phone-input-2/lib/style.css'
 
 // internal
-import {CartContext} from "../src/main/contexts/CartContext";
-import {CartSubtotalsContext} from "../src/main/contexts/CartSubtotalsContext";
-import {CartOpenContext} from "../src/main/contexts/CartOpenContext";
+import {CartContext} from "../src/store/contexts/CartContext";
+import {CartSubtotalsContext} from "../src/store/contexts/CartSubtotalsContext";
+import {CartOpenContext} from "../src/store/contexts/CartOpenContext";
 import {UserContext} from "../src/main/contexts/UserContext";
 import {CurrencyContext} from "../src/main/contexts/CurrencyContext";
-import {StatusContext} from "../src/main/contexts/StatusContext";
-import {StringFormContext} from "../src/main/contexts/StringFormContext";
+import {StatusContext} from "../src/store/contexts/StatusContext";
+import {StringFormContext} from "../src/store/contexts/StringFormContext";
 import AppCss from '../src/main/styles/app.css.js';
-import Banner from '../src/main/components/Banner';
-import NavBar from '../src/main/components/NavBar';
-import Footer from '../src/main/components/Footer';
-import CartButton from '../src/main/components/onlineStore/CartButton';
-import ActivateEmail from '../src/main/components/ActivateEmail';
-import ResetPassword from '../src/main/components/ResetPassword';
-import UploadListingResult from '../src/main/components/UploadListingResult';
-import SellerAgreement from '../src/main/components/SellerAgreement';
-import UploadStoreItem from '../src/main/components/onlineStore/uploadstoreitem';
+import Banner from '../src/main/components/main/Banner';
+import NavBar from '../src/main/components/main/NavBar';
+import Footer from '../src/main/components/main/Footer';
+import CartButton from '../src/store/components/main/CartButton';
+import ActivateEmail from '../src/main/components/main/ActivateEmail';
+import ResetPassword from '../src/main/components/main/ResetPassword';
+import UploadListingResult from '../src/main/components/main/UploadListingResult';
+import SellerAgreement from '../src/main/components/main/SellerAgreement';
+import UploadStoreItem from '../src/store/components/main/uploadstoreitem';
 import { parseJwt } from '../src/main/utils/helpers';
 import {
     CART_OPEN_INIT,

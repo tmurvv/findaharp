@@ -5,9 +5,9 @@ import axios from 'axios';
 
 // internal
 import IndexCss from '../src/main/styles/index.css.js';
-import ProductSearch from '../src/main/components/ProductSearch';
-import PageTitle from '../src/main/components/PageTitle';
-import FastNEasyStringForm from '../src/main/components/onlineStore/FastNEasyStringForm';
+import ProductSearch from '../src/main/components/main/ProductSearch';
+import PageTitle from '../src/main/components/main/PageTitle';
+import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
 
 // // local test data
 // import testData from '../src/main/utils/testData';

@@ -2,7 +2,7 @@
 import React, {useReducer, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 // styles
-import StoreProductContainerCss from '../../../styles/onlineStore/StoreProductContainer.css';
+import StoreProductContainerCss from '../../../styles//StoreProductContainer.css';
 // internal
 import StoreProductModal from './StoreProductModal';
 import StoreProduct from './StoreProduct';

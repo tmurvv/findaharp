@@ -8,7 +8,7 @@ import axios from "axios";
 import StoreProduct from '../onlineStore/StoreProduct';
 import StoreResults from '../onlineStore/StoreResults';
 // other internal
-import StoreProductContainerCss from '../../styles/onlineStore/StoreProductContainer.css';
+import StoreProductContainerCss from '../../styles//StoreProductContainer.css';
 import { setOpacity } from '../helpers';
 import { productsReducer } from '../../reducers/reducers';
 import { triggerLazy } from '../helpers';
