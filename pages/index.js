@@ -4,14 +4,14 @@ import Head from 'next/head';
 import axios from 'axios';
 
 // internal
-import IndexCss from '../src/styles/index.css.js';
-import ProductSearch from '../src/components/ProductSearch';
-import PageTitle from '../src/components/PageTitle';
-import FastNEasyStringForm from '../src/components/onlineStore/FastNEasyStringForm';
+import IndexCss from '../src/main/styles/index.css.js';
+import ProductSearch from '../src/main/components/ProductSearch';
+import PageTitle from '../src/main/components/PageTitle';
+import FastNEasyStringForm from '../src/main/components/onlineStore/FastNEasyStringForm';
 
 // // local test data
-// import testData from '../src/utils/testData';
-// import testMakesModels from '../src/utils/testMakesModels';
+// import testData from '../src/main/utils/testData';
+// import testMakesModels from '../src/main/utils/testMakesModels';
 
 const Index = (props) => {
     const [clientLat, setClientLat] = useState();

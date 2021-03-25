@@ -3,9 +3,9 @@ import {useEffect} from 'react';
 import Head from 'next/head';
 
 // internal
-import PageTitle from '../src/components/PageTitle';
-import ContactUsForm from '../src/components/ContactUsForm';
-import ContactCSS from '../src/styles/Contact.css';
+import PageTitle from '../src/main/components/PageTitle';
+import ContactUsForm from '../src/main/components/ContactUsForm';
+import ContactCSS from '../src/main/styles/Contact.css';
 
 function Contact() {
     useEffect(()=>{

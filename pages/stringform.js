@@ -5,27 +5,27 @@ import uuid from 'uuid';
 import parseNum from 'parse-num';
 import Router from 'next/router';
 // contexts
-import { StringFormContext } from '../src/contexts/StringFormContext';
-import { StringFormInfoContext } from '../src/contexts/StringFormInfoContext';
-import { CartContext } from '../src/contexts/CartContext';
-import { UserContext } from '../src/contexts/UserContext';
+import { StringFormContext } from '../src/main/contexts/StringFormContext';
+import { StringFormInfoContext } from '../src/main/contexts/StringFormInfoContext';
+import { CartContext } from '../src/main/contexts/CartContext';
+import { UserContext } from '../src/main/contexts/UserContext';
 // components
-import Octave from '../src/components/stringForm/Octave';
-import RememberHarpLogin from '../src/components/stringForm/RememberHarpLogin';
-import Note from '../src/components/stringForm/Note';
-import PageTitle from '../src/components/PageTitle';
-import HarpLoginSignup from '../src/components/stringForm/HarpLoginSignup';
-import UserHarpProfile from '../src/components/stringForm/UserHarpProfile';
-import RememberExplained from '../src/components/stringForm/RememberExplained';
+import Octave from '../src/main/components/stringForm/Octave';
+import RememberHarpLogin from '../src/main/components/stringForm/RememberHarpLogin';
+import Note from '../src/main/components/stringForm/Note';
+import PageTitle from '../src/main/components/PageTitle';
+import HarpLoginSignup from '../src/main/components/stringForm/HarpLoginSignup';
+import UserHarpProfile from '../src/main/components/stringForm/UserHarpProfile';
+import RememberExplained from '../src/main/components/stringForm/RememberExplained';
 // other internal
-import StringFormCss from '../src/styles/stringForm/StringForm.css';
-import { setlocalCart } from '../src/utils/checkoutHelpers';
-import { zeroQuantities } from '../src/utils/storeHelpers';
-import { STRING_FORM_INIT, STRING_FORM_INFO_INIT } from '../src/constants/inits';
-import ResultsWindow from '../src/components/ResultsWindow';
-import { RESULTSWINDOW_INITIAL_STATE } from '../src/constants/constants';
-import { STRING_BRANDS } from '../src/constants/stringBrands';
-import { resultsWindowReducer } from '../src/reducers/ResultsWindowReducer';
+import StringFormCss from '../src/main/styles/stringForm/StringForm.css';
+import { setlocalCart } from '../src/main/utils/checkoutHelpers';
+import { zeroQuantities } from '../src/main/utils/storeHelpers';
+import { STRING_FORM_INIT, STRING_FORM_INFO_INIT } from '../src/main/constants/inits';
+import ResultsWindow from '../src/main/components/ResultsWindow';
+import { RESULTSWINDOW_INITIAL_STATE } from '../src/main/constants/constants';
+import { STRING_BRANDS } from '../src/main/constants/stringBrands';
+import { resultsWindowReducer } from '../src/main/reducers/ResultsWindowReducer';
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);

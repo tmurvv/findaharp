@@ -5,9 +5,9 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import PageTitle from '../src/components/PageTitle';
-import { UserContext } from '../src/contexts/UserContext';
-import LoginSignupCSS from '../src/styles/LoginSignup.css';
+import PageTitle from '../src/main/components/PageTitle';
+import { UserContext } from '../src/main/contexts/UserContext';
+import LoginSignupCSS from '../src/main/styles/LoginSignup.css';
 
 function ResetPassword(props) {
     const { user, setUser} = useContext(UserContext);

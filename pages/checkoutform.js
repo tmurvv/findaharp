@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useContext, useReducer } from "react";
 import Router from 'next/router';
 
-import { CartContext } from '../src/contexts/CartContext';
-import { UserContext } from '../src/contexts/UserContext';
-import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import Results from '../src/components/Results';
-import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
-import { resultInfoReducer } from '../src/reducers/reducers';
+import { CartContext } from '../src/main/contexts/CartContext';
+import { UserContext } from '../src/main/contexts/UserContext';
+import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
+import Results from '../src/main/components/Results';
+import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
+import { resultInfoReducer } from '../src/main/reducers/reducers';
 import {
     CardElement,
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
-import { getTotal } from "../src/utils/checkoutHelpers";
-import IndexCss from "../src/styles/index.css";
-import CheckoutFormCss from "../src/styles/onlineStore/CheckoutForm.css";
-import { deletelocalCart } from "../src/utils/checkoutHelpers";
+import { getTotal } from "../src/main/utils/checkoutHelpers";
+import IndexCss from "../src/main/styles/index.css";
+import CheckoutFormCss from "../src/main/styles/onlineStore/CheckoutForm.css";
+import { deletelocalCart } from "../src/main/utils/checkoutHelpers";
 
 export default function CheckoutForm() {
     const { cart, setCart } = useContext(CartContext);
