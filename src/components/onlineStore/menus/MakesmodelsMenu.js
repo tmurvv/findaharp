@@ -109,7 +109,7 @@ export default function MakesmodelsMenu(props) {
                     id='trans'
                     onClick={()=>{document.querySelector('#trans').style.maxHeight='1000px'; setRees(true);setDusty(false);setTriplett(false);setStoney(false)}} 
                     key={uuid()} 
-                    class='trans'
+                    className='trans'
                     name='Rees'
                 >Rees
                     <ul

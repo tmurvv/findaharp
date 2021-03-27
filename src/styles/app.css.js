@@ -3,6 +3,10 @@ import React from 'react';
 function AppCss() {
     return (
         <style jsx="true">{`
+            input,
+            input:focus {
+                outline: none;
+            }
             @font-face {
                 font-family: avenir;
                 src: url(/fonts/avenir_ff/AvenirLTStd-Roman.otf);

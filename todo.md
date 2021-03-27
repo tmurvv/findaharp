@@ -31,9 +31,10 @@
 - cancel button on upload harp listing
 - troubleshoot these steps: change password, check old password-should fail, choose try again, check new password, gets 'Network Error?'
 - clear all button in store search
+- after delete account, should return to main-page
 
 ### functionality
--- four times a bug when switching harps
+- four times a bug when switching harps
 - get Delta back on menu
 - on string menu, get models in sub-menus
 - back-button from PayPal page loses cart
