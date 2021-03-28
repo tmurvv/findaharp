@@ -2,31 +2,31 @@ import { useState, useContext, useEffect, useReducer } from 'react';
 import uuid from 'react-uuid';
 import Router, { withRouter } from 'next/router';
 
-import { CartContext } from '../src/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
-import { UserContext } from '../src/contexts/UserContext';
-import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import CartItem from '../src/components/onlineStore/CartItem';
-import OrderSummary from '../src/components/onlineStore/OrderSummary';
-import Subtotal from '../src/components/onlineStore/Subtotal';
-import { branding } from '../src/constants/branding';
-import { cssVariables } from '../src/constants/cssVariables';
-import CartCss from '../src/styles/onlineStore/cart.css'; 
-import IndexCss from '../src/styles/index.css'; 
-import { resultInfoReducer } from '../src/reducers/reducers';
-import Results from '../src/components/Results';
-import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
+import { CartContext } from '../src/store/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/store/contexts/CartSubtotalsContext';
+import { UserContext } from '../src/main/contexts/UserContext';
+import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
+import CartItem from '../src/store/components/main/CartItem';
+import OrderSummary from '../src/store/components/main/OrderSummary';
+import Subtotal from '../src/store/components/main/Subtotal';
+import { branding } from '../src/main/constants/branding';
+import { cssVariables } from '../src/main/constants/cssVariables';
+import CartCss from '../src/store/styles/cart.css'; 
+import IndexCss from '../src/main/styles/index.css'; 
+import { resultInfoReducer } from '../src/main/reducers/reducers';
+import Results from '../src/main/components/main/Results';
+import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import {
     getNumItems,
     getStores,
     getSubTotal
-} from '../src/utils/storeHelpers';
-import { getTotal, deletelocalCart } from '../src/utils/checkoutHelpers';
-import GetZipPostal from '../src/components/onlineStore/GetZipPostal';
-import PageTitle from '../src/components/PageTitle';
-import SubCart from '../src/components/onlineStore/SubCart';
-import { CART_ITEMS_INIT } from '../src/constants/inits';
-import FastNEasyStringForm from '../src/components/onlineStore/FastNEasyStringForm';
+} from '../src/store/utils/storeHelpers';
+import { getTotal, deletelocalCart } from '../src/store/utils/checkoutHelpers';
+import GetZipPostal from '../src/store/components/main/GetZipPostal';
+import PageTitle from '../src/main/components/main/PageTitle';
+import SubCart from '../src/store/components/main/SubCart';
+import { CART_ITEMS_INIT } from '../src/main/constants/inits';
+import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
 
 
 function Cart(props) {

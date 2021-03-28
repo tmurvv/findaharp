@@ -5,27 +5,26 @@ import uuid from 'uuid';
 import parseNum from 'parse-num';
 import Router from 'next/router';
 // contexts
-import { StringFormContext } from '../src/contexts/StringFormContext';
-import { StringFormInfoContext } from '../src/contexts/StringFormInfoContext';
-import { CartContext } from '../src/contexts/CartContext';
-import { UserContext } from '../src/contexts/UserContext';
+import { StringFormContext } from '../src/store/contexts/StringFormContext';
+import { StringFormInfoContext } from '../src/store/contexts/StringFormInfoContext';
+import { CartContext } from '../src/store/contexts/CartContext';
+import { UserContext } from '../src/main/contexts/UserContext';
 // components
-import Octave from '../src/components/stringForm/Octave';
-import RememberHarpLogin from '../src/components/stringForm/RememberHarpLogin';
-import Note from '../src/components/stringForm/Note';
-import PageTitle from '../src/components/PageTitle';
-import HarpLoginSignup from '../src/components/stringForm/HarpLoginSignup';
-import UserHarpProfile from '../src/components/stringForm/UserHarpProfile';
-import RememberExplained from '../src/components/stringForm/RememberExplained';
+import Octave from '../src/store/components/stringForm/Octave';
+import RememberHarpLogin from '../src/store/components/stringForm/RememberHarpLogin';
+import PageTitle from '../src/main/components/main/PageTitle';
+import HarpLoginSignup from '../src/store/components/stringForm/HarpLoginSignup';
+import UserHarpProfile from '../src/store/components/stringForm/UserHarpProfile';
+import RememberExplained from '../src/store/components/stringForm/RememberExplained';
 // other internal
-import StringFormCss from '../src/styles/stringForm/StringForm.css';
-import { setlocalCart } from '../src/utils/checkoutHelpers';
-import { zeroQuantities } from '../src/utils/storeHelpers';
-import { STRING_FORM_INIT, STRING_FORM_INFO_INIT } from '../src/constants/inits';
-import ResultsWindow from '../src/components/ResultsWindow';
-import { RESULTSWINDOW_INITIAL_STATE } from '../src/constants/constants';
-import { STRING_BRANDS } from '../src/constants/stringBrands';
-import { resultsWindowReducer } from '../src/reducers/ResultsWindowReducer';
+import StringFormCss from '../src/store/styles/stringForm/StringForm.css';
+import { setlocalCart } from '../src/store/utils/checkoutHelpers';
+import { zeroQuantities } from '../src/store/utils/storeHelpers';
+import { STRING_FORM_INIT, STRING_FORM_INFO_INIT } from '../src/main/constants/inits';
+import ResultsWindow from '../src/main/components/main/ResultsWindow';
+import { RESULTSWINDOW_INITIAL_STATE } from '../src/main/constants/constants';
+import { STRING_BRANDS } from '../src/store/constants/stringBrands';
+import { resultsWindowReducer } from '../src/main/reducers/ResultsWindowReducer';
 
 const StringForm = (props) => {
     const { stringForm, setStringForm } = useContext(StringFormContext);
@@ -52,7 +51,8 @@ const StringForm = (props) => {
         }
         try {
             // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
-            const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+            const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
+            // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
             if (results) dispatchResultInfo({type: 'OK', payload: `Update brands for harp ${user.currentHarpname.toUpperCase()} was successful.`});
         } catch(e) {
             console.log(e.message);
@@ -131,7 +131,8 @@ const StringForm = (props) => {
             }
             try {
                 // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
-                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+                const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
+                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 // console.log('updateharpres', res.data)
                 // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
@@ -413,7 +414,8 @@ StringForm.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
+    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk

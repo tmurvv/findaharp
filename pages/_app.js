@@ -11,31 +11,31 @@ import * as gtag from '../lib/gtag';
 import 'react-phone-input-2/lib/style.css'
 
 // internal
-import {CartContext} from "../src/contexts/CartContext";
-import {CartSubtotalsContext} from "../src/contexts/CartSubtotalsContext";
-import {CartOpenContext} from "../src/contexts/CartOpenContext";
-import {UserContext} from "../src/contexts/UserContext";
-import {CurrencyContext} from "../src/contexts/CurrencyContext";
-import {StatusContext} from "../src/contexts/StatusContext";
-import {StringFormContext} from "../src/contexts/StringFormContext";
-import AppCss from '../src/styles/app.css.js';
-import Banner from '../src/components/Banner';
-import NavBar from '../src/components/NavBar';
-import Footer from '../src/components/Footer';
-import CartButton from '../src/components/onlineStore/CartButton';
-import ActivateEmail from '../src/components/ActivateEmail';
-import ResetPassword from '../src/components/ResetPassword';
-import UploadListingResult from '../src/components/UploadListingResult';
-import SellerAgreement from '../src/components/SellerAgreement';
-import UploadStoreItem from '../src/components/onlineStore/uploadstoreitem';
-import { parseJwt } from '../src/utils/helpers';
+import {CartContext} from "../src/store/contexts/CartContext";
+import {CartSubtotalsContext} from "../src/store/contexts/CartSubtotalsContext";
+import {CartOpenContext} from "../src/store/contexts/CartOpenContext";
+import {UserContext} from "../src/main/contexts/UserContext";
+import {CurrencyContext} from "../src/main/contexts/CurrencyContext";
+import {StatusContext} from "../src/store/contexts/StatusContext";
+import {StringFormContext} from "../src/store/contexts/StringFormContext";
+import AppCss from '../src/main/styles/app.css.js';
+import Banner from '../src/main/components/main/Banner';
+import NavBar from '../src/main/components/main/NavBar';
+import Footer from '../src/main/components/main/Footer';
+import CartButton from '../src/store/components/main/CartButton';
+import ActivateEmail from '../src/main/components/main/ActivateEmail';
+import ResetPassword from '../src/main/components/main/ResetPassword';
+import UploadListingResult from '../src/main/components/main/UploadListingResult';
+import SellerAgreement from '../src/main/components/main/SellerAgreement';
+import UploadStoreItem from '../src/store/components/main/uploadstoreitem';
+import { parseJwt } from '../src/main/utils/helpers';
 import {
     CART_OPEN_INIT,
     CART_ITEMS_INIT,
     CART_SUBTOTALS_INIT,
     STRING_FORM_INIT,
     STRING_FORM_INFO_INIT
-} from '../src/constants/inits.js'
+} from '../src/main/constants/inits.js'
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 

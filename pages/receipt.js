@@ -1,16 +1,16 @@
 import { useState, useContext, useEffect } from 'react';
 import Router from 'next/router';
 
-import { CartContext } from '../src/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
-import { UserContext } from '../src/contexts/UserContext';
-import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import { StatusContext } from '../src/contexts/StatusContext';
-import PageTitle from '../src/components/PageTitle';
-import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
-import CartCss from '../src/styles/onlineStore/cart.css'; 
-import IndexCss from '../src/styles/index.css'; 
-import ProductModalCSS from '../src/styles/ProductModal.css';
+import { CartContext } from '../src/store/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/store/contexts/CartSubtotalsContext';
+import { UserContext } from '../src/main/contexts/UserContext';
+import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
+import { StatusContext } from '../src/store/contexts/StatusContext';
+import PageTitle from '../src/main/components/main/PageTitle';
+import StatusIndicator from '../src/store/components/main/StatusIndicator';
+import CartCss from '../src/store/styles/cart.css'; 
+import IndexCss from '../src/main/styles/index.css'; 
+import ProductModalCSS from '../src/main/styles/ProductModal.css';
 
 
 function Receipt() {

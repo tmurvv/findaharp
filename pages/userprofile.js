@@ -5,13 +5,13 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import PageTitle from '../src/components/PageTitle';
-import Results from '../src/components/Results';
-import SellerAgreement from '../src/components/SellerAgreement';
-import UserProfileCSS from '../src/styles/UserProfile.css';
-import { RESULTS_INITIAL_STATE } from '../src/constants/constants';
-import { UserContext } from '../src/contexts/UserContext';
-import { resultInfoReducer, activeWindowReducer } from '../src/reducers/reducers';
+import PageTitle from '../src/main/components/main/PageTitle';
+import Results from '../src/main/components/main/Results';
+import SellerAgreement from '../src/main/components/main/selleragreement';
+import UserProfileCSS from '../src/main/styles/UserProfile.css';
+import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
+import { UserContext } from '../src/main/contexts/UserContext';
+import { resultInfoReducer, activeWindowReducer } from '../src/main/reducers/reducers';
 
 const activeWindowInitialState = {
     activeWindow: 'changePassword',

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { UserContext } from '../src/contexts/UserContext';
+import { UserContext } from '../src/main/contexts/UserContext';
 // display cart??
 // useEffect(()=>{
 //     if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='none';

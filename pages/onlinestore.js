@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 // internal
-import PageTitle from '../src/components/PageTitle';
-import GlobalStoreSearch from '../src/components/onlineStore/GlobalStoreSearch';
-import StoreIndexCss from '../src/styles/onlineStore/StoreIndex.css';
-import OnlineStoreCss from '../src/styles/onlineStore/onlinestores/FindaharpOnlineStore.css';
+import PageTitle from '../src/main/components/main/PageTitle';
+import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
+import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
@@ -32,8 +31,6 @@ const OnlineStore = (props) => {
                     setSearchResults={setSearchResults}
                 />     
             </div>
-            
-            <StoreIndexCss />
             <OnlineStoreCss />
         </>
     )
@@ -50,7 +47,8 @@ OnlineStore.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
-    const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
+    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk

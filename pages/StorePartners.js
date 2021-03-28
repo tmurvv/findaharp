@@ -3,16 +3,15 @@ import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 
 //internal
-import { STORE_PARTNERS } from '../src/constants/storeDirectory';
-import PageTitle from '../src/components/PageTitle';
-import AboutPartnerStore from '../src/components/AboutPartnerStore';
-import FastNEasyStringForm from '../src/components/onlineStore/FastNEasyStringForm';
-import StorePartnersCSS from '../src/styles/StorePartners.css';
+import { STORE_PARTNERS } from '../src/main/constants/storeDirectory';
+import PageTitle from '../src/main/components/main/PageTitle';
+import AboutPartnerStore from '../src/main/components/main/AboutPartnerStore';
+import StorePartnersCSS from '../src/main/styles/StorePartners.css';
 import { 
     getWindowSize,
     shuffleStorePartners,
-    addPlaceholderStorePartners } from '../src/utils/helpers';
-import StorePartnerInfo from '../src/components/StorePartnerInfo';
+    addPlaceholderStorePartners } from '../src/main/utils/helpers';
+import StorePartnerInfo from '../src/main/components/main/StorePartnerInfo';
   
 export default function StorePartners() {
     const [openStoreOwnerInq, setOpenStoreOwnerInq] = useState(false);

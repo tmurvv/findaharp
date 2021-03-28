@@ -4,20 +4,20 @@ import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Router from 'next/router';
 import axios from 'axios';
 // contexts
-import { UserContext } from '../src/contexts/UserContext';
-import { CartContext } from '../src/contexts/CartContext';
-import { CartSubtotalsContext } from '../src/contexts/CartSubtotalsContext';
-import { CurrencyContext } from '../src/contexts/CurrencyContext';
-import { StatusContext } from '../src/contexts/StatusContext';
+import { UserContext } from '../src/main/contexts/UserContext';
+import { CartContext } from '../src/store/contexts/CartContext';
+import { CartSubtotalsContext } from '../src/store/contexts/CartSubtotalsContext';
+import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
+import { StatusContext } from '../src/store/contexts/StatusContext';
 // components
-import StatusIndicator from '../src/components/onlineStore/StatusIndicator';
-import Subtotal from '../src/components/onlineStore/Subtotal';
-import OrderSummary from '../src/components/onlineStore/OrderSummary';
-import Results from '../src/components/Results';
+import StatusIndicator from '../src/store/components/main/StatusIndicator';
+import Subtotal from '../src/store/components/main/Subtotal';
+import OrderSummary from '../src/store/components/main/OrderSummary';
+import Results from '../src/main/components/main/Results';
 // other internal
-import ShippingCss from '../src/styles/onlineStore/Shipping.css';
-import { resultInfoReducer } from '../src/reducers/reducers';
-import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../src/constants/constants';
+import ShippingCss from '../src/store/styles//Shipping.css';
+import { resultInfoReducer } from '../src/main/reducers/reducers';
+import { RESULTS_INITIAL_STATE, RESET_SHIPPING_INFO } from '../src/main/constants/constants';
 import {
     generateReceiptEmailHtml, 
     selectRegion, 
@@ -25,10 +25,10 @@ import {
     tax,
     deletelocalCart,
     getShippingArray
-} from '../src/utils/checkoutHelpers';
+} from '../src/store/utils/checkoutHelpers';
 import { 
     getNumItems, getStores
-} from '../src/utils/storeHelpers';
+} from '../src/store/utils/storeHelpers';
 
 function Shipping() {
     const { user, setUser } = useContext(UserContext);
