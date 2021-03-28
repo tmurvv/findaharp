@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from 'react';
 import Router from 'next/router';
 
-import PageTitle from '../PageTitle';
+import PageTitle from '../../../main/components/main/PageTitle';
 import CartCss from '../../styles/cart.css'; 
-import IndexCss from '../../styles/index.css';
+import IndexCss from '../../../main/styles/index.css';
 
 
 function RememberExplained(props) {  

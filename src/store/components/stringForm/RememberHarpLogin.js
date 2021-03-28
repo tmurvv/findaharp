@@ -2,25 +2,15 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import Router from 'next/router';
-import uuid from 'uuid';
-import parseNum from 'parse-num';
 // contexts
-import { UserContext } from '../../contexts/UserContext';
-import { CartContext } from '../../contexts/CartContext';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { StringFormInfoContext } from '../../contexts/StringFormInfoContext';
-import { CurrencyContext } from '../../contexts/CurrencyContext';
-import { CartSubtotalsContext } from '../../contexts/CartSubtotalsContext';
 // other internal
-import NewsletterSignup from '../NewsletterSignup';
+import NewsletterSignup from '../../../main/components/main/NewsletterSignup';
 import RememberHarpModalCSS from '../../styles/stringForm/RememberHarpModal.css';
-import { STORE_PARTNERS } from '../../constants/storeDirectory';
-import { incQty } from '../../utils/storeHelpers';
-import { setlocalCart } from '../../utils/checkoutHelpers';
-import ResultsWindow from '../ResultsWindow';
+import ResultsWindow from '../../../main/components/main/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE } from '../../../main/constants/constants';
-import { resultsWindowReducer } from '../../reducers/ResultsWindowReducer';
-import { AirlineSeatLegroomReducedSharp, SettingsEthernetSharp } from '@material-ui/icons';
+import { resultsWindowReducer } from '../../../main/reducers/ResultsWindowReducer';
 
 function RememberHarpLogin(props) {
     const [ localHarpname, setLocalHarpname] = useState();

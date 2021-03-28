@@ -1,22 +1,21 @@
 // packages
 import React, { useState, useContext, useReducer, useEffect } from 'react';
-import Router from 'next/router';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
 // contexts
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../../main/contexts/UserContext';
 import { StringFormContext } from '../../contexts/StringFormContext';
 // components
 import HarpLoginSignupCSS from '../../styles//HarpLoginSignup.css';
-import PageTitle from '../PageTitle';
-import Results from '../Results';
-import NewsletterSignup from '../NewsletterSignup';
-import FastNEasyStringForm from '../onlineStore/FastNEasyStringForm';
+import PageTitle from '../../../main/components/main/PageTitle';
+import Results from '../../../main/components/main/Results';
+import NewsletterSignup from '../../../main/components/main/NewsletterSignup';
+import FastNEasyStringForm from '../../components/main/FastNEasyStringForm';
 // other internal
-import { RESULTS_INITIAL_STATE, RESULTSWINDOW_INITIAL_STATE, NOTES_IN_OCTAVE  } from '../../../main/constants/constants';
-import { STRING_FORM_INIT } from '../../constants/inits';
-import { resultInfoReducer, harpactiveWindowReducer } from '../../reducers/reducers';
+import { RESULTS_INITIAL_STATE, NOTES_IN_OCTAVE  } from '../../../main/constants/constants';
+import { STRING_FORM_INIT } from '../../../main/constants/inits';
+import { resultInfoReducer, harpactiveWindowReducer } from '../../../main/reducers/reducers';
 import { zeroQuantities } from '../../utils/storeHelpers';
 
 // initialize reducer object

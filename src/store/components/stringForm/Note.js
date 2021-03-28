@@ -3,7 +3,7 @@ import parseNum from 'parse-num';
 import NoteCss from '../../styles/stringForm/Note.css';
 import { StringFormContext } from '../../contexts/StringFormContext';
 import { NOTES_IN_OCTAVE } from '../../../main/constants/constants';
-import SelectString from '../stringForm/SelectString';
+import SelectString from '../../components/stringForm/SelectString';
 
 function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, applyToOctaves, setTotal, setApplyToOctaves}) {
     const { stringForm, setStringForm } = useContext(StringFormContext);

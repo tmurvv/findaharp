@@ -5,6 +5,7 @@ import axios from 'axios';
 // internal
 import PageTitle from '../src/main/components/main/PageTitle';
 import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
+import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
@@ -30,6 +31,7 @@ const OnlineStore = (props) => {
                     setSearchResults={setSearchResults}
                 />     
             </div>
+            <OnlineStoreCss />
         </>
     )
 }

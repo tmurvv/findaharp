@@ -1,11 +1,18 @@
-
-
 import React from "react";
-import { cssVariables } from '../../../constants/cssVariables'
 
 function OnlineStoreCss() {
     return (
         <style jsx="true">{`
+            .storeIndex {
+                margin: 0;
+                padding: 70px 40px;
+                height: fit-content;
+                position: relative;
+            }
+            .storeIndex h2 {
+                margin-block-end:0;
+                margin-block-start:0;
+            }
             .divider img {
                 max-height: 5px;
             }

@@ -5,21 +5,17 @@ import axios from 'axios';
 import uuid from 'react-uuid';
 
 // internal
-import PageTitle from '../PageTitle';
-import NewsletterSignup from '../NewsletterSignup';
-import FastNEasyStringForm from '../onlineStore/FastNEasyStringForm';
-import Results from '../Results';
-import SellerAgreement from '../SellerAgreement';
-import UserProfileCSS from '../../styles/UserProfile.css';
-import { RESULTS_INITIAL_STATE } from '../../../main/constants/constants';
-import ResultsWindow from '../ResultsWindow';
+import PageTitle from '../../../main/components/main/PageTitle';
+import NewsletterSignup from '../../../main/components/main/NewsletterSignup';
+import FastNEasyStringForm from '../../components/main/FastNEasyStringForm';
+import UserProfileCSS from '../../../main/styles/UserProfile.css';
+import ResultsWindow from '../../../main/components/main/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE, NOTES_IN_OCTAVE } from '../../../main/constants/constants';
-import { UserContext } from '../../contexts/UserContext';
-import { resultInfoReducer, activeWindowReducer } from '../../reducers/reducers';
-import { resultsWindowReducer } from '../../reducers/ResultsWindowReducer';
+import { UserContext } from '../../../main/contexts/UserContext';
+import { activeWindowReducer } from '../../../main/reducers/reducers';
+import { resultsWindowReducer } from '../../../main/reducers/ResultsWindowReducer';
 import { StringFormContext } from '../../contexts/StringFormContext';
-import { STRING_FORM_INIT } from '../../constants/inits';
-import { zeroQuantities } from '../../utils/storeHelpers'
+import { STRING_FORM_INIT } from '../../../main/constants/inits';
 
 const activeWindowInitialState = {
     activeWindow: 'changePassword',

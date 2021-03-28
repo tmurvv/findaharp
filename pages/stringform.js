@@ -10,13 +10,12 @@ import { StringFormInfoContext } from '../src/store/contexts/StringFormInfoConte
 import { CartContext } from '../src/store/contexts/CartContext';
 import { UserContext } from '../src/main/contexts/UserContext';
 // components
-import Octave from '../src/main/components/mainstringForm/Octave';
-import RememberHarpLogin from '../src/main/components/mainstringForm/RememberHarpLogin';
-import Note from '../src/main/components/mainstringForm/Note';
+import Octave from '../src/store/components/stringForm/Octave';
+import RememberHarpLogin from '../src/store/components/stringForm/RememberHarpLogin';
 import PageTitle from '../src/main/components/main/PageTitle';
-import HarpLoginSignup from '../src/main/components/mainstringForm/HarpLoginSignup';
-import UserHarpProfile from '../src/main/components/mainstringForm/UserHarpProfile';
-import RememberExplained from '../src/main/components/mainstringForm/RememberExplained';
+import HarpLoginSignup from '../src/store/components/stringForm/HarpLoginSignup';
+import UserHarpProfile from '../src/store/components/stringForm/UserHarpProfile';
+import RememberExplained from '../src/store/components/stringForm/RememberExplained';
 // other internal
 import StringFormCss from '../src/store/styles/stringForm/StringForm.css';
 import { setlocalCart } from '../src/store/utils/checkoutHelpers';
