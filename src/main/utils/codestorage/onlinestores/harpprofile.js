@@ -66,7 +66,8 @@ const HarpProfile = (props) => {
             }
             try {
                 // const res = await axios.post('http://localhost:3000/api/v1/userharps/createuserharp', harpObject);
-                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/userharps/createuserharp', harpObject);
+                const res = await axios.post(`${process.env.backend}/api/v1/userharps/createuserharp`, harpObject);
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/userharps/createuserharp', harpObject);
                 dispatchResultInfo({type: 'OK', payload: `Add a Harp Profile successful for ${harpObject.oldharpname}.`});    
             } catch(e) {
                 console.log(e.message);
@@ -91,7 +92,8 @@ const HarpProfile = (props) => {
             }
             try {
                 // const res = await axios.post('http://localhost:3000/api/v1/userharps', harpObject);
-                const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/userharps', harpObject);
+                const res = await axios.post(`${process.env.backend}/api/v1/userharps`, harpObject);
+                // const res = await axios.post('https://findaharp-api.herokuapp.com/api/v1/userharps', harpObject);
                 // setStringFormInfo({
                 //     harpname: harpObject.harpname, 
                 //     email: harpObject.email, 
@@ -131,7 +133,8 @@ const HarpProfile = (props) => {
             // }
             try {
                 // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
-                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+                const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
+                // const res = await axios.patch(`https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp`, harpObject);
                 console.log('whtasehre', harpObject)
                 setStringFormInfo({
                     harpname: harpObject.harpname, 
@@ -159,7 +162,8 @@ const HarpProfile = (props) => {
             }
             try {
                 // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp', harpObject);
-                const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
+                const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
+                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
                 dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`}); 
                 setStringFormInfo({
                     harpname: harpObject.harpname, 
@@ -442,6 +446,7 @@ HarpProfile.getInitialProps = async (props) => {
      * API DATA
      *******************/
     // API
+    const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
     const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
     // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);

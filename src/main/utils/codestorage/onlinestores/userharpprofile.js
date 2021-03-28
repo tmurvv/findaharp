@@ -7,17 +7,14 @@ import uuid from 'react-uuid';
 // internal
 import PageTitle from '../src/main/components/main/PageTitle';
 import NewsletterSignup from '../src/main/components/mainNewsletterSignup';
-import Results from '../src/main/components/main/Results';
-import SellerAgreement from '../src/main/components/mainSellerAgreement';
 import UserProfileCSS from '../src/main/styles/UserProfile.css';
-import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import ResultsWindow from '../src/main/components/main/ResultsWindow';
 import { RESULTSWINDOW_INITIAL_STATE } from '../src/main/constants/constants';
 import { UserContext } from '../src/main/contexts/UserContext';
-import { resultInfoReducer, activeWindowReducer } from '../src/main/reducers/reducers';
+import { activeWindowReducer } from '../src/main/reducers/reducers';
 import { resultsWindowReducer } from '../src/main/reducers/ResultsWindowReducer';
 import { StringFormContext } from '../src/store/contexts/StringFormContext';
-import { STRING_FORM_INFO_INIT, STRING_FORM_INIT } from '../src/main/constants/inits';
+import { STRING_FORM_INIT } from '../src/main/constants/inits';
 
 const activeWindowInitialState = {
     activeWindow: 'changePassword',
@@ -337,9 +334,7 @@ function UserHarpProfile(props) {
         // getHarpList();
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
     },[]);
-    if (openAgreement===true) {
-        return <SellerAgreement setOpenAgreement={setOpenAgreement}/>
-    } else { 
+    
     return (
        <>
         <div className='updatePassword-edit-container'>
@@ -460,7 +455,6 @@ function UserHarpProfile(props) {
             </div>  
         </>
     )
-    }
 }
 
 export default UserHarpProfile;
