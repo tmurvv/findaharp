@@ -45,7 +45,7 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
             document.querySelector(`#spinner${note}`).style.display='block';
             return;
         }
-        if (stringType==='charts') {alert('This feature is under construction. Expected March 2021. In the meantime, feel free to email us for advice on string types or brands. harps@findaharp.com'); return;}
+        if (stringType==='charts') {alert('This feature is under construction. Expected June 2021. In the meantime, feel free to email us for advice on string types or brands. harps@findaharp.com'); return;}
         
         const brandObject = STRING_BRANDS.find(brand =>brand.name===stringType);
         if (!brandObject) return alert(`Something went wrong. Feel free to let us know. Copy and paste this error message and email harps@findaharp.com. Error: Brand Object not found, string type: ${stringType}`)

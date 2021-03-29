@@ -48,10 +48,6 @@ OnlineStore.getInitialProps = async (props) => {
      *******************/
     // API
     const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     const filteredProducts = res.data.storeitems;
     // const holidayProducts = res.data.storeitems.filter(product => product.title&&product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
     const usedProducts = res.data.storeitems.filter(product => product.newused==='used').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));

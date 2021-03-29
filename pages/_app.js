@@ -16,6 +16,7 @@ import {CartSubtotalsContext} from "../src/store/contexts/CartSubtotalsContext";
 import {CartOpenContext} from "../src/store/contexts/CartOpenContext";
 import {UserContext} from "../src/main/contexts/UserContext";
 import {CurrencyContext} from "../src/main/contexts/CurrencyContext";
+import {CurrencyContextCADtoUSD} from "../src/main/contexts/CurrencyContextCADtoUSD";
 import {StatusContext} from "../src/store/contexts/StatusContext";
 import {StringFormContext} from "../src/store/contexts/StringFormContext";
 import AppCss from '../src/main/styles/app.css.js';
@@ -33,8 +34,7 @@ import {
     CART_OPEN_INIT,
     CART_ITEMS_INIT,
     CART_SUBTOTALS_INIT,
-    STRING_FORM_INIT,
-    STRING_FORM_INFO_INIT
+    STRING_FORM_INIT
 } from '../src/main/constants/inits.js'
 
 const promise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
@@ -57,7 +57,8 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
     const [stringForm, setStringForm] = useState(Array.from(JSON.parse(JSON.stringify(STRING_FORM_INIT))));
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27);
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27); // USD to CAD
+    const [currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD] = useState(5000); // CAD to USD
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -83,8 +84,15 @@ function MyApp(props) {
     }, []);
     //get currency multiplier
     useEffect(() => {
+        const fetchData = async () => {
+            const data = await axios(`http://data.fixer.io/api/latest?access_key=c4bea783b698f8ebafeb5211fac2160b&format=1`);
+            setCurrencyMultiplier(data.data.rates.USD/data.data.rates.CAD);
+            setCurrencyMultiplierCADtoUSD(data.data.rates.CAD/data.data.rates.USD);
+        }
+        
+        fetchData();
         // const response = axios.get('https://free.currconv.com/api/v7/convert?q=USD_PHP&compact=ultra&apiKey=f99db690b27b4653acc2');
-    });
+    }, []);
     // if no user, check for JWT cookie in browser
     useEffect(() => {
         if (typeof window !== 'undefined' && !user._id) {
@@ -170,14 +178,16 @@ function MyApp(props) {
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
-                            <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
-                                <>
-                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                    <CartButton />
-                                    <UploadStoreItem />
-                                    <Footer />
-                                </>
-                            </CurrencyContext.Provider>
+                            <CurrencyContextCADtoUSD.Provider value={{currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD}}>
+                                <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                    <>
+                                        <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                        <CartButton />
+                                        <UploadStoreItem />
+                                        <Footer />
+                                    </>
+                                </CurrencyContext.Provider>
+                            </CurrencyContextCADtoUSD.Provider>
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
@@ -204,14 +214,16 @@ function MyApp(props) {
                     <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                         <CartContext.Provider value={{cart, setCart}}>
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
-                            <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
-                                <>
-                                    <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                    <CartButton />
-                                    <SellerAgreement />
-                                    <Footer />
-                                </>
-                            </CurrencyContext.Provider>
+                            <CurrencyContextCADtoUSD.Provider value={{currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD}}>
+                                <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                    <>
+                                        <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                        <CartButton />
+                                        <SellerAgreement />
+                                        <Footer />
+                                    </>
+                                </CurrencyContext.Provider>
+                            </CurrencyContextCADtoUSD.Provider>
                         </CartSubtotalsContext.Provider>
                         </CartContext.Provider>
                     </CartOpenContext.Provider>
@@ -239,27 +251,29 @@ function MyApp(props) {
                 <CartOpenContext.Provider value={{cartOpen, setCartOpen}}>
                     <CartContext.Provider value={{cart, setCart}}>
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
-                        <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
-                            {props.router.query.upload
-                                ?<UploadStoreItem />
-                                :props.router.query.agreement
-                                ?<SellerAgreement />
-                                :props.router.query.reset
-                                ?<ResetPassword />
-                                :props.router.query.activateemail
-                                    ?<ActivateEmail found={true}/>
-                                    :props.router.query.uploadlisting
-                                        ?<UploadListingResult success={true}/>
-                                        :<>
-                                            <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
-                                            <CartButton />
-                                            <Elements stripe={promise}>
-                                                <Component {...pageProps} />
-                                            </Elements>
-                                            <Footer />
-                                        </>
-                            }
-                        </CurrencyContext.Provider>
+                        <CurrencyContextCADtoUSD.Provider value={{currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD}}>
+                            <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                {props.router.query.upload
+                                    ?<UploadStoreItem />
+                                    :props.router.query.agreement
+                                    ?<SellerAgreement />
+                                    :props.router.query.reset
+                                    ?<ResetPassword />
+                                    :props.router.query.activateemail
+                                        ?<ActivateEmail found={true}/>
+                                        :props.router.query.uploadlisting
+                                            ?<UploadListingResult success={true}/>
+                                            :<>
+                                                <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
+                                                <CartButton />
+                                                <Elements stripe={promise}>
+                                                    <Component {...pageProps} />
+                                                </Elements>
+                                                <Footer />
+                                            </>
+                                }
+                            </CurrencyContext.Provider>
+                        </CurrencyContextCADtoUSD.Provider>
                     </CartSubtotalsContext.Provider>
                     </CartContext.Provider>
                 </CartOpenContext.Provider>

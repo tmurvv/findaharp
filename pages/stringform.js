@@ -50,9 +50,7 @@ const StringForm = (props) => {
             // newsletter: localNews
         }
         try {
-            // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
             const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
-            // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
             if (results) dispatchResultInfo({type: 'OK', payload: `Update brands for harp ${user.currentHarpname.toUpperCase()} was successful.`});
         } catch(e) {
             console.log(e.message);
@@ -130,10 +128,7 @@ const StringForm = (props) => {
                 // newsletter: localNews
             }
             try {
-                // const res = await axios.patch('http://localhost:3000/api/v1/userharps/updateuserharp/', harpObject); // BREAKINk
                 const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
-                // const res = await axios.patch('https://findaharp-api.herokuapp.com/api/v1/userharps/updateuserharp', harpObject);
-                // console.log('updateharpres', res.data)
                 // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
             } catch(e) {
                 console.log(e.message);
@@ -415,10 +410,6 @@ StringForm.getInitialProps = async (props) => {
      *******************/
     // API
     const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`https://findaharp-api-staging.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com/api/v1/storeitems`);
-    // const res = await axios.get(`http://localhost:3000/api/v1/storeitems`); //BREAKINk
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
 
     return {

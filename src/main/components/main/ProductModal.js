@@ -6,6 +6,9 @@ import ProductModalCSS from '../../styles/ProductModal.css';
 import { removeDashOE, getGeoDistance } from '../../utils/helpers';
 import { UserContext } from '../../contexts/UserContext';
 import { CurrencyContext } from '../../contexts/CurrencyContext';
+import { CurrencyContextCADtoUSD } from '../../contexts/CurrencyContextCADtoUSD';
+import { STORE_PARTNERS } from '../../constants/storeDirectory';
+import { CompassCalibrationOutlined } from '@material-ui/icons';
 
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
@@ -19,12 +22,15 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
 
 function ProductModal(props) {
     const { user } = useContext(UserContext);
+    // const [ store, setStore ] = useState();
+    const [ price, setPrice ] = useState();
     const { currencyMultiplier, setCurrencyMultiplier } = useContext(CurrencyContext);
+    const { currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD } = useContext(CurrencyContextCADtoUSD);
     const [longDesc, setLongDesc] = useState(true);
     const [miles] = useState(user.distanceunit==='miles');
     const [geoDistance, setGeoDistance] = useState(0); //miles
     const [drivingDistance, setDrivingDistance] = useState(0); //miles
-    const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerCountry, sellerName, sellerLat, sellerLong} = props.product;
+    const {productTitle, productMaker, productModel, productSize, productPrice, productType, productFinish, productLongDesc, productImageUrl, sellerCountry, sellerName, sellerLat, sellerLong, sellerCurrency} = props.product;
     // let productLongDescMine = "hilo <br /> here we are"
     if (props.product===undefined||!props.product) return props.handleCloseDetail();
     function handleClick(evt, product, openContact) {
@@ -59,7 +65,23 @@ function ProductModal(props) {
         return endIndex;
     }
     const convertPrice = (price) => {
-        if (user.currency.toUpperCase()==="CAD") price = `$${(parseNum(price)*currencyMultiplier).toFixed(2)}`;
+        const sparray = Array.from(STORE_PARTNERS);
+        const store=sparray.find(thisStore => thisStore.productTitle===props.product.sellerName);
+        console.log('top', price, "USER:", user&&user.currency, "STORE:",store&&store.currency)
+        console.log(currencyMultiplier, currencyMultiplierCADtoUSD)
+        if (store&&store.currency&&store.currency.toUpperCase()!==user.currency.toUpperCase()) {
+            if(user.currency.toUpperCase()==="USD") {
+                console.log('inuserUSD')
+                price=`$${(parseNum(price)*currencyMultiplier).toFixed(2)}`;
+            } else {
+                console.log('inuserCAD')
+                price=`$${(parseNum(price)*currencyMultiplierCADtoUSD).toFixed(2)}`;
+            }
+        }
+        console.log('bott', price, "USER:", user&&user.currency, "STORE:",store&&store.currency)
+        
+        // if (user.currency.toUpperCase()==="CAD") price = `$${(parseNum(price)*currencyMultiplier).toFixed(2)}`;
+        // setPrice(price);
         return price;
     }
     useEffect(() => {
@@ -67,13 +89,15 @@ function ProductModal(props) {
     }, []);
     // get currency conversions, if necessary
     useEffect(() => {
-        async function getMultiplier() {
-            const multiplier = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_CAD&compact=ultra&apiKey=33d9a2db5c4410feb3f2');
-            setCurrencyMultiplier(multiplier.data.USD_CAD);
-        }
-        
-        if (user.currency.toUpperCase()==="CAD"&&!currencyMultiplier) getMultiplier();
-      }, []);
+        const sparray = Array.from(STORE_PARTNERS);
+        const storeObj=sparray.find(store => store.productTitle===props.product.sellerName)
+        // setStore(storeObj);
+        // async function getMultiplier() {
+        //     const multiplier = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_CAD&compact=ultra&apiKey=33d9a2db5c4410feb3f2');
+        //     setCurrencyMultiplier(multiplier.data.USD_CAD);
+        // }
+        // if (user.currency.toUpperCase()==="CAD"&&!currencyMultiplier) getMultiplier();
+    }, []);
     return (
         <>
         <div className='detailContainer'>
@@ -88,7 +112,24 @@ function ProductModal(props) {
                     <p><span>Maker</span> {productMaker}<br></br>
                     <span>Model</span> {productModel}<br></br>
                     <span>Size</span> {productSize?productSize:'?'} Strings / {productType}<br></br>
+                    {/* <span>Price</span> {productPrice
+                        ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
+                        :'contact seller'} <button
+                        onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
+                        style={{
+                            color: '#6A75AA', 
+                            textDecoration: 'underline', 
+                            backgroundColor: 'transparent', 
+                            border: 'none', 
+                            outline: 'none', 
+                            fontSize: '12px', 
+                            cursor: 'pointer'
+                        }}
+                        // key={uuid()}
+                        name='Preference'
+                    >Change Currency</button>        <br /> */}
                     <span>Price</span> {productPrice
+                        // ?`${convertPrice(productPrice)} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
                         ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
                         :'contact seller'} <button
                         onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
