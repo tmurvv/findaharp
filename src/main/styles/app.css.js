@@ -3,6 +3,8 @@ import React from 'react';
 function AppCss() {
     return (
         <style jsx="true">{`
+            select,
+            select:focus,
             input,
             input:focus {
                 outline: none;

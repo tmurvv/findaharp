@@ -57,8 +57,8 @@ function MyApp(props) {
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
     const [status, setStatus] = useState('idle');
     const [stringForm, setStringForm] = useState(Array.from(JSON.parse(JSON.stringify(STRING_FORM_INIT))));
-    const [currencyMultiplier, setCurrencyMultiplier] = useState(1.27); // USD to CAD
-    const [currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD] = useState(5000); // CAD to USD
+    const [currencyMultiplier, setCurrencyMultiplier] = useState(0); // USD to CAD
+    const [currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD] = useState(0); // CAD to USD
     const [windowWidth, setWindowWidth] = useState(0);
     const [navOpen, setNavOpen] = useState(false);
     
@@ -85,9 +85,13 @@ function MyApp(props) {
     //get currency multiplier
     useEffect(() => {
         const fetchData = async () => {
-            const data = await axios(`http://data.fixer.io/api/latest?access_key=c4bea783b698f8ebafeb5211fac2160b&format=1`);
-            setCurrencyMultiplier(data.data.rates.USD/data.data.rates.CAD);
-            setCurrencyMultiplierCADtoUSD(data.data.rates.CAD/data.data.rates.USD);
+            const data = await axios(`https://openexchangerates.org/api/latest.json?app_id=${process.env.currencyconvert}`);
+            console.log("here", data.data.rates.CAD)
+            setCurrencyMultiplier(data.data.rates.CAD);
+            setCurrencyMultiplierCADtoUSD(1/data.data.rates.CAD);
+            // const data = await axios(`https://data.fixer.io/api/latest?access_key=c4bea783b698f8ebafeb5211fac2160b&format=1`);
+            // setCurrencyMultiplier(data.data.rates.USD/data.data.rates.CAD);
+            // setCurrencyMultiplierCADtoUSD(data.data.rates.CAD/data.data.rates.USD);
         }
         
         fetchData();

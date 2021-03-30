@@ -79,8 +79,8 @@ export default function LocationMenu(props) {
                     onClick={handleClose}
                     hidden={activateDriving}
                     key={uuid()}
-                    name='Northeast'
-                >US-Northeast</li>    
+                    name='Eastern'
+                >US-East</li>    
                 <li 
                     onClick={handleClose}
                     hidden={activateDriving}

@@ -57,7 +57,7 @@ export const STORE_PARTNERS = [
         sellerCountry: "Canada",
         sellerRegion: "Calgary, AB, Canada",
         shipsTo: "Anywhere",
-        currency: "usd",
+        currency: "cad",
         productTitle: "Find a Harp",
         productLongDesc: "<p><span>Find a Harp</span> is mainly interested in connecting buyers with sellers, but also has a few harps of it's own for sale and rent.</p> <p>Located at the foot of the Rocky Mountains, Find a Harp is always searching for a wide variety of pre-owned instruments for harp lovers and aspiring students alike.<p>",
         productMaker: "Find a Harp",

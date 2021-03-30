@@ -65,16 +65,18 @@ function ProductModal(props) {
         return endIndex;
     }
     const convertPrice = (price) => {
+        console.log('props', props)
         const sparray = Array.from(STORE_PARTNERS);
-        const store=sparray.find(thisStore => thisStore.productTitle===props.product.sellerName);
+        sparray.map(thisStore => console.log(thisStore.productTitle, props.product.sellerName));
+        const store=sparray.find(thisStore => thisStore.productTitle.replace(/\s/g, '').toUpperCase().indexOf(props.product.sellerName.replace(/\s/g, '').toUpperCase())>-1||props.product.sellerName.replace(/\s/g, '').toUpperCase().indexOf(thisStore.productTitle.replace(/\s/g, '').toUpperCase())>-1);
         console.log('top', price, "USER:", user&&user.currency, "STORE:",store&&store.currency)
         console.log(currencyMultiplier, currencyMultiplierCADtoUSD)
         if (store&&store.currency&&store.currency.toUpperCase()!==user.currency.toUpperCase()) {
-            if(user.currency.toUpperCase()==="USD") {
-                console.log('inuserUSD')
+            if(user.currency.toUpperCase()==="CAD") {
+                console.log('inuserCAD')
                 price=`$${(parseNum(price)*currencyMultiplier).toFixed(2)}`;
             } else {
-                console.log('inuserCAD')
+                console.log('inuserUSD')
                 price=`$${(parseNum(price)*currencyMultiplierCADtoUSD).toFixed(2)}`;
             }
         }
@@ -128,8 +130,7 @@ function ProductModal(props) {
                         // key={uuid()}
                         name='Preference'
                     >Change Currency</button>        <br /> */}
-                    <span>Price</span> {productPrice
-                        // ?`${convertPrice(productPrice)} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
+                    <span>Price</span> {productPrice&&productPrice.toUpperCase().indexOf('CONTACT')<0
                         ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
                         :'contact seller'} <button
                         onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
