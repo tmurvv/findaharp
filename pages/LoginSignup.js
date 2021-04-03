@@ -292,6 +292,18 @@ function LoginSignup(props) {
     return ( 
        <>
         <div className='login-signup-container'>
+            <img id='spinner' style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '40%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    zIndex: '9000',
+                    height: '75px'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />
             <Results 
                 resultInfo={resultInfo} 

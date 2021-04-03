@@ -190,6 +190,18 @@ const StringForm = (props) => {
         return (
             <>
             <div className="stringForm" >
+                <img id='spinner' style={{
+                        display: 'none', 
+                        position: 'fixed', 
+                        top: '40%', 
+                        left: '50%', 
+                        transform: 'translate(-50%,-50%)',
+                        zIndex: '9000',
+                        height: '75px'
+                    }} 
+                    src='/img/spinner.gif' 
+                    alt='spinner' 
+                />
                 {/* <h1>stringform: {stringForm[0]}</h1> */}
     
                 <ResultsWindow 

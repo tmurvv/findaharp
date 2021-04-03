@@ -1,6 +1,4 @@
-
-// packages
-import React, { useContext } from 'react';
+import React, { useEffect } from 'react';
 import uuid from 'react-uuid';
 
 export default function BrandsMenu(props) {
@@ -8,19 +6,15 @@ export default function BrandsMenu(props) {
         if (evt.target.value === 'All Brands') return;
         props.handleBrandsChange(evt.target.getAttribute('name')); 
     };
-      
+    
     return (
         <div className='relative'>
             <button 
                 className="menuButton" 
                 name='brands' 
-                onClick={(e)=>{
-                    props.handleclick(e); 
-                }}
+                onClick={(e)=>{props.handleclick(e);}}
                 style={{color: '#000000'}}
-            >
-                Brands
-            </button>               
+            >Brands</button>               
             <ul
                 id="brands-select"
                 onClose={handleClose}
@@ -102,8 +96,7 @@ export default function BrandsMenu(props) {
                     onClick={handleClose} 
                     key={uuid()} 
                     name='Silkgut'
-                >Silkgut</li>
-                               
+                >Silkgut</li>    
             </ul>     
         </div>
     );

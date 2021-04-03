@@ -38,7 +38,9 @@ export const STORE_INITIAL_STATE = {
     octaves: 'All Octaves',
     notes: 'All Notes',
     brands: 'All Brands',
+    brandAbbr: 'All Brands',
     makesmodels: 'All Makes/Models',
+    modelAbbr: 'All Makes/Models',
     searchInfo: ''
 }
 export const RESET_SHIPPING_INFO = {

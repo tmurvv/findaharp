@@ -18,6 +18,18 @@ function Contact() {
             <meta name="Description" content="Contact Us -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
         </Head>
         <div className='contactContainer'>
+            <img id='spinner' style={{
+                    display: 'none', 
+                    position: 'fixed', 
+                    top: '40%', 
+                    left: '50%', 
+                    transform: 'translate(-50%,-50%)',
+                    zIndex: '9000',
+                    height: '75px'
+                }} 
+                src='/img/spinner.gif' 
+                alt='spinner' 
+            />
             <PageTitle maintitle='Contact Us' subtitle='We want to hear from you!' />
             <div>
                 <ContactUsForm handleCloseContact={() => console.log('')} />
