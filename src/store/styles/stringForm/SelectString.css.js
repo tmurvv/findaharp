@@ -53,6 +53,7 @@ function Css() {
                 position: absolute;
                 box-shadow:  5px 5px 10px 0 rgba(0,0,0, 0.5);
                 color: gold;
+                z-index: 5000;
             }
 
             .menu > li ul, .menu ul ul{
@@ -60,7 +61,7 @@ function Css() {
                 -webkit-transition: all 0.2s ease-in;
                 -moz-transition: all 0.2s ease-in;
                 transition: all 0.2s ease-in;
-                z-index: 9000;
+                z-index: 6000;
                 visibility: hidden;
                 background-color: #ffe58a;
                 width: 100%;

@@ -187,7 +187,8 @@ function GlobalStoreSearch(props) {
             const octave = menu==='octaves'?value1:allState.octaves;
             const note = menu==='notes'?value2:allState.notes;
             const brand = menu==='brands'?value3:allState.brands;
-            const makesmodels = menu==='makesmodels'?value4:allState.makesmodels;
+            let makesmodels = menu==='makesmodels'?value4:allState.makesmodels;
+            if (makesmodels.toUpperCase().startsWith('ALL')&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") makesmodels=makesmodels.substr(4);
             // initialize variables
             let octavesProductList=[];
             let notesProductList=[];

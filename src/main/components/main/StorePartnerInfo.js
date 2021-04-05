@@ -9,7 +9,7 @@ function StorePartnerInfo(props) {
         <div className='detailContainer' style={{flexDirection: 'column'}} hidden={!props.open}>
             <h2 style={{maxWidth: '90%'}}>Store Partner Program Details</h2>
             <br />
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
+            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='detailInfo'>
                 <div className={`detailImg`}>
                     <img src= '/img/golden_harp_cropped.png' style={{objectFit: 'contain', height: 'auto'}} alt='findaharp golden harp logo' />

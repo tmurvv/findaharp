@@ -198,7 +198,7 @@ function ProductSearchCss() {
             li {
                 padding: 5px 7px;
                 border: 1 solid grey;
-                z-index: 1000;
+                // z-index: 1000;
             }
             .storeselected {
                 width: fit-content;

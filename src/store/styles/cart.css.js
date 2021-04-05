@@ -143,7 +143,7 @@ function CartCss() {
             position: fixed;
             top: 220px;
             right: 10px;
-            z-index: 5000;
+            z-index: 9000;
         }
         .cartButtonCart {
             cursor: pointer;

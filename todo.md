@@ -4,7 +4,7 @@
 - useOutsideClick on harpsearch not working when filteredProducts is empty (weird one)
 
 ### internal
-- try to solve 'content not matching server console warning' with https://nextjs.org/docs/basic-features/built-in-css-support A component using styled-jsx looks like this:
+- update styles according to https://nextjs.org/docs/basic-features/built-in-css-support
 - update all results info to ResultsWindow
 - record keeping on sellers needs to be improved
 - separate store partner program info into a component
@@ -14,6 +14,9 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
+
+- make userharp cookie work
+- make all menus roll down like store makes/models submenu functionality
 - make all alerts resultsWindow
 - for modal take out border and do opacity thing
 - select boxes on ios are ugly
@@ -34,6 +37,7 @@
 - after delete account, should return to main-page
 
 ### functionality
+- change currency on Germaine Strings
 - four times a bug when switching harps
 - get Delta back on menu
 - on string menu, get models in sub-menus

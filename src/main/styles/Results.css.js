@@ -18,7 +18,7 @@ function ResultsCss() {
             top: 25%;
             right: 50%;
             transform: translate(50%, 50%);
-            z-index: 5000;
+            z-index: 9000;
         }
         #loadingLoginImg,
         #loadingVerifyLoginImg {

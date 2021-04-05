@@ -324,19 +324,22 @@ function UserHarpProfile(props) {
             harpname: userEdit.currentHarpname?userEdit.currentHarpname:user.currentHarpname,
             email: userEdit.emailCurrentHarp?userEdit.emailCurrentHarp:user.emailCurrentHarp,
         };
+        console.log('updatedUser', updatedUser)
         if ((!updatedUser.harpname)||!updatedUser.email) {
             dispatchResultInfo({type: 'tryAgain'});
             resultText.innerText=`Harp name and email required.`;
             return;
         }
-        if (!confirm(`Are you sure you want to delete harp ${userEdit.harpname}`)) return;
+        if (!confirm(`Are you sure you want to delete harp ${userEdit.currentHarpname&&userEdit.currentHarpname}`)) return;
         
             
         try {
-            // Delete User
-            const res=await axios.delete(`${process.env.backend}/api/v1/userharps/deleteUserharps`, updatedUser);
+            // Delete User Harp
+            const res=await axios.post(`http://localhost:3000/api/v1/userharps/deleteuserharp/`, updatedUser);
+            // const res=await axios.delete(`${process.env.backend}/api/v1/userharps/deleteUserharp`, updatedUser);
+            console.log('res', res)
             dispatchResultInfo({type: 'OK'});
-            resultText.innerText=`Harp ${userEdit.editpassword} has been deleted`;
+            resultText.innerText=`Harp ${userEdit.currentHarpname&&userEdit.currentHarpname} has been deleted`;
             await setUser({
                 firstname: user.firstname||'login',
                 lastname: user.lastname||'',
@@ -354,13 +357,14 @@ function UserHarpProfile(props) {
                 harplist: null
             });
         } catch(e) {
-            // if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('incorrect')) {
-            //     resultText.innerText=`${process.env.next_env==='development'?e.message:'Password does not match our records.'} Login as guest?`;
-            //     dispatchResultInfo({type: 'okTryAgain'});
-            // } else {
+            console.log(e.response.data.message)
+            if (e.response&&e.response.data&&e.response.data.message&&e.response.data.message.includes('not found')) {
+                resultText.innerText=`Harp not found.`;
+                dispatchResultInfo({type: 'ok'});
+            } else {
                 dispatchResultInfo({type: 'okTryAgain'})
                 resultText.innerText=`${process.env.next_env==='development'?e.message:'Something went wrong on delete.'}`;
-            // }   
+            }   
         }
         clearForm('Both');
     }

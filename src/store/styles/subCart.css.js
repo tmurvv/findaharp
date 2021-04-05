@@ -123,7 +123,7 @@ function subCartCss() {
             position: fixed;
             top: 220px;
             right: 10px;
-            z-index: 5000;
+            z-index: 9000;
         }
         .cartButton img {
             height: 45px;

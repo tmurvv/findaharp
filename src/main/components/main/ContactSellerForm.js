@@ -134,7 +134,7 @@ function ContactSellerForm(props) {
             <div className='heading'>
                 <p>Your name, email, and inquiry will be forwarded to {product.sellerName}.<br></br></p>
             </div>
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
+            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='contactContainer'>
                 <div className={`detailImg`}>
                     <img src= {product.productImageUrl} alt={product.productTitle}/>

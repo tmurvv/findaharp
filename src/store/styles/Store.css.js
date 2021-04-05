@@ -60,13 +60,6 @@ function StoreCss() {
                     font-size: 12px;
                 }
             }
-            .harpContact {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 5000;
-            }
         `}
         </style>
     )

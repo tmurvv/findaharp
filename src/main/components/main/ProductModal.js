@@ -107,7 +107,7 @@ function ProductModal(props) {
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div> 
             <h1>{productModel.indexOf(productMaker)>-1?'':productMaker} {productModel}</h1>
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden diveder line" />
+            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='detailInfo'>
                 <div className={`detailImg`}><img src= {productImageUrl} alt={productTitle} /></div>
                 <div className={`detailText`}>

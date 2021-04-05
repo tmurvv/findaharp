@@ -86,10 +86,12 @@ function StoreProductSearchStrings(props) {
         props.handleChange('strings', 'makesmodels', props.allState.octaves, props.allState.notes, props.allState.brands, makesmodels);
         
         let abbr;
+        console.log('mm', makesmodels)
         MENU_ABBR.map(harp => {
             if (makesmodels===harp[0]) abbr=harp[1];
         });
-        if (abbr!==undefined) abbr=makesmodels;
+        console.log('abbr', abbr)
+        if (abbr===undefined) abbr=makesmodels;
         props.setAllState({...props.allState, 
             makesmodels,
             modelAbbr: abbr,

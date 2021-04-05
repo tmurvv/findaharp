@@ -12,10 +12,6 @@ export default function MakesmodelsMenu(props) {
     const [ triplett, setTriplett ] = useState();
     const useOctaveMenu = ' label their strings by octaves. Please use the "Octaves" menu or our Fast N Easy string form. Continue to Fast N Easy String Form?';
     const handleClose = (evt) => {
-        setDusty(false);
-        setRees(false);
-        setStoney(false);
-        setTriplett(false);
         if (evt.target.value === 'Makes/Models') return;
         console.log('makesmodelsmenu', evt.target.getAttribute('name'))
         props.handleMakesmodelsChange(evt.target.getAttribute('name')); 
@@ -24,25 +20,38 @@ export default function MakesmodelsMenu(props) {
     async function getCurrency() {
         const multiplier = await axios.get('https://free.currconv.com/api/v7/convert?q=USD_CAD&compact=ultra&apiKey=33d9a2db5c4410feb3f2');
         setCurrencyMultiplier(multiplier.data.USD_CAD);  
-    }   
+    }  
+    function openSub(menu) {
+        const classes = document.querySelector(`#${menu}`).classList;
+        if (classes.contains('storeSubMenu-closed')) {
+            classes.remove('storeSubMenu-closed');
+            classes.add('storeSubMenu-open');
+            // setRees(menu==='rees');setDusty(menu==='dusty');setTriplett(menu==='triplett');setStoney(menu==='stoney')
+        } else {
+            classes.add='storeSubMenu-closed';
+            classes.remove('storeSubMenu-open');
+            // setRees(false);setDusty(false);setTriplett(false);setStoney(false);
+        }
+    }
     return (
         <div className='relative'>
             <button 
                 className="menuButton makesmodels" 
-                name='makesmodels' 
+                name='makesmodels'
                 onClick={(e)=>{
                     setDusty(false);
                     setRees(false);
                     setStoney(false);
                     setTriplett(false);
-                    props.handleclick(e); 
+                    props.handleclick(e);
+                    document.querySelector('#rees').focus(); 
                 }}
                 style={{color: '#000000'}}
             >
                 By Make/Model
             </button>               
             <ul
-                id="makesmodels-select"
+                id="makesmodels"
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Makes/Models'
@@ -53,32 +62,24 @@ export default function MakesmodelsMenu(props) {
                     key={uuid()} 
                     name='All Makes/Models'
                 >All Makes/Models</li>
-                {/* <li 
-                    onClick={()=>{if (confirm(`Pedal harps${useOctaveMenu}`)) Router.push('/stringform')}} 
-                    key={uuid()} 
-                    name='Pedal Harps'
-                >Pedal Harps</li> */}
-
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='Delta'
                 >Delta</li> 
                 <li 
-                    onClick={()=>{setRees(false);setDusty(true);setTriplett(false);setStoney(false)}} 
+                    onClick={()=>{openSub('dusty');}} 
                     key={uuid()} 
                     name='Dusty Strings'
                 >Dusty Strings
                     <ul
-                        id="makesmodels-select"
+                        id="dusty"
                         onClose={(e)=>{setDusty(false);handleClose(e)}}
-                        hidden={!dusty}
                         name='Makes/Models'
-                        className='storePlainTextSelectLine2'
-                        style={{backgroundColor: '#6A75AA', color: '#ffffff', marginLeft: '30px'}}
+                        className='storePlainTextSelectLine2 storeSubMenu-closed'
                     >
                         <li 
-                            onClick={(e)=>{e.stopPropagation(); setDusty(false); handleClose(e);}} 
+                            onClick={(e)=>{e.stopPropagation(); openSub('dusty');}} 
                             key={uuid()} 
                             name='All Dusty Strings'
                         >All Dusty Strings</li>   
@@ -106,19 +107,16 @@ export default function MakesmodelsMenu(props) {
                 </li>
                 <li 
                     id='trans'
-                    onClick={()=>{document.querySelector('#trans').style.maxHeight='1000px'; setRees(true);setDusty(false);setTriplett(false);setStoney(false)}} 
+                    onClick={()=>{openSub('rees');}} 
                     key={uuid()} 
                     className='trans'
                     name='Rees'
                 >Rees
                     <ul
-                        id="makesmodels-select"
-                        onClick={()=>document.querySelector('#makesmodels-select').backgroundColor='blue'}
+                        id="rees"
                         onClose={(e)=>{setRees(false);handleClose(e)}}
-                        hidden={!rees}
                         name='Makes/Models'
-                        className='storePlainTextSelectLine2'
-                        style={{backgroundColor: '#6A75AA', color: '#ffffff', marginLeft: '30px'}}
+                        className='storePlainTextSelectLine2 storeSubMenu-closed'
                     >
                         <li 
                             onClick={(e)=>{e.stopPropagation(); setRees(false); handleClose(e);}} 
@@ -189,17 +187,15 @@ export default function MakesmodelsMenu(props) {
                 
                 </li>
                 <li 
-                    onClick={()=>{setRees(false);setDusty(false);setTriplett(false);setStoney(true)}} 
+                    onClick={()=>{openSub('stoney')}} 
                     key={uuid()} 
                     name='Stoney End'
                 >Stoney End
                     <ul
-                        id="makesmodels-select"
+                        id="stoney"
                         onClose={(e)=>{setStoney(false);handleClose(e)}}
-                        hidden={!stoney}
                         name='Makes/Models'
-                        className='storePlainTextSelectLine2'
-                        style={{backgroundColor: '#6A75AA', color: '#ffffff', marginLeft: '30px'}}
+                        className='storePlainTextSelectLine2 storeSubMenu-closed'
                     >
                         <li 
                             onClick={(e)=>{e.stopPropagation(); setStoney(false); handleClose(e);}} 
@@ -246,17 +242,15 @@ export default function MakesmodelsMenu(props) {
                 
                 </li>    
                 <li 
-                    onClick={()=>{setRees(false);setDusty(false);setTriplett(true);setStoney(false)}} 
+                    onClick={()=>{openSub('triplett')}} 
                     key={uuid()} 
                     name='Triplett'
                 >Triplett
                     <ul
-                        id="makesmodels-select"
+                        id="triplett"
                         onClose={(e)=>{setTriplett(false);handleClose(e)}}
-                        hidden={!triplett}
                         name='Makes/Models'
-                        className='storePlainTextSelectLine2'
-                        style={{backgroundColor: '#6A75AA', color: '#ffffff', marginLeft: '30px'}}
+                        className='storePlainTextSelectLine2 storeSubMenu-closed'
                     >
                         <li 
                             onClick={(e)=>{e.stopPropagation(); setTriplett(false); handleClose(e);}} 
