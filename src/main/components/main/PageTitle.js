@@ -23,7 +23,7 @@ function PageTitle({ maintitle, subtitle }) {
                         textDecoration: 'underline',
                         position: 'absolute',
                         top: '50px',
-                        left: '15px'
+                        right: '15px'
                     }}
                 >Music, Accessories, Gifts Here</a>
             }

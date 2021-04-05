@@ -377,7 +377,7 @@ function HarpLoginSignup(props) {
             src='/img/spinner.gif' 
             alt='spinner' 
         />
-        <div style={{position: 'absolute', top: '15px', left: '15px', zIndex: '2000'}}>
+        <div style={{position: 'absolute', top: '15px', right: '15px', zIndex: '2000'}}>
             <FastNEasyStringForm setstringformstatus={props.setstringformstatus}/>
         </div>
         <div className='harplogin-signup-container'>

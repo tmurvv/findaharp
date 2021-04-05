@@ -24,7 +24,8 @@ function StoreProductCss() {
                 text-align: left;
             }
             .storeproductDetails div {
-                font-family: 'Metropolitan Extra Bold';
+                // font-family: 'Metropolitan Extra Bold';
+                font-size: 14px;
             }
             .storeproductDetails span {
                 font-weight: 800;

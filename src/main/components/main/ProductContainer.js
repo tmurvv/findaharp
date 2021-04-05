@@ -34,8 +34,8 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
         dispatch({type:'contact', product})
         setOpacity(true);
     }
-    function handleCloseContact() {
-        dispatch({type:'initial'})
+    function handleCloseContact(evt, product) {
+        product?dispatch({type:'detail', product}):dispatch({type:'initial'});
         setOpacity(false);
     }
     
@@ -64,6 +64,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
                         handleCloseContact={handleCloseContact}
                         clientlat={clientlat}
                         clientlong={clientlong}
+                        // setOpenDetail={setOpenDetail}
                 />}
                 {state.openContact
                     &&<ContactSellerForm 

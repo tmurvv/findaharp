@@ -79,6 +79,9 @@ function ContactSellerForm(props) {
         clearForm();
         props.handleCloseContact()
     }
+    function returnToDetail(e, product) {
+        props.handleCloseContact('back', product)
+    }
     // handle form submit
     const handleSubmit = async (evt) => {
         evt.preventDefault();
@@ -117,13 +120,26 @@ function ContactSellerForm(props) {
    return (
         <>
         <div className='detailContainer'>
-            <div 
-                className='clearModal' 
-                onClick={() => 
-                    {if (!userContact.change ||userContact.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
-                }} 
-            >
-                <img src='/img/clear_search.png' alt='clear filters'/>
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <button 
+                    onClick={(e)=>returnToDetail(e, product)} 
+                    style={{
+                        opacity: '.4',
+                        backgroundColor: 'transparent',
+                        outline: 'none',
+                        fontSize: '30px',
+                        border: 'none',
+                        transform: 'translate(-10px, -10px)'
+                    }}
+                >&#10229;</button>
+                <div 
+                    className='clearModal' 
+                    onClick={() => 
+                        {if (!userContact.change ||userContact.change && confirm('Email not sent. Changes will be lost. Exit contact form?')) props.handleCloseContact();
+                    }} 
+                >
+                    <img src='/img/clear_search.png' alt='clear filters'/>
+                </div>
             </div>
             <Results 
                 resultInfo={resultInfo} 

@@ -85,6 +85,7 @@ function ProductContainerCss() {
                 justify-content: center;
                 align-items: center;
                 min-height: 269px;
+                cursor: pointer;
             }
             .productSmallDisplay-img img{
                 height: 267px;

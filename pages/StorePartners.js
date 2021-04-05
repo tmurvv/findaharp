@@ -49,9 +49,6 @@ export default function StorePartners() {
                 maintitle='Our Store and Business Partners' 
                 subtitle='Find a Harp is proud to partner with the following harp sellers' 
             />
-            {/* <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
-                    <FastNEasyStringForm />
-            </div> */}
             <h3 className={`subTitle`} style={{width: 'fit-content', marginTop: '-45px'}}><button onClick={()=>setOpenStoreOwnerInq(true)} style={{margin: 'auto', padding: '5px 7px', fontSize: '16px', backgroundColor: 'transparent', border: 'none', color: '#6A75AA'}}>Click here</button>for more information.</h3>
             <div data-test='component-ProductContainer' className='productContainer'>    
                 <div className="grid-container">
