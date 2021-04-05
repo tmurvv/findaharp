@@ -6,6 +6,13 @@ ETC - 17
 Vavra - thingy
 ETC - Rees, Aberdeen
 
+z-index levels:
+ribbon 2000
+5000 menu
+6000 sub
+7000 modal
+9000 error
+
 
 - STAGING -- onestop-staging.take2tech.ca
 - PRODUCTION -- findaharp.com

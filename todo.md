@@ -14,7 +14,6 @@
 - getDrivingDistance in Product Model needs to be imported from helpers.js
 
 ### UI/UX
-
 - make userharp cookie work
 - make all menus roll down like store makes/models submenu functionality
 - make all alerts resultsWindow

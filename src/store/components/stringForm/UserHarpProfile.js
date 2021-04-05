@@ -259,13 +259,6 @@ function UserHarpProfile(props) {
                 document.querySelector('#spinner').style.display='block';     
                 props.setstringformstatus('stringform');
             } catch(e) {
-                // alert('error', e.message)
-                // console.log('doc harplist', document.querySelector('#harplist').value);
-                // console.log('doc email', document.querySelector('#selectemail').value);
-                // console.log('user', user)
-                // console.log('error', e.message)
-                // console.log(e.res)
-                
                 // email not found #1
                 if (e.message&&e.message==="Network Error") {
                     resultText.innerText=`Something went wrong switching harps, please check your network connection.`;
@@ -335,9 +328,7 @@ function UserHarpProfile(props) {
             
         try {
             // Delete User Harp
-            const res=await axios.post(`http://localhost:3000/api/v1/userharps/deleteuserharp/`, updatedUser);
-            // const res=await axios.delete(`${process.env.backend}/api/v1/userharps/deleteUserharp`, updatedUser);
-            console.log('res', res)
+            const res=await axios.post(`${process.env.backend}/api/v1/userharps/deleteuserharp/`, updatedUser);
             dispatchResultInfo({type: 'OK'});
             resultText.innerText=`Harp ${userEdit.currentHarpname&&userEdit.currentHarpname} has been deleted`;
             await setUser({
