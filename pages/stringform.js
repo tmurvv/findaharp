@@ -311,7 +311,7 @@ const StringForm = (props) => {
                                         color: '#6A75AA',
                                         backgroundColor: '#fff',
                                         fontStyle: 'italic', 
-                                        fontSize: '12px',
+                                        fontSize: '14px',
                                         cursor: 'pointer', 
                                         textDecoration: 'underline'
                                     }}
@@ -326,7 +326,7 @@ const StringForm = (props) => {
                                 <img className='shipsToImg' style={{transform: 'translate(10px, 5px)', maxHeight: '15px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                             <div  className='shipsTo' style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>&nbsp;To: US and Canada</div>
                         </li>
-                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '14px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
+                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
                     </ul>
                 </div>
                 {/* {changes&& */}

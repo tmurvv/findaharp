@@ -23,6 +23,8 @@ function GlobalStoreSearch(props) {
     const [ allState, setAllState ] = useState(STORE_INITIAL_STATE);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
     const [ clearMenus, setClearMenus ] = useState(false);
+    const [ musicSearch, setMusicSearch ] = useState(false);
+    const [ stringSearch, setStringSearch ] = useState(false);
     const [ octavesSearch, setOctavesSearch ] = useState();
     const [ notesSearch, setNotesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
@@ -53,9 +55,23 @@ function GlobalStoreSearch(props) {
 
     function handleChange(type, menu, value1, value2, value3, value4) {
         console.log('handleChange', type, menu, value1, value2, value3, value4)
+        if (document.querySelector('#category').value.toUpperCase()==="MUSIC") {
+            setMusicSearch(true);
+            setStringSearch(false);
+        } else if (document.querySelector('#category').value.toUpperCase()==="STRINGS") {
+            setMusicSearch(false);
+            setStringSearch(true);
+        } else {
+            setMusicSearch(false);
+            setStringSearch(false);
+        }
         // update menu text -- not for search term
-        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 });
+        if (type==='music') {           
+            setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 })
+        };
+        if (type==='strings') { 
+            setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 })
+        };
         // get search items
         let category = document.querySelector('#category').value;
         let searchTerm = document.querySelector('#searchTerm').value;
@@ -72,7 +88,7 @@ function GlobalStoreSearch(props) {
         if (category&&category.toUpperCase()!=='ALL') {
             if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
                 // document.querySelector('#category').value= 'All';
-                return alert("Digital Downloads under construction. Expected by February 2021."); // NOT YET IMPLEMENTED
+                return alert("Digital Downloads under construction. Expected by June 2021."); // NOT YET IMPLEMENTED
             }
             if (category.toUpperCase()==="STRINGS") type='strings';
             if (category.toUpperCase()==="MUSIC") type='music';
@@ -268,7 +284,7 @@ function GlobalStoreSearch(props) {
         // search term
         if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
-            searchProductList = searchBar(preSearchProductList, searchTerm)
+            searchProductList = searchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
         } else {
             searchProductList=[...preSearchProductList]
         }
@@ -329,6 +345,7 @@ function GlobalStoreSearch(props) {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
+            
             <div className='storeSearchLine' >
                 {screenWidth>750
                 ?
@@ -344,7 +361,7 @@ function GlobalStoreSearch(props) {
                         <option name='Books'>Books</option>
                         <option name='Gifts'>Gifts</option>
                         <option name='CDs'>CDs</option>
-                        <option name='Digital Downloads'>Digital Downloads</option>
+                        {/* <option name='Digital Downloads'>Digital Downloads</option> */}
                     </select>
                     <span>&#711;</span>
                 </div>
@@ -404,29 +421,45 @@ function GlobalStoreSearch(props) {
                 </>
                 }
             </div>
-            <StoreProductSearch 
-                clearMenus={clearMenus} 
-                setTypeOfSearch={setTypeOfSearch} 
-                handleClear={handleClear} 
-                handleChange={handleChange}
-                allState={allState}
-                setAllState={setAllState} 
-            />
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{width: 'fit-content', margin: 'auto', marginTop: '30px', marginBottom: '-20px', zIndex: '2000'}}>
-                <FastNEasyStringForm />
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div hidden={musicSearch}><button onClick={()=>setMusicSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
+                <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
+                {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
+                <div>
+                    <button 
+                        onClick={()=>document.querySelector('#spinner').style.display='block'} 
+                        style={{border: 'none', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}
+                    >
+                        <FastNEasyStringForm />
+                    </button>
+                </div>
             </div>
-            <StoreProductSearchStrings              
-                clearMenus={clearMenus} 
-                setTypeOfSearch={setTypeOfSearch} 
-                handleClear={handleClear} 
-                handleChange={handleChange} 
-                allState={allState}
-                setAllState={setAllState} 
-                setOctavesSearch={setOctavesSearch} 
-                setNotesSearch={setNotesSearch} 
-                setBrandsSearch={setBrandsSearch} 
-                setMakesmodelsSearch={setMakesmodelsSearch}
-            />
+            {musicSearch
+                &&<StoreProductSearch 
+                    clearMenus={clearMenus} 
+                    setTypeOfSearch={setTypeOfSearch} 
+                    handleClear={handleClear} 
+                    handleChange={handleChange}
+                    allState={allState}
+                    setAllState={setAllState}
+                    setMusicSearch={setMusicSearch} 
+                />
+            }
+            {stringSearch
+                &&<StoreProductSearchStrings              
+                    clearMenus={clearMenus} 
+                    setTypeOfSearch={setTypeOfSearch} 
+                    handleClear={handleClear} 
+                    handleChange={handleChange} 
+                    allState={allState}
+                    setAllState={setAllState} 
+                    setOctavesSearch={setOctavesSearch} 
+                    setNotesSearch={setNotesSearch} 
+                    setBrandsSearch={setBrandsSearch} 
+                    setMakesmodelsSearch={setMakesmodelsSearch}
+                    setStringSearch={setStringSearch}
+                />
+            }
             {searchResults&&searchResults.length>0&&
             <>
             <div className="storeproductContainer">
@@ -478,9 +511,9 @@ function GlobalStoreSearch(props) {
             }
             {searchResultsText==='entry'&&
             <>
-                <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Browse Featured Items"/>
-                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
-                <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
+                <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Featured Items"/>
+                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="String Brands"/>
+                <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Music Titles"/>
             </>
             }
             <StoreProductSearchCss />

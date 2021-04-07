@@ -155,7 +155,19 @@ function StoreProductSearch(props) {
     return (
         <>       
         <div className='storeproductSearchOuter'>
-            <h3 className='storesearchTitle'>Searching for MUSIC? Refine your search here.</h3>
+            <h3 className='storesearchTitle'>Music advanced search&nbsp;&nbsp;
+                <img 
+                    name='soloensemble'
+                    style={{height: '10px', opacity:'.8'}}
+                    onClick={
+                        (e)=>{
+                            props.setMusicSearch(false);
+                        }
+                    }
+                    src='/img/clear_search.png' 
+                    alt='clear filters'
+                />
+            </h3>
             <div className='storemobileSearchLine1'>
                 <div className='storesearchLine1'>
                     <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
