@@ -8,6 +8,7 @@ import IndexCss from '../src/main/styles/index.css.js';
 import ProductSearch from '../src/main/components/main/ProductSearch';
 import PageTitle from '../src/main/components/main/PageTitle';
 import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
+import OverlayMenu from '../src/main/components/main/OverlayMenu';
 
 // // local test data
 // import testData from '../src/main/utils/testData';
@@ -38,6 +39,7 @@ const Index = (props) => {
         </Head>
         
         <div className="index" >
+            {/* {openOverlay&&<OverlayMenu setOpenOverlay={setOpenOverlay} />} */}
             <img id='spinner' style={{
                     display: 'none', 
                     position: 'fixed', 
@@ -51,7 +53,7 @@ const Index = (props) => {
                 alt='spinner' 
             />
             <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
-                    <FastNEasyStringForm />
+                    {/* <FastNEasyStringForm /> */}
             </div>
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 
