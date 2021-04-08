@@ -33,7 +33,7 @@ function OverlayMenuCss() {
                 right: 50%;
                 transform: translate(50%, -50%);
                 display: flex;
-                height: 90%;
+                height: 80%;
                 flex-direction: column;
                 justify-content: space-around;
             }        
