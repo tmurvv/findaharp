@@ -394,7 +394,7 @@ function UserHarpProfile(props) {
     return (
        <>
         <div style={{position: 'relative'}}>
-        <div style={{position: 'absolute', top: '15px', left: '15px', zIndex: '2000'}}>
+        <div style={{position: 'absolute', top: '15px', right: '15px', zIndex: '2000'}}>
             <FastNEasyStringForm setstringformstatus={props.setstringformstatus}/>
         </div>
         <div className='updatePassword-edit-container'>

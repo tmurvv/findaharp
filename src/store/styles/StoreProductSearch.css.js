@@ -26,7 +26,7 @@ function ProductSearchCss() {
             }
             @media only screen and (max-width: 750px) {
                 .storeproductSearchOuter {
-                    width: 70%
+                    // width: 70%
                 }
             } 
             .storesearchLine1 {

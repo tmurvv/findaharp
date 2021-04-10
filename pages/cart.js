@@ -89,7 +89,7 @@ function Cart(props) {
                     resetResults={resetResults} 
                 />
             <div className="cartContainer"> 
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', right: '15px'}}>
                     <FastNEasyStringForm />
             </div>
                 

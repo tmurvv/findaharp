@@ -220,21 +220,18 @@ function StoreProductSearchStrings(props) {
     return (
         <>       
         <div className='storeproductSearchOuter'>
-            <h3 className='storesearchTitle'>
-                Searching for STRINGS? Refine your search here.<br />
-                {/* <img 
-                    src='img/store/icon-fast-0.jpg' 
-                    alt='fast cart' 
-                    style={{
-                        width: '35px', 
-                        height: '20px', 
-                        transform: 'translate(0px, 5px)', 
-                        opacity: '.4'
-                    }}
+            <h3 className='storesearchTitle'>Strings advanced search&nbsp;&nbsp;
+                <img 
+                    name='stringadvanced'
+                    style={{height: '10px', opacity:'.8'}}
+                    onClick={
+                        (e)=>{
+                            props.setStringSearch(false);
+                        }
+                    }
+                    src='/img/clear_search.png' 
+                    alt='clear filters'
                 />
-                    &nbsp;&nbsp;<span style={{fontStyle: 'normal', fontWeight: 'bold'}}>
-                        Fast and Easy
-                    </span> string order form coming soon!! */}
             </h3>
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>

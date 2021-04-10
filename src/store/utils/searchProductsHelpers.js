@@ -156,8 +156,11 @@ export const getStoreSearchInfo = (allState, type) => {
     return `Showing ${allState.category}: ${searchInfo}`;
 }
 
-export function searchBar(filteredProducts, query) {
+export function searchBar(filteredProducts, query, setMusicSearch, setStringSearch) {
     const returnArray = [];
+    let music;
+    let strings;
+
     // create index on filteredProducts for search engine
     var idx = lunr(function () {
         this.ref('title');
@@ -183,7 +186,15 @@ export function searchBar(filteredProducts, query) {
     const results = idx.search(String(query).replace(/\//g,'-'));
     // map found item ids to items list
     filteredProducts.map(product=>{
-        results.map(result=> result.ref===product.title&&returnArray.push({...product, score: result.score}));
+        results.map(result=> {
+            if (result.ref===product.title) {
+                if (product.category==='music') music=true;
+                if (product.category==='strings') strings=true;
+                returnArray.push({...product, score: result.score});
+            };
+        });
+        setMusicSearch(music);
+        setStringSearch(strings);
     });
     // sort and return
     return returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0));

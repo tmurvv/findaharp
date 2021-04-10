@@ -52,8 +52,8 @@ const Index = (props) => {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
-                    {/* <FastNEasyStringForm /> */}
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', right: '15px', overflow: 'hidden'}}>
+                    <FastNEasyStringForm />
             </div>
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 

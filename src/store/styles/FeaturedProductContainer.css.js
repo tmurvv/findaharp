@@ -33,7 +33,7 @@ function FeaturedProductContainerCss() {
                 }
             }
             .featuredgrid-container {
-                margin: 50px auto;
+                margin: 25px auto;
                 width: 80%;
                 // max-width: 1010px;
                 display: flex;

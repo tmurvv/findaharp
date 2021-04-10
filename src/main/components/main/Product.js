@@ -90,15 +90,12 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
                             fontSize: '14px', 
                             backgroundColor: 'transparent', 
                             border: 'none', 
-                            color: '#6A75AA'}}
+                            color: '#6A75AA',
+                            cursor: 'pointer'
+                        }}
                     >more...</button>:''}
                     <br />
-                <span 
-                    onClick={(e)=>handleOpenContactModal(e, productdetail)} 
-                    style={{color: '#6A75AA'}}
-                >
                     {removeDashOE(productdetail.sellerName)}
-                </span>
                 </p>
             </div>           
             <ProductCss />          
