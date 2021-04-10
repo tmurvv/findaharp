@@ -33,25 +33,35 @@ export default function OverlayMenu(props) {
                             <img src='/img/clear_search.png' alt="close mobile menu icon"/>
                         </div>:''
                     } */}
+                    <div style={{display: 'flex'}}>
                     <Link href='/'>
-                        <a className='overlayLink thinLink' onClick={(e)=>{
-                            e.preventDefault();
+                        <a className='overlayLink item1' onClick={(e)=>{
                             clearOverlay();
-                        }}><img src="/img/OverlayMenu/landing_used_nosub.png" alt="used harps" /></a>
+                        }}>
+                            {/* <img src="/img/OverlayMenu/landing_usedharps.png" alt="used harps" /> */}
+                        </a>
                     </Link>
                     <Link href='/buildersshowcase'>
-                        <a className='overlayLink fatLink' onClick={(e)=>{clearOverlay(e)}}><img src="/img/OverlayMenu/landing_builders.png" alt="Builders Showcase" /></a>
+                        <a className='overlayLink item2' onClick={(e)=>{clearOverlay(e)}}>
+                            {/* <img src="/img/OverlayMenu/landing_builders.png" alt="Builders Showcase" /> */}
+                        </a>
                     </Link>
-                    <Link href='/stringform'>
-                        <a className='overlayLink fatLink' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}><img src="/img/OverlayMenu/landing_fastneasy.png" alt="Fast and Easy String Form" /></a>
-                    </Link>
-                    <Link href='/onlinestore'>
-                        <a className='overlayLink thinLink' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}><img src="/img/OverlayMenu/landing_onlinestore.png" alt="Online Store" /></a>
-                    </Link>        
-                    
+                    </div>
+                    <div style={{display: 'flex'}}>
+                        <Link href='/stringform'>
+                            <a className='overlayLink item3' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
+                                {/* <img src="/img/OverlayMenu/landing_fastneasy.png" alt="Fast and Easy String Form" /> */}
+                            </a>
+                        </Link>
+                        <Link href='/onlinestore'>
+                            <a className='overlayLink item4' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
+                                {/* <img src="/img/OverlayMenu/landing_onlinestore.png" alt="Online Store" /> */}
+                            </a>
+                        </Link>        
+                    </div>
                 </div>
             </div>
-            :<img id='tiles' onClick={()=>restoreOverlay()} style={{height: '30px', zIndex: '6000', position: 'absolute', top: '198px', right: '7px'}}src='/img/OverlayMenu/tilesplaceholder.jpg' alt='opening tile menu icon' />
+            :<img id='tiles' onClick={()=>restoreOverlay()} style={{height: '12px', width: '20px', zIndex: '6000', position: 'absolute', top: '195px', right: '20px'}} src='/img/OverlayMenu/landing_menucomposite_dullwide.png' alt='opening tile menu icon' />
         }
         <OverlayMenuCss />
        </>    
