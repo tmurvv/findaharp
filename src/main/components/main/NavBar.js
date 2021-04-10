@@ -44,9 +44,14 @@ export default function NavBar(props) {
                     <Link href='/'>
                         <a onClick={props.handleNavOpen}>Find a Harp</a>
                     </Link>
-                    <Link href='/storepartners' as='/storepartners'>
-                        <a onClick={props.handleNavOpen}>Our Store Partners</a>
-                    </Link>
+                    {!Router.route.includes('builder')
+                        ?<Link href='/storepartners' as='/storepartners'>
+                            <a onClick={props.handleNavOpen}>Our Store Partners</a>
+                        </Link>
+                        :<Link href='/builderpartners'>
+                            <a onClick={props.handleNavOpen}>Our Builder Partners</a>
+                        </Link>
+                    }
                     <Link href='/onlinestore' as='/onlinestore'>
                         <a onClick={(e)=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen(e);}}>Online Store</a>
                     </Link>        
@@ -101,9 +106,14 @@ export default function NavBar(props) {
                     <Link href='/'>
                         <a onClick={props.handleNavOpen}>Find a Harp</a>
                     </Link>
-                    <Link href='/storepartners' as='/storepartners'>
-                        <a onClick={props.handleNavOpen}>Our Store Partners</a>
-                    </Link>
+                    {!Router.route.includes('builder')
+                        ?<Link href='/storepartners' as='/storepartners'>
+                            <a onClick={props.handleNavOpen}>Our Store Partners</a>
+                        </Link>
+                        :<Link href='/builderpartners'>
+                            <a onClick={props.handleNavOpen}>Our Builder Partners</a>
+                        </Link>
+                    }
                     <Link href='/onlinestore' as='/onlinestore'>
                         <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Online Store</a>
                     </Link>        
