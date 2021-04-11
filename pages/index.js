@@ -53,7 +53,7 @@ const Index = (props) => {
                 alt='spinner' 
             />
             <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', right: '15px', overflow: 'hidden'}}>
-                    <FastNEasyStringForm />
+                    {/* <FastNEasyStringForm /> */}
             </div>
             <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 

@@ -61,7 +61,7 @@ export default function OverlayMenu(props) {
                     </div>
                 </div>
             </div>
-            :<img id='tiles' onClick={()=>restoreOverlay()} style={{height: '12px', width: '20px', zIndex: '6000', position: 'absolute', top: '195px', right: '20px'}} src='/img/OverlayMenu/landing_menucomposite_dullwide.png' alt='opening tile menu icon' />
+            :<img id='tiles' onClick={()=>restoreOverlay()} src='/img/OverlayMenu/landing_menucomposite_dullwide.png' alt='opening tile menu icon' />
         }
         <OverlayMenuCss />
        </>    

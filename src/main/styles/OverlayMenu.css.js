@@ -89,7 +89,24 @@ function OverlayMenuCss() {
                 // margin-top: 5px;
             }
             
-              
+            #tiles {
+                height: 12px;
+                width: 20px;
+                zIndex: 6000;
+                position: absolute;
+                top: 195px;
+                right: 20px;
+            }
+            @media only screen and (max-width: 950px) {
+                #tiles {
+                  top: 175px;
+                }
+            }
+            @media only screen and (max-width: 600px) {
+                #tiles {
+                  top: 235px;
+                }
+            }
             @-webkit-keyframes myMove {
                 0% { -webkit-transform: translate(50%, -50%) scale(1);  } 
                 70% {-webkit-transform: translate(400px, -200px) scale(.1); }
