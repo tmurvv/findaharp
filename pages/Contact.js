@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 // internal
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import ContactUsForm from '../src/main/components/main/ContactUsForm';
 import ContactCSS from '../src/main/styles/Contact.css';
 
@@ -18,18 +19,7 @@ function Contact() {
             <meta name="Description" content="Contact Us -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps" key="title" />
         </Head>
         <div className='contactContainer'>
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '40%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <PageTitle maintitle='Contact Us' subtitle='We want to hear from you!' />
             <div>
                 <ContactUsForm handleCloseContact={() => console.log('')} />

@@ -13,6 +13,7 @@ import { UserContext } from '../src/main/contexts/UserContext';
 import Octave from '../src/store/components/stringForm/Octave';
 import RememberHarpLogin from '../src/store/components/stringForm/RememberHarpLogin';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import HarpLoginSignup from '../src/store/components/stringForm/HarpLoginSignup';
 import UserHarpProfile from '../src/store/components/stringForm/UserHarpProfile';
 import RememberExplained from '../src/store/components/stringForm/RememberExplained';
@@ -190,18 +191,7 @@ const StringForm = (props) => {
         return (
             <>
             <div className="stringForm" >
-                <img id='spinner' style={{
-                        display: 'none', 
-                        position: 'fixed', 
-                        top: '40%', 
-                        left: '50%', 
-                        transform: 'translate(-50%,-50%)',
-                        zIndex: '9000',
-                        height: '75px'
-                    }} 
-                    src='/img/spinner.gif' 
-                    alt='spinner' 
-                />
+                <Spinner />
                 {/* <h1>stringform: {stringForm[0]}</h1> */}
     
                 <ResultsWindow 

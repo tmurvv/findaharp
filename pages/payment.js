@@ -2,7 +2,8 @@
 import { useEffect, useContext, useState } from 'react';
 
 // internal
-import PaymentCss from '../src/store/styles//Payment.css';
+import PaymentCss from '../src/store/styles/Payment.css';
+import Spinner from '../src/main/components/main/Spinner';
 import StatusIndicator from '../src/store/components/main/StatusIndicator';
 import Subtotal from '../src/store/components/main/Subtotal';
 import StripeCheckout from '../src/store/components/main/StripeCheckout';
@@ -24,18 +25,7 @@ function Payment() {
     },[]);
     return (
         <div className='whiteWallPaper'>
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '40%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <div className='paymentContainer'>
             <StatusIndicator />
             <Subtotal type='total'/>

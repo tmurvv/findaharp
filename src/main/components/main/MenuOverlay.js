@@ -1,40 +1,34 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { UserContext } from '../../contexts/UserContext';
-import OverlayMenuCss from '../../styles/OverlayMenu.css.js';
-// import { OverlayMenuContext } from '../../contexts/OverlayMenuContext';
-import {MenuOverlayContext} from '../../contexts/MenuOverlayContext';
+import { MenuOverlayContext } from '../../../main/contexts/MenuOverlayContext';
+import OverlayMenuCss from '../../styles/OverlayMenu.css';
 
 export default function MenuOverlay(props) {
-    // const { overlayMenu } = useContext(OverlayMenuContext);
-    // const { user } = useContext(UserContext);
-    const { menuOverlay, setMenuOverlay } = useContext(MenuOverlayContext);
+    const { setMenuOverlay } = useContext(MenuOverlayContext);
     function clearOverlay() {
-        document.querySelector('#overlayBar').style.background = 'rgb(244,244,244,0)';
+        document.querySelector('body').style.background = 'rgb(244,244,244,0)';
         document.querySelector('.overlayLinks').style.animation = 'myMove .8s';
         setTimeout(()=> {
             setMenuOverlay(false);
-        },800);
+        },600);
     }
     
     return(
         <>
-            {setMenuOverlay
-                ?<div className='overlayBarOuter overlayBarOpen' id='overlayBar'>
-                    <div className='overlayLinks' id='overlayLinks'>
-                        <div style={{display: 'flex'}}>
-                            <Link href='/'>
-                                <a className='overlayLink item1' onClick={clearOverlay}>
-                                    <img src="/img/OverlayMenu/landing_usedharps.png" alt="used harps" />
-                                </a>
-                            </Link>
-                            <Link href='/buildersshowcase'>
-                                <a className='overlayLink item2' onClick={clearOverlay}>
-                                    <img src="/img/OverlayMenu/landing_builders.png" alt="Builders Showcase" />
-                                </a>
-                            </Link>
-                        </div>
+            <div className='overlayBarOuter overlayBarOpen' id='overlayBar'>
+                <div className='overlayLinks' id='overlayLinks'>
+                    <div style={{display: 'flex'}}>
+                        <Link href='/'>
+                            <a className='overlayLink item1' onClick={clearOverlay}>
+                                {/* <img src="/img/OverlayMenu/landing_usedharps.png" alt="used harps" /> */}
+                            </a>
+                        </Link>
+                        <Link href='/buildersshowcase'>
+                            <a className='overlayLink item2' onClick={clearOverlay}>
+                                {/* <img src="/img/OverlayMenu/landing_builders.png" alt="Builders Showcase" /> */}
+                            </a>
+                        </Link>
                     </div>
                     <div style={{display: 'flex'}}>
                         <Link href='/stringform'>
@@ -46,15 +40,15 @@ export default function MenuOverlay(props) {
                             <a className='overlayLink item4' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
                                 {/* <img src="/img/OverlayMenu/landing_onlinestore.png" alt="Online Store" /> */}
                             </a>
-                        </Link>        
+                        </Link>
                     </div>
                 </div>
-                :''
-            }
+            </div>
             <OverlayMenuCss />
         </>
     )
 }
+
 
 // {1===1
 //     ?

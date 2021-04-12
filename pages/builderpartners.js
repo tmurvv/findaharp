@@ -5,6 +5,7 @@ import Head from 'next/head';
 //internal
 import { BUILDER_PARTNERS } from '../src/showcase/constants/builderDirectory';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import AboutBuilderPartner from '../src/showcase/components/AboutBuilderPartner';
 import BuilderPartnersCSS from '../src/showcase/styles/BuilderPartners.css';
 import { 
@@ -26,18 +27,7 @@ export default function BuilderPartners() {
     },[]);
     return (
         <>
-        <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '25%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+        <Spinner />
         <Head>
             <title>findaharp.com -- Builder Partners</title>
             <meta name="Description" content="Pre-owned or used Harps of all types -- Builders partnering with findaharp.com, Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities" key="title" />

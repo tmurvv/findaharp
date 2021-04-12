@@ -11,10 +11,9 @@ function CartButton() {
     const { cart } = useContext(CartContext);
     const { menuOverlay, setMenuOverlay } = useContext(MenuOverlayContext);
     function restoreOverlay() {
-        document.querySelector('#tiles').style.animation = 'myMoveBack .8s ease-in-out';
+        document.querySelector('#tiles').style.animation = 'myMoveBack 1s ease-in-out';
         setTimeout(()=> {
             setMenuOverlay(true);
-            // document.querySelector('#overlayBar').style.background = 'rgb(244,244,244,.93)';
         }, 800);
     }
     return (

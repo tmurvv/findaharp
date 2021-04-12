@@ -14,6 +14,7 @@ import StatusIndicator from '../src/store/components/main/StatusIndicator';
 import Subtotal from '../src/store/components/main/Subtotal';
 import OrderSummary from '../src/store/components/main/OrderSummary';
 import Results from '../src/main/components/main/Results';
+import Spinner from '../src/main/components/main/Spinner';
 // other internal
 import ShippingCss from '../src/store/styles//Shipping.css';
 import { resultInfoReducer } from '../src/main/reducers/reducers';
@@ -184,19 +185,7 @@ function Shipping() {
     }
     return (
         <div className='whiteWallPaper'>
-            <img 
-                id='spinner' 
-                style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '50%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <div style={{margin: 'auto'}}>
                 <StatusIndicator />
                 {/* <button onClick={testReceipt}>test receipt</button> FOR TESTING */}

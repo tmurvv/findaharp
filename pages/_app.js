@@ -158,7 +158,6 @@ function MyApp(props) {
     }, []);
 
     function handleNavOpen() {
-        // if (document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block';
         setNavOpen(!navOpen);
     }
     useEffect(()=>{
@@ -249,7 +248,6 @@ function MyApp(props) {
                 <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                 <script src="https://js.stripe.com/v3/" />
             </Head>
-            <Banner />
             
             <StringFormContext.Provider value={{stringForm, setStringForm}}>
             <UserContext.Provider value={{user, setUser}}>
@@ -271,6 +269,7 @@ function MyApp(props) {
                                         :props.router.query.uploadlisting
                                             ?<UploadListingResult success={true}/>
                                             :<>
+                                                <Banner />
                                                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
                                                 <CartButton />
                                                 <Elements stripe={promise}>
