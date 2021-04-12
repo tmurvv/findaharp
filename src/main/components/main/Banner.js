@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import BannerCss from '../../styles/Banner.css';
-import OverlayMenu from '../../components/main/OverlayMenu';
+// import MenuOverlay from '../../components/main/MenuOverlay';
+// import { OverlayMenuContext } from '../../../main/contexts/OverlayMenuContext';
  
 function Banner() {
-    const [openOverlay, setOpenOverlay] = useState(true);
+    // const { overlayMenu } = useContext(OverlayMenuContext);
     return (
         <>
-            {openOverlay&&<OverlayMenu setOpenOverlay={setOpenOverlay}/>}
+            
             <div className="mainContainer">
+                {/* <MenuOverlay /> */}
                 <img className="textLogo" src="./img/logo_findaharp.png" alt="Find a Harp text logo"/>
                 <img className="productGraphic" src="./img/golden_harp_cropped.png" alt="Find a Harp graphic logo"/>
             </div>

@@ -9,7 +9,8 @@ function BannerCss() {
                 display: flex;
                 justify-content: space-evenly;
                 align-items: center;
-                padding: 0 20px;  
+                padding: 0 20px;
+                position: relative;
             }
             @media only screen and (max-width: 1050px) {
                 .mainContainer {

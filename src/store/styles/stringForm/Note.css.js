@@ -9,7 +9,8 @@ function NoteCss() {
                 grid-template-columns: 10% 10% 60% 10% 10%;
                 position: relative;
             }
-            .noteGridContainer > div {
+            .colHeader,
+            .notegridDiv {
                 background-color: #f6f6f6;
                 text-align: center;
                 font-size: 16px;

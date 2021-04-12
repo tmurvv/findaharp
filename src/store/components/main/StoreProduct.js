@@ -142,7 +142,7 @@ const StoreProduct = (props) => {
             }
             <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
-                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>{props.productdetail.newused.toUpperCase()}</span></div>
+                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)!=='NaN'?parseNum(props.productdetail.price).toFixed(2):"not listed"}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>{props.productdetail.newused.toUpperCase()}</span></div>
                 :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>({props.productdetail.newused.toUpperCase()})</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>

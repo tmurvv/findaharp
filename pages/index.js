@@ -8,7 +8,6 @@ import IndexCss from '../src/main/styles/index.css.js';
 import ProductSearch from '../src/main/components/main/ProductSearch';
 import PageTitle from '../src/main/components/main/PageTitle';
 import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
-import OverlayMenu from '../src/main/components/main/OverlayMenu';
 
 // // local test data
 // import testData from '../src/main/utils/testData';

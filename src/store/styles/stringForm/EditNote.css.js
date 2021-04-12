@@ -9,7 +9,8 @@ function EditNoteCss() {
                 grid-template-columns: 13% 74% 13%;
                 position: relative;
             }
-            .editNoteGridContainer > div {
+            .editNotegridDiv,
+            .colHeader {
                 background-color: #f6f6f6;
                 text-align: center;
                 font-size: 16px;

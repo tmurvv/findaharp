@@ -12,12 +12,6 @@ function OverlayMenuCss() {
                 -o-transition: all 500ms ease-in;
                 transition: all 2000ms ease-in;
             }
-            // .overlayBarClosedImg {
-            //     document.querySelector('#overlayBar').style.transform = 'scale(.02)';
-            //     document.querySelector('#overlayBar').style.top = '250px';
-            //     document.querySelector('#overlayBar').style.right = '25px';
-            //     display: 'none';
-            // }
             .overlayBarOuter {
                 z-index: 9999;
                 position: absolute;
@@ -25,11 +19,7 @@ function OverlayMenuCss() {
                 height: 100%;
                 width: 100%;
                 padding-top: 70px;
-                // background-image: url("/img/OverlayMenu/landing_background_blur.png");
-                // background-image: url("/img/OverlayMenu/landing_background_blur_darken.png"), linear-gradient(rgb(0,0,0,.4), rgb(0,0,0,.4)); /* W3C */
-                // background-size: 500px, 600px;
             }
-           
             .overlayLinks {
                 margin: auto;
                 width: 580px;
@@ -75,37 +65,16 @@ function OverlayMenuCss() {
             .item2,
             .item4 {
                 margin-left: 5px;
+            }     
+            .tileContainer {
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 15px;
             }
-            .grid-container-overlay {
-                
-            }       
-            .overlayLink {
-                // color: white;
-                // font-size: 48px;
-                // display: flex;
-                // justify-content: center;
-                // align-items: center;
-                // margin-bottom: 5px;
-                // margin-top: 5px;
-            }
-            
             #tiles {
                 height: 12px;
                 width: 20px;
-                zIndex: 6000;
-                position: absolute;
-                top: 195px;
-                right: 20px;
-            }
-            @media only screen and (max-width: 950px) {
-                #tiles {
-                  top: 175px;
-                }
-            }
-            @media only screen and (max-width: 600px) {
-                #tiles {
-                  top: 235px;
-                }
+                z-index: 6000;
             }
             @-webkit-keyframes myMove {
                 0% { -webkit-transform: translate(50%, -50%) scale(1);  } 

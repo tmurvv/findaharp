@@ -42,10 +42,10 @@ function EditNote({setChanges, strings, note, octave, octaveBrand, setOctaveBran
                 ?<>
                 <div className="item4 colHeader editNote" style={{border: '2px solid'}}>Note</div>
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
-                    <div style={{width: '90%'}}>
-                    <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div style={{color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
-                        <div style={{width: '50%', textAlign: 'right'}}>
+                    <div className='editNotegridDiv' style={{width: '90%'}}>
+                    <div className='editNotegridDiv' style={{display:'flex', justifyContent: 'space-between'}}>
+                        <div className='editNotegridDiv' style={{color: '#6A75AA', fontSize: '14px', fontStyle: 'italic'}}>{getTip}</div>
+                        <div className='editNotegridDiv' style={{width: '50%', textAlign: 'right'}}>
                             <input 
                                 type='checkbox'
                                 onClick={()=>{
@@ -59,12 +59,12 @@ function EditNote({setChanges, strings, note, octave, octaveBrand, setOctaveBran
                     </div>
                     </div>
                 </div>
-                <div className="item5 colHeader" style={{border: '2px solid'}}>Price</div>
+                <div className="item5 colHeader editNotegridDiv" style={{border: '2px solid'}}>Price</div>
                 </> 
                 :<>
-                <div className="editNote" id='editNote'>{note}</div>
+                <div className="editNote editNotegridDiv" id='editNote'>{note}</div>
                 <div 
-                    className="stringtype" 
+                    className="stringtype editNotegridDiv" 
                     id={`stringType${note}`} 
                     style={{
                         textAlign: 'left',
@@ -83,9 +83,9 @@ function EditNote({setChanges, strings, note, octave, octaveBrand, setOctaveBran
                         note={note}
                         setTotal={setTotal}
                     />
-                    <div id={`stringTypeText${note}`} style={{paddingLeft: '15px'}}>{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].brand}</div>
+                    <div className='editNotegridDiv' id={`stringTypeText${note}`} style={{paddingLeft: '15px'}}>{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].brand}</div>
                 </div>
-                <div className="item6">{parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0&&"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)}</div>
+                <div className="item6 editNotegridDiv">{parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0&&"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)}</div>
                 </>
                 }
             </div>  
