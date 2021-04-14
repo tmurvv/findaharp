@@ -8,6 +8,7 @@ import BuildersCss from '../src/showcase/styles/builders.css.js';
 import ProductSearch from '../src/main/components/main/ProductSearch';
 import PageTitle from '../src/main/components/main/PageTitle';
 import Spinner from '../src/main/components/main/Spinner';
+import { BUILDER_HARP_LIST } from '../src/showcase/constants/builderHarpList';
 import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
 
 // // local test data
@@ -73,14 +74,15 @@ BuildersShowcase.getInitialProps = async (props) => {
         // const res = await axios.get(`https://findaharp-api-testing.herokuapp.com`);
         // const res = await axios.get(`http://localhost:3000`); // BREAKINk
         // API DATA Populate variables
-        const products = res.data.harpData;
+        // const products = res.data.harpData;
+        const products = BUILDER_HARP_LIST;
         const makesModels = res.data.harpMakesModels;
         products.map(product => {
-            product.productImageUrl.indexOf('genericHarp.png')>-1?product.productModel=`zz${product.productModel}`:'';
+            product&&product.productImageUrl&&product.productImageUrl.indexOf('genericHarp.png')>-1?product.productModel=`zz${product.productModel}`:'';
         });
         products.sort((a,b) => (a.productModel > b.productModel) ? 1 : ((b.productModel > a.productModel) ? -1 : 0));
         products.map(product => {
-            product.productModel.startsWith('zz')?product.productModel=`${product.productModel.substr(2)}`:'';
+            product&&product.productModel&&product.productModel.startsWith('zz')?product.productModel=`${product.productModel.substr(2)}`:'';
         });
         return { products, makesModels, verifying: false, found: false };
 }
