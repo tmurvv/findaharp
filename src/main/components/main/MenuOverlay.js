@@ -1,43 +1,86 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { MenuOverlayContext } from '../../../main/contexts/MenuOverlayContext';
 import OverlayMenuCss from '../../styles/OverlayMenu.css';
+import { FullscreenExitRounded } from '@material-ui/icons';
 
 export default function MenuOverlay(props) {
     const { setMenuOverlay } = useContext(MenuOverlayContext);
+    const [ screenWidth, setScreenWidth ] = useState();
     function clearOverlay() {
-        document.querySelector('body').style.background = 'rgb(244,244,244,0)';
-        document.querySelector('.overlayLinks').style.animation = 'myMove .8s';
+        document.querySelector('.overlayLinks')?document.querySelector('.overlayLinks').style.animation = 'myMove .8s':'';
         setTimeout(()=> {
             setMenuOverlay(false);
         },600);
     }
+
+    useEffect(() => {
+        setScreenWidth(window.innerWidth);
+        // if (document.querySelector('.builders')) {
+        //     document.querySelector('.builders').style.opacity=.1;
+        // }
+    });
     
+    if (screenWidth&&screenWidth>550) {
+        return(
+            <>
+                <div className='overlayBarOuter overlayBarOpen' id='overlayBar'>
+                    <div className='overlayLinks' id='overlayLinks'>
+                        <div style={{display: 'flex'}}>
+                            <Link href='/'>
+                                <a className='overlayLink item1' onClick={clearOverlay}>
+                                    {/* <img src="/img/OverlayMenu/landing_usedharps.png" alt="used harps" /> */}
+                                </a>
+                            </Link>
+                            <Link href='/buildersshowcase'>
+                                <a className='overlayLink item2' onClick={clearOverlay}>
+                                    {/* <img src="/img/OverlayMenu/landing_builders.png" alt="Builders Showcase" /> */}
+                                </a>
+                            </Link>
+                        </div>
+                        <div style={{display: 'flex'}}>
+                            <Link href='/stringform'>
+                                <a className='overlayLink item3' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
+                                    {/* <img src="/img/OverlayMenu/landing_fastneasy.png" alt="Fast and Easy String Form" /> */}
+                                </a>
+                            </Link>
+                            <Link href='/onlinestore'>
+                                <a className='overlayLink item4' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
+                                    {/* <img src="/img/OverlayMenu/landing_onlinestore.png" alt="Online Store" /> */}
+                                </a>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+                <OverlayMenuCss />
+            </>
+        )
+    }
     return(
         <>
             <div className='overlayBarOuter overlayBarOpen' id='overlayBar'>
                 <div className='overlayLinks' id='overlayLinks'>
-                    <div style={{display: 'flex'}}>
-                        <Link href='/'>
-                            <a className='overlayLink item1' onClick={clearOverlay}>
-                                {/* <img src="/img/OverlayMenu/landing_usedharps.png" alt="used harps" /> */}
-                            </a>
-                        </Link>
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: '500px', width: 'unset', margin: 'unset'}}>
+                        {/* <div style={{height: '20px'}}> */}
+                            <Link style={{height: '100%'}} href='/'>
+                                <a style={{transform: 'scale(.8)'}} className='overlayLink item1' onClick={clearOverlay}>
+                                    {/* <img src="/img/OverlayMenu/landing_usedharps.png" alt="used harps" /> */}
+                                </a>
+                            </Link>
+                        {/* </div> */}
                         <Link href='/buildersshowcase'>
-                            <a className='overlayLink item2' onClick={clearOverlay}>
+                            <a style={{transform: 'scale(.8)'}} className='overlayLink item2' onClick={clearOverlay}>
                                 {/* <img src="/img/OverlayMenu/landing_builders.png" alt="Builders Showcase" /> */}
                             </a>
                         </Link>
-                    </div>
-                    <div style={{display: 'flex'}}>
-                        <Link href='/stringform'>
-                            <a className='overlayLink item3' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
+                        <Link style={{transform: 'scale(.8)'}} href='/stringform'>
+                            <a style={{transform: 'scale(.8)'}} className='overlayLink item3' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
                                 {/* <img src="/img/OverlayMenu/landing_fastneasy.png" alt="Fast and Easy String Form" /> */}
                             </a>
                         </Link>
                         <Link href='/onlinestore'>
-                            <a className='overlayLink item4' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
+                            <a style={{transform: 'scale(.8)'}} className='overlayLink item4' onClick={()=>{clearOverlay(); if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>
                                 {/* <img src="/img/OverlayMenu/landing_onlinestore.png" alt="Online Store" /> */}
                             </a>
                         </Link>

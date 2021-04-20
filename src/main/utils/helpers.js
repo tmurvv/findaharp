@@ -75,6 +75,13 @@ export function findSizeWords(strings, type) {
     // short cut if not lever or pedal harp
     if (type && type=='lever-free'&&!strings.toString().toUpperCase().startsWith('WIRE')) return 'lever-free';
     if (type && type.toUpperCase()==='ELECTRIC') return 'Electric';
+    //#region added for builder harp menu
+    if (strings&&strings.toString().toUpperCase()=='WIRE') return 'Wire';
+    if (strings&&strings.toString().toUpperCase()=='CROSS') return 'Cross';
+    if (strings&&strings.toString().toUpperCase()=='DOUBLE') return 'Double';
+    if (strings&&strings.toString().toUpperCase()=='TRIPLE') return 'Triple';
+    if (strings&&strings.toString().toUpperCase()=='CARBON FIBER') return 'Carbon Fiber';
+    //#endregion
     if (strings&&strings.toString().toUpperCase()=='WIRE/CROSS/DOUBLE/TRIPLE') return 'wire/cross/double/triple';
     // strings to number type
     strings = parseInt(strings);

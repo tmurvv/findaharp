@@ -5,11 +5,10 @@ import axios from 'axios';
 
 // internal
 import BuildersCss from '../src/showcase/styles/builders.css.js';
-import ProductSearch from '../src/main/components/main/ProductSearch';
+import BuilderProductSearch from '../src/showcase/components/builderProductSearch';
 import PageTitle from '../src/main/components/main/PageTitle';
 import Spinner from '../src/main/components/main/Spinner';
 import { BUILDER_HARP_LIST } from '../src/showcase/constants/builderHarpList';
-import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
 
 // // local test data
 // import testData from '../src/main/utils/testData';
@@ -21,6 +20,7 @@ const BuildersShowcase = (props) => {
 
     // get client lat/long
     useEffect(() => {
+        console.log('imin')
         if (navigator&&navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) { // courtesy Gaurav Singhal, PluralSight
                 setClientLat(position.coords.latitude.toFixed(4));
@@ -45,7 +45,7 @@ const BuildersShowcase = (props) => {
                     {/* <FastNEasyStringForm /> */}
             </div>
             <PageTitle maintitle="Builder's Showcase" subtitle='Showcasing harp luthiers from all across North America' />
-            <ProductSearch 
+            <BuilderProductSearch 
                 makesmodels={props.makesModels}
                 products={props.products}
                 clientlat={clientLat}

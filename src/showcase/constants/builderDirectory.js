@@ -42,5 +42,27 @@ export const BUILDER_PARTNERS = [
         sellerWebsite: 'https://blevinsharps.com',
         sellerWebsiteText: 'blevinsharps.com',
         sellerEmail: 'blevinsharps@gmail.com'
+    },
+    {
+        id: 'Fake Harp Luthier, Inc.',
+        sellerCountry: "USA",
+        currency: "usd",
+        sellerRegion: "Upstate New York",
+        productTitle: "Fake Harp Luthier, Inc.",
+        productPrice: "",
+        productLongDesc: `
+            <div>
+                <p>Welcome to <span>Fake Harp Luthier, Inc.</span> where our mission is to give you the gift of music.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <br />  
+            </div>
+        `,
+        productMaker: "Blevins Harps",
+        productImageUrl: "img/factoryFloor.jpg",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: '',
+        sellerWebsiteText: 'FHLHarps.com',
+        sellerEmail: ''
     }
 ];
