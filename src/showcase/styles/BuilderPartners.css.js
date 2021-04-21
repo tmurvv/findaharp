@@ -2,7 +2,7 @@ function BuilderPartnersCSS() {
     return (
         <style jsx="true">{`
             .builderPartnersContainer {
-                // background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
+                background-image: linear-gradient(to bottom, #eff3fc, #ffffff 300px);
                 padding-top: 70px;
                 padding-bottom: 70px;
                 position: relative;

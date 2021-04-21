@@ -4,7 +4,7 @@ function BuildersCss() {
     return (
         <style jsx="true">{`
             .builders {
-                // background-image: linear-gradient(to bottom, #fffedf, #ffffff 300px);
+                background-image: linear-gradient(to bottom, #eff3fc, #ffffff 300px);
                 margin: 0;
                 padding-top: 70px;
                 height: fit-content;

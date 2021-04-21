@@ -342,7 +342,7 @@ const StringForm = (props) => {
                     <div style={{
                             padding: '5px 0',
                             fontSize: '16px',
-                            width: '200px',
+                            width: '175px',
                             backgroundColor: '#f6f6f6',
                             color: '#000000',
                             textAlign: 'center',

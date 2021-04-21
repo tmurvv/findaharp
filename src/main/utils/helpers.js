@@ -59,17 +59,25 @@ export function getWindowSize() {
 export function setOpacity(yesNo) {
     if (yesNo) {
         document.body.style.overflowY='hidden';
-        document.querySelector('.searchLine1').style.opacity='.1';
-        document.querySelector('.searchLine2').style.opacity='.1';
-        document.querySelector('.searchLine1Sub').style.opacity='.1';
-        document.querySelector('.searchLine2Sub').style.opacity='.1';
+        document.querySelector('.searchLine1')?document.querySelector('.searchLine1').style.opacity='.1':'';
+        document.querySelector('.searchLine1')?document.querySelector('.searchLine2').style.opacity='.1':'';
+        document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine1Sub').style.opacity='.1':'';
+        document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine2Sub').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine1').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine2').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine1Sub').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine2Sub').style.opacity='.1':'';
         return
     }
     document.body.style.overflowY='auto';
-    document.querySelector('.searchLine1').style.opacity='1';
-    document.querySelector('.searchLine2').style.opacity='1';
-    document.querySelector('.searchLine1Sub').style.opacity='1';
-    document.querySelector('.searchLine2Sub').style.opacity='1';
+    document.querySelector('.searchLine1')?document.querySelector('.searchLine1').style.opacity='1':'';
+    document.querySelector('.searchLine1')?document.querySelector('.searchLine2').style.opacity='1':'';
+    document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine1Sub').style.opacity='1':'';
+    document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine2Sub').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine1').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine2').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine1Sub').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine2Sub').style.opacity='1':'';
 }
 export function findSizeWords(strings, type) {
     // short cut if not lever or pedal harp

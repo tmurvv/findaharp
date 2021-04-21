@@ -53,9 +53,9 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                 <div className="item4 colHeader" style={{border: '2px solid'}}>Note</div>
                 <div className="item3 colHeader" style={{border: '2px solid'}}>Qty</div>
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
-                    <div className='notegridDiv' style={{width: '100%'}}>
-                    <div className='notegridDiv' style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div className='notegridDiv' style={{width: 'fit-content', textAlign: 'left'}}>
+                    <div className='colHeaderdDiv' style={{width: '100%'}}>
+                    <div className='colHeaderDiv' style={{display:'flex', justifyContent: 'space-between'}}>
+                        <div className='colHeaderDiv' style={{width: 'fit-content', textAlign: 'left'}}>
                             <input 
                                 id={`applytooctave${octave}`}
                                 type='checkbox'
@@ -68,7 +68,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                             <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                         </div>
                         <div 
-                            className='notegridDiv' style={{
+                            className='colHeaderDiv' style={{
                                 color: '#6A75AA', 
                                 fontSize: '14px', 
                                 fontStyle: 'italic', 

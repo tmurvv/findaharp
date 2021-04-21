@@ -17,6 +17,7 @@ import PriceMenu from './menus/BuilderPriceMenu';
 import LocationMenu from './menus/BuilderLocationMenu';
 import { UserContext } from '../../main/contexts/UserContext';
 import { CurrencyContext } from '../../main/contexts/CurrencyContext';
+import { BUILDER_PARTNERS } from '../constants/builderDirectory';
 import {
     getFilteredProducts,
     getSearchInfo,
@@ -79,11 +80,16 @@ function BuilderProductSearch(props) {
         const newState = {...allState, 
             maker,
             model: "All Models"
-        }       
+        }
+        const builderInfo = BUILDER_PARTNERS.find(builder=>maker===builder.productTitle);
+        console.log('builderInfo', builderInfo);
+        console.log(maker)
+        console.log(BUILDER_PARTNERS[0])
         setAllState({...allState, 
             maker,
             model: "All Models",
-            searchInfo: getSearchInfo(newState)
+            searchInfo: getSearchInfo(newState),
+            builderInfo
         });
         setMenus(initialState);
     }
@@ -263,8 +269,6 @@ function BuilderProductSearch(props) {
         setAllState({...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo});
     }
     useEffect(() => {
-        console.log('in search')
-        console.log('props', props)
         triggerLazy();
         
     },[]);
@@ -272,12 +276,11 @@ function BuilderProductSearch(props) {
     const showing = allState.location!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";
     return (
         <>       
-        <h3 className='searchTitle'>Use the filters below to narrow your results.</h3>
-        <div className='productSearchOuter'>
-            <div className='mobileSearchLine1'>
-            <div  ref={ref} className='searchLine1'>  
-                <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
-                
+        <h3 className='builder buildersearchTitle'>Use the filters below to narrow your results.</h3>
+        <div className='builderproductSearchOuter'>
+            <div className='mobilebuilderSearchLine1'>
+            <div  ref={ref} className='buildersearchLine1'>  
+                <img src='./img/ribbon_blue_curtains.png' alt="blue background ribbon with fancy curtains"/>     
                 <SizeMenu 
                     handleSizeChange={handleSizeSelection} 
                     products={shuffledProducts}
@@ -303,10 +306,10 @@ function BuilderProductSearch(props) {
                     handleclick={handleClick}
                 />
             </div>
-            <div className="searchLine1Sub">
+            <div className="buildersearchLine1Sub">
                 <div 
                     id="selectedSize" 
-                    className={`search-grid-item`} 
+                    className={`buildersearch-grid-item`} 
                     value={allState.size}
                     onClick={()=>handleClick({target: {name: 'size'}})}
                 >
@@ -328,7 +331,7 @@ function BuilderProductSearch(props) {
                 </div>
                 <div 
                     id="selectedMaker" 
-                    className={`search-grid-item`} 
+                    className={`buildersearch-grid-item`} 
                     value={allState.maker}
                     onClick={()=>handleClick({target: {name: 'maker'}})}
                 >
@@ -350,7 +353,7 @@ function BuilderProductSearch(props) {
                 </div>
                 <div 
                     id="selectedModel" 
-                    className={`search-grid-item`} 
+                    className={`buildersearch-grid-item`} 
                     value={allState.model}
                     onClick={()=>handleClick({target: {name: 'model'}})}
                 >
@@ -372,10 +375,10 @@ function BuilderProductSearch(props) {
                 </div>
             </div>
             </div>
-            <h3 className='searchTitle'>Further refine your search.</h3>
-            <div className='mobileSearchLine2'>
-                <div ref={ref} className='searchLine2'>
-                    <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
+            <h3 className='builder buildersearchTitle'>Further refine your search.</h3>
+            <div className='mobilebuilderSearchLine2'>
+                <div ref={ref} className='buildersearchLine2'>
+                    <img src='./img/ribbon_ltblue_full.png' alt="golden background ribbon"/> 
                     <FinishMenu 
                         handleFinishChange = {handleFinishSelection} 
                         products={shuffledProducts}
@@ -400,10 +403,10 @@ function BuilderProductSearch(props) {
                         handleclick={handleClick}
                     /> 
                 </div>
-                <div className="searchLine2Sub">
+                <div className="buildersearchLine2Sub">
                         <div 
                             id="selectedFinish" 
-                            className={`search-grid-item`} 
+                            className={`buildersearch-grid-item`} 
                             value={allState.finish}
                             onClick={()=>handleClick({target: {name: 'finish'}})}
                         >
@@ -425,7 +428,7 @@ function BuilderProductSearch(props) {
                         </div>
                         <div 
                             id="selectedPrice" 
-                            className={`search-grid-item`} 
+                            className={`buildersearch-grid-item`} 
                             value={allState.price}
                             onClick={()=>handleClick({target: {name: 'price'}})}
                         >
@@ -448,7 +451,7 @@ function BuilderProductSearch(props) {
                         </div>
                         <div 
                             id="selectedAll Locations" 
-                            className={`search-grid-item`} 
+                            className={`buildersearch-grid-item`} 
                             value={allState.location}
                             onClick={()=>handleClick({target: {name: 'location'}})}
                         >
@@ -479,6 +482,12 @@ function BuilderProductSearch(props) {
                     <p>Clear</p> 
                 </div>
             </div>
+            <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+                {allState.maker!=="All Makers"&&<><img style={{height: '150px', borderRadius: '3px'}} src={`${allState.builderInfo.productImageUrl}`} alt='harp maker logo' /></>}
+            </div>
+            <p style={{textAlign: 'center', width: '100%', fontStyle: 'italic'}}>
+                Visit builder website: {allState.builderInfo&&allState.builderInfo.sellerWebsiteText&&allState.builderInfo.sellerWebsiteText}
+            </p>
             <ProductContainer 
                 data-test="component-ProductContainer" 
                 filteredproductscontainer={filteredProducts} 

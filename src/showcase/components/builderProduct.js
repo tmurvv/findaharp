@@ -39,7 +39,6 @@ function Product({productdetail, handleopendetail, handleclosedetail, handleopen
     }
     
     useEffect(() => {
-        console.log('in product')
         if (productdetail) {
             let mounted = true;
             // if image is squarish, adjusts the height so image not stretched out

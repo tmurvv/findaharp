@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ProductSearchCss() {
+function BuilderProductSearchCss() {
     return (
         <style jsx="true">{`
-            .searchTitle {
+            .buildersearchTitle {
                 width: 60%;
                 margin: 25px auto 5px;
                 text-align: center;
@@ -13,23 +13,23 @@ function ProductSearchCss() {
                 font-weight: 500;
                 font-size:14px;
             }
-            h3 {
+            .builder h3 {
                 width: 100%;
                 text-align: center;
                 margin-block-end: 1.66em;
                 margin-block-start: 1.66em;
             }
-            .productSearchOuter {
+            .builderproductSearchOuter {
                 max-width: 1010px;
                 width: 70%;
                 margin: auto;
             }
             @media only screen and (max-width: 550px) {
-                .productSearchOuter {
+                .builderproductSearchOuter {
                     width: 90%;
                 }
             } 
-            .searchLine1 {
+            .buildersearchLine1 {
                 display: flex;
                 justify-content: space-evenly;
                 text-align: center;
@@ -37,25 +37,25 @@ function ProductSearchCss() {
                 grid-template-columns: 33.3% 33.3% 33.3%;               
             }
             @media only screen and (max-width: 550px) {
-                .searchLine1 {
+                .buildersearchLine1 {
                     background-color: #000000;
                 }
             }
-            .searchLine1 img {
+            .buildersearchLine1 img {
                 width: 70%;
                 position: absolute;
-                height: 60px;
+                height: 150px;
                 max-width: 1010px;
             }
             @media only screen and (max-width: 550px) {
-                .searchLine1 img {
+                .buildersearchLine1 img {
                     display: none;
                 }
             } 
-            .searchLine1 span {
+            .buildersearchLine1 span {
                 color: #fafbfc;
             }
-            .searchLine1Sub {
+            .buildersearchLine1Sub {
                 display: flex;
                 justify-content: space-evenly;
                 font-size: 13px;
@@ -65,14 +65,14 @@ function ProductSearchCss() {
                 grid-template-columns: 33.3% 33.3% 33.3%;
             }
             @media only screen and (max-width: 550px) {
-                .mobileSearchLine1 {
+                .mobilebuilderSearchLine1 {
                     display: flex;
                     justify-content: space-evenly;
                     margin: auto;
                     width: 80%;
                     margin-top: 10px;
                 }
-                .searchLine1 {
+                .buildersearchLine1 {
                     flex: 5;
                     grid-template-columns: 100%;
                     height: 120px;
@@ -80,10 +80,10 @@ function ProductSearchCss() {
                     align-items: center;
                     border: 1px solid black;
                 }
-                .searchLine1>.grid-item {
+                .buildersearchLine1>.grid-item {
                     padding-top: 5px;
                 }
-                .searchLine1Sub {
+                .buildersearchLine1Sub {
                     flex: 5;
                     grid-template-columns: 100%;
                     padding: 0;
@@ -94,7 +94,7 @@ function ProductSearchCss() {
                     background-color: #ffffff;
                 }
             }
-            .searchLine2 {
+            .buildersearchLine2 {
                 width: 90%;
                 margin: auto;
                 display: flex;
@@ -104,27 +104,27 @@ function ProductSearchCss() {
                 grid-template-columns: 33.3% 33.3% 33.3%;
             }
             @media only screen and (max-width: 550px) {
-                .searchLine2 {
+                .buildersearchLine2 {
                     height: 120px;
                     border: 1px solid #FCD961;
                     background-color: #FCD961;
                 }
             }
-            .searchLine2 img {
+            .buildersearchLine2 img {
                 width: 63.3%;
                 position: absolute;
                 height: 60px;
                 max-width: 909px;
             }
             @media only screen and (max-width: 550px) {
-                .searchLine2 img {
+                .buildersearchLine2 img {
                     display: none;
                 }
             }
-            .searchLine2 span {
+            .buildersearchLine2 span {
                 color: #fafbfc;
             }
-            .searchLine2Sub {
+            .buildersearchLine2Sub {
                 margin: auto;
                 width: 90%;
                 display: flex;
@@ -136,28 +136,28 @@ function ProductSearchCss() {
                 grid-template-columns: 33.3% 33.3% 33.3%;
             }
             @media only screen and (max-width: 550px) {
-                .mobileSearchLine2 {
+                .mobilebuilderSearchLine2 {
                     display: flex;
                     justify-content: space-evenly;
                     margin: auto;
                     width: 80%;
                     margin-bottom: 40px;
                 }
-                .searchLine2 {
+                .buildersearchLine2 {
                     grid-template-columns: 100%;
                     height: 120px;
                     grid-template-columns: unset;
                     align-items: center;
                 }
-                .searchLine2 img {
+                .buildersearchLine2 img {
                     width: 70%;
                     position: absolute;
                     height: 50px;
                 }
-                .searchLine2.div.button {
+                .buildersearchLine2.div.button {
                     color: #000000;
                 }
-                .searchLine2Sub {
+                .buildersearchLine2Sub {
                     grid-template-columns: 100%;
                     height: 120px;
                     border: 1px solid;
@@ -174,28 +174,28 @@ function ProductSearchCss() {
                 display: flex;
                 justify-content: space-between;
             }
-            .search-grid-item {
+            .buildersearch-grid-item {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 z-index: 5;
             }
             @media only screen and (max-width: 550px) {
-                .search-grid-item {
+                .buildersearch-grid-item {
                     font-size: 16px;
                 }
             }
             
-            .search-grid-item img {
+            .buildersearch-grid-item img {
                 height: 12px;
                 margin-left: 10px;
                 color: #333333
                 z-index: 1000;
                 padding-bottom: 2px;
             }
-            input {
-                margin-bottom: 15px;
-            }  
+            // input {
+            //     margin-bottom: 15px;
+            // }  
             li {
                 padding: 5px 7px;
                 border: 1 solid grey;
@@ -250,4 +250,4 @@ function ProductSearchCss() {
     )
 }
 
-export default ProductSearchCss;
+export default BuilderProductSearchCss;

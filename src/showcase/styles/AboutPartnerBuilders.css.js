@@ -16,18 +16,18 @@ function AboutPartnerBuildersCSS() {
                 font-weight: 500;
                 font-size:14px       
             }
-            .productContainer {
+            .builderproductContainer {
                 margin: auto;
                 position: relative;
                 width: 90%;
             }
             @media only screen and (max-width: 1475px) {
-                .productContainer {
+                .builderproductContainer {
                     max-width: unset;
                 }
             }
             @media only screen and (max-width: 550px) {
-                .productContainer {
+                .builderproductContainer {
                     width: 80%;
                 }
             }
@@ -44,7 +44,7 @@ function AboutPartnerBuildersCSS() {
                 }
             }
             @media only screen and (max-width: 550px) {
-                .productContainer {
+                .builderproductContainer {
                     width: 80%;
                 }
             }
@@ -60,7 +60,7 @@ function AboutPartnerBuildersCSS() {
                     width: 60vw;
                 }
             }
-            .productSmallDisplay {
+            .builderproductSmallDisplay {
                 display: flex;
                 flex-direction: column;
                 margin: 5px 3px 50px 3px;
@@ -70,37 +70,37 @@ function AboutPartnerBuildersCSS() {
                 min-width: 360px;
                 max-width: 100%;
                 width: 19%;
-                border: 2px solid #f9bf1e;
+                border: 2px solid #223156;
                 border-radius: 3px;
                 padding: 20px 20px 3px;
                 background-color: #ffffff;
             }
             
             @media only screen and (max-width: 1500px) {
-                .productSmallDisplay {
+                .builderproductSmallDisplay {
                     width: 24%;
                 }
             }      
             @media only screen and (max-width: 1250px) {
-                .productSmallDisplay {
+                .builderproductSmallDisplay {
                   width: 42%;
                   margin: 10px auto;
                 }
             }
             @media only screen and (max-width: 1010px) {
-                .productSmallDisplay {
+                .builderproductSmallDisplay {
                     width: 80vw;  
                 }
             }
             @media only screen and (max-width: 850px) {
-                .productSmallDisplay {
+                .builderproductSmallDisplay {
                     min-width: 300px;  
                 }
             }
-            .productSmallDisplay span {
+            .builderproductSmallDisplay span {
                 cursor: pointer;
             }
-            .productSmallDisplay-img {
+            .builderproductSmallDisplay-img {
                 flex:6;
                 overflow: hidden;
                 display: flex;
@@ -108,7 +108,7 @@ function AboutPartnerBuildersCSS() {
                 align-items: center;
                 margin-bottom: 17px;
             }
-            .productSmallDisplay-img img{
+            .builderproductSmallDisplay-img img{
                 height: 267px;
                 width: auto;
                 max-width:100%;
@@ -116,7 +116,7 @@ function AboutPartnerBuildersCSS() {
                 object-fit: contain;
                 overflow: hidden;
             }
-            .productSmallDisplay-LongDesc {
+            .builderproductSmallDisplay-LongDesc {
                 flex: 8;
                 text-align: left;
                 overflow-y: scroll;
@@ -124,10 +124,10 @@ function AboutPartnerBuildersCSS() {
                 max-height: 70%;
                 margin-bottom: 20px
             }
-            .productSmallDisplay-LongDesc span {
+            .builderproductSmallDisplay-LongDesc span {
                 font-family: 'Metropolis Extra Bold';
             }
-            .productSmallDisplay-text {
+            .builderproductSmallDisplay-text {
                 flex: 2;
                 display: flex;
                 flex-direction: column;
@@ -135,12 +135,12 @@ function AboutPartnerBuildersCSS() {
                 align-items: center;
                 padding-bottom: 10px;
             }
-            .productSmallDisplay-text p {
+            .builderproductSmallDisplay-text p {
                 margin-block-start: 0;
                 margin-block-end: 0;
                 text-align: left;
             }
-            .productSmallDisplay-text p a {
+            .builderproductSmallDisplay-text p a {
                 text-decoration: none;
                 cursor: pointer;
                 color: #333333;
@@ -216,7 +216,7 @@ function AboutPartnerBuildersCSS() {
             } 
             ::-webkit-scrollbar-thumb {
                     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-                    background-color: #ffe58a; 
+                    background-color: #9ba6c4; 
             }
         `}
         </style>

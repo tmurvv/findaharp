@@ -11,7 +11,7 @@ export const BUILDER_PARTNERS = [
         productPrice: "",
         productLongDesc: `<p><span>Vavra Harp</span> It Is Our Pleasure to engage in the construction of harps. We use the finest materials we can find, applying a lifetime of skills to produce heirloom quality instruments that sound and look beautiful.</p><p>We create custom harps, repair, rebuilder, or re-create harps, and we clean, regulate, and tune harps. Sorry, but we do not service pedal harps. Located in Upstate South Carolina, we can ship anywhere.</p><p>We have found that crafting a harp requires the precise melding of calculation, skill, and experience. The overall 'voice' of the instrument results from the consideration of wood, strings, finish, and decoration.  ​​​We can do whatever it takes to deliver what  you want. Please, browse our SHOP and peruse our GALLERY; you may see something that inspires!</p><p>In addition to our Stock Harps, Vavra Harp offers Custom Harps, Rental Harps, Used Harps, Trade-Ins, Harp Repair, Harp Restoration, and Harp Recreations (from pictures, sketches, etc.)</p>`,
         productMaker: "Vavra Harp",
-        productImageUrl: "img/builderPartners/vavra_logo.png",
+        productImageUrl: "img/builderPartners/vavra_orig_wide.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'http://vavraharp.com',
         sellerWebsiteText: 'vavraharp.com',
@@ -58,8 +58,8 @@ export const BUILDER_PARTNERS = [
                 <br />  
             </div>
         `,
-        productMaker: "Blevins Harps",
-        productImageUrl: "img/factoryFloor.jpg",
+        productMaker: "Fake Harp Luthier, Inc.",
+        productImageUrl: "img/builderPartners/fakeHarpLuthierLogo2.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: '',
         sellerWebsiteText: 'FHLHarps.com',

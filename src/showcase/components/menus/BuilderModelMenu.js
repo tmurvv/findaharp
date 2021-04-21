@@ -11,7 +11,6 @@ export default function BuilderModelMenu(props) {
     if (props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
     
     const currentModels = props.products.map(product => product.productModel).sort(); 
-    console.log('buildermodels', currentModels)
     let models = new Set(currentModels);
     
     if (props.productMaker) maker = props.productMaker;

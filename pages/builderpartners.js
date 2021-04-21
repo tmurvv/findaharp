@@ -35,7 +35,7 @@ export default function BuilderPartners() {
         {openBuilderOwnerInq?<AboutBuilderPartner open={openBuilderOwnerInq} close={()=>setOpenBuilderOwnerInq(false)}/>:''}
         <div className='builderPartnersContainer'>
             <PageTitle   
-                maintitle='Our Builder and Business Partners' 
+                maintitle='Our Builder Partners' 
                 subtitle='Find a Harp is proud to partner with the following harp sellers' 
             />
             {/* <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>

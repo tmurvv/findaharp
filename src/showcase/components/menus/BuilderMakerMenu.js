@@ -5,7 +5,6 @@ export default function BuilderMakerMenu(props) {
     const currentMakers = props.products.map(product => product.productMaker);
     let makers = new Set([]);
     props.makesmodels.map(maker => { makers.add(maker.sellerName)});
-    console.log('set', makers)
     // makers = itemsSortByDisabled(makers, currentMakers);
     const handleClose = (evt) => {
         props.handleMakerChange(evt.target.getAttribute('name'));

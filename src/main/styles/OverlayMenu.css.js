@@ -4,11 +4,11 @@ function OverlayMenuCss() {
     return (
         <style>{`
             #overlayBar {
-                -webkit-transition: all 500ms ease-in;
-                -moz-transition: all 500ms ease-in;
-                -ms-transition: all 500ms ease-in;
-                -o-transition: all 500ms ease-in;
-                transition: all 2000ms ease-in;
+                -webkit-transition: all 200ms ease-in;
+                -moz-transition: all 200ms ease-in;
+                -ms-transition: all 200ms ease-in;
+                -o-transition: all 200ms ease-in;
+                transition: all 200ms ease-in;
             }
             .overlayBarOuter {
                 z-index: 9000;

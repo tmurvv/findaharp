@@ -39,7 +39,7 @@ const BuildersShowcase = (props) => {
             <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
         </Head>
         
-        <div className="builders" >
+        <div className="builders">
             <Spinner />
             <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
                     {/* <FastNEasyStringForm /> */}

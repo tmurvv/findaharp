@@ -15,10 +15,10 @@ function AboutBuilderPartner(props) {
         <div 
             key={partnerBuilder.id} 
             id={partnerBuilder.id} 
-            className={`productSmallDisplay`}
+            className={`builderproductSmallDisplay`}
             style={props.placeholder?{opacity:'0'}:{}} 
         >
-            <div className={`productSmallDisplay-img`}>
+            <div className={`builderproductSmallDisplay-img`}>
                 <LazyLoad
                     once={true}
                     offset={300}
@@ -34,10 +34,10 @@ function AboutBuilderPartner(props) {
                 </LazyLoad>
             </div>
             <div className='buyerDivider'>
-                <img src='./img/golden_tapered_line.png' alt="decorative divider"/>
+                <img src='./img/dkblue_tapered_line.png' alt="decorative divider"/>
             </div>
-            <div className='longDesc productSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerBuilder.productLongDesc}} />
-            <div className={`grid-item productSmallDisplay-text`}>
+            <div className='longDesc builderproductSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerBuilder.productLongDesc}} />
+            <div className={`grid-item builderproductSmallDisplay-text`}>
                 <p><a href={`${partnerBuilder.sellerWebsite}`} style={{color: '#6A75AA', fontSize: '18px'}} target="_blank">{partnerBuilder.sellerWebsiteText}</a></p>
                 <p>{partnerBuilder.sellerRegion}</p>     
             </div>           

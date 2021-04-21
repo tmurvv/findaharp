@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { MenuOverlayContext } from '../../../main/contexts/MenuOverlayContext';
 import OverlayMenuCss from '../../styles/OverlayMenu.css';
-import { FullscreenExitRounded } from '@material-ui/icons';
 
 export default function MenuOverlay(props) {
     const { setMenuOverlay } = useContext(MenuOverlayContext);
@@ -12,7 +11,7 @@ export default function MenuOverlay(props) {
         document.querySelector('.overlayLinks')?document.querySelector('.overlayLinks').style.animation = 'myMove .8s':'';
         setTimeout(()=> {
             setMenuOverlay(false);
-        },600);
+        }, 200);
     }
 
     useEffect(() => {
