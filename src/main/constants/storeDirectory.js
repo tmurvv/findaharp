@@ -235,6 +235,38 @@ export const STORE_PARTNERS = [
         sellerEmail: 'julie@normanfamily.org'
     },
     {
+        id: 'marinaharp',
+        sellerCountry: "USA",
+        currency: "usd",
+        sellerRegion: "Reno, Nevada",
+        shipsTo: "Pickup only",
+        productTitle: "MarinaHarp",
+        productPrice: "",
+        productLongDesc: `<div class="span-17">
+            <span>Marina Roznitovsky</span> currently teaches harp at the <a href="http://www.unr.edu/" title="University of Nevada, Reno" target="_blank">University of Nevada, Reno</a> and <a href="http://www.tmcc.edu" title="Truckee Meadows Community College" target="_blank">Truckee Meadows Community College</a>, and operates a private harp studio in Reno. She is currently the principal harpist with the <a href="http://www.renochamberorchestra.org/" title="Reno Chamber Orchestra" target="_blank">Reno Chamber Orchestra</a>, <a href="http://www.susanvillesymphony.com" title="Susanville Symphony" target="_blank">Susanville Symphony</a> and the <a href="http://www.nevadaopera.org/" title="Nevada Opera" target="_blank">Nevada Opera</a>. She is active in charity concerts and events and a number of her performances have been broadcast on National Israeli and United States television and radio. 
+            <br/>
+            <br/>
+            Throughout her Career Ms. Roznitovsky performed with several professional orchestras in Israel and in the United States and recently was a featured soloist with the <a href="http://www.susanvillesymphony.com" title="Susanville Symphony" target="_blank">Susanville Symphony</a>, the <a href="http://www.susanvillesymphony.com" title="TOCCATA Orchestra" target="_blank">TOCCATA Orchestra</a> in Tahoe and <a href="http://www.oistrachsymphony.org/" title="Oistrach Symphony Orchestra" target="_blank">Oistrach Symphony Orchestra</a> in Chicago. She also performed under the baton of Mr. Daniel Barenboim during a worldwide tour with the <a href="http://www.west-eastern-divan.org/" title="West Eastern Divan Orchestra" target="_blank">West Eastern Divan Orchestra</a>.
+            <br/>
+            <br/>
+            Ms.Roznitovsky earned her BM, MM and PD in harp performance and pedagogy at <a href="http://www.music.indiana.edu/" title="Indiana University" target="_blank">Indiana University</a>, under the tutelage of Distinguished Professor, <a href="http://info.music.indiana.edu/sb/page/normal/196.html" title="Susann McDonald" target="_blank">Susann McDonald</a>. She also completed her studies and practice of harp regulation at Indiana University. In addition to her studies, Ms. Roznitovsky participated in Master classes with many world-renowned harpists such as <a href="http://www.musica.cz/static/bouskova/" title="Jana Bouskova" target="_blank">Jana Bouskova</a>, <a href="http://www.naokoyoshino.com/" title="Naoko Yoshino" target="_blank">Naoko Yoshino</a>, <a href="http://www.isabelle-perrin.eu/en-harpe-biography" title="Isabelle Perrin" target="_blank">Isabelle Perrin</a>, <a href="http://www.youtube.com/watch?v=-mxMPVMxJmg&feature=related" title="Catherine Michel" target="_blank">Catherine Michel</a>, <a href="http://www.sebastien-lipman.com/" title="Sebastian Lipman" target="_blank">Sebastian Lipman</a> and <a href="http://www.roosevelt.edu/CCPA/MusicConservatory/Faculty/Harp.aspx" title="Sarah Bullen" target="_blank">Sarah Bullen</a>. 
+            <br/><br/>
+            As a graduate student one of her most significant achievements was winning the first prize in the music category of the 2006 National Society of Arts and Letters competition in Bloomington, IN. In 2007 Marina was a contestant coordinator and outreach leader for the world renowned <a href="http://usaihc.org/" title="USA International Harp Competition" target="_blank">USA International Harp Competition</a>. In 2009 Marina competed in the prestegious <a href="http://www.harpcontest-israel.org.il/?p=376" title="International Harp Contest in Israel" target="_blank">International Harp Contest in Israel</a>. She is now preparing for the next International Harp Contest in Israel, which will take place in Fall 2012.
+            <br/><br/>
+            Ms. Roznitovsky was a recipient of the American Israel Cultural Foundation scholarship award four consecutive times.  She also received multiple scholarship awards from the Dunie Weitzman Conservatory (of Haifa, Israel), Indiana University (Bloomington), Barenboim-Said Foundation (Spain) and the Bureau of Jewish Education (CA).
+            <br/><br/>
+            Ms. Roznitovsky was born in Ukraine, and immigrated to Israel with her mother when she was six years old. At the age of twelve she began studying harp under the instruction of Professor <a href="http://www.musicolga.com/about/eng/" title="Olga Moitlis" target="_blank">Olga Moitlis</a>.
+            <br/><br/>
+        </div>
+        `,
+        productMaker: "Marina Harp",
+        productImageUrl: "/img/storePartners/marina_logo.jpg",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: 'http://marinaharp.com',
+        sellerWebsiteText: 'marinaharp.com',
+        sellerEmail: 'marinaharp@gmail.com'
+    },
+    {
         id: 'novaharps',
         sellerCountry: "Canada",
         sellerRegion: "Halifax, NS, Canada",

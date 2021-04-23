@@ -20,7 +20,7 @@ export default function SizeMenu(props) {
                 id="size-select"
                 onClose={handleClose}
                 name='Size Menu'
-                className='plainTextSelectLine1'
+                className='builderplainTextSelectLine1 plainTextSelectLine1'
                 style={{zIndex: 6000}}
                 hidden={!props.open}
             >

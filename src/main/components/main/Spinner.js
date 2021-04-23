@@ -5,19 +5,30 @@ import Router from 'next/router';
 function PageTitle({ maintitle, subtitle }) {
     return (
         <>
-        
-        <img id='spinner' style={{
-                    display: 'none', 
+            <div id='spinner'
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: '10px 70px',
+                    border: '1px solid #6A75AA',
+                    backgroundColor: '#fff',
+                    width: 'fit-content',display: 'none', 
                     position: 'fixed', 
                     top: '35%', 
                     left: '50%', 
                     transform: 'translate(-50%,-50%)',
                     zIndex: '9999',
-                    height: '250px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+                }}
+            >
+                <img style={{
+                        
+                        height: '100px'
+                    }} 
+                    src='/img/spinner.gif' 
+                    alt='spinner' 
+                />
+            </div>
         </>
     )
 }

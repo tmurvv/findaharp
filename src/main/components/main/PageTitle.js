@@ -7,7 +7,7 @@ function PageTitle({ maintitle, subtitle }) {
         <>
         {/* {maintitle.toUpperCase()!=='YOUR CART'&&maintitle.toUpperCase()!=='HARP PROFILES'&&!maintitle.toUpperCase().startsWith('EZ')
         ?<div>
-            {maintitle.toUpperCase()!=='ONLINE STORE'&&
+            {maintitle.toUpperCase()!=='Music, Strings & Things'&&
             maintitle.toUpperCase()!=='OUR STORE AND BUSINESS PARTNERS'&&
             maintitle.toUpperCase()!=='CONTACT US'&&
             maintitle.toUpperCase()!=='LOGIN/SIGNUP'&&

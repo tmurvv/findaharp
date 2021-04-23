@@ -152,7 +152,6 @@ function ProductModal(props) {
                     <div className='longDesc'></div>
                     <br />
                     <p>
-                    <span>Options</span> Options such as string types, engraving could go here.<br></br>
                     <span>Location</span> {sellerCountry?sellerCountry:'unavailable'}<br></br>
                     <span>Distance</span> {drivingDistance===0
                         ?<button 

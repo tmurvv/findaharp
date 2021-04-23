@@ -21,7 +21,7 @@ const OnlineStore = (props) => {
     return (
         <>
             <div className='storeIndex'>
-                <PageTitle maintitle="Online Store" subtitle='Featuring products sold by our store partners' /> 
+                <PageTitle maintitle="Music, Strings and Things" subtitle='Featuring products sold by our store partners' /> 
                 <GlobalStoreSearch 
                     usedProducts={props.usedProducts}
                     filteredProducts={props.filteredProducts} 

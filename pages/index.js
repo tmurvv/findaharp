@@ -42,7 +42,7 @@ const Index = (props) => {
             <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', right: '15px', overflow: 'hidden'}}>
                     {/* <FastNEasyStringForm /> */}
             </div>
-            <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
+            <PageTitle maintitle='Find a Used Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
             <ProductSearch 
                 makesmodels={props.makesModels}
                 products={props.products}

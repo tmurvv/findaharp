@@ -23,7 +23,7 @@ export default function BuilderMakerMenu(props) {
                 id="maker-select"
                 onClose={handleClose}
                 name='Maker Menu'
-                className='plainTextSelectLine1'
+                className='builderplainTextSelectLine1 plainTextSelectLine1'
                 style={{zIndex: 6000}}
                 hidden={props.open}
             >

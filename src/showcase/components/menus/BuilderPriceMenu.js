@@ -30,35 +30,26 @@ export default function PriceMenu(props) {
                 }}
                 style={{color: '#000000'}}
             >
-                PRICE {user.currency.toUpperCase()==='USD'?'USD':'CAD'}
+                BASE PRICE {user.currency.toUpperCase()==='USD'?'USD':'CAD'}
             </button>               
             <ul
                 id="price-select"
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Price Menu'
-                className='plainTextSelectLine2'
+                className='builderplainTextSelectLine2 plainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='All Prices'
                 >All Prices</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()}
-                    name='$30,000 plus'
-                >$30,000 plus</li>      
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='$20,000-29,999'
-                >$20,000-29,999</li>
+                
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
                     name='$10,000-19,999'
-                >$10,000-19,999</li>
+                >$10,000 plus</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -81,7 +72,7 @@ export default function PriceMenu(props) {
                 >Prices in {user.currency.toUpperCase()==='USD'?'US Dollars':'Canadian Dollars'}</li>
                 <li 
                     onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
-                    style={{color: '#6A75AA', textDecoration: 'underline'}}
+                    style={{color: '#000', textDecoration: 'underline'}}
                     key={uuid()}
                     name='Preference'
             >Change Currency</li>        

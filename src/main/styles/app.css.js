@@ -95,6 +95,9 @@ function AppCss() {
                 transform: translateX(16.5%);
                 padding: 9px;
             }
+            .builderplainTextSelectLine1 {
+                background-color: #223156;
+            }
             @media only screen and (max-width: 550px) {
                 .plainTextSelectLine1 {
                     width: 190%;
@@ -104,7 +107,8 @@ function AppCss() {
                 margin-block-start: 0;
                 margin-block-end: 0;
             }
-            .plainTextSelectLine2 {
+            .plainTextSelectLine2,
+            .builderplainTextSelectLine2 {
                 margin-block-start: -.2em;
                 color: #333333;
                 font-size: 14px;
@@ -119,6 +123,9 @@ function AppCss() {
                 transform: translateX(16.5%);
                 text-align: center;
                 max-width: 200px;
+            }
+            .builderplainTextSelectLine2 {
+                background-color: #6d81bf;
             }
             .plainTextSelectLine2 p {
                 margin-block-start: 0;

@@ -13,11 +13,10 @@ function OverlayMenuCss() {
             .overlayBarOuter {
                 z-index: 9000;
                 position: absolute;
-                top: 160px;
+                top: 191px;
                 height: 5000px;
                 width: 100%;
                 padding-top: 70px;
-                // background-image: url('img/visa.png');
                 background-color: #fff;
                 background-image: url('img/OverlayMenu/landing_background_opacity.png');
             }
@@ -25,11 +24,21 @@ function OverlayMenuCss() {
                 margin: auto;
                 width: 580px;
             }
+            @media only screen and (max-width: 1155px) {
+                .overlayBarOuter {
+                    top: 162px;
+                } 
+            }
             @media only screen and (max-width: 550px) {
                 .overlayLinks {
                     margin: auto;
+                    width: 100%
+                } 
+                .overlayBarOuter {
+                    top: 223px;
                 } 
             } 
+             
             .item1,
             .item4 { 
                 width: 100%;
@@ -96,8 +105,12 @@ function OverlayMenuCss() {
                 .item4 { 
                     margin: -7.5px;
                 }
+                .item2 {
+                    background-color: #7682b9;
+                }
                 .item3 {
                     margin-top: -22.5px;
+                    background-color: #fdc93a;
                 }
             }
             @-webkit-keyframes myMove {

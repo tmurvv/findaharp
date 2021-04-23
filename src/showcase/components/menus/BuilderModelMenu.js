@@ -18,6 +18,7 @@ export default function BuilderModelMenu(props) {
     if (maker && maker.length > 0 && maker!=='All Makers') {
         models = [];
         BUILDER_HARP_LIST.map(harp => harp.sellerName===maker&&models.push(harp.productModel));
+        models = new Set(models);
     } 
     // else {
     //     models = Array.from(getModelList(props.makesmodels, props.productSize));
@@ -79,7 +80,7 @@ export default function BuilderModelMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Model Menu'
-                className='plainTextSelectLine1'
+                className='builderplainTextSelectLine1 plainTextSelectLine1'
                 style={{zIndex: 6000}}
             >
                 <li 
@@ -89,13 +90,13 @@ export default function BuilderModelMenu(props) {
                 >
                     {props&&props.productSize&&props.productSize.toUpperCase()!=='ALL SIZES'&&props.productSize.toUpperCase!=='HARP SIZE'?props.productSize:"All Models"}
                 </li>  
-                {Array.from(models).map(model => <li 
+                {Array.from(models).map(model => {if (model!=='') {return <li 
                         key={uuid()} 
                         name={model}
                         onClick={handleClose}                                   
                         >{model}
-                    </li>
-                )}
+                    </li>}
+                })}
             </ul>  
         </div>
     );

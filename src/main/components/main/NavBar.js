@@ -42,7 +42,10 @@ export default function NavBar(props) {
                         </div>:''
                     }
                     <Link href='/'>
-                        <a onClick={props.handleNavOpen}>Find a Harp</a>
+                        <a onClick={props.handleNavOpen}>Find a Used Harp</a>
+                    </Link>
+                    <Link href='/buildersshowcase'>
+                        <a onClick={props.handleNavOpen}>Harp Builder Showcase</a>
                     </Link>
                     {!Router.route.includes('builder')
                         ?<Link href='/storepartners' as='/storepartners'>
@@ -53,14 +56,14 @@ export default function NavBar(props) {
                         </Link>
                     }
                     <Link href='/onlinestore' as='/onlinestore'>
-                        <a onClick={(e)=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen(e);}}>Online Store</a>
+                        <a onClick={(e)=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen(e);}}>Music, Strings & Things</a>
                     </Link>        
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname!==undefined&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
+                    {/* <Link href={user&&user.firstname&&user.firstname!==undefined&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
                         <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
-                    </Link>
+                    </Link> */}
                     {/* {user.currentHarpname
                         ?<Link href='/userharpprofile' as='/userharpprofile'>
                             <a id='userName' onClick={props.handleNavOpen}>Harp Profile</a>
@@ -104,7 +107,10 @@ export default function NavBar(props) {
                         </div>:''
                     }
                     <Link href='/'>
-                        <a onClick={props.handleNavOpen}>Find a Harp</a>
+                        <a onClick={props.handleNavOpen}>Find a Used Harp</a>
+                    </Link>
+                    <Link href='/buildersshowcase'>
+                        <a onClick={props.handleNavOpen}>Harp Builder Showcase</a>
                     </Link>
                     {!Router.route.includes('builder')
                         ?<Link href='/storepartners' as='/storepartners'>
@@ -115,14 +121,14 @@ export default function NavBar(props) {
                         </Link>
                     }
                     <Link href='/onlinestore' as='/onlinestore'>
-                        <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Online Store</a>
+                        <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Music, Strings & Things</a>
                     </Link>        
                     <Link href='/contact' as='contact'>
                         <a onClick={props.handleNavOpen}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
+                    {/* <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
                         <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
-                    </Link>
+                    </Link> */}
                     <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>
                     </Link>

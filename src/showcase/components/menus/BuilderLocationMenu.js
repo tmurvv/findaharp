@@ -37,7 +37,7 @@ export default function LocationMenu(props) {
                 onClose={handleClose}
                 hidden={!props.open}
                 name='Location Menu'
-                className='plainTextSelectLine2'
+                className='builderplainTextSelectLine2 plainTextSelectLine2'
             >
                 <li 
                     onClick={handleClose} 
@@ -48,7 +48,7 @@ export default function LocationMenu(props) {
                     onClick={(e)=>locationEnabled(e)}
                     key={uuid()}
                     name='ltActivate'
-                    style={{color: '#6A75AA', textDecoration: 'underline'}}
+                    style={{color: '#000', textDecoration: 'underline'}}
                 >{activateDriving?'by Region':'by Driving Distance'}</li>            
                 <li 
                     onClick={handleClose}
@@ -71,7 +71,7 @@ export default function LocationMenu(props) {
                 <li 
                     onClick={()=>alert('Km/Miles preference is located in your profile. Please login or signup to change your distance unit preference.')}
                     hidden={!activateDriving}
-                    style={{color: '#6A75AA', textDecoration: 'underline'}}
+                    style={{color: '#000', textDecoration: 'underline'}}
                     key={uuid()}
                     name='Preference'
                 >Change to {distanceUnit==='miles'?'kms':'miles'}</li>
@@ -91,7 +91,7 @@ export default function LocationMenu(props) {
                     // onClick={handleClose}
                     hidden={activateDriving}
                     key={uuid()}
-                    style={{color: 'grey'}}
+                    style={{color: '#5b6a7b'}}
                     name='Mid-West'
                 >US-MidWest</li>
                 <li 
@@ -104,26 +104,26 @@ export default function LocationMenu(props) {
                     // onClick={handleClose}
                     hidden={activateDriving}
                     key={uuid()}
-                    style={{color: 'grey'}} 
+                    style={{color: '#5b6a7b'}} 
                     name='Pacific'
                 >US-Pacific</li>
                 <li 
                     // onClick={handleClose}  
                     hidden={activateDriving}
-                    style={{color: 'grey'}}
+                    style={{color: '#5b6a7b'}}
                     key={uuid()} 
                     name='Canada-East'
                 >Canada-East</li>              
                 <li 
                     // onClick={handleClose}
-                    style={{color: 'grey'}}
+                    style={{color: '#5b6a7b'}}
                     hidden={activateDriving}
                     key={uuid()} 
                     name='Canada-West'
                 >Canada-West</li>              
                 <li 
                     // onClick={handleClose}
-                    style={{color: 'grey'}}
+                    style={{color: '#5b6a7b'}}
                     hidden={activateDriving}
                     key={uuid()} 
                     name='Canada-Pacific'

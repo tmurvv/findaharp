@@ -30,7 +30,7 @@ function NavBarCss() {
                     padding: 10px;
                     border-radius: 3px;
                     background-image: linear-gradient(340deg, #f9bf1e 50%, #fffbb5 58%, #ffe58a 74%, #f9bf1e 87%);
-                    z-index: 6000;
+                    z-index: 9500;
                 }
                 .navLinks a {
                     font-size: 16px;

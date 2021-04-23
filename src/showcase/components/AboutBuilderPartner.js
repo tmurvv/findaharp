@@ -33,6 +33,7 @@ function AboutBuilderPartner(props) {
                     />
                 </LazyLoad>
             </div>
+            <button onClick={()=>alert('under construction')} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-20px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Harp Models</button>
             <div className='buyerDivider'>
                 <img src='./img/dkblue_tapered_line.png' alt="decorative divider"/>
             </div>

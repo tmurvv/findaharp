@@ -24,6 +24,7 @@ import {
     triggerLazy,
     shuffleStorePartners
 } from '../../main/utils/helpers';
+import { AllInclusiveTwoTone } from '@material-ui/icons';
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
@@ -482,12 +483,15 @@ function BuilderProductSearch(props) {
                     <p>Clear</p> 
                 </div>
             </div>
-            <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
+            {allState.maker&&allState.maker!=='All Makers'&&
+                <div style={{textAlign: 'center', width: '100%', marginTop: '-30px', marginBottom: '30px', fontSize: '14px'}}>
+                    Visit builder website: <a style={{fontStyle: 'italic', fontSize: '14px', color: '#6A75AA'}} href={`${allState.builderInfo&&allState.builderInfo.sellerWebsite&&allState.builderInfo.sellerWebsite}`}> {allState.builderInfo&&allState.builderInfo.sellerWebsiteText&&allState.builderInfo.sellerWebsiteText}</a>
+                </div>
+            }
+            <div style={{display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '30px'}}>
                 {allState.maker!=="All Makers"&&<><img style={{height: '150px', borderRadius: '3px'}} src={`${allState.builderInfo.productImageUrl}`} alt='harp maker logo' /></>}
             </div>
-            <p style={{textAlign: 'center', width: '100%', fontStyle: 'italic'}}>
-                Visit builder website: {allState.builderInfo&&allState.builderInfo.sellerWebsiteText&&allState.builderInfo.sellerWebsiteText}
-            </p>
+            
             <ProductContainer 
                 data-test="component-ProductContainer" 
                 filteredproductscontainer={filteredProducts} 

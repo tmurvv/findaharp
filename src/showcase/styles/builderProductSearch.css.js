@@ -38,7 +38,7 @@ function BuilderProductSearchCss() {
             }
             @media only screen and (max-width: 550px) {
                 .buildersearchLine1 {
-                    background-color: #000000;
+                    background-color: #223156;
                 }
             }
             .buildersearchLine1 img {
@@ -106,8 +106,8 @@ function BuilderProductSearchCss() {
             @media only screen and (max-width: 550px) {
                 .buildersearchLine2 {
                     height: 120px;
-                    border: 1px solid #FCD961;
-                    background-color: #FCD961;
+                    border: 1px solid #6d81bf;
+                    background-color: #6d81bf;
                 }
             }
             .buildersearchLine2 img {

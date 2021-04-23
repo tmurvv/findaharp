@@ -309,7 +309,7 @@ const StringForm = (props) => {
                             </li>
                         }
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
-                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
+                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use "Music, Strings & Things", Makes/Models menu.</li>
                         <li style={{display: 'flex', width: 'fit-content', paddingLeft: '0', textIndent: '0', overflow: 'hidden'}}>
                             <img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />
                             <div  className='shipsTo shipsToLeft' style={{whiteSpace: 'nowrap'}}>&nbsp;&nbsp;Ships from: USA</div>
