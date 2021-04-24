@@ -148,7 +148,7 @@ export function getModelListForMaker(productMakesModels, productMaker) {
     if (!productMaker) throw new Error("from getModelListForMaker: maker parameter empty");
 
     let modelList = [];
-    if (productMaker.toUpperCase() !== "ALL MAKERS"){
+    if (productMaker.toUpperCase() !== "ALL MAKERS" && productMaker.toUpperCase() !== "ALL BUILDERS"){
         productMakesModels.filter(product => product.productMaker === productMaker);
     } 
     productMakesModels.map(maker => {   
@@ -216,7 +216,7 @@ export function getFilteredProducts(allProducts, allState, user, rate) {
         filteredProducts = filteredProducts.filter(
             product => product.productModel&&product.productModel === allState.model
         );
-    if (allState.maker && allState.maker.toUpperCase() !== "ALL MAKERS") 
+    if (allState.maker && allState.maker.toUpperCase() !== "ALL MAKERS" && allState.maker.toUpperCase() !== "ALL BUILDERS") 
         filteredProducts = filteredProducts.filter(
             product => product.productMaker&&product.productMaker === allState.maker
         );
@@ -380,7 +380,7 @@ export const getSearchInfo = (allState) => {
     if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
     if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
     // prepare comparison array to eliminate not-selected filters
-    const initArr = ['All Sizes', 'All Makers', 'All Models', 'All Finishes', 'All Prices', 'All Locations']
+    const initArr = ['All Sizes', 'All Makers', 'All Builders', 'All Models', 'All Finishes', 'All Prices', 'All Locations']
     // prepare array of only filter selections from state
     const menuArr = [allState.size, allState.maker, allState.model, allState.finish, allState.price, allState.location];
     // append searchInfo string with only selected filter information

@@ -8,10 +8,10 @@ export default function MenuOverlay(props) {
     const { setMenuOverlay } = useContext(MenuOverlayContext);
     const [ screenWidth, setScreenWidth ] = useState();
     function clearOverlay() {
-        document.querySelector('.overlayLinks')?document.querySelector('.overlayLinks').style.animation = 'myMove .8s':'';
+        document.querySelector('.overlayLinks')?document.querySelector('.overlayLinks').style.animation = 'myMove 1s':'';
         setTimeout(()=> {
             setMenuOverlay(false);
-        }, 200);
+        }, 800);
     }
 
     useEffect(() => {

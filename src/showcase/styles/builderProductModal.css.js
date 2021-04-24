@@ -1,10 +1,10 @@
 function ProductModalCSS() {
     return (
         <style jsx="true">{`
-            .detailContainer {
+            .builderdetailContainer {
                 width: 80vw;
                 background-color: #ffffff;
-                border: 4px solid #f9bf1e;
+                border: 4px solid #6d81bf;
                 box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
                 border-radius: 3px;
                 position: fixed;
@@ -20,23 +20,24 @@ function ProductModalCSS() {
                 color: #000000
                 opacity: 1;
             }
-            .detailInfo {
+            .builderdetailInfo {
                 display: flex;
                 align-items: flex-start;
                 padding: 15px 20px 20px;
             }
             @media only screen and (max-width: 550px) {
-                .detailContainer {
+                .builderdetailContainer {
                     flex-direction: column;
                     padding: 15px 0;
                 }
-                .detailInfo {
+                .builderdetailInfo {
                     flex-direction: column
                 }
             }
-            .detailButton {
+            .builderdetailButton {
                 margin: 40px 0;
-                background-image: linear-gradient(340deg, #f9bf1e 50%, #ffe178 58%, #ffe58a 74%, #f9bf1e 87%);
+                // background-image: linear-gradient(340deg, #223156 50%, #6d81bf 58%, #6d81bf 74%, #223156 87%);
+                background-image: linear-gradient(340deg, #9cacdd 50%, #b9c3e4 58%, #e2e7f9 74%, #9cacdd 87%);
                 padding: 5px 10px;
                 font-size: 16px;
                 border-radius: 3px;
@@ -47,20 +48,20 @@ function ProductModalCSS() {
                 /*-webkit-box-shadow: 2px 2px 2px 0px #555555;
                 box-shadow: 2px 2px 2px 0px #555555;*/
             }
-            .detailButton:active {
+            .builderdetailButton:active {
                 box-shadow: none;
             }
-            .detailButton-cancel {
+            .builderdetailButton-cancel {
                 background-color: #333333;
                 margin-left: 30px;
                 color: white;
                 background-image: none;
             }
-            .detailImg {
+            .builderdetailImg {
                 flex: 4;
                 height: 100%;
             }
-            .detailImg img {
+            .builderdetailImg img {
                 height: 95%;
                 width: 95%;
                 max-width:100%;
@@ -68,21 +69,21 @@ function ProductModalCSS() {
                 object-fit: cover;
                 overflow: hidden;
             }
-            .detailText {
+            .builderdetailText {
                 flex: 6;
                 padding: 0 0 0 60px;
                 text-align: left;
             }
             @media only screen and (max-width: 550px) {
-                .detailText {
+                .builderdetailText {
                     padding: 25px 0;
                 }
             }         
-            .detailText span {
+            .builderdetailText span {
                 font-family: 'Metropolis Extra Bold';
                 font-weight: 800;
             }
-            .detailText p {
+            .builderdetailText p {
                 margin-block-start: 0;
                 margin-block-end: 0;
                 height: auto;
@@ -104,7 +105,7 @@ function ProductModalCSS() {
                 opacity: .4;
             }
             .moreButton {
-                color: #f9bf1e;
+                color: #6d81bf;
                 cursor: pointer;
                 outline: none;
                 font-size: 14px;
@@ -115,7 +116,7 @@ function ProductModalCSS() {
                 overflow-y: auto;
             }
             .longDesc a {
-                color:#6A75AA;
+                color:#6d81bf;
             }
             .blueFontButton {
                 background-color: 'white';

@@ -70,7 +70,7 @@ function AboutPartnerBuildersCSS() {
                 min-width: 360px;
                 max-width: 100%;
                 width: 19%;
-                border: 2px solid #223156;
+                border: 2px solid #6d81bf;
                 border-radius: 3px;
                 padding: 20px 20px 3px;
                 background-color: #ffffff;
@@ -163,8 +163,9 @@ function AboutPartnerBuildersCSS() {
                 padding: 20px;
                 margin: auto;
                 margin-bottom: 50px;
-                border: 4px solid #f9bf1e;
-                box-shadow: 0 1rem 1rem rgba(249,191,30, .05);
+                border: 4px solid #6d81bf;
+                // box-shadow: 0 1rem 1rem rgba(249,191,30, .05);
+                box-shadow: 0 2rem 4rem rgb(129 170 225 / 15%);
                 border-radius: 3px;
                 overflow-y: auto;
             }
@@ -180,7 +181,7 @@ function AboutPartnerBuildersCSS() {
             }
             .detailButton {
                 margin: 15px auto;
-                background-color: #f9bf1e;
+                background-color: #6d81bf;
                 padding: 5px 10px;
                 font-size: 20px;
                 border-radius: 3px;

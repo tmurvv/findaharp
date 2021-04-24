@@ -4,11 +4,11 @@ function OverlayMenuCss() {
     return (
         <style>{`
             #overlayBar {
-                -webkit-transition: all 200ms ease-in;
-                -moz-transition: all 200ms ease-in;
-                -ms-transition: all 200ms ease-in;
-                -o-transition: all 200ms ease-in;
-                transition: all 200ms ease-in;
+                -webkit-transition: all 1000ms ease-in;
+                -moz-transition: all 1000ms ease-in;
+                -ms-transition: all 1000ms ease-in;
+                -o-transition: all 1000ms ease-in;
+                transition: all 1000ms ease-in;
             }
             .overlayBarOuter {
                 z-index: 9000;
@@ -115,10 +115,10 @@ function OverlayMenuCss() {
             }
             @-webkit-keyframes myMove {
                 0% { -webkit-transform: translate(50%, -50%) scale(1);  } 
-                70% {-webkit-transform: translate(400px, -200px) scale(.1); }
-                100% { -webkit-transform: translate(400px, -200px) scale(.02); }
+                70% {-webkit-transform: translate(45vw, -150px) scale(.1); }
+                100% { -webkit-transform: translate(45vw, -150px) scale(.02); }
             }
-                
+              
       `}</style>
     )
 }

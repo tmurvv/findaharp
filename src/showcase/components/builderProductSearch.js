@@ -59,7 +59,7 @@ function BuilderProductSearch(props) {
     const [menus, setMenus] = useState(initialState);
     const [allState, setAllState] = useState({
         selectionType: '',
-        maker: 'All Makers',
+        maker: 'All Builders',
         model: 'All Models',
         size: 'All Sizes',
         finish: 'All Finishes',
@@ -257,13 +257,14 @@ function BuilderProductSearch(props) {
             price: 'All Prices',
             location: 'All Locations',
             size: "All Sizes",
-            maker: "All Makers",
+            maker: "All Builders",
             model: "All Models",
             searchInfo: 'All Harps'
         });
     }
     function clearOneFilter(e) {
         let menuClick = e.target.name;
+        menuClick==='maker'?menuClick="builder":'';
         const newState = {...allState, [e.target.name]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, searchInfo: newSearchInfo}
         const newSearchInfo = getSearchInfo(newState);
         if (menuClick==='finish') menuClick = 'finishe';
@@ -337,7 +338,7 @@ function BuilderProductSearch(props) {
                     onClick={()=>handleClick({target: {name: 'maker'}})}
                 >
                     {allState.maker}
-                    {allState.maker!=="All Makers"
+                    {allState.maker!=="All Builders"
                         ?<img 
                             name='maker'
                             onClick={
@@ -483,14 +484,8 @@ function BuilderProductSearch(props) {
                     <p>Clear</p> 
                 </div>
             </div>
-            {allState.maker&&allState.maker!=='All Makers'&&
-                <div style={{textAlign: 'center', width: '100%', marginTop: '-30px', marginBottom: '30px', fontSize: '14px'}}>
-                    Visit builder website: <a style={{fontStyle: 'italic', fontSize: '14px', color: '#6A75AA'}} href={`${allState.builderInfo&&allState.builderInfo.sellerWebsite&&allState.builderInfo.sellerWebsite}`}> {allState.builderInfo&&allState.builderInfo.sellerWebsiteText&&allState.builderInfo.sellerWebsiteText}</a>
-                </div>
-            }
-            <div style={{display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '30px'}}>
-                {allState.maker!=="All Makers"&&<><img style={{height: '150px', borderRadius: '3px'}} src={`${allState.builderInfo.productImageUrl}`} alt='harp maker logo' /></>}
-            </div>
+            
+            
             
             <ProductContainer 
                 data-test="component-ProductContainer" 

@@ -1,5 +1,5 @@
 // packages
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ import BuildersCss from '../src/showcase/styles/builders.css.js';
 import BuilderProductSearch from '../src/showcase/components/builderProductSearch';
 import PageTitle from '../src/main/components/main/PageTitle';
 import Spinner from '../src/main/components/main/Spinner';
+import { MenuOverlayContext } from '../src/main/contexts/MenuOverlayContext';
 import { BUILDER_HARP_LIST } from '../src/showcase/constants/builderHarpList';
 
 // // local test data
@@ -17,6 +18,7 @@ import { BUILDER_HARP_LIST } from '../src/showcase/constants/builderHarpList';
 const BuildersShowcase = (props) => {
     const [clientLat, setClientLat] = useState();
     const [clientLong, setClientLong] = useState();
+    const { menuOverlay, setMenuOverlay } = useContext(MenuOverlayContext);
 
     // get client lat/long
     useEffect(() => {

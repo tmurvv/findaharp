@@ -245,13 +245,13 @@ function CartCss() {
             margin-right: 15px;
         }
         #tiles {
-            height: 12px;
-            width: 20px;
+            height: 25px;
+            width: 25px;
             z-index: 6000;
         }
         @-webkit-keyframes myMoveBack {
             0% { -webkit-transform: scale(1) translate(0, 0); background: rgb(244,244,244,0); }
-            100% { -webkit-transform: scale(8) translate(-40px, 20px); background: rgb(244,244,244,.93);}
+            100% { -webkit-transform: scale(8) translate(-5vw, 20px); background: rgb(244,244,244,.93);}
         } 
         `}
         </style>

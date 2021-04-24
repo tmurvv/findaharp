@@ -8,14 +8,13 @@ import { BUILDER_HARP_LIST } from '../../constants/builderHarpList';
 
 export default function BuilderModelMenu(props) {
     let maker; 
-    if (props.productMaker !== "All Makers") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
+    if (props.productMaker !== "All Builders") maker = props.makesmodels.find(maker => maker.sellerName === props.productMaker);
     
     const currentModels = props.products.map(product => product.productModel).sort(); 
     let models = new Set(currentModels);
     
     if (props.productMaker) maker = props.productMaker;
-    console.log('maker', maker)
-    if (maker && maker.length > 0 && maker!=='All Makers') {
+    if (maker && maker.length > 0 && maker!=='All Builders') {
         models = [];
         BUILDER_HARP_LIST.map(harp => harp.sellerName===maker&&models.push(harp.productModel));
         models = new Set(models);

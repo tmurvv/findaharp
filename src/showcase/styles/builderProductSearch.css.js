@@ -201,6 +201,17 @@ function BuilderProductSearchCss() {
                 border: 1 solid grey;
                 z-index: 1000;
             }
+            @media only screen and (max-width: 640px) {
+                #font12 {
+                    font-size: 12px !important;
+                }
+            }
+            @media only screen and (max-width: 550px) {
+                #font12 {
+                    font-size: 14px !important;
+                }
+            }
+            
             .selected {
                 width: fit-content;
                 height: fit-content;

@@ -11,11 +11,13 @@ export const BUILDER_PARTNERS = [
         productPrice: "",
         productLongDesc: `<p><span>Vavra Harp</span> It Is Our Pleasure to engage in the construction of harps. We use the finest materials we can find, applying a lifetime of skills to produce heirloom quality instruments that sound and look beautiful.</p><p>We create custom harps, repair, rebuilder, or re-create harps, and we clean, regulate, and tune harps. Sorry, but we do not service pedal harps. Located in Upstate South Carolina, we can ship anywhere.</p><p>We have found that crafting a harp requires the precise melding of calculation, skill, and experience. The overall 'voice' of the instrument results from the consideration of wood, strings, finish, and decoration.  ​​​We can do whatever it takes to deliver what  you want. Please, browse our SHOP and peruse our GALLERY; you may see something that inspires!</p><p>In addition to our Stock Harps, Vavra Harp offers Custom Harps, Rental Harps, Used Harps, Trade-Ins, Harp Repair, Harp Restoration, and Harp Recreations (from pictures, sketches, etc.)</p>`,
         productMaker: "Vavra Harp",
-        productImageUrl: "img/builderPartners/vavra_logo_wide.png",
+        productImageUrl: "img/builderPartners/vavra_banner.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'http://vavraharp.com',
         sellerWebsiteText: 'vavraharp.com',
-        sellerEmail: 'vavra@vavraharp.com'
+        sellerEmail: 'vavra@vavraharp.com',
+        sellerBanner: 'img/builderPartners/vavra_banner.png',
+        bannerBackgroundColor: '#000'
     },
     {
         id: 'blevinsharps',
@@ -40,7 +42,9 @@ export const BUILDER_PARTNERS = [
         productImageBestColor: "#d6c3ab",
         sellerWebsite: 'https://blevinsharps.com',
         sellerWebsiteText: 'blevinsharps.com',
-        sellerEmail: 'blevinsharps@gmail.com'
+        sellerEmail: 'blevinsharps@gmail.com',
+        sellerBanner: 'img/builderPartners/blevins_banner.png',
+        bannerBackgroundColor: '#000'
     },
     {
         id: 'Fake Luthier, Inc.',
@@ -51,7 +55,7 @@ export const BUILDER_PARTNERS = [
         productPrice: "",
         productLongDesc: `
             <div>
-                <p>Welcome to <span>Fake Luthier, Inc.</span> where our mission is to give you the gift of music.</p>
+                <p>Welcome to <span>Fake Luthier, Inc.</span> where our goal is to give you the gift of music.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 <br />  
@@ -62,6 +66,8 @@ export const BUILDER_PARTNERS = [
         productImageBestColor: "#d6c3ab",
         sellerWebsite: '',
         sellerWebsiteText: 'FHLHarps.com',
-        sellerEmail: ''
+        sellerEmail: '',
+        sellerBanner: 'img/builderPartners/fakeluthier_banner.png',
+        bannerBackgroundColor: '#214f0b'
     }
 ];

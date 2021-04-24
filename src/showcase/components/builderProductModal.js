@@ -98,15 +98,15 @@ function ProductModal(props) {
     }, []);
     return (
         <>
-        <div className='detailContainer'>
+        <div className='builderdetailContainer'>
             <div onClick={(evt) => handleClick(evt, props.product, false)} className='clearModal'>
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div> 
             <h1>{productModel.indexOf(productMaker)>-1?'':productMaker} {productModel}</h1>
-            <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
-            <div className='detailInfo'>
-                <div className={`detailImg`}><img src= {productImageUrl} alt={productTitle} /></div>
-                <div className={`detailText`}>
+            <img className={`dividerBlue`} src="./img/tapered_line_blue.png" alt="fancy golden divider line" />
+            <div className='builderdetailInfo'>
+                <div className={`builderdetailImg`}><img src= {productImageUrl} alt={productTitle} /></div>
+                <div className={`builderdetailText`}>
                     <p><span>Maker</span> {productMaker}<br></br>
                     <span>Model</span> {productModel}<br></br>
                     <span>Size</span> {productSize?productSize:'?'} {`${isNaN(Number(productSize))?"":"Strings"}`}<br></br>
@@ -169,7 +169,7 @@ function ProductModal(props) {
                         :`Driving: ${drivingDistance==='NaN'?'Not Found ':drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance==="NaN"?'Not Found ':geoDistance}${miles?'Mi':'Kms'}`
                         }<br />
                     <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
-                    <button className='detailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
+                    <button className='builderdetailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
                 </div> 
             </div>
         </div>

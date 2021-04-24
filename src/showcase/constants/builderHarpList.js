@@ -74,7 +74,7 @@ export const BUILDER_HARP_LIST = [
         
             <p>Pricing:</p><br/>
         
-            <p>$3346  Full Truitt levers</p><br/>
+            <p>$3346 Full Truitt levers</p><br/>
         
             <p>Options not included in the above prices:</p><br/>
         

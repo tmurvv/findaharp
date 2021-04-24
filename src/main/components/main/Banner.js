@@ -4,10 +4,10 @@ import MenuOverlay from '../../components/main/MenuOverlay';
 import { MenuOverlayContext } from '../../../main/contexts/MenuOverlayContext';
  
 function Banner() {
-    const { menuOverlay } = useContext(MenuOverlayContext);
+    const { menuOverlay, setMenuOverlay } = useContext(MenuOverlayContext);
     return (
         <>
-            <div className="mainContainer">
+            <div className="mainContainer" onClick={()=>setMenuOverlay(true)}>
                 {menuOverlay&&<MenuOverlay />}
                 <img className="textLogo" src="./img/logo_findaharp.png" alt="Find a Harp text logo"/>
                 <img className="productGraphic" src="./img/golden_harp_cropped.png" alt="Find a Harp graphic logo"/>

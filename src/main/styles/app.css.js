@@ -126,6 +126,17 @@ function AppCss() {
             }
             .builderplainTextSelectLine2 {
                 background-color: #6d81bf;
+                right: 80px;
+            }
+            @media only screen and (max-width: 1300px) {
+                .builderplainTextSelectLine2 {
+                    right: 55px;
+                }
+            }
+            @media only screen and (max-width: 950px) {
+                .builderplainTextSelectLine2 {
+                    right: 40px;
+                }
             }
             .plainTextSelectLine2 p {
                 margin-block-start: 0;
@@ -201,13 +212,21 @@ function AppCss() {
                     position: absolute;
                 }
             }  
-            .divider {
-                width: 90%;
-                height: 7px;
+            .divider,
+            .dividerBlue {
                 margin: auto;
                 background-color: transparent;
             }
-            .divider img {
+            .divider {
+                width: 90%;
+                height: 7px;
+            }
+            .dividerBlue {
+                width: 100%;
+                height: 40px;
+            }
+            .divider img,
+            .dividerBlue img {
                 width: 100%;
             }
             .flex {

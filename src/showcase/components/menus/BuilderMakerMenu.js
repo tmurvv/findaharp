@@ -17,7 +17,7 @@ export default function BuilderMakerMenu(props) {
                 name='maker' 
                 onClick={(e)=>{props.handleclick(e);}}
             >
-                HARP MAKER
+                HARP BUILDER
             </button>               
             <ul
                 id="maker-select"
@@ -29,8 +29,8 @@ export default function BuilderMakerMenu(props) {
             >
                 <li onClick={handleClose}                   
                         onClick={handleClose}
-                        name="All Makers"
-                    >All Makers
+                        name="All Builders"
+                    >All Builders
                 </li>
                 {Array.from(makers).map(maker =>
                     <li 

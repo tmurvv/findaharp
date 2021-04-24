@@ -11,6 +11,7 @@ import ContactCSS from '../src/main/styles/Contact.css';
 function Contact() {
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
+        // setMenuOverlay(false);
     },[]);
     return (
         <>

@@ -33,9 +33,9 @@ function AboutBuilderPartner(props) {
                     />
                 </LazyLoad>
             </div>
-            <button onClick={()=>alert('under construction')} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-20px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Harp Models</button>
+            <button onClick={()=>alert('under construction')} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-20px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Models</button>
             <div className='buyerDivider'>
-                <img src='./img/dkblue_tapered_line.png' alt="decorative divider"/>
+                <img src='./img/tapered_line_blue.png' alt="decorative divider"/>
             </div>
             <div className='longDesc builderproductSmallDisplay-LongDesc' dangerouslySetInnerHTML={{__html: partnerBuilder.productLongDesc}} />
             <div className={`grid-item builderproductSmallDisplay-text`}>

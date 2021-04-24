@@ -1,5 +1,5 @@
 // import App from 'next/app'
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import Router from 'next/router';
 import Head from 'next/head';
@@ -157,8 +157,14 @@ function MyApp(props) {
         }   
     }, []);
 
-    function handleNavOpen() {
+    function handleNavOpen(e) {
+        console.log('newroute', e.target.getAttribute('href'), Router.route)
+        if (e.target.getAttribute('href') === Router.route) return setMenuOverlay(false);
         setNavOpen(!navOpen);
+        if (e.target.getAttribute('href') !== '/') document.querySelector('#spinner')?document.querySelector('#spinner').style.display='block':"";  
+        setTimeout(()=>{
+            setMenuOverlay(false);
+        }, 600)
     }
     useEffect(()=>{
         // if (props.router&&props.router.query&&props.router.query.upload&&props.router.query.upload==='yes') Router.push('/uploadstoreitem');

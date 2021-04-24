@@ -107,27 +107,29 @@ export default function NavBar(props) {
                         </div>:''
                     }
                     <Link href='/'>
-                        <a onClick={props.handleNavOpen}>Find a Used Harp</a>
+                        <a onClick={(e)=>{props.handleNavOpen(e);}}>Find a Used Harp</a>
                     </Link>
                     <Link href='/buildersshowcase'>
-                        <a onClick={props.handleNavOpen}>Harp Builder Showcase</a>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Harp Builder Showcase</a>
+                        {/* <a onClick={props.handleNavOpen}>Harp Builder Showcase</a> */}
                     </Link>
                     {!Router.route.includes('builder')
                         ?<Link href='/storepartners' as='/storepartners'>
-                            <a onClick={props.handleNavOpen}>Our Store Partners</a>
+                            <a onClick={(e)=>props.handleNavOpen(e)}>Our Store Partners</a>
                         </Link>
                         :<Link href='/builderpartners'>
-                            <a onClick={props.handleNavOpen}>Our Builder Partners</a>
+                            <a onClick={(e)=>props.handleNavOpen(e)}>Our Builder Partners</a>
                         </Link>
                     }
                     <Link href='/onlinestore' as='/onlinestore'>
-                        <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Music, Strings & Things</a>
+                        {/* <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Music, Strings & Things</a> */}
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Music, Strings & Things</a>
                     </Link>        
                     <Link href='/contact' as='contact'>
-                        <a onClick={props.handleNavOpen}>Contact/About</a>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Contact/About</a>
                     </Link>
                     {/* <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
-                        <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
+                        <a id='userName' onClick={(e)=>props.handleNavOpen(e)}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
                     </Link> */}
                     <Link href='/ActivateEmail' as='/activateemail'>
                         <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>

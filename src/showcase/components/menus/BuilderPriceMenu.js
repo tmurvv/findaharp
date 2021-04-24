@@ -22,6 +22,7 @@ export default function PriceMenu(props) {
     return (
         <div className='relative'>
             <button 
+                id='font12'
                 className="menuButton" 
                 name='price' 
                 onClick={(e)=>{
