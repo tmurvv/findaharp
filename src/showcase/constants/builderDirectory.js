@@ -43,7 +43,7 @@ export const BUILDER_PARTNERS = [
         sellerWebsite: 'https://blevinsharps.com',
         sellerWebsiteText: 'blevinsharps.com',
         sellerEmail: 'blevinsharps@gmail.com',
-        sellerBanner: 'img/builderPartners/blevins_banner.png',
+        sellerBanner: 'img/builderPartners/blevins_harps_banner_tm.png',
         bannerBackgroundColor: '#000'
     },
     {
@@ -62,12 +62,36 @@ export const BUILDER_PARTNERS = [
             </div>
         `,
         productMaker: "Fake Luthier, Inc.",
-        productImageUrl: "img/builderPartners/fakeHarpLuthierLogo2.png",
+        productImageUrl: "img/builderPartners/fakeluthier_banner.png",
         productImageBestColor: "#d6c3ab",
         sellerWebsite: '',
         sellerWebsiteText: 'FHLHarps.com',
         sellerEmail: '',
         sellerBanner: 'img/builderPartners/fakeluthier_banner.png',
         bannerBackgroundColor: '#214f0b'
+    },
+    {
+        id: "Harps R Us",
+        sellerCountry: "Bend, OR",
+        currency: "usd",
+        sellerRegion: "pacific",
+        productTitle: "Harps R Us",
+        productPrice: "",
+        productLongDesc: `
+            <div>
+                <p>At <span>Harps R Us</span> we make your dreams a reality. We are also just a fake company to show the new builder showcase area on findaharp.com.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <br />  
+            </div>
+        `,
+        productMaker: "Harps R Us",
+        productImageUrl: "img/harpsrus_banner.jpg",
+        productImageBestColor: "#d6c3ab",
+        sellerWebsite: '',
+        sellerWebsiteText: 'HarpsRUs.nada',
+        sellerEmail: '',
+        sellerBanner: 'img/harpsrus_banner.jpg',
+        bannerBackgroundColor: '#fc6197'
     }
 ];

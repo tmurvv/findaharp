@@ -129,16 +129,30 @@ function BuilderProductSearch(props) {
         setMenus(initialState);
     }
     function handleFinishSelection(finish) {
+        //comment out when menu implemented
+        alert("Finish menu for builders under construction.");
         const newState = {...allState, 
-            finish: finish==='All Finishes'?'All Finishes':finish,
-            productType: 'all',
+            finish: 'All Finishes',
+            productType: 'all'
         }
         setAllState({...allState, 
-            finish: finish==='All Finishes'?'All Finishes':finish,
+            finish: 'All Finishes',
             productType: 'all',
             searchInfo: getSearchInfo(newState)
         });
         setMenus(initialState);
+        
+        // // Orig harp finish code from used harps
+        // const newState = {...allState, 
+        //     finish: finish==='All Finishes'?'All Finishes':finish,
+        //     productType: 'all',
+        // }
+        // setAllState({...allState, 
+        //     finish: finish==='All Finishes'?'All Finishes':finish,
+        //     productType: 'all',
+        //     searchInfo: getSearchInfo(newState)
+        // });
+        // setMenus(initialState);
     }
     function handlePriceSelection(price) {
         const newState = {...allState, 

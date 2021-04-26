@@ -101,10 +101,10 @@ export default function LocationMenu(props) {
                     name='West'
                 >US-West</li>
                 <li 
-                    // onClick={handleClose}
+                    onClick={handleClose}
                     hidden={activateDriving}
                     key={uuid()}
-                    style={{color: '#5b6a7b'}} 
+                    // style={{color: '#5b6a7b'}} 
                     name='Pacific'
                 >US-Pacific</li>
                 <li 

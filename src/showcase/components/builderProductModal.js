@@ -111,8 +111,8 @@ function ProductModal(props) {
                     <span>Model</span> {productModel}<br></br>
                     <span>Size</span> {productSize?productSize:'?'} {`${isNaN(Number(productSize))?"":"Strings"}`}<br></br>
                     {/* <span>Price</span> {productPrice
-                        ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
-                        :'contact seller'} <button
+                        ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact builder'?'contact builder':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
+                        :'contact builder'} <button
                         onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
                         style={{
                             color: '#6A75AA', 
@@ -127,8 +127,8 @@ function ProductModal(props) {
                         name='Preference'
                     >Change Currency</button>        <br /> */}
                     <span>Base Price</span> {productPrice&&productPrice.toUpperCase().indexOf('CONTACT')<0
-                        ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact seller'?'contact seller':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
-                        :'contact seller'} <button
+                        ?`${convertPrice(productPrice.substring(0, checkprice(productPrice)))} ${productPrice.substring(0, checkprice(productPrice)).indexOf('usd')>-1||productPrice==='contact builder'?'contact builder':user.currency.toUpperCase()==="USD"?"US dollars":"Canadian Dollars"}`
+                        :'contact builder'} <button
                         onClick={()=>alert('Currency preference is located in your profile. Please login or signup to change your currency preference.')}
                         style={{
                             color: '#6A75AA', 
@@ -168,8 +168,8 @@ function ProductModal(props) {
                         </button>
                         :`Driving: ${drivingDistance==='NaN'?'Not Found ':drivingDistance}${miles?'Mi':'Kms'} / Straight Line: ${geoDistance==="NaN"?'Not Found ':geoDistance}${miles?'Mi':'Kms'}`
                         }<br />
-                    <span>Seller</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
-                    <button className='builderdetailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Seller</button>        
+                    <span>Builder</span> {sellerName?removeDashOE(sellerName):'unavailable'}<br></br></p>
+                    <button className='builderdetailButton' onClick={(evt) => handleClick(evt, props.product, true)}>Contact Builder</button>        
                 </div> 
             </div>
         </div>

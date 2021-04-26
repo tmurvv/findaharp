@@ -37,8 +37,8 @@ const BuildersShowcase = (props) => {
     return (
         <>
         <Head>
-            <title>Find a Harp Pre-owned, Used</title>
-            <meta name="Description" content="Pre-owned or used Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
+            <title>Find a Harp Builder Showcase</title>
+            <meta name="Description" content="New Harps of all types -- Lever Harps, Pedal Harps, Wire Harps, Celtic Harps, Irish Harps, Folk Harps -- great search capabilities from harp stores around the US and Canada" key="title" />
         </Head>
         
         <div className="builders">
@@ -46,7 +46,7 @@ const BuildersShowcase = (props) => {
             <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
                     {/* <FastNEasyStringForm /> */}
             </div>
-            <PageTitle maintitle="Builder's Showcase" subtitle='Showcasing harp luthiers from all across North America' />
+            <PageTitle maintitle="Builder Showcase" subtitle='Showcasing harp luthiers from all across North America' />
             <BuilderProductSearch 
                 makesmodels={props.makesModels}
                 products={props.products}

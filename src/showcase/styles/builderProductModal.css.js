@@ -5,7 +5,7 @@ function ProductModalCSS() {
                 width: 80vw;
                 background-color: #ffffff;
                 border: 4px solid #6d81bf;
-                box-shadow: 0 2rem 4rem rgba(249,191,30, .15);
+                box-shadow: 0 2rem 4rem rgba(64,81,160, .15);
                 border-radius: 3px;
                 position: fixed;
                 top: 50vh;

@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 import ProductContainerCss from '../styles/builderProductContainer.css';
 // internal  
 import ProductModal from './builderProductModal';
-import ContactSellerForm from '../../main/components/main/ContactSellerForm';
+import ContactBuilderForm from './ContactBuilder';
 import Product from './builderProduct';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../main/utils/helpers';
 import { productsReducer } from '../../main/reducers/reducers';
@@ -75,7 +75,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
                         // setOpenDetail={setOpenDetail}
                 />}
                 {state.openContact
-                    &&<ContactSellerForm 
+                    &&<ContactBuilderForm 
                         product={state.productSelect}
                         handleCloseContact={handleCloseContact}     
                 />}

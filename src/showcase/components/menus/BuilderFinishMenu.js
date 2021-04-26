@@ -2,10 +2,8 @@ import React from 'react';
 
 export default function FinishMenu(props) {
     const handleClose = (evt) => {
-        alert('Finish Menu for builders under construction.');
         if (evt.target.value === 'All Finishes') return;
-        // Commented out until menu implemented
-        // props.handleFinishChange(evt.target.getAttribute('name')); 
+        props.handleFinishChange(evt.target.getAttribute('name')); 
     };
 
     return (

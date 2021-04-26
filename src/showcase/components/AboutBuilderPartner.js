@@ -33,7 +33,7 @@ function AboutBuilderPartner(props) {
                     />
                 </LazyLoad>
             </div>
-            <button onClick={()=>alert('under construction')} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-20px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Models</button>
+            <button onClick={()=>alert('under construction')} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-15px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Models</button>
             <div className='buyerDivider'>
                 <img src='./img/tapered_line_blue.png' alt="decorative divider"/>
             </div>
