@@ -290,10 +290,9 @@ function BuilderProductSearch(props) {
     }
     useEffect(() => {
         triggerLazy();
-        if (Router?.query) {
-            handleMakerSelection(Router.query.builder)
-            setMenuOverlay(false)
-        }
+        if (Router?.query?.builder) {
+            handleMakerSelection(Router.query.builder);
+        }   
     },[]);
     const filteredProducts = getFilteredProducts(shuffledProducts, allState, user, currencyMultiplier);
     const showing = allState.location!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";

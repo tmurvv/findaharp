@@ -44,10 +44,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
         return(  
             <div data-test='component-ProductContainer' className='productContainer'>
                 {allstate&&allstate.maker&&allstate.maker!=='All Builders'&&
-                    // <div style={{backgroundColor: 'tomato', textAlign: 'center', width: '100%', marginTop: '-30px', marginBottom: '30px', fontSize: '14px'}}>
-                    //     Visit builder website: <a style={{fontStyle: 'italic', fontSize: '14px', color: '#6A75AA'}} href={`${allstate.builderInfo&&allstate.builderInfo.sellerWebsite&&allstate.builderInfo.sellerWebsite}`}> {allState.builderInfo&&allState.builderInfo.sellerWebsiteText&&allState.builderInfo.sellerWebsiteText}</a>
-                    // </div>
-                    <div style={{backgroundColor: `${allstate.builderInfo.bannerBackgroundColor}`, display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '30px'}}>
+                    <div style={{backgroundColor: `${allstate.builderInfo.bannerBackgroundColor}`, display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '30px', borderRadius: '3px'}}>
                         {allstate.maker!=="All Builders"&&<><img style={{height: '150px', borderRadius: '3px'}} src={`${allstate.builderInfo.sellerBanner&&allstate.builderInfo.sellerBanner}`} alt='harp maker logo' /></>}
                     </div>
                 }
