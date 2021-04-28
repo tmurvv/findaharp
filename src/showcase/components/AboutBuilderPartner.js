@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import React, { useEffect } from 'react';
 import LazyLoad from 'react-lazyload';
 import AboutPartnerBuildersCSS from '../styles/AboutPartnerBuilders.css';
@@ -33,7 +34,7 @@ function AboutBuilderPartner(props) {
                     />
                 </LazyLoad>
             </div>
-            <button onClick={()=>alert('under construction')} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-15px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Models</button>
+            <button onClick={()=>Router.push(`/buildersshowcase?builder=${partnerBuilder.productTitle}`)} style={{cursor: 'pointer', fontSize: '14px', marginTop: '-15px', marginBottom: '20px', color: 'rgb(106, 117, 170)', outline: 'none', backgroundColor: 'transparent', border: 'none', textDecoration: 'none'}}>View Models</button>
             <div className='buyerDivider'>
                 <img src='./img/tapered_line_blue.png' alt="decorative divider"/>
             </div>

@@ -4,6 +4,7 @@ import React, {
     useContext, 
     useEffect, 
     useRef } from 'react';
+import Router from 'next/router';
 import axios from 'axios';
 
 // internal
@@ -17,14 +18,15 @@ import PriceMenu from './menus/BuilderPriceMenu';
 import LocationMenu from './menus/BuilderLocationMenu';
 import { UserContext } from '../../main/contexts/UserContext';
 import { CurrencyContext } from '../../main/contexts/CurrencyContext';
+import { MenuOverlayContext } from '../../main/contexts/MenuOverlayContext';
 import { BUILDER_PARTNERS } from '../constants/builderDirectory';
 import {
     getFilteredProducts,
     getSearchInfo,
     triggerLazy,
-    shuffleStorePartners
+    shuffleStorePartners,
+    setOpacity
 } from '../../main/utils/helpers';
-import { AllInclusiveTwoTone } from '@material-ui/icons';
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
@@ -45,6 +47,8 @@ const initialState = {
 function BuilderProductSearch(props) {
     const { user } = useContext(UserContext);
     const { currencyMultiplier } = useContext(CurrencyContext);
+    const { menuOverlay, setMenuOverlay } = useContext(MenuOverlayContext);
+
     const ref = useRef();
     // randomize products
     let shuffledProducts=[...props.products];
@@ -286,7 +290,10 @@ function BuilderProductSearch(props) {
     }
     useEffect(() => {
         triggerLazy();
-        
+        if (Router?.query) {
+            handleMakerSelection(Router.query.builder)
+            setMenuOverlay(false)
+        }
     },[]);
     const filteredProducts = getFilteredProducts(shuffledProducts, allState, user, currencyMultiplier);
     const showing = allState.location!=='ltActivate'?`SHOWING  ${allState.searchInfo.trim().substr(allState.searchInfo.trim().length-1)==='|'?`${allState.searchInfo.trim().substr(0,allState.searchInfo.trim().length-1)}`:`${allState.searchInfo}`}`:"";

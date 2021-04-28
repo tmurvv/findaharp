@@ -1,5 +1,5 @@
 // packages
-import React, {useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import LazyLoad from 'react-lazyload'; 
 // styles
 import ProductCss from '../styles/builderProduct.css';
