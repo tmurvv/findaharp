@@ -24,7 +24,7 @@ export default function BuilderPartners() {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
-        // setMenuOverlay(false);
+        document.querySelector('#partnerSubMenu')?document.querySelector('#partnerSubMenu').style.display='none':'';
     },[]);
     return (
         <>

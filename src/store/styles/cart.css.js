@@ -242,11 +242,12 @@ function CartCss() {
         .tileContainer {
             display: flex;
             justify-content: flex-end;
-            margin-right: 15px;
+            margin-right: 10px;
+            margin-top: 10px;
         }
         #tiles {
-            height: 25px;
-            width: 25px;
+            height: 20px;
+            width: 20px;
             z-index: 6000;
         }
         @-webkit-keyframes myMoveBack {

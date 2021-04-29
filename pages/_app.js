@@ -158,10 +158,10 @@ function MyApp(props) {
     }, []);
 
     function handleNavOpen(e) {
-        console.log('newroute', e.target.getAttribute('href'), Router.route)
+        console.log('here', e.target)
         if (e.target.getAttribute('href') === Router.route) return setMenuOverlay(false);
         setNavOpen(!navOpen);
-        if (e.target.getAttribute('href') !== '/') document.querySelector('#spinner')?document.querySelector('#spinner').style.display='block':"";  
+        if (e.target.getAttribute('href') !== '/' && e.target.getAttribute('id') !== 'hamburger') document.querySelector('#spinner')?document.querySelector('#spinner').style.display='block':"";  
         setTimeout(()=>{
             setMenuOverlay(false);
         }, 600)
