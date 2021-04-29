@@ -24,9 +24,15 @@ function OverlayMenuCss() {
                 margin: auto;
                 width: 580px;
             }
-            @media only screen and (max-width: 1155px) {
+            @media only screen and (max-width: 1050px) {
                 .overlayBarOuter {
                     top: 162px;
+                } 
+            }
+            @media only screen and (max-width: 850px) {
+                .overlayBarOuter {
+                    top: 120px;
+                    right: 0;
                 } 
             }
             @media only screen and (max-width: 550px) {
@@ -37,8 +43,7 @@ function OverlayMenuCss() {
                 .overlayBarOuter {
                     top: 223px;
                 } 
-            } 
-             
+            }     
             .item1,
             .item4 { 
                 width: 100%;

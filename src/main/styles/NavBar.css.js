@@ -16,6 +16,46 @@ function NavBarCss() {
                     justify-content: flex-end;
                 }
             }
+            #partnerSubMenu {
+                transform: translateX(25%);
+                display: none;
+                width: fit-content;
+                position: absolute;
+                top: 20px;
+                z-index: 9001;
+                padding: 10px;
+                background-color: #f9bf1e;
+                box-shadow: 3px 3px 13px #f7dd93;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+            #partnerSubMenu a {
+                white-space: nowrap;
+                text-align: left;
+            }
+            @media only screen and (max-width: 550px) {
+                #partnerSubMenu {
+                    transform: translateX(-75%);
+                    justify-content: flex-end;
+                }
+                #partnerSubMenu a {
+                    text-align: right;
+                }
+            }
+            .mirrorATagFont {
+                color: #000;
+                font-size: 16px;
+            }
+            @media only screen and (max-width: 950px) {
+                a {
+                    font-size: 14px;
+                }
+            }
+            @media only screen and (max-width: 700px) {
+                a {
+                    font-size: 12px;
+                }
+            }
             .navLinks {
                 height: 100%;
                 display: flex;
@@ -52,9 +92,15 @@ function NavBarCss() {
                 a {
                     font-size: 14px;
                 }
+                .mirrorATagFont {
+                    font-size: 14px;
+                }
             }
             @media only screen and (max-width: 700px) {
                 a {
+                    font-size: 12px;
+                }
+                .mirrorATagFont {
                     font-size: 12px;
                 }
             }
