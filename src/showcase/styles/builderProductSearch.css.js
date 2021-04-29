@@ -44,7 +44,7 @@ function BuilderProductSearchCss() {
             .buildersearchLine1 img {
                 width: 70%;
                 position: absolute;
-                height: 150px;
+                height: 170px;
                 max-width: 1010px;
             }
             @media only screen and (max-width: 550px) {

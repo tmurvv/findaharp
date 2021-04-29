@@ -1,350 +1,350 @@
 export const BUILDER_HARP_LIST = [
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Eden 26",
-         "productPrice": "$2446",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>pictured, "Spalted Buckeye"</p><br/>
-             <p>The amazing sound of the rounded bout and the almost lute-shaped sound box of the Eden 26 have made it one of our most sought-after lap harps. Many are used in harp therapy programs.</p><br/>
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Eden 26",
+    //      "productPrice": "$2446",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>pictured, "Spalted Buckeye"</p><br/>
+    //          <p>The amazing sound of the rounded bout and the almost lute-shaped sound box of the Eden 26 have made it one of our most sought-after lap harps. Many are used in harp therapy programs.</p><br/>
 
-             <p>The decorative rosettes are included in the price. They are carved wood rosettes set into the soundboard.</p><br/>
+    //          <p>The decorative rosettes are included in the price. They are carved wood rosettes set into the soundboard.</p><br/>
 
-             <p>Dimensions: 34.5" x 22" x 12." The length of the sound board is 27.5".</p><br/>
+    //          <p>Dimensions: 34.5" x 22" x 12." The length of the sound board is 27.5".</p><br/>
 
-             <p>Approximate weight: 10.75 lb. depending on wood type. </p><br/>
+    //          <p>Approximate weight: 10.75 lb. depending on wood type. </p><br/>
 
-             <p>String range: C5 to G1</p><br/>
+    //          <p>String range: C5 to G1</p><br/>
 
-             <p>String spacing at middle C: 14.5 mm</p><br/>
+    //          <p>String spacing at middle C: 14.5 mm</p><br/>
 
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
 
-             <p>$2446  Full Truitt levers</p><br/>
+    //          <p>$2446  Full Truitt levers</p><br/>
 
-             <p>$2022  CFB Truitt levers</p><br/>
+    //          <p>$2022  CFB Truitt levers</p><br/>
 
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
 
-             <p>Strap and Buttons $119</p><br/>
+    //          <p>Strap and Buttons $119</p><br/>
 
-             <p>Soft transport case: $250</p><br/>
+    //          <p>Soft transport case: $250</p><br/>
 
-             <p>String set: $105</p><br/>
+    //          <p>String set: $105</p><br/>
 
-             <p>Display stand: $140</p><br/>
+    //          <p>Display stand: $140</p><br/>
 
-             <p>Le Stand: $230 (Walnut $250)</p><br/>
+    //          <p>Le Stand: $230 (Walnut $250)</p><br/>
 
-             <p>Shipping: Inquire for charges</p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
 
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Eden 26",
-         "productType": "lever",
-         "productSize": "26",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Consort 36",
-         "productPrice": "$3615",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>Dimensions: 52.5" at the tallest point of the pillar, and 53.5" from the floor to the top of the "playing side." From the floor to the top of the sound box is 50." 12" at width of base.</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Eden 26",
+    //      "productType": "lever",
+    //      "productSize": "26",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Consort 36",
+    //      "productPrice": "$3615",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>Dimensions: 52.5" at the tallest point of the pillar, and 53.5" from the floor to the top of the "playing side." From the floor to the top of the sound box is 50." 12" at width of base.</p><br/>
 
-             <p>Approximate weight: 20 lbs. depending upon wood type (24 lbs - Walnut)</p><br/>
+    //          <p>Approximate weight: 20 lbs. depending upon wood type (24 lbs - Walnut)</p><br/>
         
-             <p>String range: C6 to C1</p><br/>
+    //          <p>String range: C6 to C1</p><br/>
         
-             <p>String spacing at middle C: 15 mm</p><br/>
+    //          <p>String spacing at middle C: 15 mm</p><br/>
         
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
         
-             <p>$3346 Full Truitt levers</p><br/>
+    //          <p>$3346 Full Truitt levers</p><br/>
         
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
         
-             <p>Soft transport case: $280 (Larger case needed with feet package: $295.00)</p><br/>
+    //          <p>Soft transport case: $280 (Larger case needed with feet package: $295.00)</p><br/>
         
-             <p>String set: $205</p><br/>
+    //          <p>String set: $205</p><br/>
         
-             <p>Optional feet package: $225 (requires larger case)</p><br/>
+    //          <p>Optional feet package: $225 (requires larger case)</p><br/>
         
-             <p>Shipping: Inquire for charges</p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
         
         
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Consort 36",
-         "productType": "lever",
-         "productSize": "36",
-         "productFinish": ["walnut"],
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Consort36.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Feather Light 26",
-         "productPrice": "$2186",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>The Featherlight 26 is made from Sassafras, which makes this harp light weight while creating a warm sound.  The upgrade to Aluminum tuning pins also helps to make this harp as light as a feather.  </p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Consort 36",
+    //      "productType": "lever",
+    //      "productSize": "36",
+    //      "productFinish": ["walnut"],
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Consort36.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Feather Light 26",
+    //      "productPrice": "$2186",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>The Featherlight 26 is made from Sassafras, which makes this harp light weight while creating a warm sound.  The upgrade to Aluminum tuning pins also helps to make this harp as light as a feather.  </p><br/>
 
-             <p>String range: C5 to G1</p><br/>
+    //          <p>String range: C5 to G1</p><br/>
         
-             <p>Dimensions: 34" h x 8.5" w x 22"</p><br/>
+    //          <p>Dimensions: 34" h x 8.5" w x 22"</p><br/>
         
-             <p>String spacing at Middle C: 14 mm</p><br/>
+    //          <p>String spacing at Middle C: 14 mm</p><br/>
         
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
         
-             <p>$2186  Full Truitt levers</p><br/>
+    //          <p>$2186  Full Truitt levers</p><br/>
         
-             <p>$1966  CFB Truitt  levers  </p><br/>
+    //          <p>$1966  CFB Truitt  levers  </p><br/>
         
-             <p>Options not included in the above price:</p><br/>
+    //          <p>Options not included in the above price:</p><br/>
         
-             <p>Strap and Buttons $119</p><br/>
+    //          <p>Strap and Buttons $119</p><br/>
         
-             <p>Soft transport case: $250</p><br/>
+    //          <p>Soft transport case: $250</p><br/>
         
-             <p>String set: $95</p><br/>
+    //          <p>String set: $95</p><br/>
         
-             <p>Le Stand: $230 as seen in photo above. </p><br/>
+    //          <p>Le Stand: $230 as seen in photo above. </p><br/>
         
-             <p>Shipping: Inquire for charges</p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Feather Light 26",
-         "productType": "lever",
-         "productSize": "",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/FeatherLight26Bright.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Xythara Cross",
-         "productPrice": "$2265",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <div class="sqs-block-content">
-                 <p class="" style="white-space:pre-wrap;">&nbsp;Pictured in walnut. 41 strings. Also available in 6/6 pattern with 44 strings.</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Dimensions: 34.5" x 11"</p><br/><p class="" style="white-space:pre-wrap;">Approximate weight: 10.5 lb. depending on wood type</p><br/>
-                 <p class="" style="white-space:pre-wrap;">String range: C5 up to E</p><br/><p class="" style="white-space:pre-wrap;">Price:</p><br/><p class="" style="white-space:pre-wrap;">$2265</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Options not included in the above price:</p><br/><p class="" style="white-space:pre-wrap;">Soft transport case: $250</p><br/>
-                 <p class="" style="white-space:pre-wrap;">String set: $225</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Display stand: $150</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Shipping: Inquire for charges</p><br/>
-             </div>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Xythara Cross",
-         "productType": "cross",
-         "productSize": "Cross",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/xytharaCross.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Eden 26",
-         "productPrice": "$1615",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>This Blevinsong 20 is a great little harp, with a  clear, beautiful singing tone.  It is ideal for travel, therapy, or just for sitting on the couch and enjoying your favorite songs.  Built from Butternut with aluminum tuning pins to keep the weight down.  </p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Feather Light 26",
+    //      "productType": "lever",
+    //      "productSize": "",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/FeatherLight26Bright.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Xythara Cross",
+    //      "productPrice": "$2265",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <div class="sqs-block-content">
+    //              <p class="" style="white-space:pre-wrap;">&nbsp;Pictured in walnut. 41 strings. Also available in 6/6 pattern with 44 strings.</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Dimensions: 34.5" x 11"</p><br/><p class="" style="white-space:pre-wrap;">Approximate weight: 10.5 lb. depending on wood type</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">String range: C5 up to E</p><br/><p class="" style="white-space:pre-wrap;">Price:</p><br/><p class="" style="white-space:pre-wrap;">$2265</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Options not included in the above price:</p><br/><p class="" style="white-space:pre-wrap;">Soft transport case: $250</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">String set: $225</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Display stand: $150</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Shipping: Inquire for charges</p><br/>
+    //          </div>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Xythara Cross",
+    //      "productType": "cross",
+    //      "productSize": "Cross",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/xytharaCross.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Eden 26",
+    //      "productPrice": "$1615",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>This Blevinsong 20 is a great little harp, with a  clear, beautiful singing tone.  It is ideal for travel, therapy, or just for sitting on the couch and enjoying your favorite songs.  Built from Butternut with aluminum tuning pins to keep the weight down.  </p><br/>
 
-             <p>Dimensions:  29” x 18“ x 7 3/4“</p><br/>
+    //          <p>Dimensions:  29” x 18“ x 7 3/4“</p><br/>
 
-             <p>Weight:  </p><br/>
+    //          <p>Weight:  </p><br/>
 
-             <p>4.8 lbs - No Levers</p><br/>
+    //          <p>4.8 lbs - No Levers</p><br/>
 
-             <p>4.9 lbs - Levered on Fs and G above middle C</p><br/>
+    //          <p>4.9 lbs - Levered on Fs and G above middle C</p><br/>
 
-             <p>5 lbs - CFB Truitt Levers</p><br/>
+    //          <p>5 lbs - CFB Truitt Levers</p><br/>
 
-             <p>5.2 lbs - Full Truitt Levers</p><br/>
+    //          <p>5.2 lbs - Full Truitt Levers</p><br/>
 
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
 
-             <p>$1615 Full Truitt levers</p><br/>
+    //          <p>$1615 Full Truitt levers</p><br/>
 
-             <p>$1263 CFB Truitt levers</p><br/>
+    //          <p>$1263 CFB Truitt levers</p><br/>
 
-             <p>$975 Without levers</p><br/>
+    //          <p>$975 Without levers</p><br/>
 
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
 
-             <p>Soft transport case: $225</p><br/>
+    //          <p>Soft transport case: $225</p><br/>
 
-             <p>String set: $100</p><br/>
+    //          <p>String set: $100</p><br/>
 
-             <p>Strap with buttons: $119</p><br/>
+    //          <p>Strap with buttons: $119</p><br/>
 
-             <p>Le Stand: $230</p><br/>
+    //          <p>Le Stand: $230</p><br/>
 
-             <p>Shipping: Inquire for charges   </p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Eden 26",
-         "productType": "lever",
-         "productSize": 26,
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Eden 29",
-         "productPrice": "$2446",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>AVAILABLE NOW</p><br/>
-             <p>This Aria 22, handcrafted from Sweet Gum, is compact and portable.  Makes a great travel harp.  </p><br/>
+    //          <p>Shipping: Inquire for charges   </p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Eden 26",
+    //      "productType": "lever",
+    //      "productSize": 26,
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Eden 29",
+    //      "productPrice": "$2446",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>AVAILABLE NOW</p><br/>
+    //          <p>This Aria 22, handcrafted from Sweet Gum, is compact and portable.  Makes a great travel harp.  </p><br/>
         
-             <p>Dimensions: 29.5“ x 19.5” x 8.75” </p><br/>
+    //          <p>Dimensions: 29.5“ x 19.5” x 8.75” </p><br/>
         
-             <p>Weight: 8.5 lbs</p><br/>
+    //          <p>Weight: 8.5 lbs</p><br/>
         
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
         
-             <p>$1860 Full Truitt levers</p><br/>
+    //          <p>$1860 Full Truitt levers</p><br/>
         
-             <p>$1444 CFB Truitt levers</p><br/>
+    //          <p>$1444 CFB Truitt levers</p><br/>
         
-             <p>$1156 without levers</p><br/>
+    //          <p>$1156 without levers</p><br/>
         
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
         
-             <p>Harp case: $250 </p><br/>
+    //          <p>Harp case: $250 </p><br/>
         
-             <p>String set: $80</p><br/>
+    //          <p>String set: $80</p><br/>
         
-             <p>Strap and Buttons: $119</p><br/>
+    //          <p>Strap and Buttons: $119</p><br/>
         
-             <p>Shipping: Inquire for charges</p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
         
-             <p>There are various options for stands for the Aria 22, including the new LeStand. </p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Eden 29",
-         "productType": "lever",
-         "productSize": 29,
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Eden29.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Skyedancer 52 Double",
-         "productPrice": "$3657",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>Pictured in Walnut. 52 strings, double strung. </p><br/>
+    //          <p>There are various options for stands for the Aria 22, including the new LeStand. </p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Eden 29",
+    //      "productType": "lever",
+    //      "productSize": 29,
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Eden29.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Skyedancer 52 Double",
+    //      "productPrice": "$3657",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>Pictured in Walnut. 52 strings, double strung. </p><br/>
 
-             <p>Dimensions: 34.5" x 12"  </p><br/>
+    //          <p>Dimensions: 34.5" x 12"  </p><br/>
         
-             <p>Approximate weight: 11.5 lb. depending on wood type</p><br/>
+    //          <p>Approximate weight: 11.5 lb. depending on wood type</p><br/>
         
-             <p>String range: two sets of 26 strings, C5 to G1</p><br/>
+    //          <p>String range: two sets of 26 strings, C5 to G1</p><br/>
         
-             <p>Pricing:  </p><br/>
+    //          <p>Pricing:  </p><br/>
         
-             <p>$3637 Full Truitt levers, other options available for partial levers. </p><br/>
+    //          <p>$3637 Full Truitt levers, other options available for partial levers. </p><br/>
         
-             <p>Options not included in the above price:</p><br/>
+    //          <p>Options not included in the above price:</p><br/>
         
-             <p>Soft transport case: $225</p><br/>
+    //          <p>Soft transport case: $225</p><br/>
         
-             <p>String set: $95.00 (one course)</p><br/>
+    //          <p>String set: $95.00 (one course)</p><br/>
         
-             <p>Display stand: $145   </p><br/>
+    //          <p>Display stand: $145   </p><br/>
         
-             <p>Le Stand: $230 (Walnut $250)</p><br/>
+    //          <p>Le Stand: $230 (Walnut $250)</p><br/>
         
-             <p>Decorative rosettes: $90</p><br/>
+    //          <p>Decorative rosettes: $90</p><br/>
         
-             <p>Shipping: Inquire for charges  </p><br/>
+    //          <p>Shipping: Inquire for charges  </p><br/>
         
         
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Skyedancer 52 Double",
-         "productType": "Double",
-         "productSize": "Double",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/SkyedancerDouble.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Reve 36 Hybrid Harp",
-         "productPrice": "$4360",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>Our hybrid harps combine the lovely sound of natural wood with the strength and lightweight qualities of carbon fiber. Because the sound boxes are constructed solely of wood, our hybrid models produce the exceptional tone quality of traditional wood harps. The neck and pillar are crafted of lightweight spruce reinforced with carbon fiber providing a combination that significantly reduces the weight of the harp.</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Skyedancer 52 Double",
+    //      "productType": "Double",
+    //      "productSize": "Double",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/SkyedancerDouble.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Reve 36 Hybrid Harp",
+    //      "productPrice": "$4360",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>Our hybrid harps combine the lovely sound of natural wood with the strength and lightweight qualities of carbon fiber. Because the sound boxes are constructed solely of wood, our hybrid models produce the exceptional tone quality of traditional wood harps. The neck and pillar are crafted of lightweight spruce reinforced with carbon fiber providing a combination that significantly reduces the weight of the harp.</p><br/>
 
-             <p>Some color choices: black, white, almond, burgundy, regal blue, yellow, pastels . . . you can even choose your own color. Contact us to discuss the possibilities.</p><br/>
+    //          <p>Some color choices: black, white, almond, burgundy, regal blue, yellow, pastels . . . you can even choose your own color. Contact us to discuss the possibilities.</p><br/>
 
-             <p>Dimensions: Height: 48" at tallest point. Sound box: 41.25” x 10.25". Front to back: 31.25”.  </p><br/>
+    //          <p>Dimensions: Height: 48" at tallest point. Sound box: 41.25” x 10.25". Front to back: 31.25”.  </p><br/>
 
-             <p>Approximate weight: 10.3 pounds</p><br/>
+    //          <p>Approximate weight: 10.3 pounds</p><br/>
 
-             <p>String range: C6 to C1</p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Reve 36 Hybrid",
-         "productType": "lever",
-         "productSize": "Carbon Fiber",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/reve36.jpg",
-         "divider": "00000000000000000000000"
-     },
+    //          <p>String range: C6 to C1</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Reve 36 Hybrid",
+    //      "productType": "lever",
+    //      "productSize": "Carbon Fiber",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/reve36.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
     {
         "id": "0f97b463-544c-447a-8336-8add3820f209",
         "sellerName": "Fake Luthier, Inc.",
@@ -380,7 +380,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL Double",
         "productType": "Double",
         "productSize": "Double",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/cartton.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -399,7 +399,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 36",
         "productType": "lever",
         "productSize": "36",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/girl.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -418,7 +418,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL Cross",
         "productType": "Cross",
         "productSize": "Cross",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/goldcartoon.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -437,7 +437,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 29",
         "productType": "lever",
         "productSize": "29",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/graygreen.png",
         "divider": "00000000000000000000000"
     },
     {
@@ -456,355 +456,355 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 22 Wire",
         "productType": "Wire",
         "productSize": "Wire",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/green.png",
         "divider": "00000000000000000000000"
     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Eden 26",
-         "productPrice": "$2446",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>pictured, "Spalted Buckeye"</p><br/>
-             <p>The amazing sound of the rounded bout and the almost lute-shaped sound box of the Eden 26 have made it one of our most sought-after lap harps. Many are used in harp therapy programs.</p><br/>
+    // {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Eden 26",
+    //      "productPrice": "$2446",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>pictured, "Spalted Buckeye"</p><br/>
+    //          <p>The amazing sound of the rounded bout and the almost lute-shaped sound box of the Eden 26 have made it one of our most sought-after lap harps. Many are used in harp therapy programs.</p><br/>
 
-             <p>The decorative rosettes are included in the price. They are carved wood rosettes set into the soundboard.</p><br/>
+    //          <p>The decorative rosettes are included in the price. They are carved wood rosettes set into the soundboard.</p><br/>
 
-             <p>Dimensions: 34.5" x 22" x 12." The length of the sound board is 27.5".</p><br/>
+    //          <p>Dimensions: 34.5" x 22" x 12." The length of the sound board is 27.5".</p><br/>
 
-             <p>Approximate weight: 10.75 lb. depending on wood type. </p><br/>
+    //          <p>Approximate weight: 10.75 lb. depending on wood type. </p><br/>
 
-             <p>String range: C5 to G1</p><br/>
+    //          <p>String range: C5 to G1</p><br/>
 
-             <p>String spacing at middle C: 14.5 mm</p><br/>
+    //          <p>String spacing at middle C: 14.5 mm</p><br/>
 
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
 
-             <p>$2446  Full Truitt levers</p><br/>
+    //          <p>$2446  Full Truitt levers</p><br/>
 
-             <p>$2022  CFB Truitt levers</p><br/>
+    //          <p>$2022  CFB Truitt levers</p><br/>
 
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
 
-             <p>Strap and Buttons $119</p><br/>
+    //          <p>Strap and Buttons $119</p><br/>
 
-             <p>Soft transport case: $250</p><br/>
+    //          <p>Soft transport case: $250</p><br/>
 
-             <p>String set: $105</p><br/>
+    //          <p>String set: $105</p><br/>
 
-             <p>Display stand: $140</p><br/>
+    //          <p>Display stand: $140</p><br/>
 
-             <p>Le Stand: $230 (Walnut $250)</p><br/>
+    //          <p>Le Stand: $230 (Walnut $250)</p><br/>
 
-             <p>Shipping: Inquire for charges</p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
 
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Eden 26",
-         "productType": "lever",
-         "productSize": "26",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Consort 36",
-         "productPrice": "$3615 (includes Truitt levers)",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>Dimensions: 52.5" at the tallest point of the pillar, and 53.5" from the floor to the top of the "playing side." From the floor to the top of the sound box is 50." 12" at width of base.</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Eden 26",
+    //      "productType": "lever",
+    //      "productSize": "26",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Consort 36",
+    //      "productPrice": "$3615 (includes Truitt levers)",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>Dimensions: 52.5" at the tallest point of the pillar, and 53.5" from the floor to the top of the "playing side." From the floor to the top of the sound box is 50." 12" at width of base.</p><br/>
 
-             <p>Approximate weight: 20 lbs. depending upon wood type (24 lbs - Walnut)</p><br/>
+    //          <p>Approximate weight: 20 lbs. depending upon wood type (24 lbs - Walnut)</p><br/>
         
-             <p>String range: C6 to C1</p><br/>
+    //          <p>String range: C6 to C1</p><br/>
         
-             <p>String spacing at middle C: 15 mm</p><br/>
+    //          <p>String spacing at middle C: 15 mm</p><br/>
         
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
         
-             <p>$3346  Full Truitt levers</p><br/>
+    //          <p>$3346  Full Truitt levers</p><br/>
         
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
         
-             <p>Soft transport case: $280 (Larger case needed with feet package: $295.00)</p><br/>
+    //          <p>Soft transport case: $280 (Larger case needed with feet package: $295.00)</p><br/>
         
-             <p>String set: $205</p><br/>
+    //          <p>String set: $205</p><br/>
         
-             <p>Optional feet package: $225 (requires larger case)</p><br/>
+    //          <p>Optional feet package: $225 (requires larger case)</p><br/>
         
-             <p>Shipping: Inquire for charges</p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
         
         
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Consort 36",
-         "productType": "lever",
-         "productSize": "36",
-         "productFinish": ["walnut"],
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Consort36.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Feather Light 26",
-         "productPrice": "$2186",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>The Featherlight 26 is made from Sassafras, which makes this harp light weight while creating a warm sound.  The upgrade to Aluminum tuning pins also helps to make this harp as light as a feather.  </p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Consort 36",
+    //      "productType": "lever",
+    //      "productSize": "36",
+    //      "productFinish": ["walnut"],
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Consort36.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Feather Light 26",
+    //      "productPrice": "$2186",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>The Featherlight 26 is made from Sassafras, which makes this harp light weight while creating a warm sound.  The upgrade to Aluminum tuning pins also helps to make this harp as light as a feather.  </p><br/>
 
-             <p>String range: C5 to G1</p><br/>
+    //          <p>String range: C5 to G1</p><br/>
         
-             <p>Dimensions: 34" h x 8.5" w x 22"</p><br/>
+    //          <p>Dimensions: 34" h x 8.5" w x 22"</p><br/>
         
-             <p>String spacing at Middle C: 14 mm</p><br/>
+    //          <p>String spacing at Middle C: 14 mm</p><br/>
         
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
         
-             <p>$2186  Full Truitt levers</p><br/>
+    //          <p>$2186  Full Truitt levers</p><br/>
         
-             <p>$1966  CFB Truitt  levers  </p><br/>
+    //          <p>$1966  CFB Truitt  levers  </p><br/>
         
-             <p>Options not included in the above price:</p><br/>
+    //          <p>Options not included in the above price:</p><br/>
         
-             <p>Strap and Buttons $119</p><br/>
+    //          <p>Strap and Buttons $119</p><br/>
         
-             <p>Soft transport case: $250</p><br/>
+    //          <p>Soft transport case: $250</p><br/>
         
-             <p>String set: $95</p><br/>
+    //          <p>String set: $95</p><br/>
         
-             <p>Le Stand: $230 as seen in photo above. </p><br/>
+    //          <p>Le Stand: $230 as seen in photo above. </p><br/>
         
-             <p>Shipping: Inquire for charges</p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Feather Light 26",
-         "productType": "lever",
-         "productSize": "",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/FeatherLight26Bright.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Xythara Cross",
-         "productPrice": "$2265",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <div class="sqs-block-content">
-                 <p class="" style="white-space:pre-wrap;">&nbsp;Pictured in walnut. 41 strings. Also available in 6/6 pattern with 44 strings.</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Dimensions: 34.5" x 11"</p><br/><p class="" style="white-space:pre-wrap;">Approximate weight: 10.5 lb. depending on wood type</p><br/>
-                 <p class="" style="white-space:pre-wrap;">String range: C5 up to E</p><br/><p class="" style="white-space:pre-wrap;">Price:</p><br/><p class="" style="white-space:pre-wrap;">$2265</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Options not included in the above price:</p><br/><p class="" style="white-space:pre-wrap;">Soft transport case: $250</p><br/>
-                 <p class="" style="white-space:pre-wrap;">String set: $225</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Display stand: $150</p><br/>
-                 <p class="" style="white-space:pre-wrap;">Shipping: Inquire for charges</p><br/>
-             </div>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Xythara Cross",
-         "productType": "cross",
-         "productSize": "Cross",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/xytharaCross.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Eden 26",
-         "productPrice": "$1615",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>This Blevinsong 20 is a great little harp, with a  clear, beautiful singing tone.  It is ideal for travel, therapy, or just for sitting on the couch and enjoying your favorite songs.  Built from Butternut with aluminum tuning pins to keep the weight down.  </p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Feather Light 26",
+    //      "productType": "lever",
+    //      "productSize": "",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/FeatherLight26Bright.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Xythara Cross",
+    //      "productPrice": "$2265",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <div class="sqs-block-content">
+    //              <p class="" style="white-space:pre-wrap;">&nbsp;Pictured in walnut. 41 strings. Also available in 6/6 pattern with 44 strings.</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Dimensions: 34.5" x 11"</p><br/><p class="" style="white-space:pre-wrap;">Approximate weight: 10.5 lb. depending on wood type</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">String range: C5 up to E</p><br/><p class="" style="white-space:pre-wrap;">Price:</p><br/><p class="" style="white-space:pre-wrap;">$2265</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Options not included in the above price:</p><br/><p class="" style="white-space:pre-wrap;">Soft transport case: $250</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">String set: $225</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Display stand: $150</p><br/>
+    //              <p class="" style="white-space:pre-wrap;">Shipping: Inquire for charges</p><br/>
+    //          </div>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Xythara Cross",
+    //      "productType": "cross",
+    //      "productSize": "Cross",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/xytharaCross.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Eden 26",
+    //      "productPrice": "$1615",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>This Blevinsong 20 is a great little harp, with a  clear, beautiful singing tone.  It is ideal for travel, therapy, or just for sitting on the couch and enjoying your favorite songs.  Built from Butternut with aluminum tuning pins to keep the weight down.  </p><br/>
 
-             <p>Dimensions:  29” x 18“ x 7 3/4“</p><br/>
+    //          <p>Dimensions:  29” x 18“ x 7 3/4“</p><br/>
 
-             <p>Weight:  </p><br/>
+    //          <p>Weight:  </p><br/>
 
-             <p>4.8 lbs - No Levers</p><br/>
+    //          <p>4.8 lbs - No Levers</p><br/>
 
-             <p>4.9 lbs - Levered on Fs and G above middle C</p><br/>
+    //          <p>4.9 lbs - Levered on Fs and G above middle C</p><br/>
 
-             <p>5 lbs - CFB Truitt Levers</p><br/>
+    //          <p>5 lbs - CFB Truitt Levers</p><br/>
 
-             <p>5.2 lbs - Full Truitt Levers</p><br/>
+    //          <p>5.2 lbs - Full Truitt Levers</p><br/>
 
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
 
-             <p>$1615 Full Truitt levers</p><br/>
+    //          <p>$1615 Full Truitt levers</p><br/>
 
-             <p>$1263 CFB Truitt levers</p><br/>
+    //          <p>$1263 CFB Truitt levers</p><br/>
 
-             <p>$975 Without levers</p><br/>
+    //          <p>$975 Without levers</p><br/>
 
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
 
-             <p>Soft transport case: $225</p><br/>
+    //          <p>Soft transport case: $225</p><br/>
 
-             <p>String set: $100</p><br/>
+    //          <p>String set: $100</p><br/>
 
-             <p>Strap with buttons: $119</p><br/>
+    //          <p>Strap with buttons: $119</p><br/>
 
-             <p>Le Stand: $230</p><br/>
+    //          <p>Le Stand: $230</p><br/>
 
-             <p>Shipping: Inquire for charges   </p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Eden 26",
-         "productType": "lever",
-         "productSize": 26,
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Eden 29",
-         "productPrice": "$2446",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>AVAILABLE NOW</p><br/>
-             <p>This Aria 22, handcrafted from Sweet Gum, is compact and portable.  Makes a great travel harp.  </p><br/>
+    //          <p>Shipping: Inquire for charges   </p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Eden 26",
+    //      "productType": "lever",
+    //      "productSize": 26,
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Eden26.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Eden 29",
+    //      "productPrice": "$2446",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>AVAILABLE NOW</p><br/>
+    //          <p>This Aria 22, handcrafted from Sweet Gum, is compact and portable.  Makes a great travel harp.  </p><br/>
         
-             <p>Dimensions: 29.5“ x 19.5” x 8.75” </p><br/>
+    //          <p>Dimensions: 29.5“ x 19.5” x 8.75” </p><br/>
         
-             <p>Weight: 8.5 lbs</p><br/>
+    //          <p>Weight: 8.5 lbs</p><br/>
         
-             <p>Pricing:</p><br/>
+    //          <p>Pricing:</p><br/>
         
-             <p>$1860 Full Truitt levers</p><br/>
+    //          <p>$1860 Full Truitt levers</p><br/>
         
-             <p>$1444 CFB Truitt levers</p><br/>
+    //          <p>$1444 CFB Truitt levers</p><br/>
         
-             <p>$1156 without levers</p><br/>
+    //          <p>$1156 without levers</p><br/>
         
-             <p>Options not included in the above prices:</p><br/>
+    //          <p>Options not included in the above prices:</p><br/>
         
-             <p>Harp case: $250 </p><br/>
+    //          <p>Harp case: $250 </p><br/>
         
-             <p>String set: $80</p><br/>
+    //          <p>String set: $80</p><br/>
         
-             <p>Strap and Buttons: $119</p><br/>
+    //          <p>Strap and Buttons: $119</p><br/>
         
-             <p>Shipping: Inquire for charges</p><br/>
+    //          <p>Shipping: Inquire for charges</p><br/>
         
-             <p>There are various options for stands for the Aria 22, including the new LeStand. </p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Eden 29",
-         "productType": "lever",
-         "productSize": 29,
-         "productImageUrl": "/img/builderPartners/BlevinsModels/Eden29.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Skyedancer 52 Double",
-         "productPrice": "$3657",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>Pictured in Walnut. 52 strings, double strung. </p><br/>
+    //          <p>There are various options for stands for the Aria 22, including the new LeStand. </p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Eden 29",
+    //      "productType": "lever",
+    //      "productSize": 29,
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/Eden29.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Skyedancer 52 Double",
+    //      "productPrice": "$3657",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>Pictured in Walnut. 52 strings, double strung. </p><br/>
 
-             <p>Dimensions: 34.5" x 12"  </p><br/>
+    //          <p>Dimensions: 34.5" x 12"  </p><br/>
         
-             <p>Approximate weight: 11.5 lb. depending on wood type</p><br/>
+    //          <p>Approximate weight: 11.5 lb. depending on wood type</p><br/>
         
-             <p>String range: two sets of 26 strings, C5 to G1</p><br/>
+    //          <p>String range: two sets of 26 strings, C5 to G1</p><br/>
         
-             <p>Pricing:  </p><br/>
+    //          <p>Pricing:  </p><br/>
         
-             <p>$3637 Full Truitt levers, other options available for partial levers. </p><br/>
+    //          <p>$3637 Full Truitt levers, other options available for partial levers. </p><br/>
         
-             <p>Options not included in the above price:</p><br/>
+    //          <p>Options not included in the above price:</p><br/>
         
-             <p>Soft transport case: $225</p><br/>
+    //          <p>Soft transport case: $225</p><br/>
         
-             <p>String set: $95.00 (one course)</p><br/>
+    //          <p>String set: $95.00 (one course)</p><br/>
         
-             <p>Display stand: $145   </p><br/>
+    //          <p>Display stand: $145   </p><br/>
         
-             <p>Le Stand: $230 (Walnut $250)</p><br/>
+    //          <p>Le Stand: $230 (Walnut $250)</p><br/>
         
-             <p>Decorative rosettes: $90</p><br/>
+    //          <p>Decorative rosettes: $90</p><br/>
         
-             <p>Shipping: Inquire for charges  </p><br/>
+    //          <p>Shipping: Inquire for charges  </p><br/>
         
         
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Skyedancer 52 Double",
-         "productType": "Double",
-         "productSize": "Double",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/SkyedancerDouble.jpg",
-         "divider": "00000000000000000000000"
-     },
-     {
-         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
-         "sellerName": "Blevins Harps",
-         "sellerEmail": "blevinsharps@gmail.com",
-         "sellerCountry": "Grand Junction, CO",
-         "sellerRegion": "West",
-         "sellerLat": "39.0826",
-         "sellerLong": "-108.5932",
-         "productTitle": "Reve 36 Hybrid Harp",
-         "productPrice": "$4360",
-         "productShortDesc": ``,
-         "productLongDesc": `
-             <p>Our hybrid harps combine the lovely sound of natural wood with the strength and lightweight qualities of carbon fiber. Because the sound boxes are constructed solely of wood, our hybrid models produce the exceptional tone quality of traditional wood harps. The neck and pillar are crafted of lightweight spruce reinforced with carbon fiber providing a combination that significantly reduces the weight of the harp.</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Skyedancer 52 Double",
+    //      "productType": "Double",
+    //      "productSize": "Double",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/SkyedancerDouble.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
+    //  {
+    //      "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+    //      "sellerName": "Blevins Harps",
+    //      "sellerEmail": "blevinsharps@gmail.com",
+    //      "sellerCountry": "Grand Junction, CO",
+    //      "sellerRegion": "West",
+    //      "sellerLat": "39.0826",
+    //      "sellerLong": "-108.5932",
+    //      "productTitle": "Reve 36 Hybrid Harp",
+    //      "productPrice": "$4360",
+    //      "productShortDesc": ``,
+    //      "productLongDesc": `
+    //          <p>Our hybrid harps combine the lovely sound of natural wood with the strength and lightweight qualities of carbon fiber. Because the sound boxes are constructed solely of wood, our hybrid models produce the exceptional tone quality of traditional wood harps. The neck and pillar are crafted of lightweight spruce reinforced with carbon fiber providing a combination that significantly reduces the weight of the harp.</p><br/>
 
-             <p>Some color choices: black, white, almond, burgundy, regal blue, yellow, pastels . . . you can even choose your own color. Contact us to discuss the possibilities.</p><br/>
+    //          <p>Some color choices: black, white, almond, burgundy, regal blue, yellow, pastels . . . you can even choose your own color. Contact us to discuss the possibilities.</p><br/>
 
-             <p>Dimensions: Height: 48" at tallest point. Sound box: 41.25” x 10.25". Front to back: 31.25”.  </p><br/>
+    //          <p>Dimensions: Height: 48" at tallest point. Sound box: 41.25” x 10.25". Front to back: 31.25”.  </p><br/>
 
-             <p>Approximate weight: 10.3 pounds</p><br/>
+    //          <p>Approximate weight: 10.3 pounds</p><br/>
 
-             <p>String range: C6 to C1</p><br/>
-         `,
-         "productMaker": "Blevins Harps",
-         "productModel": "Reve 36 Hybrid",
-         "productType": "lever",
-         "productSize": "Carbon Fiber",
-         "productImageUrl": "/img/builderPartners/BlevinsModels/reve36.jpg",
-         "divider": "00000000000000000000000"
-     },
+    //          <p>String range: C6 to C1</p><br/>
+    //      `,
+    //      "productMaker": "Blevins Harps",
+    //      "productModel": "Reve 36 Hybrid",
+    //      "productType": "lever",
+    //      "productSize": "Carbon Fiber",
+    //      "productImageUrl": "/img/builderPartners/BlevinsModels/reve36.jpg",
+    //      "divider": "00000000000000000000000"
+    //  },
     {
         "id": "0f97b463-544c-447a-8336-8add3820f209",
         "sellerName": "Fake Luthier, Inc.",
@@ -821,7 +821,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 40",
         "productType": "lever",
         "productSize": "40",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/harphands.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -840,7 +840,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL Double",
         "productType": "Double",
         "productSize": "Double",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/pinklong.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -859,7 +859,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 36",
         "productType": "lever",
         "productSize": "36",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/roses.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -878,7 +878,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL Cross",
         "productType": "Cross",
         "productSize": "Cross",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/sleeves.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -897,7 +897,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 29",
         "productType": "lever",
         "productSize": "29",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/twotone.png",
         "divider": "00000000000000000000000"
     },
     {
@@ -916,7 +916,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 22 Wire",
         "productType": "Wire",
         "productSize": "Wire",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/whitesleeve.jpg",
         "divider": "00000000000000000000000"
     },
     
@@ -936,7 +936,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 40",
         "productType": "lever",
         "productSize": "40",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/double.png",
         "divider": "00000000000000000000000"
     },
     {
@@ -955,7 +955,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL Double",
         "productType": "Double",
         "productSize": "Double",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/cartton.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -993,7 +993,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL Cross",
         "productType": "Cross",
         "productSize": "Cross",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/Newfolder/skinny.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1012,7 +1012,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 29",
         "productType": "lever",
         "productSize": "29",
-        "productImageUrl": "/img/builderPartners/stockharp.jpg",
+        "productImageUrl": "/img/builderPartners/green.png",
         "divider": "00000000000000000000000"
     },
     {
@@ -1088,7 +1088,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS Cross",
         "productType": "Cross",
         "productSize": "Cross",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/whiteharp.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1107,7 +1107,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS Triple",
         "productType": "Triple",
         "productSize": "Triple",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/sled.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1126,7 +1126,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS 22 Wire",
         "productType": "Wire",
         "productSize": "Wire",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/light2.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1145,7 +1145,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS Double",
         "productType": "Double",
         "productSize": "Double",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/skinny.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1164,7 +1164,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS 36",
         "productType": "lever",
         "productSize": "36",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/light.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1183,7 +1183,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS Cross",
         "productType": "Cross",
         "productSize": "Cross",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/cool.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1202,7 +1202,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS 29",
         "productType": "lever",
         "productSize": "29",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/Newfolder/chub.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1221,7 +1221,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS 22 Wire",
         "productType": "Wire",
         "productSize": "Wire",
-        "productImageUrl": "/img/builderPartners/harpsrus.png",
+        "productImageUrl": "/img/builderPartners/sleeves.jpg",
         "divider": "00000000000000000000000"
     },
     // {
