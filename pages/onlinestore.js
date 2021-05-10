@@ -4,11 +4,13 @@ import axios from 'axios';
 
 // internal
 import PageTitle from '../src/main/components/main/PageTitle';
+import CategoryMenu from '../src/store/components/menus/CategoryMenu';
 import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
 import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
+    const [ menuOpen, setMenuOpen ] = useState(false);
     // display cart
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
@@ -20,7 +22,8 @@ const OnlineStore = (props) => {
     },[]);
     return (
         <>
-            <div className='storeIndex'>
+            <CategoryMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen}/>
+            <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>
                 <PageTitle maintitle="Music, Strings and Things" subtitle='Featuring products sold by our store partners' /> 
                 <GlobalStoreSearch 
                     usedProducts={props.usedProducts}
@@ -29,6 +32,7 @@ const OnlineStore = (props) => {
                     music={props.music} 
                     strings={props.strings} 
                     setSearchResults={setSearchResults}
+                    menuOpen={menuOpen}
                 />     
             </div>
             <OnlineStoreCss />

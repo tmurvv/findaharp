@@ -38,7 +38,47 @@ function GlobalStoreSearch(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [idx, setIdx] = useState(0);
     const [screenWidth, setScreenWidth] = useState();
- 
+    const [ change, setChange ] = useState('');
+    
+    //#region region category menu
+    // const [ menuOpen, setMenuOpen] = useState([]);
+
+    // function handleCatChange(e) {
+    //     const filtered = [];
+    //     const catId = e.target.id.toString();
+    //     setMenuOpen('[]');
+    //     console.log(e.target.id);
+    //     document.querySelector('#categories').nextElementSibling.innerText = e.target.id;
+            
+    //     storedItems.map(prod => {
+    //         if (prod.subsubcategory===catId) {filtered.push(prod);} else {
+    //             // console.log(catId,storedItems)
+    //         }
+    //     })
+
+    //     console.log('filtered', filtered);
+    //     // console.log(props.filteredProducts[0]);
+    //     // const storedItems = props.filteredProducts.filter(prod=>prod.subcategory===catId);
+    //     // console.log(storedItems.length)
+    //     // console.log(storedItems)
+    //     // setSearchResults(storedItems);
+    // }
+    // function toggleOpen(e) {
+    //     const arrayCopy = [...menuOpen]
+    //     if (arrayCopy.includes(e.target.id)) {
+    //         const index = arrayCopy.indexOf(e.target.id);
+    //         if (index > -1) {
+    //             arrayCopy.splice(index, 1);
+    //         }
+    //     } else {
+    //         arrayCopy.push(e.target.id);
+    //     }
+    //     setMenuOpen(arrayCopy);
+    // }   
+    //#endregion
+
+
+
     function resetResults() {
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
@@ -55,6 +95,8 @@ function GlobalStoreSearch(props) {
 
     function handleChange(type, menu, value1, value2, value3, value4) {
         console.log('handleChange', type, menu, value1, value2, value3, value4)
+        console.log(props.filteredProducts[600]);
+        console.log(props.filteredProducts[props.filteredProducts.length-550]);
         if (document.querySelector('#category').value.toUpperCase()==="MUSIC") {
             setMusicSearch(true);
             setStringSearch(false);
@@ -319,11 +361,76 @@ function GlobalStoreSearch(props) {
             setIdx(idx+30);
         }
       };
-    
+    function handleCatChange(e) {
+        const catId = e.target.getAttribute('id');
+        console.log('change', e.target, catId)
+        console.log(props.filteredProducts[0]);
+        const newProdList = prodList.filter(prod=>prod.subcategory===catId);
+        console.log(newProdList.length)
+        console.log(newProdList)
+        setSearchResults(newProdList);
+    }
     useEffect(()=>{
-            setScreenWidth(window.innerWidth);
+        setScreenWidth(window.innerWidth);
+        const buttons = document.querySelectorAll('.submenu-toggle-button');
+        Array.prototype.forEach.call(buttons, function(button) {
+            button.addEventListener('click', function() {
+                const submenu = button.parentNode.querySelector('.submenu');
+                submenu.classList.toggle('open');
+                const buttonState = button.parentNode.querySelector('.submenu-toggle-button');
+                buttonState.classList.toggle('open');
+            });
+        });
     })
-    
+    // region functionality from CategoryMenu
+    const [catSearchResults, setCatSearchResults] = useState();
+    const [ toggle0, setToggle0] = useState('+');
+    function handleCatChange(e) {
+        const filtered = [];
+        const catId = e.target.id.toString();
+        
+        prodList.map(prod => {
+            if (prod.subsubcategory===catId) {filtered.push(prod);} else {
+                // console.log(catId,prodList)
+            }
+        })
+
+        console.log('filtered', filtered);
+        // console.log(props.filteredProducts[0]);
+        // const prodList = props.filteredProducts.filter(prod=>prod.subcategory===catId);
+        // console.log(prodList.length)
+        // console.log(prodList)
+        // setSearchResults(prodList);
+    }
+    function toggleOpen(e) { 
+        console.log('here')
+        const submenu = e.target.parentNode.querySelector('.submenu');
+        console.log(submenu.classList)
+        if (submenu.classList.contains('open')) {
+            submenu.classList.remove('open');
+            e.target.innerText='+'
+        } else { 
+            submenu.classList.add('open');
+            e.target.innerText='+'
+        }
+        console.log(submenu.classList)
+        const buttonState = e.target.parentNode.querySelector('.submenu-toggle-button');
+        buttonState.classList.contains('open')?buttonState.classList.remove('open'):buttonState.classList.add('open');
+        setChange('yes');
+    }
+    useEffect(()=>{
+        const buttons = document.querySelectorAll('.submenu-toggle-button');
+        Array.prototype.forEach.call(buttons, function(button) {
+            button.addEventListener('click', function() {
+                // alert('here')
+                // const submenu = button.parentNode.querySelector('.submenu');
+                // submenu.classList.toggle('open');
+                // const buttonState = button.parentNode.querySelector('.submenu-toggle-button');
+                // buttonState.classList.toggle('open');
+            });
+        });
+    });
+    //end region
     return (
         <>
             <StoreResults 
@@ -345,14 +452,15 @@ function GlobalStoreSearch(props) {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
+            {/* <CategoryMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} handleCatChange={handleCatChange} toggleOpen={toggleOpen}/> */}
             
             <div className='storeSearchLine' >
                 {screenWidth>750
                 ?
                 <>
                 
-                <h3 className='searchHelperText'>Search by category</h3>
-                <div className='selectContainer'>    
+                
+                {/* <div className='selectContainer'>    
                     <select onChange={()=>handleChange('','category')} id='category'>
                         <option name='All'>All</option>
                         <option name='Strings'>Strings</option>
@@ -361,10 +469,10 @@ function GlobalStoreSearch(props) {
                         <option name='Books'>Books</option>
                         <option name='Gifts'>Gifts</option>
                         <option name='CDs'>CDs</option>
-                        {/* <option name='Digital Downloads'>Digital Downloads</option> */}
+                        <option name='Digital Downloads'>Digital Downloads</option>
                     </select>
                     <span>&#711;</span>
-                </div>
+                </div> */}
                 <h3 className='searchHelperText'>and / or search term</h3>
                 <div className="searchTextImg">
                     <form style={{display: 'flex'}}>
