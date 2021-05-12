@@ -475,7 +475,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "FHL 19 Lap",
         "productType": "Lever-Free/Lap",
         "productSize": "Lever-Free/Lap",
-        "productImageUrl": "/img/builderPartners/whitesleeves.png",
+        "productImageUrl": "/img/builderPartners/whitesleeve.png",
         "divider": "00000000000000000000000"
     },
     // {
@@ -1202,7 +1202,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "HRUS 26",
         "productType": "lever",
         "productSize": "26",
-        "productImageUrl": "/img/builderPartners/Newfolder/roses.jpg",
+        "productImageUrl": "/img/builderPartners/Newfolder/skinny.jpg",
         "divider": "00000000000000000000000"
     },
     {
