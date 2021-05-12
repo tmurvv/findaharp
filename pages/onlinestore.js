@@ -63,8 +63,8 @@ const OnlineStore = (props) => {
                         };
                     });
                 });
-                // sort and return
-                setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
+                // setSearchResults(returnArray.sort
+                // sort and return((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
                 return;
             }
         }
@@ -81,8 +81,10 @@ const OnlineStore = (props) => {
         setSearchResults(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
     },[]);
     return (
-        <>
-            SearchResults: {searchResults&&searchResults.length}
+        <>  <div style={{height: '300px', marginTop: '70px'}}>
+                <PageTitle maintitle='Store not installed here' subtitle="This is the builder showcase demo site. Please go to findaharp.com to view store." />
+            </div>
+            {/* SearchResults: {searchResults&&searchResults.length}
             <CategoryMenu 
                 subMenuOpen={subMenuOpen} 
                 setSubMenuOpen={setSubMenuOpen} 
@@ -102,7 +104,7 @@ const OnlineStore = (props) => {
                     menuOpen={menuOpen}
                 />     
             </div>
-            <OnlineStoreCss />
+            <OnlineStoreCss /> */}
         </>
     )
 }
