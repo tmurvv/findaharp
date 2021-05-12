@@ -5,7 +5,7 @@ import { CATEGORIES } from '../../constants/Categories';
 
 function CategoryMenu(props) {
     const [searchResults, setSearchResults] = useState();
-    const [ subMenuOpen, setSubMenuOpen] = useState();
+    // const [ subMenuOpen, setSubMenuOpen] = useState();
     const [ mainCategories ] = useState(Object.keys(CATEGORIES));
 
     function handleCatChange(e) {
@@ -37,10 +37,10 @@ function CategoryMenu(props) {
     function handleClick() {
         if (props.menuOpen) {
             props.setMenuOpen(false);
-            setSubMenuOpen(false);
+            props.setSubMenuOpen(false);
         } else {
             props.setMenuOpen(true);
-            if (!subMenuOpen) setSubMenuOpen('Featured Items')
+            if (!props.subMenuOpen) props.setSubMenuOpen('Featured Items')
             // document.
         }
     }
@@ -48,7 +48,7 @@ function CategoryMenu(props) {
     return (
         <>              
             <h3 className='searchHelperText'>Search by category</h3>
-            <div className='CatMenuCont' style={props.menuOpen&&subMenuOpen?{width: '550px'}:{width: '126px'}}>
+            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '550px'}:{width: '126px'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#fffbb5',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul>
                         <li  onClick={()=>handleClick()} id="Categories" className='CatLine'>
@@ -64,14 +64,14 @@ function CategoryMenu(props) {
                                 key={cat}
                                 className='CatLine hovershow'
                                 id={cat}
-                                onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; setSubMenuOpen(cat);}} 
+                                onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
-                                onClick={()=>setSubMenuOpen(cat)}>
+                                onClick={()=>props.setSubMenuOpen(cat)}>
                                 <div>{cat}</div>
                                 <img 
                                     className='catChevron hovershow' 
                                     src='img/store/right-chevron.png' 
-                                    // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; setSubMenuOpen(cat);}} 
+                                    // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; props.setSubMenuOpen(cat);}} 
                                     // onMouseLeave={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(1)';}} 
                                     alt='right arrow'
                                     style={{maxHeight: '0'}}
@@ -82,9 +82,18 @@ function CategoryMenu(props) {
                     }
                     </ul>
                 </div>
-                <div className='SubCat' style={subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
-                    {subMenuOpen&&
-                        <SubCatMenu menuName={subMenuOpen} />
+                <div className='SubCat' style={props.subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
+                    {props.subMenuOpen&&
+                        <SubCatMenu 
+                            // searchCategory={props.searchCategory}
+                            // setSearchCategory={props.setSearchCategory}
+                            // searchSubCategory={props.searchSubCategory}
+                            // setSearchSubCategory={props.setSearchSubCategory}
+                            // searchItem={props.searchItem}
+                            // setSearchItem={props.setSearchItem}
+                            menuName={props.subMenuOpen} 
+                            handleCatChange={props.handleCatChange}
+                        />
                     }
                     <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
                         <img style={{height: '100%', opacity: '.6'}} src='img/clear_search.png' alt='clear filters'/>

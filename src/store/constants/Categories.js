@@ -8,27 +8,27 @@ export const CATEGORIES = {
     ],
     "Strings by Type": {
         Gut: [
-            'Bow Brand Pedal Natural Gut',
-            'Bow Brand Lever Natural Gut',
+            'Bow Brand Pedal Gut',
+            'Bow Brand Lever Gut',
             'Concedo Gut',
             'Burgundy Gut',
-            'Silkgut (synthetic gut)'
+            'Silkgut (synthetic)'
         ],
         Nylon: [
-                'Bow Brand Pedal Nylon',
-                'Bow Brand Lever Nylon',
+                'Bow Brand Nylon',
                 'Artist Nylon',
                 'Nylon Monofilament'
         ],
         Wires: [
-            'Silver-Plated Pedal Bass Wire',
-            'Pedal Bass Wire (Tarnish-Resistant)',
-            'Bow Brand Lever Bass Wire',
-            'Professional Lever Bass Wire'
+            'Wire String Sets',
+            'Silver-Plated Pedal Bass Wires',
+            'Tarnish-Resistant Pedal Bass Wires',
+            'Bow Brand Lever Bass Wires',
+            'Professional Lever Bass Wires'
         ],
         Synthetic: [
             'Saverez KF Composite',
-            'Silkgut'
+            'Silkgut (synthetic)'
         ] 
     },
     "Strings by Harp Builder": {
@@ -51,6 +51,9 @@ export const CATEGORIES = {
             "Mariposa F to A",
             "Shaylee Meadows",
             "Special Edition Fullsicle"
+        ],
+        "Salvi Delta": [
+            "Salvi Delta"
         ],
         "Stoney End": [
             "Anne",
@@ -87,23 +90,26 @@ export const CATEGORIES = {
     "Music": {
         "Lever Harp": [
             "Lever Solos",
+            "Lever Solo Collections",
             "Lever Ensemble",
             "Lever with Other Instruments",
-            "Lever Methods and Studies",
-            "Lever Popular Solos and Collections",
-            "Lever Solo Collections",
             "Lever with Voice or Chorus",
-            "Lever Holiday"
+            "Lever Methods and Studies",
+            "Lever Holiday",
+            "Lever Popular Solos and Collections"
         ],
         "Pedal Harp": [
             "Pedal Solos",
-            "Pedal Ensemble",
-            "Pedal with Other Instruments",
-            "Pedal Methods and Studies",
-            "Pedal Popular Solos and Collections",
             "Pedal Solo Collections",
+            "Pedal Ensemble",
+            "Pedal with Flute",
+            "Pedal with Other Instruments",
             "Pedal with Voice or Chorus",
-            "Pedal Holiday"
+            "Pedal Methods and Studies",
+            "Pedal Concertos",
+            "Pedal Orchestra Parts",
+            "Pedal Holiday",
+            "Pedal Popular Solos and Collections"
         ]
     },
     "Accessories": [
@@ -119,18 +125,15 @@ export const CATEGORIES = {
     ],
     "Books": [
         "Biographical Books",
-        "Historical Books"
+        "Instructional Books"
     ],
     "Gifts": [
         "Jewelry",
         "Gift Certificates"
     ],
     "Cds": [
-        "Children",
-        "Christmas and Holiday",
         "Classical",
-        "New Age and Modern Jazz",
-        "Original",
-        "Pop Jazz"
+        "Inspirational",
+        "Other"
     ]
 }
