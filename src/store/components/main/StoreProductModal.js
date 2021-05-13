@@ -85,7 +85,7 @@ function StoreProductModal(props) {
         Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.product.store) setSellerInfo(seller);
         });
-    });
+    },[]);
     return (
         <>
         <div className='storedetailContainer' style={{display: 'block'}}>

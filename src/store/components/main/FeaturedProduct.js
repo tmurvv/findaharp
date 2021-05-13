@@ -93,7 +93,7 @@ const FeaturedProduct = (props) => {
         Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.productdetail.store) setSellerInfo(seller);
         });
-    });
+    },[]);
     return (
         <div className="featuredproduct" style={{height: 'auto'}}>
             <Results 

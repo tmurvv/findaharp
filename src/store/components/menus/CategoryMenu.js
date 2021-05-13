@@ -93,6 +93,7 @@ function CategoryMenu(props) {
                             // setSearchItem={props.setSearchItem}
                             menuName={props.subMenuOpen} 
                             handleCatChange={props.handleCatChange}
+                            setDetailProduct2={props.setDetailProduct2}
                         />
                     }
                     <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>

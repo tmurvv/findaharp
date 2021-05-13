@@ -97,10 +97,10 @@ function GlobalStoreSearch(props) {
         console.log('handleChange', type, menu, value1, value2, value3, value4)
         console.log(props.filteredProducts[600]);
         console.log(props.filteredProducts[props.filteredProducts.length-550]);
-        if (document.querySelector('#category').value.toUpperCase()==="MUSIC") {
+        if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="MUSIC") {
             setMusicSearch(true);
             setStringSearch(false);
-        } else if (document.querySelector('#category').value.toUpperCase()==="STRINGS") {
+        } else if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="STRINGS") {
             setMusicSearch(false);
             setStringSearch(true);
         } else {
@@ -115,7 +115,7 @@ function GlobalStoreSearch(props) {
             setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 })
         };
         // get search items
-        let category = document.querySelector('#category').value;
+        let category = document.querySelector('#category')&&document.querySelector('#category').value;
         let searchTerm = document.querySelector('#searchTerm').value;
         let newused = document.querySelector('#newused').value;
         setClearMenus(false);
@@ -142,7 +142,7 @@ function GlobalStoreSearch(props) {
         } 
         if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
             category = "Strings";
-            document.querySelector('#category').value='Strings';
+            document.querySelector('#category')?document.querySelector('#category').value='Strings':'';
             type = 'strings'
         }
         setAllState({...allState, category: category});

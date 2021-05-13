@@ -6,6 +6,7 @@ import lunr from "lunr";
 // internal
 import PageTitle from '../src/main/components/main/PageTitle';
 import CategoryMenu from '../src/store/components/menus/CategoryMenu';
+import StoreProductModal from '../src/store/components/main/StoreProductModal';
 import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
 import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 
@@ -13,19 +14,28 @@ const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
     const [ menuOpen, setMenuOpen ] = useState(false);
     const [ subMenuOpen, setSubMenuOpen ] = useState();
+    const [ openStoreDetail, setopenStoreDetail ] = useState(false);
+    const [ detailProduct2, setDetailProduct2 ] = useState();
 
     function handleCatChange(searchCategory, searchSubCategory, searchItem) {
 
-        console.log('CAT', searchCategory);
-        console.log('SubCAT', searchSubCategory);
-        console.log('item', searchItem);
+        // console.log('CAT', searchCategory);
+        // console.log('SubCAT', searchSubCategory);
+        // console.log('item', searchItem);
         console.log('product', props.filteredProducts[500])
         
-        console.log(String(searchCategory).toUpperCase())
+        // console.log(String(searchCategory).toUpperCase());
+        // console.log('inif')
+            if (searchItem.toUpperCase()==='GIFT CERTIFICATES') {
+                alert('Please email orders@findaharp.com to purchase a gift certificate.');
+                return;
+            }
         const stringsOnly = props.filteredProducts.filter(res=>String(res.category).toUpperCase()==='STRINGS');
         if (String(searchCategory).toUpperCase()==='STRINGS BY HARP BUILDER') {
-            console.log('inif')
+            
             const searchTerm = searchItem;
+            console.log('in', searchTerm, stringsOnly.length)
+
             if(searchTerm) {
                 // searchProductList = searchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
 
@@ -63,13 +73,24 @@ const OnlineStore = (props) => {
                         };
                     });
                 });
-                // setSearchResults(returnArray.sort
-                // sort and return((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
+                
+                // sort and return
+                setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
                 return;
             }
         }
         String(searchCategory).toUpperCase().startsWith('STRINGS')?searchCategory='strings':'';
         setSearchResults(props.filteredProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
+    }
+    function handleCloseDetail() {
+        setDetailProduct2([]);
+        setopenStoreDetail(false); 
+    }
+    function handleResults(msg) {
+        const resultText = document.querySelector('#loadingLoginText');
+        resultText.innerText=msg;
+        document.querySelector('#SP-loadingLogin').style.display = "block";
+        dispatchResultInfo({type: 'OK'});
     }
     // display cart
     useEffect(()=>{
@@ -81,16 +102,26 @@ const OnlineStore = (props) => {
         setSearchResults(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
     },[]);
     return (
-        <>  <div style={{height: '300px', marginTop: '70px'}}>
-                <PageTitle maintitle='Store not installed here' subtitle="This is the builder showcase demo site. Please go to findaharp.com to view store." />
-            </div>
-            {/* SearchResults: {searchResults&&searchResults.length}
+        <> 
+            {detailProduct2&&detailProduct2.title?
+                    <>
+                    <StoreProductModal 
+                        product={detailProduct2} 
+                        handleCloseDetail={handleCloseDetail}
+                        handleResults={handleResults}
+                /></>:''
+                } 
+            {/* <div style={{height: '300px', marginTop: '70px'}}>
+                <PageTitle maintitle='Store not installed on demo site' subtitle="This is the builder showcase demo site. Please go to findaharp.com to view store." />
+            </div> */}
+            SearchResults: {searchResults&&searchResults.length}
             <CategoryMenu 
                 subMenuOpen={subMenuOpen} 
                 setSubMenuOpen={setSubMenuOpen} 
                 menuOpen={menuOpen} 
                 setMenuOpen={setMenuOpen}
                 handleCatChange={handleCatChange}
+                setDetailProduct2={setDetailProduct2}
             />
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>
                 <PageTitle maintitle="Music, Strings and Things" subtitle='Featuring products sold by our store partners' /> 
@@ -104,7 +135,7 @@ const OnlineStore = (props) => {
                     menuOpen={menuOpen}
                 />     
             </div>
-            <OnlineStoreCss /> */}
+            <OnlineStoreCss />
         </>
     )
 }

@@ -27,7 +27,7 @@ export const CATEGORIES = {
             'Professional Lever Bass Wires'
         ],
         Synthetic: [
-            'Saverez KF Composite',
+            'Savarez KF Composite',
             'Silkgut (synthetic)'
         ] 
     },
