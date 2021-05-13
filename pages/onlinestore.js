@@ -8,6 +8,7 @@ import PageTitle from '../src/main/components/main/PageTitle';
 import CategoryMenu from '../src/store/components/menus/CategoryMenu';
 import StoreProductModal from '../src/store/components/main/StoreProductModal';
 import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
+import SearchBar from '../src/store/components/main/SearchBar';
 import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 
 const OnlineStore = (props) => {
@@ -37,7 +38,7 @@ const OnlineStore = (props) => {
             console.log('in', searchTerm, stringsOnly.length)
 
             if(searchTerm) {
-                // searchProductList = searchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
+                // searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
 
                 const returnArray = [];
             
@@ -115,14 +116,25 @@ const OnlineStore = (props) => {
                 <PageTitle maintitle='Store not installed on demo site' subtitle="This is the builder showcase demo site. Please go to findaharp.com to view store." />
             </div> */}
             SearchResults: {searchResults&&searchResults.length}
-            <CategoryMenu 
+            {/* <CategoryMenu 
                 subMenuOpen={subMenuOpen} 
                 setSubMenuOpen={setSubMenuOpen} 
                 menuOpen={menuOpen} 
                 setMenuOpen={setMenuOpen}
                 handleCatChange={handleCatChange}
                 setDetailProduct2={setDetailProduct2}
-            />
+            /> */}
+            <div className='searchBarMainCont'>
+                <SearchBar 
+                    subMenuOpen={subMenuOpen} 
+                    setSubMenuOpen={setSubMenuOpen} 
+                    menuOpen={menuOpen} 
+                    setMenuOpen={setMenuOpen}
+                    handleCatChange={handleCatChange}
+                    setDetailProduct2={setDetailProduct2}
+                />
+            </div>
+            
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>
                 <PageTitle maintitle="Music, Strings and Things" subtitle='Featuring products sold by our store partners' /> 
                 <GlobalStoreSearch 
@@ -136,6 +148,20 @@ const OnlineStore = (props) => {
                 />     
             </div>
             <OnlineStoreCss />
+            <style jsx>{`
+                * {
+                    box-sizing: border-box;
+                }
+                .searchBarMainCont {
+                    position: absolute;
+                    top: -160px;
+                    margin: 50%;
+                    transform: translate(-50%, 0);
+                    z-index: 9995;
+                    display: flex;
+                    justify-content: center;
+                }
+            `}</style>
         </>
     )
 }

@@ -156,7 +156,7 @@ export const getStoreSearchInfo = (allState, type) => {
     return `Showing ${allState.category}: ${searchInfo}`;
 }
 
-export function searchBar(filteredProducts, query, setMusicSearch, setStringSearch) {
+export function searchSearchBar(filteredProducts, query, setMusicSearch, setStringSearch) {
     const returnArray = [];
     let music;
     let strings;

@@ -11,7 +11,7 @@ function OverlayMenuCss() {
                 transition: all 1000ms ease-in;
             }
             .overlayBarOuter {
-                z-index: 9000;
+                z-index: 9997;
                 position: absolute;
                 top: 191px;
                 height: 5000px;

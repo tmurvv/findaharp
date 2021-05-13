@@ -10,6 +10,7 @@ function FeaturedProductContainerCss() {
                 position: relative;
                 z-index: 0;
             } 
+            
             .featurednotFoundContainer img {
                 height: 225px;
             }          

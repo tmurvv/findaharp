@@ -121,12 +121,12 @@ const StoreProduct = (props) => {
                         textAlign:'left',
                         verticalAlign: 'text-top',
                         letterSpacing: '2px',
-                        zIndex: '6000'
+                        zIndex: '9900'
                     }}
                 >more...</button>
             </div>
             :<>  
-                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '3000'}}>
+                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '9900'}}>
                     <div 
                         style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} 
                         className='longDesc productSmallDisplay-LongDesc' 
@@ -135,7 +135,7 @@ const StoreProduct = (props) => {
                     <div style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} className='longDesc productSmallDisplay-LongDesc'>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
                     <button className='btn blueFont' 
                         onClick={()=>handleOpenStoreModal()} 
-                            style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '4000',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}
+                            style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '9900',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}
                     >more...</button>
                 </div>
             </>

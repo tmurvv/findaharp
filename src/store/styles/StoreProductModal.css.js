@@ -11,7 +11,7 @@ function StoreProductModalCSS() {
                 top: 50vh;
                 left: 50vw;
                 transform: translate(-50%, -50%);
-                z-index: 7000;
+                z-index: 9996;
                 max-height: calc(100vh - 100px);
                 max-width: 850px;
                 overflow-y: auto;

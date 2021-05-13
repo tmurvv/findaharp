@@ -47,11 +47,10 @@ function CategoryMenu(props) {
     
     return (
         <>              
-            <h3 className='searchHelperText'>Search by category</h3>
-            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '550px'}:{width: '126px'}}>
+            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#fffbb5'}:{width: '126px', minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#fffbb5',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul>
-                        <li  onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                        <li style={props.menuOpen?{backgroundColor: '#fffbb5'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             Categories
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
@@ -66,7 +65,7 @@ function CategoryMenu(props) {
                                 id={cat}
                                 onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
-                                onClick={()=>props.setSubMenuOpen(cat)}>
+                                onClick={()=>props.setSubMenuOpen(cat)}>  
                                 <div>{cat}</div>
                                 <img 
                                     className='catChevron hovershow' 
@@ -85,12 +84,6 @@ function CategoryMenu(props) {
                 <div className='SubCat' style={props.subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
                     {props.subMenuOpen&&
                         <SubCatMenu 
-                            // searchCategory={props.searchCategory}
-                            // setSearchCategory={props.setSearchCategory}
-                            // searchSubCategory={props.searchSubCategory}
-                            // setSearchSubCategory={props.setSearchSubCategory}
-                            // searchItem={props.searchItem}
-                            // setSearchItem={props.setSearchItem}
                             menuName={props.subMenuOpen} 
                             handleCatChange={props.handleCatChange}
                             setDetailProduct2={props.setDetailProduct2}
@@ -103,15 +96,16 @@ function CategoryMenu(props) {
             </div>
            
             <style>{`
+                * {
+                    box-sizing: border-box;
+                }
                 .CatMenuCont {
                     display: flex;
                     justify-content: flex-start;
-                    position: absolute;
-                    padding-top: 10px;
-                    z-index:1000;
-                    top: 357px;
-                    left: 56px;
-                    padding-top: 10px;
+                    z-index: 9995;
+                    position: relative;
+                    -webkit-appearance: none;
+                    border: 1px solid rgb(249, 191, 30);
                 }
                 .CatMenuCont ul {
                     list-style: none;
@@ -125,11 +119,7 @@ function CategoryMenu(props) {
                 .MainCat {
                     flex: 4;
                     background-color: #fff;
-                    // padding: 5px 0 5px 5px;
-                    border: 1px solid #f9bf1e;
                     border-right: none;
-                    // background-color: #fffbb5;
-
                 }
                 .CatLine {
                     color: #000;
@@ -138,6 +128,7 @@ function CategoryMenu(props) {
                     align-items: center;
                     padding: 10px 0px 10px 15px;
                     white-space: nowrap;
+                    background-color: rgb(255, 251, 181);
                 }
                 .MainCat1:hover {
                     background-color: #f9bf1e;
@@ -159,6 +150,7 @@ function CategoryMenu(props) {
                 .catChevron {
                     height: 12px;
                     margin-right: 5px;
+                    margin-left: 5px;
                 }
                 .CatLine>.hovershow {
                     maxHeight: 0;
@@ -166,7 +158,6 @@ function CategoryMenu(props) {
                 .CatLine:hover {
                     background-color: #f9bf1e;
                 }
-
             `}</style>
         </>
     )

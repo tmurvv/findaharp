@@ -84,7 +84,7 @@ function SubCatMenu(props) {
                 </ul> 
             </div> 
             {props.menuName==="Featured Items"
-                ?<div style={{display: 'flex', justifyContent: 'space-evenly'}}>
+                ?<div style={{display: 'flex', justifyContent: 'space-evenly', transform: 'translateY(-270px)'}}>
                     <img onClick={()=>props.setDetailProduct2({
                         id: "MSST-MWOV",
                         store: 'findaharp',
@@ -135,11 +135,13 @@ function SubCatMenu(props) {
                     color: #f9bf1e;
                     text-align: left;
                     margin-left: 20px;
+                    background-color: #fff;
                 }
                 .SubCont {
                     display: flex;
                     justify-content: space-between;
-
+                    background-color: #fff;
+                    min-height: 450px;
                 }
                 .SubCatLevel1 {
                     margin-top: 10px;

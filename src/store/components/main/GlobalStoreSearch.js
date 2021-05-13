@@ -9,13 +9,14 @@ import StoreProductSearch from './StoreProductSearch';
 import StoreProductSearchStrings from './StoreProductSearchStrings';
 import ProductScroll from './ProductScroll';
 import StoreResults from './StoreResults';
+import SearchBar from './SearchBar';
 // other internal
 import GlobalStoreSearchCss from '../../styles/GlobalStoreSearch.css';
 import StoreProductSearchCss from '../../styles/StoreProductSearch.css';
 import StoreProductContainerCss from '../../styles/StoreProductContainer.css';
 import { resultInfoReducer } from '../../../main/reducers/reducers';
 import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../../main/constants/constants';
-import { getStoreSearchInfo, searchBar } from '../../utils/searchProductsHelpers';
+import { getStoreSearchInfo, searchSearchBar } from '../../utils/searchProductsHelpers';
 import FastNEasyStringForm from './FastNEasyStringForm';
 
 function GlobalStoreSearch(props) {
@@ -39,45 +40,6 @@ function GlobalStoreSearch(props) {
     const [idx, setIdx] = useState(0);
     const [screenWidth, setScreenWidth] = useState();
     const [ change, setChange ] = useState('');
-    
-    //#region region category menu
-    // const [ menuOpen, setMenuOpen] = useState([]);
-
-    // function handleCatChange(e) {
-    //     const filtered = [];
-    //     const catId = e.target.id.toString();
-    //     setMenuOpen('[]');
-    //     console.log(e.target.id);
-    //     document.querySelector('#categories').nextElementSibling.innerText = e.target.id;
-            
-    //     storedItems.map(prod => {
-    //         if (prod.subsubcategory===catId) {filtered.push(prod);} else {
-    //             // console.log(catId,storedItems)
-    //         }
-    //     })
-
-    //     console.log('filtered', filtered);
-    //     // console.log(props.filteredProducts[0]);
-    //     // const storedItems = props.filteredProducts.filter(prod=>prod.subcategory===catId);
-    //     // console.log(storedItems.length)
-    //     // console.log(storedItems)
-    //     // setSearchResults(storedItems);
-    // }
-    // function toggleOpen(e) {
-    //     const arrayCopy = [...menuOpen]
-    //     if (arrayCopy.includes(e.target.id)) {
-    //         const index = arrayCopy.indexOf(e.target.id);
-    //         if (index > -1) {
-    //             arrayCopy.splice(index, 1);
-    //         }
-    //     } else {
-    //         arrayCopy.push(e.target.id);
-    //     }
-    //     setMenuOpen(arrayCopy);
-    // }   
-    //#endregion
-
-
 
     function resetResults() {
         document.querySelector('#loadingLoginText').innerText='';
@@ -326,7 +288,7 @@ function GlobalStoreSearch(props) {
         // search term
         if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
-            searchProductList = searchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
+            searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
         } else {
             searchProductList=[...preSearchProductList]
         }
@@ -458,38 +420,7 @@ function GlobalStoreSearch(props) {
                 {screenWidth>750
                 ?
                 <>
-                
-                
-                {/* <div className='selectContainer'>    
-                    <select onChange={()=>handleChange('','category')} id='category'>
-                        <option name='All'>All</option>
-                        <option name='Strings'>Strings</option>
-                        <option name='Music'>Music</option>
-                        <option name='Accessories'>Accessories</option>
-                        <option name='Books'>Books</option>
-                        <option name='Gifts'>Gifts</option>
-                        <option name='CDs'>CDs</option>
-                        <option name='Digital Downloads'>Digital Downloads</option>
-                    </select>
-                    <span>&#711;</span>
-                </div> */}
-                <h3 className='searchHelperText'>and / or search term</h3>
-                <div className="searchTextImg">
-                    <form style={{display: 'flex'}}>
-                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
-                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
-                            <img src='/img/searchicon.png' alt='search icon' />
-                        </button>
-                    </form> 
-                </div>
-                <div className='selectContainer'>
-                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
-                        <option value='New/Used' name='All newused'>New/Used</option>
-                        <option value='New' name='New'>New Only</option>
-                        <option value='Used' name='Used'>Used Only</option>
-                    </select>
-                    <span>&#711;</span>
-                </div>
+                    
                 </>
                 :
                 <>
@@ -529,7 +460,8 @@ function GlobalStoreSearch(props) {
                 </>
                 }
             </div>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px'}}>
+                
                 <div hidden={musicSearch}><button onClick={()=>setMusicSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
                 <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
                 {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
@@ -570,7 +502,7 @@ function GlobalStoreSearch(props) {
             }
             {searchResults&&searchResults.length>0&&
             <>
-            <div className="storeproductContainer">
+            <div className="storeproductContainer" style={props.menuOpen?{opacity: '.2'}:{opacity: 1}}>
                 <div>
                     <div className='searchInfo clearAll' id='clearSearch'>
                         <div className='searchInfoWrapper'>
@@ -632,3 +564,34 @@ function GlobalStoreSearch(props) {
 }
 
 export default GlobalStoreSearch;
+
+// {/* <div className='selectContainer'>    
+//                     <select onChange={()=>handleChange('','category')} id='category'>
+//                         <option name='All'>All</option>
+//                         <option name='Strings'>Strings</option>
+//                         <option name='Music'>Music</option>
+//                         <option name='Accessories'>Accessories</option>
+//                         <option name='Books'>Books</option>
+//                         <option name='Gifts'>Gifts</option>
+//                         <option name='CDs'>CDs</option>
+//                         <option name='Digital Downloads'>Digital Downloads</option>
+//                     </select>
+//                     <span>&#711;</span>
+//                 </div> */}
+//                 <h3 className='searchHelperText'>and / or search term</h3>
+//                 <div className="searchTextImg">
+//                     <form style={{display: 'flex'}}>
+//                         <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
+//                         <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
+//                             <img src='/img/searchicon.png' alt='search icon' />
+//                         </button>
+//                     </form> 
+//                 </div>
+//                 <div className='selectContainer'>
+//                     <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
+//                         <option value='New/Used' name='All newused'>New/Used</option>
+//                         <option value='New' name='New'>New Only</option>
+//                         <option value='Used' name='Used'>Used Only</option>
+//                     </select>
+//                     <span>&#711;</span>
+//                 </div>
