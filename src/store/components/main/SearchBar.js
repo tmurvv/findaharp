@@ -48,10 +48,11 @@ const SearchBar = (props) => {
                 setMenuOpen={props.setMenuOpen}
                 handleCatChange={props.handleCatChange}
                 setDetailProduct2={props.setDetailProduct2}
+                catBreadCrumb={props.catBreadCrumb}
             />   
         <div className="searchTextImg">
             <form style={{display: 'flex'}}>
-                <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
+                <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="           Search" /> 
                 <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
                     <img src='/img/searchicon.png' alt='search icon' />
                 </button>

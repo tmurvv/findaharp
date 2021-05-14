@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { CATEGORIES } from '../../constants/Categories';
 function SubCatMenu(props) {
-    const [searchResults, setSearchResults] = useState();
+    // const [searchResults, setSearchResults] = useState();
     const [ menuOpen, setMenuOpen] = useState(false);
     const [ subMenuOpen, setSubMenuOpen] = useState(true);
     const [ mainCategories ] = useState(Object.keys(CATEGORIES));

@@ -10,6 +10,7 @@ import StoreProductModal from '../src/store/components/main/StoreProductModal';
 import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
 import SearchBar from '../src/store/components/main/SearchBar';
 import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
+import { ABBR } from '../src/store/constants/Abbreviations';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
@@ -17,7 +18,20 @@ const OnlineStore = (props) => {
     const [ subMenuOpen, setSubMenuOpen ] = useState();
     const [ openStoreDetail, setopenStoreDetail ] = useState(false);
     const [ detailProduct2, setDetailProduct2 ] = useState();
-
+    const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
+    const [catBreadCrumb, setCatBreadCrumb ] = useState('Categories  ');
+    
+    function findCatAbbr(fullCat) {
+        console.log(fullCat);
+        console.log(ABBR.length);
+        console.log(ABBR[0][0]);
+        console.log(fullCat);
+        let replace;
+        ABBR.forEach(element => {
+            if (element[0]===fullCat) {console.log('FOUND IT', element[1]);replace=element[1];}
+        });
+        return replace;
+    }
     function handleCatChange(searchCategory, searchSubCategory, searchItem) {
 
         // console.log('CAT', searchCategory);
@@ -76,12 +90,21 @@ const OnlineStore = (props) => {
                 });
                 
                 // sort and return
+                setMenuOpen(false);
+                setSubMenuOpen(false);
                 setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
+                setSearchResultsText('');
+                setCatBreadCrumb(findCatAbbr(searchItem));
                 return;
             }
         }
         String(searchCategory).toUpperCase().startsWith('STRINGS')?searchCategory='strings':'';
         setSearchResults(props.filteredProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
+        setSearchResultsText('');
+        
+        setCatBreadCrumb(findCatAbbr(searchItem));
+        setMenuOpen(false);
+        setSubMenuOpen(false);
     }
     function handleCloseDetail() {
         setDetailProduct2([]);
@@ -101,6 +124,13 @@ const OnlineStore = (props) => {
     useEffect(()=>{
         // setFilteredProducts(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
         setSearchResults(props.filteredProducts.sort((a,b) => (a.artist_last > b.artist_last) ? 1 : ((b.artist_last > a.artist_last) ? -1 : 0)));
+    },[]);
+    // reset variables
+    useEffect(()=>{
+        setSearchResultsText('entry');
+        setMenuOpen(false);
+        setSubMenuOpen(false);
+        setCatBreadCrumb('Categories');
     },[]);
     return (
         <> 
@@ -132,6 +162,7 @@ const OnlineStore = (props) => {
                     setMenuOpen={setMenuOpen}
                     handleCatChange={handleCatChange}
                     setDetailProduct2={setDetailProduct2}
+                    catBreadCrumb={catBreadCrumb}
                 />
             </div>
             
@@ -143,7 +174,10 @@ const OnlineStore = (props) => {
                     featuredProducts={props.featuredProducts} 
                     music={props.music} 
                     strings={props.strings} 
+                    searchResults={searchResults}
                     setSearchResults={setSearchResults}
+                    searchResultsText={searchResultsText}
+                    setSearchResultsText={setSearchResultsText}
                     menuOpen={menuOpen}
                 />     
             </div>

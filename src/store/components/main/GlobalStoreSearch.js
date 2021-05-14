@@ -30,8 +30,8 @@ function GlobalStoreSearch(props) {
     const [ notesSearch, setNotesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
     const [ makesmodelsSearch, setMakesmodelsSearch ] = useState();
-    const [ searchResults, setSearchResults ] = useState();
-    const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
+    // const [ searchResults, props.searchResults ] = useState();
+    // const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
     const [ openStoreDetail, setopenStoreDetail ] = useState(false);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [hasMore, setHasMore] = useState(false);
@@ -294,17 +294,17 @@ function GlobalStoreSearch(props) {
         }
         finalProductList=[...searchProductList];
         // console.log('final', finalProductList.length)
-        finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
+        finalProductList.length<1?props.searchResultsText('notfound'):props.searchResultsText('found');  
         setTypeOfSearch(type);
-        setSearchResults(finalProductList)
+        props.props.searchResults(finalProductList)
     }
     
     function handleClear() {
         document.querySelector('#category').value='All';
         document.querySelector('#searchTerm').value='';
         setAllState(STORE_INITIAL_STATE);
-        setSearchResults(props.filteredProducts);
-        setSearchResultsText('entry');
+        props.searchResults(props.filteredProducts);
+        setprops.searchResultsText('entry');
         if (document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display='none';
     }
     function handleopenStoreDetail(product) {
@@ -317,7 +317,7 @@ function GlobalStoreSearch(props) {
     }
     const loadMore = page => {  
         setHasMore(true);
-        if (idx+30 > searchResults.length) {
+        if (idx+30 > props.searchResults.length) {
             setHasMore(false);  
         } else {
             setIdx(idx+30);
@@ -330,7 +330,7 @@ function GlobalStoreSearch(props) {
         const newProdList = prodList.filter(prod=>prod.subcategory===catId);
         console.log(newProdList.length)
         console.log(newProdList)
-        setSearchResults(newProdList);
+        props.searchResults(newProdList);
     }
     useEffect(()=>{
         setScreenWidth(window.innerWidth);
@@ -362,7 +362,7 @@ function GlobalStoreSearch(props) {
         // const prodList = props.filteredProducts.filter(prod=>prod.subcategory===catId);
         // console.log(prodList.length)
         // console.log(prodList)
-        // setSearchResults(prodList);
+        // props.searchResults(prodList);
     }
     function toggleOpen(e) { 
         console.log('here')
@@ -461,7 +461,8 @@ function GlobalStoreSearch(props) {
                 }
             </div>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px'}}>
-                
+                <p>Entry Text: {props.searchResultsText&&props.searchResultsText}</p>
+                <p>Global Search: {props.searchResults&&props.searchResults.length}</p>
                 <div hidden={musicSearch}><button onClick={()=>setMusicSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
                 <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
                 {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
@@ -500,7 +501,7 @@ function GlobalStoreSearch(props) {
                     setStringSearch={setStringSearch}
                 />
             }
-            {searchResults&&searchResults.length>0&&
+            {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&
             <>
             <div className="storeproductContainer" style={props.menuOpen?{opacity: '.2'}:{opacity: 1}}>
                 <div>
@@ -521,7 +522,7 @@ function GlobalStoreSearch(props) {
                     loadMore={loadMore}
                     resetPage={resetPage}
                 >
-                    {(searchResults.slice(0,idx+30)).map(product => <StoreProduct 
+                    {(props.searchResults.slice(0,idx+30)).map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
                         handleopenstoredetail={handleopenStoreDetail} 
@@ -540,7 +541,7 @@ function GlobalStoreSearch(props) {
             </div>
             </>
             }
-            {searchResultsText==='notfound'&&
+            {props.searchResultsText==='notfound'&&
                 <div className='storeselected clearAll' id='clearSearch' style={{display:'flex', paddingTop: '40px'}}>
                     <h3>No items match your search.</h3>
                     <div onClick={handleClear} className='clearAll clearSearch'>
@@ -549,7 +550,7 @@ function GlobalStoreSearch(props) {
                     </div>
                 </div>
             }
-            {searchResultsText==='entry'&&
+            {props.searchResultsText==='entry'&&
             <>
                 <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Featured Items"/>
                 <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="String Brands"/>

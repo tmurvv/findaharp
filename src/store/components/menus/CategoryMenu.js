@@ -51,7 +51,7 @@ function CategoryMenu(props) {
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#fffbb5',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul>
                         <li style={props.menuOpen?{backgroundColor: '#fffbb5'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
-                            Categories
+                            {props.catBreadCrumb}
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
                             :<img className='catChevron' src='img/store/right-chevron.png' alt='right arrow' />
@@ -81,12 +81,13 @@ function CategoryMenu(props) {
                     }
                     </ul>
                 </div>
-                <div className='SubCat' style={props.subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
+                <div className='SubCat' style={props.menuOpen&&props.subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
                     {props.subMenuOpen&&
                         <SubCatMenu 
                             menuName={props.subMenuOpen} 
                             handleCatChange={props.handleCatChange}
                             setDetailProduct2={props.setDetailProduct2}
+                            menuOpen={props.menuOpen}
                         />
                     }
                     <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
@@ -129,6 +130,8 @@ function CategoryMenu(props) {
                     padding: 10px 0px 10px 15px;
                     white-space: nowrap;
                     background-color: rgb(255, 251, 181);
+                    height: 48px;
+                    border-right: 1px solid gold;
                 }
                 .MainCat1:hover {
                     background-color: #f9bf1e;

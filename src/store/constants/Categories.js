@@ -119,7 +119,6 @@ export const CATEGORIES = {
         "Transportation",
         "Tuning Keys",
         "Music Stands",
-        "Benches",
         "Crowns",
         "For Students"
     ],
