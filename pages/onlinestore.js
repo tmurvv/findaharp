@@ -20,6 +20,8 @@ const OnlineStore = (props) => {
     const [ detailProduct2, setDetailProduct2 ] = useState();
     const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
     const [catBreadCrumb, setCatBreadCrumb ] = useState('Categories  ');
+    const [ ribbonmenuOpen, ribbonsetMenuOpen ] = useState(false);
+    const [ ribbonsubMenuOpen, ribbonsetSubMenuOpen ] = useState();
     
     function findCatAbbr(fullCat) {
         console.log(fullCat);
@@ -179,6 +181,10 @@ const OnlineStore = (props) => {
                     searchResultsText={searchResultsText}
                     setSearchResultsText={setSearchResultsText}
                     menuOpen={menuOpen}
+                    ribbonmenuOpen={ribbonmenuOpen}
+                    ribbonsetMenuOpen={ribbonsetMenuOpen}
+                    ribbonsubMenuOpen={ribbonsubMenuOpen}
+                    ribbonsetSubMenuOpen={ribbonsetSubMenuOpen}
                 />     
             </div>
             <OnlineStoreCss />

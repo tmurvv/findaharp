@@ -10,6 +10,7 @@ import StoreProductSearchCss from '../../styles/StoreProductSearch.css';
 import { getSearchInfo, triggerLazy } from '../../../main/utils/helpers';
 import { MENU_ABBR } from '../../../main/constants/constants';
 import { CompassCalibrationOutlined } from '@material-ui/icons';
+import CategoryMenu from '../menus/CategoryMenu';
 
 const initialState = {
     category: false,
@@ -266,12 +267,21 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-                    <MakesmodelsMenu 
+                    {/* <MakesmodelsMenu 
                         id='makesmodelsmenu'
                         handleMakesmodelsChange = {handleMakesmodelsSelection}
                         currentselected={props.allState.makesmodels?props.allState.makesmodels:'Makes/Models'}
                         open={menus.makesmodels}
                         handleclick={handleClick}
+                    /> */}
+                    <CategoryMenu 
+                        ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
+                        ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
+                        ribbonmenuOpen={props.ribbonmenuOpen} 
+                        ribbonsetMenuOpen={props.ribbonsetMenuOpen}
+                        ribbonhandleCatChange={props.ribbonhandleCatChange}
+                        ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
+                        ribboncatBreadCrumb={'ribbon'}
                     />
                 </div>
                 <div className="storesearchLine2Sub">

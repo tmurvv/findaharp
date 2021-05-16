@@ -9,18 +9,6 @@ function SubCatMenu(props) {
     const [ mainCategories ] = useState(Object.keys(CATEGORIES));
     const CategoryCopy = {...JSON.parse(JSON.stringify(CATEGORIES))}
 
-    function toggleOpen(e) {
-        const arrayCopy = [...menuOpen]
-        if (arrayCopy.includes(e.target.id)) {
-            const index = arrayCopy.indexOf(e.target.id);
-            if (index > -1) {
-                arrayCopy.splice(index, 1);
-            }
-        } else {
-            arrayCopy.push(e.target.id);
-        }
-        setMenuOpen(arrayCopy);
-    } 
     function handleClick(e) {
         // e.stopPropagation();
         // const filtered = [];

@@ -24,18 +24,7 @@ function SubCatMenu(props) {
     //     // console.log(storedItems)
     //     // setSearchResults(storedItems);
     // }
-    function toggleOpen(e) {
-        const arrayCopy = [...menuOpen]
-        if (arrayCopy.includes(e.target.id)) {
-            const index = arrayCopy.indexOf(e.target.id);
-            if (index > -1) {
-                arrayCopy.splice(index, 1);
-            }
-        } else {
-            arrayCopy.push(e.target.id);
-        }
-        setMenuOpen(arrayCopy);
-    } 
+    
     if (props.menuOpen) {
         return (
             <>       

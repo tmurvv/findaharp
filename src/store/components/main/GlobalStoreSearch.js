@@ -364,22 +364,6 @@ function GlobalStoreSearch(props) {
         // console.log(prodList)
         // props.searchResults(prodList);
     }
-    function toggleOpen(e) { 
-        console.log('here')
-        const submenu = e.target.parentNode.querySelector('.submenu');
-        console.log(submenu.classList)
-        if (submenu.classList.contains('open')) {
-            submenu.classList.remove('open');
-            e.target.innerText='+'
-        } else { 
-            submenu.classList.add('open');
-            e.target.innerText='+'
-        }
-        console.log(submenu.classList)
-        const buttonState = e.target.parentNode.querySelector('.submenu-toggle-button');
-        buttonState.classList.contains('open')?buttonState.classList.remove('open'):buttonState.classList.add('open');
-        setChange('yes');
-    }
     useEffect(()=>{
         const buttons = document.querySelectorAll('.submenu-toggle-button');
         Array.prototype.forEach.call(buttons, function(button) {
@@ -414,7 +398,7 @@ function GlobalStoreSearch(props) {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
-            {/* <CategoryMenu setMenuOpen={setMenuOpen} menuOpen={menuOpen} handleCatChange={handleCatChange} toggleOpen={toggleOpen}/> */}
+            
             
             <div className='storeSearchLine' >
                 {screenWidth>750
@@ -499,6 +483,13 @@ function GlobalStoreSearch(props) {
                     setBrandsSearch={setBrandsSearch} 
                     setMakesmodelsSearch={setMakesmodelsSearch}
                     setStringSearch={setStringSearch}
+                    ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
+                    ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
+                    ribbonmenuOpen={props.ribbonmenuOpen} 
+                    ribbonsetMenuOpen={props.ribbonsetMenuOpen}
+                    ribbonhandleCatChange={props.ribbonhandleCatChange}
+                    ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
+                    ribboncatBreadCrumb={props.ribboncatBreadCrumb}
                 />
             }
             {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&
