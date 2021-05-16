@@ -282,6 +282,7 @@ function StoreProductSearchStrings(props) {
                         ribbonhandleCatChange={props.ribbonhandleCatChange}
                         ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
                         ribboncatBreadCrumb={'ribbon'}
+                        handleCatChange={props.handleCatChange}
                     />
                 </div>
                 <div className="storesearchLine2Sub">
@@ -365,7 +366,7 @@ function StoreProductSearchStrings(props) {
                             handleClick({target: {name: 'makesmodels'}});
                             
                         }}
-                        style={{cursor: 'pointer'}}
+                        style={{justifySelf: 'left'}}
                     >
                         {/* {props.allState&&props.allState.makesmodels} */}
                         {props.allState.modelAbbr}

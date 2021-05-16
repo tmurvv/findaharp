@@ -445,8 +445,6 @@ function GlobalStoreSearch(props) {
                 }
             </div>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px'}}>
-                <p>Entry Text: {props.searchResultsText&&props.searchResultsText}</p>
-                <p>Global Search: {props.searchResults&&props.searchResults.length}</p>
                 <div hidden={musicSearch}><button onClick={()=>setMusicSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
                 <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
                 {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
@@ -487,7 +485,7 @@ function GlobalStoreSearch(props) {
                     ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
                     ribbonmenuOpen={props.ribbonmenuOpen} 
                     ribbonsetMenuOpen={props.ribbonsetMenuOpen}
-                    ribbonhandleCatChange={props.ribbonhandleCatChange}
+                    handleCatChange={props.handleCatChange}
                     ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
                     ribboncatBreadCrumb={props.ribboncatBreadCrumb}
                 />

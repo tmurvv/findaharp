@@ -147,7 +147,7 @@ const OnlineStore = (props) => {
             {/* <div style={{height: '300px', marginTop: '70px'}}>
                 <PageTitle maintitle='Store not installed on demo site' subtitle="This is the builder showcase demo site. Please go to findaharp.com to view store." />
             </div> */}
-            SearchResults: {searchResults&&searchResults.length}
+            {/* SearchResults: {searchResults&&searchResults.length} */}
             {/* <CategoryMenu 
                 subMenuOpen={subMenuOpen} 
                 setSubMenuOpen={setSubMenuOpen} 
@@ -185,6 +185,7 @@ const OnlineStore = (props) => {
                     ribbonsetMenuOpen={ribbonsetMenuOpen}
                     ribbonsubMenuOpen={ribbonsubMenuOpen}
                     ribbonsetSubMenuOpen={ribbonsetSubMenuOpen}
+                    handleCatChange={handleCatChange}
                 />     
             </div>
             <OnlineStoreCss />
