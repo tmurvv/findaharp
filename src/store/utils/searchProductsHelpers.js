@@ -138,6 +138,7 @@ export const getStoreSearchInfo = (allState, type) => {
     // if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
     // append searchInfo string with only selected filter information
     let searchInfo='';
+    if (type&&type!=='music'&&type!=='strings') return `Showing: ${type}`;
     if (type==='music') {
         [allState.soloensemble, allState.level, allState.publicationtype].map(menuItem => {
             if(!['All Lever/Pedal/Ens', 'All Levels', 'All Publication Types'].includes(menuItem)) searchInfo += `${menuItem} | `

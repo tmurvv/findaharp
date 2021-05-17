@@ -45,7 +45,7 @@ function CategoryMenu(props) {
         }
     }
     useEffect(()=>{
-        console.log('props cat menu', props)
+        // console.log('props cat menu', props)
     })
     if (!props.ribboncatBreadCrumb) return (
         <>              

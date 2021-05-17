@@ -11,6 +11,7 @@ import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
 import SearchBar from '../src/store/components/main/SearchBar';
 import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 import { ABBR } from '../src/store/constants/Abbreviations';
+import { getStoreSearchInfo } from '../src/store/utils/searchProductsHelpers';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
@@ -20,6 +21,7 @@ const OnlineStore = (props) => {
     const [ detailProduct2, setDetailProduct2 ] = useState();
     const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
     const [catBreadCrumb, setCatBreadCrumb ] = useState('Categories  ');
+    const [ searchBreadCrumb, setSearchBreadCrumb ] = useState('searchBread');
     const [ ribbonmenuOpen, ribbonsetMenuOpen ] = useState(false);
     const [ ribbonsubMenuOpen, ribbonsetSubMenuOpen ] = useState();
     
@@ -97,6 +99,7 @@ const OnlineStore = (props) => {
                 setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
                 setSearchResultsText('');
                 setCatBreadCrumb(findCatAbbr(searchItem));
+                setSearchBreadCrumb(searchItem)
                 return;
             }
         }
@@ -107,6 +110,8 @@ const OnlineStore = (props) => {
         setCatBreadCrumb(findCatAbbr(searchItem));
         setMenuOpen(false);
         setSubMenuOpen(false);
+        getStoreSearchInfo({category: 'music'}, 'music')
+        setSearchBreadCrumb(searchItem)
     }
     function handleCloseDetail() {
         setDetailProduct2([]);
@@ -186,6 +191,7 @@ const OnlineStore = (props) => {
                     ribbonsubMenuOpen={ribbonsubMenuOpen}
                     ribbonsetSubMenuOpen={ribbonsetSubMenuOpen}
                     handleCatChange={handleCatChange}
+                    searchBreadCrumb={searchBreadCrumb}
                 />     
             </div>
             <OnlineStoreCss />

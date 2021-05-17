@@ -99,12 +99,12 @@ function GlobalStoreSearch(props) {
         } 
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
             category = "Music";
-            document.querySelector('#category').value='Music';
+            // document.querySelector('#category').value='Music';
             type = 'music';
         } 
         if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
             category = "Strings";
-            document.querySelector('#category')?document.querySelector('#category').value='Strings':'';
+            // document.querySelector('#category')?document.querySelector('#category').value='Strings':'';
             type = 'strings'
         }
         setAllState({...allState, category: category});
@@ -236,7 +236,7 @@ function GlobalStoreSearch(props) {
             // check notes
             if (note&&note.toUpperCase()!=='ALL NOTES'&&note!==undefined) {
                 octavesProductList.map(product=> {
-                    // Note Yet Implement (search for notes by number)
+                    // Not Yet Implement (search for notes by number)
                     if (note==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
                     if (note==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
                     if (note==='C'&&Number.isInteger((product.order+4)/7)) notesProductList.push(product);
@@ -300,7 +300,7 @@ function GlobalStoreSearch(props) {
     }
     
     function handleClear() {
-        document.querySelector('#category').value='All';
+        // document.querySelector('#category').value='All';
         document.querySelector('#searchTerm').value='';
         setAllState(STORE_INITIAL_STATE);
         props.searchResults(props.filteredProducts);
@@ -375,6 +375,8 @@ function GlobalStoreSearch(props) {
                 // buttonState.classList.toggle('open');
             });
         });
+        console.log('global', props)
+        props.searchBreadCrumb&&setTypeOfSearch(props.searchBreadCrumb);
     });
     //end region
     return (
@@ -490,7 +492,7 @@ function GlobalStoreSearch(props) {
                     ribboncatBreadCrumb={props.ribboncatBreadCrumb}
                 />
             }
-            {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&
+            {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&props.searchResultsText!=='entry'&&
             <>
             <div className="storeproductContainer" style={props.menuOpen?{opacity: '.2'}:{opacity: 1}}>
                 <div>

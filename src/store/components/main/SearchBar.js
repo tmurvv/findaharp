@@ -29,14 +29,17 @@ const SearchBar = (props) => {
     const [query, setQuery] = useState(null);
     const [results, setResults] = useState([{ref: 'here'}, {ref: 'here again'}])
 
-    const handleChange = (evt) => {
-        alert('Not yet implemented');
+    const handleChange = (e) => {
+        const searchText=document.querySelector('#searchTerm')&&document.querySelector('#searchTerm').value;
+        console.log('st', searchText)
+        // alert('Not yet implemented');
         // left over from when search bar was for text input
-        // setQuery(evt.target.value);
+        setQuery(searchText);
+        searchIt('library');
     }
-    function searchIt() {
-    console.log(idx.search(query))
-        setResults(idx.search(query));
+    function searchIt(searchText) {
+        console.log('res', idx.search(searchText).length)
+        setResults(idx.search(searchText));
     }
     return (
         <>  
@@ -53,7 +56,7 @@ const SearchBar = (props) => {
         <div className="searchTextImg">
             <form style={{display: 'flex'}}>
                 <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="           Search" /> 
-                <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
+                <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange(e)}}>
                     <img src='/img/searchicon.png' alt='search icon' />
                 </button>
             </form> 
