@@ -60,14 +60,14 @@ function GlobalStoreSearch(props) {
         console.log(props.filteredProducts[600]);
         console.log(props.filteredProducts[props.filteredProducts.length-550]);
         if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="MUSIC") {
-            setMusicSearch(true);
-            setStringSearch(false);
+            props.setMusicSearch(true);
+            props.setStringSearch(false);
         } else if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="STRINGS") {
-            setMusicSearch(false);
-            setStringSearch(true);
+            props.setMusicSearch(false);
+            props.setStringSearch(true);
         } else {
-            setMusicSearch(false);
-            setStringSearch(false);
+            props.setMusicSearch(false);
+            props.setStringSearch(false);
         }
         // update menu text -- not for search term
         if (type==='music') {           
@@ -81,8 +81,8 @@ function GlobalStoreSearch(props) {
         let searchTerm = document.querySelector('#searchTerm').value;
         let newused = document.querySelector('#newused').value;
         setClearMenus(false);
-        setIdx(0);
-        setHasMore(true);
+        props.setIdx(0);
+        props.setHasMore(true);
         let productListCopy=[...props.filteredProducts];
         let preSearchProductList=[]
         let finalProductList=[];
@@ -288,7 +288,7 @@ function GlobalStoreSearch(props) {
         // search term
         if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
-            searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
+            searchProductList = searchSearchBar(preSearchProductList, searchTerm, props.setMusicSearch, props.setStringSearch)
         } else {
             searchProductList=[...preSearchProductList]
         }
@@ -303,8 +303,8 @@ function GlobalStoreSearch(props) {
         // document.querySelector('#category').value='All';
         document.querySelector('#searchTerm').value='';
         setAllState(STORE_INITIAL_STATE);
-        props.searchResults(props.filteredProducts);
-        setprops.searchResultsText('entry');
+        props.setSearchResults(props.filteredProducts);
+        props.setSearchResultsText('entry');
         if (document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display='none';
     }
     function handleopenStoreDetail(product) {
@@ -316,22 +316,14 @@ function GlobalStoreSearch(props) {
         setopenStoreDetail(false); 
     }
     const loadMore = page => {  
-        setHasMore(true);
-        if (idx+30 > props.searchResults.length) {
-            setHasMore(false);  
+        props.setHasMore(true);
+        if (props.idx+30 > props.searchResults.length) {
+            props.setHasMore(false);  
         } else {
-            setIdx(idx+30);
+            props.setIdx(props.idx+30);
         }
       };
-    function handleCatChange(e) {
-        const catId = e.target.getAttribute('id');
-        console.log('change', e.target, catId)
-        console.log(props.filteredProducts[0]);
-        const newProdList = prodList.filter(prod=>prod.subcategory===catId);
-        console.log(newProdList.length)
-        console.log(newProdList)
-        props.searchResults(newProdList);
-    }
+    
     useEffect(()=>{
         setScreenWidth(window.innerWidth);
         const buttons = document.querySelectorAll('.submenu-toggle-button');
@@ -344,26 +336,7 @@ function GlobalStoreSearch(props) {
             });
         });
     })
-    // region functionality from CategoryMenu
-    const [catSearchResults, setCatSearchResults] = useState();
-    const [ toggle0, setToggle0] = useState('+');
-    function handleCatChange(e) {
-        const filtered = [];
-        const catId = e.target.id.toString();
-        
-        prodList.map(prod => {
-            if (prod.subsubcategory===catId) {filtered.push(prod);} else {
-                // console.log(catId,prodList)
-            }
-        })
-
-        console.log('filtered', filtered);
-        // console.log(props.filteredProducts[0]);
-        // const prodList = props.filteredProducts.filter(prod=>prod.subcategory===catId);
-        // console.log(prodList.length)
-        // console.log(prodList)
-        // props.searchResults(prodList);
-    }
+    
     useEffect(()=>{
         const buttons = document.querySelectorAll('.submenu-toggle-button');
         Array.prototype.forEach.call(buttons, function(button) {
@@ -375,8 +348,8 @@ function GlobalStoreSearch(props) {
                 // buttonState.classList.toggle('open');
             });
         });
-        console.log('global', props)
-        props.searchBreadCrumb&&setTypeOfSearch(props.searchBreadCrumb);
+        // console.log('global', props)
+        // props.searchBreadCrumb&&setTypeOfSearch(props.searchBreadCrumb);
     });
     //end region
     return (
@@ -413,7 +386,7 @@ function GlobalStoreSearch(props) {
                 <h3 className='searchHelperText'>Search by category</h3>
                 <div style={{display: 'flex', margin:'auto'}}>
                 <div className='selectContainer'>    
-                    <select onChange={()=>handleChange('','category')} id='category' style={{WebkitAppearance: 'none'}}>
+                    <select onChange={()=>props.handleChange('','category')} id='category' style={{WebkitAppearance: 'none'}}>
                         <option name='All'>All</option>
                         <option name='Strings'>Strings</option>
                         <option name='Music'>Music</option>
@@ -426,7 +399,7 @@ function GlobalStoreSearch(props) {
                     <span>&#711;</span>
                 </div>
                 <div className='selectContainer'> 
-                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px', WebkitAppearance: 'none'}}>
+                    <select onChange={()=>props.handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px', WebkitAppearance: 'none'}}>
                         <option value='New/Used' name='All newused'>New/Used</option>
                         <option value='New' name='New'>New Only</option>
                         <option value='Used' name='Used'>Used Only</option>
@@ -438,7 +411,7 @@ function GlobalStoreSearch(props) {
                 <div className="searchTextImg">
                     <form style={{display: 'flex'}}>
                         <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
-                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
+                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange()}}>
                             <img src='/img/searchicon.png' alt='search icon' />
                         </button>
                     </form> 
@@ -447,8 +420,8 @@ function GlobalStoreSearch(props) {
                 }
             </div>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px'}}>
-                <div hidden={musicSearch}><button onClick={()=>setMusicSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
-                <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
+                <div hidden={props.musicSearch}><button onClick={()=>props.setMusicSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
+                <div hidden={props.stringSearch}><button onClick={()=>props.setStringSearch(true)} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
                 {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
                 <div>
                     <button 
@@ -459,30 +432,30 @@ function GlobalStoreSearch(props) {
                     </button>
                 </div>
             </div>
-            {musicSearch
+            {props.musicSearch
                 &&<StoreProductSearch 
                     clearMenus={clearMenus} 
                     setTypeOfSearch={setTypeOfSearch} 
                     handleClear={handleClear} 
-                    handleChange={handleChange}
-                    allState={allState}
-                    setAllState={setAllState}
-                    setMusicSearch={setMusicSearch} 
+                    handleChange={props.handleChange}
+                    allState={props.allState}
+                    setAllState={props.setAllState}
+                    setMusicSearch={props.setMusicSearch} 
                 />
             }
-            {stringSearch
+            {props.stringSearch
                 &&<StoreProductSearchStrings              
                     clearMenus={clearMenus} 
                     setTypeOfSearch={setTypeOfSearch} 
                     handleClear={handleClear} 
-                    handleChange={handleChange} 
-                    allState={allState}
-                    setAllState={setAllState} 
+                    handleChange={props.handleChange} 
+                    allState={props.allState}
+                    setAllState={props.setAllState} 
                     setOctavesSearch={setOctavesSearch} 
                     setNotesSearch={setNotesSearch} 
                     setBrandsSearch={setBrandsSearch} 
                     setMakesmodelsSearch={setMakesmodelsSearch}
-                    setStringSearch={setStringSearch}
+                    setStringSearch={props.setStringSearch}
                     ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
                     ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
                     ribbonmenuOpen={props.ribbonmenuOpen} 
@@ -498,7 +471,7 @@ function GlobalStoreSearch(props) {
                 <div>
                     <div className='searchInfo clearAll' id='clearSearch'>
                         <div className='searchInfoWrapper'>
-                            <h3>{getStoreSearchInfo(allState,typeOfSearch)}</h3>
+                            <h3>{getStoreSearchInfo(allState,props.typeOfSearch)}</h3>
                             <div onClick={handleClear} className='clearAll clearSearch'>
                                 <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
                                 <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
@@ -509,11 +482,11 @@ function GlobalStoreSearch(props) {
                 <InfiniteScrollLoading
                     element="div"
                     pageStart={1}
-                    hasMore={hasMore && !isLoading}
+                    hasMore={props.hasMore && !isLoading}
                     loadMore={loadMore}
                     resetPage={resetPage}
                 >
-                    {(props.searchResults.slice(0,idx+30)).map(product => <StoreProduct 
+                    {(props.searchResults.slice(0,props.idx+30)).map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
                         handleopenstoredetail={handleopenStoreDetail} 
@@ -544,7 +517,7 @@ function GlobalStoreSearch(props) {
             {props.searchResultsText==='entry'&&
             <>
                 <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Featured Items"/>
-                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="String Brands"/>
+                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={props.handleChange} handleResults={handleResults} title="String Brands"/>
                 <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Music Titles"/>
             </>
             }
