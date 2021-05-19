@@ -127,11 +127,11 @@ const FeaturedProduct = (props) => {
                         <div className="featuredproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic', marginLeft: '0'}}>USD</span> ({props.productdetail.newused})</div>
                         :<div className="featuredproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic', marginLeft: '0'}}>CAD</span> ({props.productdetail.newused})</div>
                     }
-                    <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px', marginTop: '-24px'}}>
+                    {/* <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px', marginTop: '-24px'}}>
                         <div style={{width:'fit-content' }}>From: {sellerInfo&&sellerInfo.sellerCountry}</div>
                         <img style={{width: '25px', maxHeight: '20px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                         <div style={{width:'fit-content'}}>{sellerInfo&&sellerInfo.shipsTo}</div>
-                    </div>              
+                    </div>               */}
                 </div> 
                        
             <FeaturedProductCss />

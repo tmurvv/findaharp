@@ -56,6 +56,7 @@ function StoreProductCss() {
                 height: 267px;
                 // height: 50%;
                 min-height: 50%;
+                position: relative;
             }
             .storeproduct__imgcontainer img {
                 // height: auto;

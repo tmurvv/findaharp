@@ -94,6 +94,16 @@ const StoreProduct = (props) => {
                         alt={props.productdetail.title}
                         onClick={()=>handleOpenStoreModal()}
                     />
+                    {props.productdetail.newused==="used"
+                    &&<img src='img/used_label.png' style={{
+                            position: 'absolute',
+                            bottom: '0px',
+                            left: '34px',
+                            boxShadow: 'none',
+                            width: '75%',
+                            height: '17.5px'
+                        }} 
+                        alt='used label' />}
                 </LazyLoad>
             </div>
             <div className="storeproduct__title" >

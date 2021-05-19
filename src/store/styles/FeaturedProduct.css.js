@@ -66,6 +66,7 @@ function FeaturedProductCss() {
                 bottom: 0;
                 left: 0px;
                 margin-top: 20px;
+                font-size: 14px;
             }
             .featuredflyToCart {
                 position: relative;

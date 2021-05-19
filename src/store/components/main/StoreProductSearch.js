@@ -171,7 +171,7 @@ function StoreProductSearch(props) {
             <div className='storemobileSearchLine1'>
                 <div className='storesearchLine1'>
                     <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
-                    <SoloEnsembleMenu 
+                    {/* <SoloEnsembleMenu 
                         id="soloensemblemenu"
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
@@ -179,7 +179,7 @@ function StoreProductSearch(props) {
                         currentselected={props.allState&&props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
                         handleclick={handleClick}
                         open={menus.soloensemble}
-                    />            
+                    />             */}
                     <LevelMenu 
                         id="levelmenu"
                         handleLevelChange = {handleLevelSelection}
@@ -188,16 +188,16 @@ function StoreProductSearch(props) {
                         open={menus.level}
                         handleclick={handleClick}
                     />
-                    <PublicationTypeMenu 
+                    {/* <PublicationTypeMenu 
                         id='publicationtypemenu'
                         handlePublicationTypeChange = {handlePublicationTypeSelection}
                         currentselected={props.allState?props.allState.publicationtype:'All Publication Types'}
                         open={menus.publicationtype}
                         handleclick={handleClick}
-                    /> 
+                    />  */}
                 </div>
                 <div className="storesearchLine1Sub">
-                        <div 
+                        {/* <div 
                             id="selectedSoloEnsemble" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.soloensemble}
@@ -219,7 +219,7 @@ function StoreProductSearch(props) {
                                 />
                                 :''
                             }
-                        </div>
+                        </div> */}
                         <div 
                             id="selectedLevel" 
                             className={`storesearch-grid-item`} 
@@ -244,7 +244,7 @@ function StoreProductSearch(props) {
                             }
                             
                         </div>
-                        <div 
+                        {/* <div 
                             id="selectedAll Publication Types" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.publicationtype}
@@ -266,7 +266,7 @@ function StoreProductSearch(props) {
                                 />
                                 :''
                             }
-                        </div>
+                        </div> */}
                 </div>
             </div>
             
