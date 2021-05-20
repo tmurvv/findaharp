@@ -40,6 +40,8 @@ function CategoryMenu(props) {
                 props.setSubMenuOpen(false);
             } else {
                 props.setMenuOpen(true);
+                props.setCatBreadCrumb('Categories');
+                props.setSearchResultsText('entry')
                 if (!props.subMenuOpen) props.setSubMenuOpen('Featured Items')
             }
         }
@@ -51,8 +53,8 @@ function CategoryMenu(props) {
         <>              
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#fffbb5'}:{width: '126px', minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#fffbb5',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
-                    <ul>
-                        <li style={props.menuOpen?{backgroundColor: '#fffbb5'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                    <ul id='category'>
+                        <li value="categories" style={props.menuOpen?{backgroundColor: '#fffbb5'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
@@ -65,6 +67,7 @@ function CategoryMenu(props) {
                                 key={cat}
                                 className='CatLine hovershow'
                                 id={cat}
+                                value={cat}
                                 onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
                                 onClick={()=>props.setSubMenuOpen(cat)}>  

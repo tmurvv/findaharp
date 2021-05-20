@@ -21,7 +21,7 @@ const OnlineStore = (props) => {
     const [ openStoreDetail, setopenStoreDetail ] = useState(false);
     const [ detailProduct2, setDetailProduct2 ] = useState();
     const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
-    const [ catBreadCrumb, setCatBreadCrumb ] = useState('Categories  ');
+    const [ catBreadCrumb, setCatBreadCrumb ] = useState('Categories');
     const [ searchBreadCrumb, setSearchBreadCrumb ] = useState('searchBread');
     const [ ribbonmenuOpen, ribbonsetMenuOpen ] = useState(false);
     const [ ribbonsubMenuOpen, ribbonsetSubMenuOpen ] = useState();
@@ -33,36 +33,23 @@ const OnlineStore = (props) => {
     const [ stringSearch, setStringSearch ] = useState();
     const [idx, setIdx] = useState(0);
     const [hasMore, setHasMore] = useState(0);
-
     
     function findCatAbbr(fullCat) {
-        // console.log(fullCat);
-        // console.log(ABBR.length);
-        // console.log(ABBR[0][0]);
-        // console.log(fullCat);
         let replace;
         ABBR.forEach(element => {
-            if (element[0]===fullCat) {console.log('FOUND IT', element[1]);replace=element[1];}
+            if (element[0]===fullCat) {replace=element[1];}
         });
         return replace;
     }
     function handleCatChange(searchCategory, searchSubCategory, searchItem) {
         let workingProducts = [...props.filteredProducts];
-        console.log('here',document.querySelector('#newused').value.toUpperCase());
-        console.log(workingProducts[0])
+        
         if (document.querySelector('#newused').value!=='New/Used') {
             document.querySelector('#newused').value='New/Used';
             alert('Coming soon, searching by category and by "New" or "Used". For now searching by category finds all new and used products.')
         }
         
         document.querySelector('#searchTerm').value='';
-        // console.log('CAT', searchCategory);
-        // console.log('SubCAT', searchSubCategory);
-        // console.log('item', searchItem);
-        // console.log('product', props.filteredProducts[500])
-        
-        // console.log(String(searchCategory).toUpperCase());
-        // console.log('inif')
             if (searchItem.toUpperCase()==='GIFT CERTIFICATES') {
                 alert('Please email orders@findaharp.com to purchase a gift certificate.');
                 return;
@@ -71,7 +58,6 @@ const OnlineStore = (props) => {
         if (String(searchCategory).toUpperCase()==='STRINGS BY HARP BUILDER') {
             
             const searchTerm = searchItem;
-            console.log('in', searchTerm, stringsOnly.length)
 
             if(searchTerm) {
                 // searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
@@ -112,34 +98,25 @@ const OnlineStore = (props) => {
                 });
                 
                 // sort and return
-                setMenuOpen(false);
-                setSubMenuOpen(false);
-                setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));
-                setSearchResultsText('');
-                setCatBreadCrumb(findCatAbbr(searchItem));
-                setSearchBreadCrumb(searchItem);
-                setTypeOfSearch(searchItem);
-                return;
+                setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));             
             }
+        } else {
+            setSearchResults(workingProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
         }
         String(searchCategory).toUpperCase().startsWith('STRINGS')?searchCategory='strings':'';
-        console.log('128', workingProducts.length)
-        setSearchResults(workingProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
         setSearchResultsText('');
-        
         setCatBreadCrumb(findCatAbbr(searchItem));
         setMenuOpen(false);
         setSubMenuOpen(false);
-        getStoreSearchInfo({category: 'music'}, 'music')
+        getStoreSearchInfo({...allState, category: searchItem}, 'music');
+        setAllState({...allState, category: searchItem});
         setSearchBreadCrumb(searchItem);
         setTypeOfSearch(searchItem);
+        handleChange(musicSearch?'music':'strings', searchItem);
     }
 
     function handleChange(type, menu, value1, value2, value3, value4) {
-        // console.log('handleChange', type, menu, value1, value2, value3, value4)
-        // console.log(props.filteredProducts[600]);
-        // console.log(props.filteredProducts[props.filteredProducts.length-550]);
-        setCatBreadCrumb('Categories');
+        
         // if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="MUSIC") {
         //     setMusicSearch(true);
         //     setStringSearch(false);
@@ -161,44 +138,49 @@ const OnlineStore = (props) => {
         };
         if (musicSearch) type='music';
         if (stringSearch) type='strings';
-        console.log('handlechangetype', type)
-        console.log('handlechangetype', type)
         // get search items
-        let category = document.querySelector('#category')&&document.querySelector('#category').value;
+        
+        let category;
+        ABBR.forEach(item=>{
+            item[1]===catBreadCrumb?category=item[0]:'';
+        });
         let searchTerm = document.querySelector('#searchTerm').value;
         let newused = document.querySelector('#newused').value;
         setClearMenus(false);
         setIdx(0);
         setHasMore(true);
-        let productListCopy=[...props.filteredProducts];
+
+        let productListCopy;
+        productListCopy=menu==='category'?[...searchResults]:[...props.filteredProducts];
         let preSearchProductList=[]
         let finalProductList=[];
         let categoryProductList=[];
         let newusedProductList=[];
         let searchProductList=[];
-        if (category&&category.toUpperCase()!=='ALL') {
-            if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
-                // document.querySelector('#category').value= 'All';
-                return alert("Digital Downloads under construction. Expected by June 2021."); // NOT YET IMPLEMENTED
-            }
-            if (category.toUpperCase()==="STRINGS") type='strings';
-            if (category.toUpperCase()==="MUSIC") type='music';
-        } 
+        // if (category&&category.toUpperCase()!=='CATEGORIES') {
+        //     if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
+        //         // document.querySelector('#category').value= 'All';
+        //         return alert("Digital Downloads under construction. Expected by June 2021."); // NOT YET IMPLEMENTED
+        //     }
+        //     if (category.toUpperCase()==="STRINGS") type='strings';
+        //     if (category.toUpperCase()==="MUSIC") type='music';
+        // } 
         if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
-            category = "Music";
+            // category = "Music";
             // document.querySelector('#category').value='Music';
             type = 'music';
         } 
         if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
-            category = "Strings";
+            // category = "Strings";
             // document.querySelector('#category')?document.querySelector('#category').value='Strings':'';
             type = 'strings'
         }
         setAllState({...allState, category: category});
 
-        if(category&&category.toUpperCase()!=="ALL") {
+        if(category&&category.toUpperCase()!=="CATEGORIES") {
+
             productListCopy.map(product=>{
-                if (String(product.category).toUpperCase()===category.toUpperCase()) {
+                if (String(product.subsubcategory).toUpperCase()===category.toUpperCase()) {
                     categoryProductList.push(product);
                 } 
                 if (product.subcategories) {
@@ -212,14 +194,12 @@ const OnlineStore = (props) => {
         }
         // newused
         if(newused!=='New/Used') {
-            console.log('NEWSUERD', newused,categoryProductList.length)
 
             categoryProductList.map(product=>{
                 if (newused.toUpperCase()===String(product.newused).toUpperCase()) {
                     newusedProductList.push(product);
                 }
             });
-            console.log('NEWSUERD', newused,newusedProductList.length)
         } else {
             newusedProductList = [...categoryProductList]
         }
@@ -290,7 +270,7 @@ const OnlineStore = (props) => {
             finalProductList=[...publicationProductList];
             
         } else if (category&&category.toUpperCase()==='STRINGS'||String(type).toUpperCase()==="STRINGS") {
-            console.log("INSTRINGS")
+            
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2="All Notes";
             if (!value3||value3===undefined) value3="All Brands";
@@ -370,7 +350,6 @@ const OnlineStore = (props) => {
             } else {
                 makesmodelsProductList=[...brandsProductList];
             }
-            // console.log('dusty', makesmodelsProductList.length)
             finalProductList=[...makesmodelsProductList];
         } else {
             finalProductList=[...newusedProductList]
@@ -385,10 +364,14 @@ const OnlineStore = (props) => {
             searchProductList=[...preSearchProductList]
         }
         finalProductList=[...searchProductList];
-        // console.log('final', finalProductList.length)
         finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
         setTypeOfSearch(type);
-        setSearchResults(finalProductList)
+        setSearchResults(finalProductList);
+        
+        setMenuOpen(false);
+        setSubMenuOpen(false);
+        setAllState({...allState, category: menu})
+        setSearchBreadCrumb(getStoreSearchInfo({...allState, category: menu}, type));
     }
     
     function handleCloseDetail() {
@@ -415,7 +398,7 @@ const OnlineStore = (props) => {
         setSearchResultsText('entry');
         setMenuOpen(false);
         setSubMenuOpen(false);
-        setCatBreadCrumb('Categories');
+        // setCatBreadCrumb('Categories');
     },[]);
     return (
         <> 
@@ -448,6 +431,8 @@ const OnlineStore = (props) => {
                     handleCatChange={handleCatChange}
                     setDetailProduct2={setDetailProduct2}
                     catBreadCrumb={catBreadCrumb}
+                    setCatBreadCrumb={setCatBreadCrumb}
+                    setSearchResultsText={setSearchResultsText}
                     handleChange={handleChange}
                 />
             </div>
@@ -483,6 +468,7 @@ const OnlineStore = (props) => {
                     setStringSearch={setStringSearch}
                     musicSearch={musicSearch}
                     setMusicSearch={setMusicSearch}
+                    typeOfSearch={typeOfSearch}
                 />     
             </div>
             <OnlineStoreCss />

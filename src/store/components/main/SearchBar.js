@@ -38,7 +38,6 @@ const SearchBar = (props) => {
         searchIt('library');
     }
     function searchIt(searchText) {
-        console.log('res', idx.search(searchText).length)
         setResults(idx.search(searchText));
     }
     return (
@@ -52,6 +51,8 @@ const SearchBar = (props) => {
                 handleCatChange={props.handleCatChange}
                 setDetailProduct2={props.setDetailProduct2}
                 catBreadCrumb={props.catBreadCrumb}
+                setCatBreadCrumb={props.setCatBreadCrumb}
+                setSearchResultsText={props.setSearchResultsText}
             />   
         <div className="searchTextImg">
             <form style={{display: 'flex'}}>
