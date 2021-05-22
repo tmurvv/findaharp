@@ -51,10 +51,10 @@ function CategoryMenu(props) {
     })
     if (!props.ribboncatBreadCrumb) return (
         <>              
-            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#fffbb5'}:{width: '126px', minHeight: '50px', backgroundColor: '#fff'}}>
-                <div className='MainCat' style={props.menuOpen?{backgroundColor: '#fffbb5',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
+            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: '126px', minHeight: '50px', backgroundColor: '#fff'}}>
+                <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul id='category'>
-                        <li value="categories" style={props.menuOpen?{backgroundColor: '#fffbb5'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                        <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
@@ -134,7 +134,7 @@ function CategoryMenu(props) {
                     align-items: center;
                     padding: 10px 0px 10px 15px;
                     white-space: nowrap;
-                    background-color: rgb(255, 251, 181);
+                    background-color: #ffd663;
                     height: 48px;
                     border-right: 1px solid gold;
                 }

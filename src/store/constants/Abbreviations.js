@@ -86,9 +86,9 @@ export const ABBR = [
     ["For Students", 'For Students'],
     ["Biographical Books", 'Biographies'],
     ["Instructional Books", 'Instruction Bks'],
-    ["Jewelry", 'Jewelry'],
+    ["Gifts", 'Gifts'],
     ["Gift Certificates", 'Gift Cert'],
     ["Classical", 'Cds-Classical'],
     ["Inspirational", 'Cds-Inspiration'],
-    ["Other", 'Cds-Other'],
+    ["Other", 'Cds-Other']
 ]

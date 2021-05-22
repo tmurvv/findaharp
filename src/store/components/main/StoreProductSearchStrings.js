@@ -31,7 +31,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setOctavesSearch(octaves);
-        props.handleChange('strings', 'octaves', octaves, props.allState.notes, props.allState.brands, props.allState.makesmodels);
+        props.handleChange('','strings', 'octaves', octaves, props.allState.notes, props.allState.brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             octaves,
             productType: 'all',
@@ -46,7 +46,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setNotesSearch(notes);
-        props.handleChange('strings', 'notes', props.allState.octaves, notes, props.allState.brands, props.allState.makesmodels);
+        props.handleChange('','strings', 'notes', props.allState.octaves, notes, props.allState.brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             notes,
             productType: 'all',
@@ -61,7 +61,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all',
         }
         props.setBrandsSearch(brands);
-        props.handleChange('strings', 'brands', props.allState.octaves, props.allState.notes, brands, props.allState.makesmodels);
+        props.handleChange('','strings', 'brands', props.allState.octaves, props.allState.notes, brands, props.allState.makesmodels);
         let abbr;
         console.log('here', brands)
         MENU_ABBR.map(abbrConst => { 
@@ -84,7 +84,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setMakesmodelsSearch(makesmodels);
-        props.handleChange('strings', 'makesmodels', props.allState.octaves, props.allState.notes, props.allState.brands, makesmodels);
+        props.handleChange('','strings', 'makesmodels', props.allState.octaves, props.allState.notes, props.allState.brands, makesmodels);
         
         let abbr;
         console.log('mm', makesmodels)

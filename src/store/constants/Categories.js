@@ -127,7 +127,7 @@ export const CATEGORIES = {
         "Instructional Books"
     ],
     "Gifts": [
-        "Jewelry",
+        "Gifts",
         "Gift Certificates"
     ],
     "Cds": [

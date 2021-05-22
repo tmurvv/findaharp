@@ -29,7 +29,7 @@ function StoreProductSearch(props) {
             productType: 'all',
         }
         
-        props.handleChange("music", 'soloensemble', soloensemble, props.allState&&props.allState.level, props.allState&&props.allState.publicationtype);
+        props.handleChange('',"music", 'soloensemble', soloensemble, props.allState&&props.allState.level, props.allState&&props.allState.publicationtype);
         props.setAllState({...props.allState, 
             soloensemble,
             productType: 'all',
@@ -43,7 +43,7 @@ function StoreProductSearch(props) {
             level: level==='All Levels'?'All Levels':level,
             productType: 'all'
         }
-        props.handleChange("music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
+        props.handleChange('',"music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
         props.setAllState({...props.allState, 
             level,
             productType: 'all',
@@ -57,7 +57,7 @@ function StoreProductSearch(props) {
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
         }
-        props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', publicationtype);
+        props.handleChange('','music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', publicationtype);
         props.setAllState({...props.allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
@@ -140,9 +140,9 @@ function StoreProductSearch(props) {
     }
     function clearOneFilter(e) {
         const menuClick = e.target.name;
-        if (menuClick==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
-        if (menuClick==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
-        if (menuClick==='publicationtype') {props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
+        if (menuClick==='soloensemble') {props.handleChange('',"music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='level') {props.handleChange('',"music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='publicationtype') {props.handleChange('','music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
         e.target.name==="soloensemble"?e.target.name="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         e.target.name==="publicationtype"?e.target.name="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...props.allState, [menuClick]: `All ${e.target.name.charAt(0).toUpperCase()}${e.target.name.slice(1)}s`}

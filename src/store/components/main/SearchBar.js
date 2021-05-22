@@ -57,13 +57,13 @@ const SearchBar = (props) => {
         <div className="searchTextImg">
             <form style={{display: 'flex'}}>
                 <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="           Search" /> 
-                <button id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange(e)}}>
+                <button id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange('', 'searchTerm', document.querySelector('#searchTerm').value)}}>
                     <img src='/img/searchicon.png' alt='search icon' />
                 </button>
             </form> 
         </div>
         <div className='selectContainer'>
-            <select onChange={()=>props.handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
+            <select onChange={()=>props.handleChange('','','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
                 <option value='New/Used' name='All newused'>New/Used</option>
                 <option value='New' name='New'>New Only</option>
                 <option value='Used' name='Used'>Used Only</option>

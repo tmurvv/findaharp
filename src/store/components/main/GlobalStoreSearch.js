@@ -53,15 +53,18 @@ function GlobalStoreSearch(props) {
     }
     function loginGuest(evt) { 
         resetResults();
-    }
-
-    
+    }  
     function handleClear() {
         // document.querySelector('#category').value='All';
-        document.querySelector('#searchTerm').value='';
+        document.querySelector('#searchTerm')?document.querySelector('#searchTerm').value='':'';
+        document.querySelector('#newused')?document.querySelector('#newused').value='New/Used':'';
         setAllState(STORE_INITIAL_STATE);
         props.setSearchResults(props.filteredProducts);
         props.setSearchResultsText('entry');
+        props.setCatBreadCrumb('Categories');
+        props.setMusicSearch(false);
+        props.setStringSearch(false);
+
         if (document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display='none';
     }
     function handleopenStoreDetail(product) {
@@ -144,7 +147,7 @@ function GlobalStoreSearch(props) {
                 <h3 className='searchHelperText'>Search by category</h3>
                 <div style={{display: 'flex', margin:'auto'}}>
                 <div className='selectContainer'>    
-                    <select onChange={()=>props.handleChange('','category')} id='category' style={{WebkitAppearance: 'none'}}>
+                    <select onChange={()=>props.handleChange('category','category')} id='category' style={{WebkitAppearance: 'none'}}>
                         <option name='All'>All</option>
                         <option name='Strings'>Strings</option>
                         <option name='Music'>Music</option>
@@ -157,7 +160,7 @@ function GlobalStoreSearch(props) {
                     <span>&#711;</span>
                 </div>
                 <div className='selectContainer'> 
-                    <select onChange={()=>props.handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px', WebkitAppearance: 'none'}}>
+                    <select onChange={()=>props.handleChange('', '', 'newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px', WebkitAppearance: 'none'}}>
                         <option value='New/Used' name='All newused'>New/Used</option>
                         <option value='New' name='New'>New Only</option>
                         <option value='Used' name='Used'>Used Only</option>
