@@ -43,15 +43,16 @@ function CategoryMenu(props) {
                 props.setMenuOpen(true);
                 props.setCatBreadCrumb('All Categories');
                 props.setSearchResultsText('entry')
-                if (!props.subMenuOpen) props.setSubMenuOpen('Featured Items')
+                if ((!props.subMenuOpen)&&winWidth>750) props.setSubMenuOpen('Featured Items')
             }
         }
     }
     useEffect(()=>{
         // console.log('props cat menu', props)
         setWinWidth(window.innerWidth);
+        window&&window.innerWidth<=750?props.setSubMenuOpen(false):'';
     },[]);
-    if (!props.ribboncatBreadCrumb) return (
+    if ((!props.ribboncatBreadCrumb)&&winWidth>750) return (
         <>              
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
@@ -62,9 +63,11 @@ function CategoryMenu(props) {
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
                             :<img className='catChevron' src='img/store/right-chevron.png' alt='right arrow' />
                             }
-                        </li>                   
+                        </li>
+                                          
                     {props.menuOpen
-                    ?mainCategories.map(cat=>            
+                    ?
+                    mainCategories.map(cat=>            
                             <li 
                                 key={cat}
                                 className='CatLine hovershow'
@@ -80,10 +83,10 @@ function CategoryMenu(props) {
                                     // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; props.setSubMenuOpen(cat);}} 
                                     // onMouseLeave={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(1)';}} 
                                     alt='right arrow'
-                                    style={{maxHeight: '0'}}
                                 />
                             </li>
                         )
+                        
                     : ''                 
                     }
                     </ul>
@@ -164,7 +167,7 @@ function CategoryMenu(props) {
                     margin-left: 5px;
                 }
                 .CatLine>.hovershow {
-                    maxHeight: 0;
+                    // maxHeight: 0;
                 }
                 .CatLine:hover {
                     background-color: #f9bf1e;
@@ -172,6 +175,131 @@ function CategoryMenu(props) {
             `}</style>
         </>
     )
+    if ((!props.ribboncatBreadCrumb)&&winWidth<=750) return (
+        <>              
+            <div className='CatMenuCont' style={props.menuOpen?{width: '100%', minHeight: '528px', backgroundColor: '#ffd663'}:{width: "100%", minHeight: '50px', backgroundColor: '#fff'}}>
+             
+                <div className='MainCat' style={!props.subMenuOpen?{backgroundColor: '#ffd663',  width: '100%', padding: '0', minWidth: '210px', borderColor: 'transparent'}:{display: 'none'}}>
+                    <ul id='category'>
+                        <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                            {props.catBreadCrumb}
+                            {props.menuOpen
+                            ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
+                            :<img className='catChevron' src='img/store/right-chevron.png' alt='right arrow' />
+                            }
+                        </li>                   
+                    {props.menuOpen
+                    ?mainCategories.map(cat=>            
+                            <li 
+                                key={cat}
+                                className='CatLine hovershow'
+                                id={cat}
+                                value={cat}
+                                onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
+                                onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
+                                onClick={()=>props.setSubMenuOpen(cat)}>  
+                                <div>{cat}</div>
+                                <img 
+                                    className='catChevron hovershow' 
+                                    src='img/store/right-chevron.png' 
+                                    // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; props.setSubMenuOpen(cat);}} 
+                                    // onMouseLeave={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(1)';}} 
+                                    alt='right arrow'
+                                />
+                            </li>
+                        )
+                    : ''                 
+                    }
+                    </ul>
+                </div>
+                <div className='SubCat' style={props.subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
+                    {props.subMenuOpen&&
+                        <SubCatMenu 
+                            menuName={props.subMenuOpen} 
+                            handleCatChange={props.handleCatChange}
+                            setDetailProduct2={props.setDetailProduct2}
+                            menuOpen={props.menuOpen}
+                        />
+                    }
+                    {/* <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'> */}
+                    <div style={props.menuOpen?{height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
+                        <img style={{height: '100%', opacity: '.6'}} src='img/clear_search.png' alt='clear filters'/>
+                    </div>
+                </div>
+            </div>
+           
+            <style>{`
+                * {
+                    box-sizing: border-box;
+                }
+                .CatMenuCont {
+                    display: flex;
+                    justify-content: flex-start;
+                    z-index: 9995;
+                    position: relative;
+                    -webkit-appearance: none;
+                    border: 1px solid rgb(249, 191, 30);
+                }
+                .CatMenuCont ul {
+                    list-style: none;
+                    margin-block-start: 0;
+                    margin-block-end: 0;
+                    padding-inline-start: 0;
+                    text-align: left;
+                    line-height: 1.5;
+                    margin-left: 0 !important;
+                }
+                .MainCat {
+                    flex: 4;
+                    background-color: #fff;
+                    border-right: none;
+                }
+                .CatLine {
+                    color: #000;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 0px 10px 15px;
+                    white-space: nowrap;
+                    background-color: #ffd663;
+                    height: 48px;
+                    border-right: 1px solid gold;
+                }
+                .MainCat1:hover {
+                    background-color: #f9bf1e;
+                }
+                .SubCat {
+                    flex: 6;
+                    background-color: #fff;
+                    color: #f9bf1e;
+                    font-weight: 600;
+                    padding-top: 20px;
+                    padding-right: 20px;
+                    position: relative;
+                    white-space: nowrap;
+                    width: fit-content;
+                }
+                .MainCat1:hover + .Sub1 {
+                    display: block
+                }
+                .catChevron {
+                    height: 12px;
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+                .CatLine>.hovershow {
+                    // maxHeight: 0;
+                }
+                .CatLine:hover {
+                    background-color: #f9bf1e;
+                }
+            `}</style>
+        </>
+    )
+
+
+
+
     if (props.ribboncatBreadCrumb&&props.ribboncatBreadCrumb==='ribbon') return (
         <>              
             {/* <div className='' style={{position: 'absolute', width: '75px', zIndex: '9950', right: '22%'}}> */}

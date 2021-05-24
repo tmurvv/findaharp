@@ -520,6 +520,7 @@ const OnlineStore = (props) => {
                 handleCatChange={handleCatChange}
                 setDetailProduct2={setDetailProduct2}
             /> */}
+            <div>{String(menuOpen)}/{String(subMenuOpen)}</div>
             
             
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>

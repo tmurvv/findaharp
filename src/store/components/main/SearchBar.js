@@ -283,7 +283,7 @@ const SearchBar = (props) => {
             <>  
             <div className='searchBarCont' style={{display: 'block'}}>
                 <div style={{display: 'flex', width: '100%'}}>
-                    <div style={{width: '50%'}}>
+                    <div style={{width: `${props.menuOpen?'100%':'50%'}`}}>
                         <CategoryMenu 
                             subMenuOpen={props.subMenuOpen} 
                             setSubMenuOpen={props.setSubMenuOpen} 
@@ -297,7 +297,7 @@ const SearchBar = (props) => {
                         />
                     </div>
                        
-            
+                    {!props.menuOpen&&
                     <div className='selectContainer' style={{width: '100%'}}>
                         <select onChange={()=>props.handleChange('','','newused')} id='newused' style={{width: `${window&&window.innerWidth<750?'100%':'25%'}`, minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
                             <option value='New/Used' name='All newused'>New/Used</option>
@@ -314,6 +314,7 @@ const SearchBar = (props) => {
                             />
                         </span>
                     </div>
+                    }
                 </div>
                 
                 <div className="searchTextImg">
