@@ -38,7 +38,7 @@ function GlobalStoreSearch(props) {
     const [resetPage, setResetPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [idx, setIdx] = useState(0);
-    const [screenWidth, setScreenWidth] = useState();
+    const [ winWidth, setWinWidth ] = useState(4000);
     const [ change, setChange ] = useState('');
 
     function resetResults() {
@@ -61,7 +61,7 @@ function GlobalStoreSearch(props) {
         setAllState(STORE_INITIAL_STATE);
         props.setSearchResults(props.filteredProducts);
         props.setSearchResultsText('entry');
-        props.setCatBreadCrumb('Categories');
+        props.setCatBreadCrumb('All Categories');
         props.setMusicSearch(false);
         props.setStringSearch(false);
 
@@ -85,7 +85,7 @@ function GlobalStoreSearch(props) {
       };
     
     useEffect(()=>{
-        setScreenWidth(window.innerWidth);
+        setWinWidth(window&&window.innerWidth);
         const buttons = document.querySelectorAll('.submenu-toggle-button');
         Array.prototype.forEach.call(buttons, function(button) {
             button.addEventListener('click', function() {
@@ -95,7 +95,12 @@ function GlobalStoreSearch(props) {
                 buttonState.classList.toggle('open');
             });
         });
-    })
+        if (document.querySelector('#searchLineAnchor')){
+            const myRect=document.querySelector('#searchLineAnchor').getBoundingClientRect();
+            console.log('myRect-X:', myRect.x,'myRect-Y', myRect.y);
+            props.setAnchor([myRect.x, myRect.y]);
+        }
+    },[])
     
     useEffect(()=>{
         const buttons = document.querySelectorAll('.submenu-toggle-button');
@@ -111,7 +116,7 @@ function GlobalStoreSearch(props) {
         // console.log('bott', props.allState, props.typeOfSearch, '|', getStoreSearchInfo(props.allState, props.typeOfSearch))
         // console.log('global', props)
         // props.searchBreadCrumb&&setTypeOfSearch(props.searchBreadCrumb);
-    });
+    },[]);
     //end region
     return (
         <>
@@ -136,7 +141,7 @@ function GlobalStoreSearch(props) {
             />
             
             
-            <div className='storeSearchLine' >
+            {/* <div className='storeSearchLine' >
                 {screenWidth>750
                 ?
                 <>
@@ -179,10 +184,10 @@ function GlobalStoreSearch(props) {
                 </div>
                 </>
                 }
-            </div>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px'}}>
-                <div hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
-                <div hidden={props.stringSearch}><button onClick={()=>{props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
+            </div> */}
+            <div style={{marginTop: `${winWidth<750?'125px':''}`, display: 'flex', flexDirection: `${winWidth<750?'column':'row'}`, justifyContent: 'center', alignItems: 'center', marginTop: `${winWidth<750?'130px':'50px'}`}}>
+                <div style={{marginBottom: '-10px'}} id='searchLineAnchor' hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px -10px'}}>Music advanced search</button></div>
+                <div style={{marginBottom: '-10px'}} hidden={props.stringSearch}><button onClick={()=>{props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
                 {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
                 <div>
                     <button 
@@ -216,6 +221,7 @@ function GlobalStoreSearch(props) {
                     setNotesSearch={setNotesSearch} 
                     setBrandsSearch={setBrandsSearch} 
                     setMakesmodelsSearch={setMakesmodelsSearch}
+                    catBreadCrumb={props.catBreadCrumb}
                     setStringSearch={props.setStringSearch}
                     ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
                     ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
@@ -224,6 +230,8 @@ function GlobalStoreSearch(props) {
                     handleCatChange={props.handleCatChange}
                     ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
                     ribboncatBreadCrumb={props.ribboncatBreadCrumb}
+                    anchor={props.anchor}
+                    setAnchor={props.setAnchor}
                 />
             }
             {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&props.searchResultsText!=='entry'&&

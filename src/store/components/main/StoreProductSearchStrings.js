@@ -237,7 +237,7 @@ function StoreProductSearchStrings(props) {
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
-                     
+                     {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -248,6 +248,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.octaves}
                         clearMenu={props.clearMenus}
                     />
+                }
                     <NotesMenu 
                         id="notesmenu"
                         handleNotesChange={handleNotesSelection} 
@@ -258,6 +259,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
+                    {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
                     <BrandsMenu 
                         id="brandsmenu"
                         handleBrandsChange = {handleBrandsSelection}
@@ -267,6 +269,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
+            }
                     {/* <MakesmodelsMenu 
                         id='makesmodelsmenu'
                         handleMakesmodelsChange = {handleMakesmodelsSelection}
@@ -286,10 +289,9 @@ function StoreProductSearchStrings(props) {
                     />
                 </div>
                 <div className="storesearchLine2Sub">
-                    
+                {(!props.ribbonmenuOpen)&&String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
                     <div 
                         id="selectedOctaves" 
-                        className={`storesearch-grid-item`} 
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
                         style={{cursor: 'pointer', zIndex: '1000'}}
@@ -310,6 +312,8 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
+                    }
+                    {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedNotes" 
                         className={`storesearch-grid-item`} 
@@ -333,6 +337,8 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
+                    }
+                    {(!props.ribbonmenuOpen)&&String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
                     <div 
                         id="selectedBrands" 
                         className={`storesearch-grid-item`} 
@@ -358,6 +364,8 @@ function StoreProductSearchStrings(props) {
                         }
                         
                     </div>
+                    }
+                    {!props.ribbonmenuOpen&&
                     <div 
                         id="makesmodels" 
                         className={`storesearch-grid-item`} 
@@ -384,7 +392,9 @@ function StoreProductSearchStrings(props) {
                             />
                             :''
                         }
+                        {/* {String(props.catBreadCrumb).toUpperCase()!=="ALL CATEGORIES"&&'Select All Categories to view more menus.'} */}
                     </div>
+                    }
                 </div>
             </div>
             <StoreProductSearchCss />             

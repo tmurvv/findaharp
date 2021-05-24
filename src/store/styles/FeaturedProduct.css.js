@@ -35,6 +35,7 @@ function FeaturedProductCss() {
                     border-bottom: none;
                     margin-bottom: 40px;
                     width: 100%;
+                    min-width: 200px;
                 }
             }
             

@@ -9,6 +9,7 @@ function CategoryMenu(props) {
     // const [ subMenuOpen, setSubMenuOpen] = useState();
     const [ mainCategories ] = useState(Object.keys(CATEGORIES));
     const [ builders ] = useState(['Dusty Strings', 'Rees', 'Stoney End', 'Triplett', 'Salvi Delta']);
+    const [ winWidth, setWinWidth ] = useState(4000);
     
     function handleCatChange(e) {
         const filtered = [];
@@ -40,7 +41,7 @@ function CategoryMenu(props) {
                 props.setSubMenuOpen(false);
             } else {
                 props.setMenuOpen(true);
-                props.setCatBreadCrumb('Categories');
+                props.setCatBreadCrumb('All Categories');
                 props.setSearchResultsText('entry')
                 if (!props.subMenuOpen) props.setSubMenuOpen('Featured Items')
             }
@@ -48,10 +49,11 @@ function CategoryMenu(props) {
     }
     useEffect(()=>{
         // console.log('props cat menu', props)
-    })
+        setWinWidth(window.innerWidth);
+    },[]);
     if (!props.ribboncatBreadCrumb) return (
         <>              
-            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: '126px', minHeight: '50px', backgroundColor: '#fff'}}>
+            <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul id='category'>
                         <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
@@ -95,7 +97,8 @@ function CategoryMenu(props) {
                             menuOpen={props.menuOpen}
                         />
                     }
-                    <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
+                    {/* <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'> */}
+                    <div style={props.menuOpen?{height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
                         <img style={{height: '100%', opacity: '.6'}} src='img/clear_search.png' alt='clear filters'/>
                     </div>
                 </div>
@@ -171,7 +174,8 @@ function CategoryMenu(props) {
     )
     if (props.ribboncatBreadCrumb&&props.ribboncatBreadCrumb==='ribbon') return (
         <>              
-            <div className='' style={{position: 'absolute', width: '75px', zIndex: '9950', right: '22%'}}>
+            {/* <div className='' style={{position: 'absolute', width: '75px', zIndex: '9950', right: '22%'}}> */}
+            <div className='' style={{position: 'relative', width: '75px', zIndex: '9950'}}>
                 <div className='' style={props.ribbonmenuOpen?{backgroundColor: 'transparent',  padding: '0', minWidth: '165px', borderColor: 'transparent',cursor: 'pointer'}:{cursor: 'pointer', backgroundColor: 'transparent'}}>
                     <ul style={{marginBlock: '0', padding: '0'}}>
                         <li style={{backgroundColor: 'transparent', padding: '0', height: '30px', fontSize: '14px', transform: 'translateY(4px)'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>

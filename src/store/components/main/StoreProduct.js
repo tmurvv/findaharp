@@ -22,6 +22,7 @@ const StoreProduct = (props) => {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [ openStoreModal, setOpenStoreModal ] = useState(false);
     const [ sellerInfo, setSellerInfo ] = useState();
+    const [ winWidth, setWinWidth ] = useState(4000);
 
     function handleImageLoad(evt) {
         if (evt.target.style.height !== '30%') evt.target.style.height="auto";
@@ -71,13 +72,14 @@ const StoreProduct = (props) => {
         e.target.classList.add("storeflyToCart");
     }
     useEffect(() => {
+        setWinWidth(window.innerWidth);
         Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.productdetail.store) setSellerInfo(seller);
         });
-    });
+    },[]);
     return (
         <div className="storeproduct">
-            <div className={`storeproduct__imgcontainer`}>
+            <div className={`storeproduct__imgcontainer`} style={{width: `${winWidth<750?'50%':'75%'}`, left: `${winWidth<750?'100px':'34px'}`}}>
                 <LazyLoad
                     once={true}
                     offset={300}
