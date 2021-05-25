@@ -279,9 +279,10 @@ const SearchBar = (props) => {
             </>
         )
     } else {
+        // width <= 750
         return (
             <>  
-            <div className='searchBarCont' style={{display: 'block'}}>
+            <div className='searchBarCont' style={{display: 'block', marginBottom: '40px'}}>
                 <div style={{display: 'flex', width: '100%'}}>
                     <div style={{width: `${props.menuOpen?'100%':'50%'}`}}>
                         <CategoryMenu 
@@ -316,15 +317,16 @@ const SearchBar = (props) => {
                     </div>
                     }
                 </div>
-                
+                {!props.menuOpen&&
                 <div className="searchTextImg">
                     <form style={{display: 'flex'}}>
-                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="           Search" /> 
+                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
                         <button id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange('', 'searchTerm', document.querySelector('#searchTerm').value)}}>
                             <img src='/img/searchicon.png' alt='search icon' />
                         </button>
                     </form> 
                 </div>
+                }
             </div>
             <style jsx>{`
                 .searchBarCont {

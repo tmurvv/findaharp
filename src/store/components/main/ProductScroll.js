@@ -19,11 +19,10 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStringsChange, handleResults }) => {
+const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStringsChange, handleResults, menuOpen }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [ numInCarousel, setNumInCarousel ] = useState(Math.floor(getWindowSize().width/270));
-    const [windowSize, setWindowSize] = useState();
     const [ index, setIndex ] = useState(0);
     const indexStart = useRef(); 
 
@@ -110,7 +109,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         if (index+(Math.floor(size.width/270))>filteredproductscontainer.length) addPlaces=[...filteredproductscontainer, ...extraPlaces];
         addPlaces=addPlaces.slice(index, index+(Math.floor(size.width/270)));
         return(
-            <div data-test='component-ProductContainer' className='featuredproductContainer'>
+            <div style={{opacity: `${menuOpen?.2:1}`}} data-test='component-ProductContainer' className='featuredproductContainer'>
                 <h3>{title}</h3>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10094;</div>

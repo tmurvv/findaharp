@@ -79,7 +79,7 @@ const StoreProduct = (props) => {
     },[]);
     return (
         <div className="storeproduct">
-            <div className={`storeproduct__imgcontainer`} style={{width: `${winWidth<750?'50%':'75%'}`, left: `${winWidth<750?'100px':'34px'}`}}>
+            <div className={`storeproduct__imgcontainer`}>
                 <LazyLoad
                     once={true}
                     offset={300}
@@ -109,7 +109,7 @@ const StoreProduct = (props) => {
                 </LazyLoad>
             </div>
             <div className="storeproduct__title" >
-                <div style={{fontSize: '16px'}}>{props.productdetail.title}</div>
+                <div style={{fontSize: '16px', whiteSpace: `${winWidth<750?'nowrap':''}`, overflowX: `${winWidth<750?'hidden':''}`}}>{props.productdetail.title}</div>
                 <div style={{fontSize: '14px', fontStyle: 'italic'}}>{(props.productdetail.artist_first&&String(props.productdetail.artist_first)!=='undefined')||(props.productdetail.artist_last&&String(props.productdetail.artist_last)!=='undefined')?props.productdetail.artist_first+'   '+props.productdetail.artist_last:""}</div>
             </div>
             <div className="storeproductDetails"><div><span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}</div></div>
@@ -144,7 +144,7 @@ const StoreProduct = (props) => {
                         className='longDesc productSmallDisplay-LongDesc' 
                         dangerouslySetInnerHTML={{__html: props.productdetail.description}} 
                     />
-                    <div style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} className='longDesc productSmallDisplay-LongDesc'>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
+                    <div style={{fontSize: '14px', height: 'fit-content', maxHeight: `${winWidth<750?'34px':'60px'}`, overflow: 'hidden'}} className='longDesc productSmallDisplay-LongDesc'>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
                     <button className='btn blueFont' 
                         onClick={()=>handleOpenStoreModal()} 
                             style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '9900',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}

@@ -185,6 +185,7 @@ function GlobalStoreSearch(props) {
                 </>
                 }
             </div> */}
+            {winWidth>750&&
             <div style={{marginTop: `${winWidth<750?'125px':''}`, display: 'flex', flexDirection: `${winWidth<750?'column':'row'}`, justifyContent: 'center', alignItems: 'center', marginTop: `${winWidth<750?'130px':'50px'}`}}>
                 <div style={{marginBottom: '-10px'}} id='searchLineAnchor' hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px -10px'}}>Music advanced search</button></div>
                 <div style={{marginBottom: '-10px'}} hidden={props.stringSearch}><button onClick={()=>{props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
@@ -198,6 +199,7 @@ function GlobalStoreSearch(props) {
                     </button>
                 </div>
             </div>
+            }
             {props.musicSearch
                 &&<StoreProductSearch 
                     clearMenus={clearMenus} 
@@ -236,7 +238,7 @@ function GlobalStoreSearch(props) {
             }
             {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&props.searchResultsText!=='entry'&&
             <>
-            <div className="storeproductContainer" style={props.menuOpen?{opacity: '.2'}:{opacity: 1}}>
+            <div className="storeproductContainer" style={{opacity: `${props.menuOpen?.2:1}`, marginTop: `${winWidth<750?'150px':''}`}}>
                 <div>
                     <div className='searchInfo clearAll' id='clearSearch'>
                         <div className='searchInfoWrapper'>
@@ -284,11 +286,11 @@ function GlobalStoreSearch(props) {
                 </div>
             }
             {props.searchResultsText==='entry'&&
-            <>
-                <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Featured Items"/>
-                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={props.handleChange} handleResults={handleResults} title="String Brands"/>
-                <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Music Titles"/>
-            </>
+            <div style={{marginTop: `${winWidth<750? '200px':''}`}}>
+                <ProductScroll style={{opacity: `${props.menuOpen?.2:1}`}} filteredproductscontainer={props.featuredProducts} menuOpen={props.menuOpen} handleResults={handleResults} title="Featured Items"/>
+                <ProductScroll style={{opacity: `${props.menuOpen?.2:1}`}} filteredproductscontainer={props.strings} menuOpen={props.menuOpen} handleStringsChange={props.handleChange} handleResults={handleResults} title="String Brands"/>
+                <ProductScroll style={{opacity: `${props.menuOpen?.2:1}`}} filteredproductscontainer={props.music} menuOpen={props.menuOpen} handleResults={handleResults} title="Music Titles"/>
+            </div>
             }
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />

@@ -136,14 +136,12 @@ function CartCss() {
             margin-right: 5px;
         }
         .cartButton {
-            // float: right;
-            // cursor: pointer;
-            // margin: 10px;
             display: block;
             position: fixed;
             top: 220px;
             right: 10px;
-            z-index: 9000;
+            z-index: 9999;
+            cursor: pointer;
         }
         .cartButtonCart {
             cursor: pointer;

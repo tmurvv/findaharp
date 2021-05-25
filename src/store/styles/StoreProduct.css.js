@@ -39,7 +39,7 @@ function StoreProductCss() {
                 .storeproduct {
                     display: flex;
                     flex-direction: column;
-                    border-bottom: 1px solid lightgrey;
+                    border-top: 1px solid lightgrey;
                     margin-bottom: 40px;
                     width: 100%;
                 }
@@ -57,6 +57,7 @@ function StoreProductCss() {
                 // height: 50%;
                 min-height: 50%;
                 position: relative;
+                margin: 20px auto;
             }
             .storeproduct__imgcontainer img {
                 // height: auto;

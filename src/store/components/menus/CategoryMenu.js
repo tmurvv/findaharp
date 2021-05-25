@@ -50,12 +50,12 @@ function CategoryMenu(props) {
     useEffect(()=>{
         // console.log('props cat menu', props)
         setWinWidth(window.innerWidth);
-        window&&window.innerWidth<=750?props.setSubMenuOpen(false):'';
+        // window&&window.innerWidth<=750?props.setSubMenuOpen(false):'';
     },[]);
     if ((!props.ribboncatBreadCrumb)&&winWidth>750) return (
         <>              
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
-                <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', minWidth: '210px', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
+                <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul id='category'>
                         <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
@@ -177,9 +177,9 @@ function CategoryMenu(props) {
     )
     if ((!props.ribboncatBreadCrumb)&&winWidth<=750) return (
         <>              
-            <div className='CatMenuCont' style={props.menuOpen?{width: '100%', minHeight: '528px', backgroundColor: '#ffd663'}:{width: "100%", minHeight: '50px', backgroundColor: '#fff'}}>
+            <div className='CatMenuCont' style={props.menuOpen?{width: '100%', backgroundColor: '#ffd663'}:{width: "100%", minHeight: '50px', backgroundColor: '#fff'}}>
              
-                <div className='MainCat' style={!props.subMenuOpen?{backgroundColor: '#ffd663',  width: '100%', padding: '0', minWidth: '210px', borderColor: 'transparent'}:{display: 'none'}}>
+                <div className='MainCat' style={!props.subMenuOpen?{backgroundColor: '#ffd663',  width: '100%', padding: '0', borderColor: 'transparent'}:{display: 'none'}}>
                     <ul id='category'>
                         <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
@@ -212,7 +212,7 @@ function CategoryMenu(props) {
                     }
                     </ul>
                 </div>
-                <div className='SubCat' style={props.subMenuOpen?{display: 'block'}:{display: 'none'}}>                    
+                <div className='SubCat' style={props.subMenuOpen?{position: 'relative', display: 'block'}:{display: 'none'}}>                    
                     {props.subMenuOpen&&
                         <SubCatMenu 
                             menuName={props.subMenuOpen} 
@@ -222,8 +222,8 @@ function CategoryMenu(props) {
                         />
                     }
                     {/* <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'> */}
-                    <div style={props.menuOpen?{height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
-                        <img style={{height: '100%', opacity: '.6'}} src='img/clear_search.png' alt='clear filters'/>
+                    <div style={props.menuOpen?{position: 'absolute', top: '15px', left: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
+                        <img style={{height: '100%', opacity: '.6'}} src='img/store/left-chevron.png' alt='left arrow back to main categories'/>
                     </div>
                 </div>
             </div>
@@ -276,8 +276,6 @@ function CategoryMenu(props) {
                     padding-top: 20px;
                     padding-right: 20px;
                     position: relative;
-                    white-space: nowrap;
-                    width: fit-content;
                 }
                 .MainCat1:hover + .Sub1 {
                     display: block

@@ -53,7 +53,7 @@ const OnlineStore = (props) => {
         //     alert('Coming soon, searching by category and by "New" or "Used". For now searching by category finds all new and used products.')
         // }
         
-        document.querySelector('#searchTerm').value='';
+        document.querySelector('#searchTerm')?document.querySelector('#searchTerm').value='':'';
             if (searchItem.toUpperCase()==='GIFT CERTIFICATES') {
                 alert('Please email orders@findaharp.com to purchase a gift certificate.');
                 return;
@@ -155,8 +155,8 @@ const OnlineStore = (props) => {
         });
         category===undefined&&cat==='Cat'&&menu!=='octaves'&&menu!=='brands'?category='Cat':'';
         console.log('category:', category)
-        let searchTerm = document.querySelector('#searchTerm').value;
-        let newused = document.querySelector('#newused').value;
+        let searchTerm = document.querySelector('#searchTerm')&&document.querySelector('#searchTerm').value;
+        let newused = document.querySelector('#newused')&&document.querySelector('#newused').value;
         setClearMenus(false);
         setIdx(0);
         setHasMore(true);
@@ -218,7 +218,7 @@ const OnlineStore = (props) => {
         if (String(type).toUpperCase()==='STRINGS BY HARP BUILDER') {
             searchTerm=menu;
             searchTerm==='FH Models'?searchTerm="FH":'';
-            categoryProductList=productListCopy.filter(item=>String(item.category).toUpperCase()==="STRINGS");
+            if (prodItem&&prodItem.title.toUpperCase().includes(menu.toUpperCase())) categoryProductList.push(prodItem);
             
         } else if (menu==='octaves') {
             setCatBreadCrumb('All Categories');
@@ -230,12 +230,15 @@ const OnlineStore = (props) => {
             // console.log('productListCopy:', productListCopy.length)
             // console.log('categoryProductList:', Array.isArray(categoryProductList))
             // console.log('productListCopy:', Array.isArray(productListCopy))
-            // console.log('menu:', menu.toUpperCase())
+            console.log('cat:', cat)
+            console.log('type:', type)
+            console.log('menu:', menu.toUpperCase())
             // console.log(productListCopy[3300].subsubcategory.toUpperCase())
 
             productListCopy.map((prodItem, index)=>{
                 if (index===3100) console.log(prodItem, menu.toUpperCase());
-                if (prodItem&&prodItem.title.toUpperCase().includes(menu.toUpperCase())) categoryProductList.push(prodItem);
+                // if (prodItem&&prodItem.title.toUpperCase().includes(menu.toUpperCase())) categoryProductList.push(prodItem);
+                categoryProductList=productListCopy.filter(item=>String(item.subsubcategory).toUpperCase()===menu.toUpperCase());
             });
             // categoryProductList=productListCopy.filter(item=>String(item.subsubcategory).toUpperCase()===String(menu).toUpperCase()); 
             console.log('categoryProductList:', categoryProductList.length)
@@ -256,9 +259,9 @@ const OnlineStore = (props) => {
         console.log('bottbott', 'Cat:', categoryProductList.length);
         // console.log('newused:', newused)
         // newused
-        if(newused!=='New/Used') {
+        if(newused&&newused!=='New/Used') {
             categoryProductList.map(product=>{
-                if (newused.toUpperCase()===String(product.newused).toUpperCase()) {
+                if (newused&&newused.toUpperCase()===String(product.newused).toUpperCase()) {
                     newusedProductList.push(product);
                 }
             });
@@ -452,7 +455,7 @@ const OnlineStore = (props) => {
         console.log(finalProductList.length)
         preSearchProductList = [...finalProductList]
         // search term
-        if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
+        if (document.querySelector('#searchTerm')&&document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
             searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
             type=searchTerm;
@@ -520,7 +523,7 @@ const OnlineStore = (props) => {
                 handleCatChange={handleCatChange}
                 setDetailProduct2={setDetailProduct2}
             /> */}
-            <div>{String(menuOpen)}/{String(subMenuOpen)}</div>
+            <div>{winWidth}-{String(menuOpen)}/{String(subMenuOpen)}</div>
             
             
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>
