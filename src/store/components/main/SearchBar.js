@@ -129,19 +129,6 @@ const SearchBar = (props) => {
                     font-size: 28px;
                     pointer-events: none;
                 }
-                @media only screen and (max-width: 750px) {
-                    .selectContainer {
-                        width: 100%;
-                        display: flex;
-                    }
-                    select {
-                        width: 100%;
-                        height: 50px;
-                    }
-                    .selectContainer>span {
-                        display: none;
-                    }
-                }
                 #searchInput {
                     background-image: url('/css/searchicon.png');
                     background-position: 10px 12px;
@@ -153,12 +140,6 @@ const SearchBar = (props) => {
                     border: 1px solid #ffe58a;
                     margin-bottom: 0px;
                     max-width: 650px;
-                }
-                @media only screen and (max-width: 750px) {
-                    #searchInput {
-                        flex: unset;
-                    }
-                    
                 }
                 select {
                     font-size: 16px;
@@ -184,6 +165,12 @@ const SearchBar = (props) => {
                 .searchTextImg {
                     display: flex;
                     width: 100%;
+                    margin-left: 35px;
+                }
+                @media only screen and (max-width<750) {
+                    .searchTextImg {
+                        margin-left: 0;
+                    }
                 }
                 .searchTextImg form{
                     display: flex;
@@ -222,11 +209,6 @@ const SearchBar = (props) => {
                     font-weight: 500;
                     font-size:14px;
                 }
-                @media only screen and (max-width: 750px) {
-                    .searchHelperText {
-                        display: block;
-                    }
-                }
                 .globalstoresearchTitle {
                     width: 60%;
                     margin: 25px auto 5px;
@@ -244,14 +226,6 @@ const SearchBar = (props) => {
                 }
                 .searchInfoWrapper {
                     display: flex;
-                }
-                @media only screen and (max-width: 750px) {
-                    .searchInfoWrapper {
-                        display: block;
-                    }
-                    .searchInfoWrapper h3 {
-                        font-size: 14px;
-                    }
                 }
                 
                 #myUL {
@@ -299,7 +273,7 @@ const SearchBar = (props) => {
                     </div>
                        
                     {!props.menuOpen&&
-                    <div className='selectContainer' style={{width: '100%'}}>
+                    <div className='selectContainer' style={{width: '50%'}}>
                         <select onChange={()=>props.handleChange('','','newused')} id='newused' style={{width: `${window&&window.innerWidth<750?'100%':'25%'}`, minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
                             <option value='New/Used' name='All newused'>New/Used</option>
                             <option value='New' name='New'>New Only</option>
@@ -383,7 +357,7 @@ const SearchBar = (props) => {
                         height: 50px;
                     }
                     .selectContainer>span {
-                        display: none;
+                        // display: none;
                     }
                 }
                 #searchInput {

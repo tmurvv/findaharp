@@ -22,7 +22,8 @@ const initialState = {
     makesmodels: false
 }
 function StoreProductSearchStrings(props) {
-    const [menus, setMenus] = useState(initialState);
+    const [ menus, setMenus ] = useState(initialState);
+    const [ winWidth, setWinWidth ] = useState(initialState);
     
     function handleOctavesSelection(octaves) {
         props.setTypeOfSearch("strings");
@@ -196,14 +197,14 @@ function StoreProductSearchStrings(props) {
    function clearOneFilter(e) {
         let menuClick = e.target.name;
         menuClick==="makesmodels"?menuClick="Makes/Models":''; // hack change e.target.name to 'Lever/Pedal/Ens'
-        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.makesmodels);}
-        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange("strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.makesmodels);}
-        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels);}
-        if (menuClick==='Makes/Models') {props.setMakesmodelsSearch("All Makes/Models"); props.handleChange("strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "All Makes/Models");}
+        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange('',"strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.makesmodels);}
+        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange('',"strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.makesmodels);}
+        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange('',"strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels);}
+        if (menuClick==='Makes/Models') {props.setMakesmodelsSearch("All Makes/Models"); props.handleChange('',"strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "All Makes/Models");}
         console.log('clearOne', menuClick)
         const newState = {
             ...props.allState, 
-            [menuClick]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, 
+            [menuClick]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}`, 
             searchInfo: newSearchInfo,
             brandAbbr: menuClick==='brands'?"All Brands": props.allState.brandAbbr,
             brands: menuClick==='brands'?"All Brands": props.allState.brands,
@@ -217,10 +218,10 @@ function StoreProductSearchStrings(props) {
     useEffect(() => {
         triggerLazy();
     },[]);
-    useEffect(()=>console.log('ineffect'),[])
+    useEffect(()=>setWinWidth(window.innerWidth),[])
     return (
         <>       
-        <div className='storeproductSearchOuter'>
+        <div className='storeproductSearchOuter' style={{marginTop: `${winWidth<750?'170px':''}`, marginBottom: `${winWidth<750?'-150px':''}`}}>
             <h3 className='storesearchTitle'>Strings advanced search&nbsp;&nbsp;
                 <img 
                     name='stringadvanced'
@@ -237,7 +238,7 @@ function StoreProductSearchStrings(props) {
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
-                     {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
+                     {/* {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&& */}
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -248,7 +249,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.octaves}
                         clearMenu={props.clearMenus}
                     />
-                }
+                {/* } */}
                     <NotesMenu 
                         id="notesmenu"
                         handleNotesChange={handleNotesSelection} 
@@ -259,7 +260,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
-                    {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
+                    {/* {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&& */}
                     <BrandsMenu 
                         id="brandsmenu"
                         handleBrandsChange = {handleBrandsSelection}
@@ -269,7 +270,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-            }
+            {/* } */}
                     {/* <MakesmodelsMenu 
                         id='makesmodelsmenu'
                         handleMakesmodelsChange = {handleMakesmodelsSelection}
@@ -289,16 +290,17 @@ function StoreProductSearchStrings(props) {
                     />
                 </div>
                 <div className="storesearchLine2Sub">
-                {(!props.ribbonmenuOpen)&&String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
+                {/* {(!props.ribbonmenuOpen)&&String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&& */}
                     <div 
                         id="selectedOctaves" 
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{cursor: 'pointer', zIndex: '1000'}}
+                        style={{fontSize: '16px', cursor: 'pointer', zIndex: '1000', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"
                             ?<img 
+                                style={{height: '10px', marginLeft: '7px'}}
                                 name='octaves'
                                 onClick={
                                     (e)=>{
@@ -312,7 +314,7 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
-                    }
+                    {/* } */}
                     {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedNotes" 
@@ -338,7 +340,7 @@ function StoreProductSearchStrings(props) {
                         }
                     </div>
                     }
-                    {(!props.ribbonmenuOpen)&&String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&&
+                    {(!props.ribbonmenuOpen)&&
                     <div 
                         id="selectedBrands" 
                         className={`storesearch-grid-item`} 
@@ -374,7 +376,7 @@ function StoreProductSearchStrings(props) {
                             handleClick({target: {name: 'makesmodels'}});
                             
                         }}
-                        style={{justifySelf: 'left'}}
+                        style={{justifySelf: `${winWidth>750?'left':''}`}}
                     >
                         {/* {props.allState&&props.allState.makesmodels} */}
                         {props.allState.modelAbbr}

@@ -1,7 +1,6 @@
 // packages
 import React, { useEffect, useState } from 'react';
 import SubCatMenu from './SubCatMenu';
-import SubSubCatMenu from './SubSubCatMenu';
 import { CATEGORIES } from '../../constants/Categories';
 
 function CategoryMenu(props) {
@@ -56,7 +55,7 @@ function CategoryMenu(props) {
         <>              
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
-                    <ul id='category'>
+                    <ul id='category' style={{width: `${props.menuOpen?'210px':''}`}}>
                         <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
                             {props.menuOpen
@@ -117,7 +116,6 @@ function CategoryMenu(props) {
                     z-index: 9995;
                     position: relative;
                     -webkit-appearance: none;
-                    border: 1px solid rgb(249, 191, 30);
                 }
                 .CatMenuCont ul {
                     list-style: none;
@@ -131,7 +129,9 @@ function CategoryMenu(props) {
                 .MainCat {
                     flex: 4;
                     background-color: #fff;
+                    border: 1px solid rgb(249, 191, 30);
                     border-right: none;
+                    
                 }
                 .CatLine {
                     color: #000;
@@ -143,6 +143,12 @@ function CategoryMenu(props) {
                     background-color: #ffd663;
                     height: 48px;
                     border-right: 1px solid gold;
+                    width: 160px;
+                }
+                @media only screen and (max-width: 750px) {
+                    .catLine {
+                        width: unset;
+                    }
                 }
                 .MainCat1:hover {
                     background-color: #f9bf1e;
@@ -197,7 +203,7 @@ function CategoryMenu(props) {
                                 value={cat}
                                 onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
-                                onClick={()=>props.setSubMenuOpen(cat)}>  
+                                onClick={e=>{e.stopPropagation();props.setSubMenuOpen(cat)}}>  
                                 <div>{cat}</div>
                                 <img 
                                     className='catChevron hovershow' 
@@ -300,8 +306,8 @@ function CategoryMenu(props) {
 
     if (props.ribboncatBreadCrumb&&props.ribboncatBreadCrumb==='ribbon') return (
         <>              
-            {/* <div className='' style={{position: 'absolute', width: '75px', zIndex: '9950', right: '22%'}}> */}
-            <div className='' style={{position: 'relative', width: '75px', zIndex: '9950'}}>
+            {/* <div className='' style={{position: 'absolute', width: '75px', zIndex: '950', right: '22%'}}> */}
+            <div className='' style={{position: 'relative', width: '75px', zIndex: '950'}}>
                 <div className='' style={props.ribbonmenuOpen?{backgroundColor: 'transparent',  padding: '0', minWidth: '165px', borderColor: 'transparent',cursor: 'pointer'}:{cursor: 'pointer', backgroundColor: 'transparent'}}>
                     <ul style={{marginBlock: '0', padding: '0'}}>
                         <li style={{backgroundColor: 'transparent', padding: '0', height: '30px', fontSize: '14px', transform: 'translateY(4px)'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>

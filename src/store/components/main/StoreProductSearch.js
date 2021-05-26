@@ -22,6 +22,7 @@ const initialState = {
 }
 function StoreProductSearch(props) {
     const [menus, setMenus] = useState(initialState);
+    const [winWidth, setWinWidth] = useState(4000);
     
     function handleSoloEnsembleSelection(soloensemble) {
         const newState = {...props.allState, 
@@ -141,7 +142,7 @@ function StoreProductSearch(props) {
     function clearOneFilter(e) {
         const menuClick = e.target.name;
         if (menuClick==='soloensemble') {props.handleChange('',"music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
-        if (menuClick==='level') {props.handleChange('',"music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='level') {props.handleChange('',"music", "level", props.allState?props.allState.soloensemble:'', "clearone", props.allState?props.allState.publicationtype:'');}
         if (menuClick==='publicationtype') {props.handleChange('','music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
         e.target.name==="soloensemble"?e.target.name="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         e.target.name==="publicationtype"?e.target.name="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
@@ -151,10 +152,11 @@ function StoreProductSearch(props) {
     }
     useEffect(() => {
         triggerLazy();
+        setWinWidth(window.innerWidth);
     },[]);
     return (
         <>       
-        <div className='storeproductSearchOuter'>
+        <div className='storeproductSearchOuter' style={{marginTop: `${winWidth<750?'170px':''}`, marginBottom: `${winWidth<750?'-150px':''}`}}>
             <h3 className='storesearchTitle'>Music advanced search&nbsp;&nbsp;
                 <img 
                     name='soloensemble'

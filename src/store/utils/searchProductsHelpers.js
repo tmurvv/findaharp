@@ -195,7 +195,7 @@ export function searchSearchBar(filteredProducts, query, setMusicSearch, setStri
             };
         });
         setMusicSearch(music);
-        setStringSearch(strings);
+        // setStringSearch(strings);
     });
     // sort and return
     return returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0));

@@ -139,56 +139,10 @@ function GlobalStoreSearch(props) {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
-            
-            
-            {/* <div className='storeSearchLine' >
-                {screenWidth>750
-                ?
-                <>
-                    
-                </>
-                :
-                <>
-                <h3 className='searchHelperText'>Search by category</h3>
-                <div style={{display: 'flex', margin:'auto'}}>
-                <div className='selectContainer'>    
-                    <select onChange={()=>props.handleChange('category','category')} id='category' style={{WebkitAppearance: 'none'}}>
-                        <option name='All'>All</option>
-                        <option name='Strings'>Strings</option>
-                        <option name='Music'>Music</option>
-                        <option name='Accessories'>Accessories</option>
-                        <option name='Books'>Books</option>
-                        <option name='Gifts'>Gifts</option>
-                        <option name='CDs'>CDs</option>
-                        <option name='Digital Downloads'>Digital Downloads</option>
-                    </select>
-                    <span>&#711;</span>
-                </div>
-                <div className='selectContainer'> 
-                    <select onChange={()=>props.handleChange('', '', 'newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px', WebkitAppearance: 'none'}}>
-                        <option value='New/Used' name='All newused'>New/Used</option>
-                        <option value='New' name='New'>New Only</option>
-                        <option value='Used' name='Used'>Used Only</option>
-                    </select>
-                    <span>&#711;</span>
-                </div>
-                </div>
-                <h3 className='searchHelperText'>and / or search term</h3>
-                <div className="searchTextImg">
-                    <form style={{display: 'flex'}}>
-                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
-                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange()}}>
-                            <img src='/img/searchicon.png' alt='search icon' />
-                        </button>
-                    </form> 
-                </div>
-                </>
-                }
-            </div> */}
             {winWidth>750&&
-            <div style={{marginTop: `${winWidth<750?'125px':''}`, display: 'flex', flexDirection: `${winWidth<750?'column':'row'}`, justifyContent: 'center', alignItems: 'center', marginTop: `${winWidth<750?'130px':'50px'}`}}>
-                <div style={{marginBottom: '-10px'}} id='searchLineAnchor' hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px -10px'}}>Music advanced search</button></div>
-                <div style={{marginBottom: '-10px'}} hidden={props.stringSearch}><button onClick={()=>{props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '88px'}}>
+                <div id='searchLineAnchor' hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
+                <div hidden={props.stringSearch}><button onClick={()=>{handleClear(); props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
                 {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
                 <div>
                     <button 
@@ -277,7 +231,7 @@ function GlobalStoreSearch(props) {
             </>
             }
             {props.searchResultsText==='notfound'&&
-                <div className='storeselected clearAll' id='clearSearch' style={{display:'flex', paddingTop: '40px'}}>
+                <div className='storeselected clearAll' id='clearSearch' style={{marginTop: `${winWidth<750?'100px':''}`, display:'flex', paddingTop: '40px'}}>
                     <h3>No items match your search.</h3>
                     <div onClick={handleClear} className='clearAll clearSearch'>
                         <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>

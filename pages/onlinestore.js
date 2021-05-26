@@ -59,8 +59,13 @@ const OnlineStore = (props) => {
                 return;
             }
         const stringsOnly = props.filteredProducts.filter(res=>String(res.category).toUpperCase()==='STRINGS');
+        if (String(searchCategory).toUpperCase()==='STRINGS BY TYPE') {
+            setStringSearch(true);
+            setAllState({...allState, octaves: 'All Octaves', notes: 'All Notes', brands: 'All Brands' })
+        }
         if (String(searchCategory).toUpperCase()==='STRINGS BY HARP BUILDER') {
-            
+            setStringSearch(false);
+            setAllState({...allState, octaves: 'All Octaves', notes: 'All Notes', brands: 'All Brands' })
             const searchTerm = searchItem;
 
             if(searchTerm) {
@@ -124,9 +129,14 @@ const OnlineStore = (props) => {
     }
 
     function handleChange(cat, type, menu, value1, value2, value3, value4) {
-        console.log('topcat:', cat)
-        console.log('toptype:', type)
-        console.log('topmenu:', menu)
+        console.log('topcat:', cat);
+        console.log('toptype:', type);
+        console.log('topmenu:', menu);
+        console.log('value1:', value1);
+        console.log('value2:', value2);
+        console.log('value3:', value3);
+        const topMenu = menu;
+        const topType = type;
         // if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="MUSIC") {
         //     setMusicSearch(true);
         //     setStringSearch(false);
@@ -191,16 +201,18 @@ const OnlineStore = (props) => {
             console.log('value2:', value2)
             type='music';
             (!value2)||value2.startsWith('All')?value2=allState.level:'';
+            value2==='clearone'?value2='All Levels':'';
             console.log('value2:', value2);
         }
         if (stringSearch)  {
             // console.log('value1:', value1);
             // console.log('value2:', value2);
             // console.log('value3:', value3);
-            // // type='strings';
-            (!value1)||value1.startsWith('All')?value1=allState.octaves:'';
-            (!value2)||value2.startsWith('All')?value2=allState.notes:'';
-            (!value3)||value3.startsWith('All')?value3=allState.brands:'';
+            // 
+            console.log('menu:', menu);
+            (!value1)||(value1.startsWith('All')&&topMenu!=='octaves')?value1=allState.octaves:'';
+            (!value2)||(value2.startsWith('All')&&topMenu!=='notes')?value2=allState.notes:'';
+            (!value3)||(value2.startsWith('All')&&topMenu!=='brands')?value3=allState.brands:'';
             // console.log('value1:', value1);
             // console.log('value2:', value2);
             // console.log('value3:', value3);
@@ -213,18 +225,22 @@ const OnlineStore = (props) => {
            
         if (cat!=='Cat'&&String(catBreadCrumb).toUpperCase()!=='ALL CATEGORIES') {
             console.log('inssssssss')
-            cat='Cat'; menu=category;
-        }
-        if (String(type).toUpperCase()==='STRINGS BY HARP BUILDER') {
-            searchTerm=menu;
-            searchTerm==='FH Models'?searchTerm="FH":'';
-            if (prodItem&&prodItem.title.toUpperCase().includes(menu.toUpperCase())) categoryProductList.push(prodItem);
+            cat='Cat';
+            menu=category;
             
-        } else if (menu==='octaves') {
-            setCatBreadCrumb('All Categories');
-            categoryProductList = [...productListCopy] 
         }
-        else if (cat==='Cat') {
+        if (String(topType).toUpperCase()==='STRINGS BY HARP BUILDER') {
+            searchTerm=menu;
+            String(searchTerm).toUpperCase()==='FH MODELS'?searchTerm="FH":'';
+            console.log('searchTerm:', searchTerm)
+            console.log('menu:', menu)
+            console.log('productListCopy:', productListCopy.length)
+            productListCopy.map((prodItem, index)=>{
+                if (index===3100) console.log(prodItem, menu.toUpperCase());
+                if (prodItem&&prodItem.title.toUpperCase().includes(searchTerm.toUpperCase())) categoryProductList.push(prodItem);
+            }); 
+            console.log('categoryProductList:', categoryProductList.length)  
+        } else if (cat==='Cat') {
             // console.log('inslkdfj')
             // console.log('categoryProductList:', categoryProductList.length)
             // console.log('productListCopy:', productListCopy.length)
@@ -232,14 +248,11 @@ const OnlineStore = (props) => {
             // console.log('productListCopy:', Array.isArray(productListCopy))
             console.log('cat:', cat)
             console.log('type:', type)
-            console.log('menu:', menu.toUpperCase())
+            console.log('menu:', menu.toUpperCase());
+            console.log('topMenu:', topMenu)
             // console.log(productListCopy[3300].subsubcategory.toUpperCase())
-
-            productListCopy.map((prodItem, index)=>{
-                if (index===3100) console.log(prodItem, menu.toUpperCase());
-                // if (prodItem&&prodItem.title.toUpperCase().includes(menu.toUpperCase())) categoryProductList.push(prodItem);
-                categoryProductList=productListCopy.filter(item=>String(item.subsubcategory).toUpperCase()===menu.toUpperCase());
-            });
+            categoryProductList=productListCopy.filter(item=>item&&item.subsubcategory&&String(item.subsubcategory).toUpperCase()===menu.toUpperCase());
+            
             // categoryProductList=productListCopy.filter(item=>String(item.subsubcategory).toUpperCase()===String(menu).toUpperCase()); 
             console.log('categoryProductList:', categoryProductList.length)
         } else {
@@ -271,6 +284,7 @@ const OnlineStore = (props) => {
         console.log('newusedprodlist', newusedProductList.length)
         // finalProductList=[...categoryProductList]
         if (category&&category.toUpperCase()==="MUSIC"||String(type).toUpperCase()==='MUSIC') {
+            console.log('in music')
             if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
             if (!value2||value2===undefined) value2="All Levels";
             if (!value3||value3===undefined) value3="All Publication Types";
@@ -287,6 +301,7 @@ const OnlineStore = (props) => {
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check level
             if (level&&level.toUpperCase()!=='ALL LEVELS') { 
+                console.log('in level', level, value2)
                 newusedProductList.map(product=> {
                     if (String(product.level).toUpperCase().startsWith('BEGIN')&&level.toUpperCase().startsWith("BEGIN")) {
                         levelProductList.push(product);
@@ -343,13 +358,14 @@ const OnlineStore = (props) => {
             console.log('cat:', cat)
             console.log('newusedProductList:', newusedProductList.length)
             console.log('value1:', value1)
+            console.log('value2:', value2)
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2=allState.note!=="All Notes"?allState.notes:'All Notes';
             if (!value3||value3===undefined) value3="All Brands";
             if (!value4||value4===undefined) value4="All Makes/Models";
-            const octave = menu==='octaves'?value1.replace('ss', 's'):allState.octaves.replace('ss','s');
-            const note = menu==='notes'?value2.replace('ss', 's'):allState.notes.replace('ss', 's');
-            const brand = menu==='brands'?value3.replace('ss', 's'):allState.brands.replace('ss', 's');
+            const octave = topMenu==='octaves'?value1.replace('ss', 's'):allState.octaves.replace('ss','s');
+            const note = topMenu==='notes'?value2.replace('ss', 's'):allState.notes.replace('ss', 's');
+            const brand = topMenu==='brands'?value3.replace('ss', 's'):allState.brands.replace('ss', 's');
             let makesmodels = menu==='makesmodels'?value4.replace('ss', 's'):allState.makesmodels.replace('ss', 's');
             if (makesmodels.toUpperCase().startsWith('ALL')&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") makesmodels=makesmodels.substr(4);
             // initialize variables
@@ -360,6 +376,7 @@ const OnlineStore = (props) => {
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
+            console.log('octave:', octave)
             if (octave&&octave.toUpperCase()!=='ALL OCTAVES'&&octave!==undefined) {
                 console.log('octave:', octave)
                 console.log(newusedProductList.length)
@@ -380,13 +397,16 @@ const OnlineStore = (props) => {
             console.log('octavesProductList:', octavesProductList.length)
             finalProductList=[...octavesProductList];
             // check notes
-            // console.log('above note:', note)
-            // console.log('value2:', value2)
-            // console.log('category:', category)
+            console.log('above note:', note)
+            console.log('value2:', value2)
+            console.log('category:', category)
+
             if (value2&&value2.toUpperCase()!=='ALL NOTES'&&value2!==undefined) {
-                
-                    octavesProductList.map(product=> {
-                        if (!category||category.toUpperCase()==='ALL CATEGORIES') {
+                    console.log('stringSearch:', stringSearch)
+                    console.log('octavesProductList:', octavesProductList.length)
+                  octavesProductList.map(product=> {
+                        if (stringSearch) {
+                            console.log('inif')
                             // Not Yet Implement (search for notes by number)
                             if (value2==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
                             if (value2==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
@@ -398,8 +418,8 @@ const OnlineStore = (props) => {
                             product.subcategories.map(cat=>cat.toUpperCase()===note.toUpperCase()&&notesProductList.push(product));
                         } else {
                             console.log('in else')
-                            console.log('notesProductList:', notesProductList.length)
-                            console.log('note:', note)
+                            // console.log('notesProductList:', notesProductList.length)
+                            // console.log('note:', note)
                             // Not Yet Implement (search for notes by number)
                             if (value2==='E'&&product.title.includes(' E ')) notesProductList.push(product);
                             if (value2==='D'&&product.title.includes(' D ')) notesProductList.push(product);
@@ -523,11 +543,11 @@ const OnlineStore = (props) => {
                 handleCatChange={handleCatChange}
                 setDetailProduct2={setDetailProduct2}
             /> */}
-            <div>{winWidth}-{String(menuOpen)}/{String(subMenuOpen)}</div>
+            {/* <div>{winWidth}-{String(menuOpen)}/{String(subMenuOpen)}</div> */}
             
             
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>
-                <div className='searchBarMainCont' style={{top: `${winWidth<751?'150px':'126px'}`, margin: 'auto', transform: 'none'}}>
+                <div className='searchBarMainCont' style={{top: `${winWidth<751?'150px':'126px'}`, margin: 'auto', transform: 'none', borderBottom: '1px solid rgb(249, 191, 30)', marginLeft: '4%'}}>
                     <SearchBar 
                         subMenuOpen={subMenuOpen} 
                         setSubMenuOpen={setSubMenuOpen} 

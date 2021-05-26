@@ -203,7 +203,7 @@ function AppCss() {
             @media only screen and (max-width: 750px) {
                 .storePlainTextSelectLine1 {
                     /*margin-block-start: -.5em;*/
-                    width: 190%;
+                    // width: 190%;
                     position: absolute;
                 }
                 .storePlainTextSelectLine2 {

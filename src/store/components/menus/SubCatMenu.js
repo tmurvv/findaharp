@@ -31,7 +31,7 @@ function SubCatMenu(props) {
     if (props.menuOpen&&winWidth>750) {
         return (
             <>       
-                <div className='HeadingChoice'> wind: {winWidth}
+                <div className='HeadingChoice'>
                     {props.menuName}
                     {props.menuName==='Strings by Harp Builder'
                         ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Builder not found? Please use "Strings by Type" menu</div>

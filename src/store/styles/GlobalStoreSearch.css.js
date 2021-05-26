@@ -44,7 +44,7 @@ function GlobalStoreSearchCss() {
                     width: 100%;
                 }
                 .selectContainer>span {
-                    display: none;
+                    // display: none;
                 }
             }
             #searchInput {
