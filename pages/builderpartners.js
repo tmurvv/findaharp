@@ -37,7 +37,7 @@ export default function BuilderPartners() {
         <div className='builderPartnersContainer'>
             <PageTitle   
                 maintitle='Our Builder Partners' 
-                subtitle='Find a Harp is proud to partner with the following harp sellers' 
+                subtitle='Find a Harp is proud to partner with the following harp builders' 
             />
             {/* <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
                     <FastNEasyStringForm />
