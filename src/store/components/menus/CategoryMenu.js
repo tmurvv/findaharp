@@ -56,7 +56,7 @@ function CategoryMenu(props) {
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul id='category' style={{width: `${props.menuOpen?'210px':'160px'}`}}>
-                        <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                        <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={(e)=>{e.stopPropagation();handleClick();}} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
@@ -74,7 +74,7 @@ function CategoryMenu(props) {
                                 value={cat}
                                 onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
-                                onClick={()=>props.setSubMenuOpen(cat)}>  
+                                onClick={(e)=>{e.stopPropagation();props.setSubMenuOpen(cat);}}>  
                                 <div>{cat}</div>
                                 <img 
                                     className='catChevron hovershow' 
@@ -97,10 +97,11 @@ function CategoryMenu(props) {
                             handleCatChange={props.handleCatChange}
                             setDetailProduct2={props.setDetailProduct2}
                             menuOpen={props.menuOpen}
+                            winWidth={winWidth}
                         />
                     }
                     {/* <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'> */}
-                    <div style={props.menuOpen?{height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
+                    <div style={props.menuOpen?{height: '20px'}:{display:'none'}} onClick={(e) => {e.stopPropagation();handleClick(e, props.product, false);}} className='storeclearModal'>
                         <img style={{height: '100%', opacity: '.6'}} src='img/clear_search.png' alt='clear filters'/>
                     </div>
                 </div>
@@ -186,7 +187,7 @@ function CategoryMenu(props) {
              
                 <div className='MainCat' style={!props.subMenuOpen?{backgroundColor: '#ffd663',  width: '100%', padding: '0', borderColor: 'transparent'}:{display: 'none'}}>
                     <ul id='category'>
-                        <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                        <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={(e)=>{e.stopPropagation();handleClick();}} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
@@ -224,10 +225,11 @@ function CategoryMenu(props) {
                             handleCatChange={props.handleCatChange}
                             setDetailProduct2={props.setDetailProduct2}
                             menuOpen={props.menuOpen}
+                            winWidth={winWidth}
                         />
                     }
                     {/* <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'> */}
-                    <div style={props.menuOpen?{position: 'absolute', top: '15px', left: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
+                    <div style={props.menuOpen?{position: 'absolute', top: '15px', left: '5px', height: '20px'}:{display:'none'}} onClick={(e) => {e.stopPropagation();handleClick(e, props.product, false)}} className='storeclearModal'>
                         <img style={{height: '100%', opacity: '.6'}} src='img/store/left-chevron.png' alt='left arrow back to main categories'/>
                     </div>
                 </div>
@@ -305,7 +307,7 @@ function CategoryMenu(props) {
             <div className='' style={{position: 'relative', width: '75px', zIndex: '950'}}>
                 <div className='' style={props.ribbonmenuOpen?{backgroundColor: 'transparent',  padding: '0', minWidth: '165px', borderColor: 'transparent',cursor: 'pointer'}:{cursor: 'pointer', backgroundColor: 'transparent'}}>
                     <ul style={{marginBlock: '0', padding: '0'}}>
-                        <li style={{backgroundColor: 'transparent', padding: '0', height: '30px', fontSize: '14px', transform: 'translateY(4px)'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
+                        <li style={{backgroundColor: 'transparent', padding: '0', height: '30px', fontSize: '14px', transform: 'translateY(4px)'}} onClick={(e)=>{e.stopPropagation();handleClick();}} id="Categories" className='CatLine'>
                             <div>Makes/Models {props.ribbonmenuOpen}</div>
                             {props.ribbonmenuOpen
                             ?<img style={{position: 'unset', height: '10px', width: '10px', backgroundColor: 'transparent'}} className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
@@ -322,7 +324,7 @@ function CategoryMenu(props) {
                                 onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.ribbonsetSubMenuOpen(builder);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
                                 // onClick={()=>alert()}>  
-                                onClick={()=>props.ribbonsetSubMenuOpen(builder)}
+                                onClick={(e)=>{e.stopPropagation();props.ribbonsetSubMenuOpen(builder);}}
                             >  
                                 <div>{builder}</div>
                                 <img 

@@ -28,7 +28,7 @@ function SubCatMenu(props) {
     
     useEffect(()=>setWinWidth(window.innerWidth),[]);
 
-    if (props.menuOpen&&winWidth>750) {
+    if (props.menuOpen&&props.winWidth>750) {
         return (
             <>       
                 <div className='HeadingChoice'>
@@ -37,10 +37,10 @@ function SubCatMenu(props) {
                         ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Builder not found? Please use "Strings by Type" menu</div>
                         :''
                     }
-                    {props.menuName==='Music'
+                    {/* {props.menuName==='Music'
                         ?<div onClick={()=>alert('Link coming soon. Please find this feature on the store main page under the "word search" area. Search by difficulty level, ensemble type, genre, etc.')}style={{fontSize: '14px', cursor: 'pointer', fontStyle: 'italic', marginTop: '5px', color: '#333', textDecoration:'underline'}}>Advanced Music Search</div>
                         :''
-                    }
+                    } */}
                 </div>
                 <div className='SubCont' style={{padding: '20px'}}>
                     <ul style={winWidth>750?{columns: '2', breakAfter: 'avoid-column', breakInside: 'avoid-column'}:{}}>
@@ -147,10 +147,10 @@ function SubCatMenu(props) {
                 
             </>
         )
-    } else if (props.menuOpen&&winWidth<=750) {
+    } else if (props.menuOpen&&props.winWidth<=750) {
         return (
             <>       
-                <div className='HeadingChoice' style={{paddingLeft: '20px'}}>
+                <div className='HeadingChoice' style={{paddingLeft: '20px'}}>winwidth: 'Less than 750'{winWidth}
                     {props.menuName}
                     {props.menuName==='Strings by Harp Builder'
                         ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Builder not found? Please use "Strings by Type" menu</div>
