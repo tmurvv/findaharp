@@ -45,7 +45,22 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
             <div data-test='component-ProductContainer' className='productContainer'>
                 {allstate&&allstate.maker&&allstate.maker!=='All Builders'&&
                     <div style={{backgroundColor: `${allstate.builderInfo.bannerBackgroundColor}`, display: 'flex', justifyContent: 'center', width: '100%', marginBottom: '30px', borderRadius: '3px'}}>
-                        {allstate.maker!=="All Builders"&&<><img style={{height: '150px', borderRadius: '3px'}} src={`${allstate.builderInfo.sellerBanner&&allstate.builderInfo.sellerBanner}`} alt='harp maker logo' /></>}
+                        {allstate.maker!=="All Builders"&&
+                        <>
+                            <img 
+                                style={{height: '150px', borderRadius: '3px'}} 
+                                src={`${allstate.builderInfo.sellerBanner&&allstate.builderInfo.sellerBanner}`} 
+                                alt='harp maker logo'
+                                usemap="#bannermap"
+                            />
+                            {/* <img src="workplace.jpg" alt="Workplace" usemap="#bannermap" /> */}
+
+                            <map name="bannermap">
+                                <area shape="rect" coords="120, 120, 260, 150" alt="Computer" href={`${allstate.builderInfo.sellerWebsite}`} target='_blank' />
+                                {/* <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.htm" />
+                                <area shape="circle" coords="337,300,44" alt="Coffee" href="coffee.htm" /> */}
+                            </map>
+                        </>}
                     </div>
                 }
                 <div className="grid-container" style={{'opacity': `${state.opacity}`}}>

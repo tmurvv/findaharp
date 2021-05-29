@@ -153,14 +153,14 @@ const SearchBar = (props) => {
     
                 select:active,
                 select:hover {
-                    outline-color: #ffe499;
+                    outline-color: #ffe58a;
                 }
                 input:active,
                 input:hover {
-                    outline-color: #ffe499;
+                    outline-color: #ffe58a;
                 }
                 select:focus, input:focus{
-                    outline-color: #ffe499;
+                    outline-color: #ffe58a;
                 }
                 .searchTextImg {
                     display: flex;
@@ -178,7 +178,7 @@ const SearchBar = (props) => {
                 }
                 .searchTextImg input{
                     width: 100%;
-                    border: 1px solid #ffe499;
+                    border: 1px solid #ffe58a;
                     flex: 8;
                     padding: 13px 7px;
                     font-size: 16px;
@@ -390,14 +390,14 @@ const SearchBar = (props) => {
     
                 select:active,
                 select:hover {
-                    outline-color: #ffe499;
+                    outline-color: #ffe58a;
                 }
                 input:active,
                 input:hover {
-                    outline-color: #ffe499;
+                    outline-color: #ffe58a;
                 }
                 select:focus, input:focus{
-                    outline-color: #ffe499;
+                    outline-color: #ffe58a;
                 }
                 .searchTextImg {
                     display: flex;
@@ -409,7 +409,7 @@ const SearchBar = (props) => {
                 }
                 .searchTextImg input{
                     width: 100%;
-                    border: 1px solid #ffe499;
+                    border: 1px solid #ffe58a;
                     flex: 8;
                     padding: 13px 7px;
                     font-size: 16px;

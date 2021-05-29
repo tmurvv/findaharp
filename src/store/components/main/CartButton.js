@@ -19,7 +19,7 @@ function CartButton() {
     return (
         <>
             <div className='cartButton'>
-                <div className='tileContainer'><img id='tiles' onClick={()=>restoreOverlay()} src='/img/OverlayMenu/icon_mini_tiles_black.png' alt='opening tile menu icon' /></div>
+                <div className='tileContainer'><img id='tiles' onClick={()=>restoreOverlay()} src='/img/OverlayMenu/minimenu_dullwide.png' alt='opening tile menu icon' /></div>
                 {/* {!menuOverlay&&<div className='tileContainer'><img id='tiles' onClick={()=>restoreOverlay()} src='/img/OverlayMenu/icon_mini_tiles_black.png' alt='opening tile menu icon' /></div>} */}
                 <div className='cartButtonCart' onClick={()=>Router.push('/cart')}>
                     <p>{getNumItems(cart)<10?`0${getNumItems(cart)}`:getNumItems(cart)}</p>

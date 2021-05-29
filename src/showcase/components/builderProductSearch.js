@@ -24,9 +24,8 @@ import {
     getFilteredProducts,
     getSearchInfo,
     triggerLazy,
-    shuffleStorePartners,
-    setOpacity
-} from '../../main/utils/helpers';
+    shuffleStorePartners
+} from '../utils/helpers';
 async function getDrivingDistance(lat1, long1, lat2, long2) {
     try {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
@@ -159,6 +158,7 @@ function BuilderProductSearch(props) {
         // setMenus(initialState);
     }
     function handlePriceSelection(price) {
+        console.log('price:', price)
         const newState = {...allState, 
             price
         }
@@ -334,6 +334,7 @@ function BuilderProductSearch(props) {
                     className={`buildersearch-grid-item`} 
                     value={allState.size}
                     onClick={()=>handleClick({target: {name: 'size'}})}
+                    style={{transform: 'translateY(-1.5px'}}
                 >
                     {allState.size}
                     {allState.size!=="All Sizes"
@@ -356,6 +357,7 @@ function BuilderProductSearch(props) {
                     className={`buildersearch-grid-item`} 
                     value={allState.maker}
                     onClick={()=>handleClick({target: {name: 'maker'}})}
+                    style={{transform: 'translateY(-1.5px'}}
                 >
                     {allState.maker}
                     {allState.maker!=="All Builders"
@@ -378,6 +380,7 @@ function BuilderProductSearch(props) {
                     className={`buildersearch-grid-item`} 
                     value={allState.model}
                     onClick={()=>handleClick({target: {name: 'model'}})}
+                    style={{transform: 'translateY(-1.5px'}}
                 >
                     {allState.model}
                     {allState.model!=="All Models"
@@ -431,6 +434,7 @@ function BuilderProductSearch(props) {
                             className={`buildersearch-grid-item`} 
                             value={allState.finish}
                             onClick={()=>handleClick({target: {name: 'finish'}})}
+                            style={{transform: 'translateY(-1.5px'}}
                         >
                             {allState.finish}
                             {allState.finish!=="All Finishes"
@@ -453,6 +457,7 @@ function BuilderProductSearch(props) {
                             className={`buildersearch-grid-item`} 
                             value={allState.price}
                             onClick={()=>handleClick({target: {name: 'price'}})}
+                            style={{transform: 'translateY(-1.5px'}}
                         >
                             {allState.price}
                             {allState.price!=="All Prices"
@@ -476,6 +481,7 @@ function BuilderProductSearch(props) {
                             className={`buildersearch-grid-item`} 
                             value={allState.location}
                             onClick={()=>handleClick({target: {name: 'location'}})}
+                            style={{transform: 'translateY(-1.5px'}}
                         >
                             {allState.location}
                             {allState.location!=="All Locations"

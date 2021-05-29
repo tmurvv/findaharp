@@ -9,7 +9,6 @@ import MakesmodelsMenu from '../menus/MakesmodelsMenu';
 import StoreProductSearchCss from '../../styles/StoreProductSearch.css';
 import { getSearchInfo, triggerLazy } from '../../../main/utils/helpers';
 import { MENU_ABBR } from '../../../main/constants/constants';
-import { CompassCalibrationOutlined } from '@material-ui/icons';
 import CategoryMenu from '../menus/CategoryMenu';
 
 const initialState = {
@@ -238,7 +237,6 @@ function StoreProductSearchStrings(props) {
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
-                     {/* {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&& */}
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -249,7 +247,6 @@ function StoreProductSearchStrings(props) {
                         open={menus.octaves}
                         clearMenu={props.clearMenus}
                     />
-                {/* } */}
                     <NotesMenu 
                         id="notesmenu"
                         handleNotesChange={handleNotesSelection} 
@@ -260,7 +257,6 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
-                    {/* {String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&& */}
                     <BrandsMenu 
                         id="brandsmenu"
                         handleBrandsChange = {handleBrandsSelection}
@@ -270,14 +266,7 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-            {/* } */}
-                    {/* <MakesmodelsMenu 
-                        id='makesmodelsmenu'
-                        handleMakesmodelsChange = {handleMakesmodelsSelection}
-                        currentselected={props.allState.makesmodels?props.allState.makesmodels:'Makes/Models'}
-                        open={menus.makesmodels}
-                        handleclick={handleClick}
-                    /> */}
+                    <div>
                     <CategoryMenu 
                         ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
                         ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
@@ -288,14 +277,15 @@ function StoreProductSearchStrings(props) {
                         ribboncatBreadCrumb={'ribbon'}
                         handleCatChange={props.handleCatChange}
                     />
+                    </div>
                 </div>
                 <div className="storesearchLine2Sub">
-                {/* {(!props.ribbonmenuOpen)&&String(props.catBreadCrumb).toUpperCase()==="ALL CATEGORIES"&& */}
+                    {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedOctaves" 
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{fontSize: '16px', cursor: 'pointer', zIndex: '1000', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                        style={{cursor: 'pointer'}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"
@@ -314,7 +304,7 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
-                    {/* } */}
+                    }
                     {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedNotes" 
@@ -348,7 +338,6 @@ function StoreProductSearchStrings(props) {
                         onClick={()=>handleClick({target: {name: 'brands'}})}
                         style={{cursor: 'pointer', zIndex: '1000'}}
                     >
-                        {/* {props.allState&&props.allState.brands} */}
                         {props.allState.brandAbbr}
                         {props.allState&&props.allState.brands.toUpperCase()!=="ALL BRANDS"
                             ?<img 
@@ -364,7 +353,6 @@ function StoreProductSearchStrings(props) {
                             />
                             :''
                         }
-                        
                     </div>
                     }
                     {!props.ribbonmenuOpen&&
@@ -376,7 +364,7 @@ function StoreProductSearchStrings(props) {
                             handleClick({target: {name: 'makesmodels'}});
                             
                         }}
-                        style={{justifySelf: `${winWidth>750?'left':''}`}}
+                        style={{justifySelf: `${winWidth>750?'left':'center'}`}}
                     >
                         {/* {props.allState&&props.allState.makesmodels} */}
                         {props.allState.modelAbbr}
@@ -394,7 +382,6 @@ function StoreProductSearchStrings(props) {
                             />
                             :''
                         }
-                        {/* {String(props.catBreadCrumb).toUpperCase()!=="ALL CATEGORIES"&&'Select All Categories to view more menus.'} */}
                     </div>
                     }
                 </div>

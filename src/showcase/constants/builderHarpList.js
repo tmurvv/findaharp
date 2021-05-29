@@ -1,4 +1,7 @@
 export const BUILDER_HARP_LIST = [
+    ////////////////////////////////////////////////////////
+    // Vavra Harp
+    ////////////////////////////////////////////////////////
     {
         "id": "16572003-5b2f-4413-91a9-450cca0721b3",
         "sellerName": "Vavra Harp",
@@ -205,7 +208,7 @@ export const BUILDER_HARP_LIST = [
         "productTitle": "Regency 34",
         "productPrice": "Contact Builder",
         "productShortDesc": "",
-        "productLongDesc": `34 strings form C2-A6, 27 high and mid-range are nylon, the 7 bass are steel. It weighs 37 pounds and is 62 inches tall. This is a beautiful harp with a platform bottom. The Musicmakers catalogs say "Many harpists tell us that this model is one of the best sounding folk harps on the market today." `,
+        "productLongDesc": `34 strings form C2-A6, 27 high and mid-range are nylon, the 7 bass are steel. It weighs 37 pounds and is 62 inches tall. This is a beautiful harp with a platform bottom. The Musicmakers catalogs say "Many harpists tell us that this model is one of the best sounding folk harps on the market today." This is a stock harp. Stock Harps are built using proven plans from various harp makers, including Vavra Harp.`,
         "productMaker": "Vavra Harp",
         "productModel": "Regency 34",
         "productType": "lever",
@@ -224,7 +227,7 @@ export const BUILDER_HARP_LIST = [
         "productTitle": "Limerick 26",
         "productPrice": "Contact Builder",
         "productShortDesc": "",
-        "productLongDesc": `This small harp produces exceptional volume and has terrific tone. It can be strung with 26 nylon or steel strings from F3-C7 or from C3-G6. Strung with steel strings, this model compares to other high-end Celtic harps and the tones are vibrant and carry well. `,
+        "productLongDesc": `This small harp produces exceptional volume and has terrific tone. It can be strung with 26 nylon or steel strings from F3-C7 or from C3-G6. Strung with steel strings, this model compares to other high-end Celtic harps and the tones are vibrant and carry well. This is a stock harp. Stock Harps are built using proven plans from various harp makers, including Vavra Harp.`,
         "productMaker": "Vavra Harp",
         "productModel": "Limerick 26",
         "productType": "Wire",
@@ -243,11 +246,11 @@ export const BUILDER_HARP_LIST = [
         "productTitle": "Gothic 36",
         "productPrice": "Contact Builder",
         "productShortDesc": "",
-        "productLongDesc": `36 nylon strings from C2-C7, weighs 26 pounds and is 66 inches tall. This is a fabulous harp with a warm and mellow tone that comes from the slightly curved soundboard and back. Although difficult to build, the stability is inherent to the design and it requires less tuning than most. After 25 years, the plans or kits are no longer offered by Musicmakers.`,
+        "productLongDesc": `36 nylon strings from C2-C7, weighs 26 pounds and is 66 inches tall. This is a fabulous harp with a warm and mellow tone that comes from the slightly curved soundboard and back. Although difficult to build, the stability is inherent to the design and it requires less tuning than most. After 25 years, the plans or kits are no longer offered by Musicmakers. This is a stock harp. Stock Harps are built using proven plans from various harp makers, including Vavra Harp.`,
         "productMaker": "Vavra Harp",
         "productModel": "Gothic 36",
         "productType": "",
-        "productSize": "",
+        "productSize": "36",
         "productImageUrl": "/img/builderPartners/VavraModels/Gothic36.jpg",
         "divider": "00000000000000000000000"
     },
@@ -262,11 +265,11 @@ export const BUILDER_HARP_LIST = [
         "productTitle": "Gothic 31",
         "productPrice": "Contact Builder",
         "productShortDesc": "",
-        "productLongDesc": `31 nylon strings from E2-G6, weighs 22 pounds and is 58 inches tall. Like the 36 string Gothic, this model also has a slightly curved soundboard and back that produce the very warm and mellow tone for which this model is famous, and which give it the stability inherent to Its design. After 25 years, the kits are no longer offered by Musicmakers.`,
+        "productLongDesc": `31 nylon strings from E2-G6, weighs 22 pounds and is 58 inches tall. Like the 36 string Gothic, this model also has a slightly curved soundboard and back that produce the very warm and mellow tone for which this model is famous, and which give it the stability inherent to Its design. After 25 years, the kits are no longer offered by Musicmakers. This is a stock harp. Stock Harps are built using proven plans from various harp makers, including Vavra Harp.`,
         "productMaker": "Vavra Harp",
         "productModel": "Gothic 31",
         "productType": "",
-        "productSize": "",
+        "productSize": "31",
         "productImageUrl": "/img/builderPartners/VavraModels/Gothic31.jpg",
         "divider": "00000000000000000000000"
     },
@@ -282,11 +285,11 @@ export const BUILDER_HARP_LIST = [
         "productPrice": "Contact Builder",
         "productShortDesc": "",
         "productType": "",
-        "productLongDesc": `This is a very stylish floor harp with a great voice. Strung with 29 nylon strings from A2-A6 or 22 nylon upper and mid-range strings and 7 wrapped steel bass strings from G2-G6. It weighs 16 pounds and is 47 inches tall. It produces a surprising tone for what was intended to be an entry-level model. You could have this harp built with fine wood, add levers, Tornavoz, and K&K Pickups - not an 'entry-level' harp by any measure!`,
+        "productLongDesc": `This is a very stylish floor harp with a great voice. Strung with 29 nylon strings from A2-A6 or 22 nylon upper and mid-range strings and 7 wrapped steel bass strings from G2-G6. It weighs 16 pounds and is 47 inches tall. It produces a surprising tone for what was intended to be an entry-level model. You could have this harp built with fine wood, add levers, Tornavoz, and K&K Pickups - not an 'entry-level' harp by any measure! This is a stock harp. Stock Harps are built using proven plans from various harp makers, including Vavra Harp.`,
         "productMaker": "Vavra Harp",
         "productModel": "Studio 29",
         "productType": "",
-        "productSize": "",
+        "productSize": "29",
         "productImageUrl": "/img/builderPartners/VavraModels/Studio29.jpg",
         "divider": "00000000000000000000000"
     },
@@ -302,16 +305,16 @@ export const BUILDER_HARP_LIST = [
         "productPrice": "Contact Builder",
         "productShortDesc": "",
         "productType": "",
-        "productLongDesc": `This stylish little lap harp has 22 nylon strings, G2-G6, weighs 11 pounds, is 37 inches tall, and has a wonderful, vibrant, clear tone. A lot of sound from such a portable instrument.`,
+        "productLongDesc": `This stylish little lap harp has 22 nylon strings, G2-G6, weighs 11 pounds, is 37 inches tall, and has a wonderful, vibrant, clear tone. A lot of sound from such a portable instrument. This is a stock harp. Stock Harps are built using proven plans from various harp makers, including Vavra Harp.`,
         "productMaker": "Vavra Harp",
         "productModel": "Shepherd 22",
         "productType": "",
-        "productSize": "",
+        "productSize": "22",
         "productImageUrl": "/img/builderPartners/VavraModels/Shepherd22.png",
         "divider": "00000000000000000000000"
     },
     ////////////////////////////////////////////////////////
-    // Blevins
+    // Blevins Harps
     ////////////////////////////////////////////////////////
     {
         "id": "16572003-5b2f-4413-91a9-450cca0721b3",

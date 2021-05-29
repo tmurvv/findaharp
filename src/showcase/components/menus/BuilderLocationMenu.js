@@ -76,9 +76,10 @@ export default function LocationMenu(props) {
                     name='Preference'
                 >Change to {distanceUnit==='miles'?'kms':'miles'}</li>
                 <li 
-                    onClick={handleClose}
+                    // onClick={handleClose}
                     hidden={activateDriving}
                     key={uuid()}
+                    style={{color: '#5b6a7b'}}
                     name='Eastern'
                 >US-East</li>    
                 <li 
@@ -101,10 +102,10 @@ export default function LocationMenu(props) {
                     name='West'
                 >US-West</li>
                 <li 
-                    onClick={handleClose}
+                    // onClick={handleClose}
                     hidden={activateDriving}
                     key={uuid()}
-                    // style={{color: '#5b6a7b'}} 
+                    style={{color: '#5b6a7b'}} 
                     name='Pacific'
                 >US-Pacific</li>
                 <li 

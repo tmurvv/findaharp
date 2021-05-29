@@ -6,7 +6,7 @@ import AboutPartnerBuildersCSS from '../styles/AboutPartnerBuilders.css';
 function AboutBuilderPartner(props) {
     let partnerBuilder = props.product;
     if (!partnerBuilder) props.handleClose;
-    if (!partnerBuilder.productLongDesc) partnerBuilder={...partnerBuilder, productLongDesc: "description not found"};
+    if (partnerBuilder&&!partnerBuilder.productLongDesc) partnerBuilder={...partnerBuilder, productLongDesc: "description not found"};
     function handleImageLoad(evt) {
         evt.target.parentElement.style.backgroundColor="#ffffff";
         if (evt.target.style.height !== '85%') evt.target.style.height="90%";

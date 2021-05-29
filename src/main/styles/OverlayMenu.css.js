@@ -18,7 +18,7 @@ function OverlayMenuCss() {
                 width: 100%;
                 padding-top: 70px;
                 background-color: #fff;
-                background-image: url('img/OverlayMenu/landing_background_opacity.png');
+                background-image: url('img/OverlayMenu/landing_background_opacity17.png');
             }
             .overlayLinks {
                 margin: auto;

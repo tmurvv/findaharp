@@ -154,7 +154,7 @@ export const getStoreSearchInfo = (allState, type) => {
         });
     }
     if (searchInfo.substr(searchInfo.length-2,1)==='|') searchInfo = searchInfo.substr(0, searchInfo.length-2);
-    return `Showing ${allState.category}: ${searchInfo}`;
+    return `Showing ${allState.category==='newused'?'':allState.category}: ${searchInfo}`;
 }
 
 export function searchSearchBar(filteredProducts, query, setMusicSearch, setStringSearch) {

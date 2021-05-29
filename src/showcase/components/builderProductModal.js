@@ -14,7 +14,7 @@ async function getDrivingDistance(lat1, long1, lat2, long2) {
         const response = await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${long1}%2C${lat1}%3B${long2}%2C${lat2}?alternatives=true&geometries=geojson&steps=true&access_token=pk.eyJ1IjoidG11cnZ2IiwiYSI6ImNrMHUxcTg5ZTBpN3gzbm4wN2MxYnNyaTgifQ.7p5zmmb6577ofkAIGVUcwA`);
         return response.data.routes[0].distance;
     } catch (error) {
-        alert("Something went wrong fetching driving distance. Please check your network connection.")
+        alert("Something went wrong finding driving distance. Be location services are turned on in settings on your device.")
         return NaN;
     }
 }
@@ -144,9 +144,10 @@ function ProductModal(props) {
                     >Change Currency</button>        <br />
                     
                     {/* <span>Finish</span> {productFinish?productFinish:'unavailable'}</p> */}
-                    <span>Lever Options</span> <button style={{color: '#6A75AA', backgroundColor: 'transparent', border: 'none', outline: 'none', textDecoration: 'underline'}} onClick={()=>alert("Under construction. Lever configurations and costs available for this model will go here.")}>Click</button>
+                    {/* <span>Lever Options</span> <button style={{color: '#6A75AA', backgroundColor: 'transparent', border: 'none', outline: 'none', textDecoration: 'underline'}} onClick={()=>alert("Under construction. Lever configurations and costs available for this model will go here.")}>Click</button>
                     <br />
-                    <span>Finishes</span> <button style={{color: '#6A75AA', backgroundColor: 'transparent', border: 'none', outline: 'none', textDecoration: 'underline'}} onClick={()=>alert("Under construction. Available finishes for this model will go here and be searchable.")}>Click</button></p>
+                    <span>Finishes</span> <button style={{color: '#6A75AA', backgroundColor: 'transparent', border: 'none', outline: 'none', textDecoration: 'underline'}} onClick={()=>alert("Under construction. Available finishes for this model will go here and be searchable.")}>Click</button> */}
+                    </p>
                     <br />
                     
                     <div className='longDesc'></div>

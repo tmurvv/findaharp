@@ -49,23 +49,28 @@ export default function PriceMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='$10,000-19,999'
-                >$10,000 plus</li>
+                    name='$6500 plus'
+                >$6500 plus</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='$5,000-9,999'
-                >$5,000-9,999</li>
+                    name='$4,000-6,499'
+                >$4,000-6,499</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='$2,000-4,999'
-                >$2,000-4,999</li>
+                    name='$2,500-3,999'
+                >$2,500-3,999</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Less than $2,000'
-                >Less than $2,000</li>          
+                    name='$1,000-2,499'
+                >$1,000-2,499</li>
+                <li 
+                    onClick={handleClose} 
+                    key={uuid()} 
+                    name='Less than $1,000'
+                >Less than $1,000</li>          
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -76,8 +81,7 @@ export default function PriceMenu(props) {
                     style={{color: '#000', textDecoration: 'underline'}}
                     key={uuid()}
                     name='Preference'
-            >Change Currency</li>        
-            {/*>I prefer {user.currency.toUpperCase()==='USD'?'Canadian Dollars':'US Dollars'}</li>        */}
+            >Change Currency</li>
             </ul>     
         </div>
     );

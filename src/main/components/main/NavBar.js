@@ -53,7 +53,7 @@ export default function NavBar(props) {
                     <Link href='/buildersshowcase'>
                         <a onClick={(e)=>props.handleNavOpen(e)}>Builder Showcase</a>
                     </Link>
-                    <div  className='mirrorATagFont' onClick={()=>handleSubMenuClick()} style={{textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative'}}>Our Partners
+                    <div  className='mirrorATagFont aclass' onClick={()=>handleSubMenuClick()} style={{textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative'}}>Our Partners
                         <div id='partnerSubMenu' style={{transform: 'translateX(25%)', display: 'none', width: 'fit-content', position: 'absolute', top: '30px', zIndex: '9001', padding: '10px', backgroundColor: '#f9bf1e', boxShadow: '3px 3px 13px #f7dd93', flexDirection: 'column', justifyContent: 'flex-start'}}>
                             <Link href='/builderpartners'>
                                 <a style={{whiteSpace: 'nowrap', marginBottom: '7px', textAlign: 'left'}} onClick={(e)=>props.handleNavOpen(e)}>Builder Partners</a>
@@ -130,7 +130,7 @@ export default function NavBar(props) {
                         <a onClick={(e)=>props.handleNavOpen(e)}>Builder Showcase</a>
                         {/* <a onClick={props.handleNavOpen}>Harp Builder Showcase</a> */}
                     </Link>
-                    <div className='mirrorATagFont' onClick={()=>handleSubMenuClick()} style={{transition: 'transform 1s', fontSize: '16px', textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative'}}>Our Partners
+                    <div className='mirrorATagFont aclass' onClick={()=>handleSubMenuClick()} style={{transition: 'transform 1s', textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative'}}>Our Partners
                         <div id='partnerSubMenu'>
                             <Link href='/builderpartners'>
                                 <a style={{marginBottom: '7px'}} onClick={(e)=>props.handleNavOpen(e)}>Builder Partners</a>

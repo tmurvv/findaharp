@@ -55,7 +55,7 @@ function CategoryMenu(props) {
         <>              
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
-                    <ul id='category' style={{width: `${props.menuOpen?'210px':''}`}}>
+                    <ul id='category' style={{width: `${props.menuOpen?'210px':'160px'}`}}>
                         <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={()=>handleClick()} id="Categories" className='CatLine'>
                             {props.catBreadCrumb}
                             {props.menuOpen
@@ -129,7 +129,7 @@ function CategoryMenu(props) {
                 .MainCat {
                     flex: 4;
                     background-color: #fff;
-                    border: 1px solid rgb(249, 191, 30);
+                    border: 1px solid #ffe58a;
                     border-right: none;
                     
                 }
@@ -143,7 +143,6 @@ function CategoryMenu(props) {
                     background-color: #ffd663;
                     height: 48px;
                     border-right: 1px solid gold;
-                    width: 160px;
                 }
                 @media only screen and (max-width: 750px) {
                     .catLine {
@@ -173,7 +172,7 @@ function CategoryMenu(props) {
                     margin-left: 5px;
                 }
                 .CatLine>.hovershow {
-                    // maxHeight: 0;
+                    max-height: 0;
                 }
                 .CatLine:hover {
                     background-color: #f9bf1e;
@@ -244,7 +243,7 @@ function CategoryMenu(props) {
                     z-index: 9995;
                     position: relative;
                     -webkit-appearance: none;
-                    border: 1px solid rgb(249, 191, 30);
+                    border: 1px solid #ffe58a;
                 }
                 .CatMenuCont ul {
                     list-style: none;
@@ -292,7 +291,7 @@ function CategoryMenu(props) {
                     margin-left: 5px;
                 }
                 .CatLine>.hovershow {
-                    // maxHeight: 0;
+                    // max-height: 0;
                 }
                 .CatLine:hover {
                     background-color: #f9bf1e;
@@ -300,10 +299,6 @@ function CategoryMenu(props) {
             `}</style>
         </>
     )
-
-
-
-
     if (props.ribboncatBreadCrumb&&props.ribboncatBreadCrumb==='ribbon') return (
         <>              
             {/* <div className='' style={{position: 'absolute', width: '75px', zIndex: '950', right: '22%'}}> */}
@@ -371,12 +366,14 @@ function CategoryMenu(props) {
                     position: relative;
                     -webkit-appearance: none;
                     background-color: transparent;
-                    border: 1px solid rgb(249, 191, 30);
+                    border: 1px solid #ffe58a;
                 }
                 .CatMenuCont ul {
                     list-style: none;
                     margin-block-start: 0;
                     margin-block-end: 0;
+                    margin-top: 0;
+                    margin-bottom: 0;
                     padding-inline-start: 0;
                     text-align: left;
                     line-height: 1.5;

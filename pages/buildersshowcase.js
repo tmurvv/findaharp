@@ -43,7 +43,8 @@ const BuildersShowcase = (props) => {
             <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
                     {/* <FastNEasyStringForm /> */}
             </div>
-            <PageTitle maintitle="Builder Showcase" subtitle='Showcasing harp luthiers from all across North America' />
+            {/* <PageTitle maintitle="Builder Showcase" subtitle='Showcasing harp luthiers from all across North America' /> */}
+            <PageTitle maintitle="Builder Showcase" subtitle="Presenting our brand new builder's showcase. More builders added soon!" />
             <BuilderProductSearch 
                 makesmodels={props.makesModels}
                 products={props.products}

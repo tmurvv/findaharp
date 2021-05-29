@@ -22,7 +22,7 @@ function NavBarCss() {
                 width: fit-content;
                 position: absolute;
                 top: 20px;
-                z-index: 9001;
+                z-index: 9998;
                 padding: 10px;
                 background-color: #f9bf1e;
                 box-shadow: 3px 3px 13px #f7dd93;
@@ -47,12 +47,14 @@ function NavBarCss() {
                 font-size: 16px;
             }
             @media only screen and (max-width: 950px) {
-                a {
+                a,
+                aclass {
                     font-size: 14px;
                 }
             }
             @media only screen and (max-width: 700px) {
-                a {
+                a,
+                aclass {
                     font-size: 12px;
                 }
             }
