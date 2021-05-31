@@ -119,23 +119,23 @@ const StringForm = (props) => {
         if (user.currentHarpname) {
             updateBrands();
         }
-        if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
-            const harpObject = {
-                oldharpname: user.currentHarpname,
-                oldemail: user.emailCurrentHarp,
-                harpname: user.currentHarpname,
-                email: user.emailCurrentHarp,
-                stringform: JSON.stringify(stringForm)
-                // newsletter: localNews
-            }
-            try {
-                const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
-                // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
-            } catch(e) {
-                console.log(e.message);
-                dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
-            }
-            // document.querySelector('#spinnerRemember').style.display='none';
+        // if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
+        const harpObject = {
+            oldharpname: user.currentHarpname,
+            oldemail: user.emailCurrentHarp,
+            harpname: user.currentHarpname,
+            email: user.emailCurrentHarp,
+            stringform: JSON.stringify(stringForm)
+            // newsletter: localNews
+        }
+        try {
+            const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
+            // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
+        } catch(e) {
+            console.log(e.message);
+            dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
+        }
+        // document.querySelector('#spinnerRemember').style.display='none';
         dispatchResultInfo({type: 'OK', payload: user.currentHarpname?`Strings added to cart. Harp ${user.currentHarpname.toUpperCase()} brands updated.`:`Strings added to cart.`});
     }
     

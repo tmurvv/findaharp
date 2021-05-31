@@ -240,12 +240,12 @@ function CartCss() {
         .tileContainer {
             display: flex;
             justify-content: flex-end;
-            margin-right: 15px;
+            margin-right: 12.5px;
             margin-top: 10px;
         }
         #tiles {
-            height: 20px;
-            width: 27px;
+            height: 15px;
+            width: 22px;
             z-index: 6000;
         }
         @-webkit-keyframes myMoveBack {

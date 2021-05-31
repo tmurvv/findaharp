@@ -150,7 +150,7 @@ function SubCatMenu(props) {
     } else if (props.menuOpen&&props.winWidth<=750) {
         return (
             <>       
-                <div className='HeadingChoice' style={{paddingLeft: '20px'}}>winwidth: 'Less than 750'{winWidth}
+                <div className='HeadingChoice' style={{paddingLeft: '20px'}}>
                     {props.menuName}
                     {props.menuName==='Strings by Harp Builder'
                         ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Builder not found? Please use "Strings by Type" menu</div>

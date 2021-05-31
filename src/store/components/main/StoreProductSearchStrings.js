@@ -285,7 +285,7 @@ function StoreProductSearchStrings(props) {
                         id="selectedOctaves" 
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{cursor: 'pointer'}}
+                        style={{cursor: 'pointer', fontSize: '14px'}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"

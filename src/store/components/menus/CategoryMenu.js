@@ -101,7 +101,7 @@ function CategoryMenu(props) {
                         />
                     }
                     {/* <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'> */}
-                    <div style={props.menuOpen?{height: '20px'}:{display:'none'}} onClick={(e) => {e.stopPropagation();handleClick(e, props.product, false);}} className='storeclearModal'>
+                    <div style={props.menuOpen?{position: 'absolute', right: '5px', top: '5px', height: '20px'}:{display:'none'}} onClick={(e) => {e.stopPropagation();handleClick(e, props.product, false);}} className='storeclearModal'>
                         <img style={{height: '100%', opacity: '.6'}} src='img/clear_search.png' alt='clear filters'/>
                     </div>
                 </div>

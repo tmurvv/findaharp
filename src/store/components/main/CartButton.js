@@ -9,7 +9,7 @@ import { getNumItems } from '../../utils/storeHelpers';
 
 function CartButton() {
     const { cart } = useContext(CartContext);
-    const { setMenuOverlay } = useContext(MenuOverlayContext);
+    const { menuOverlay, setMenuOverlay } = useContext(MenuOverlayContext);
     function restoreOverlay() {
         document.querySelector('#tiles').style.animation = 'myMoveBack 1s ease-in-out';
         setTimeout(()=> {
@@ -19,7 +19,17 @@ function CartButton() {
     return (
         <>
             <div className='cartButton'>
-                <div className='tileContainer'><img id='tiles' onClick={()=>restoreOverlay()} src='/img/OverlayMenu/minimenu_dullwide.png' alt='opening tile menu icon' /></div>
+                <div 
+                    // style={{display: `${menuOverlay?'none':'flex'}`}} 
+                    className='tileContainer'
+                >
+                    <img 
+                        id='tiles' 
+                        onClick={()=>restoreOverlay()} 
+                        src='/img/OverlayMenu/minimenu_dullwide.png' 
+                        alt='opening tile menu icon' 
+                    />
+                </div>
                 {/* {!menuOverlay&&<div className='tileContainer'><img id='tiles' onClick={()=>restoreOverlay()} src='/img/OverlayMenu/icon_mini_tiles_black.png' alt='opening tile menu icon' /></div>} */}
                 <div className='cartButtonCart' onClick={()=>Router.push('/cart')}>
                     <p>{getNumItems(cart)<10?`0${getNumItems(cart)}`:getNumItems(cart)}</p>

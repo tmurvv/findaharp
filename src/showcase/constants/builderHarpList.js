@@ -366,7 +366,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "Blevinsong 20",
         "productType": "lever",
         "productSize": 26,
-        "productImageUrl": "/img/builderPartners/BlevinsModels/Blevinsong20.jpg",
+        "productImageUrl": "/img/builderPartners/BlevinsModels/BlevinsSong20Bright.jpg",
         "divider": "00000000000000000000000"
     },
     {
@@ -1140,6 +1140,20 @@ export const BUILDER_HARP_LIST = [
             <p>Approximate weight: 10.3 pounds</p><br/>
 
             <p>String range: C6 to C1</p><br/>
+
+            <p>String spacing at middle C: 14.3 mm</p><br />
+
+            <p>Pricing:</p><br />
+
+            <p>$4710  Full Truitt levers (Available with partial levers - inquire for price)</p><br />
+
+            <p>Options not included in the above price:</p><br />
+
+            <p>Harp case: $320</p><br />
+
+            <p>String set: $210</p><br />
+
+            <p>Shipping: Inquire for charges</p><br />
         `,
         "productMaker": "Blevins Harps",
         "productModel": "Reve 36 Hybrid",
@@ -1160,7 +1174,7 @@ export const BUILDER_HARP_LIST = [
         "productPrice": "$3657",
         "productShortDesc": ``,
         "productLongDesc": `
-            <p>Pictured in Walnut. 52 strings, double strung. </p><br />
+            <br>Pictured in Walnut. 52 strings, double strung. </br><br />
 
             <p>Dimensions: 34.5" x 12"  </p><br />
         
@@ -1275,7 +1289,7 @@ export const BUILDER_HARP_LIST = [
         "productModel": "Riversong DS68",
         "productType": "Double",
         "productSize": "Double",
-        "productImageUrl": "img/builderPartners/BlevinsModels/RiversongDS68.jpg",
+        "productImageUrl": "img/builderPartners/BlevinsModels/RiverSongDS68.jpg",
         "divider": "00000000000000000000000"
     },
     {

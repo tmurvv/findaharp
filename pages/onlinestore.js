@@ -66,6 +66,8 @@ const OnlineStore = (props) => {
         if (String(searchCategory).toUpperCase()==='STRINGS BY TYPE') {
             setStringSearch(true);
             setAllState({...allState, octaves: 'All Octaves', notes: 'All Notes', brands: 'All Brands' })
+        } else {
+            setStringSearch(false);
         }
         if (String(searchCategory).toUpperCase()==='STRINGS BY HARP BUILDER') {
             setStringSearch(false);
@@ -481,7 +483,18 @@ const OnlineStore = (props) => {
         // search term
         if (document.querySelector('#searchTerm')&&document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
+            // remove harp and music from search terms
+            const searchTermOld = searchTerm;
+            console.log('searchTerm-abv:', searchTerm)
+            searchTerm=searchTerm.toUpperCase().replace('HARP', '').replace('MUSIC', '');
+            console.log('searchTerm-bel:', searchTerm)
             searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
+            if (searchProductList.length===0) {
+                searchTerm=searchTermOld;
+                console.log('inold');
+                searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch);
+                console.log('searchProductList:', searchProductList.lenth)
+            }
             type=searchTerm;
         } else {
             searchProductList=[...preSearchProductList]
@@ -547,7 +560,7 @@ const OnlineStore = (props) => {
                 handleCatChange={handleCatChange}
                 setDetailProduct2={setDetailProduct2}
             /> */}
-            <div>{winWidth}-{String(menuOpen)}/{String(subMenuOpen)}</div>
+            {/* <div>{winWidth}-{String(menuOpen)}/{String(subMenuOpen)}</div> */}
             
             
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>

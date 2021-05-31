@@ -9,7 +9,7 @@ function uploadlisting() {
     const { user } = useContext(UserContext);
     return (
         <>
-            <h1>BREAKING -- this component causing a build error. Needs to be debugged. Scroll down to see code.</h1>           
+            <h1>BREAKINk -- this component causing a build error. Needs to be debugged. Scroll down to see code.</h1>           
         </>
     )
 }

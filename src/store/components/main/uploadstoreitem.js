@@ -63,7 +63,7 @@ function uploadstoreitem() {
                     <div className='inputGroup'>
                         <label name="seller"><span style={{color: 'red'}}>*</span>Seller Name: </label>
                         <input type="text" name="seller" value='Simply Music' required/>
-                        {/* <input type="text" name="sellername" defaultValue={`${user.firstname} ${user.lastname}`} disabled /> // BREAKING*/}
+                        {/* <input type="text" name="sellername" defaultValue={`${user.firstname} ${user.lastname}`} disabled /> // BREAKINk*/}
                     </div>
                     <div className='inputGroup'>
                         <label htmlFor="category"><span style={{color: 'red'}}>*</span>Main Category: </label>
