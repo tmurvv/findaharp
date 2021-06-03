@@ -13,6 +13,7 @@ function StoreProductCss() {
                 margin-bottom: 60px;
                 min-width: 265px;
             }
+            
             .storeproduct__title {
                 width: 95%;
                 margin: 25px auto 15px;
@@ -39,7 +40,6 @@ function StoreProductCss() {
                 .storeproduct {
                     display: flex;
                     flex-direction: column;
-                    border-top: 1px solid lightgrey;
                     margin-bottom: 40px;
                     width: 100%;
                 }

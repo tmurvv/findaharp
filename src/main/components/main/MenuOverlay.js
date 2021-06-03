@@ -6,7 +6,7 @@ import OverlayMenuCss from '../../styles/OverlayMenu.css';
 
 export default function MenuOverlay(props) {
     const { setMenuOverlay } = useContext(MenuOverlayContext);
-    const [ screenWidth, setScreenWidth ] = useState();
+    const [ winWidth, setWinWidth ] = useState(4000);
     function clearOverlay() {
         document.querySelector('.overlayLinks')?document.querySelector('.overlayLinks').style.animation = 'myMove 1s':'';
         setTimeout(()=> {
@@ -15,17 +15,39 @@ export default function MenuOverlay(props) {
     }
 
     useEffect(() => {
-        setScreenWidth(window.innerWidth);
-        // if (document.querySelector('.builders')) {
-        //     document.querySelector('.builders').style.opacity=.1;
-        // }
+        setWinWidth(window.innerWidth);setWinWidth(window.innerWidth);
     });
     
-    if (screenWidth&&screenWidth>550) {
+    if (winWidth&&winWidth>550) {
         return(
             <>
-                <div className='overlayBarOuter overlayBarOpen' id='overlayBar'>
+                <div className='overlayBarOuter overlayBarOpen' id='overlayBar'>    
                     <div className='overlayLinks' id='overlayLinks'>
+                        {winWidth<750?
+                        <div 
+                            style={{
+                                position: 'absolute', 
+                                top: '-0px', 
+                                left: '-21px',
+                                transform: 'rotate(-14deg)'
+                            }}
+                        >
+                            <div style={{fontSize: '16px', fontWeight: 'bold'}}>To Classic Site</div>
+                            <img src='img/arrow_right_curved.png' style={{height: '30px', marginLeft: '-15px'}}alt='arrow right curved pointing to Find a Used Harp graphic'/>
+                        </div>
+                        :
+                        <div 
+                            style={{
+                                position: 'absolute', 
+                                top: '-3px', 
+                                left: '-92px',
+                                transform: 'rotate(-14deg)'
+                            }}
+                        >
+                            <div style={{fontSize: '26px', fontWeight: 'bold'}}>To Classic Site</div>
+                            <img src='img/arrow_right_curved.png' style={{height: '65px', marginLeft: '17px'}}alt='arrow right curved pointing to Find a Used Harp graphic'/>
+                        </div>
+                        }
                         <div style={{display: 'flex'}}>
                             <Link href='/'>
                                 <a className='overlayLink item1' onClick={clearOverlay}>
@@ -60,6 +82,16 @@ export default function MenuOverlay(props) {
         <>
             <div className='overlayBarOuter overlayBarOpen' id='overlayBar'>
                 <div className='overlayLinks' id='overlayLinks'>
+                    <div 
+                        style={{
+                            position: 'absolute', 
+                            top: '-22px', 
+                            left: '7px',
+                        }}
+                    >
+                        <div style={{fontSize: '16px', fontWeight: 'bold'}}>To Classic Site</div>
+                        <img src='img/arrow_right_curved.png' style={{height: '25px', marginLeft: '5px', marginTop: '10px'}}alt='arrow right curved pointing to Find a Used Harp graphic'/>
+                    </div>
                     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', height: '500px', width: 'unset', margin: 'unset'}}>
                         {/* <div style={{height: '20px'}}> */}
                             <Link style={{height: '100%'}} href='/'>

@@ -23,6 +23,7 @@ function OverlayMenuCss() {
             .overlayLinks {
                 margin: auto;
                 width: 580px;
+                position: relative;
             }
             @media only screen and (max-width: 1050px) {
                 .overlayBarOuter {
@@ -41,7 +42,7 @@ function OverlayMenuCss() {
                     width: 100%
                 } 
                 .overlayBarOuter {
-                    top: 223px;
+                    top: 200px;
                 } 
             }     
             .item1,

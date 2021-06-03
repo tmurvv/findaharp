@@ -138,7 +138,7 @@ const StoreProduct = (props) => {
                 >more...</button>
             </div>
             :<>  
-                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '9900'}}>
+                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '9900', borderBottom: `${winWidth<750?'1px solid lightgrey':''}`}}>
                     <div 
                         style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} 
                         className='longDesc productSmallDisplay-LongDesc' 

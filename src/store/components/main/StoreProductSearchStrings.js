@@ -237,6 +237,7 @@ function StoreProductSearchStrings(props) {
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
+                    <div style={{paddingTop: `${winWidth<550?'7px':''}`}}>
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -247,6 +248,9 @@ function StoreProductSearchStrings(props) {
                         open={menus.octaves}
                         clearMenu={props.clearMenus}
                     />
+                    </div>
+                    
+                    <div style={{paddingTop: `${winWidth<550?'5px':''}`}}>
                     <NotesMenu 
                         id="notesmenu"
                         handleNotesChange={handleNotesSelection} 
@@ -257,6 +261,8 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
+                    </div>
+                    <div style={{paddingTop: `${winWidth<550?' 5px':''}`}}>
                     <BrandsMenu 
                         id="brandsmenu"
                         handleBrandsChange = {handleBrandsSelection}
@@ -266,7 +272,8 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-                    <div>
+                    </div>
+                        
                     <CategoryMenu 
                         ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
                         ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
@@ -277,15 +284,15 @@ function StoreProductSearchStrings(props) {
                         ribboncatBreadCrumb={'ribbon'}
                         handleCatChange={props.handleCatChange}
                     />
-                    </div>
                 </div>
                 <div className="storesearchLine2Sub">
                     {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedOctaves" 
+                        className={`storesearch-grid-item`}
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{cursor: 'pointer', fontSize: '14px'}}
+                        style={{cursor: 'pointer', fontSize: '16px'}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"

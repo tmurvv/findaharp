@@ -130,7 +130,7 @@ export default function NavBar(props) {
                         <a onClick={(e)=>props.handleNavOpen(e)}>Builder Showcase</a>
                         {/* <a onClick={props.handleNavOpen}>Harp Builder Showcase</a> */}
                     </Link>
-                    <div className='mirrorATagFont aclass' onClick={()=>handleSubMenuClick()} style={{transition: 'transform 1s', textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative'}}>Our Partners
+                    <div className='mirrorATagFont aclass' onClick={()=>handleSubMenuClick()} style={{transition: 'transform 1s', textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative', fontSize: '16px'}}>Our Partners
                         <div id='partnerSubMenu'>
                             <Link href='/builderpartners'>
                                 <a style={{marginBottom: '7px'}} onClick={(e)=>props.handleNavOpen(e)}>Builder Partners</a>

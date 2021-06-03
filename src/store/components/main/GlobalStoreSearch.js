@@ -142,8 +142,7 @@ function GlobalStoreSearch(props) {
             {winWidth>750&&
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '88px'}}>
                 <div id='searchLineAnchor' hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
-                <div hidden={props.stringSearch}><button onClick={()=>{handleClear(); props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div>
-                {/* <div hidden={stringSearch}><button onClick={()=>setStringSearch(true)} style={{height: '42px', outline: 'none', boxShadow: '2px 2px 2px #fff1cb', backgroundColor: 'transparent', border: '1px solid #ffe499', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
+                {/* <div hidden={props.stringSearch}><button onClick={()=>{handleClear(); props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
                 <div>
                     <button 
                         onClick={()=>document.querySelector('#spinner').style.display='block'} 
@@ -165,7 +164,7 @@ function GlobalStoreSearch(props) {
                     setMusicSearch={props.setMusicSearch} 
                 />
             }
-            {props.stringSearch
+            {/* {props.stringSearch
                 &&<StoreProductSearchStrings              
                     clearMenus={clearMenus} 
                     setTypeOfSearch={setTypeOfSearch} 
@@ -189,7 +188,7 @@ function GlobalStoreSearch(props) {
                     anchor={props.anchor}
                     setAnchor={props.setAnchor}
                 />
-            }
+            } */}
             {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&props.searchResultsText!=='entry'&&
             <>
             <div className="storeproductContainer" style={{opacity: `${props.menuOpen?.2:1}`, marginTop: `${winWidth<750?'150px':''}`}}>

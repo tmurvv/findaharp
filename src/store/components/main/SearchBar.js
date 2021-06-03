@@ -47,42 +47,42 @@ const SearchBar = (props) => {
     if (winWidth>750) {
         return (
             <>  
-            <div className='searchBarCont'>
-                <CategoryMenu 
-                    subMenuOpen={props.subMenuOpen} 
-                    setSubMenuOpen={props.setSubMenuOpen} 
-                    menuOpen={props.menuOpen} 
-                    setMenuOpen={props.setMenuOpen}
-                    handleCatChange={props.handleCatChange}
-                    setDetailProduct2={props.setDetailProduct2}
-                    catBreadCrumb={props.catBreadCrumb}
-                    setCatBreadCrumb={props.setCatBreadCrumb}
-                    setSearchResultsText={props.setSearchResultsText}
-                />   
-            <div className="searchTextImg">
-                <form style={{display: 'flex'}}>
-                    <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
-                    <button id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange('', 'searchTerm', document.querySelector('#searchTerm').value)}}>
-                        <img src='/img/searchicon.png' alt='search icon' />
-                    </button>
-                </form> 
-            </div>
-            <div className='selectContainer'>
-                <select onChange={()=>props.handleChange('','','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
-                    <option value='New/Used' name='All newused'>New/Used</option>
-                    <option value='New' name='New'>New Only</option>
-                    <option value='Used' name='Used'>Used Only</option>
-                </select>
-                <span>
-                    <img 
-                        className='newUsedChevron' 
-                        src='img/store/down-chevron.png' 
-                        // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; props.setSubMenuOpen(cat);}} 
-                        // onMouseLeave={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(1)';}} 
-                        alt='down arrow'
-                    />
-                </span>
-            </div>
+                <div className='searchBarCont'>
+                    <CategoryMenu 
+                        subMenuOpen={props.subMenuOpen} 
+                        setSubMenuOpen={props.setSubMenuOpen} 
+                        menuOpen={props.menuOpen} 
+                        setMenuOpen={props.setMenuOpen}
+                        handleCatChange={props.handleCatChange}
+                        setDetailProduct2={props.setDetailProduct2}
+                        catBreadCrumb={props.catBreadCrumb}
+                        setCatBreadCrumb={props.setCatBreadCrumb}
+                        setSearchResultsText={props.setSearchResultsText}
+                    />   
+                <div className="searchTextImg" style={{opacity: `${props.menuOpen?'.2':'1'}`}}>
+                    <form style={{display: 'flex'}}>
+                        <input disabled={props.menuOpen} type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
+                        <button disabled={props.menuOpen} id="searchMagnify" onClick={(e)=>{e.preventDefault();props.handleChange('', 'searchTerm', document.querySelector('#searchTerm').value)}}>
+                            <img src='/img/searchicon.png' alt='search icon' />
+                        </button>
+                    </form> 
+                </div>
+                <div className='selectContainer' style={{opacity: `${props.menuOpen?'.2':'1'}`}}>
+                    <select disabled={props.menuOpen} onChange={()=>props.handleChange('','','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
+                        <option value='New/Used' name='All newused'>New/Used</option>
+                        <option value='New' name='New'>New Only</option>
+                        <option value='Used' name='Used'>Used Only</option>
+                    </select>
+                    <span>
+                        <img 
+                            className='newUsedChevron' 
+                            src='img/store/down-chevron.png' 
+                            // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; props.setSubMenuOpen(cat);}} 
+                            // onMouseLeave={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(1)';}} 
+                            alt='down arrow'
+                        />
+                    </span>
+                </div>
             </div>
             <style jsx>{`
                 .searchBarCont {

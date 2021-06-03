@@ -564,7 +564,7 @@ const OnlineStore = (props) => {
             
             
             <div style={menuOpen?{background: 'linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4))'}:{}} className='storeIndex'>
-                <div className='searchBarMainCont' style={{top: `${winWidth<751?'150px':'126px'}`, margin: 'auto', transform: 'none', borderBottom: '1px solid rgb(249, 191, 30)', marginLeft: `${winWidth<750?'0':`${winWidth>1200?'7%':'4%'}`}`}}>
+                <div className='searchBarMainCont' style={{top: `${winWidth<751?'150px':'126px'}`, margin: 'auto', transform: 'none', marginLeft: `${winWidth<750?'0':`${winWidth>1200?'7%':'4%'}`}`}}>
                     <SearchBar 
                         subMenuOpen={subMenuOpen} 
                         setSubMenuOpen={setSubMenuOpen} 

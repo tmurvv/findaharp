@@ -42,7 +42,7 @@ function CategoryMenu(props) {
                 props.setMenuOpen(true);
                 props.setCatBreadCrumb('All Categories');
                 props.setSearchResultsText('entry')
-                if ((!props.subMenuOpen)&&winWidth>750) props.setSubMenuOpen('Featured Items')
+                if ((!props.subMenuOpen)&&winWidth>900) props.setSubMenuOpen('Featured Items')
             }
         }
     }
@@ -51,7 +51,7 @@ function CategoryMenu(props) {
         setWinWidth(window.innerWidth);
         // window&&window.innerWidth<=750?props.setSubMenuOpen(false):'';
     },[]);
-    if ((!props.ribboncatBreadCrumb)&&winWidth>750) return (
+    if ((!props.ribboncatBreadCrumb)&&winWidth>900) return (
         <>              
             <div className='CatMenuCont' style={props.menuOpen&&props.subMenuOpen?{width: '450px', minHeight: '528px', backgroundColor: '#ffd663'}:{width: `${winWidth<750?"100%":"126px"}`, minHeight: '50px', backgroundColor: '#fff'}}>
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
@@ -159,10 +159,11 @@ function CategoryMenu(props) {
                     color: #f9bf1e;
                     font-weight: 600;
                     padding-top: 20px;
-                    padding-right: 20px;
+                    padding-right: 0px;
                     position: relative;
                     white-space: nowrap;
                     width: fit-content;
+                    max-width: 610px;
                 }
                 .MainCat1:hover + .Sub1 {
                     display: block
@@ -181,7 +182,7 @@ function CategoryMenu(props) {
             `}</style>
         </>
     )
-    if ((!props.ribboncatBreadCrumb)&&winWidth<=750) return (
+    if ((!props.ribboncatBreadCrumb)&&winWidth<=900) return (
         <>              
             <div className='CatMenuCont' style={props.menuOpen?{width: '100%', backgroundColor: '#ffd663'}:{width: "100%", minHeight: '50px', backgroundColor: '#fff'}}>
              
@@ -281,8 +282,9 @@ function CategoryMenu(props) {
                     color: #f9bf1e;
                     font-weight: 600;
                     padding-top: 20px;
-                    padding-right: 20px;
+                    padding-right: 0px;
                     position: relative;
+                    max-width: 610px;
                 }
                 .MainCat1:hover + .Sub1 {
                     display: block
@@ -406,10 +408,11 @@ function CategoryMenu(props) {
                     color: #f9bf1e;
                     font-weight: 600;
                     padding-top: 20px;
-                    padding-right: 20px;
+                    padding-right: 0px;
                     position: relative;
                     white-space: nowrap;
                     width: fit-content;
+                    max-width: 610px;
                 }
                 .MainCat1:hover + .Sub1 {
                     display: block

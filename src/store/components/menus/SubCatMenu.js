@@ -101,7 +101,7 @@ function SubCatMenu(props) {
                                 descriptiontext: "Quilted case with carrying strap and large Pocket (fits multiple sets of legs). Fits a Lyon and Healy folk harp but there is room for something taller. Happy to ship this harp cover.",
                                 image: "https://findaharp.com/img/store/strummedstrings/quiltedharpcase.jpg", 
                                 newused: 'used'
-                        })} className='featuredimg' src='img/store/strummedStrings/quiltedharpcase.jpg' alt='Quilted Harp Case' />
+                        })} className='featuredimg' src='https://findaharp.com/img/store/strummedstrings/quiltedharpcase.jpg' alt='Quilted Harp Case' />
                         <img onClick={()=>props.setDetailProduct2({
                             id: "OVSC-GNKS",
                             store: 'michiganharpcenter',
@@ -128,7 +128,7 @@ function SubCatMenu(props) {
                         font-weight: 400;
                         color: #f9bf1e;
                         text-align: left;
-                        margin-left: 20px;
+                        padding-left: 25px;
                         background-color: #fff;
                     }
                     .SubCont {
