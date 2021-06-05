@@ -7,6 +7,7 @@ import uuid from 'react-uuid';
 // internal
 import LoginSignupCSS from '../src/main/styles/LoginSignup.css';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import Results from '../src/main/components/main/Results';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
 import { UserContext } from '../src/main/contexts/UserContext';
@@ -292,18 +293,7 @@ function LoginSignup(props) {
     return ( 
        <>
         <div className='login-signup-container'>
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '40%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <PageTitle maintitle='Login/Signup' subtitle='Welcome to our community!' />
             <Results 
                 resultInfo={resultInfo} 

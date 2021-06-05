@@ -111,7 +111,8 @@ export const STRING_BRANDS = {
         'Professional Lever Bass Wire'
     ],
     synthetic: [
-            'Saverez KF Composite (synthetic)'
+            'Saverez KF Composite (synthetic)',
+            'Silkgut'
     ]                       
 }
 export const STRING_NUMBER = {

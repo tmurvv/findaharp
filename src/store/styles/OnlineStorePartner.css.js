@@ -92,6 +92,7 @@ function OnlineStorePartnerCSS() {
                 justify-content: center;
                 align-items: center;
                 margin-bottom: 17px;
+                cursor: pointer;
             }
             .onlineSmallDisplay .productSmallDisplay-img img{
                 height: 267px;

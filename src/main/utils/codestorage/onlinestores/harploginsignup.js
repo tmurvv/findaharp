@@ -7,6 +7,7 @@ import uuid from 'react-uuid';
 // internal
 import HarpLoginSignupCSS from '../src/store/styles//HarpLoginSignup.css';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import Results from '../src/main/components/main/Results';
 import NewsletterSignup from '../src/main/components/mainNewsletterSignup';
 import { RESULTS_INITIAL_STATE } from '../src/main/constants/constants';
@@ -273,18 +274,7 @@ function HarpLoginSignup(props) {
     },[]);
     return ( 
        <>
-       <img id='spinner' style={{
-                display: 'none', 
-                position: 'fixed', 
-                top: '50%', 
-                left: '50%', 
-                transform: 'translate(-50%,-50%)',
-                zIndex: '9000',
-                height: '75px'
-            }} 
-            src='/img/spinner.gif' 
-            alt='spinner' 
-        />
+        <Spinner />
         <div className='harplogin-signup-container'>
             <PageTitle maintitle='Harp Login/Signup' subtitle='Keep track of one or many harp string brands!' />
             <a href='/rememberdetails' style={{display: 'flex', justifyContent: 'center', fontSize: '14px', color: '#6A75AA', textDecoration: 'underline', width: '100%', textAlign:'center', marginTop: '-40px', marginBottom: '40px'}}>How does it work?</a>

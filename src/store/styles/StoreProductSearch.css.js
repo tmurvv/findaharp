@@ -26,7 +26,7 @@ function ProductSearchCss() {
             }
             @media only screen and (max-width: 750px) {
                 .storeproductSearchOuter {
-                    width: 70%
+                    // width: 70%
                 }
             } 
             .storesearchLine1 {
@@ -34,7 +34,7 @@ function ProductSearchCss() {
                 justify-content: space-evenly;
                 text-align: center;
                 display: grid;
-                grid-template-columns: 33.3% 33.3% 33.3%;
+                grid-template-columns: 33.3%;
                 color: white;            
             }
             @media only screen and (max-width: 750px) {
@@ -63,7 +63,7 @@ function ProductSearchCss() {
                 padding-top: 9px;
                 text-align: center;
                 display: grid;
-                grid-template-columns: 33.3% 33.3% 33.3%;
+                grid-template-columns: 33.3%;
             }
             @media only screen and (max-width: 750px) {
                 .storemobileSearchLine1 {

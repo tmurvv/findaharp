@@ -136,14 +136,12 @@ function CartCss() {
             margin-right: 5px;
         }
         .cartButton {
-            // float: right;
-            // cursor: pointer;
-            // margin: 10px;
             display: block;
             position: fixed;
             top: 220px;
             right: 10px;
-            z-index: 9000;
+            z-index: 9999;
+            cursor: pointer;
         }
         .cartButtonCart {
             cursor: pointer;
@@ -239,6 +237,21 @@ function CartCss() {
         .itemLine1 {
             display: flex;
         }
+        .tileContainer {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 12.5px;
+            margin-top: 10px;
+        }
+        #tiles {
+            height: 15px;
+            width: 22px;
+            z-index: 6000;
+        }
+        @-webkit-keyframes myMoveBack {
+            0% { -webkit-transform: scale(1) translate(0, 0); background: rgb(244,244,244,0); }
+            100% { -webkit-transform: scale(8) translate(-5vw, 20px); background: rgb(244,244,244,.93);}
+        } 
         `}
         </style>
     )

@@ -1,5 +1,5 @@
 // import App from 'next/app'
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import Router from 'next/router';
 import Head from 'next/head';
@@ -11,6 +11,7 @@ import * as gtag from '../lib/gtag';
 import 'react-phone-input-2/lib/style.css'
 
 // internal
+import {MenuOverlayContext} from "../src/main/contexts/MenuOverlayContext";
 import {CartContext} from "../src/store/contexts/CartContext";
 import {CartSubtotalsContext} from "../src/store/contexts/CartSubtotalsContext";
 import {CartOpenContext} from "../src/store/contexts/CartOpenContext";
@@ -51,7 +52,8 @@ function MyApp(props) {
         currency: 'USD',
         role: 'not set',
         agreementStatus: ''
-    }); // firstname, lastname, email, distanceunit
+    });
+    const [menuOverlay, setMenuOverlay] = useState(true);
     const [cart, setCart] = useState(CART_ITEMS_INIT);
     const [cartSubtotals, setCartSubtotals] = useState(CART_SUBTOTALS_INIT);
     const [cartOpen, setCartOpen] = useState(CART_OPEN_INIT);
@@ -155,9 +157,14 @@ function MyApp(props) {
         }   
     }, []);
 
-    function handleNavOpen() {
-        // if (document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block';
+    function handleNavOpen(e) {
+        console.log('here', e.target)
+        if (e.target.getAttribute('href') === Router.route) return setMenuOverlay(false);
         setNavOpen(!navOpen);
+        if (e.target.getAttribute('href') !== '/' && e.target.getAttribute('id') !== 'hamburger') document.querySelector('#spinner')?document.querySelector('#spinner').style.display='block':"";  
+        setTimeout(()=>{
+            setMenuOverlay(false);
+        }, 600)
     }
     useEffect(()=>{
         // if (props.router&&props.router.query&&props.router.query.upload&&props.router.query.upload==='yes') Router.push('/uploadstoreitem');
@@ -180,12 +187,14 @@ function MyApp(props) {
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                             <CurrencyContextCADtoUSD.Provider value={{currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD}}>
                                 <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                    
                                     <>
                                         <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
                                         <CartButton />
                                         <UploadStoreItem />
                                         <Footer />
                                     </>
+                                    
                                 </CurrencyContext.Provider>
                             </CurrencyContextCADtoUSD.Provider>
                         </CartSubtotalsContext.Provider>
@@ -216,12 +225,14 @@ function MyApp(props) {
                         <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                             <CurrencyContextCADtoUSD.Provider value={{currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD}}>
                                 <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                
                                     <>
                                         <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
                                         <CartButton />
                                         <SellerAgreement />
                                         <Footer />
                                     </>
+                                    
                                 </CurrencyContext.Provider>
                             </CurrencyContextCADtoUSD.Provider>
                         </CartSubtotalsContext.Provider>
@@ -243,7 +254,6 @@ function MyApp(props) {
                 <link rel="shortcut icon" href="./favicon.ico?v=5.0" sizes="16x16" type="image/png"/>
                 <script src="https://js.stripe.com/v3/" />
             </Head>
-            <Banner />
             
             <StringFormContext.Provider value={{stringForm, setStringForm}}>
             <UserContext.Provider value={{user, setUser}}>
@@ -253,6 +263,7 @@ function MyApp(props) {
                     <CartSubtotalsContext.Provider value={{cartSubtotals, setCartSubtotals}}>
                         <CurrencyContextCADtoUSD.Provider value={{currencyMultiplierCADtoUSD, setCurrencyMultiplierCADtoUSD}}>
                             <CurrencyContext.Provider value={{currencyMultiplier, setCurrencyMultiplier}}>
+                                <MenuOverlayContext.Provider value={{menuOverlay, setMenuOverlay}}>
                                 {props.router.query.upload
                                     ?<UploadStoreItem />
                                     :props.router.query.agreement
@@ -264,6 +275,7 @@ function MyApp(props) {
                                         :props.router.query.uploadlisting
                                             ?<UploadListingResult success={true}/>
                                             :<>
+                                                <Banner />
                                                 <NavBar mobile={windowWidth<=550} open={navOpen} handleNavOpen={handleNavOpen}/>
                                                 <CartButton />
                                                 <Elements stripe={promise}>
@@ -272,6 +284,7 @@ function MyApp(props) {
                                                 <Footer />
                                             </>
                                 }
+                                </MenuOverlayContext.Provider>
                             </CurrencyContext.Provider>
                         </CurrencyContextCADtoUSD.Provider>
                     </CartSubtotalsContext.Provider>

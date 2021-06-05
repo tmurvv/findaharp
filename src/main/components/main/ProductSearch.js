@@ -48,8 +48,8 @@ function ProductSearch(props) {
     // randomize products
     let shuffledProducts=[...props.products];
     // remove listings without photos (they go at the bottom of the list)
-    const tempGeneric = shuffledProducts.filter(product=> product.productImageUrl.indexOf('genericHarp')>-1)
-    shuffledProducts = shuffledProducts.filter(product=> product.productImageUrl.indexOf('genericHarp')===-1)
+    const tempGeneric = shuffledProducts.filter(product=> product&&product.productImageUrl&&product.productImageUrl.indexOf('genericHarp')>-1)
+    shuffledProducts = shuffledProducts.filter(product=> product&&product.productImageUrl&&product.productImageUrl.indexOf('genericHarp')===-1)
     // randomize
     shuffledProducts = shuffleStorePartners(shuffledProducts);
     // add back in listings without photos

@@ -95,6 +95,9 @@ function AppCss() {
                 transform: translateX(16.5%);
                 padding: 9px;
             }
+            .builderplainTextSelectLine1 {
+                background-color: #223156;
+            }
             @media only screen and (max-width: 550px) {
                 .plainTextSelectLine1 {
                     width: 190%;
@@ -104,7 +107,8 @@ function AppCss() {
                 margin-block-start: 0;
                 margin-block-end: 0;
             }
-            .plainTextSelectLine2 {
+            .plainTextSelectLine2,
+            .builderplainTextSelectLine2 {
                 margin-block-start: -.2em;
                 color: #333333;
                 font-size: 14px;
@@ -119,6 +123,20 @@ function AppCss() {
                 transform: translateX(16.5%);
                 text-align: center;
                 max-width: 200px;
+            }
+            .builderplainTextSelectLine2 {
+                background-color: #6d81bf;
+                right: 80px;
+            }
+            @media only screen and (max-width: 1300px) {
+                .builderplainTextSelectLine2 {
+                    right: 55px;
+                }
+            }
+            @media only screen and (max-width: 950px) {
+                .builderplainTextSelectLine2 {
+                    right: 40px;
+                }
             }
             .plainTextSelectLine2 p {
                 margin-block-start: 0;
@@ -185,7 +203,7 @@ function AppCss() {
             @media only screen and (max-width: 750px) {
                 .storePlainTextSelectLine1 {
                     /*margin-block-start: -.5em;*/
-                    width: 190%;
+                    // width: 190%;
                     position: absolute;
                 }
                 .storePlainTextSelectLine2 {
@@ -194,13 +212,21 @@ function AppCss() {
                     position: absolute;
                 }
             }  
-            .divider {
-                width: 90%;
-                height: 7px;
+            .divider,
+            .dividerBlue {
                 margin: auto;
                 background-color: transparent;
             }
-            .divider img {
+            .divider {
+                width: 90%;
+                height: 7px;
+            }
+            .dividerBlue {
+                width: 100%;
+                height: 40px;
+            }
+            .divider img,
+            .dividerBlue img {
                 width: 100%;
             }
             .flex {

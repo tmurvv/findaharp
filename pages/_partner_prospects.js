@@ -70,7 +70,7 @@ function PartnerProspects() {
 									<td colspan='2'><textarea rows='4' value='June 29th, spoke by phone, sent her an email with deets. June 15th via contact form, Dallas area'/></td>
 								</tr>
 								<tr>
-									<td>Vavra Harps</td>
+									<td>Vavra Harp</td>
 									<td></td>
 									<td></td>
 									<td></td>

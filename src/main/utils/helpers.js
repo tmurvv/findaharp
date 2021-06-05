@@ -59,22 +59,37 @@ export function getWindowSize() {
 export function setOpacity(yesNo) {
     if (yesNo) {
         document.body.style.overflowY='hidden';
-        document.querySelector('.searchLine1').style.opacity='.1';
-        document.querySelector('.searchLine2').style.opacity='.1';
-        document.querySelector('.searchLine1Sub').style.opacity='.1';
-        document.querySelector('.searchLine2Sub').style.opacity='.1';
+        document.querySelector('.searchLine1')?document.querySelector('.searchLine1').style.opacity='.1':'';
+        document.querySelector('.searchLine1')?document.querySelector('.searchLine2').style.opacity='.1':'';
+        document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine1Sub').style.opacity='.1':'';
+        document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine2Sub').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine1').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine2').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine1Sub').style.opacity='.1':'';
+        document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine2Sub').style.opacity='.1':'';
         return
     }
     document.body.style.overflowY='auto';
-    document.querySelector('.searchLine1').style.opacity='1';
-    document.querySelector('.searchLine2').style.opacity='1';
-    document.querySelector('.searchLine1Sub').style.opacity='1';
-    document.querySelector('.searchLine2Sub').style.opacity='1';
+    document.querySelector('.searchLine1')?document.querySelector('.searchLine1').style.opacity='1':'';
+    document.querySelector('.searchLine1')?document.querySelector('.searchLine2').style.opacity='1':'';
+    document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine1Sub').style.opacity='1':'';
+    document.querySelector('.searchLine1Sub')?document.querySelector('.searchLine2Sub').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine1').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1')?document.querySelector('.buildersearchLine2').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine1Sub').style.opacity='1':'';
+    document.querySelector('.buildersearchLine1Sub')?document.querySelector('.buildersearchLine2Sub').style.opacity='1':'';
 }
 export function findSizeWords(strings, type) {
     // short cut if not lever or pedal harp
     if (type && type=='lever-free'&&!strings.toString().toUpperCase().startsWith('WIRE')) return 'lever-free';
     if (type && type.toUpperCase()==='ELECTRIC') return 'Electric';
+    //#region added for builder harp menu
+    if (strings&&strings.toString().toUpperCase()=='WIRE') return 'Wire';
+    if (strings&&strings.toString().toUpperCase()=='CROSS') return 'Cross';
+    if (strings&&strings.toString().toUpperCase()=='DOUBLE') return 'Double';
+    if (strings&&strings.toString().toUpperCase()=='TRIPLE') return 'Triple';
+    if (strings&&strings.toString().toUpperCase()=='CARBON FIBER') return 'Carbon Fiber';
+    //#endregion
     if (strings&&strings.toString().toUpperCase()=='WIRE/CROSS/DOUBLE/TRIPLE') return 'wire/cross/double/triple';
     // strings to number type
     strings = parseInt(strings);
@@ -133,7 +148,7 @@ export function getModelListForMaker(productMakesModels, productMaker) {
     if (!productMaker) throw new Error("from getModelListForMaker: maker parameter empty");
 
     let modelList = [];
-    if (productMaker.toUpperCase() !== "ALL MAKERS"){
+    if (productMaker.toUpperCase() !== "ALL MAKERS" && productMaker.toUpperCase() !== "ALL BUILDERS"){
         productMakesModels.filter(product => product.productMaker === productMaker);
     } 
     productMakesModels.map(maker => {   
@@ -201,7 +216,7 @@ export function getFilteredProducts(allProducts, allState, user, rate) {
         filteredProducts = filteredProducts.filter(
             product => product.productModel&&product.productModel === allState.model
         );
-    if (allState.maker && allState.maker.toUpperCase() !== "ALL MAKERS") 
+    if (allState.maker && allState.maker.toUpperCase() !== "ALL MAKERS" && allState.maker.toUpperCase() !== "ALL BUILDERS") 
         filteredProducts = filteredProducts.filter(
             product => product.productMaker&&product.productMaker === allState.maker
         );
@@ -365,7 +380,7 @@ export const getSearchInfo = (allState) => {
     if (allState.searchInfo&&allState.searchInfo.indexOf("All Harps")>-1) allState.searchInfo = '';
     if (document&&document.querySelector('.clearAll')) document.querySelector('.clearAll').style.display='none';
     // prepare comparison array to eliminate not-selected filters
-    const initArr = ['All Sizes', 'All Makers', 'All Models', 'All Finishes', 'All Prices', 'All Locations']
+    const initArr = ['All Sizes', 'All Makers', 'All Builders', 'All Models', 'All Finishes', 'All Prices', 'All Locations']
     // prepare array of only filter selections from state
     const menuArr = [allState.size, allState.maker, allState.model, allState.finish, allState.price, allState.location];
     // append searchInfo string with only selected filter information

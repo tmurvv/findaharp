@@ -9,13 +9,14 @@ import StoreProductSearch from './StoreProductSearch';
 import StoreProductSearchStrings from './StoreProductSearchStrings';
 import ProductScroll from './ProductScroll';
 import StoreResults from './StoreResults';
+import SearchBar from './SearchBar';
 // other internal
 import GlobalStoreSearchCss from '../../styles/GlobalStoreSearch.css';
 import StoreProductSearchCss from '../../styles/StoreProductSearch.css';
 import StoreProductContainerCss from '../../styles/StoreProductContainer.css';
 import { resultInfoReducer } from '../../../main/reducers/reducers';
 import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../../../main/constants/constants';
-import { getStoreSearchInfo, searchBar } from '../../utils/searchProductsHelpers';
+import { getStoreSearchInfo, searchSearchBar } from '../../utils/searchProductsHelpers';
 import FastNEasyStringForm from './FastNEasyStringForm';
 
 function GlobalStoreSearch(props) {
@@ -23,20 +24,23 @@ function GlobalStoreSearch(props) {
     const [ allState, setAllState ] = useState(STORE_INITIAL_STATE);
     const [ typeOfSearch, setTypeOfSearch ] = useState();
     const [ clearMenus, setClearMenus ] = useState(false);
+    const [ musicSearch, setMusicSearch ] = useState(false);
+    const [ stringSearch, setStringSearch ] = useState(false);
     const [ octavesSearch, setOctavesSearch ] = useState();
     const [ notesSearch, setNotesSearch ] = useState();
     const [ brandsSearch, setBrandsSearch ] = useState();
     const [ makesmodelsSearch, setMakesmodelsSearch ] = useState();
-    const [ searchResults, setSearchResults ] = useState();
-    const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
+    // const [ searchResults, props.searchResults ] = useState();
+    // const [ searchResultsText, setSearchResultsText ] = useState('entry'); // entry, found, notfound, nosearch
     const [ openStoreDetail, setopenStoreDetail ] = useState(false);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [hasMore, setHasMore] = useState(false);
     const [resetPage, setResetPage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [idx, setIdx] = useState(0);
-    const [screenWidth, setScreenWidth] = useState();
- 
+    const [ winWidth, setWinWidth ] = useState(4000);
+    const [ change, setChange ] = useState('');
+
     function resetResults() {
         document.querySelector('#loadingLoginText').innerText='';
         dispatchResultInfo({type: 'initial'});
@@ -49,242 +53,18 @@ function GlobalStoreSearch(props) {
     }
     function loginGuest(evt) { 
         resetResults();
-    }
-
-    function handleChange(type, menu, value1, value2, value3, value4) {
-        console.log('handleChange', type, menu, value1, value2, value3, value4)
-        // update menu text -- not for search term
-        if (type==='music') setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 });
-        if (type==='strings') setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 });
-        // get search items
-        let category = document.querySelector('#category').value;
-        let searchTerm = document.querySelector('#searchTerm').value;
-        let newused = document.querySelector('#newused').value;
-        setClearMenus(false);
-        setIdx(0);
-        setHasMore(true);
-        let productListCopy=[...props.filteredProducts];
-        let preSearchProductList=[]
-        let finalProductList=[];
-        let categoryProductList=[];
-        let newusedProductList=[];
-        let searchProductList=[];
-        if (category&&category.toUpperCase()!=='ALL') {
-            if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
-                // document.querySelector('#category').value= 'All';
-                return alert("Digital Downloads under construction. Expected by February 2021."); // NOT YET IMPLEMENTED
-            }
-            if (category.toUpperCase()==="STRINGS") type='strings';
-            if (category.toUpperCase()==="MUSIC") type='music';
-        } 
-        if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
-            category = "Music";
-            document.querySelector('#category').value='Music';
-            type = 'music';
-        } 
-        if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
-            category = "Strings";
-            document.querySelector('#category').value='Strings';
-            type = 'strings'
-        }
-        setAllState({...allState, category: category});
-
-        if(category&&category.toUpperCase()!=="ALL") {
-            productListCopy.map(product=>{
-                if (String(product.category).toUpperCase()===category.toUpperCase()) {
-                    categoryProductList.push(product);
-                } 
-                if (product.subcategories) {
-                    product.subcategories.map(subcategory=>{
-                        if (subcategory.toUpperCase()===category.toUpperCase()) categoryProductList.push(product);
-                    })
-                }
-            });
-        } else {
-            categoryProductList = [...productListCopy]
-        }
-        // newused
-        if(newused!=='New/Used') {
-            categoryProductList.map(product=>{
-                if (newused.toUpperCase().startsWith(String(product.newused).toUpperCase())) {
-                    newusedProductList.push(product);
-                }
-            });
-        } else {
-            newusedProductList = [...categoryProductList]
-        }
-        // finalProductList=[...categoryProductList]
-        if (category.toUpperCase()==='MUSIC') {
-            if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
-            if (!value2||value2===undefined) value2="All Levels";
-            if (!value3||value3===undefined) value3="All Publication Types";
-            const soloensemble = menu==='soloensemble'?value1:allState.soloensemble;
-            const level = menu==='level'?value2:allState.level;
-            const publicationType = menu==='publicationtype'?value3:allState.publicationtype;
-            // initialize variables
-            let levelProductList=[];
-            let soloensembleProductList=[];
-            let publicationProductList=[];
-            
-            // add clear searches button
-            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
-            
-            // check level
-            if (level&&level.toUpperCase()!=='ALL LEVELS') { 
-                newusedProductList.map(product=> {
-                    if (String(product.level).toUpperCase().startsWith('BEGIN')&&level.toUpperCase().startsWith("BEGIN")) {
-                        levelProductList.push(product);
-                    } else {
-                        if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
-                    }    
-                });
-            } else {
-                levelProductList=[...newusedProductList];
-            }
-
-            finalProductList=[...levelProductList];
-
-            // check soloensemble
-            if (soloensemble&&soloensemble.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
-                levelProductList.map(product=> {
-                    if (soloensemble.toUpperCase()==="LEVER HARP") {
-                        if (product.harptype) {
-                            if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
-                        }
-                    } else if (String(soloensemble).toUpperCase()==="PEDAL HARP") {
-                        if (product.harptype) {
-                            if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
-                        }
-                    } else if (product.subcategories) {
-                        product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
-                        })
-                    }
-                });
-            } else {
-                soloensembleProductList=[...levelProductList];
-            }
-            finalProductList=[...soloensembleProductList];
-            // check publication
-            if (publicationType&&publicationType.toUpperCase()!=="ALL PUBLICATION TYPES") {
-            soloensembleProductList.map(product=> {
-                if (product.subcategories) {
-                    product.subcategories.map(subcategory=>{
-                        if (subcategory.toUpperCase()===publicationType.toUpperCase()) publicationProductList.push(product);
-                    })
-                }
-            }); 
-            } else {
-                publicationProductList=[...soloensembleProductList];
-            }
-            finalProductList=[...publicationProductList];
-            
-        } else if (category.toUpperCase()==='STRINGS') {
-            if (!value1||value1===undefined) value1="All Octaves";
-            if (!value2||value2===undefined) value2="All Notes";
-            if (!value3||value3===undefined) value3="All Brands";
-            if (!value4||value4===undefined) value4="All Makes/Models";
-            const octave = menu==='octaves'?value1:allState.octaves;
-            const note = menu==='notes'?value2:allState.notes;
-            const brand = menu==='brands'?value3:allState.brands;
-            let makesmodels = menu==='makesmodels'?value4:allState.makesmodels;
-            if (makesmodels.toUpperCase().startsWith('ALL')&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") makesmodels=makesmodels.substr(4);
-            // initialize variables
-            let octavesProductList=[];
-            let notesProductList=[];
-            let brandsProductList=[];
-            let makesmodelsProductList=[];
-            // add clear searches button
-            if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
-            // check octaves
-            if (octave&&octave.toUpperCase()!=='ALL OCTAVES'&&octave!==undefined) {
-                newusedProductList.map(product=> {
-                    if (String(product.title).toUpperCase().includes(octave.toUpperCase())) octavesProductList.push(product);
-                    product.subcategories.map(cat=> {
-                        cat.toUpperCase()===octave.toUpperCase()&&octavesProductList.push(product);
-                        if(cat.toUpperCase()==='WIRE') {
-                            if(product.title.toUpperCase().includes('5TH OCTAVE')&&octave.toUpperCase().includes('5TH OCTAVE')) octavesProductList.push(product);
-                            if(product.title.toUpperCase().includes('6TH OCTAVE')&&octave.toUpperCase().includes('6TH OCTAVE')) octavesProductList.push(product);
-                            if(product.title.toUpperCase().includes('7TH OCTAVE')&&octave.toUpperCase().includes('7TH OCTAVE')) octavesProductList.push(product);
-                        }
-                    });
-                })
-            } else {
-                octavesProductList=[...newusedProductList];
-            }
-            finalProductList=[...octavesProductList];
-            // check notes
-            if (note&&note.toUpperCase()!=='ALL NOTES'&&note!==undefined) {
-                octavesProductList.map(product=> {
-                    // Note Yet Implement (search for notes by number)
-                    if (note==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
-                    if (note==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
-                    if (note==='C'&&Number.isInteger((product.order+4)/7)) notesProductList.push(product);
-                    if (note==='B'&&Number.isInteger((product.order+3)/7)) notesProductList.push(product);
-                    if (note==='A'&&Number.isInteger((product.order+2)/7)) notesProductList.push(product);
-                    if (note==='G'&&Number.isInteger((product.order+1)/7)) notesProductList.push(product);
-                    if (note==='F'&&Number.isInteger((product.order+0)/7)) notesProductList.push(product);
-                    product.subcategories.map(cat=>cat.toUpperCase()===note.toUpperCase()&&notesProductList.push(product));
-                })
-            } else {
-                notesProductList=[...octavesProductList];
-            }
-            finalProductList=[...notesProductList];
-
-            // check brands
-            if (brand&&brand!==undefined&&brand.toUpperCase()!=='ALL BRANDS') {
-                notesProductList.map(product=> {
-                    if (String(product.title).toUpperCase().includes(brand.toUpperCase())) brandsProductList.push(product);
-                })
-            } else {
-                brandsProductList=[...notesProductList];
-            }
-
-            finalProductList=[...brandsProductList];
-            // check string makesmodels
-            if (makesmodels&&makesmodels!==undefined&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") {
-                brandsProductList.map(product=> {
-                    if (makesmodels.toUpperCase()==='NEW' || makesmodels.toUpperCase()==='USED') {
-                        if (product.newused.toUpperCase()==='NEW'&&makesmodels.toUpperCase()==='NEW') makesmodelsProductList.push(product); 
-                        if (product.newused.toUpperCase()==='USED'&&makesmodels.toUpperCase()==='USED') makesmodelsProductList.push(product); 
-                    }
-                    else if (String(product.title).toUpperCase().includes(makesmodels.toUpperCase())) {
-                        makesmodelsProductList.push(product);
-                    } else if (product.subcategories) {
-                        product.subcategories.map(subcategory=>{
-                            if (subcategory.toUpperCase()===makesmodels.toUpperCase()) makesmodelsProductList.push(product);
-                        });
-                    }
-                }); 
-            } else {
-                makesmodelsProductList=[...brandsProductList];
-            }
-            // console.log('dusty', makesmodelsProductList.length)
-            finalProductList=[...makesmodelsProductList];
-        } else {
-            finalProductList=[...newusedProductList]
-        }
-        preSearchProductList = [...finalProductList]
-        // search term
-        if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
-        if(searchTerm) {
-            searchProductList = searchBar(preSearchProductList, searchTerm)
-        } else {
-            searchProductList=[...preSearchProductList]
-        }
-        finalProductList=[...searchProductList];
-        // console.log('final', finalProductList.length)
-        finalProductList.length<1?setSearchResultsText('notfound'):setSearchResultsText('found');  
-        setTypeOfSearch(type);
-        setSearchResults(finalProductList)
-    }
-    
+    }  
     function handleClear() {
-        document.querySelector('#category').value='All';
-        document.querySelector('#searchTerm').value='';
+        // document.querySelector('#category').value='All';
+        document.querySelector('#searchTerm')?document.querySelector('#searchTerm').value='':'';
+        document.querySelector('#newused')?document.querySelector('#newused').value='New/Used':'';
         setAllState(STORE_INITIAL_STATE);
-        setSearchResults(props.filteredProducts);
-        setSearchResultsText('entry');
+        props.setSearchResults(props.filteredProducts);
+        props.setSearchResultsText('entry');
+        props.setCatBreadCrumb('All Categories');
+        props.setMusicSearch(false);
+        props.setStringSearch(false);
+
         if (document.querySelector('#clearSearch')) document.querySelector('#clearSearch').style.display='none';
     }
     function handleopenStoreDetail(product) {
@@ -296,18 +76,48 @@ function GlobalStoreSearch(props) {
         setopenStoreDetail(false); 
     }
     const loadMore = page => {  
-        setHasMore(true);
-        if (idx+30 > searchResults.length) {
-            setHasMore(false);  
+        props.setHasMore(true);
+        if (props.idx+30 > props.searchResults.length) {
+            props.setHasMore(false);  
         } else {
-            setIdx(idx+30);
+            props.setIdx(props.idx+30);
         }
       };
     
     useEffect(()=>{
-            setScreenWidth(window.innerWidth);
-    })
+        setWinWidth(window&&window.innerWidth);
+        const buttons = document.querySelectorAll('.submenu-toggle-button');
+        Array.prototype.forEach.call(buttons, function(button) {
+            button.addEventListener('click', function() {
+                const submenu = button.parentNode.querySelector('.submenu');
+                submenu.classList.toggle('open');
+                const buttonState = button.parentNode.querySelector('.submenu-toggle-button');
+                buttonState.classList.toggle('open');
+            });
+        });
+        if (document.querySelector('#searchLineAnchor')){
+            const myRect=document.querySelector('#searchLineAnchor').getBoundingClientRect();
+            console.log('myRect-X:', myRect.x,'myRect-Y', myRect.y);
+            props.setAnchor([myRect.x, myRect.y]);
+        }
+    },[])
     
+    useEffect(()=>{
+        const buttons = document.querySelectorAll('.submenu-toggle-button');
+        Array.prototype.forEach.call(buttons, function(button) {
+            button.addEventListener('click', function() {
+                // alert('here')
+                // const submenu = button.parentNode.querySelector('.submenu');
+                // submenu.classList.toggle('open');
+                // const buttonState = button.parentNode.querySelector('.submenu-toggle-button');
+                // buttonState.classList.toggle('open');
+            });
+        });
+        // console.log('bott', props.allState, props.typeOfSearch, '|', getStoreSearchInfo(props.allState, props.typeOfSearch))
+        // console.log('global', props)
+        // props.searchBreadCrumb&&setTypeOfSearch(props.searchBreadCrumb);
+    },[]);
+    //end region
     return (
         <>
             <StoreResults 
@@ -329,111 +139,63 @@ function GlobalStoreSearch(props) {
                 src='/img/spinner.gif' 
                 alt='spinner' 
             />
-            <div className='storeSearchLine' >
-                {screenWidth>750
-                ?
-                <>
-                
-                <h3 className='searchHelperText'>Search by category</h3>
-                <div className='selectContainer'>    
-                    <select onChange={()=>handleChange('','category')} id='category'>
-                        <option name='All'>All</option>
-                        <option name='Strings'>Strings</option>
-                        <option name='Music'>Music</option>
-                        <option name='Accessories'>Accessories</option>
-                        <option name='Books'>Books</option>
-                        <option name='Gifts'>Gifts</option>
-                        <option name='CDs'>CDs</option>
-                        <option name='Digital Downloads'>Digital Downloads</option>
-                    </select>
-                    <span>&#711;</span>
+            {winWidth>750&&
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '88px'}}>
+                <div id='searchLineAnchor' hidden={props.musicSearch}><button onClick={()=>{props.setStringSearch(false);props.setMusicSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Music advanced search</button></div>
+                {/* <div hidden={props.stringSearch}><button onClick={()=>{handleClear(); props.setMusicSearch(false);props.setStringSearch(true);}} style={{textDecoration: 'underline', border: 'none', color: '#6A75AA', height: '42px', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}>Strings advanced search</button></div> */}
+                <div>
+                    <button 
+                        onClick={()=>document.querySelector('#spinner').style.display='block'} 
+                        style={{border: 'none', outline: 'none', backgroundColor: 'transparent', padding: '5px 7px', margin: '0 2.5px'}}
+                    >
+                        <FastNEasyStringForm />
+                    </button>
                 </div>
-                <h3 className='searchHelperText'>and / or search term</h3>
-                <div className="searchTextImg">
-                    <form style={{display: 'flex'}}>
-                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
-                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
-                            <img src='/img/searchicon.png' alt='search icon' />
-                        </button>
-                    </form> 
-                </div>
-                <div className='selectContainer'>
-                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
-                        <option value='New/Used' name='All newused'>New/Used</option>
-                        <option value='New' name='New'>New Only</option>
-                        <option value='Used' name='Used'>Used Only</option>
-                    </select>
-                    <span>&#711;</span>
-                </div>
-                </>
-                :
-                <>
-                <h3 className='searchHelperText'>Search by category</h3>
-                <div style={{display: 'flex', margin:'auto'}}>
-                <div className='selectContainer'>    
-                    <select onChange={()=>handleChange('','category')} id='category' style={{WebkitAppearance: 'none'}}>
-                        <option name='All'>All</option>
-                        <option name='Strings'>Strings</option>
-                        <option name='Music'>Music</option>
-                        <option name='Accessories'>Accessories</option>
-                        <option name='Books'>Books</option>
-                        <option name='Gifts'>Gifts</option>
-                        <option name='CDs'>CDs</option>
-                        <option name='Digital Downloads'>Digital Downloads</option>
-                    </select>
-                    <span>&#711;</span>
-                </div>
-                <div className='selectContainer'> 
-                    <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '110px', fontSize: '14px', padding: '13.4px 7px', WebkitAppearance: 'none'}}>
-                        <option value='New/Used' name='All newused'>New/Used</option>
-                        <option value='New' name='New'>New Only</option>
-                        <option value='Used' name='Used'>Used Only</option>
-                    </select>
-                    <span>&#711;</span>
-                </div>
-                </div>
-                <h3 className='searchHelperText'>and / or search term</h3>
-                <div className="searchTextImg">
-                    <form style={{display: 'flex'}}>
-                        <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
-                        <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
-                            <img src='/img/searchicon.png' alt='search icon' />
-                        </button>
-                    </form> 
-                </div>
-                </>
-                }
             </div>
-            <StoreProductSearch 
-                clearMenus={clearMenus} 
-                setTypeOfSearch={setTypeOfSearch} 
-                handleClear={handleClear} 
-                handleChange={handleChange}
-                allState={allState}
-                setAllState={setAllState} 
-            />
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{width: 'fit-content', margin: 'auto', marginTop: '30px', marginBottom: '-20px', zIndex: '2000'}}>
-                <FastNEasyStringForm />
-            </div>
-            <StoreProductSearchStrings              
-                clearMenus={clearMenus} 
-                setTypeOfSearch={setTypeOfSearch} 
-                handleClear={handleClear} 
-                handleChange={handleChange} 
-                allState={allState}
-                setAllState={setAllState} 
-                setOctavesSearch={setOctavesSearch} 
-                setNotesSearch={setNotesSearch} 
-                setBrandsSearch={setBrandsSearch} 
-                setMakesmodelsSearch={setMakesmodelsSearch}
-            />
-            {searchResults&&searchResults.length>0&&
+            }
+            {props.musicSearch
+                &&<StoreProductSearch 
+                    clearMenus={clearMenus} 
+                    setTypeOfSearch={setTypeOfSearch} 
+                    handleClear={handleClear} 
+                    handleChange={props.handleChange}
+                    allState={props.allState}
+                    setAllState={props.setAllState}
+                    setMusicSearch={props.setMusicSearch} 
+                />
+            }
+            {/* {props.stringSearch
+                &&<StoreProductSearchStrings              
+                    clearMenus={clearMenus} 
+                    setTypeOfSearch={setTypeOfSearch} 
+                    handleClear={handleClear} 
+                    handleChange={props.handleChange} 
+                    allState={props.allState}
+                    setAllState={props.setAllState} 
+                    setOctavesSearch={setOctavesSearch} 
+                    setNotesSearch={setNotesSearch} 
+                    setBrandsSearch={setBrandsSearch} 
+                    setMakesmodelsSearch={setMakesmodelsSearch}
+                    catBreadCrumb={props.catBreadCrumb}
+                    setStringSearch={props.setStringSearch}
+                    ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
+                    ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
+                    ribbonmenuOpen={props.ribbonmenuOpen} 
+                    ribbonsetMenuOpen={props.ribbonsetMenuOpen}
+                    handleCatChange={props.handleCatChange}
+                    ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
+                    ribboncatBreadCrumb={props.ribboncatBreadCrumb}
+                    anchor={props.anchor}
+                    setAnchor={props.setAnchor}
+                />
+            } */}
+            {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&props.searchResultsText!=='entry'&&
             <>
-            <div className="storeproductContainer">
+            <div className="storeproductContainer" style={{opacity: `${props.menuOpen?.2:1}`, marginTop: `${winWidth<750?'150px':''}`}}>
                 <div>
                     <div className='searchInfo clearAll' id='clearSearch'>
                         <div className='searchInfoWrapper'>
-                            <h3>{getStoreSearchInfo(allState,typeOfSearch)}</h3>
+                            <h3>{getStoreSearchInfo(props.allState,props.typeOfSearch)}</h3>
                             <div onClick={handleClear} className='clearAll clearSearch'>
                                 <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
                                 <p style={{whiteSpace: 'nowrap'}}>Clear All</p> 
@@ -444,11 +206,11 @@ function GlobalStoreSearch(props) {
                 <InfiniteScrollLoading
                     element="div"
                     pageStart={1}
-                    hasMore={hasMore && !isLoading}
+                    hasMore={props.hasMore && !isLoading}
                     loadMore={loadMore}
                     resetPage={resetPage}
                 >
-                    {(searchResults.slice(0,idx+30)).map(product => <StoreProduct 
+                    {(props.searchResults.slice(0,props.idx+30)).map(product => <StoreProduct 
                         key={uuid()}
                         productdetail={product}
                         handleopenstoredetail={handleopenStoreDetail} 
@@ -467,8 +229,8 @@ function GlobalStoreSearch(props) {
             </div>
             </>
             }
-            {searchResultsText==='notfound'&&
-                <div className='storeselected clearAll' id='clearSearch' style={{display:'flex', paddingTop: '40px'}}>
+            {props.searchResultsText==='notfound'&&
+                <div className='storeselected clearAll' id='clearSearch' style={{marginTop: `${winWidth<750?'100px':''}`, display:'flex', paddingTop: '40px'}}>
                     <h3>No items match your search.</h3>
                     <div onClick={handleClear} className='clearAll clearSearch'>
                         <img onClick={handleClear} src='/img/clear_search.png' alt='clear filters'/>
@@ -476,12 +238,12 @@ function GlobalStoreSearch(props) {
                     </div>
                 </div>
             }
-            {searchResultsText==='entry'&&
-            <>
-                <ProductScroll filteredproductscontainer={props.featuredProducts} handleResults={handleResults} title="Browse Featured Items"/>
-                <ProductScroll filteredproductscontainer={props.strings} handleStringsChange={handleChange} handleResults={handleResults} title="Browse String Brands"/>
-                <ProductScroll filteredproductscontainer={props.music} handleResults={handleResults} title="Browse Music Titles"/>
-            </>
+            {props.searchResultsText==='entry'&&
+            <div style={{marginTop: `${winWidth<750? '200px':''}`}}>
+                <ProductScroll style={{opacity: `${props.menuOpen?.2:1}`}} filteredproductscontainer={props.featuredProducts} menuOpen={props.menuOpen} handleResults={handleResults} title="Featured Items"/>
+                <ProductScroll style={{opacity: `${props.menuOpen?.2:1}`}} filteredproductscontainer={props.strings} menuOpen={props.menuOpen} handleStringsChange={props.handleChange} handleResults={handleResults} title="String Brands"/>
+                <ProductScroll style={{opacity: `${props.menuOpen?.2:1}`}} filteredproductscontainer={props.music} menuOpen={props.menuOpen} handleResults={handleResults} title="Music Titles"/>
+            </div>
             }
             <StoreProductSearchCss />
             <GlobalStoreSearchCss />
@@ -491,3 +253,279 @@ function GlobalStoreSearch(props) {
 }
 
 export default GlobalStoreSearch;
+
+// {/* <div className='selectContainer'>    
+//                     <select onChange={()=>handleChange('','category')} id='category'>
+//                         <option name='All'>All</option>
+//                         <option name='Strings'>Strings</option>
+//                         <option name='Music'>Music</option>
+//                         <option name='Accessories'>Accessories</option>
+//                         <option name='Books'>Books</option>
+//                         <option name='Gifts'>Gifts</option>
+//                         <option name='CDs'>CDs</option>
+//                         <option name='Digital Downloads'>Digital Downloads</option>
+//                     </select>
+//                     <span>&#711;</span>
+//                 </div> */}
+//                 <h3 className='searchHelperText'>and / or search term</h3>
+//                 <div className="searchTextImg">
+//                     <form style={{display: 'flex'}}>
+//                         <input type="text" style={{marginBottom: '0'}} id="searchTerm" placeholder="Search" /> 
+//                         <button id="searchMagnify" onClick={(e)=>{e.preventDefault();handleChange()}}>
+//                             <img src='/img/searchicon.png' alt='search icon' />
+//                         </button>
+//                     </form> 
+//                 </div>
+//                 <div className='selectContainer'>
+//                     <select onChange={()=>handleChange('','newused')} id='newused' style={{width: '25%', minWidth: '95px', fontSize: '14px', padding: '13.4px 7px'}}>
+//                         <option value='New/Used' name='All newused'>New/Used</option>
+//                         <option value='New' name='New'>New Only</option>
+//                         <option value='Used' name='Used'>Used Only</option>
+//                     </select>
+//                     <span>&#711;</span>
+//                 </div>
+
+
+// function handleChange(type, menu, value1, value2, value3, value4) {
+//     console.log('handleChange', type, menu, value1, value2, value3, value4)
+//     console.log(props.filteredProducts[600]);
+//     console.log(props.filteredProducts[props.filteredProducts.length-550]);
+//     if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="MUSIC") {
+//         props.setMusicSearch(true);
+//         props.setStringSearch(false);
+//     } else if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="STRINGS") {
+//         props.setMusicSearch(false);
+//         props.setStringSearch(true);
+//     } else {
+//         props.setMusicSearch(false);
+//         props.setStringSearch(false);
+//     }
+//     // update menu text -- not for search term
+//     if (type==='music') {           
+//         setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 })
+//     };
+//     if (type==='strings') { 
+//         setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 })
+//     };
+//     // get search items
+//     let category = document.querySelector('#category')&&document.querySelector('#category').value;
+//     let searchTerm = document.querySelector('#searchTerm').value;
+//     let newused = document.querySelector('#newused').value;
+//     setClearMenus(false);
+//     props.setIdx(0);
+//     props.setHasMore(true);
+//     let productListCopy=[...props.filteredProducts];
+//     let preSearchProductList=[]
+//     let finalProductList=[];
+//     let categoryProductList=[];
+//     let newusedProductList=[];
+//     let searchProductList=[];
+//     if (category&&category.toUpperCase()!=='ALL') {
+//         if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
+//             // document.querySelector('#category').value= 'All';
+//             return alert("Digital Downloads under construction. Expected by June 2021."); // NOT YET IMPLEMENTED
+//         }
+//         if (category.toUpperCase()==="STRINGS") type='strings';
+//         if (category.toUpperCase()==="MUSIC") type='music';
+//     } 
+//     if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
+//         category = "Music";
+//         // document.querySelector('#category').value='Music';
+//         type = 'music';
+//     } 
+//     if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
+//         category = "Strings";
+//         // document.querySelector('#category')?document.querySelector('#category').value='Strings':'';
+//         type = 'strings'
+//     }
+//     setAllState({...allState, category: category});
+
+//     if(category&&category.toUpperCase()!=="ALL") {
+//         productListCopy.map(product=>{
+//             if (String(product.category).toUpperCase()===category.toUpperCase()) {
+//                 categoryProductList.push(product);
+//             } 
+//             if (product.subcategories) {
+//                 product.subcategories.map(subcategory=>{
+//                     if (subcategory.toUpperCase()===category.toUpperCase()) categoryProductList.push(product);
+//                 })
+//             }
+//         });
+//     } else {
+//         categoryProductList = [...productListCopy]
+//     }
+//     // newused
+//     if(newused!=='New/Used') {
+//         categoryProductList.map(product=>{
+//             if (newused.toUpperCase().startsWith(String(product.newused).toUpperCase())) {
+//                 newusedProductList.push(product);
+//             }
+//         });
+//     } else {
+//         newusedProductList = [...categoryProductList]
+//     }
+//     // finalProductList=[...categoryProductList]
+//     if (category.toUpperCase()==='MUSIC') {
+//         if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
+//         if (!value2||value2===undefined) value2="All Levels";
+//         if (!value3||value3===undefined) value3="All Publication Types";
+//         const soloensemble = menu==='soloensemble'?value1:allState.soloensemble;
+//         const level = menu==='level'?value2:allState.level;
+//         const publicationType = menu==='publicationtype'?value3:allState.publicationtype;
+//         // initialize variables
+//         let levelProductList=[];
+//         let soloensembleProductList=[];
+//         let publicationProductList=[];
+        
+//         // add clear searches button
+//         if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
+        
+//         // check level
+//         if (level&&level.toUpperCase()!=='ALL LEVELS') { 
+//             newusedProductList.map(product=> {
+//                 if (String(product.level).toUpperCase().startsWith('BEGIN')&&level.toUpperCase().startsWith("BEGIN")) {
+//                     levelProductList.push(product);
+//                 } else {
+//                     if (String(product.level).toUpperCase()===level.toUpperCase()) levelProductList.push(product);
+//                 }    
+//             });
+//         } else {
+//             levelProductList=[...newusedProductList];
+//         }
+
+//         finalProductList=[...levelProductList];
+
+//         // check soloensemble
+//         if (soloensemble&&soloensemble.toUpperCase()!=="ALL LEVER/PEDAL/ENS") {
+//             levelProductList.map(product=> {
+//                 if (soloensemble.toUpperCase()==="LEVER HARP") {
+//                     if (product.harptype) {
+//                         if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
+//                     }
+//                 } else if (String(soloensemble).toUpperCase()==="PEDAL HARP") {
+//                     if (product.harptype) {
+//                         if (String(product.harptype).toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
+//                     }
+//                 } else if (product.subcategories) {
+//                     product.subcategories.map(subcategory=>{
+//                         if (subcategory.toUpperCase()===soloensemble.toUpperCase()) soloensembleProductList.push(product);
+//                     })
+//                 }
+//             });
+//         } else {
+//             soloensembleProductList=[...levelProductList];
+//         }
+//         finalProductList=[...soloensembleProductList];
+//         // check publication
+//         if (publicationType&&publicationType.toUpperCase()!=="ALL PUBLICATION TYPES") {
+//         soloensembleProductList.map(product=> {
+//             if (product.subcategories) {
+//                 product.subcategories.map(subcategory=>{
+//                     if (subcategory.toUpperCase()===publicationType.toUpperCase()) publicationProductList.push(product);
+//                 })
+//             }
+//         }); 
+//         } else {
+//             publicationProductList=[...soloensembleProductList];
+//         }
+//         finalProductList=[...publicationProductList];
+        
+//     } else if (category.toUpperCase()==='STRINGS') {
+//         if (!value1||value1===undefined) value1="All Octaves";
+//         if (!value2||value2===undefined) value2="All Notes";
+//         if (!value3||value3===undefined) value3="All Brands";
+//         if (!value4||value4===undefined) value4="All Makes/Models";
+//         const octave = menu==='octaves'?value1:allState.octaves;
+//         const note = menu==='notes'?value2:allState.notes;
+//         const brand = menu==='brands'?value3:allState.brands;
+//         let makesmodels = menu==='makesmodels'?value4:allState.makesmodels;
+//         if (makesmodels.toUpperCase().startsWith('ALL')&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") makesmodels=makesmodels.substr(4);
+//         // initialize variables
+//         let octavesProductList=[];
+//         let notesProductList=[];
+//         let brandsProductList=[];
+//         let makesmodelsProductList=[];
+//         // add clear searches button
+//         if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
+//         // check octaves
+//         if (octave&&octave.toUpperCase()!=='ALL OCTAVES'&&octave!==undefined) {
+//             newusedProductList.map(product=> {
+//                 if (String(product.title).toUpperCase().includes(octave.toUpperCase())) octavesProductList.push(product);
+//                 product.subcategories.map(cat=> {
+//                     cat.toUpperCase()===octave.toUpperCase()&&octavesProductList.push(product);
+//                     if(cat.toUpperCase()==='WIRE') {
+//                         if(product.title.toUpperCase().includes('5TH OCTAVE')&&octave.toUpperCase().includes('5TH OCTAVE')) octavesProductList.push(product);
+//                         if(product.title.toUpperCase().includes('6TH OCTAVE')&&octave.toUpperCase().includes('6TH OCTAVE')) octavesProductList.push(product);
+//                         if(product.title.toUpperCase().includes('7TH OCTAVE')&&octave.toUpperCase().includes('7TH OCTAVE')) octavesProductList.push(product);
+//                     }
+//                 });
+//             })
+//         } else {
+//             octavesProductList=[...newusedProductList];
+//         }
+//         finalProductList=[...octavesProductList];
+//         // check notes
+//         if (note&&note.toUpperCase()!=='ALL NOTES'&&note!==undefined) {
+//             octavesProductList.map(product=> {
+//                 // Not Yet Implement (search for notes by number)
+//                 if (note==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
+//                 if (note==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
+//                 if (note==='C'&&Number.isInteger((product.order+4)/7)) notesProductList.push(product);
+//                 if (note==='B'&&Number.isInteger((product.order+3)/7)) notesProductList.push(product);
+//                 if (note==='A'&&Number.isInteger((product.order+2)/7)) notesProductList.push(product);
+//                 if (note==='G'&&Number.isInteger((product.order+1)/7)) notesProductList.push(product);
+//                 if (note==='F'&&Number.isInteger((product.order+0)/7)) notesProductList.push(product);
+//                 product.subcategories.map(cat=>cat.toUpperCase()===note.toUpperCase()&&notesProductList.push(product));
+//             })
+//         } else {
+//             notesProductList=[...octavesProductList];
+//         }
+//         finalProductList=[...notesProductList];
+
+//         // check brands
+//         if (brand&&brand!==undefined&&brand.toUpperCase()!=='ALL BRANDS') {
+//             notesProductList.map(product=> {
+//                 if (String(product.title).toUpperCase().includes(brand.toUpperCase())) brandsProductList.push(product);
+//             })
+//         } else {
+//             brandsProductList=[...notesProductList];
+//         }
+
+//         finalProductList=[...brandsProductList];
+//         // check string makesmodels
+//         if (makesmodels&&makesmodels!==undefined&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") {
+//             brandsProductList.map(product=> {
+//                 if (makesmodels.toUpperCase()==='NEW' || makesmodels.toUpperCase()==='USED') {
+//                     if (product.newused.toUpperCase()==='NEW'&&makesmodels.toUpperCase()==='NEW') makesmodelsProductList.push(product); 
+//                     if (product.newused.toUpperCase()==='USED'&&makesmodels.toUpperCase()==='USED') makesmodelsProductList.push(product); 
+//                 }
+//                 else if (String(product.title).toUpperCase().includes(makesmodels.toUpperCase())) {
+//                     makesmodelsProductList.push(product);
+//                 } else if (product.subcategories) {
+//                     product.subcategories.map(subcategory=>{
+//                         if (subcategory.toUpperCase()===makesmodels.toUpperCase()) makesmodelsProductList.push(product);
+//                     });
+//                 }
+//             }); 
+//         } else {
+//             makesmodelsProductList=[...brandsProductList];
+//         }
+//         // console.log('dusty', makesmodelsProductList.length)
+//         finalProductList=[...makesmodelsProductList];
+//     } else {
+//         finalProductList=[...newusedProductList]
+//     }
+//     preSearchProductList = [...finalProductList]
+//     // search term
+//     if (document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
+//     if(searchTerm) {
+//         searchProductList = searchSearchBar(preSearchProductList, searchTerm, props.setMusicSearch, props.setStringSearch)
+//     } else {
+//         searchProductList=[...preSearchProductList]
+//     }
+//     finalProductList=[...searchProductList];
+//     // console.log('final', finalProductList.length)
+//     finalProductList.length<1?props.searchResultsText('notfound'):props.searchResultsText('found');  
+//     setTypeOfSearch(type);
+//     props.props.searchResults(finalProductList)
+// }

@@ -330,32 +330,32 @@ function SelectString({strings, note, setTotal, octave, octaveBrand, setOctaveBr
                     </select>
                     
                     <span>&#711;</span>
-                    <select className={`clear${note} selectStringBrand`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
+                    <select className={`clear${note} selectStringBrand`} name='helpMenu' id={`notSureMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px', border: 'none'}}>
                         <option value={`Let us help`}>Let us help...</option>
                         <option value='email'>Send us an email for advice on string types and brands.</option>
                         <option value='charts'>Tell us harp make and model to view string chart.</option>
                     </select>
-                    <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
+                    <select className={`clear${note}`} name='gutMenu' id={`gutMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px', border: 'none'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Natural Gut`}>Bow Brand Pedal Natural Gut</option>
                         {leverGutHidden&&leverGutHidden}
                         <option value={`Concedo Gut`}>Concedo Gut</option>
                         <option value={`Burgundy Gut`}>Burgundy Gut</option>
                     </select>
-                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
+                    <select className={`clear${note}`} id={`nylonMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px', border: 'none'}}>
                         <option value={`Select Brand`}>Brand</option>
                         <option value={`Bow Brand Pedal Nylon`}>Bow Brand Pedal Nylon</option>
                         {leverNylonHidden&&leverNylonHidden}
                         <option value={`Artist Nylon`}>Artist Nylon</option>
                     </select>
-                    <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
+                    <select className={`clear${note}`} id={`wireMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px', border: 'none'}}>
                         <option value={`Select Brand`}>Brand</option>
                         {silvWiresHidden&&silvWiresHidden}
                         {tarnWiresHidden&&tarnWiresHidden}
                         {leverWiresHidden&&leverWiresHidden}
                         {profLeverWiresHidden&&profLeverWiresHidden}
                     </select>
-                    <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px'}}>
+                    <select className={`clear${note}`} id={`syntheticMenu${note}`} onChange={(e)=>handleClick(e)} style={{WebkitAppearance: 'none', MozAppearance:'none', appearance: 'none', display: 'none', position: 'absolute', left: '87%', padding: '10px', width: '100%', fontSize: '14px', border: 'none'}}>
                         <option value={`Select Brand`}>Brand</option>
                         {savSynHidden&&savSynHidden}
                         {silkSynHidden&&silkSynHidden}

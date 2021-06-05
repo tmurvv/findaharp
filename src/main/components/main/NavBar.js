@@ -6,6 +6,12 @@ import Router from 'next/router';
 import NavBarCss from '../../styles/NavBar.css.js';
 import { UserContext } from '../../contexts/UserContext';
 
+function handleSubMenuClick() {
+    const subMenu= document.querySelector('#partnerSubMenu');
+    if (subMenu) {
+        subMenu.style.display=subMenu.style.display==='flex'?'none':'flex';
+    }
+}
 export default function NavBar(props) {
     const { user, setUser } = useContext(UserContext);
     useEffect(()=> {
@@ -29,33 +35,52 @@ export default function NavBar(props) {
         <><div className='navBarOuter'>
             {/* show mobile menu icon */}
             {props.mobile&&(!props.open||props.open===undefined)?
-                <div className='hamburgerMenu' onClick={() => props.handleNavOpen()}>
-                    <img src='/img/hamburger.png' alt="open mobile menu icon"/>
+                <div className='hamburgerMenu' onClick={(e) => props.handleNavOpen(e)}>
+                    <img id='hamburger' src='/img/hamburger.png' alt="open mobile menu icon"/>
                 </div>:''
             }
             {/* show menu */}
             {!props.mobile || props.mobile&&props.open?
                 <div className='navLinks' id='navLinks'>
                     {props.mobile&&props.open?
-                        <div className='closeIcon' onClick={props.handleNavOpen}>
+                        <div className='closeIcon' onClick={(e)=>props.handleNavOpen(e)}>
                             <img src='/img/clear_search.png' alt="close mobile menu icon"/>
                         </div>:''
                     }
                     <Link href='/'>
-                        <a onClick={props.handleNavOpen}>Find a Harp</a>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Find a Used Harp</a>
                     </Link>
-                    <Link href='/storepartners' as='/storepartners'>
-                        <a onClick={props.handleNavOpen}>Our Store Partners</a>
+                    <Link href='/buildersshowcase'>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Builder Showcase</a>
                     </Link>
-                    <Link href='/onlinestore' as='/onlinestore'>
-                        <a onClick={(e)=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen(e);}}>Online Store</a>
+                    <div  className='mirrorATagFont aclass' onClick={()=>handleSubMenuClick()} style={{textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative'}}>Our Partners
+                        <div id='partnerSubMenu' style={{transform: 'translateX(25%)', display: 'none', width: 'fit-content', position: 'absolute', top: '30px', zIndex: '9001', padding: '10px', backgroundColor: '#f9bf1e', boxShadow: '3px 3px 13px #f7dd93', flexDirection: 'column', justifyContent: 'flex-start'}}>
+                            <Link href='/builderpartners'>
+                                <a style={{whiteSpace: 'nowrap', marginBottom: '7px', textAlign: 'left'}} onClick={(e)=>props.handleNavOpen(e)}>Builder Partners</a>
+                            </Link>
+                            <Link href='/storepartners'>
+                                <a style={{whiteSpace: 'nowrap', textAlign: 'left'}} onClick={(e)=>props.handleNavOpen(e)}>Store/Business Partners</a>
+                            </Link>
+                        </div>
+                    </div>
+                    {/* {!Router.route.includes('builder')
+                        ?<Link href='/storepartners' as='/storepartners'>
+                            <a onClick={props.handleNavOpen}>Our Store Partners</a>
+                        </Link>
+                        :<Link href='/builderpartners'>
+                            <a onClick={props.handleNavOpen}>Our Builder Partners</a>
+                        </Link>
+                    } */}
+                    <Link href='/onlinestore'>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Music, Strings & Things</a>
+                        {/* <a onClick={(e)=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen(e);}}>Music, Strings & Things</a> */}
                     </Link>        
                     <Link href='/contact' as='contact'>
-                        <a onClick={props.handleNavOpen}>Contact/About</a>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname!==undefined&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
+                    {/* <Link href={user&&user.firstname&&user.firstname!==undefined&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
                         <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
-                    </Link>
+                    </Link> */}
                     {/* {user.currentHarpname
                         ?<Link href='/userharpprofile' as='/userharpprofile'>
                             <a id='userName' onClick={props.handleNavOpen}>Harp Profile</a>
@@ -70,13 +95,13 @@ export default function NavBar(props) {
                         </button>
                     </Link> */}
                     <Link href='/ActivateEmail' as='/activateemail'>
-                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>
+                        <a style={{display: 'none'}} onClick={(e)=>props.handleNavOpen(e)}>Activate Email</a>
                     </Link>
                     <Link href='/ResetPassword' as='/resetpassword'>
-                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Reset Password</a>
+                        <a style={{display: 'none'}} onClick={(e)=>props.handleNavOpen(e)}>Reset Password</a>
                     </Link>
                     <Link href='/cart' as='/cart'>
-                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
+                        <a style={{display: 'none'}} onClick={(e)=>props.handleNavOpen(e)}>Cart</a>
                     </Link>
                 </div>:''
             }
@@ -86,41 +111,61 @@ export default function NavBar(props) {
         :<><div className='navBarOuter'>
             {/* show mobile menu icon */}
             {props.mobile&&(!props.open||props.open===undefined)?
-                <div className='hamburgerMenu' onClick={() => props.handleNavOpen()}>
-                    <img src='/img/hamburger.png' alt="open mobile menu icon"/>
+                <div className='hamburgerMenu' onClick={(e) => props.handleNavOpen(e)}>
+                    <img id='hamburger' src='/img/hamburger.png' alt="open mobile menu icon"/>
                 </div>:''
             }
             {/* show menu */}
             {!props.mobile || props.mobile&&props.open?
                 <div className='navLinks' id='navLinks'>
                     {props.mobile&&props.open?
-                        <div className='closeIcon' onClick={props.handleNavOpen}>
+                        <div className='closeIcon' onClick={(e)=>props.handleNavOpen(e)}>
                             <img src='/img/clear_search.png' alt="close mobile menu icon"/>
                         </div>:''
                     }
                     <Link href='/'>
-                        <a onClick={props.handleNavOpen}>Find a Harp</a>
+                        <a onClick={(e)=>{props.handleNavOpen(e);}}>Find a Used Harp</a>
                     </Link>
-                    <Link href='/storepartners' as='/storepartners'>
-                        <a onClick={props.handleNavOpen}>Our Store Partners</a>
+                    <Link href='/buildersshowcase'>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Builder Showcase</a>
+                        {/* <a onClick={props.handleNavOpen}>Harp Builder Showcase</a> */}
                     </Link>
+                    <div className='mirrorATagFont aclass' onClick={()=>handleSubMenuClick()} style={{transition: 'transform 1s', textAlign: 'center', justifyContent: 'center', flex: '2', cursor: 'pointer', position: 'relative', fontSize: '16px'}}>Our Partners
+                        <div id='partnerSubMenu'>
+                            <Link href='/builderpartners'>
+                                <a style={{marginBottom: '7px'}} onClick={(e)=>props.handleNavOpen(e)}>Builder Partners</a>
+                            </Link>
+                            <Link href='/storepartners'>
+                                <a onClick={(e)=>props.handleNavOpen(e)}>Store/Business Partners</a>
+                            </Link>
+                        </div>
+                    </div>
+                    {/* {!Router.route.includes('builder')
+                        ?<Link href='/storepartners' as='/storepartners'>
+                            <a onClick={(e)=>props.handleNavOpen(e)}>Our Store Partners</a>
+                        </Link>
+                        :<Link href='/builderpartners'>
+                            <a onClick={(e)=>props.handleNavOpen(e)}>Our Builder Partners</a>
+                        </Link>
+                    } */}
                     <Link href='/onlinestore' as='/onlinestore'>
-                        <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Online Store</a>
+                        {/* <a onClick={()=>{if (Router&&Router.route!=='/onlinestore'&&document.querySelector('#spinner')) document.querySelector('#spinner').style.display='block'; props.handleNavOpen;}}>Music, Strings & Things</a> */}
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Music, Strings & Things</a>
                     </Link>        
                     <Link href='/contact' as='contact'>
-                        <a onClick={props.handleNavOpen}>Contact/About</a>
+                        <a onClick={(e)=>props.handleNavOpen(e)}>Contact/About</a>
                     </Link>
-                    <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
-                        <a id='userName' onClick={props.handleNavOpen}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
-                    </Link>
+                    {/* <Link href={user&&user.firstname&&user.firstname.toUpperCase()!=='LOGIN'?'/userprofile':'/loginsignup'}>
+                        <a id='userName' onClick={(e)=>props.handleNavOpen(e)}>{user&&user.firstname&&user.firstname!==undefined&&user.firstname.substr(0,1).toUpperCase()+user.firstname.substr(1).toLowerCase()}</a>
+                    </Link> */}
                     <Link href='/ActivateEmail' as='/activateemail'>
-                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Activate Email</a>
+                        <a style={{display: 'none'}} onClick={(e)=>props.handleNavOpen(e)}>Activate Email</a>
                     </Link>
                     <Link href='/ResetPassword' as='/resetpassword'>
-                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Reset Password</a>
+                        <a style={{display: 'none'}} onClick={(e)=>props.handleNavOpen(e)}>Reset Password</a>
                     </Link>
                     <Link href='/cart' as='/cart'>
-                        <a style={{display: 'none'}} onClick={props.handleNavOpen}>Cart</a>
+                        <a style={{display: 'none'}} onClick={(e)=>props.handleNavOpen(e)}>Cart</a>
                     </Link>
                 </div>:''
             }

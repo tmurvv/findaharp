@@ -22,6 +22,7 @@ const initialState = {
 }
 function StoreProductSearch(props) {
     const [menus, setMenus] = useState(initialState);
+    const [winWidth, setWinWidth] = useState(4000);
     
     function handleSoloEnsembleSelection(soloensemble) {
         const newState = {...props.allState, 
@@ -29,7 +30,7 @@ function StoreProductSearch(props) {
             productType: 'all',
         }
         
-        props.handleChange("music", 'soloensemble', soloensemble, props.allState&&props.allState.level, props.allState&&props.allState.publicationtype);
+        props.handleChange('',"music", 'soloensemble', soloensemble, props.allState&&props.allState.level, props.allState&&props.allState.publicationtype);
         props.setAllState({...props.allState, 
             soloensemble,
             productType: 'all',
@@ -43,7 +44,7 @@ function StoreProductSearch(props) {
             level: level==='All Levels'?'All Levels':level,
             productType: 'all'
         }
-        props.handleChange("music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
+        props.handleChange('',"music", 'level', props.allState?props.allState&&props.allState.soloensemble:'', level, props.allState?props.allState&&props.allState.publicationtype:'');
         props.setAllState({...props.allState, 
             level,
             productType: 'all',
@@ -57,7 +58,7 @@ function StoreProductSearch(props) {
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
         }
-        props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', publicationtype);
+        props.handleChange('','music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', publicationtype);
         props.setAllState({...props.allState, 
             publicationtype: publicationtype==='All Publication Types'?'All Publication Types':publicationtype,
             productType: 'all',
@@ -140,9 +141,9 @@ function StoreProductSearch(props) {
     }
     function clearOneFilter(e) {
         const menuClick = e.target.name;
-        if (menuClick==='soloensemble') {props.handleChange("music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
-        if (menuClick==='level') {props.handleChange("music", "level", props.allState?props.allState.soloensemble:'', "All Levels", props.allState?props.allState.publicationtype:'');}
-        if (menuClick==='publicationtype') {props.handleChange('music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
+        if (menuClick==='soloensemble') {props.handleChange('',"music","soloensemble","All Lever/Pedal/Ens",props.allState?props.allState.level:'', props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='level') {props.handleChange('',"music", "level", props.allState?props.allState.soloensemble:'', "clearone", props.allState?props.allState.publicationtype:'');}
+        if (menuClick==='publicationtype') {props.handleChange('','music', 'publicationtype', props.allState?props.allState&&props.allState.soloensemble:'', props.allState?props.allState&&props.allState.level:'', "All Publication Types");}
         e.target.name==="soloensemble"?e.target.name="Lever/Pedal/En":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         e.target.name==="publicationtype"?e.target.name="Publication Type":''; // hack change e.target.name to 'Lever/Pedal/Ens'
         const newState = {...props.allState, [menuClick]: `All ${e.target.name.charAt(0).toUpperCase()}${e.target.name.slice(1)}s`}
@@ -151,15 +152,28 @@ function StoreProductSearch(props) {
     }
     useEffect(() => {
         triggerLazy();
+        setWinWidth(window.innerWidth);
     },[]);
     return (
         <>       
-        <div className='storeproductSearchOuter'>
-            <h3 className='storesearchTitle'>Searching for MUSIC? Refine your search here.</h3>
+        <div className='storeproductSearchOuter' style={{marginTop: `${winWidth<750?'170px':''}`, marginBottom: `${winWidth<750?'-150px':''}`}}>
+            <h3 className='storesearchTitle'>Music advanced search&nbsp;&nbsp;
+                <img 
+                    name='soloensemble'
+                    style={{height: '10px', opacity:'.8'}}
+                    onClick={
+                        (e)=>{
+                            props.setMusicSearch(false);
+                        }
+                    }
+                    src='/img/clear_search.png' 
+                    alt='clear filters'
+                />
+            </h3>
             <div className='storemobileSearchLine1'>
                 <div className='storesearchLine1'>
                     <img src='./img/ribbon_black_full.png' alt="black background ribbon"/> 
-                    <SoloEnsembleMenu 
+                    {/* <SoloEnsembleMenu 
                         id="soloensemblemenu"
                         handleSoloEnsembleChange={handleSoloEnsembleSelection} 
                         products={props.products}
@@ -167,7 +181,7 @@ function StoreProductSearch(props) {
                         currentselected={props.allState&&props.allState.soloensemble?props.allState.soloensemble:'Harp SoloEnsemble'}
                         handleclick={handleClick}
                         open={menus.soloensemble}
-                    />            
+                    />             */}
                     <LevelMenu 
                         id="levelmenu"
                         handleLevelChange = {handleLevelSelection}
@@ -176,16 +190,16 @@ function StoreProductSearch(props) {
                         open={menus.level}
                         handleclick={handleClick}
                     />
-                    <PublicationTypeMenu 
+                    {/* <PublicationTypeMenu 
                         id='publicationtypemenu'
                         handlePublicationTypeChange = {handlePublicationTypeSelection}
                         currentselected={props.allState?props.allState.publicationtype:'All Publication Types'}
                         open={menus.publicationtype}
                         handleclick={handleClick}
-                    /> 
+                    />  */}
                 </div>
                 <div className="storesearchLine1Sub">
-                        <div 
+                        {/* <div 
                             id="selectedSoloEnsemble" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.soloensemble}
@@ -207,7 +221,7 @@ function StoreProductSearch(props) {
                                 />
                                 :''
                             }
-                        </div>
+                        </div> */}
                         <div 
                             id="selectedLevel" 
                             className={`storesearch-grid-item`} 
@@ -232,7 +246,7 @@ function StoreProductSearch(props) {
                             }
                             
                         </div>
-                        <div 
+                        {/* <div 
                             id="selectedAll Publication Types" 
                             className={`storesearch-grid-item`} 
                             value={props.allState&&props.allState.publicationtype}
@@ -254,7 +268,7 @@ function StoreProductSearch(props) {
                                 />
                                 :''
                             }
-                        </div>
+                        </div> */}
                 </div>
             </div>
             

@@ -7,6 +7,7 @@ import { UserContext } from '../src/main/contexts/UserContext';
 import { CurrencyContext } from '../src/main/contexts/CurrencyContext';
 import { StatusContext } from '../src/store/contexts/StatusContext';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import StatusIndicator from '../src/store/components/main/StatusIndicator';
 import CartCss from '../src/store/styles/cart.css'; 
 import IndexCss from '../src/main/styles/index.css'; 
@@ -26,18 +27,7 @@ function Receipt() {
     }, []);
     return ( 
         <>
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '40%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <div className='index' style={{paddingBottom: '25px'}}>
                 <StatusIndicator />
             </div>

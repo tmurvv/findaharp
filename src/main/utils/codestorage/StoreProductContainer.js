@@ -26,10 +26,11 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
   const repoArray = Symbol.iterator in Object(filteredproductscontainer)?[...filteredproductscontainer]:[];  
   const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
-    const [repoList, setRepoList] = useState([]);
-    const [hasMore, setHasMore] = useState(false);
-    const [resetPage, setResetPage] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [ repoList, setRepoList] = useState([]);
+    const [ hasMore, setHasMore] = useState(false);
+    const [ resetPage, setResetPage] = useState(false);
+    const [ isLoading, setIsLoading] = useState(false);
+    const [ winWidth, setWinWidth ] = useState(4000);
     const idx = useRef(0)
 
     
@@ -106,13 +107,14 @@ const StoreProductContainer = ({ filteredproductscontainer, allstate, clientlat,
     useEffect(() => {
         triggerLazy();
         getStarted();
+        setWinWidth(window.innerWidth);
     },[]);
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
         // const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
         let addPlaces=filteredproductscontainer;
         return(
             <>
-            <div className="storeproductContainer">
+            <div className="storeproductContainer" style={{marginTop: `${winWidth<750?'50px':''}`}}>
                 
                 <InfiniteScrollLoading
                     element="div"

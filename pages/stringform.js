@@ -13,6 +13,7 @@ import { UserContext } from '../src/main/contexts/UserContext';
 import Octave from '../src/store/components/stringForm/Octave';
 import RememberHarpLogin from '../src/store/components/stringForm/RememberHarpLogin';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import HarpLoginSignup from '../src/store/components/stringForm/HarpLoginSignup';
 import UserHarpProfile from '../src/store/components/stringForm/UserHarpProfile';
 import RememberExplained from '../src/store/components/stringForm/RememberExplained';
@@ -118,23 +119,23 @@ const StringForm = (props) => {
         if (user.currentHarpname) {
             updateBrands();
         }
-        if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
-            const harpObject = {
-                oldharpname: user.currentHarpname,
-                oldemail: user.emailCurrentHarp,
-                harpname: user.currentHarpname,
-                email: user.emailCurrentHarp,
-                stringform: JSON.stringify(stringForm)
-                // newsletter: localNews
-            }
-            try {
-                const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
-                // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
-            } catch(e) {
-                console.log(e.message);
-                dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
-            }
-            // document.querySelector('#spinnerRemember').style.display='none';
+        // if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
+        const harpObject = {
+            oldharpname: user.currentHarpname,
+            oldemail: user.emailCurrentHarp,
+            harpname: user.currentHarpname,
+            email: user.emailCurrentHarp,
+            stringform: JSON.stringify(stringForm)
+            // newsletter: localNews
+        }
+        try {
+            const res = await axios.patch(`${process.env.backend}/api/v1/userharps/updateuserharp`, harpObject);
+            // dispatchResultInfo({type: 'OK', payload: res&&res.data&&res.data.login?`Remember My Harp update successful for ${harpObject.harpname}.`:`Remember My Harp update successful for ${harpObject.harpname}.`});    
+        } catch(e) {
+            console.log(e.message);
+            dispatchResultInfo({type: 'tryAgain', payload: `Something went wrong on harp update. Please contact tisha@findaharp.com for futher assistance.`});
+        }
+        // document.querySelector('#spinnerRemember').style.display='none';
         dispatchResultInfo({type: 'OK', payload: user.currentHarpname?`Strings added to cart. Harp ${user.currentHarpname.toUpperCase()} brands updated.`:`Strings added to cart.`});
     }
     
@@ -190,18 +191,7 @@ const StringForm = (props) => {
         return (
             <>
             <div className="stringForm" >
-                <img id='spinner' style={{
-                        display: 'none', 
-                        position: 'fixed', 
-                        top: '40%', 
-                        left: '50%', 
-                        transform: 'translate(-50%,-50%)',
-                        zIndex: '9000',
-                        height: '75px'
-                    }} 
-                    src='/img/spinner.gif' 
-                    alt='spinner' 
-                />
+                <Spinner />
                 {/* <h1>stringform: {stringForm[0]}</h1> */}
     
                 <ResultsWindow 
@@ -311,7 +301,7 @@ const StringForm = (props) => {
                                         color: '#6A75AA',
                                         backgroundColor: '#fff',
                                         fontStyle: 'italic', 
-                                        fontSize: '12px',
+                                        fontSize: '14px',
                                         cursor: 'pointer', 
                                         textDecoration: 'underline'
                                     }}
@@ -319,14 +309,14 @@ const StringForm = (props) => {
                             </li>
                         }
                         <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;This form for new strings labelled by octave.</li>
-                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use Online Store, Makes/Models menu.</li>
+                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;For numbered strings, please use "Music, Strings & Things", Makes/Models menu.</li>
                         <li style={{display: 'flex', width: 'fit-content', paddingLeft: '0', textIndent: '0', overflow: 'hidden'}}>
                             <img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />
                             <div  className='shipsTo shipsToLeft' style={{whiteSpace: 'nowrap'}}>&nbsp;&nbsp;Ships from: USA</div>
                                 <img className='shipsToImg' style={{transform: 'translate(10px, 5px)', maxHeight: '15px'}} src="/img/store/fastTruck.png" alt='Fast shipping truck' />
                             <div  className='shipsTo' style={{width:'fit-content', whiteSpace: 'nowrap', marginLeft: '15px'}}>&nbsp;To: US and Canada</div>
                         </li>
-                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '14px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
+                        <li><img style={{height: '15px', transform: 'translateY(15%)'}} src="img/golden_harp_full.png" alt="golden harp" />&nbsp;&nbsp;If you prefer, we also welcome your string order by email <a style={{color: '#6A75AA', fontSize: '15px'}} href="mailto: orders@findaharp.com">orders@findaharp.com</a>.</li> 
                     </ul>
                 </div>
                 {/* {changes&& */}
@@ -352,7 +342,7 @@ const StringForm = (props) => {
                     <div style={{
                             padding: '5px 0',
                             fontSize: '16px',
-                            width: '200px',
+                            width: '175px',
                             backgroundColor: '#f6f6f6',
                             color: '#000000',
                             textAlign: 'center',

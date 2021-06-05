@@ -13,6 +13,7 @@ function StoreProductCss() {
                 margin-bottom: 60px;
                 min-width: 265px;
             }
+            
             .storeproduct__title {
                 width: 95%;
                 margin: 25px auto 15px;
@@ -24,7 +25,8 @@ function StoreProductCss() {
                 text-align: left;
             }
             .storeproductDetails div {
-                font-family: 'Metropolitan Extra Bold';
+                // font-family: 'Metropolitan Extra Bold';
+                font-size: 14px;
             }
             .storeproductDetails span {
                 font-weight: 800;
@@ -38,7 +40,6 @@ function StoreProductCss() {
                 .storeproduct {
                     display: flex;
                     flex-direction: column;
-                    border-bottom: 1px solid lightgrey;
                     margin-bottom: 40px;
                     width: 100%;
                 }
@@ -55,6 +56,8 @@ function StoreProductCss() {
                 height: 267px;
                 // height: 50%;
                 min-height: 50%;
+                position: relative;
+                margin: 20px auto;
             }
             .storeproduct__imgcontainer img {
                 // height: auto;

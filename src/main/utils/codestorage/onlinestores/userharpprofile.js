@@ -6,6 +6,7 @@ import uuid from 'react-uuid';
 
 // internal
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import NewsletterSignup from '../src/main/components/mainNewsletterSignup';
 import UserProfileCSS from '../src/main/styles/UserProfile.css';
 import ResultsWindow from '../src/main/components/main/ResultsWindow';
@@ -338,18 +339,7 @@ function UserHarpProfile(props) {
     return (
        <>
         <div className='updatePassword-edit-container'>
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '25%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <PageTitle maintitle='Harp Profile' subtitle='Change Password / Edit Profile' />
             {/* <Results 
                 resultInfo={resultInfo} 

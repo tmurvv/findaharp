@@ -7,7 +7,7 @@ import axios from 'axios';
 import IndexCss from '../src/main/styles/index.css.js';
 import ProductSearch from '../src/main/components/main/ProductSearch';
 import PageTitle from '../src/main/components/main/PageTitle';
-import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
+import Spinner from '../src/main/components/main/Spinner';
 
 // // local test data
 // import testData from '../src/main/utils/testData';
@@ -29,6 +29,7 @@ const Index = (props) => {
     // display cart??
     useEffect(()=>{
         if (document.querySelector('.cartButton')) document.querySelector('.cartButton').style.display='block';
+        
     },[]);
     return (
         <>
@@ -38,22 +39,11 @@ const Index = (props) => {
         </Head>
         
         <div className="index" >
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '40%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px', overflow: 'hidden'}}>
+            <Spinner />
+            {/* <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', right: '15px', overflow: 'hidden'}}>
                     <FastNEasyStringForm />
-            </div>
-            <PageTitle maintitle='Find a Harp' subtitle='Pre-owned harp listings from around the US and Canada' />
+            </div> */}
+            <PageTitle maintitle='Find a Used Harp' subtitle='Used harp listings from around the US and Canada' />
             <ProductSearch 
                 makesmodels={props.makesModels}
                 products={props.products}

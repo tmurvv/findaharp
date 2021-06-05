@@ -35,6 +35,7 @@ function FeaturedProductCss() {
                     border-bottom: none;
                     margin-bottom: 40px;
                     width: 100%;
+                    min-width: 200px;
                 }
             }
             
@@ -66,6 +67,7 @@ function FeaturedProductCss() {
                 bottom: 0;
                 left: 0px;
                 margin-top: 20px;
+                font-size: 14px;
             }
             .featuredflyToCart {
                 position: relative;

@@ -9,7 +9,7 @@ import MakesmodelsMenu from '../menus/MakesmodelsMenu';
 import StoreProductSearchCss from '../../styles/StoreProductSearch.css';
 import { getSearchInfo, triggerLazy } from '../../../main/utils/helpers';
 import { MENU_ABBR } from '../../../main/constants/constants';
-import { CompassCalibrationOutlined } from '@material-ui/icons';
+import CategoryMenu from '../menus/CategoryMenu';
 
 const initialState = {
     category: false,
@@ -21,7 +21,8 @@ const initialState = {
     makesmodels: false
 }
 function StoreProductSearchStrings(props) {
-    const [menus, setMenus] = useState(initialState);
+    const [ menus, setMenus ] = useState(initialState);
+    const [ winWidth, setWinWidth ] = useState(initialState);
     
     function handleOctavesSelection(octaves) {
         props.setTypeOfSearch("strings");
@@ -30,7 +31,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setOctavesSearch(octaves);
-        props.handleChange('strings', 'octaves', octaves, props.allState.notes, props.allState.brands, props.allState.makesmodels);
+        props.handleChange('','strings', 'octaves', octaves, props.allState.notes, props.allState.brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             octaves,
             productType: 'all',
@@ -45,7 +46,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setNotesSearch(notes);
-        props.handleChange('strings', 'notes', props.allState.octaves, notes, props.allState.brands, props.allState.makesmodels);
+        props.handleChange('','strings', 'notes', props.allState.octaves, notes, props.allState.brands, props.allState.makesmodels);
         props.setAllState({...props.allState, 
             notes,
             productType: 'all',
@@ -60,7 +61,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all',
         }
         props.setBrandsSearch(brands);
-        props.handleChange('strings', 'brands', props.allState.octaves, props.allState.notes, brands, props.allState.makesmodels);
+        props.handleChange('','strings', 'brands', props.allState.octaves, props.allState.notes, brands, props.allState.makesmodels);
         let abbr;
         console.log('here', brands)
         MENU_ABBR.map(abbrConst => { 
@@ -83,7 +84,7 @@ function StoreProductSearchStrings(props) {
             productType: 'all'
         }
         props.setMakesmodelsSearch(makesmodels);
-        props.handleChange('strings', 'makesmodels', props.allState.octaves, props.allState.notes, props.allState.brands, makesmodels);
+        props.handleChange('','strings', 'makesmodels', props.allState.octaves, props.allState.notes, props.allState.brands, makesmodels);
         
         let abbr;
         console.log('mm', makesmodels)
@@ -195,14 +196,14 @@ function StoreProductSearchStrings(props) {
    function clearOneFilter(e) {
         let menuClick = e.target.name;
         menuClick==="makesmodels"?menuClick="Makes/Models":''; // hack change e.target.name to 'Lever/Pedal/Ens'
-        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange("strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.makesmodels);}
-        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange("strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.makesmodels);}
-        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange("strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels);}
-        if (menuClick==='Makes/Models') {props.setMakesmodelsSearch("All Makes/Models"); props.handleChange("strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "All Makes/Models");}
+        if (menuClick==='octaves') {props.setOctavesSearch("All Octaves"); props.handleChange('',"strings","octaves","All Octaves", props.allState.notes, props.allState.brands, props.allState.makesmodels);}
+        if (menuClick==='notes') {props.setNotesSearch("All Notes"); props.handleChange('',"strings","notes",props.allState.Octaves, "All Notes", props.allState.brands, props.allState.makesmodels);}
+        if (menuClick==='brands') {props.setBrandsSearch("All Brands"); props.handleChange('',"strings","brands",props.allState.octaves, props.allState.notes, "All Brands", props.allState.makesmodels);}
+        if (menuClick==='Makes/Models') {props.setMakesmodelsSearch("All Makes/Models"); props.handleChange('',"strings","makesmodels",props.allState.octaves, props.allState.notes, props.allState.brands, "All Makes/Models");}
         console.log('clearOne', menuClick)
         const newState = {
             ...props.allState, 
-            [menuClick]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}s`, 
+            [menuClick]: `All ${menuClick.charAt(0).toUpperCase()}${menuClick.slice(1)}`, 
             searchInfo: newSearchInfo,
             brandAbbr: menuClick==='brands'?"All Brands": props.allState.brandAbbr,
             brands: menuClick==='brands'?"All Brands": props.allState.brands,
@@ -216,30 +217,27 @@ function StoreProductSearchStrings(props) {
     useEffect(() => {
         triggerLazy();
     },[]);
-    useEffect(()=>console.log('ineffect'),[])
+    useEffect(()=>setWinWidth(window.innerWidth),[])
     return (
         <>       
-        <div className='storeproductSearchOuter'>
-            <h3 className='storesearchTitle'>
-                Searching for STRINGS? Refine your search here.<br />
-                {/* <img 
-                    src='img/store/icon-fast-0.jpg' 
-                    alt='fast cart' 
-                    style={{
-                        width: '35px', 
-                        height: '20px', 
-                        transform: 'translate(0px, 5px)', 
-                        opacity: '.4'
-                    }}
+        <div className='storeproductSearchOuter' style={{marginTop: `${winWidth<750?'170px':''}`, marginBottom: `${winWidth<750?'-150px':''}`}}>
+            <h3 className='storesearchTitle'>Strings advanced search&nbsp;&nbsp;
+                <img 
+                    name='stringadvanced'
+                    style={{height: '10px', opacity:'.8'}}
+                    onClick={
+                        (e)=>{
+                            props.setStringSearch(false);
+                        }
+                    }
+                    src='/img/clear_search.png' 
+                    alt='clear filters'
                 />
-                    &nbsp;&nbsp;<span style={{fontStyle: 'normal', fontWeight: 'bold'}}>
-                        Fast and Easy
-                    </span> string order form coming soon!! */}
             </h3>
             <div className='storemobileSearchLine2'>
                 <div className='storesearchLine2'>
                     <img src='./img/ribbon_gold_full.png' alt="golden background ribbon"/> 
-                     
+                    <div style={{paddingTop: `${winWidth<550?'7px':''}`}}>
                     <OctavesMenu 
                         id="octavesmenu"
                         handleOctavesChange={handleOctavesSelection} 
@@ -250,6 +248,9 @@ function StoreProductSearchStrings(props) {
                         open={menus.octaves}
                         clearMenu={props.clearMenus}
                     />
+                    </div>
+                    
+                    <div style={{paddingTop: `${winWidth<550?'5px':''}`}}>
                     <NotesMenu 
                         id="notesmenu"
                         handleNotesChange={handleNotesSelection} 
@@ -260,6 +261,8 @@ function StoreProductSearchStrings(props) {
                         open={menus.notes}
                         clearMenu={props.clearMenus}
                     />
+                    </div>
+                    <div style={{paddingTop: `${winWidth<550?' 5px':''}`}}>
                     <BrandsMenu 
                         id="brandsmenu"
                         handleBrandsChange = {handleBrandsSelection}
@@ -269,26 +272,32 @@ function StoreProductSearchStrings(props) {
                         open={menus.brands}
                         handleclick={handleClick}
                     />
-                    <MakesmodelsMenu 
-                        id='makesmodelsmenu'
-                        handleMakesmodelsChange = {handleMakesmodelsSelection}
-                        currentselected={props.allState.makesmodels?props.allState.makesmodels:'Makes/Models'}
-                        open={menus.makesmodels}
-                        handleclick={handleClick}
+                    </div>
+                        
+                    <CategoryMenu 
+                        ribbonsubMenuOpen={props.ribbonsubMenuOpen} 
+                        ribbonsetSubMenuOpen={props.ribbonsetSubMenuOpen} 
+                        ribbonmenuOpen={props.ribbonmenuOpen} 
+                        ribbonsetMenuOpen={props.ribbonsetMenuOpen}
+                        ribbonhandleCatChange={props.ribbonhandleCatChange}
+                        ribbonsetDetailProduct2={props.ribbonsetDetailProduct2}
+                        ribboncatBreadCrumb={'ribbon'}
+                        handleCatChange={props.handleCatChange}
                     />
                 </div>
                 <div className="storesearchLine2Sub">
-                    
+                    {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedOctaves" 
-                        className={`storesearch-grid-item`} 
+                        className={`storesearch-grid-item`}
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{cursor: 'pointer', zIndex: '1000'}}
+                        style={{cursor: 'pointer', fontSize: '16px'}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"
                             ?<img 
+                                style={{height: '10px', marginLeft: '7px'}}
                                 name='octaves'
                                 onClick={
                                     (e)=>{
@@ -302,6 +311,8 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
+                    }
+                    {!props.ribbonmenuOpen&&
                     <div 
                         id="selectedNotes" 
                         className={`storesearch-grid-item`} 
@@ -325,6 +336,8 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
+                    }
+                    {(!props.ribbonmenuOpen)&&
                     <div 
                         id="selectedBrands" 
                         className={`storesearch-grid-item`} 
@@ -332,7 +345,6 @@ function StoreProductSearchStrings(props) {
                         onClick={()=>handleClick({target: {name: 'brands'}})}
                         style={{cursor: 'pointer', zIndex: '1000'}}
                     >
-                        {/* {props.allState&&props.allState.brands} */}
                         {props.allState.brandAbbr}
                         {props.allState&&props.allState.brands.toUpperCase()!=="ALL BRANDS"
                             ?<img 
@@ -348,8 +360,9 @@ function StoreProductSearchStrings(props) {
                             />
                             :''
                         }
-                        
                     </div>
+                    }
+                    {!props.ribbonmenuOpen&&
                     <div 
                         id="makesmodels" 
                         className={`storesearch-grid-item`} 
@@ -358,7 +371,7 @@ function StoreProductSearchStrings(props) {
                             handleClick({target: {name: 'makesmodels'}});
                             
                         }}
-                        style={{cursor: 'pointer'}}
+                        style={{justifySelf: `${winWidth>750?'left':'center'}`}}
                     >
                         {/* {props.allState&&props.allState.makesmodels} */}
                         {props.allState.modelAbbr}
@@ -377,6 +390,7 @@ function StoreProductSearchStrings(props) {
                             :''
                         }
                     </div>
+                    }
                 </div>
             </div>
             <StoreProductSearchCss />             

@@ -85,7 +85,7 @@ function StoreProductModal(props) {
         Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.product.store) setSellerInfo(seller);
         });
-    });
+    },[]);
     return (
         <>
         <div className='storedetailContainer' style={{display: 'block'}}>
@@ -96,10 +96,24 @@ function StoreProductModal(props) {
             <div style={{fontSize: '14px', fontStyle: 'italic', marginBottom: '15px'}}>{artist_first&&String(artist_first)!=='undefined'||artist_last&&String(artist_last)!=='undefined'?artist_first+'   '+artist_last:"_"}</div>
             <img className={`divider`} src="./img/golden_tapered_line.png" alt="fancy golden divider line" />
             <div className='storedetailInfo' style={{marginTop: '15px'}}>
-                <div className={`storedetailImg`}><img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full_grey_not_found.png'} alt={title} /></div>
+                <div className={`storedetailImg`}>
+                    <img src= {image&&image!==undefined&&image!==''?image:'/img/golden_harp_full_grey_not_found.png'} alt={title} />                 
+                </div>
                 <div className={`storedetailText`}>
                     <div>
-                    <div className='storelongDesc' dangerouslySetInnerHTML={{__html: description}} />
+                        <div className='storelongDesc' dangerouslySetInnerHTML={{__html: description}} />
+                        {newused==="used"
+                        &&<img src='img/used_label.png' style={{
+                                width: '100%',
+                                height: '25px',
+                                marginTop: '-15px',
+                                marginBottom: '15px',
+                                boxShadow: 'none',
+                                opacity: '.25'
+                            }} 
+                            alt='used label' />
+                        }
+
                         <div>{description?'':descriptiontext}</div>
                         <br/>
                         <div style={category==='music'?{display: 'block'}:{display: 'none'}}>

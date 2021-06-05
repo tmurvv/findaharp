@@ -24,6 +24,7 @@ import {
 import { getTotal, deletelocalCart } from '../src/store/utils/checkoutHelpers';
 import GetZipPostal from '../src/store/components/main/GetZipPostal';
 import PageTitle from '../src/main/components/main/PageTitle';
+import Spinner from '../src/main/components/main/Spinner';
 import SubCart from '../src/store/components/main/SubCart';
 import { CART_ITEMS_INIT } from '../src/main/constants/inits';
 import FastNEasyStringForm from '../src/store/components/main/FastNEasyStringForm';
@@ -69,18 +70,7 @@ function Cart(props) {
     }, []);
     return (
         <>
-            <img id='spinner' style={{
-                    display: 'none', 
-                    position: 'fixed', 
-                    top: '25%', 
-                    left: '50%', 
-                    transform: 'translate(-50%,-50%)',
-                    zIndex: '9000',
-                    height: '75px'
-                }} 
-                src='/img/spinner.gif' 
-                alt='spinner' 
-            />
+            <Spinner />
             <div className='index' style={{width: '100%'}}>
                 <PageTitle maintitle="Your Cart" subtitle="Shipping and Taxes calculated at checkout"/>
                 <Results 
@@ -89,7 +79,7 @@ function Cart(props) {
                     resetResults={resetResults} 
                 />
             <div className="cartContainer"> 
-            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', left: '15px'}}>
+            <div onClick={()=>document.querySelector('#spinner').style.display='block'} style={{position: 'absolute', top: '15px', right: '15px'}}>
                     <FastNEasyStringForm />
             </div>
                 

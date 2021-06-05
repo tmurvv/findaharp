@@ -19,11 +19,10 @@ const initialState = {
     opacity: 1,
     overflowY: 'auto'
 }
-const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStringsChange, handleResults }) => {
+const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStringsChange, handleResults, menuOpen }) => {
     const [state, dispatch] = useReducer(productsReducer, initialState);
     const [ detailProduct, setDetailProduct ] = useState([]);
     const [ numInCarousel, setNumInCarousel ] = useState(Math.floor(getWindowSize().width/270));
-    const [windowSize, setWindowSize] = useState();
     const [ index, setIndex ] = useState(0);
     const indexStart = useRef(); 
 
@@ -31,26 +30,26 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
 
     function handleOpenDetail(product) {
         console.log('detail', product)
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND PEDAL NATURAL GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Pedal Natural Gut", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER NATURAL GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Natural Gut", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('CONCEDO GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Concedo Gut", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BURGUNDY GUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Burgundy Gut", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND PEDAL NYLON')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Pedal Nylon", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('SILVER-PLATED PEDAL BASE WIRE')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Silver-Plated Pedal Bass Wire", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('PEDAL BASS WIRE (TARNISH RESISTANT)')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Pedal Bass Wire (Tarnish-Resistant)", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER BASS WIRE')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Bass Wire", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('PROFESSIONAL LEVER BASS WIRE')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Professional Lever Bass Wire", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER NYLON')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Nylon", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('ARTIST NYLON')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Artist Nylon", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BRONZE WIRE MONOFILAMENT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Bronze Wire Monofilament", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('KF COMPOSITE')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "KF Composite", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('NYLON MONOFILAMENT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Nylon Monofilament", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('SILKGUT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Silkgut", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('DUSTY STRINGS')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Dusty Strings", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('TRIPLETT')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Triplett", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('REES')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Rees", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('STONEY END')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Stoney End", "All Makes/Models");
-        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('DELTA')) return handleStringsChange("strings", "brands", "All Octaves", "All Notes", "Delta", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND PEDAL NATURAL GUT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Bow Brand Pedal Natural Gut", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER NATURAL GUT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Natural Gut", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('CONCEDO GUT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Concedo Gut", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BURGUNDY GUT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Burgundy Gut", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND PEDAL NYLON')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Bow Brand Pedal Nylon", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('SILVER-PLATED PEDAL BASE WIRE')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Silver-Plated Pedal Bass Wire", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('PEDAL BASS WIRE (TARNISH RESISTANT)')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Pedal Bass Wire (Tarnish-Resistant)", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER BASS WIRE')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Bass Wire", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('PROFESSIONAL LEVER BASS WIRE')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Professional Lever Bass Wire", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BOW BRAND LEVER NYLON')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Bow Brand Lever Nylon", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('ARTIST NYLON')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Artist Nylon", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('BRONZE WIRE MONOFILAMENT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Bronze Wire Monofilament", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('KF COMPOSITE')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "KF Composite", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('NYLON MONOFILAMENT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Nylon Monofilament", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('SILKGUT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Silkgut", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('DUSTY STRINGS')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Dusty Strings", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('TRIPLETT')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Triplett", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('REES')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Rees", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('STONEY END')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Stoney End", "All Makes/Models");
+        if (product.category.toUpperCase()==='STRINGS'&&product.title.toUpperCase().includes('DELTA')) return handleStringsChange('', "strings", "brands", "All Octaves", "All Notes", "Delta", "All Makes/Models");
         // if (String(product.category).toLowerCase() === "strings") 
         // dispatch({type:'detail', product});
         setDetailProduct(product);
@@ -110,7 +109,7 @@ const ProductScroll = ({ filteredproductscontainer, title, allstate, handleStrin
         if (index+(Math.floor(size.width/270))>filteredproductscontainer.length) addPlaces=[...filteredproductscontainer, ...extraPlaces];
         addPlaces=addPlaces.slice(index, index+(Math.floor(size.width/270)));
         return(
-            <div data-test='component-ProductContainer' className='featuredproductContainer'>
+            <div style={{opacity: `${menuOpen?.2:1}`}} data-test='component-ProductContainer' className='featuredproductContainer'>
                 <h3>{title}</h3>
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <div className="arrow arrow-left" onClick={moveLeft} style={{fontSize: '70px', color: '#b9b9b9'}}>&#10094;</div>

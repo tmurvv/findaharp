@@ -22,6 +22,7 @@ const StoreProduct = (props) => {
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [ openStoreModal, setOpenStoreModal ] = useState(false);
     const [ sellerInfo, setSellerInfo ] = useState();
+    const [ winWidth, setWinWidth ] = useState(4000);
 
     function handleImageLoad(evt) {
         if (evt.target.style.height !== '30%') evt.target.style.height="auto";
@@ -71,10 +72,11 @@ const StoreProduct = (props) => {
         e.target.classList.add("storeflyToCart");
     }
     useEffect(() => {
+        setWinWidth(window.innerWidth);
         Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.productdetail.store) setSellerInfo(seller);
         });
-    });
+    },[]);
     return (
         <div className="storeproduct">
             <div className={`storeproduct__imgcontainer`}>
@@ -94,10 +96,20 @@ const StoreProduct = (props) => {
                         alt={props.productdetail.title}
                         onClick={()=>handleOpenStoreModal()}
                     />
+                    {props.productdetail.newused==="used"
+                    &&<img src='img/used_label.png' style={{
+                            position: 'absolute',
+                            bottom: '0px',
+                            left: '34px',
+                            boxShadow: 'none',
+                            width: '75%',
+                            height: '17.5px'
+                        }} 
+                        alt='used label' />}
                 </LazyLoad>
             </div>
             <div className="storeproduct__title" >
-                <div style={{fontSize: '16px'}}>{props.productdetail.title}</div>
+                <div style={{fontSize: '16px', whiteSpace: `${winWidth<750?'nowrap':''}`, overflowX: `${winWidth<750?'hidden':''}`}}>{props.productdetail.title}</div>
                 <div style={{fontSize: '14px', fontStyle: 'italic'}}>{(props.productdetail.artist_first&&String(props.productdetail.artist_first)!=='undefined')||(props.productdetail.artist_last&&String(props.productdetail.artist_last)!=='undefined')?props.productdetail.artist_first+'   '+props.productdetail.artist_last:""}</div>
             </div>
             <div className="storeproductDetails"><div><span>Sold By:</span> {sellerInfo?sellerInfo.productTitle:''}</div></div>
@@ -121,28 +133,28 @@ const StoreProduct = (props) => {
                         textAlign:'left',
                         verticalAlign: 'text-top',
                         letterSpacing: '2px',
-                        zIndex: '6000'
+                        zIndex: '9900'
                     }}
                 >more...</button>
             </div>
             :<>  
-                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '3000'}}>
+                <div style={{textAlign: 'left', minHeight: '200px', zIndex: '9900', borderBottom: `${winWidth<750?'1px solid lightgrey':''}`}}>
                     <div 
                         style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} 
                         className='longDesc productSmallDisplay-LongDesc' 
                         dangerouslySetInnerHTML={{__html: props.productdetail.description}} 
                     />
-                    <div style={{fontSize: '14px', height: 'fit-content', maxHeight: '60px', overflow: 'hidden'}} className='longDesc productSmallDisplay-LongDesc'>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
+                    <div style={{fontSize: '14px', height: 'fit-content', maxHeight: `${winWidth<750?'34px':'60px'}`, overflow: 'hidden'}} className='longDesc productSmallDisplay-LongDesc'>{props.productdetail.description?'':props.productdetail.descriptiontext}</div>
                     <button className='btn blueFont' 
                         onClick={()=>handleOpenStoreModal()} 
-                            style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '4000',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}
+                            style={{fontStyle:'italic', cursor:'pointer', color:"cadetblue", zIndex: '9900',outline:'none', backgroundColor: 'transparent', border: 'none', paddingTop: '-50px'}}
                     >more...</button>
                 </div>
             </>
             }
             <div className="storeproduct__price-button-container">
                 {user&&user.currency==="USD"?    
-                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>{props.productdetail.newused.toUpperCase()}</span></div>
+                <div className="storeproduct__price">${parseNum(props.productdetail.price).toFixed(2)!=='NaN'?parseNum(props.productdetail.price).toFixed(2):"not listed"}<span style={{fontSize: '10px', fontStyle: 'italic'}}>USD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>{props.productdetail.newused.toUpperCase()}</span></div>
                 :<div className="storeproduct__price">${(parseNum(props.productdetail.price)*currencyMultiplier).toFixed(2)}<span style={{fontSize: '10px', fontStyle: 'italic'}}>CAD</span>&nbsp;<span style={{fontSize: '10px', fontWeight: '400', color: '#6a75aa'}}>({props.productdetail.newused.toUpperCase()})</span></div>
                 }
                 <div style={{display: 'flex', justifyContent: 'space-between', width: '100%', fontSize: '12px'}}>

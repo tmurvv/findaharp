@@ -120,7 +120,7 @@ class Carousel extends React.Component {
                     color: #fffeee;
                     line-height: 30px;
                     margin-top: 85px;
-                    z-index: 1000;
+                    z-index: 9900;
                 }
                 
                 .arrow-right {

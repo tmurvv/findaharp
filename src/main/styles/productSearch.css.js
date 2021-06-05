@@ -219,7 +219,8 @@ function ProductSearchCss() {
                 margin-left: 7px;
             }
             .clearSearch img {
-                z-index: 1000;
+                z-index: 1000; //BREAKING
+                z-index: 0;
                 width: 15px;
                 padding-bottom: 2px;
             }

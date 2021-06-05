@@ -53,9 +53,9 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                 <div className="item4 colHeader" style={{border: '2px solid'}}>Note</div>
                 <div className="item3 colHeader" style={{border: '2px solid'}}>Qty</div>
                 <div className="item6 colHeader" style={{border: '2px solid'}}>
-                    <div style={{width: '100%'}}>
-                    <div style={{display:'flex', justifyContent: 'space-between'}}>
-                        <div style={{width: 'fit-content', textAlign: 'left'}}>
+                    <div className='colHeaderdDiv' style={{width: '100%'}}>
+                    <div className='colHeaderDiv' style={{display:'flex', justifyContent: 'space-between'}}>
+                        <div className='colHeaderDiv' style={{width: 'fit-content', textAlign: 'left'}}>
                             <input 
                                 id={`applytooctave${octave}`}
                                 type='checkbox'
@@ -68,7 +68,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                             <label style={{fontSize: '14px'}}>Apply to Octave?</label>
                         </div>
                         <div 
-                            style={{
+                            className='colHeaderDiv' style={{
                                 color: '#6A75AA', 
                                 fontSize: '14px', 
                                 fontStyle: 'italic', 
@@ -84,8 +84,8 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                 <div className="item6 colHeader" style={{border: '2px solid'}}>Total</div>
                 </> 
                 :<>
-                <div className="note" id='note'>{note}</div>
-                <div>
+                <div className="note notegridDiv" id='note'>{note}</div>
+                <div className='notegridDiv'>
                     <input 
                         id={`qty${note}`}
                         className='qty-input' 
@@ -97,7 +97,7 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                     />
                 </div>
                 <div 
-                    className="stringtype" 
+                    className="stringtype notegridDiv" 
                     id={`stringType${note}`} 
                     style={{
                         textAlign: 'left',
@@ -118,8 +118,8 @@ function Note({setChanges, strings, note, octave, octaveBrand, setOctaveBrand, a
                     />
                     <div id={`stringTypeText${note}`}>{stringForm&&note&&stringForm[note.substr(0,1)][note.substr(1)].brand}</div>
                 </div>
-                <div className="item6">{parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0&&"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)}</div>
-                <div className="item7">
+                <div className="item6 notegridDiv">{parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)>0&&"$"+parseNum(stringForm[note.substr(0,1)][note.substr(1)].price).toFixed(2)}</div>
+                <div className="item7 notegridDiv">
                     {stringForm[note.substr(0,1)][note.substr(1)].qty>0
                     ?"$"+(parseNum(stringForm[note.substr(0,1)][note.substr(1)].price)
                         *stringForm[note.substr(0,1)][note.substr(1)].qty).toFixed(2)
