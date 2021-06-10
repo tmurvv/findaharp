@@ -9,6 +9,8 @@ import MakesmodelsMenu from '../menus/MakesmodelsMenu';
 import StoreProductSearchCss from '../../styles/StoreProductSearch.css';
 import { getSearchInfo, triggerLazy } from '../../../main/utils/helpers';
 import { MENU_ABBR } from '../../../main/constants/constants';
+import { getMenuAbbr } from '../../utils/storeHelpers';
+
 import CategoryMenu from '../menus/CategoryMenu';
 
 const initialState = {
@@ -292,7 +294,7 @@ function StoreProductSearchStrings(props) {
                         className={`storesearch-grid-item`}
                         value={props.allState&&props.allState.octaves}
                         onClick={()=>handleClick({target: {name: 'octaves'}})}
-                        style={{cursor: 'pointer', fontSize: '16px'}}
+                        style={{cursor: 'pointer', fontSize: `${winWidth<750?'16px':''}`}}
                     >
                         {props.allState&&props.allState.octaves}
                         {props.allState&&props.allState.octaves!=="All Octaves"
@@ -345,7 +347,7 @@ function StoreProductSearchStrings(props) {
                         onClick={()=>handleClick({target: {name: 'brands'}})}
                         style={{cursor: 'pointer', zIndex: '1000'}}
                     >
-                        {props.allState.brandAbbr}
+                        {getMenuAbbr(props.allState.brands)}
                         {props.allState&&props.allState.brands.toUpperCase()!=="ALL BRANDS"
                             ?<img 
                                 name='brands'

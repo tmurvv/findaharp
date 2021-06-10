@@ -4,16 +4,15 @@ import axios from 'axios';
 import lunr from "lunr";
 
 // internal
-import PageTitle from '../src/main/components/main/PageTitle';
-import CategoryMenu from '../src/store/components/menus/CategoryMenu';
 import StoreProductModal from '../src/store/components/main/StoreProductModal';
 import GlobalStoreSearch from '../src/store/components/main/GlobalStoreSearch';
 import SearchBar from '../src/store/components/main/SearchBar';
 import OnlineStoreCss from '../src/store/styles/OnlineStore.css';
 import { ABBR } from '../src/store/constants/Abbreviations';
+import { MENU_ABBR } from '../src/main/constants/constants';
 import { getStoreSearchInfo,searchSearchBar } from '../src/store/utils/searchProductsHelpers';
-import { RESULTS_INITIAL_STATE, STORE_INITIAL_STATE } from '../src/main/constants/constants';
-import { Category } from '@material-ui/icons';
+import { STORE_INITIAL_STATE } from '../src/main/constants/constants';
+import stringsOnly from '../src/store/constants/storeItemsListStrings.json';
 
 const OnlineStore = (props) => {
     const [ searchResults, setSearchResults ] = useState();
@@ -51,11 +50,6 @@ const OnlineStore = (props) => {
             setMusicSearch(false);
         }
         let workingProducts = [...props.filteredProducts];
-        
-        // if (document.querySelector('#newused').value!=='New/Used') {
-        //     document.querySelector('#newused').value='New/Used';
-        //     alert('Coming soon, searching by category and by "New" or "Used". For now searching by category finds all new and used products.')
-        // }
         
         document.querySelector('#searchTerm')?document.querySelector('#searchTerm').value='':'';
             if (searchItem.toUpperCase()==='GIFT CERTIFICATES') {
@@ -116,9 +110,8 @@ const OnlineStore = (props) => {
                 setSearchResults(returnArray.sort((a,b) => (a.score > b.score) ? -1 : ((b.score > a.score) ? 1 : 0)));             
             }
         } else {
-            setSearchResults(workingProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
+            setSearchResults(workingProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&item.subsubcategory!==undefined&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
         }
-        // String(searchCategory).toUpperCase().startsWith('STRINGS')?searchCategory='strings':'';
         setSearchResultsText('');
         setCatBreadCrumb(findCatAbbr(searchItem));
         setMenuOpen(false);
@@ -127,10 +120,6 @@ const OnlineStore = (props) => {
         setAllState({...allState, category: searchItem, brands: 'All Brands', octaves: 'All Octaves'});
         setSearchBreadCrumb(searchItem);
         setTypeOfSearch(searchItem);
-        // setMusicSearch(false);
-        // setStringSearch(false);
-        // console.log('from cat change', searchCategory,);
-        // console.log('searchItem:', searchItem);
         handleChange('Cat', searchCategory, searchItem);
     }
 
@@ -138,39 +127,16 @@ const OnlineStore = (props) => {
         console.log('topcat:', cat);
         console.log('toptype:', type);
         console.log('topmenu:', menu);
-        console.log('value1:', value1);
-        console.log('value2:', value2);
-        console.log('value3:', value3);
+        // console.log('value1:', value1);
+        // console.log('value2:', value2);
+        // console.log('value3:', value3);
         const topMenu = menu;
         const topType = type;
-        // if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="MUSIC") {
-        //     setMusicSearch(true);
-        //     setStringSearch(false);
-        // } else if (document.querySelector('#category')&&document.querySelector('#category').value.toUpperCase()==="STRINGS") {
-        //     setMusicSearch(false);
-        //     setStringSearch(true);
-        // } else {
-        //     setMusicSearch(false);
-        //     setStringSearch(false);
-        // }
-
-        
-        // update menu text -- not for search term
-        // if (type==='music') {           
-        //     setAllState({...allState, soloensemble: value1, level: value2, publicationtype: value3 })
-        // };
-        // if (type==='strings') { 
-        //     setAllState({...allState, octaves: value1, notes: value2, brands: value3, makesmodels: value4 })
-        // };
-        
-        // get search items
-        
         let category;
-        ABBR.forEach(item=>{
-            item[1]===catBreadCrumb?category=item[0]:'';
-        });
+        menu === 'brands'?setCatBreadCrumb(value3):'';
+        menu === 'brands'?category=value3:'';
+
         category===undefined&&cat==='Cat'&&menu!=='octaves'&&menu!=='brands'?category='Cat':'';
-        console.log('category:', category)
         let searchTerm = document.querySelector('#searchTerm')&&document.querySelector('#searchTerm').value;
         let newused = document.querySelector('#newused')&&document.querySelector('#newused').value;
         setClearMenus(false);
@@ -183,101 +149,53 @@ const OnlineStore = (props) => {
         let categoryProductList = [];
         let newusedProductList=[];
         let searchProductList=[];
-        // if (category&&category.toUpperCase()!=='CATEGORIES') {
-        //     if (category.toUpperCase()==="DIGITAL DOWNLOADS") {
-        //         // document.querySelector('#category').value= 'All';
-        //         return alert("Digital Downloads under construction. Expected by June 2021."); // NOT YET IMPLEMENTED
-        //     }
-        //     if (category.toUpperCase()==="STRINGS") type='strings';
-        //     if (category.toUpperCase()==="MUSIC") type='music';
-        // } 
-        // if (menu==='soloensemble'||menu==='level'||menu==='publicationtype') {
-        //     // category = "Music";
-        //     // document.querySelector('#category').value='Music';
-        //     type = 'music';
-        // } 
-        // if (menu==='octaves'||menu==='notes'||menu==='brands'||menu==='makesmodels') {
-        //     // category = "Strings";
-        //     // document.querySelector('#category')?document.querySelector('#category').value='Strings':'';
-        //     type = 'strings'
-        // }
-        setAllState({...allState, category: type});
+        // setAllState({...allState, category: type});
 
         if (musicSearch) {
-            console.log('value2:', value2)
             type='music';
             (!value2)||value2.startsWith('All')?value2=allState.level:'';
             value2==='clearone'?value2='All Levels':'';
-            console.log('value2:', value2);
         }
         if (stringSearch)  {
-            // console.log('value1:', value1);
-            // console.log('value2:', value2);
-            // console.log('value3:', value3);
-            // 
-            console.log('menu:', menu);
             (!value1)||(value1.startsWith('All')&&topMenu!=='octaves')?value1=allState.octaves:'';
             (!value2)||(value2.startsWith('All')&&topMenu!=='notes')?value2=allState.notes:'';
             (!value3)||(value2.startsWith('All')&&topMenu!=='brands')?value3=allState.brands:'';
-            // console.log('value1:', value1);
-            // console.log('value2:', value2);
-            // console.log('value3:', value3);
         }
         // setSearchResults(workingProducts.filter(item=>String(item.category).toUpperCase()===String(searchCategory).toUpperCase()&&String(item.subsubcategory).toUpperCase()===String(searchItem).toUpperCase()));
 
         // Category
-        console.log('category:', category)
-        console.log('catBreadCrumb:', catBreadCrumb)
            
         if (cat!=='Cat'&&String(catBreadCrumb).toUpperCase()!=='ALL CATEGORIES') {
-            console.log('inssssssss')
             cat='Cat';
-            menu=category;
-            
+            menu=category;   
         }
         if (String(topType).toUpperCase()==='STRINGS BY HARP BUILDER') {
             searchTerm=menu;
             String(searchTerm).toUpperCase()==='FH MODELS'?searchTerm="FH":'';
-            console.log('searchTerm:', searchTerm)
-            console.log('menu:', menu)
-            console.log('productListCopy:', productListCopy.length)
             productListCopy.map((prodItem, index)=>{
-                if (index===3100) console.log(prodItem, menu.toUpperCase());
                 if (prodItem&&prodItem.title.toUpperCase().includes(searchTerm.toUpperCase())) categoryProductList.push(prodItem);
             }); 
-            console.log('categoryProductList:', categoryProductList.length)  
         } else if (cat==='Cat') {
-            // console.log('inslkdfj')
-            // console.log('categoryProductList:', categoryProductList.length)
-            // console.log('productListCopy:', productListCopy.length)
-            // console.log('categoryProductList:', Array.isArray(categoryProductList))
-            // console.log('productListCopy:', Array.isArray(productListCopy))
-            console.log('cat:', cat)
-            console.log('type:', type)
-            console.log('menu:', menu.toUpperCase());
+            console.log('eleseif')
+            console.log('productListCopy:', productListCopy.length)
+            console.log('productListCopyzero:', productListCopy[0])
+            console.log('menu', menu)
             console.log('topMenu:', topMenu)
-            // console.log(productListCopy[3300].subsubcategory.toUpperCase())
-            categoryProductList=productListCopy.filter(item=>item&&item.subsubcategory&&String(item.subsubcategory).toUpperCase()===menu.toUpperCase());
-            
-            // categoryProductList=productListCopy.filter(item=>String(item.subsubcategory).toUpperCase()===String(menu).toUpperCase()); 
-            console.log('categoryProductList:', categoryProductList.length)
+            console.log('brands:', allState.brands)
+            if (menu==='octaves') {
+                categoryProductList=productListCopy.filter(item=>item&&item.subsubcategory&&item.subsubcategory!==undefined&&String(item.subsubcategory).toUpperCase()===allState.brands.toUpperCase())
+            } else if (menu==='brands') {
+                categoryProductList=productListCopy.filter(item=>item&&item.subsubcategory&&item.subsubcategory!==undefined&&String(item.subsubcategory).toUpperCase()===topMenu.toUpperCase());
+            } else {
+                categoryProductList = [...productListCopy]   
+            }
         } else {
+            console.log('else')
             categoryProductList = [...productListCopy]              
         }
-        
-        // cat=category;
-        
-        
-        // String(type).toUpperCase().startsWith('STRINGS')?type='strings';
-        
-        // console.log('category:', category)
-        // console.log('cat:', cat);
-        // console.log('type', type);
-        // console.log('menu:', menu)
-        // console.log('searchterm', searchTerm);
-        console.log('bottbott', 'Cat:', categoryProductList.length);
-        // console.log('newused:', newused)
         // newused
+        console.log('newused:', newused)
+        console.log('categoryProductList:', categoryProductList.length)
         if(newused&&newused!=='New/Used') {
             categoryProductList.map(product=>{
                 if (newused&&newused.toUpperCase()===String(product.newused).toUpperCase()) {
@@ -290,7 +208,6 @@ const OnlineStore = (props) => {
         console.log('newusedprodlist', newusedProductList.length)
         // finalProductList=[...categoryProductList]
         if (category&&category.toUpperCase()==="MUSIC"||String(type).toUpperCase()==='MUSIC') {
-            console.log('in music')
             if (!value1||value1===undefined) value1="All Lever/Pedal/Ens";
             if (!value2||value2===undefined) value2="All Levels";
             if (!value3||value3===undefined) value3="All Publication Types";
@@ -307,7 +224,6 @@ const OnlineStore = (props) => {
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check level
             if (level&&level.toUpperCase()!=='ALL LEVELS') { 
-                console.log('in level', level, value2)
                 newusedProductList.map(product=> {
                     if (String(product.level).toUpperCase().startsWith('BEGIN')&&level.toUpperCase().startsWith("BEGIN")) {
                         levelProductList.push(product);
@@ -357,21 +273,14 @@ const OnlineStore = (props) => {
             finalProductList=[...publicationProductList];
             
         } else if (category&&category.toUpperCase()==='STRINGS'||String(type).toUpperCase()==="STRINGS"||stringSearch) {
-            console.log('in strings')
-            console.log('stringSearch:', stringSearch)
-            console.log('menu:', menu)
-            console.log('category:', category)
-            console.log('cat:', cat)
-            console.log('newusedProductList:', newusedProductList.length)
-            console.log('value1:', value1)
-            console.log('value2:', value2)
             if (!value1||value1===undefined) value1="All Octaves";
             if (!value2||value2===undefined) value2=allState.note!=="All Notes"?allState.notes:'All Notes';
             if (!value3||value3===undefined) value3="All Brands";
             if (!value4||value4===undefined) value4="All Makes/Models";
             const octave = topMenu==='octaves'?value1.replace('ss', 's'):allState.octaves.replace('ss','s');
             const note = topMenu==='notes'?value2.replace('ss', 's'):allState.notes.replace('ss', 's');
-            const brand = topMenu==='brands'?value3.replace('ss', 's'):allState.brands.replace('ss', 's');
+            let brand = topMenu==='brands'?value3:allState.brands;
+            topType.toUpperCase()==='STRINGS BY TYPE'?brand=topMenu:'';
             let makesmodels = menu==='makesmodels'?value4.replace('ss', 's'):allState.makesmodels.replace('ss', 's');
             if (makesmodels.toUpperCase().startsWith('ALL')&&makesmodels.toUpperCase()!=="ALL MAKES/MODELS") makesmodels=makesmodels.substr(4);
             // initialize variables
@@ -382,10 +291,7 @@ const OnlineStore = (props) => {
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
-            console.log('octave:', octave)
             if (octave&&octave.toUpperCase()!=='ALL OCTAVES'&&octave!==undefined) {
-                console.log('octave:', octave)
-                console.log(newusedProductList.length)
                 newusedProductList.map(product=> {
                     if (String(product.title).toUpperCase().includes(octave.toUpperCase())) octavesProductList.push(product);
                     product.subcategories.map(cat=> {
@@ -403,16 +309,9 @@ const OnlineStore = (props) => {
             console.log('octavesProductList:', octavesProductList.length)
             finalProductList=[...octavesProductList];
             // check notes
-            console.log('above note:', note)
-            console.log('value2:', value2)
-            console.log('category:', category)
-
             if (value2&&value2.toUpperCase()!=='ALL NOTES'&&value2!==undefined) {
-                    console.log('stringSearch:', stringSearch)
-                    console.log('octavesProductList:', octavesProductList.length)
                   octavesProductList.map(product=> {
                         if (stringSearch) {
-                            console.log('inif')
                             // Not Yet Implement (search for notes by number)
                             if (value2==='E'&&Number.isInteger((product.order+6)/7)) notesProductList.push(product);
                             if (value2==='D'&&Number.isInteger((product.order+5)/7)) notesProductList.push(product);
@@ -446,10 +345,8 @@ const OnlineStore = (props) => {
             console.log('notesProductList:', notesProductList.length)
             // check brands
             if (brand&&brand!==undefined&&brand.toUpperCase()!=='ALL BRANDS') {
-                console.log('in brands')
-                console.log('notesProductList:', notesProductList.length)
                 notesProductList.map(product=> {
-                    if (String(product.title).toUpperCase().includes(brand.toUpperCase())) brandsProductList.push(product);
+                    if (String(product.subsubcategory).toUpperCase().includes(brand.toUpperCase())) brandsProductList.push(product);
                 })
             } else {
                 brandsProductList=[...notesProductList];
@@ -483,17 +380,18 @@ const OnlineStore = (props) => {
         // search term
         if (document.querySelector('#searchTerm')&&document.querySelector('#searchTerm').value) searchTerm = document.querySelector('#searchTerm').value;
         if(searchTerm) {
-            // remove harp and music from search terms
+            // remove 'harp' and 'music' from search terms
             const searchTermOld = searchTerm;
-            console.log('searchTerm-abv:', searchTerm)
             searchTerm=searchTerm.toUpperCase().replace('HARP', '').replace('MUSIC', '');
-            console.log('searchTerm-bel:', searchTerm)
             searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch)
+            // "strings by builder" only show strings, no music
+            if (topType&&topType.toUpperCase()==='STRINGS BY HARP BUILDER') {
+                setMusicSearch(false);
+                searchProductList=searchProductList.filter(item=>item.category.toUpperCase()==='STRINGS');
+            }
             if (searchProductList.length===0) {
                 searchTerm=searchTermOld;
-                console.log('inold');
                 searchProductList = searchSearchBar(preSearchProductList, searchTerm, setMusicSearch, setStringSearch);
-                console.log('searchProductList:', searchProductList.lenth)
             }
             type=searchTerm;
         } else {
@@ -506,7 +404,16 @@ const OnlineStore = (props) => {
         
         setMenuOpen(false);
         setSubMenuOpen(false);
-        setAllState({...allState, category: menu})
+        
+        let abbr;
+        
+        MENU_ABBR.map(abbrConst => { 
+            if (topMenu&&topMenu===abbrConst[0]) abbr=abbrConst[1];
+        });
+        if (abbr===undefined) abbr=topMenu;
+        topType.toUpperCase()==="STRINGS BY TYPE"||topType.toUpperCase()==='BRANDS'
+            ?setAllState({...allState, category: menu, brands: topMenu, brandAbbr: abbr})
+            :setAllState({...allState, category: menu});
         setSearchBreadCrumb(getStoreSearchInfo({...allState, category: menu}, type));
         console.log('final', finalProductList.length);
     }
@@ -644,24 +551,42 @@ OnlineStore.getInitialProps = async (props) => {
     // const products = testData;
     // const makesModels = testMakesModels;
     // return {filteredProducts: FINDAHARP_PRODUCTS}
+    
     /*******************
      * API DATA
      *******************/
-    // API
-    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
-    const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
-    const filteredProducts = res.data.storeitems;
-    // const holidayProducts = res.data.storeitems.filter(product => product.title&&product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
-    const usedProducts = res.data.storeitems.filter(product => product.newused==='used').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
-    const featuredProducts = res.data.storeitems.filter(product => (product.category&&product.category.toUpperCase()!=='STRINGS'&&(product.subcategories.includes("Featured")||product.category.toUpperCase()==='GIFTS'||product.newused==='used'))).sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+    // LOCAL BREAKING
+    // Strings only constant
+    const filteredProducts = stringsOnly;
+    const usedProducts = filteredProducts.filter(product => product.newused==='used').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+    const featuredProducts = filteredProducts.filter(product => (product.category&&product.category.toUpperCase()!=='STRINGS'&&(product.subcategories.includes("Featured")||product.category.toUpperCase()==='GIFTS'||product.newused==='used'))).sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
     // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
     filteredProducts.sort((a,b) => (a.subcategory > b.subcategory) ? 1 : ((b.subcategory < a.subcategory) ? -1 : 0)  || (a.subsubcategory > b.subsubcategory) ? 1 : ((b.subsubcategory > a.subsubcategory) ? -1 : 0)  || a.order - b.order);   
     return {
         filteredProducts,
         usedProducts,
         featuredProducts,
-        strings: res.data.storeitems.filter(product => product.title&&product.title.toUpperCase().startsWith("3RD OCTAVE C")),
-        music: res.data.storeitems.filter(product => product.category==="music")
+        strings: filteredProducts.filter(product => product.title&&product.title.toUpperCase().startsWith("3RD OCTAVE C")),
+        music: filteredProducts.filter(product => product.category==="music")
     };
+
+    // // API - production
+    // const res = await axios.get(`https://findaharp-api.herokuapp.com/api/v1/storeitems`);
+    // // API - local BE
+    // const res = await axios.get(`${process.env.backend}/api/v1/storeitems`);
+    // API both local & production
+    // const filteredProducts = res.data.storeitems;
+    // const holidayProducts = res.data.storeitems.filter(product => product.title&&product.title.toUpperCase().includes("CHRISTMAS")||product.category==='gifts').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+    // const usedProducts = res.data.storeitems.filter(product => product.newused==='used').sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+    // const featuredProducts = res.data.storeitems.filter(product => (product.category&&product.category.toUpperCase()!=='STRINGS'&&(product.subcategories.includes("Featured")||product.category.toUpperCase()==='GIFTS'||product.newused==='used'))).sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0));
+    // // filteredProducts.sort((a,b) => (a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)); 
+    // filteredProducts.sort((a,b) => (a.subcategory > b.subcategory) ? 1 : ((b.subcategory < a.subcategory) ? -1 : 0)  || (a.subsubcategory > b.subsubcategory) ? 1 : ((b.subsubcategory > a.subsubcategory) ? -1 : 0)  || a.order - b.order);   
+    // return {
+    //     filteredProducts,
+    //     usedProducts,
+    //     featuredProducts,
+    //     strings: res.data.storeitems.filter(product => product.title&&product.title.toUpperCase().startsWith("3RD OCTAVE C")),
+    //     music: res.data.storeitems.filter(product => product.category==="music")
+    // };
 }
 export default OnlineStore;

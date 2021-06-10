@@ -97,7 +97,6 @@ function GlobalStoreSearch(props) {
         });
         if (document.querySelector('#searchLineAnchor')){
             const myRect=document.querySelector('#searchLineAnchor').getBoundingClientRect();
-            console.log('myRect-X:', myRect.x,'myRect-Y', myRect.y);
             props.setAnchor([myRect.x, myRect.y]);
         }
     },[])
@@ -164,7 +163,7 @@ function GlobalStoreSearch(props) {
                     setMusicSearch={props.setMusicSearch} 
                 />
             }
-            {/* {props.stringSearch
+            {props.stringSearch
                 &&<StoreProductSearchStrings              
                     clearMenus={clearMenus} 
                     setTypeOfSearch={setTypeOfSearch} 
@@ -188,7 +187,7 @@ function GlobalStoreSearch(props) {
                     anchor={props.anchor}
                     setAnchor={props.setAnchor}
                 />
-            } */}
+            }
             {props.searchResults&&props.searchResults.length>0&&props.searchResultsText!=='nosearch'&&props.searchResultsText!=='entry'&&
             <>
             <div className="storeproductContainer" style={{opacity: `${props.menuOpen?.2:1}`, marginTop: `${winWidth<750?'150px':''}`}}>

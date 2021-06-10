@@ -1,5 +1,6 @@
 import parseNum from 'parse-num';
 import { setlocalCart, tax, shipping, getShippingArray, updateShippingTaxes } from "./checkoutHelpers";
+import { ABBR } from '../constants/Abbreviations';
 
 export function getStores(cart) {
     const stores = new Set();
@@ -66,4 +67,13 @@ export function zeroQuantities(parseStringForm) {
         if (parseStringForm[i].F) parseStringForm[i].F.qty='0';
     }
     return parseStringForm;
+}
+export function getMenuAbbr(fullLength, fallBack) {
+    let abbr;
+        
+    ABBR.map(abbrConst => { 
+        if (fullLength===abbrConst[0]) abbr=abbrConst[1];
+    });
+    if (abbr===undefined) abbr=fallBack;
+    return abbr;
 }

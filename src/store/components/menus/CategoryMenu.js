@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import SubCatMenu from './SubCatMenu';
 import { CATEGORIES } from '../../constants/Categories';
+import { getMenuAbbr } from '../../utils/storeHelpers';
 
 function CategoryMenu(props) {
     const [searchResults, setSearchResults] = useState();
@@ -16,13 +17,6 @@ function CategoryMenu(props) {
         props.setMenuOpen(['categories']);
         console.log(e.target.id);
         document.querySelector('#categories').nextElementSibling.innerText = `${e.target.id} Selected`;
-
-        // console.log('filtered', filtered);
-        // console.log(props.filteredProducts[0]);
-        // const storedItems = props.filteredProducts.filter(prod=>prod.subcategory===catId);
-        // console.log(storedItems.length)
-        // console.log(storedItems)
-        // setSearchResults(storedItems);
     }
     
     function handleClick() {
@@ -57,7 +51,7 @@ function CategoryMenu(props) {
                 <div className='MainCat' style={props.menuOpen?{backgroundColor: '#ffd663',  padding: '0', borderColor: 'transparent'}:{backgroundColor: '#fff'}}>
                     <ul id='category' style={{width: `${props.menuOpen?'210px':'160px'}`}}>
                         <li value="categories" style={props.menuOpen?{backgroundColor: '#ffd663'}:{backgroundColor: '#fff'}} onClick={(e)=>{e.stopPropagation();handleClick();}} id="Categories" className='CatLine'>
-                            {props.catBreadCrumb}
+                            {getMenuAbbr(props.catBreadCrumb, props.catBreadCrumb)}
                             {props.menuOpen
                             ?<img className='catChevron' src='img/store/down-chevron.png' alt='down arrow' />                           
                             :<img className='catChevron' src='img/store/right-chevron.png' alt='right arrow' />
@@ -74,7 +68,7 @@ function CategoryMenu(props) {
                                 value={cat}
                                 onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
                                 onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
-                                onClick={(e)=>{e.stopPropagation();props.setSubMenuOpen(cat);}}>  
+                                onClick={(e)=>{e.stopPropagation();e.preventDefault();props.setSubMenuOpen(cat);}}>  
                                 <div>{cat}</div>
                                 <img 
                                     className='catChevron hovershow' 
@@ -183,7 +177,7 @@ function CategoryMenu(props) {
         </>
     )
     if ((!props.ribboncatBreadCrumb)&&winWidth<=900) return (
-        <>              
+        <> 
             <div className='CatMenuCont' style={props.menuOpen?{width: '100%', backgroundColor: '#ffd663'}:{width: "100%", minHeight: '50px', backgroundColor: '#fff'}}>
              
                 <div className='MainCat' style={!props.subMenuOpen?{backgroundColor: '#ffd663',  width: '100%', padding: '0', borderColor: 'transparent'}:{display: 'none'}}>
@@ -202,15 +196,15 @@ function CategoryMenu(props) {
                                 className='CatLine hovershow'
                                 id={cat}
                                 value={cat}
-                                onMouseEnter={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='200px'; props.setSubMenuOpen(cat);}} 
-                                onMouseLeave={e=>{if(e.target.lastChild&&e.target.lastChild.style) e.target.lastChild.style.maxHeight='0';}} 
-                                onClick={e=>{e.stopPropagation();props.setSubMenuOpen(cat)}}>  
-                                <div>{cat}</div>
+                                onClick={e=>{
+                                    e.stopPropagation();
+                                    props.setSubMenuOpen(cat);
+                                }}
+                            >  
+                                {cat}
                                 <img 
-                                    className='catChevron hovershow' 
+                                    className='catChevron hovershow thisClass' 
                                     src='img/store/right-chevron.png' 
-                                    // onMouseEnter={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(2)'; props.setSubMenuOpen(cat);}} 
-                                    // onMouseLeave={e=>{if(e.target.lastChild) e.target.lastChild.style.transform='scale(1)';}} 
                                     alt='right arrow'
                                 />
                             </li>
