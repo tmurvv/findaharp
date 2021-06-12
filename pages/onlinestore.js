@@ -277,8 +277,8 @@ const OnlineStore = (props) => {
             if (!value2||value2===undefined) value2=allState.note!=="All Notes"?allState.notes:'All Notes';
             if (!value3||value3===undefined) value3="All Brands";
             if (!value4||value4===undefined) value4="All Makes/Models";
-            const octave = topMenu==='octaves'?value1.replace('ss', 's'):allState.octaves.replace('ss','s');
-            const note = topMenu==='notes'?value2.replace('ss', 's'):allState.notes.replace('ss', 's');
+            let octave = topMenu==='octaves'?value1.replace('ss', 's'):allState.octaves.replace('ss','s');
+            let note = topMenu==='notes'?value2.replace('ss', 's'):allState.notes.replace('ss', 's');
             let brand = topMenu==='brands'?value3:allState.brands;
             topType.toUpperCase()==='STRINGS BY TYPE'?brand=topMenu:'';
             let makesmodels = menu==='makesmodels'?value4.replace('ss', 's'):allState.makesmodels.replace('ss', 's');
@@ -291,6 +291,7 @@ const OnlineStore = (props) => {
             // add clear searches button
             if (document&&document.querySelector('#clearSearch')) {document.querySelector('#clearSearch').style.display="flex"}
             // check octaves
+            if (topType.toUpperCase()==='STRINGS BY HARP BUILDER') {octave='All Octaves'; brand='All Brands';}
             if (octave&&octave.toUpperCase()!=='ALL OCTAVES'&&octave!==undefined) {
                 newusedProductList.map(product=> {
                     if (String(product.title).toUpperCase().includes(octave.toUpperCase())) octavesProductList.push(product);

@@ -119,7 +119,7 @@ const StringForm = (props) => {
         if (user.currentHarpname) {
             updateBrands();
         }
-        // if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
+        if ((!user.currentHarpname)&&confirm(`Would you like us to remember these brands for next time? If so, choose 'Ok' and then Harp Signup.`)) setStringformStatus('login')              
         const harpObject = {
             oldharpname: user.currentHarpname,
             oldemail: user.emailCurrentHarp,
@@ -148,21 +148,7 @@ const StringForm = (props) => {
         resetResultsWindow();
     }
     useEffect(() => {
-        // window.addEventListener('beforeunload', function (e) {
-        //     if (changes) {
-        //         // Cancel the event
-        //         e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-        //         // Chrome requires returnValue to be set
-        //         e.returnValue = '';
-        //     }
-        //     // Cancel the before unload event
-        //     window.onbeforeunload = function () {
-        //         // blank function do nothing
-        //     }
-        // });
-        // setChanges&&setChanges(false)
-        // document&&document.querySelector('#stringForm').addEventListener('change', () => formChanged = true);
-        
+        if (document.querySelector('#spinner')) document.querySelector('#spinner').style.display = 'none';
     });
     
     // display cart??
