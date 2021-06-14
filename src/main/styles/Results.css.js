@@ -10,15 +10,15 @@ function ResultsCss() {
             color: #6A75AA;
             border: 2px solid #6A75AA;
             background-color: #fff;
-            padding: 30px;
+            padding: 30px;w
             border-radius: 3px;
             width: 294px;
             margin:auto;
             position: fixed;
-            top: 25%;
+            top: 50vh;
             right: 50%;
             transform: translate(50%, 50%);
-            z-index: 9000;
+            z-index: 9999;
         }
         #loadingLoginImg,
         #loadingVerifyLoginImg {

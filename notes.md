@@ -1,18 +1,12 @@
 WATCH LIST
 
-MHC - Daphne 40
-ETC - Salzedo
-ETC - 17
-Vavra - thingy
-ETC - Rees, Aberdeen
-
-z-index levels:
-ribbon 2000
-5000 menu
-6000 sub
-7000 modal
-9000 error
-
+GLASS UI color theme customizations:
+"workbench.colorCustomizations": {
+    "icon.foreground": "#7900a8",
+    "terminal.ansiBrightWhite": "#b700ff",
+    "terminal.ansiWhite": "#b700ff",
+    "gitDecoration.modifiedResourceForeground": "#0099ffa2"       
+}
 
 - STAGING -- onestop-staging.take2tech.ca
 - PRODUCTION -- findaharp.com

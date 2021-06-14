@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import uuid from 'react-uuid';
 
+
 export default function BrandsMenu(props) {
     const handleClose = (evt) => {
         if (evt.target.value === 'All Brands') return;
@@ -30,13 +31,13 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()}
-                    name='Bow Brand Pedal Natural Gut'
-                >Bow Brand Pedal Natural Gut</li>      
+                    name='Bow Brand Pedal Gut'
+                >Bow Brand Pedal Gut</li>      
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Lever Natural Gut'
-                >Bow Brand Lever Natural Gut</li>
+                    name='Bow Brand Lever Gut'
+                >Bow Brand Lever Gut</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -50,13 +51,8 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Pedal Nylon'
-                >Bow Brand Pedal Nylon</li>
-                <li 
-                    onClick={handleClose} 
-                    key={uuid()} 
-                    name='Bow Brand Lever Nylon'
-                >Bow Brand Lever Nylon</li>
+                    name='Bow Brand Nylon'
+                >Bow Brand Nylon</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -65,28 +61,28 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Silver-Plated Pedal Bass Wire'
+                    name='Silver-Plated Pedal Bass Wires'
                 >Silver-Plated Pedal Bass Wire</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Pedal Bass Wire (Tarnish-Resistant)'
-                >Pedal Bass Wire (Tarnish-Resistant)</li>
+                    name='Tarnish-Resistant Pedal Bass Wires'
+                >Tarnish-Resistant Pedal Bass Wires</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Bow Brand Lever Bass Wire'
-                >Bow Brand Lever Bass Wire</li>
+                    name='Bow Brand Lever Bass Wires'
+                >Bow Brand Lever Bass Wires</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Professional Lever Bass Wire'
-                >Professional Lever Bass Wire</li>
+                    name='Professional Lever Bass Wires'
+                >Professional Lever Bass Wires</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='KF Composite'
-                >Saverez KF Composite</li>
+                    name='Savarez KF Composite'
+                >Savarez KF Composite</li>
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
@@ -95,8 +91,8 @@ export default function BrandsMenu(props) {
                 <li 
                     onClick={handleClose} 
                     key={uuid()} 
-                    name='Silkgut'
-                >Silkgut</li>    
+                    name='Silkgut (synthetic)'
+                >Silkgut (synthetic)</li>    
             </ul>     
         </div>
     );

@@ -39,7 +39,6 @@ function StringFormCss() {
             @media only screen and (max-width: 550px) {
                 .stringForm-subheader {
                     width: 93%;
-                    font-size: 13px;
                 }
                 .shipsToImg{
                     display: none;

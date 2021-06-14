@@ -6,9 +6,11 @@ import { CATEGORIES } from '../../constants/Categories';
 function SubCatMenu(props) {
     const [ searchResults, setSearchResults ] = useState();
     const [ menuOpen, setMenuOpen] = useState(false);
-    const [ subMenuName, setSubMenuName] = useState('Gut');
+    const [ subSubMenu, setSubSubMenu] = useState();
+    const [ subMenuName, setSubMenuName] = useState();
     const [ mainCategories ] = useState(Object.keys(CATEGORIES));
     const [ winWidth, setWinWidth ] = useState(4000);
+    const [ active, setActive ] = useState();
     const categoryCopy = {...JSON.parse(JSON.stringify(CATEGORIES))}
 
     // function handleCatChange(e) {
@@ -26,7 +28,10 @@ function SubCatMenu(props) {
     //     // setSearchResults(storedItems);
     // }
     
-    useEffect(()=>setWinWidth(window.innerWidth),[]);
+    useEffect(()=>{
+        setWinWidth(window.innerWidth);
+        setActive(true);
+    },[]);
 
     if (props.menuOpen&&props.winWidth>750) {
         return (
@@ -35,6 +40,10 @@ function SubCatMenu(props) {
                     {props.menuName}
                     {props.menuName==='Strings by Harp Builder'
                         ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Builder not found? Please use "Strings by Type" menu</div>
+                        :''
+                    }
+                    {props.menuName==='Strings by Type'
+                        ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Not sure what type? Feel free to ask <a style={{cursor: 'pointer'}} href='mailto: orders@findaharp.com'>orders@findaharp.com</a>.</div>
                         :''
                     }
                     {/* {props.menuName==='Music'
@@ -56,6 +65,7 @@ function SubCatMenu(props) {
                             subMenuName={false} 
                             handleCatChange={props.handleCatChange}
                             setDetailProduct2={props.setDetailProduct2}
+                            subCatMenu={props.subCatMenu}
                         />
                         :Object.keys(categoryCopy[props.menuName]).map(item=>
                             <li key={item} className='SubCatLevel1'>
@@ -149,17 +159,21 @@ function SubCatMenu(props) {
         )
     } else if (props.menuOpen&&props.winWidth<=750) {
         return (
-            <>       
+            <>   
                 <div className='HeadingChoice' style={{paddingLeft: '20px'}}>
                     {props.menuName}
                     {props.menuName==='Strings by Harp Builder'
                         ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Builder not found? Please use "Strings by Type" menu</div>
                         :''
                     }
-                    {props.menuName==='Music'
-                        ?<div onClick={()=>alert('Link coming soon. Please find this feature on the store main page under the "word search" area. Search by difficulty level, ensemble type, genre, etc.')}style={{fontSize: '14px', cursor: 'pointer', fontStyle: 'italic', marginTop: '5px', color: '#333', textDecoration:'underline'}}>Advanced Music Search</div>
+                    {props.menuName==='Strings by Type'
+                        ?<div style={{fontSize: '14px', fontStyle: 'italic', marginTop: '5px', color: '#333'}}>Not sure what type? Feel free to ask <a style={{cursor: 'pointer'}} href='mailto: orders@findaharp.com'>orders@findaharp.com</a>.</div>
                         :''
                     }
+                    {/* {props.menuName==='Music'
+                        ?<div onClick={()=>alert('Link coming soon. Please find this feature on the store main page under the "word search" area. Search by difficulty level, ensemble type, genre, etc.')}style={{fontSize: '14px', cursor: 'pointer', fontStyle: 'italic', marginTop: '5px', color: '#333', textDecoration:'underline'}}>Advanced Music Search</div>
+                        :''
+                    } */}
                 </div>
                 <div className='SubCont' style={{width: '100%', padding: '20px'}}> 
                     <ul>
@@ -195,50 +209,6 @@ function SubCatMenu(props) {
                         }
                     </ul> 
                 </div> 
-                {/* {props.menuName==="Featured Items"
-                    ?<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                        <img onClick={()=>props.setDetailProduct2({
-                            id: "MSST-MWOV",
-                            store: 'findaharp',
-                            category: 'accessories',
-                            subcategories: ['Featured', 'Music stand'],
-                            title: "EMS Georgian Wooden Music Stand", 
-                            price: 135.00, 
-                            image: "https://findaharp.com/img/store/findaharp/accessories/woodenStand.jpg", 
-                            descriptiontext: "Costs $240USD new. Solid ash, stained rosewood/mahogany. Excellent condition.",
-                            newused: 'used'
-                        })} className='featuredimg' src='img/store/findaharp/accessories/woodenStand.jpg' alt='Wooden Music Stand' />
-                        <br />
-                        <img onClick={()=>props.setDetailProduct2({
-                                id: "QUCV-EHGY",
-                                store: 'strummedstrings',
-                                artist_first: '',
-                                artist_last: '',
-                                category: 'accessories',
-                                subcategories: ['Cover', 'Featured'],
-                                title: "34 string lever harp case", 
-                                price: 250.00,
-                                descriptiontext: "Quilted case with carrying strap and large Pocket (fits multiple sets of legs). Fits a Lyon and Healy folk harp but there is room for something taller. Happy to ship this harp cover.",
-                                image: "https://findaharp.com/img/store/strummedstrings/quiltedharpcase.jpg", 
-                                newused: 'used'
-                        })} className='featuredimg' src='img/store/strummedStrings/quiltedharpcase.jpg' alt='Quilted Harp Case' />
-                        <br />
-                        <img onClick={()=>props.setDetailProduct2({
-                            id: "OVSC-GNKS",
-                            store: 'michiganharpcenter',
-                            artist_first: '',
-                            artist_last: '',
-                            category: 'Accessories',
-                            subcategories: ['Gifts','Featured'],
-                            title: "Overscore Tape", 
-                            price: 8.00,
-                            descriptiontext: "This is Overscore, your unique removable manuscript tape tested by musicians for musicians, this new tape absolutely works a treat!!",
-                            image: "https://findaharp.com/img/store/michiganharpcenter/overscoretape.jpg",
-                            newused: 'new'
-                        })} className='featuredimg' src='img/store/michiganharpcenter/overscoretape.jpg' alt='Over Score Tape' />
-                    </div> 
-                    :''
-                }  */}
                       
                 <style>{`
                     .featuredimg {

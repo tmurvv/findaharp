@@ -1,8 +1,8 @@
 export const ABBR = [
     ['Bow Brand Pedal Gut','BB Pedal Gut'],
     ['Bow Brand Lever Gut','BB Lever Gut'],
-    ['Concedo Gut','Concedo'],
-    ['Burgundy Gut','Burgundy'],
+    ['Concedo Gut','Concedo Gut'],
+    ['Burgundy Gut','Burgundy Gut'],
     ['Silkgut (synthetic)','Silkgut'],
     ['Bow Brand Nylon','BB Nylon'],
     ['Artist Nylon','Artist Nylon'],

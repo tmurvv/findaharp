@@ -19,6 +19,7 @@ function StoreProductModal(props) {
     const { currencyMultiplier } = useContext(CurrencyContext);
     const { cartSubtotals, setCartSubtotals } = useContext(CartSubtotalsContext);
     const [ sellerInfo, setSellerInfo ] = useState();
+    const [winWidth, setWinWidth] = useState(4000);
     const {
         id,
         store,
@@ -85,10 +86,11 @@ function StoreProductModal(props) {
         Array.from(STORE_PARTNERS).filter(seller => {
             if (seller.id===props.product.store) setSellerInfo(seller);
         });
+        setWinWidth(window.innerWidth);
     },[]);
     return (
         <>
-        <div className='storedetailContainer' style={{display: 'block'}}>
+        <div className='storedetailContainer' style={{display: 'block', border: `${winWidth<750?'none':''}`}}>
             <div onClick={(evt) => handleClick(evt, props.product, false)} className='storeclearModal'>
                 <img src='/img/clear_search.png' alt='clear filters'/>
             </div> 
