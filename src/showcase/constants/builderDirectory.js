@@ -62,7 +62,7 @@ export const BUILDER_PARTNERS = [
         sellerWebsiteText: 'lewiscreek.net',
         sellerEmail: 'info@lewiscreek.net',
         sellerBanner: 'img/builderPartners/LewisCreek/lewis_creek_banner.png',
-        bannerBackgroundColor: '#747F55'
+        bannerBackgroundColor: '#3e5909'
     },
     // {
     //     id: 'Fake Luthier, Inc.',
