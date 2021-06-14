@@ -65,6 +65,7 @@ function ProductModalCSS() {
                 height: 95%;
                 width: 95%;
                 max-width:100%;
+                min-width:125px;
                 max-height:100%;
                 object-fit: cover;
                 overflow: hidden;

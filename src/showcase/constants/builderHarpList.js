@@ -1372,6 +1372,346 @@ export const BUILDER_HARP_LIST = [
         "productImageUrl": "/img/builderPartners/BlevinsModels/xytharaCross.jpg",
         "divider": "00000000000000000000000"
     },
+    {
+        "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+        "sellerName": "Lewis Creek Instruments",
+        "sellerEmail": "info@lewiscreek.net",
+        "sellerCountry": "Chelsea, MI",
+        "sellerRegion": "Mid-West",
+        "sellerLat": "42.3901",
+        "sellerLong": "-84.1004",
+        "productTitle": "HG Phoenix Celtic Folk Harp",
+        "productPrice": "$5800",
+        "productShortDesc": ``,
+        "productLongDesc": `
+        <div>
+        <table border="0" width="610" cellspacing="0" cellpadding="5">
+        
+        <tr>
+          <td valign="top" align="left" width="610"><div align="justify">
+            <p><font face="Times New Roman" size="3">The
+              HG Phoenix - 38 Strings</font></p>
+            <p><font face="Times New Roman" size="3">26.5 lbs, 31" deep, 56.5" tall, 18" wide F to A. <br>
+                <br>
+             With it's powerful voice and  wider range this harp offers versatility and projection unparalleled by other harps of this size.
+              Even tonality and balanced tension will project your music to fill
+              most venues, without causing too much strain on your hands.&nbsp;<br>
+              <br>
+              The stature of this instrument will create a feeling of warmth and
+              good taste to your
+              music room.<br>
+              <br>
+              The HG Phoenix comes standard with  a padded case and several choices of levers.</font></p>
+            </table>
+          </div>
+            <div align="left">
+              <table border="0" width="400" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="400" height="25" colspan="2" align="center" valign="middle" bgcolor="#663300"><font face="Times New Roman" size="3" color="#FFCC66">The
+                    HG Phoenix Celtic Folk Harp</font></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Loveland Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$5800.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Truitt or Camac Levers</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$6100.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66" style="padding-left:5px"><span class="style1">Padded Case</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300 style="padding-left:5px; color:#FFCC66""><span class="style1" style="padding-left:5px; color:#FFCC66">Included</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Extra String Set	 (Nylon/Flourocarbon)</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$275.00/$370.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">USA Shipping</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$450.00</span></td>
+                </tr>
+              </table>
+            </div>
+        `,
+        "productMaker": "Lewis Creek Instruments",
+        "productModel": "HG Phoenix Celtic Folk Harp",
+        "productType": "lever",
+        "productSize": "38",
+        "productImageUrl": "/img/builderPartners/LewisCreek/hg_phoenix_38.jpg",
+        "divider": "00000000000000000000000"
+    },
+    {
+        "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+        "sellerName": "Lewis Creek Instruments",
+        "sellerEmail": "info@lewiscreek.net",
+        "sellerCountry": "Chelsea, MI",
+        "sellerRegion": "Mid-West",
+        "sellerLat": "42.3901",
+        "sellerLong": "-84.1004",
+        "productTitle": "HG Firebird Celtic Folk Harp",
+        "productPrice": "$4800",
+        "productShortDesc": ``,
+        "productLongDesc": `
+        <div>
+        <table border="0" width="610" cellspacing="0" cellpadding="5">
+        
+        <tr>
+          <td valign="top" align="left" width="610"><div align="justify">
+            <p><font face="Times New Roman" size="3">The
+            The HG Firebird - 34 Strings</font></p>
+            <p><font face="Times New Roman" size="3">21 lbs, 27" deep, 50.5" tall, 16" wide C to A.<br>
+                <br>
+                This midrange harp is designed for the artist who requires performance and portability. With the standard asymmetrical soundboard and light string tension, this harp produces a full rich tone with superb projection and range. The soundbox was specially designed with projection and sound production in mind for stage performers. <br>
+              <br>
+              The HG Firebird comes standard with a padded case and several choices of levers.</font></p>
+            </table>
+          </div>
+            <div align="left">
+              <table border="0" width="400" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="400" height="25" colspan="2" align="center" valign="middle" bgcolor="#663300"><font face="Times New Roman" size="3" color="#FFCC66">The
+                    HG Firebird Celtic Folk Harp</font></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Loveland Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$4800.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Truitt or Camac Levers</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$5200.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66" style="padding-left:5px"><span class="style1">Padded Case</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300 style="padding-left:5px; color:#FFCC66""><span class="style1" style="padding-left:5px; color:#FFCC66">Included</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Extra String Set</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$225.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">USA Shipping</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$325.00</span></td>
+                </tr>
+              </table>
+            </div>
+        `,
+        "productMaker": "Lewis Creek Instruments",
+        "productModel": "HG Firebird Celtic Folk Harp",
+        "productType": "lever",
+        "productSize": "34",
+        "productImageUrl": "/img/builderPartners/LewisCreek/hg_firebird_34.jpg",
+        "divider": "00000000000000000000000"
+    },
+    {
+        "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+        "sellerName": "Lewis Creek Instruments",
+        "sellerEmail": "info@lewiscreek.net",
+        "sellerCountry": "Chelsea, MI",
+        "sellerRegion": "Mid-West",
+        "sellerLat": "42.3901",
+        "sellerLong": "-84.1004",
+        "productTitle": "HG Raven Celtic Folk Harp",
+        "productPrice": "$3600",
+        "productShortDesc": ``,
+        "productLongDesc": `
+        <div>
+        <table border="0" width="610" cellspacing="0" cellpadding="5">
+        
+        <tr>
+          <td valign="top" align="left" width="610"><div align="justify">
+            <p><font face="Times New Roman" size="3">The
+            The HG Raven - 30 Strings</font></p>
+            <p><font face="Times New Roman" size="3">16 lbs, 24" deep, 47.5" tall, 14" wide G to A.<br>
+                <br>
+                This harp with it's smooth voice and light touch is a joy to play. It's slender build and light weight makes it easily transportable but provides enough volume and richness of base, for small and intimate performances, personal playing, as well as smaller receptions and concerts. The HG Raven's design makes it the harp perfect for, both student and professional!
+              <br>
+              The HG Raven comes standard with a padded case and several choices of levers.</font></p>
+            </table>
+          </div>
+            <div align="left">
+              <table border="0" width="400" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="400" height="25" colspan="2" align="center" valign="middle" bgcolor="#663300"><font face="Times New Roman" size="3" color="#FFCC66">The
+                    HG Raven Celtic Folk Harp</font></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">F,B,C Rees Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$3200.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Rees Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$3600.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Loveland Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$3600.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Truitt or Camac Levers</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$3900.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66" style="padding-left:5px"><span class="style1">Padded Case</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300 style="padding-left:5px; color:#FFCC66""><span class="style1" style="padding-left:5px; color:#FFCC66">Included</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Extra String Set</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$170</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">USA Shipping</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$250.00</span></td>
+                </tr>
+              </table>
+            </div>
+        `,
+        "productMaker": "Lewis Creek Instruments",
+        "productModel": "HG Raven Celtic Folk Harp",
+        "productType": "lever",
+        "productSize": "30",
+        "productImageUrl": "/img/builderPartners/LewisCreek/hg_raven_30.jpg",
+        "divider": "00000000000000000000000"
+    },
+    {
+        "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+        "sellerName": "Lewis Creek Instruments",
+        "sellerEmail": "info@lewiscreek.net",
+        "sellerCountry": "Chelsea, MI",
+        "sellerRegion": "Mid-West",
+        "sellerLat": "42.3901",
+        "sellerLong": "-84.1004",
+        "productTitle": "HG Nightingale Therapy Harp",
+        "productPrice": "$2500",
+        "productShortDesc": ``,
+        "productLongDesc": `
+        <div>
+        <table border="0" width="610" cellspacing="0" cellpadding="5">
+        
+        <tr>
+          <td valign="top" align="left" width="610"><div align="justify">
+            <p><font face="Times New Roman" size="3">The
+            The HG Nightingale - 27 Strings</font></p>
+            <p><font face="Times New Roman" size="3">7.5 lbs, 31" tall, C to A<br>
+                <br>
+                This slender harp will surprise all with its warm and comforting voice. The mellow sound and clear tone can fill a room, or have a soothing and intimate timbre. Created for the Harp Therapy Program, this harp is a perfect, synergy of playability and portability. The design of this harp allows it to fit in the overhead compartment of an airliner for those performers on the move!
+              <br>
+              The HG Nightingale comes standard with a padded case and several choices of levers.</font></p>
+            </table>
+          </div>
+            <div align="left">
+              <table border="0" width="400" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="400" height="25" colspan="2" align="center" valign="middle" bgcolor="#663300"><font face="Times New Roman" size="3" color="#FFCC66">The
+                    HG Nightingale Celtic Folk Harp</font></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">F,B,C Rees Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$2500.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Rees Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$2800.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Loveland Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$2800.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Truitt or Camac Levers</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$3100.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66" style="padding-left:5px"><span class="style1">Padded Case</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300 style="padding-left:5px; color:#FFCC66""><span class="style1" style="padding-left:5px; color:#FFCC66">Included</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Extra String Set</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$125</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">USA Shipping</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$150.00</span></td>
+                </tr>
+              </table>
+            </div>
+        `,
+        "productMaker": "Lewis Creek Instruments",
+        "productModel": "HG Nightingale Therapy Harp",
+        "productType": "lever",
+        "productSize": "27",
+        "productImageUrl": "/img/builderPartners/LewisCreek/hg_nightingale_27.jpg",
+        "divider": "00000000000000000000000"
+    },
+    {
+        "id": "16572003-5b2f-4413-91a9-450cca0721b3",
+        "sellerName": "Lewis Creek Instruments",
+        "sellerEmail": "info@lewiscreek.net",
+        "sellerCountry": "Chelsea, MI",
+        "sellerRegion": "Mid-West",
+        "sellerLat": "42.3901",
+        "sellerLong": "-84.1004",
+        "productTitle": "HG Eagle Celtic Folk Harp",
+        "productPrice": "$2500",
+        "productShortDesc": ``,
+        "productLongDesc": `
+        <div>
+        <table border="0" width="610" cellspacing="0" cellpadding="5">
+        
+        <tr>
+          <td valign="top" align="left" width="610"><div align="justify">
+            <p><font face="Times New Roman" size="3">The
+            The HG Eagle - 23 Strings</font></p>
+            <p><font face="Times New Roman" size="3">5.5 lbs, 30" tall, 18 deep, 10.5" wide G to A<br>
+                <br>
+                This petite harp will surprise all with its tremendous voice. The capacity of this harpto fill a room, with it's clear, bell like sound stands alone among lap harps. Do not confuse this harp with a toy! Performing artists all over the world will recognize the amazing voice of this instrument. The trimness, and light weight of this harp allows it to fit in the overhead compartment of an airliner for those travelers who will not leave a friend behind.
+              <br>
+              The HG Eagle comes standard with a padded case and several choices of levers.</font></p>
+            </table>
+          </div>
+            <div align="left">
+              <table border="0" width="400" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="400" height="25" colspan="2" align="center" valign="middle" bgcolor="#663300"><font face="Times New Roman" size="3" color="#FFCC66">The
+                    HG Eagle Celtic Folk Harp</font></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">F,B,C Rees Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$2500.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Rees Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$2800.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Loveland Levers </span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$2800.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Full Truitt or Camac Levers</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$3100.00</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66" style="padding-left:5px"><span class="style1">Padded Case</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300 style="padding-left:5px; color:#FFCC66""><span class="style1" style="padding-left:5px; color:#FFCC66">Included</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">Extra String Set</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$125</span></td>
+                </tr>
+                <tr>
+                  <td width="400" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">USA Shipping</span></td>
+                  <td width="125" height="25" align="left" valign="middle" bgcolor="#663300" style="padding-left:5px; color:#FFCC66"><span class="style1">$150.00</span></td>
+                </tr>
+              </table>
+            </div>
+        `,
+        "productMaker": "Lewis Creek Instruments",
+        "productModel": "HG Eagle Celtic Folk Harp",
+        "productType": "lever",
+        "productSize": "23",
+        "productImageUrl": "/img/builderPartners/LewisCreek/eagle_23.jpg",
+        "divider": "00000000000000000000000"
+    }
     
     
 ];
