@@ -57,7 +57,7 @@ export const BUILDER_PARTNERS = [
             <p align="justify">Even the most demanding of musicians will surely appreciate the beauty and response of a harp or musical instrument built by Lewis Creek Instruments.</p>`,
         productMaker: "Lewis Creek Instruments",
         productImageUrl: "img/builderPartners/LewisCreek/lewis_creek_banner.png",
-        productImageBestColor: "#d6c3ab",
+        productImageBestColor: "#3e5909",
         sellerWebsite: 'https://www.lewiscreek.net/',
         sellerWebsiteText: 'lewiscreek.net',
         sellerEmail: 'info@lewiscreek.net',
