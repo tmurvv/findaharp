@@ -25,7 +25,8 @@ export const BUILDER_PARTNERS = [
         sellerWebsite: 'https://blevinsharps.com',
         sellerWebsiteText: 'blevinsharps.com',
         sellerEmail: 'blevinsharps@gmail.com',
-        sellerBanner: 'img/builderPartners/blevins_banner.png'
+        sellerBanner: 'img/builderPartners/blevins_banner.png',
+        bannerBackgroundColor: '#000'
     },
     {
         id: 'vavraharp',

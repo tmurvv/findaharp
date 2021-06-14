@@ -9,6 +9,7 @@ import ContactBuilderForm from './ContactBuilder';
 import Product from './builderProduct';
 import { addPlaceholderProducts, setOpacity, getWindowSize } from '../../main/utils/helpers';
 import { productsReducer } from '../../main/reducers/reducers';
+import { Filter9PlusRounded } from '@material-ui/icons';
 
 const initialState = {
     openDetail: false,
@@ -40,6 +41,7 @@ const ProductContainer = ({ filteredproductscontainer, allstate, clientlat, clie
     }
     
     if (filteredproductscontainer&&filteredproductscontainer.length>0) {
+        filteredproductscontainer.sort((a,b) => (a.productSize > b.productSize) ? 1 : ((b.productSize > a.productSize) ? -1 : 0));
         const addPlaces=addPlaceholderProducts(filteredproductscontainer, size.width);
         return(  
             <div data-test='component-ProductContainer' className='productContainer'>
